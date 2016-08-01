@@ -12,9 +12,9 @@ const auth = function(){
     return false;
 };
 
-const redirect = function(){
+const redirect = function(hash = ""){
     if(auth()){
-        location.hash = '#!/';
+        location.hash = '#!/' + hash;
     } else {
         location.hash = '#!/login';
     }
