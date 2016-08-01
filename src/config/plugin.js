@@ -22,7 +22,7 @@ var plugin = {
 
 	},
 	resourceGlobalSetting() {
-		Vue.http.options.root = "";
+		//Vue.http.options.root = "";
 	},
 	runRouter() {
 		var routeMap = this.createRouteMap();
@@ -42,6 +42,12 @@ var plugin = {
 				name: 'home',
 				component (resolve) {
 					require(['../components/Home/Home.vue'], resolve);
+				}
+			},
+			'/login': {
+				name: 'login',
+				component (resolve) {
+					require(['../components/Login/Login.vue'], resolve);
 				}
 			},
 			'/detail': {

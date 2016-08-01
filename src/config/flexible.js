@@ -5,8 +5,8 @@ var doc = document,
     tid;
 // 刷新REM
 function refreshRem() {
-    var width = docEl.getBoundingClientRect().width;
-    docEl.style.fontSize = (width / 320 * 16) + 'px';
+    //var width = docEl.getBoundingClientRect().width;
+    //docEl.style.fontSize = (width / 320 * 16) + 'px';
 }
 function createViewport() {
     var scale = 1;

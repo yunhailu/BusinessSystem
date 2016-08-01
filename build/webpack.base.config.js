@@ -47,7 +47,7 @@ module.exports = {
 			},
 			{
 				test : /\.(png|jpg|gif|ttf)/,
-				loader : 'url',
+				loader : 'url-loader',
 				query : {
 					limit : 10000,
 					name : 'static/[name].[hash:7].[ext]'
