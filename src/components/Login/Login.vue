@@ -36,13 +36,15 @@
                 </fieldset>
             </form>
         </div>
-
     </div>
 </template>
 <style lang="less">
     @import "Login.less";
 </style>
 <script>
+
+    import Cookie from "js-cookie";
+    import {redirect} from "../../widgets/Auth";
 
     export default {
         name: 'login',
@@ -58,11 +60,20 @@
                     alert('用户名密码不能为空！');
                     return ;
                 }
-                if(this.userName == 'admin' && this.password == 'admin'){
-                    location.hash = '#!/';
-                } else {
+                if(this.userName != 'admin' || this.password != 'admin'){
                     alert('用户名密码不正确！');
+                    return ;
                 }
+
+                Cookie.set('business_uid', 'admin');
+                location.hash = '#!/';
+
+            }
+        },
+        route:{
+            activate(transition){
+                redirect();
+                transition.next();
             }
         }
     };
