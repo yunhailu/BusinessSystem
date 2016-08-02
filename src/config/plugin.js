@@ -1,11 +1,12 @@
 
-
 import Vue from 'vue'
 import Resource from 'vue-resource'
 import VueTouch from 'vue-touch'
 import Router from 'vue-router'
 import Vuex from 'vuex'
 import App from '../App.vue'
+import router from './router'
+import Echarts from '../widgets/echarts';
 
 var plugin = {
 	init(){
@@ -19,7 +20,7 @@ var plugin = {
 		Vue.use(Resource);
 		Vue.use(VueTouch);
 		Vue.use(Vuex);
-
+		Vue.directive('echarts', Echarts);
 	},
 	resourceGlobalSetting() {
 		//Vue.http.options.root = "";
@@ -37,26 +38,7 @@ var plugin = {
 		console.log('App-launch');
 	},
 	createRouteMap() {
-		var map = {
-			'/': {
-				name: 'home',
-				component (resolve) {
-					require(['../components/Home/Home.vue'], resolve);
-				}
-			},
-			'/login': {
-				name: 'login',
-				component (resolve) {
-					require(['../components/Login/Login.vue'], resolve);
-				}
-			},
-			'/detail': {
-				name: 'detail',
-				component (resolve) {
-					require(['../components/Detail/Detail.vue'], resolve);
-				}
-			}
-		}
+		var map = router;
 		return map;
 	}
 }
