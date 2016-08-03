@@ -1,4 +1,6 @@
 <template>
+    <header-component></header-component>
+    <menu-component></menu-component>
     <div>
         Main page
     </div>
@@ -7,8 +9,10 @@
     @import "Main.less";
 </style>
 <script>
-    //import HeaderComponent from './components/header.vue'
-    //import OtherComponent from './components/other.vue'
+    import {redirect} from "../../widgets/Auth";
+    import HeaderComponent from '../Header/Header.vue';
+    import MenuComponent from '../Menu/Menu.vue';
+
     export default{
         data(){
             return{
@@ -16,8 +20,14 @@
             }
         },
         components:{
-            //'other-component':OtherComponent,
-            //HeaderComponent,
+            'header-component': HeaderComponent,
+            'menu-component': MenuComponent
+        },
+        route:{
+            activate(transition){
+                redirect('main');
+                transition.next()
+            }
         }
     }
 </script>

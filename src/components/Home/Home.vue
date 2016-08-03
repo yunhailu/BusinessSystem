@@ -12,7 +12,7 @@
 							<input type="text" v-model="hotEvent" class="form-control"  placeholder="Search Hot Event">
 						</div>
 						<div class="col-md-2">
-							<a v-link="{name: 'detail'}" type="button" class="btn btn-primary">搜索热点</a>
+							<a v-link="{name: 'main'}" type="button" class="btn btn-primary">搜索热点</a>
 						</div>
 					</div>
 				</fieldset>

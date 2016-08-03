@@ -16,6 +16,7 @@ module.exports = {
         }
     },
     '/main': {
+        name: 'main',
         component (resolve) {
             require(['../components/Main/Main.vue'], resolve);
         }

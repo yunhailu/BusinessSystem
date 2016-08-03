@@ -1,0 +1,30 @@
+@import "../common.less";
+@h: 4.3rem;
+
+.header{
+  .pr();  .z(1030);  max-height: 10rem;
+  .top(0);  .left(0);  .right(0);
+
+  .logo{
+    .float-left();  .f(1.8rem);  .lh(@h);  .tc();  .bgc(#367fa9);  .c(#f9f9f9);
+    .pd(0 1rem);  .fw(500);  .disB();  .w(22rem);  .h(@h);
+    font-family: 'Kaushan Script', cursive;
+  }
+
+  .navbar{
+    .h(@h);  .mg(auto auto 0 22rem);   .bgc(#3c8dbc);
+    .navbar-right{
+      .mg(0);
+      .nav{
+        margin-right: 10px;
+        li>a{
+          .fw(bold);  color: rgba(255, 255, 255, 0.8);
+          .glyphicon{margin-right: 5px;}
+        }
+        li>a:hover, li>a:focus{
+          .fw(bold);   .c(#f6f6f6);  background: rgba(0, 0, 0, 0.1);
+        }
+      }
+    }
+  }
+}
