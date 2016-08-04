@@ -39,3 +39,25 @@ html,body,*{
 }
 body{.bgc(@body-bg);}
 
+@keyframes fadeAnimation {
+  from {
+    opacity: 0;
+    top: 120%;
+  }
+  to {
+    opacity: 1;
+    top: 100%;
+  }
+}
+@-webkit-keyframes fadeAnimation {
+  from {
+    opacity: 0;
+    top: 120%;
+  }
+  to {
+    opacity: 1;
+    top: 100%;
+  }
+}
+
+
