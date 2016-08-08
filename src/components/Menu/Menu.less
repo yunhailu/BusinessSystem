@@ -78,13 +78,19 @@
     .sidebar-menu > li{
       .b-top(1px solid #fff);  .b-bottom(1px solid #dbdbdb);  .mg(0);  .pd(0);
       >a{
-        .mg-right(0.1rem); .pd(1.2rem 0.5rem 1.2rem 1.5rem);   .disB();  .c(#555);
+        .mg-right(0.1rem); .pd(1.2rem 0.5rem 1.2rem 1.5rem);   .disB();  .c(#222);
         .fa{
-          .disIB();  .lh(1);  .w(2rem);
-          font-family: FontAwesome;
-          font-style: normal;
-          font-weight: normal;
-          -webkit-font-smoothing: antialiased;
+          .w(2rem);
+        }
+      }
+      >.treeview-menu{
+        .mg(0 0.1rem);   .bgc(#f9f9f9);  .pd(0);
+        >li{
+          .mg(0);
+          >a{
+            .pd(0.5rem 0.5rem 0.5rem 1.5rem);  .disB();  .f(1.4rem);  .mg(0);  .c(#777);
+            .fa{ .w(2rem); }
+          }
         }
       }
     }

@@ -61,7 +61,7 @@
                     </ul>
                 </li>
                 <li class="treeview">
-                    <a href="#">
+                    <a href="javascript:void(0);">
                         <i class="fa fa-edit"></i> <span>Forms</span>
                         <i class="fa fa-angle-left pull-right"></i>
                     </a>
@@ -72,7 +72,7 @@
                     </ul>
                 </li>
                 <li class="treeview">
-                    <a href="#">
+                    <a href="javascript:void(0);">
                         <i class="fa fa-table"></i> <span>Tables</span>
                         <i class="fa fa-angle-left pull-right"></i>
                     </a>
