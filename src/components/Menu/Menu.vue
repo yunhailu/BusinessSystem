@@ -24,112 +24,50 @@
             </form>
 
             <ul class="sidebar-menu">
-                <li class="active">
-                    <a href="javascript:void(0);">
-                        <i class="fa fa-dashboard"></i> <span>Dashboard</span>
+                <li v-for="menu in MainMenu" :class="[menu.children.length ? 'treeview' : '', menu.isActive ? 'active' : '']">
+                    <a :href="menu.children.length ? 'javascript:void(0);' : '#!/'+menu.router" @click="toggle(menu);">
+                        <i class="fa" :class="menu.icon"></i> <span>{{menu.name}}</span>
+                        <i class="fa pull-right" :class="[menu.isActive ? 'fa-angle-down' : 'fa-angle-left']" v-if="menu.children.length"></i>
                     </a>
-                </li>
-                <li>
-                    <a href="pages/widgets.html">
-                        <i class="fa fa-th"></i> <span>Widgets</span> <small class="badge pull-right bg-green">new</small>
-                    </a>
-                </li>
-                <li class="treeview">
-                    <a href="javascript:void(0);">
-                        <i class="fa fa-bar-chart-o"></i>
-                        <span>Charts</span>
-                        <i class="fa fa-angle-left pull-right"></i>
-                    </a>
-                    <ul class="treeview-menu">
-                        <li><a href="pages/charts/morris.html"><i class="fa fa-angle-double-right"></i> Morris</a></li>
-                        <li><a href="pages/charts/flot.html"><i class="fa fa-angle-double-right"></i> Flot</a></li>
-                        <li><a href="pages/charts/inline.html"><i class="fa fa-angle-double-right"></i> Inline charts</a></li>
-                    </ul>
-                </li>
-                <li class="treeview">
-                    <a href="javascript:void(0);">
-                        <i class="fa fa-laptop"></i>
-                        <span>UI Elements</span>
-                        <i class="fa fa-angle-left pull-right"></i>
-                    </a>
-                    <ul class="treeview-menu">
-                        <li><a href="pages/UI/general.html"><i class="fa fa-angle-double-right"></i> General</a></li>
-                        <li><a href="pages/UI/icons.html"><i class="fa fa-angle-double-right"></i> Icons</a></li>
-                        <li><a href="pages/UI/buttons.html"><i class="fa fa-angle-double-right"></i> Buttons</a></li>
-                        <li><a href="pages/UI/sliders.html"><i class="fa fa-angle-double-right"></i> Sliders</a></li>
-                        <li><a href="pages/UI/timeline.html"><i class="fa fa-angle-double-right"></i> Timeline</a></li>
-                    </ul>
-                </li>
-                <li class="treeview">
-                    <a href="javascript:void(0);">
-                        <i class="fa fa-edit"></i> <span>Forms</span>
-                        <i class="fa fa-angle-left pull-right"></i>
-                    </a>
-                    <ul class="treeview-menu">
-                        <li><a href="pages/forms/general.html"><i class="fa fa-angle-double-right"></i> General Elements</a></li>
-                        <li><a href="pages/forms/advanced.html"><i class="fa fa-angle-double-right"></i> Advanced Elements</a></li>
-                        <li><a href="pages/forms/editors.html"><i class="fa fa-angle-double-right"></i> Editors</a></li>
-                    </ul>
-                </li>
-                <li class="treeview">
-                    <a href="javascript:void(0);">
-                        <i class="fa fa-table"></i> <span>Tables</span>
-                        <i class="fa fa-angle-left pull-right"></i>
-                    </a>
-                    <ul class="treeview-menu">
-                        <li><a href="pages/tables/simple.html"><i class="fa fa-angle-double-right"></i> Simple tables</a></li>
-                        <li><a href="pages/tables/data.html"><i class="fa fa-angle-double-right"></i> Data tables</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="pages/calendar.html">
-                        <i class="fa fa-calendar"></i> <span>Calendar</span>
-                        <small class="badge pull-right bg-red">3</small>
-                    </a>
-                </li>
-                <li>
-                    <a href="pages/mailbox.html">
-                        <i class="fa fa-envelope"></i> <span>Mailbox</span>
-                        <small class="badge pull-right bg-yellow">12</small>
-                    </a>
-                </li>
-                <li class="treeview">
-                    <a href="#">
-                        <i class="fa fa-folder"></i> <span>Examples</span>
-                        <i class="fa fa-angle-left pull-right"></i>
-                    </a>
-                    <ul class="treeview-menu">
-                        <li><a href="pages/examples/invoice.html"><i class="fa fa-angle-double-right"></i> Invoice</a></li>
-                        <li><a href="pages/examples/login.html"><i class="fa fa-angle-double-right"></i> Login</a></li>
-                        <li><a href="pages/examples/register.html"><i class="fa fa-angle-double-right"></i> Register</a></li>
-                        <li><a href="pages/examples/lockscreen.html"><i class="fa fa-angle-double-right"></i> Lockscreen</a></li>
-                        <li><a href="pages/examples/404.html"><i class="fa fa-angle-double-right"></i> 404 Error</a></li>
-                        <li><a href="pages/examples/500.html"><i class="fa fa-angle-double-right"></i> 500 Error</a></li>
-                        <li><a href="pages/examples/blank.html"><i class="fa fa-angle-double-right"></i> Blank Page</a></li>
+                    <ul class="treeview-menu" v-if="menu.children.length" v-show="menu.isActive" transition="expand">
+                        <li v-for="item in menu.children">
+                            <a v-link="{name: menu.router, params:{item: item.router}}"><i class="fa fa-angle-double-right"></i> {{item.name}}</a>
+                        </li>
                     </ul>
                 </li>
             </ul>
         </section>
     </aside>
-
-
-    <div>
-        {{msg}}
-    </div>
 </template>
 <style lang="less">
     @import "Menu.less";
 </style>
-<script>
+<script type="text/ecmascript-6">
+    import _ from "underscore";
+    import {MainMenu} from "../../config/config";
 
     export default{
         data(){
             return{
+                MainMenu,
                 msg:'Hello Menu'
             }
         },
         components:{
 
+        },
+        methods: {
+            toggle(menu){
+                console.log(menu, this.MainMenu);
+                _.each(this.MainMenu, menuItem => {
+                    if(menuItem.router != menu.router){
+                        menuItem.isActive = false;
+                    } else {
+                        menuItem.isActive = !menuItem.isActive;
+                    }
+                });
+                //menu.isActive = !menu.isActive;
+            }
         }
     }
 </script>

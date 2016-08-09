@@ -79,9 +79,8 @@
       .b-top(1px solid #fff);  .b-bottom(1px solid #dbdbdb);  .mg(0);  .pd(0);
       >a{
         .mg-right(0.1rem); .pd(1.2rem 0.5rem 1.2rem 1.5rem);   .disB();  .c(#222);
-        .fa{
-          .w(2rem);
-        }
+        //.b-top(1px solid #fff);  .b-bottom(1px solid #dbdbdb);
+        .fa{  .w(2rem);  }
       }
       >.treeview-menu{
         .mg(0 0.1rem);   .bgc(#f9f9f9);  .pd(0);
@@ -92,7 +91,25 @@
             .fa{ .w(2rem); }
           }
         }
+        >li.active > a, >li > a:hover{  .c(#111);  }
       }
     }
+    .sidebar-menu > li.active > a,.sidebar-menu > li > a:hover{
+      .c(#222);  .bgc(#f9f9f9);
+    }
   }
+}
+
+/* 必需 */
+.expand-transition {
+  transition: all .6s ease;
+  //display: block;
+  .h(auto); .opacity(100);
+}
+
+/* .expand-enter 定义进入的开始状态 */
+/* .expand-leave 定义离开的结束状态 */
+.expand-enter, .expand-leave {
+  //display: none;
+  .h(0);  .opacity(0);
 }

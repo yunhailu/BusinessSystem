@@ -27,6 +27,24 @@ module.exports = {
             require(['../components/Test/Test.vue'], resolve);
         }
     },
+    '/source/:item': {
+        name: 'source',
+        component (resolve) {
+            require(['../components/Test/Test.vue'], resolve);
+        }
+    },
+    '/display/:item': {
+        name: 'display',
+        component (resolve) {
+            require(['../components/Test/Test.vue'], resolve);
+        }
+    },
+    '/analysis/:item': {
+        name: 'analysis',
+        component (resolve) {
+            require(['../components/Test/Test.vue'], resolve);
+        }
+    },
     '/detail': {
         name: 'detail',
         component (resolve) {
