@@ -4,7 +4,7 @@
     <!--<div class="chart" v-echarts="mapChartOption" :loading="barChartLoading"></div>-->
 </template>
 <style lang="less">
-    @import "Test.less";
+    @import "Summary.less";
 </style>
 <script>
     import Echart from 'echarts';

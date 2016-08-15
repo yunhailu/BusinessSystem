@@ -25,7 +25,7 @@
 
             <ul class="sidebar-menu">
                 <li v-for="menu in MainMenu" :class="[menu.children.length ? 'treeview' : '', menu.isActive ? 'active' : '']">
-                    <a :href="menu.children.length ? 'javascript:void(0);' : '#!/'+menu.router" @click="toggle(menu);">
+                    <a :href="menu.children.length ? 'javascript:void(0);' : '#!/main/'+menu.router" @click="toggle(menu);">
                         <i class="fa" :class="menu.icon"></i> <span>{{menu.name}}</span>
                         <i class="fa pull-right" :class="[menu.isActive ? 'fa-angle-down' : 'fa-angle-left']" v-if="menu.children.length"></i>
                     </a>

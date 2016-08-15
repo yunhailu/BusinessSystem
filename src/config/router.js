@@ -19,6 +19,14 @@ module.exports = {
         name: 'main',
         component (resolve) {
             require(['../components/Main/Main.vue'], resolve);
+        },
+        subRoutes: {
+            '/summary': {
+                name: 'summary',
+                component (resolve) {
+                    require(['../components/Summary/Summary.vue'], resolve);
+                }
+            }
         }
     },
     '/test': {

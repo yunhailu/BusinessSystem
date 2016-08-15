@@ -1,8 +1,10 @@
 <template>
     <header-component></header-component>
     <menu-component></menu-component>
-    <div>
-        Main page
+    <div class="main-panel">
+        <div class="main-panel-wrap">
+            <router-view></router-view>
+        </div>
     </div>
 </template>
 <style lang="less">
