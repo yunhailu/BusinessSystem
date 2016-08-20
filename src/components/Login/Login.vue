@@ -66,7 +66,7 @@
                 }
 
                 Cookie.set('business_uid', 'admin');
-                location.hash = '#!/';
+                location.hash = '#!/home';
 
             }
         },

@@ -9,11 +9,11 @@
 <script>
 
 	import store from './vuex/store';
+    import login from './mixin/login';
 
 	export default {
-
-		store: store
-		
+		store,
+        mixins: [login]
 	}
 
 </script>

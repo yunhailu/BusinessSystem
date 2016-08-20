@@ -1,35 +1,9 @@
-@import '../common.less';
+@import "../common.less";
 
-.home-page{
-  .pd(2rem);
-  fieldset{
-    legend{
-      .f(2rem); .pd(1rem 0rem);
-      .logo-icon{
-        .w(5rem);  .h(5rem);  .disIB();  .vm();
-      }
-      span{  .vm();  }
-    }
-    .search{
-      .pd(3rem 0);
-    }
-  }
-  .platform{
-    .pd(2rem 0);
-    ul{
-      li{
-        .tc();  .lh(3.4rem);  .mg(0.6rem 0);
-        .button-item{
-          .w(80%);  .disIB();  .b(0.1rem solid #ccc);  .pointer();  .pr();
-          .top-border{
-            .w(100%);  .h(0.3rem);  .pa();  .top(0);  .left(0);  .right(0);  .bgc(#269abc);
-          }
-          .check-icon{
-            .w(3rem);  .h(3rem);  .disIB();  .vm();
-          }
-          .check-name{  .vm();  }
-        }
-      }
-    }
+.main-panel{
+  margin-left: 22rem;  .pr();
+
+  &-wrap{
+    .pa();  .w(100%);  .h(auto); .pd(1rem);
   }
 }

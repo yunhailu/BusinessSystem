@@ -1,5 +1,5 @@
 @import "../common.less";
-@h: 4.3rem;
+@h: 4.2rem;
 
 .header{
   .pr();  .z(1030);  max-height: 10rem;
@@ -8,15 +8,39 @@
   .logo{
     .float-left();  .f(1.8rem);  .lh(@h);  .tc();  .bgc(#367fa9);  .c(#f9f9f9);
     .pd(0 1rem);  .fw(500);  .disB();  .w(22rem);  .h(@h);
-    font-family: 'Kaushan Script', cursive;
+    //font-family: 'Kaushan Script', cursive;
   }
 
   .navbar{
     .h(@h);  .mg(auto auto 0 22rem);   .bgc(#3c8dbc);
+
+    .navbar-center{
+      .mg(0);
+      .nav{
+        margin-left: 2rem;
+        .tab-item{
+          a>span{ padding-left: 0.3rem; }
+          a{
+            .fw(bold);  color: rgba(255, 255, 255, 0.8);
+            padding-left: 2rem;  padding-right: 2rem;
+            .glyphicon{margin-right: 5px;}
+          }
+          a:hover{
+            .fw(bold);   .c(#f6f6f6);  background: rgba(0, 0, 0, 0.1);
+          }
+          a:focus{
+            .fw(bold);   .c(#3c8dbc);  background: rgba(255, 255, 255, 0.9);
+            //padding-left: 3rem;  padding-right: 3rem;
+            //span{ .f(1.4rem); }
+          }
+        }
+      }
+    }
+
     .navbar-right{
       .mg(0);
       .nav{
-        margin-right: 10px;
+        margin-right: 1rem;
         li>a{
           .fw(bold);  color: rgba(255, 255, 255, 0.8);
           .glyphicon{margin-right: 5px;}
