@@ -1,5 +1,5 @@
 <template>
-	<header-component></header-component>
+	<header-component active="home"></header-component>
 	<div class="main-panel">
 		<div class="main-panel-wrap">
 			<router-view></router-view>

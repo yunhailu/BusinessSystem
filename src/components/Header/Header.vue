@@ -5,7 +5,7 @@
             <div class="navbar-center">
                 <ul class="nav navbar-nav">
                     <li class="tab-item" v-for="tab in tabs">
-                        <a href="javascript:void(0);" v-link="{name: tab.link}">
+                        <a href="javascript:void(0);" v-link="{name: tab.link}" :class="active == tab.id ? 'active' : ''">
                             <i class="fa fa-2x" :class="[tab.icon]" aria-hidden="true"></i>
                             <span>{{tab.name}}</span>
                         </a>
@@ -36,27 +36,33 @@
     import Local from "../../local/local";
 
     export default{
+        props: ["active"],
         data(){
             const words = Local().header;
             return{
                 words,
                 tabs: [{
+                    id: "home",
                     name: words.home,
                     icon: "fa-home",
                     link: "home"
                 },{
+                    id: "analytics",
                     name: words.analytics,
                     icon: "fa-line-chart",
                     link: ""
                 },{
+                    id: "dashboard",
                     name: words.dashboard,
                     icon: "fa-adjust",
                     link: ""
                 },{
+                    id: "reports",
                     name: words.reports,
                     icon: "fa-file-text-o",
                     link: ""
                 },{
+                    id: "setting",
                     name: words.setting,
                     icon: "fa-cog",
                     link: ""
