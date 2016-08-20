@@ -26,10 +26,10 @@
             'menu-component': MenuComponent
         },
         route:{
-            activate(transition){
-                redirect('main');
-                transition.next()
-            }
+//            activate(transition){
+//                redirect('main');
+//                transition.next()
+//            }
         }
     }
 </script>
