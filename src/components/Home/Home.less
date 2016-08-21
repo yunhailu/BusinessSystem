@@ -1,26 +1,64 @@
 @import "../common.less";
 
 @h: 4.2rem;
-@bg-color: #f9f9f9;
-@item-title-h: 3.8rem;
+@bg-color: #f3f3f3;
+@item-title-h: 3rem;
 
 .home-panel{
   .pa();  .top(@h);  .bottom(0);  .left(0);  .right(0);
-  .bgc(@bg-color);  .pd(2.5rem 0 0);
+  .bgc(@bg-color);  overflow: auto; //.pd(2.5rem 0 0);
 
   &-wrap{
     .pa();  .w(100%);  .h(auto); .pd(1rem);
 
     &-list{
       &-item{
-        .pd(3rem);
+        .pd(2rem);
         &-container{
-          .bgc(white);  .pd(2rem);
-          .icon{ .w(@item-title-h);  .h(@item-title-h);  .c(white);  .br(@item-title-h);  .bgc(@body-theme); .vm(); }
-          .icon:before{ .tc();  .disB();  .lh(@item-title-h);  }
-          .title{ .vm();  .lh(@item-title-h);  .mg(0 1.5rem);  .f(2.4rem);  .fw(600);  }
+          &-link{
+            .disB();  .con();
+          }
+          &-link:hover{
+            .bgc(@body-theme);
+            .icon{ .c(@body-theme);  .bgc(white); }
+            .title, .dec{ .c(white); }
+          }
         }
       }
+    }
+
+    &-dashboard{
+      .pd(2rem);
+      &-container{
+        .con();
+        .dashboard-items{
+          //.mg(1.5rem 0 0);
+          .item{
+            .pd(1rem 1rem 0);
+            &-con{
+              &-link{
+                .disB(); .bgc(@bg-color);  .pd(1rem);  .pointer();
+                i{.w(2rem);  .c(#999);  .br(2rem);  .bgc(white); .vm(); }
+                i:before{ .tc();  .disB();  .lh(2rem);  }
+                span{ .vm();  .lh(2rem);  .mg(0 1rem);  .f(1.4rem);  .fw(600);  .c(@word); .text-hidden();  .disIB();  .w(75%); }
+              }
+              &-link:hover{
+                .bgc(@body-theme);
+                i{  .c(@body-theme); }
+                span{ .c(white); }
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .con(){
+      .br(0.2rem);  .bgc(white);  .pd(2rem);
+      .icon{ .w(@item-title-h);  .c(white);  /*.fw(600);*/  .br(@item-title-h);  .bgc(@body-theme); .vm(); }
+      .icon:before{ .tc();  .disB();  .lh(@item-title-h);  }
+      .title{ .vm();  .lh(@item-title-h);  .mg(0 1.5rem);  .f(1.8rem);  .fw(600);  .c(@word);  }
+      .dec{ .mg(0.6rem 0 0 5rem);  .w(75%);  .text-hidden();  .c(@word);  }
     }
   }
 }
