@@ -11,6 +11,9 @@ export default function(){
         case "zh-CN":
             lang = zh_CN;
             break;
+        case "en":
+            lang = en;
+            break;
         default:
             lang = zh_CN;
             break;

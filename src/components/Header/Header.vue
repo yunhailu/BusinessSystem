@@ -1,6 +1,9 @@
 <template>
     <header class="header">
-        <div class="logo">{{words.title}}</div>
+        <div class="logo">
+            <!--<img src="../../../images/logo.jpg" />-->
+            <span>{{words.title}}</span>
+        </div>
         <nav class="navbar navbar-static-top" role="navigation">
             <div class="navbar-center">
                 <ul class="nav navbar-nav">

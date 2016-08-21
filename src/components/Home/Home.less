@@ -1,9 +1,26 @@
 @import "../common.less";
 
-.main-panel{
-  margin-left: 22rem;  .pr();
+@h: 4.2rem;
+@bg-color: #f9f9f9;
+@item-title-h: 3.8rem;
+
+.home-panel{
+  .pa();  .top(@h);  .bottom(0);  .left(0);  .right(0);
+  .bgc(@bg-color);  .pd(2.5rem 0 0);
 
   &-wrap{
     .pa();  .w(100%);  .h(auto); .pd(1rem);
+
+    &-list{
+      &-item{
+        .pd(3rem);
+        &-container{
+          .bgc(white);  .pd(2rem);
+          .icon{ .w(@item-title-h);  .h(@item-title-h);  .c(white);  .br(@item-title-h);  .bgc(@body-theme); .vm(); }
+          .icon:before{ .tc();  .disB();  .lh(@item-title-h);  }
+          .title{ .vm();  .lh(@item-title-h);  .mg(0 1.5rem);  .f(2.4rem);  .fw(600);  }
+        }
+      }
+    }
   }
 }
