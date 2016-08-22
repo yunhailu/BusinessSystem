@@ -10,6 +10,13 @@ module.exports = {
             require(['../components/Home/Home.vue'], resolve);
         }
     },
+    '/analytics': {
+        name: 'analytics',
+        auth: true,
+        component (resolve) {
+            require(['../components/Analytics/Analytics.vue'], resolve);
+        }
+    },
     '/login': {
         name: 'login',
         component (resolve) {

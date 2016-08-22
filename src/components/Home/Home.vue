@@ -40,7 +40,7 @@
 <style lang="less">
 	@import "Home.less";
 </style>
-<script>
+<script type="text/ecmascript-6">
 	import {redirect} from "../../widgets/Auth";
 	import HeaderComponent from '../Header/Header.vue';
 	import Local from "../../local/local";

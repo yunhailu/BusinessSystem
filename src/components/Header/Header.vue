@@ -34,7 +34,7 @@
 <style lang="less">
     @import "Header.less";
 </style>
-<script>
+<script type="text/ecmascript-6">
     import Cookie from "js-cookie";
     import Local from "../../local/local";
 
@@ -53,7 +53,7 @@
                     id: "analytics",
                     name: words.analytics,
                     icon: "fa-line-chart",
-                    link: ""
+                    link: "analytics"
                 },{
                     id: "dashboard",
                     name: words.dashboard,
