@@ -14,28 +14,17 @@
                 </div>
             </div>
 
-            <form action="#" method="get" class="sidebar-form">
-                <div class="input-group">
-                    <input type="text" name="q" class="form-control" placeholder="Search..."/>
-                        <span class="input-group-btn">
-                            <button type='submit' name='seach' id='search-btn' class="btn btn-flat"><i class="fa fa-search"></i></button>
-                        </span>
-                </div>
-            </form>
+            <!--<form action="#" method="get" class="sidebar-form">-->
+                <!--<div class="input-group">-->
+                    <!--<input type="text" name="q" class="form-control" placeholder="Search..."/>-->
+                        <!--<span class="input-group-btn">-->
+                            <!--<button type='submit' name='seach' id='search-btn' class="btn btn-flat"><i class="fa fa-search"></i></button>-->
+                        <!--</span>-->
+                <!--</div>-->
+            <!--</form>-->
 
-            <ul class="sidebar-menu">
-                <li v-for="menu in MainMenu" :class="[menu.children.length ? 'treeview' : '', menu.isActive ? 'active' : '']">
-                    <a :href="menu.children.length ? 'javascript:void(0);' : '#!/main/'+menu.router" @click="toggle(menu);">
-                        <i class="fa" :class="menu.icon"></i> <span>{{menu.name}}</span>
-                        <i class="fa pull-right" :class="[menu.isActive ? 'fa-angle-down' : 'fa-angle-left']" v-if="menu.children.length"></i>
-                    </a>
-                    <ul class="treeview-menu" v-if="menu.children.length" v-show="menu.isActive" transition="expand">
-                        <li v-for="item in menu.children">
-                            <a v-link="{name: menu.router, params:{item: item.router}}"><i class="fa fa-angle-double-right"></i> {{item.name}}</a>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
+            <menu-list title="主题" :menus="AnalyticMenu"></menu-list>
+            <menu-list title="数据源" :menus="ChannelMenu"></menu-list>
         </section>
     </aside>
 </template>
@@ -44,17 +33,18 @@
 </style>
 <script type="text/ecmascript-6">
     import _ from "underscore";
-    import {MainMenu} from "../../../config/config";
+    import {AnalyticMenu, ChannelMenu} from "../../../config/config";
+    import MenuList from "../MenuList/MenuList.vue";
 
     export default{
         data(){
             return{
-                MainMenu,
-                msg:'Hello Menu'
+                AnalyticMenu,
+                ChannelMenu
             }
         },
         components:{
-
+            'menu-list': MenuList
         },
         methods: {
             toggle(menu){

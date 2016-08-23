@@ -1,7 +1,7 @@
 @import "../common.less";
 
 .left-side{
-  .bgc(#f4f4f4);  .top(4.3rem);  .w(22rem); .float-left();//  .pa();
+  .bgc(#f4f4f4);  .top(4.3rem);  .w(18rem); .float-left();//  .pa();
   min-height: 100%;   .disB();
   .sidebar{
     .b-bottom(1px solid #fff);    .mg-bottom(0.5rem);
@@ -17,14 +17,14 @@
         a{
           .pd-right(0.5rem);  .mg-top(0.3rem);  .f(1.1rem);  .fw(normal);
           text-decoration: none;   .c(#555);
-          .fa{
-            .mg-right(0.3rem);  .disIB();  .w(0.9rem);  .h(0.9rem);  .br(0.9rem);
-            font-style: normal;  .fw(normal);  .lh(1);  .bgc(#3c673d);
-            -webkit-font-smoothing: antialiased;  font-family: FontAwesome;
-          }
-          .fa-circle:before {
-            content: "\f111";
-          }
+          //.fa{
+          //  .mg-right(0.3rem);  .disIB();  .w(0.9rem);  .h(0.9rem);  .br(0.9rem);
+          //  font-style: normal;  .fw(normal);  .lh(1);  .bgc(#3c673d);
+          //  -webkit-font-smoothing: antialiased;  font-family: FontAwesome;
+          //}
+          //.fa-circle:before {
+          //  content: "\f111";
+          //}
         }
       }
     }
@@ -54,62 +54,20 @@
           border-bottom-right-radius: 2px !important;
           border-bottom-left-radius: 0 !important;
           box-shadow: none;
-          .fa{
-            .disIB();  .fw(normal);  .lh(1);
-            font-family: FontAwesome;
-            font-style: normal;
-            -webkit-font-smoothing: antialiased;
-            .bgimg('../../images/search.png'); .w(1.6rem);  .h(1.5rem);  .bgcenter();
-            .w(1.5rem);  .h(1.6rem);  .vm();
-          }
-          .fa-search:before {
-            //content: "\f002";
-            content: "";
-          }
+          //.fa{
+          //  .disIB();  .fw(normal);  .lh(1);
+          //  font-family: FontAwesome;
+          //  font-style: normal;
+          //  -webkit-font-smoothing: antialiased;
+          //  .bgimg('../../images/search.png'); .w(1.6rem);  .h(1.5rem);  .bgcenter();
+          //  .w(1.5rem);  .h(1.6rem);  .vm();
+          //}
+          //.fa-search:before {
+          //  //content: "\f002";
+          //  content: "";
+          //}
         }
       }
-    }
-
-    .sidebar-menu{  list-style: none;  .mg(0);  .pd(0);  }
-    .sidebar-menu > li:first-of-type {
-      .b-top(1px solid #dbdbdb);
-      >a{ .b-top(1px solid #fff); }
-    }
-    .sidebar-menu > li{
-      .b-top(1px solid #fff);  .b-bottom(1px solid #dbdbdb);  .mg(0);  .pd(0);
-      >a{
-        .mg-right(0.1rem); .pd(1.2rem 0.5rem 1.2rem 1.5rem);   .disB();  .c(#222);
-        //.b-top(1px solid #fff);  .b-bottom(1px solid #dbdbdb);
-        .fa{  .w(2rem);  }
-      }
-      >.treeview-menu{
-        .mg(0 0.1rem);   .bgc(#f9f9f9);  .pd(0);
-        >li{
-          .mg(0);
-          >a{
-            .pd(0.5rem 0.5rem 0.5rem 1.5rem);  .disB();  .f(1.4rem);  .mg(0);  .c(#777);
-            .fa{ .w(2rem); }
-          }
-        }
-        >li.active > a, >li > a:hover{  .c(#111);  }
-      }
-    }
-    .sidebar-menu > li.active > a,.sidebar-menu > li > a:hover{
-      .c(#222);  .bgc(#f9f9f9);
     }
   }
-}
-
-/* 必需 */
-.expand-transition {
-  transition: all .6s ease;
-  //display: block;
-  .h(auto); .opacity(100);
-}
-
-/* .expand-enter 定义进入的开始状态 */
-/* .expand-leave 定义离开的结束状态 */
-.expand-enter, .expand-leave {
-  //display: none;
-  .h(0);  .opacity(0);
 }
