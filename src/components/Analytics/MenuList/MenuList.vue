@@ -19,7 +19,7 @@
         </ul>
     </div>
 </template>
-<style lang="less">
+<style lang="less" scoped>
     @import "MenuList.less";
 </style>
 <script type="text/ecmascript-6">

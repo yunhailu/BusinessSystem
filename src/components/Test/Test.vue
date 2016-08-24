@@ -2,12 +2,17 @@
     <div class="chart" v-echarts="barChartOption" :loading="barChartLoading"></div>
     <div class="chart" v-echarts="pieChartOption" :loading="barChartLoading"></div>
     <!--<div class="chart" v-echarts="mapChartOption" :loading="barChartLoading"></div>-->
+
+    <!--<input type="text" @click="showCalendar" v-model="value" placeholder="请输入日期">-->
+    <span @click="showCalendar" v-model="cal.value"> {{cal.value}}</span>
+    <calendar :show.sync="cal.show" :value.sync="cal.value" :x="cal.x" :y="cal.y" :begin="cal.begin" :end="cal.end" :type="cal.type" :range="cal.range"></calendar>
 </template>
-<style lang="less">
+<style lang="less" scoped>
     @import "Test.less";
 </style>
 <script>
     import Echart from 'echarts';
+    import Calendar from '../Common/Calendar/Calendar.vue';
 
     export default{
         data(){
@@ -181,8 +186,39 @@
 
                 mapChartOption: {
 
+                },
+
+                cal: {
+                    show: false,
+                    type: "date", //date datetime
+                    value: "2015-12-11",
+                    begin: "2015-12-20",
+                    end: "2015-12-25",
+                    x: 0,
+                    y: 0,
+                    range:true,//是否多选
                 }
             }
+        },
+        methods:{
+            showCalendar:function(e){
+                e.stopPropagation();
+                var that=this;
+                that.cal.show=true;
+                that.cal.x=e.target.offsetLeft;
+                that.cal.y=e.target.offsetTop+e.target.offsetHeight+8;
+                var bindHide=function(e){
+                    e.stopPropagation();
+                    that.cal.show=false;
+                    document.removeEventListener('click',bindHide,false);
+                };
+                setTimeout(function(){
+                    document.addEventListener('click',bindHide,false);
+                },500);
+            }
+        },
+        components: {
+            calendar: Calendar
         },
         route:{
             data(transition){

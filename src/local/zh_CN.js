@@ -22,6 +22,7 @@ export const zh_CN = {
         settingDec: "设置您所需要的检测信息",
     },
     common: {
-
+        weeks: ['日', '一', '二', '三', '四', '五', '六'],
+        buttons:['确定', '取消']
     }
 };

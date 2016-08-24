@@ -22,6 +22,7 @@ export const en = {
         settingDec: "Setting your data",
     },
     common: {
-
+        weeks: ['Sun', 'Mon', 'Tues', 'Wed', 'Thur', 'Fri', 'Sat'],
+        buttons:['OK', 'Cancel']
     }
 };
