@@ -15,6 +15,38 @@ module.exports = {
         auth: true,
         component (resolve) {
             require(['../components/Analytics/Analytics.vue'], resolve);
+        },
+        subRoutes: {
+            '/': {
+                name: 'result',
+                component (resolve) {
+                    require(['../components/Result/Result.vue'], resolve);
+                }
+            },
+            '/result': {
+                name: 'result',
+                component (resolve) {
+                    require(['../components/Result/Result.vue'], resolve);
+                }
+            },
+            '/sentiment': {
+                name: 'sentiment',
+                component (resolve) {
+                    require(['../components/Sentiment/Sentiment.vue'], resolve);
+                }
+            },
+            '/influence': {
+                name: 'influence',
+                component (resolve) {
+                    require(['../components/Influence/Influence.vue'], resolve);
+                }
+            },
+            '/theme': {
+                name: 'theme',
+                component (resolve) {
+                    require(['../components/Theme/Theme.vue'], resolve);
+                }
+            }
         }
     },
     '/login': {
@@ -23,6 +55,8 @@ module.exports = {
             require(['../components/Login/Login.vue'], resolve);
         }
     },
+
+    
     '/main': {
         name: 'main',
         auth: true,

@@ -21,6 +21,10 @@ export const en = {
         setting: "Setting",
         settingDec: "Setting your data",
     },
+    analytics: {
+        tabs: ["Results", "Sentiment", "Influencers", "Theme"],
+        filters: ["All", "Sentiment", "Countries", "Gender", "Languages"]
+    },
     common: {
         weeks: ['Sun', 'Mon', 'Tues', 'Wed', 'Thur', 'Fri', 'Sat'],
         buttons:['OK', 'Cancel']

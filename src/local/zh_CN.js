@@ -19,7 +19,11 @@ export const zh_CN = {
         reports: "报告生成",
         reportsDec: "创建、发送和汇总客户报告",
         setting: "检测设置",
-        settingDec: "设置您所需要的检测信息",
+        settingDec: "设置您所需要的检测信息"
+    },
+    analytics: {
+        tabs: ["信息汇总", "情绪分析", "影响力分析", "主题分析"],
+        filters: ["全部", "情绪指数", "地域分布", "性别分布", "语言分布"]
     },
     common: {
         weeks: ['日', '一', '二', '三', '四', '五', '六'],

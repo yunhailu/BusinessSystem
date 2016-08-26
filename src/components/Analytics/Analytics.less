@@ -1,1 +1,26 @@
 @import "../common.less";
+
+.analytics-panel{
+  .bgc(@bg-color);   .mg-left(18rem);
+  &-wrap{
+    .tools{
+      .h(5rem);  .pd(1.4rem 0);  .mg(0);
+      .search{
+        .w(100%);  .h(2.4rem);
+        .bgc(#e6e6e6);  .br(0.2rem);
+        &-input{  .w(80%);  .input-transparent();  .h(1.2rem);  .c(#666);  .disIB();  .mg(0.5rem 1rem); }
+        &-btn{ .float-right();  .disIB();  .pointer(); .pd(0.5rem 1rem); }
+      }
+      .days-btn{
+        .h(2.4rem);  overflow: hidden;;
+        li{
+          .disIB();  .lh(2.4rem);  .pd(0 0.3rem);  .pointer();  .br(0.4rem);  .c(@word);
+        }
+        li.active{ .bgc(@body-theme);  .c(white);  }
+      }
+      .date{
+        .w(100%);  .h(2.4rem);  .lh(2.4rem);  .c(@word);  .tc();  .disB();  .bgc(#f3f3f3);  .br(0.2rem);
+      }
+    }
+  }
+}
