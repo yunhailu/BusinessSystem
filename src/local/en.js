@@ -23,7 +23,8 @@ export const en = {
     },
     analytics: {
         tabs: ["Results", "Sentiment", "Influencers", "Theme"],
-        filters: ["All", "Sentiment", "Countries", "Gender", "Languages"]
+        filters: ["All", "Sentiment", "Countries", "Gender", "Languages"],
+        source: ["All", "WeChat", "Weibo", "Client", "Platforms"]
     },
     common: {
         weeks: ['Sun', 'Mon', 'Tues', 'Wed', 'Thur', 'Fri', 'Sat'],
