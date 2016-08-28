@@ -1,2 +1,25 @@
 @import "../common.less";
 
+
+.charts{
+  .pd(0);  .mg(0);  .h(28rem);  .w(100%);
+  .chart.active{ .w(73%); }
+  .chart{
+    .w(73%);  .h(28rem);
+    .disIB();  //.pd(1rem);
+  }
+  .pie.active{  }
+  .pie{
+    .w(23%);  .h(28rem);
+    .disIB();  //.pd(1rem);
+  }
+  .arrow{
+    .w(2rem);  .h(28rem);  .c(@word);  .float-right();  .tc();
+    i{ .mgc();  .top(13rem); .pr();   }
+  }
+  .arrow:hover{ .bgc(#eee);  .pointer(); }
+}
+
+.rotate-transition{
+  transition: all .3s ease;
+}

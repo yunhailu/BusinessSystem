@@ -2,6 +2,125 @@
  * Created by yunhailu on 2016/8/9.
  */
 
+// 统计图表基础配置(饼图、环形图)
+export const Pie = {
+    title: {
+        text: "Chart Data",
+        shadowColor: 'rgba(0, 0, 0, 0.5)',
+        shadowBlur: 10
+    },
+    toolbox: {
+        show: true,
+        showTitle: true,
+        feature: {
+            saveAsImage: {}
+        }
+    },
+    tooltip: {
+        trigger: 'item',
+        formatter: "{a} <br/>{b}: {c} ({d}%)"
+    },
+    legend: {},
+    textStyle: {
+        fontFamily: 'pingfang'
+    },
+    series: {
+        name:'pie',
+        type:'pie',
+        radius: ['40%', '85%'],
+        avoidLabelOverlap: false,
+        center: ['50%', '50%'],
+        label: {
+            normal: {
+                show: false,
+                position: 'center'
+            },
+            emphasis: {
+                show: true,
+                textStyle: {
+                    fontSize: '20',
+                    fontWeight: 'bold'
+                }
+            }
+        },
+        labelLine: {
+            normal: {
+                show: false
+            }
+        },
+    }
+};
+
+// 统计图表基础配置(折线图、柱状图)
+export const Chart = {
+    title: {
+        text: "Chart Data",
+        shadowColor: 'rgba(0, 0, 0, 0.5)',
+        shadowBlur: 10
+    },
+    xAxis: {
+        axisLine: {
+            lineStyle: {
+                color: '#aaa'
+            }
+        },
+        splitLine: {
+            lineStyle: {
+                type: 'dashed' //solid  dashed  dotted
+            }
+        }
+    },
+    yAxis: {
+        axisLine: {
+            lineStyle: {
+                color: '#aaa'
+            }
+        },
+        splitLine: {
+            lineStyle: {
+                type: 'dashed' //solid  dashed  dotted
+            }
+        }
+    },
+    Axis: {
+        axisLine: {
+            lineStyle: {
+                color: '#999'
+            }
+        },
+        splitLine: {
+            lineStyle: {
+                type: 'dashed' //solid  dashed  dotted
+            }
+        }
+    },
+    textStyle: {
+        fontFamily: 'pingfang'
+    },
+    tooltip : {
+        trigger: 'axis',
+        axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+            type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+        }
+    },
+    grid: {
+        left: '3%',
+        right: '4%',
+        bottom: '3%',
+        containLabel: true
+    },
+    toolbox: {
+        show: true,
+        showTitle: true,
+        feature: {
+            magicType: {
+                type: ['line', 'bar']
+            },
+            saveAsImage: {}
+        }
+    }
+};
+
 
 // 主菜单
 export const MainMenu = [{

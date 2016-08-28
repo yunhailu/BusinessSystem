@@ -45,9 +45,18 @@
                     ],
                     yAxis : [
                         {
-                            type : 'value'
+                            type : 'value',
+                            splitLine: {
+                                lineStyle: {
+                                    type: 'solid'//solid  dashed  dotted
+                                }
+                            }
                         }
                     ],
+                    progressive: 4,
+                    textStyle: {
+                        fontFamily: 'pingfang'
+                    },
                     series : [
                         {
                             name:'直接访问',
