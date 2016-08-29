@@ -2,7 +2,7 @@
     <span>Result</span>
     <div class="charts">
         <div class="arrow animated rubberBand" @click="toggle">
-            <i class="fa fa-angle-left fa-3x" transition="rotate" :class="[isActivePie ? 'fa-rotate-180' : '']"></i>
+            <i class="fa fa-angle-left fa-3x" transition="rotate" :class="[resultPieChartOption.isActive ? 'fa-rotate-180' : '']"></i>
         </div>
         <!--<div class="chart" v-echarts="resultChartOption" :loading="resultChartLoading" :class="[isChartScale ? 'active' : '']" :resize="isChartScale"></div>-->
         <!--<div class="pie" v-echarts="resultPieChartOption" :loading="resultPieChartLoading" :class="[isActivePie ? 'active' : '']"  :resize="isActivePie" ></div>-->
@@ -12,9 +12,36 @@
     </div>
     <div class="result-panel">
         <ul class="result-panel-list">
-            <li class="result-panel-list-item" v-for="item in list">
-                <div class="result-panel-list-item-title">{{item.title}}</div>
-                <div class="result-panel-list-item-con">{{item.content}}</div>
+            <li class="result-panel-list-item row" v-for="item in list">
+                <a :href="item.url" target="_blank">
+                    <div class="result-panel-list-item-left col-md-8">
+                        <i class="fa fa-paperclip fa-3x"></i>
+                        <div class="result-panel-list-item-left-con">
+                            <div class="title">{{item.title}}</div>
+                            <div class="detail">{{item.content}}</div>
+                            <div class="time">published on {{item.pDate}}</div>
+                        </div>
+                    </div>
+                    <div class="result-panel-list-item-right col-md-4">
+                        <i class="fa fa-flag fa-2x icon"></i>
+                        <div class="item-data">
+                            <div class="row">
+                                <div class="col-md-3 title">MATCHES</div>
+                                <div class="col-md-9">Carrival Group</div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3 title">METRICS</div>
+                                <div class="col-md-3"><i class="fa fa-wechat"></i> 12</div>
+                                <div class="col-md-3"><i class="fa fa-weibo"></i> 14</div>
+                                <div class="col-md-3"><i class="fa fa-internet-explorer"></i> 14</div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3 col-md-offset-3"><i class="fa fa-eye"></i> {{item.viewCount}}</div>
+                                <div class="col-md-3"><i class="fa fa-thumbs-up"></i> {{item.likeCount}}</div>
+                            </div>
+                        </div>
+                    </div>
+                </a>
             </li>
         </ul>
     </div>

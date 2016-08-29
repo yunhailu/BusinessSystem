@@ -82,3 +82,10 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
+.text-num-hidden(@num){
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: @num;
+  word-break: break-all;
+  overflow: hidden;
+}
