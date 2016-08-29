@@ -8,7 +8,7 @@ import echarts from  'echarts';
 
 module.exports = {
     deep: true,
-    params: ['loading'],
+    params: ['loading', 'resize'],
     paramWatchers: {
         loading: function (val, oldVal) {
             var _this = this;
@@ -17,6 +17,12 @@ module.exports = {
                 _this.instance.showLoading();
             } else {
                 _this.instance.hideLoading();
+            }
+        },
+        resize: function(val, oldVal){
+            if(val != oldVal){
+                var _this = this;
+                _this.instance.resize();
             }
         }
     },
@@ -52,6 +58,7 @@ module.exports = {
 
         Vue.nextTick(function () {
             _this.instance.setOption(options);
+            _this.instance.resize();
         });
     },
     unbind: function () {

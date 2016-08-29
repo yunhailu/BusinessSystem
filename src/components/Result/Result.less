@@ -2,15 +2,15 @@
 
 
 .charts{
-  .pd(0);  .mg(0);  .h(28rem);  .w(100%);
+  .pd(0);  .mg(0);  .h(28rem);  .w(100%);   .pr();
   .chart.active{ .w(73%); }
   .chart{
-    .w(73%);  .h(28rem);
+    .w(96%);  .h(28rem); .pd(0 1rem);
     .disIB();  //.pd(1rem);
   }
-  .pie.active{  }
+  .pie.active{ .w(23%); .disIB();  .opacity(100); }
   .pie{
-    .w(23%);  .h(28rem);
+    .w(23%);  .h(28rem);  .opacity(0);  .pa();  .right(2rem);
     .disIB();  //.pd(1rem);
   }
   .arrow{
@@ -20,6 +20,22 @@
   .arrow:hover{ .bgc(#eee);  .pointer(); }
 }
 
+.result-panel{
+  .pd(0);  .mg(0);   .w(100%);   .pr();
+  &-list{
+    .pd(1rem);
+    &-item{
+      .bgc(white);  .pd(1rem);  .mg(1rem 0);  .b-bottom(0.2rem solid @body-bg);
+      &-title{
+
+      }
+    }
+  }
+}
+
 .rotate-transition{
+  transition: all .3s ease;
+}
+.show-pie-transition{
   transition: all .3s ease;
 }
