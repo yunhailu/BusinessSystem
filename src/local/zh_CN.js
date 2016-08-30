@@ -28,6 +28,8 @@ export const zh_CN = {
     },
     common: {
         weeks: ['日', '一', '二', '三', '四', '五', '六'],
-        buttons:['确定', '取消']
+        buttons:['确定', '取消'],
+        sortBy: "排序",
+        select: "-- 请选择 --"
     }
 };

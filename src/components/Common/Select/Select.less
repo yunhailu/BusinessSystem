@@ -1,0 +1,20 @@
+@import "../../common.less";
+
+.select{
+  .title{ .c(@body-theme);  .f(1.4rem);  .ff("pingfang-bold");  .vm();  }
+
+  .select-btn{
+    .vm();  .w(10rem);  .h(2.3rem);  .f(1.2rem);  .lh(2.3rem);
+    .bgc(@body-theme);  .c(white);  .br(0rem);  .mg(0 1rem);  .br(0.2rem);
+    .disIB();  .pointer();
+    i{
+      .c(@word);  .f(1.2rem);  .c(white);  .lh(1rem);  .disIB();
+      .w(2.4rem);  .h(2.4rem);  .tc();
+    }
+    &-text{
+      .disIB();
+    }
+  }
+
+  .dropdown-menu{ .disB(); }
+}

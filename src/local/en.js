@@ -28,6 +28,8 @@ export const en = {
     },
     common: {
         weeks: ['Sun', 'Mon', 'Tues', 'Wed', 'Thur', 'Fri', 'Sat'],
-        buttons:['OK', 'Cancel']
+        buttons:['OK', 'Cancel'],
+        sortBy: "Sort By",
+        select: "-- Select --"
     }
 };
