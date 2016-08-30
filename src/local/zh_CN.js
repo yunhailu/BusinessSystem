@@ -30,6 +30,8 @@ export const zh_CN = {
         weeks: ['日', '一', '二', '三', '四', '五', '六'],
         buttons:['确定', '取消'],
         sortBy: "排序",
-        select: "-- 请选择 --"
+        select: "-- 请选择 --",
+        prevPage: "上一页",
+        nextPage: "下一页"
     }
 };

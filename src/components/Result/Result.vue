@@ -12,6 +12,10 @@
             <div class="col-md-4">
                 <select-el :options="options" :title="selectTitle" :value.sync="sortVal"></select-el>
             </div>
+            <!--<div class="col-md-4">-->
+                <!--<i class="fa fa-th-large"></i>-->
+                <!--<i class="fa fa-th-list"></i>-->
+            <!--</div>-->
         </div>
         <ul class="result-panel-list">
             <li class="result-panel-list-item row" v-for="item in list">
@@ -46,6 +50,9 @@
                 </a>
             </li>
         </ul>
+        <div class="result-panel-pager">
+            <page></page>
+        </div>
     </div>
 </template>
 <style lang="less" scoped>
@@ -56,7 +63,8 @@
     import Local from "../../local/local";
     import {Chart, Pie} from '../../config/config';
     import Select from '../Common/Select/Select.vue';
-    
+    import Page from '../Common/Page/Page.vue';
+
     const list = {
         time : [
             {
@@ -1063,7 +1071,8 @@
             }
         },
         components:{
-            'select-el': Select
+            'select-el': Select,
+            'page': Page
         }
     }
 </script>

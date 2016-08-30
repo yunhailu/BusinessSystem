@@ -30,6 +30,8 @@ export const en = {
         weeks: ['Sun', 'Mon', 'Tues', 'Wed', 'Thur', 'Fri', 'Sat'],
         buttons:['OK', 'Cancel'],
         sortBy: "Sort By",
-        select: "-- Select --"
+        select: "-- Select --",
+        prevPage: "Prev",
+        nextPage: "Next"
     }
 };

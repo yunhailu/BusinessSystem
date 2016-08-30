@@ -19,7 +19,7 @@
 <style lang="less" scoped>
     @import "Select.less";
 </style>
-<script>
+<script type="text/ecmascript-6">
     import Local from "../../../local/local";
 
     export default{
