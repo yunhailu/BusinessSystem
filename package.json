@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "webpack-dev-server --inline --hot --host 0.0.0.0 --port 80 --config build/webpack.dev.config.js",
     "prod": "webpack --hide-modules  --config build/webpack.prod.config.js",
+    "server": "json-server --watch data/db.json",
     "test": "test"
   },
   "repository": {
