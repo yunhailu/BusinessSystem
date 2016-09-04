@@ -12,14 +12,20 @@
         &-btn{ .float-right();  .disIB();  .pointer(); .pd(0.5rem 1rem); }
       }
       .days-btn{
-        .h(2.4rem);  overflow: hidden;;
+        .h(2.4rem);  overflow: hidden;;  .float-left();  .w(12.5rem);
         li{
           .disIB();  .lh(2.4rem);  .pd(0 0.3rem);  .pointer();  .br(0.4rem);  .c(@word);
         }
         li.active{ .bgc(@body-theme);  .c(white);  }
       }
-      .date{
-        .w(100%);  .h(2.4rem);  .lh(2.4rem);  .c(@word);  .tc();  .disB();  .bgc(#f3f3f3);  .br(0.2rem);
+      .diyDate{
+        .mg-left(12.5rem);
+        .date{
+          .icon{
+            .float-left();  .lh(2.4rem);  .pd(0 0.7rem);
+          }
+          .w(100%);  .h(2.4rem);  .lh(2.4rem);  .c(@word);  .tc();  .disB();  .bgc(#f3f3f3);  .br(0.2rem);
+        }
       }
     }
   }

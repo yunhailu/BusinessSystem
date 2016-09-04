@@ -24,7 +24,7 @@
             <!--</form>-->
 
             <menu-list title="主题" :menus="AnalyticMenu"></menu-list>
-            <menu-list title="数据源" :menus="ChannelMenu"></menu-list>
+            <!--<menu-list title="数据源" :menus="ChannelMenu"></menu-list>-->
         </section>
     </aside>
 </template>

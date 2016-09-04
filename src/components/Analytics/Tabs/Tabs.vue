@@ -4,11 +4,11 @@
             <a v-link="{name: tab.link}">{{tab.name}}</a>
         </li>
     </ul>
-    <ul class="row items filters">
-        <li v-for="filter in filters" class="item" :class="[filterActive == $index ? 'active' : '']" @click="filterAction(filter, $index)">
-            <span class="con">{{filter}}</span>
-        </li>
-    </ul>
+    <!--<ul class="row items filters">-->
+        <!--<li v-for="filter in filters" class="item" :class="[filterActive == $index ? 'active' : '']" @click="filterAction(filter, $index)">-->
+            <!--<span class="con">{{filter}}</span>-->
+        <!--</li>-->
+    <!--</ul>-->
     <ul class="row items source">
         <li v-for="item in source" class="item" :class="[sourceActive == $index ? 'active' : '']" @click="sourceAction(item, $index)">
             <span class="con">{{item}}</span>
@@ -41,8 +41,8 @@
                     name: words.tabs[3],
                     link: 'theme'
                 }],
-                filters: words.filters,
-                filterActive: 0,
+//                filters: words.filters,
+//                filterActive: 0,
                 source: words.source,
                 sourceActive: 0
 //                filters: [{

@@ -55,6 +55,11 @@
                     icon: "fa-line-chart",
                     link: "analytics"
                 },{
+                    id: "compare",
+                    name: words.compare,
+                    icon: "fa-paper-plane",
+                    link: ""
+                },{
                     id: "dashboard",
                     name: words.dashboard,
                     icon: "fa-adjust",

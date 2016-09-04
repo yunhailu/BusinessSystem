@@ -6,7 +6,7 @@
 				<ul class="home-panel-wrap-list row">
 					<li class="home-panel-wrap-list-item col-md-4"  v-for="item in items">
 						<div class="home-panel-wrap-list-item-container">
-							<a v-link="{name: 'home'}" class="home-panel-wrap-list-item-container-link">
+							<a v-link="item.link" class="home-panel-wrap-list-item-container-link">
 								<i class="fa fa-2x icon" :class="item.icon"></i>
 								<span class="title">{{item.name}}</span>
 								<div class="dec">{{item.dec}}</div>
@@ -70,7 +70,7 @@
 					name: words.analytics,
 					dec: words.analyticsDec,
 					icon: "fa-line-chart",
-					link: ""
+					link: {name: 'analytics'}
 				},{
 					id: "reports",
 					name: words.reports,

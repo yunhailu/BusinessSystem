@@ -7,6 +7,7 @@ export const en = {
         home: "Home",
         analytics: "Analytics",
         dashboard: "Dashboard",
+        compare: "Compare",
         reports: "Reports & Alerts",
         setting: "Setting",
         quit: "Quit"

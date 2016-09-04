@@ -7,6 +7,7 @@ export const zh_CN = {
         home: "主页",
         analytics: "数据分析",
         dashboard: "快捷报告",
+        compare: "数据对比",
         reports: "报告生成",
         setting: "检测设置",
         quit: "退出"

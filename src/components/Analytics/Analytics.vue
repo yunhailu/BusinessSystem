@@ -10,20 +10,23 @@
                         <span class="search-btn" @click="searchAction"><i class="fa fa-search"></i></span>
                     </div>
                 </div>
-                <div class="col-md-2">
-                    <span class="date" @click="showCalendar"> {{cal.value}}</span>
-                    <calendar :show.sync="cal.show" :value.sync="cal.value" :x="cal.x" :y="cal.y" :begin="cal.begin" :end="cal.end" :type="cal.type" :range="cal.range"></calendar>
-                </div>
-                <div class="col-md-2">
+                <div class="col-md-4">
                     <ul class="days-btn">
                         <li>1D</li>
                         <li class="active">7D</li>
                         <li>30D</li>
-                        <li>3M</li>
-                        <li>6M</li>
-                        <li>1Y</li>
+                        <li>自定义</li>
                     </ul>
+                    <div class="diyDate">
+                        <span class="date" @click="showCalendar"><i class="fa fa-calendar fa-2x  icon"></i> {{cal.value}}</span>
+                        <calendar :show.sync="cal.show" :value.sync="cal.value" :x="cal.x" :y="cal.y" :begin="cal.begin" :end="cal.end" :type="cal.type" :range="cal.range"></calendar>
+                    </div>
+
                 </div>
+                <!--<div class="col-md-2">-->
+                    <!--<span class="date" @click="showCalendar"> {{cal.value}}</span>-->
+                    <!--<calendar :show.sync="cal.show" :value.sync="cal.value" :x="cal.x" :y="cal.y" :begin="cal.begin" :end="cal.end" :type="cal.type" :range="cal.range"></calendar>-->
+                <!--</div>-->
             </div>
             <tabs ></tabs>
 
