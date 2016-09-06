@@ -109,6 +109,11 @@ export const Chart = {
         bottom: '3%',
         containLabel: true
     },
+    color:[
+        '#27727B','#F3A43B','#B5C334','#60C0DD','#E87C25',
+        '#FE8463','#9BCA63','#FAD860','#FCCE10','#C1232B',
+        '#D7504B','#C6E579','#F4E001','#F0805A','#26C0C0'
+    ],
     toolbox: {
         show: true,
         showTitle: true,

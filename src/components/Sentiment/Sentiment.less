@@ -1,2 +1,20 @@
 @import "../common.less";
 
+.charts{
+  .pd(0);  .mg(0);  .h(28rem);  .w(100%);   .pr();
+  .chart.active{ .w(73%); }
+  .chart{
+    .w(96%);  .h(20rem); .pd(0 1rem);
+    .disIB();  //.pd(1rem);
+  }
+  .pie.active{ .w(23%); .disIB();  .opacity(100); }
+  .pie{
+    .w(23%);  .h(28rem);  .opacity(0);  .pa();  .right(2rem);
+    .disIB();  //.pd(1rem);
+  }
+  .arrow{
+    .w(2rem);  .h(28rem);  .c(@word);  .float-right();  .tc();
+    i{ .mgc();  .top(13rem); .pr();   }
+  }
+  .arrow:hover{ .bgc(#eee);  .pointer(); }
+}
