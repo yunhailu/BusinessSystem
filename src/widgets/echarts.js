@@ -5,10 +5,14 @@
 
 import Vue from 'vue';
 import echarts from  'echarts';
+import _ from  'underscore';
+import infographic from 'echarts/theme/infographic';
+import def from 'echarts/theme/default';
+import macarons from 'echarts/theme/macarons';
 
 module.exports = {
     deep: true,
-    params: ['loading', 'resize'],
+    params: ['loading', 'resize', 'theme'],
     paramWatchers: {
         loading: function (val, oldVal) {
             var _this = this;
@@ -24,14 +28,22 @@ module.exports = {
                 var _this = this;
                 _this.instance.resize();
             }
+        },
+        theme: function(val, oldVal){
+            //this.params.theme = val;
+            //this.registerTheme(val);
         }
     },
-    bind: function () {
+    bind: function (a) {
+        console.log(a, this);
         var _this = this;
 
         Vue.nextTick(function () {
             // init echarts instance
-            _this.instance = echarts.init(_this.el);
+            //_this.instance = echarts.init(_this.el, _this.params.theme || 'default');
+
+            var theme = _this.params.theme || 'default';
+            _this.instance = echarts.init(_this.el, theme);
 
             // show loading animation
             if (_this.params.loading === true) {
@@ -58,7 +70,9 @@ module.exports = {
 
         Vue.nextTick(function () {
             _this.instance.setOption(options);
-            _this.instance.resize();
+            if(options.series.type != 'wordCloud' || _.some(options.series, item => {return item.type == 'wordCloud'})){
+                _this.instance.resize();
+            }
         });
     },
     unbind: function () {
