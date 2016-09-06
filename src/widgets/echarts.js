@@ -29,10 +29,6 @@ module.exports = {
                 _this.instance.resize();
             }
         },
-        theme: function(val, oldVal){
-            //this.params.theme = val;
-            //this.registerTheme(val);
-        }
     },
     bind: function (a) {
         console.log(a, this);

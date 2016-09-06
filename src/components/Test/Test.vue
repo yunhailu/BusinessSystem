@@ -35,10 +35,22 @@
                     legend: {
                         data:['直接访问','邮件营销','联盟广告','视频广告','搜索引擎','百度','谷歌','必应','其他']
                     },
+                    dataZoom: [
+                        {   // 这个dataZoom组件，默认控制x轴。
+                            type: 'slider', // 这个 dataZoom 组件是 slider 型 dataZoom 组件
+                            start: 10,      // 左边在 10% 的位置。
+                            end: 60         // 右边在 60% 的位置。
+                        },
+                        {   // 这个dataZoom组件，也控制x轴。
+                            type: 'inside', // 这个 dataZoom 组件是 inside 型 dataZoom 组件
+                            start: 10,      // 左边在 10% 的位置。
+                            end: 60         // 右边在 60% 的位置。
+                        }
+                    ],
                     grid: {
                         left: '3%',
                         right: '4%',
-                        bottom: '3%',
+                        bottom: '10%',
                         containLabel: true
                     },
                     xAxis : [
