@@ -1,8 +1,9 @@
 <template>
-    <div class="chart" v-echarts="barChartOption" :loading="barChartLoading" theme="default"></div>
+    <div class="chart" v-echarts="barChartOption" :loading="barChartLoading" theme="default" :click="clickAction"></div>
     <div class="chart" v-echarts="pieChartOption" :loading="barChartLoading" theme="infographic"></div>
     <div class="chart" v-echarts="mapChartOption" :loading="mapChartLoading" theme="macarons"></div>
     <div class="chart" v-echarts="wordChartOption" :loading="wordChartLoading" theme="infographic"></div>
+    <div class="chart" v-echarts="graphChartOption" :loading="grapphChartLoading" theme="infographic"></div>
     <!--<div class="chart" v-echarts="mapChartOption" :loading="barChartLoading"></div>-->
 
     <!--<input type="text" @click="showCalendar" v-model="value" placeholder="请输入日期">-->
@@ -449,6 +450,59 @@
                     }
                 },
 
+                grapphChartLoading: false,
+                graphChartOption: {
+                    title: {
+                        text: 'Les Miserables',
+                        subtext: 'Default layout',
+                        top: 'bottom',
+                        left: 'right'
+                    },
+                    tooltip: {},
+                    legend: [{
+                        // selectedMode: 'single',
+                        data: ["A1", "A2", "A3"]
+                    }],
+                    animation: false,
+                    series: [
+                        {
+                            name: 'Les Miserables',
+                            type: 'graph',
+                            layout: 'force',
+                            data: [{
+                                attributes: { modularity_class: 7 },
+                                category: 7,
+                                draggable: true,
+                                id: "75",
+                                itemStyle: null,
+                                name: "A2",
+                                symbolSize: 10,
+                                value: 10
+                            },{
+                                attributes: { modularity_class: 8 },
+                                category: 8,
+                                draggable: true,
+                                id: "76",
+                                itemStyle: null,
+                                name: "A3",
+                                symbolSize: 10,
+                                value: 10
+                            }],
+                            //links: graph.links,
+                            categories: [{name: "A1"}, {name: "A2"}, {name: "A3"}],
+                            roam: true,
+                            label: {
+                                normal: {
+                                    position: 'right'
+                                }
+                            },
+                            force: {
+                                repulsion: 100
+                            }
+                        }
+                    ]
+                },
+
                 cal: {
                     show: false,
                     type: "date", //date datetime
@@ -476,6 +530,9 @@
                 setTimeout(function(){
                     document.addEventListener('click',bindHide,false);
                 },500);
+            },
+            clickAction(opts){
+                console.log('click echatrs', opts.name);
             }
         },
         components: {

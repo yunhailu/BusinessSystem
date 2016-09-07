@@ -12,7 +12,7 @@ import macarons from 'echarts/theme/macarons';
 
 module.exports = {
     deep: true,
-    params: ['loading', 'resize', 'theme'],
+    params: ['loading', 'resize', 'theme', 'click'],
     paramWatchers: {
         loading: function (val, oldVal) {
             var _this = this;
@@ -31,15 +31,17 @@ module.exports = {
         },
     },
     bind: function (a) {
-        console.log(a, this);
         var _this = this;
 
         Vue.nextTick(function () {
             // init echarts instance
-            //_this.instance = echarts.init(_this.el, _this.params.theme || 'default');
-
             var theme = _this.params.theme || 'default';
             _this.instance = echarts.init(_this.el, theme);
+
+            // add echart click Event
+            if(_this.params.click){
+                _this.instance.on('click', _this.params.click);
+            }
 
             // show loading animation
             if (_this.params.loading === true) {
