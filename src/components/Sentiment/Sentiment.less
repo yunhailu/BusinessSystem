@@ -1,11 +1,17 @@
 @import "../common.less";
 
 .charts{
-  .pd(0);  .mg(0);  .h(28rem);  .w(100%);   .pr();
+  .pd(0);  .mg(0);  .h(28rem);  .w(100%);   .pr();  .tc();
   .chart.active{ .w(73%); }
   .chart{
     .w(96%);  .h(20rem); .pd(0 1rem);
     .disIB();  //.pd(1rem);
+  }
+
+
+  .line{
+    .w(96%);  .h(1px); .pd(0);  .mg(2rem auto);
+    .disIB();  .bgc(@word);
   }
   .pie.active{ .w(23%); .disIB();  .opacity(100); }
   .pie{
