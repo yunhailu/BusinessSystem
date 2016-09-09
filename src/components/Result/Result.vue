@@ -747,7 +747,7 @@
                 resultChartLoading: false,
                 resultChartOption: {
                     isToggle: true,
-                    title: _.extend(Chart.title, { show: false}),
+                    title: _.extend({}, Chart.title, { show: false}),
                     tooltip: Chart.tooltip,
                     legend: {
                         data:['Happy','Anger','Sorrow','Disgust','Fear']
@@ -800,9 +800,9 @@
                 resultPieChartLoading: false,
                 resultPieChartOption: {
                     isActive: true,
-                    title: _.extend(Pie.title, { show: false}),
-                    tooltip: _.extend(Pie.tooltip, { }),
-                    legend: _.extend(Pie.legend, {
+                    title: _.extend({}, Pie.title, { show: false}),
+                    tooltip: _.extend({}, Pie.tooltip),
+                    legend: _.extend({}, Pie.legend, {
                         //orient: 'vertical',
                         //x: 'bottom',
                         bottom: 0,
@@ -810,7 +810,7 @@
                     }),
                     textStyle: Pie.textStyle,
                     toolbox: Pie.toolbox,
-                    series: _.extend(Pie.series, {
+                    series: _.extend({}, Pie.series, {
                         name: 'Seniment',
                         center: ['50%', '45%'],
                         data:[
