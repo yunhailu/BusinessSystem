@@ -1,11 +1,10 @@
 <template>
     <span>Sentiment</span>
     <div class="charts">
-        <div class="chart" v-echarts="sentimentChartOption" :loading="sentimentChartLoading" ></div>
+        <div class="chart percentBar" v-echarts="sentimentChartOption" :loading="sentimentChartLoading" ></div>
+        <div class="chart timeBar" v-echarts="sentimentBarOption" :loading="sentimentBarLoading" theme="infographic"></div>
     </div>
-    <div class="charts">
-        <div class="chart" v-echarts="sentimentBarOption" :loading="sentimentBarLoading" theme="infographic"></div>
-    </div>
+    <!--<div class="charts"></div>-->
 </template>
 <style lang="less" scoped>
     @import "Sentiment.less";
@@ -131,7 +130,7 @@
                     dataZoom: _.extend({}, Chart.dataZoom),
                     //color:_.extend( Chart.color, {}),
                     grid: _.extend({}, Chart.grid, {
-                        bottom: '18%',
+                        bottom: '40rem',
                     }),
                     toolbox: _.extend({}, Chart.toolbox),
                     xAxis: _.extend({}, Chart.xAxis, {

@@ -1064,7 +1064,7 @@
                 handler(val, oldVal){
                     if(val != oldVal){
                         // 展示不同的列表信息
-                        console.log(val, oldVal);
+                        //console.log(val, oldVal);
                         this.list = list[val.key];
                     }
                 }
