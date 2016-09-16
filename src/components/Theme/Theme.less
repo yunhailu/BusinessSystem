@@ -1,2 +1,14 @@
 @import "../common.less";
 
+@theme-word-height: 27rem;
+
+.theme-word{
+    .w(100%);  .pd(1rem);
+    &-chart{
+        .w(70%);  .h(@theme-word-height);
+        .disIB();
+    }
+    &-ranking{
+        .w(30%);  .h(@theme-word-height);
+    }
+}

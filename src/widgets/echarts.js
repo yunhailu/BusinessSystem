@@ -9,6 +9,7 @@ import _ from  'underscore';
 import infographic from 'echarts/theme/infographic';
 import def from 'echarts/theme/default';
 import macarons from 'echarts/theme/macarons';
+import WordCloud from 'echarts-wordcloud';
 
 module.exports = {
     deep: true,

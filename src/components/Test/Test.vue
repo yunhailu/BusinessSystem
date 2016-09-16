@@ -17,7 +17,6 @@
     import Echart from 'echarts';
     import Calendar from '../Common/Calendar/Calendar.vue';
     import China from 'echarts/map/js/china';
-    import WordCloud from 'echarts-wordcloud';
 
     export default{
         data(){
