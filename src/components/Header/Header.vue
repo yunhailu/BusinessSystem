@@ -58,7 +58,7 @@
                     id: "compare",
                     name: words.compare,
                     icon: "fa-paper-plane",
-                    link: ""
+                    link: "compare"
                 },{
                     id: "dashboard",
                     name: words.dashboard,

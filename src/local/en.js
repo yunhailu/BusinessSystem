@@ -27,6 +27,11 @@ export const en = {
         filters: ["All", "Sentiment", "Countries", "Gender", "Languages"],
         source: ["All", "WeChat", "Weibo", "Client", "Platforms"]
     },
+    compare: {
+        tabs: ["Results", "Sentiment", "Influencers", "Theme"],
+        filters: ["All", "Sentiment", "Countries", "Gender", "Languages"],
+        source: ["All", "WeChat", "Weibo", "Client", "Platforms"]
+    },
     common: {
         weeks: ['Sun', 'Mon', 'Tues', 'Wed', 'Thur', 'Fri', 'Sat'],
         buttons:['OK', 'Cancel'],

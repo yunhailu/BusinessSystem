@@ -213,6 +213,42 @@ export const AnalyticMenu = [{
         {router: 'forward', name: '万科地产'}
     ]
 }];
+
+// Compare list
+export const CompareMenu = [{
+    router: 'source',
+    name: '人物分组',
+    //icon: 'fa-bar-chart-o',
+    isActive: false,
+    children: [
+        {router: 'weibo', name: '滴滴'},
+        {router: 'wechat', name: '优步'},
+        {router: 'platfrom', name: '易到'}
+    ]
+}, {
+    router: 'display',
+    name: '事件分组',
+    //icon: 'fa-laptop',
+    isActive: false,
+    children: [
+        {router: 'topic', name: '淘宝'},
+        {router: 'atlas', name: '京东'},
+        {router: 'waveform', name: '唯品会'},
+        {router: 'ranking', name: '美丽说'},
+        {router: 'ranking', name: '国美在线'}
+    ]
+}, {
+    router: 'analysis',
+    name: '品牌分组',
+    //icon: 'fa-edit',
+    isActive: false,
+    children: [
+        {router: 'area', name: '恒大地产'},
+        {router: 'forward', name: '绿地地产'},
+        {router: 'forward', name: '万科地产'}
+    ]
+}];
+
 // Analytics list
 export const ChannelMenu = [{
     router: 'source',

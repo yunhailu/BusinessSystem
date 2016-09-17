@@ -49,6 +49,13 @@ module.exports = {
             }
         }
     },
+    'compare': {
+        name: 'compare',
+        auth: true,
+        component (resolve) {
+            require(['../components/Compare/Compare.vue'], resolve);
+        },
+    },
     '/login': {
         name: 'login',
         component (resolve) {
