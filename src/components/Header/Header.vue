@@ -63,7 +63,7 @@
                     id: "dashboard",
                     name: words.dashboard,
                     icon: "fa-adjust",
-                    link: ""
+                    link: "dashboard"
                 },{
                     id: "reports",
                     name: words.reports,

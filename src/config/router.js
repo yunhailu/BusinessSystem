@@ -54,7 +54,14 @@ module.exports = {
         auth: true,
         component (resolve) {
             require(['../components/Compare/Compare.vue'], resolve);
-        },
+        }
+    },
+    'dashboard': {
+        name: 'dashboard',
+        auth: true,
+        component (resolve) {
+            require(['../components/Dashboard/Dashboard.vue'], resolve);
+        }
     },
     '/login': {
         name: 'login',
@@ -63,6 +70,7 @@ module.exports = {
         }
     },
 
+    
     
     '/main': {
         name: 'main',
