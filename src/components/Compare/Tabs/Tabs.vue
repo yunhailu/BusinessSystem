@@ -1,9 +1,9 @@
 <template>
-    <ul class="row tabs">
-        <li v-for="tab in tabs" class="tab" :class="[tab.link == $route.name ? 'active' : '']" >
-            <a v-link="{name: tab.link}">{{tab.name}}</a>
-        </li>
-    </ul>
+    <!--<ul class="row tabs">-->
+        <!--<li v-for="tab in tabs" class="tab" :class="[tab.link == $route.name ? 'active' : '']" >-->
+            <!--<a v-link="{name: tab.link}">{{tab.name}}</a>-->
+        <!--</li>-->
+    <!--</ul>-->
     <ul class="row items source">
         <li v-for="item in source" class="item" :class="[sourceActive == $index ? 'active' : '']" @click="sourceAction(item, $index)">
             <span class="con">{{item}}</span>

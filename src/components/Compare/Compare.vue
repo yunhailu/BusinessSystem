@@ -27,6 +27,7 @@
             <tabs ></tabs>
 
             <!--<router-view></router-view>-->
+            <main></main>
         </div>
     </div>
 </template>
@@ -38,6 +39,7 @@
     import MenuComponent from './Menu/Menu.vue';
     import Calendar from '../Common/Calendar/Calendar.vue';
     import Tabs from './Tabs/Tabs.vue';
+    import Main from './Main/Main.vue';
     import Local from "../../local/local";
 
     export default{
@@ -61,7 +63,8 @@
             'header-component': HeaderComponent,
             'menu-component': MenuComponent,
             'calendar': Calendar,
-            'tabs': Tabs
+            'tabs': Tabs,
+            'main': Main
         },
         methods: {
             searchAction(){
