@@ -1,0 +1,32 @@
+@import "../../common.less";
+
+.panel-title{
+  .mg(0.5rem 1rem);  .pd(0.5rem 1rem);  .disB();  .tc();  .bgc(#eee);
+}
+
+.charts{
+  .pd(0);  .mg(0);   .w(100%);   .pr();  .tc();
+  .chart.active{ .w(73%); }
+  .chart{
+    .w(96%);  .h(20rem); .pd(0 1rem);
+    .disIB();  .pd(2rem 0);
+  }
+  .percentBar{  }
+  .timeBar{ .h(30rem); }
+
+
+  .line{
+    .w(96%);  .h(1px); .pd(0);  .mg(2rem auto);
+    .disIB();  .bgc(@word);
+  }
+  .pie.active{ .w(23%); .disIB();  .opacity(100); }
+  .pie{
+    .w(23%);  .h(28rem);  .opacity(0);  .pa();  .right(2rem);
+    .disIB();  //.pd(1rem);
+  }
+  .arrow{
+    .w(2rem);  .h(28rem);  .c(@word);  .float-right();  .tc();
+    i{ .mgc();  .top(13rem); .pr();   }
+  }
+  .arrow:hover{ .bgc(#eee);  .pointer(); }
+}

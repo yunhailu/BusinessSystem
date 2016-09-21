@@ -34,7 +34,11 @@ export const en = {
     },
     dashboard: {
         dashboard: "Dashboard",
-        dashboardDec: "Build custom dashboards with the KPIs of your choice"
+        dashboardDec: "Build custom dashboards with the KPIs of your choice",
+        result: "Result",
+        sentiment: "Sentiment",
+        influence: "Influence",
+        theme: "Theme"
     },
     common: {
         weeks: ['Sun', 'Mon', 'Tues', 'Wed', 'Thur', 'Fri', 'Sat'],

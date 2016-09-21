@@ -34,7 +34,11 @@ export const zh_CN = {
     },
     dashboard: {
         dashboard: "快捷报告",
-        dashboardDec: "用你的 KPI 数据构建客户快捷报告"
+        dashboardDec: "用你的 KPI 数据构建客户快捷报告",
+        result: "信息汇总",
+        sentiment: "情绪分析",
+        influence: "影响力分析",
+        theme: "主题分析"
     },
     common: {
         weeks: ['日', '一', '二', '三', '四', '五', '六'],

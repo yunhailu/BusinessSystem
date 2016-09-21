@@ -6,12 +6,18 @@
                 <div class="dashboard-detail-wrap-title">
                     <div class="title"><i class="fa fa-thumb-tack"></i> <span>Ali Pictures</span></div>
                 </div>
-                <div class="dashboard-detail-wrap-result">
-                    <!--<result-component></result-component>-->
+                <div class="dashboard-detail-wrap-module">
+                    <result-component :title="words.result"></result-component>
                 </div>
-                <div class="dashboard-detail-wrap-influence"></div>
-                <div class="dashboard-detail-wrap-sentiment"></div>
-                <div class="dashboard-detail-wrap-theme"></div>
+                <div class="dashboard-detail-wrap-module">
+                    <sentiment-component :title="words.sentiment"></sentiment-component>
+                </div>
+                <div class="dashboard-detail-wrap-module">
+                    <influence-component :title="words.influence"></influence-component>
+                </div>
+                <div class="dashboard-detail-wrap-module">
+                    <theme-component :title="words.theme"></theme-component>
+                </div>
             </div>
         </div>
     </div>
@@ -22,7 +28,10 @@
 <script type="text/ecmascript-6">
     import _ from 'underscore';
     import HeaderComponent from '../Header/Header.vue';
-    import ResultComponent from '../Result/Result.vue';
+    import InfluenceComponent from './Influence/Influence.vue';
+    import ResultComponent from './Result/Result.vue';
+    import SentimentComponent from './Sentiment/Sentiment.vue';
+    import ThemeComponent from './Theme/Theme.vue';
     import Local from "../../local/local";
     import * as API from "../../widgets/Api";
 
@@ -35,7 +44,10 @@
         },
         components:{
             HeaderComponent,
-            //ResultComponent
+            ResultComponent,
+            InfluenceComponent,
+            SentimentComponent,
+            ThemeComponent
         },
         route: {
             data(){

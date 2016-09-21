@@ -1,0 +1,42 @@
+@import "../../common.less";
+
+.panel-title{
+  .mg(0.5rem 1rem);  .pd(0.5rem 1rem);  .disB();  .tc();  .bgc(#eee);
+}
+
+.popular{
+  .w(100%);  .pd(1rem 0);
+  &-list{
+    .pd(1rem);
+    &-item{
+      .w(23%);  .disIB();  .pd(1rem); .mg(0 1%);  .br(0.2rem);  .pointer();  .bgc(white);  //.c(#888);
+      .fa{ .f(1.5rem); }
+      &-title{ .vm();  .f(1.5rem);  .ff("pingfang-bold"); }
+      &-con{
+        .vm(); .f(1.2rem);
+      }
+    }
+    &-item:hover{ .c(white);  .bgc(@body-theme); }
+    &-cost{ }
+  }
+}
+
+.influenceTable{
+  .pd(0.1rem);  .mg(1rem 2rem);
+  table{ .bgc(white); .b(0.1rem solid white); }
+  table>thead{
+    .bgc(@body-theme);  .c(white);  .ff("pingfang-bold");
+  }
+  table tr>td{ .b0();  .tc();  .pr();}
+  .barTd{
+    .w(30%);
+    .sentimentBar{
+      .w(100%);  .h(1.6rem);  //.pa();  .top(0); .bottom(0);  .left(0);  .right(0);
+    }
+  }
+}
+
+.paging{
+  .w(100%);  .tc();
+}
+
