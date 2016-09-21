@@ -32,6 +32,10 @@ export const zh_CN = {
         filters: ["全部", "情绪指数", "地域分布", "性别分布", "语言分布"],
         source: ["全部", "微信", "微博", "客户端", "网页"]
     },
+    dashboard: {
+        dashboard: "快捷报告",
+        dashboardDec: "用你的 KPI 数据构建客户快捷报告"
+    },
     common: {
         weeks: ['日', '一', '二', '三', '四', '五', '六'],
         buttons:['确定', '取消'],

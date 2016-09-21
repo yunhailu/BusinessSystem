@@ -32,6 +32,10 @@ export const en = {
         filters: ["All", "Sentiment", "Countries", "Gender", "Languages"],
         source: ["All", "WeChat", "Weibo", "Client", "Platforms"]
     },
+    dashboard: {
+        dashboard: "Dashboard",
+        dashboardDec: "Build custom dashboards with the KPIs of your choice"
+    },
     common: {
         weeks: ['Sun', 'Mon', 'Tues', 'Wed', 'Thur', 'Fri', 'Sat'],
         buttons:['OK', 'Cancel'],

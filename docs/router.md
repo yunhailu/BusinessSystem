@@ -14,6 +14,7 @@
  theme             |   /#!/analytics/theme               |      null                            |         主界面 Analytics 页的主题分析标签            
  compare           |   /#!/compare                       |      null                            |         主界面 Compare 页            
  dashboard         |   /#!/dashboard                     |      null                            |         主界面 Dashboard 页            
+ dashboardDetail   |   /#!/dashboard/:id                 |      null                            |         主界面 Dashboard 的详情页            
  reports           |   /#!/reports                       |      null                            |         主界面 Reports 页            
  setting           |   /#!/setting                       |      null                            |         主界面 Setting 页            
  test              |   /#!/test                          |      null                            |         test 页，放一些测试组件            

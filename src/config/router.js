@@ -63,6 +63,13 @@ module.exports = {
             require(['../components/Dashboard/Dashboard.vue'], resolve);
         }
     },
+    'dashboard/:id': {
+        name: 'dashboardDetail',
+        auth: true,
+        component (resolve) {
+            require(['../components/DashboardDetail/DashboardDetail.vue'], resolve);
+        }
+    },
     '/login': {
         name: 'login',
         component (resolve) {
