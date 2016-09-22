@@ -7,6 +7,7 @@ import VueResource from 'vue-resource';
 
 Vue.use(VueResource);
 
+const rootURI = "http://business.com:3000";
 const Api = {
     request({url="", params= {}, method= "jsonp"}={}){
         return Vue.http[method](url, {
@@ -32,11 +33,11 @@ const Api = {
  *
  *  @param {String} id
  *
- *  @return {Promise} With product info.
+ *  @return {Promise} With dashboard detail info.
  */
 export const getDashboardDetail = params => {
     return Api.request({
-        url: 'http://business.com:3000/dashboard/'+params.id,
+        url: `${rootURI}/dashboard/${params.id}`,
         params
     });
 };

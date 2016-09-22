@@ -76,7 +76,7 @@
 					name: words.reports,
 					dec: words.reportsDec,
 					icon: "fa-file-text-o",
-					link: ""
+					link: {name: 'reports'}
 				},{
 					id: "setting",
 					name: words.setting,

@@ -68,7 +68,7 @@
                     id: "reports",
                     name: words.reports,
                     icon: "fa-file-text-o",
-                    link: ""
+                    link: "reports"
                 },{
                     id: "setting",
                     name: words.setting,

@@ -70,6 +70,13 @@ module.exports = {
             require(['../components/DashboardDetail/DashboardDetail.vue'], resolve);
         }
     },
+    'reports': {
+        name: 'reports',
+        auth: true,
+        component (resolve) {
+            require(['../components/Reports/Reports.vue'], resolve);
+        }
+    },
     '/login': {
         name: 'login',
         component (resolve) {
