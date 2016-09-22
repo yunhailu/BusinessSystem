@@ -1,1 +1,23 @@
 @import "../common.less";
+
+.reports{
+  &-wrap{
+    .bgc(@bg-color);  .pd(0);
+    &-title{
+      .w(100%);  .pd(0.5rem 1rem);  .b-bottom(1px solid #e9e9e9);
+      .title{ .f(2rem);  .c(#999);  .ff("Microsoft Yahei"); }
+    }
+    &-table{
+      .w(100%);  .pd(1rem);
+      table{ .bgc(white); .b(0.1rem solid white); }
+      table>thead{
+        .bgc(@body-theme);  .c(white);  .ff("pingfang-bold");
+      }
+      table tr>td{ .b0();  .tc();  .pr();}
+      .actionBtn{ .pd(0 0.5rem);  .pointer(); }
+    }
+    &-paging{
+      .w(100%);  .tc();
+    }
+  }
+}
