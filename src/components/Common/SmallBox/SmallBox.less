@@ -1,0 +1,114 @@
+@import "../../common.less";
+
+.bg-black {
+  color: #f9f9f9 !important;
+}
+.bg-gray {
+  background-color: #eaeaec !important;
+}
+.bg-black {
+  background-color: #222222 !important;
+}
+.bg-red {
+  background-color: #f56954 !important;
+}
+.bg-yellow {
+  background-color: #f39c12 !important;
+}
+.bg-aqua {
+  background-color: #00c0ef !important;
+}
+.bg-blue {
+  background-color: #0073b7 !important;
+}
+.bg-light-blue {
+  background-color: #3c8dbc !important;
+}
+.bg-green {
+  background-color: #00a65a !important;
+}
+.bg-navy {
+  background-color: #001f3f !important;
+}
+.bg-teal {
+  background-color: #39cccc !important;
+}
+.bg-olive {
+  background-color: #3d9970 !important;
+}
+.bg-lime {
+  background-color: #01ff70 !important;
+}
+.bg-orange {
+  background-color: #ff851b !important;
+}
+.bg-fuchsia {
+  background-color: #f012be !important;
+}
+.bg-purple {
+  background-color: #932ab6 !important;
+}
+.bg-maroon {
+  background-color: #85144b !important;
+}
+
+.small-box{
+  .pr(); .disB();  .br(0.2rem);  .c(white);  .pointer();  .mg(1rem 0.5rem);
+  .inner{
+    .pd(1.5rem);
+    h3{
+      .f(3.8rem);  .fw(bold);  .mg(0 0 1.5rem 0);  .pd(0 1rem);
+      .z(5);  white-space: nowrap;
+    }
+    p{ .f(1.5rem); .z(5); .pd(0 1rem);  .mg(0); }
+  }
+  .icon{
+    .pa();  .top(auto);  .bottom(1rem);  .right(1rem);
+    .z(0);  .f(9rem);  .c(rgba(0, 0, 0, 0.15));
+  }
+  &-footer{
+    .pr();  .tc();  .pd(0.3rem 0);  .disB();
+    .c(white);  .c(rgba(255, 255, 255, 0.8));
+    .z(10);  .bgc(rgba(0, 0, 0, 0.1));
+    text-decoration: none;
+  }
+  .small-box-footer:hover {
+    .c(white);  .bgc(rgba(0, 0, 0, 0.15));
+  }
+}
+.small-box:hover {
+  text-decoration: none;  .c(#f9f9f9);
+  .icon {
+    animation-name: tansformAnimation;
+    animation-duration: .5s;
+    animation-iteration-count: 1;
+    animation-timing-function: ease;
+    animation-fill-mode: forwards;
+    -webkit-animation-name: tansformAnimation;
+    -webkit-animation-duration: .5s;
+    -webkit-animation-iteration-count: 1;
+    -webkit-animation-timing-function: ease;
+    -webkit-animation-fill-mode: forwards;
+    -moz-animation-name: tansformAnimation;
+    -moz-animation-duration: .5s;
+    -moz-animation-iteration-count: 1;
+    -moz-animation-timing-function: ease;
+    -moz-animation-fill-mode: forwards;
+  }
+}
+@keyframes tansformAnimation {
+  from {
+    .f(9rem);  .bottom(1rem);
+  }
+  to {
+    .f(10rem); .bottom(0.5rem);
+  }
+}
+@-webkit-keyframes tansformAnimation {
+  from {
+    .f(9rem);  .bottom(1rem);
+  }
+  to {
+    .f(10rem); .bottom(0.5rem);
+  }
+}

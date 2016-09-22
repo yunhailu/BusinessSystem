@@ -40,6 +40,9 @@ export const zh_CN = {
         influence: "影响力分析",
         theme: "主题分析"
     },
+    setting: {
+        title: "设置你的项目"
+    },
     common: {
         weeks: ['日', '一', '二', '三', '四', '五', '六'],
         buttons:['确定', '取消'],

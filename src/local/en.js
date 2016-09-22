@@ -40,6 +40,9 @@ export const en = {
         influence: "Influence",
         theme: "Theme"
     },
+    setting: {
+        title: "Project Set-up"
+    },
     common: {
         weeks: ['Sun', 'Mon', 'Tues', 'Wed', 'Thur', 'Fri', 'Sat'],
         buttons:['OK', 'Cancel'],
