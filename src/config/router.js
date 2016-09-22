@@ -93,21 +93,7 @@ module.exports = {
 
     
     
-    '/main': {
-        name: 'main',
-        auth: true,
-        component (resolve) {
-            require(['../components/Main/Main.vue'], resolve);
-        },
-        subRoutes: {
-            '/summary': {
-                name: 'summary',
-                component (resolve) {
-                    require(['../components/Summary/Summary.vue'], resolve);
-                }
-            }
-        }
-    },
+
     '/test': {
         name: 'test',
         component (resolve) {
