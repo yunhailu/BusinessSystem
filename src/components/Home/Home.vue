@@ -82,7 +82,7 @@
 					name: words.setting,
 					dec: words.settingDec,
 					icon: "fa-cog",
-					link: ""
+					link: "setting"
 				}]
 			}
 		},

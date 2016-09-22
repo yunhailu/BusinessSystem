@@ -77,6 +77,13 @@ module.exports = {
             require(['../components/Reports/Reports.vue'], resolve);
         }
     },
+    'setting': {
+        name: 'setting',
+        auth: true,
+        component (resolve) {
+            require(['../components/Setting/Setting.vue'], resolve);
+        }
+    },
     '/login': {
         name: 'login',
         component (resolve) {

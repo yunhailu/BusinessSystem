@@ -73,7 +73,7 @@
                     id: "setting",
                     name: words.setting,
                     icon: "fa-cog",
-                    link: ""
+                    link: "setting"
                 }]
             }
         },
