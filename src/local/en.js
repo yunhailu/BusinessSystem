@@ -44,7 +44,14 @@ export const en = {
         title: "Project Set-up",
         titleDec: "What can you set-up for your project ?",
         introTitle: "Topics",
-        intro: "Topics contain the keywords which you wish to search for in the from of search queries. Topics are organised into groups, and each topic can contain multiple search queries."
+        intro: "Topics contain the keywords which you wish to search for in the from of search queries. Topics are organised into groups, and each topic can contain multiple search queries.",
+        addTitle: "Add Topic",
+        addDecH: "New Topic",
+        addDec: "You have created {1} new Topic, but also to create {2} in this system!",
+        groups: "Group",
+        topic: "Topic Words",
+        exclude: "Exclude Words",
+        create: "Create"
     },
     common: {
         weeks: ['Sun', 'Mon', 'Tues', 'Wed', 'Thur', 'Fri', 'Sat'],

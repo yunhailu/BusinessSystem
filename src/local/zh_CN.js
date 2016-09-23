@@ -44,7 +44,14 @@ export const zh_CN = {
         title: "设置你的项目",
         titleDec: "我们能为您的项目做些什么？",
         introTitle: "主题",
-        intro: "Topics contain the keywords which you wish to search for in the from of search queries. Topics are organised into groups, and each topic can contain multiple search queries."
+        intro: "主题包含您希望从搜索查询的搜索关键字。主题由分组组织而成，每个主题可以包含多个搜索查询。",
+        addTitle: "添加主题",
+        addDecH: "新建监测方案",
+        addDec: "您已经创建了 {0} 个监测主题方案，还能再创建 {1} 个！",
+        groups: "话题分组",
+        topic: "新主题",
+        exclude: "排除词",
+        create: "创建提交"
     },
     common: {
         weeks: ['日', '一', '二', '三', '四', '五', '六'],

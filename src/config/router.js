@@ -82,6 +82,20 @@ module.exports = {
         auth: true,
         component (resolve) {
             require(['../components/Setting/Setting.vue'], resolve);
+        },
+        subRoutes:{
+            '/': {
+                name: 'settingDefault',
+                component (resolve) {
+                    require(['../components/Setting/Default/Default.vue'], resolve);
+                }
+            },
+            '/add': {
+                name: 'settingAdd',
+                component (resolve) {
+                    require(['../components/Setting/Add/Add.vue'], resolve);
+                }
+            }
         }
     },
     '/login': {
