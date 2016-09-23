@@ -2,7 +2,7 @@
     <div class="small-box" :class="option.theme">
         <div class="inner">
             <h3>{{option.title}}</h3>
-            <p>New Orders</p>
+            <p>{{option.dec}}</p>
         </div>
         <div class="icon">
             <i class="fa" :class="option.icon"></i>

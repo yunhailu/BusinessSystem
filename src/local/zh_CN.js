@@ -41,7 +41,10 @@ export const zh_CN = {
         theme: "主题分析"
     },
     setting: {
-        title: "设置你的项目"
+        title: "设置你的项目",
+        titleDec: "我们能为您的项目做些什么？",
+        introTitle: "主题",
+        intro: "Topics contain the keywords which you wish to search for in the from of search queries. Topics are organised into groups, and each topic can contain multiple search queries."
     },
     common: {
         weeks: ['日', '一', '二', '三', '四', '五', '六'],

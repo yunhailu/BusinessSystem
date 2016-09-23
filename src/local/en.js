@@ -41,7 +41,10 @@ export const en = {
         theme: "Theme"
     },
     setting: {
-        title: "Project Set-up"
+        title: "Project Set-up",
+        titleDec: "What can you set-up for your project ?",
+        introTitle: "Topics",
+        intro: "Topics contain the keywords which you wish to search for in the from of search queries. Topics are organised into groups, and each topic can contain multiple search queries."
     },
     common: {
         weeks: ['Sun', 'Mon', 'Tues', 'Wed', 'Thur', 'Fri', 'Sat'],
