@@ -20,11 +20,11 @@
                     <li class="dropdown user user-menu right">
                         <a href="javascript:void(0);" class="dropdown-toggle" >
                             <i class="glyphicon glyphicon-user"></i>
-                            <span>Jane Doe <i class="caret"></i></span>
+                            <span>Admin <i class="caret"></i></span>
                         </a>
                     </li>
                     <li class="dropdown quit right" @click="quit">
-                        <a href="javascript:void(0);">{{words.quit}}</a>
+                        <a href="javascript:void(0);"><i class="fa fa-sign-out"></i> {{words.quit}}</a>
                     </li>
                 </ul>
             </div>

@@ -3,6 +3,7 @@
         <div class="title">
             <i class="fa fa-2x fa-laptop"></i>
             <span>{{title}}</span>
+            <i class="fa fa-plus fa-2x plus" @click="addTopic"></i>
         </div>
         <ul class="sidebar-menu">
             <li v-for="menu in menus" :class="[menu.children.length ? 'treeview' : '', menu.isActive ? 'active' : '']">
@@ -46,6 +47,9 @@
                     }
                 });
                 //menu.isActive = !menu.isActive;
+            },
+            addTopic(){
+                this.$router.go({name: "settingAdd"});
             }
         }
     }

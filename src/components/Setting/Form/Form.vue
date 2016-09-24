@@ -128,20 +128,19 @@
                 }, str);
             }
         },
-        ready(){
-            switch(this.$route.name){
-                case "settingAdd":
-                    this.title = this.words.addDecH;
-                    break;
-                case "settingEdit":
-                    this.title = this.words.editDecH;
-                    break;
-                default:
-                    break;
+        route: {
+            data(){
+                switch(this.$route.name){
+                    case "settingAdd":
+                        this.title = this.words.addDecH;
+                        break;
+                    case "settingEdit":
+                        this.title = this.words.editDecH;
+                        break;
+                    default:
+                        break;
+                }
             }
-        },
-        components:{
-
         }
     }
 </script>
