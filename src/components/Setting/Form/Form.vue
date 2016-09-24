@@ -3,7 +3,7 @@
         <!--<div class="setting-add-title">{{words.addTitle}}</div>-->
         <div class="setting-add-container">
             <div class="setting-add-container-dec">
-                <h4>{{words.addDecH}}</h4>
+                <h4>{{title}}</h4>
                 <span>{{words.addDec | composite total remainder}}</span>
             </div>
 
@@ -69,7 +69,7 @@
     </div>
 </template>
 <style lang="less" scoped>
-    @import "Add.less";
+    @import "Form.less";
 </style>
 <script type="text/ecmascript-6">
     import _ from "underscore";
@@ -80,6 +80,7 @@
             const words = Local().setting;
             return{
                 words,
+                title: "",
                 isAdvanced: false,
                 total: 0,
                 remainder: 0,
@@ -119,6 +120,18 @@
                 return _.reduce(rest, (memo, value) => {
                     return memo.replace(/\{\d\}/i, value);
                 }, str);
+            }
+        },
+        created(){
+            switch(this.$route.name){
+                case "settingAdd":
+                    this.title = this.words.addDecH;
+                    break;
+                case "settingEdit":
+                    this.title = this.words.editDecH;
+                    break;
+                default:
+                    break;
             }
         },
         components:{

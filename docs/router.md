@@ -18,4 +18,5 @@
  reports           |   /#!/reports                       |      null                            |         主界面 Reports 页            
  setting           |   /#!/setting                       |      null                            |         主界面 Setting 的默认页            
  settingAdd        |   /#!/setting/add                   |      null                            |         主界面 Setting 添加 Topic 页            
+ settingEdit       |   /#!/setting/edit/:topic_id        |      topic_id: 主题id                |         主界面 Setting 修改 Topic 页            
  test              |   /#!/test                          |      null                            |         test 页，放一些测试组件            

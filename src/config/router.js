@@ -93,7 +93,13 @@ module.exports = {
             '/add': {
                 name: 'settingAdd',
                 component (resolve) {
-                    require(['../components/Setting/Add/Add.vue'], resolve);
+                    require(['../components/Setting/Form/Form.vue'], resolve);
+                }
+            },
+            '/edit/:topic_id': {
+                name: 'settingEdit',
+                component (resolve) {
+                    require(['../components/Setting/Form/Form.vue'], resolve);
                 }
             }
         }

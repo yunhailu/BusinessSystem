@@ -47,6 +47,7 @@ export const en = {
         intro: "Topics contain the keywords which you wish to search for in the from of search queries. Topics are organised into groups, and each topic can contain multiple search queries.",
         addTitle: "Add Topic",
         addDecH: "New Topic",
+        editDecH: "Edit Topic",
         addDec: "You have created {1} new Topic, but also to create {2} in this system!",
         required: "Required",
         optional: "Optional",
