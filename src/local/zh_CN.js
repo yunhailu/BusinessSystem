@@ -68,6 +68,7 @@ export const zh_CN = {
         sortBy: "排序",
         select: "-- 请选择 --",
         prevPage: "上一页",
-        nextPage: "下一页"
+        nextPage: "下一页",
+        deleteTip: "确定要删除么？"
     }
 };

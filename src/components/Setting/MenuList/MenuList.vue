@@ -13,29 +13,40 @@
                 </a>
                 <ul class="treeview-menu" v-if="menu.children.length" v-show="menu.isActive" transition="expand">
                     <li v-for="item in menu.children">
-                        <a v-link="{name: menu.router, params:{item: item.router}}"><i class="fa fa-angle-double-right"></i> {{item.name}}</a>
+                        <a v-link="{name: menu.router, params:{item: item.router}}">
+                            <i class="fa fa-angle-double-right"></i> {{item.name}}
+                            <i class="fa fa-remove delete" @click.stop.prevent="deleteTopic(item);"></i>
+                        </a>
                     </li>
                 </ul>
             </li>
         </ul>
     </div>
+    <tips :visible.sync="showLoading" :tipsparam.sync="loadingTipParam"></tips>
 </template>
 <style lang="less" scoped>
     @import "MenuList.less";
 </style>
 <script type="text/ecmascript-6">
     import _ from "underscore";
+    import Local from "../../../local/local";
+    import Tips from "../../Common/Tips/Tips.vue"
 
     export default{
         props: ['title', 'menus'],
         data(){
+            const common = Local().common;
             return{
-                msg:'hello vue'
+                common,
+                showLoading: false,
+                loadingTipParam: {
+                    type: "confirm",
+                    content: common.deleteTip,
+                    callback: () => { console.log("success"); }
+                }
             }
         },
-        components:{
-
-        },
+        components:{ Tips },
         methods: {
             toggle(menu){
                 console.log(menu, this.menus);
@@ -50,6 +61,10 @@
             },
             addTopic(){
                 this.$router.go({name: "settingAdd"});
+            },
+            deleteTopic(item){
+                console.log(item.name);
+                this.showLoading = true;
             }
         }
     }

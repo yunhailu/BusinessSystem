@@ -1,0 +1,252 @@
+@import "../../common";
+
+.zz-tips-bg{
+  position: fixed;
+  left:0;
+  right:0;
+  top:0;
+  bottom:0;
+  background-color: #000;
+  opacity: 0.2;
+  z-index: 99;
+}
+
+.zz-tips{
+  
+  position: fixed;
+  left:0;
+  right:0;
+  top:0;
+  bottom:0;
+  z-index: 999;
+
+  &-toast{
+    width: 42%;
+    background-color: rgba(0,0,0,0.6);
+    margin: 0 auto;
+    border-radius: 10 * @px;
+    padding: 50 * @px 4%;
+    color: #ffffff;
+    position: fixed;
+    left:25%;
+    top:30%;
+    text-align: center;
+    z-index: 99;
+    font-size: 30 * @px;
+
+    .failImg,.successImg{
+      width: 120 * @px;
+      height: 120 * @px;
+      margin: 0 auto 25 * @px auto;
+    }
+    .failImg{
+      background: url(./img/fail_tip.png) no-repeat;
+      background-size: 118 * @px 118 * @px;
+    }
+    .successImg{
+      background: url(./img/success_tip.png) no-repeat;
+      background-size: 100%;
+    }
+  }
+
+  &-loading{
+    width: 22%;
+    background-color: rgba(0,0,0,0.6);
+    margin: 0 auto;
+    border-radius: 10 * @px;
+    padding: 30 * @px 4%;
+    color: #ffffff;
+    position: fixed;
+    left:35%;
+    top:30%;
+    text-align: center;
+    z-index: 99;
+    font-size: 30 * @px;
+    line-height: 40 * @px;
+
+    .loadingImg{
+      width: 80 * @px;
+      height: 80 * @px;
+      background: url(./img/loading.gif) no-repeat;
+      background-size: 80 * @px auto;
+      margin: 0 auto 15 * @px auto;
+    }
+    .loadingContent{
+      font-size: 30 * @px;
+      .vm();  .pd(0 1rem);
+    } 
+  }
+ 
+
+ &-confirm{
+   width: 20%;
+   background-color: #fff;
+   margin: 0 auto;
+   border-radius: 10 * @px;
+   padding: 0 4%;
+   color: #292d33;
+   position: fixed;
+   left:40%;
+   top:30%;
+   z-index: 99;
+   h3{
+     padding-top: 42 * @px;
+     padding-bottom: 24 * @px;
+     font-size: 38 * @px;
+     font-weight: 700;
+     text-align: center;
+   }
+   .tips-content{
+     line-height: 40 * @px;
+     font-size: 30 * @px;
+     color: #292d33;
+     text-align: center;
+   }
+   .tips-btns{
+     padding-top: 40 * @px;
+     padding-bottom: 30 * @px;
+     text-align: center;
+     overflow: hidden;
+   }
+   .tips-leftBtn {
+     height: 86 * @px;
+     width: 48%;
+     border-radius: 8 * @px;
+     border: 1px solid #d1d7e0;
+     color: #7a8899;
+     line-height: 86 * @px;
+     margin-right: 3%;
+     float: left;
+     .pointer();
+   }
+   .tips-rightBtn {
+     height: 88 * @px;
+     width: 48%;
+     border-radius: 8 * @px;
+     background-color: @body-theme;
+     color: #fff;
+     line-height: 86 * @px;
+     float: right;
+     .pointer();
+   }
+   .tips-oneBtn{
+     height: 88 * @px;
+     width: 100%;
+     border-radius: 8 * @px;
+     background-color: #ff4520;
+     color: #fff;
+     line-height: 86 * @px;
+   }
+   .tips-close{
+     display:inline-block; 
+     position: absolute;
+     right: 2px;
+     top: 7px;
+     width:12px; 
+     height:2px; 
+     background:#999; 
+     font-size:0; 
+     line-height:0;
+     vertical-align:middle;
+     -webkit-transform: rotate(45deg);
+   }
+   .tips-close:after{
+     content:'.'; 
+     display:block; 
+     width:12px; 
+     height:2px; 
+     background:#999;
+     -webkit-transform: rotate(-90deg);
+   }
+ }
+ 
+ 
+
+}
+
+
+.zz-tips-slide{
+  position: fixed;
+  z-index:999;
+  -webkit-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+}
+
+.zz-tips-center {
+  width: 100%;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+.zz-tips-top{
+  width: 100%;
+  background: #fff;
+  left:0;
+  bottom: 0;
+}
+
+.zz-tips-left{
+  width: 100%;
+  background: #fff;
+  left:0;
+  bottom: 0;
+  right:0;
+  top: 0;
+}
+
+.zz-tips-right{
+  width: 100%;
+  background: #fff;
+  left:0;
+  bottom: 0;
+  right:0;
+  top: 0;
+}
+
+.zz-tips-down{
+  width: 100%;
+  background: #fff;
+  left:0;
+  top: 0;
+  background-color: #000;
+  opacity: 0.2;
+  color: #fff;
+  text-align: center;
+}
+
+
+
+
+/*  始终保留在元素上 */
+.zz-slide-top-transition,
+.zz-slide-left-transition,
+.zz-slide-right-transition,
+.zz-slide-down-transition
+{
+  -webkit-transition: -webkit-transform .2s cubic-bezier(0,0,.25,1); 
+  transition: transform .2s cubic-bezier(0,0,.25,1); 
+}
+
+
+/* .expand-enter 定义进入的开始状态 */
+/* .expand-leave 定义离开的结束状态 */
+.zz-slide-top-enter, .zz-slide-top-leave {
+  -webkit-transform: translate3d(0, 100%, 0);
+  transform: translate3d(0, 100%, 0);
+}
+
+.zz-slide-left-enter, .zz-slide-left-leave {
+  -webkit-transform: translate3d(100%, 0, 0);
+  transform: translate3d(100%, 0, 0);
+}
+
+.zz-slide-right-enter, .zz-slide-right-leave {
+  -webkit-transform: translate3d(-100%, 0, 0);
+  transform: translate3d(-100%, 0, 0);
+}
+
+.zz-slide-down-enter, .zz-slide-down-leave {
+  -webkit-transform: translate3d(0, -100%, 0);
+  transform: translate3d(0, -100%, 0);
+}
+

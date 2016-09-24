@@ -68,6 +68,7 @@ export const en = {
         sortBy: "Sort By",
         select: "-- Select --",
         prevPage: "Prev",
-        nextPage: "Next"
+        nextPage: "Next",
+        deleteTip: "Are you sure ?"
     }
 };
