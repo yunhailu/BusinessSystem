@@ -48,9 +48,17 @@ export const en = {
         addTitle: "Add Topic",
         addDecH: "New Topic",
         addDec: "You have created {1} new Topic, but also to create {2} in this system!",
-        groups: "Group",
+        required: "Required",
+        optional: "Optional",
+        groupTitle: "Group",
         topic: "Topic Words",
+        topicArr: "Topic Phrase",
+        topicArrTip: "Topic Phrase separated by a space, logic or",
+        related: "Related Words",
+        quickBtn: "Quick Mode",
+        advancedBtn: "Advanced Mode",
         exclude: "Exclude Words",
+        groups: ["People", "Mechanism", "Product", "Project", "Event", "Brand", "Others"],
         create: "Create"
     },
     common: {

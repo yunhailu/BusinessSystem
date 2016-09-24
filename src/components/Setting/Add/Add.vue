@@ -6,33 +6,60 @@
                 <h4>{{words.addDecH}}</h4>
                 <span>{{words.addDec | composite total remainder}}</span>
             </div>
-            <div class="setting-add-container">
+
+            <div class="setting-add-container-mode">
+                <div class="btn-group">
+                    <a class="btn btn-default" :class="[!isAdvanced ? 'btn-primary ' : '']" href="javascript:void(0);" @click="setAdvanced(false);">
+                        <i class="fa fa-plane" title="Align Left"></i> {{words.quickBtn}}
+                    </a>
+                    <a class="btn btn-default" :class="[isAdvanced ? 'btn-primary ' : '']" href="javascript:void(0);" @click="setAdvanced(true);">
+                        <i class="fa fa-key" title="Align Center"></i> {{words.advancedBtn}}
+                    </a>
+                </div>
+            </div>
+
+            <div class="setting-add-container-con">
                 <form class="form-horizontal">
                     <fieldset>
                         <div class="form-group">
-                            <label for="" class="col-sm-2 control-label">{{words.groups}}</label>
-                                <div class="radio-inline" v-for="group in groups">
-                                    <label>
-                                        <input type="radio" name="optionsRadios" id="group.id" value="option1" checked>
-                                        {{group.text}}
-                                    </label>
-                                </div>
+                            <label for="" class="col-sm-2 control-label">{{words.groupTitle}}</label>
+                            <div class="radio-inline" v-for="group in groups">
+                                <label>
+                                    <input type="radio" name="optionsRadios" id="group.id" :value="group.value" v-model="radioVal">{{group.text}}
+                                </label>
+                            </div>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group" v-show="!isAdvanced">
                             <label for="topicText" class="col-sm-2 control-label">{{words.topic}}</label>
                             <div class="col-sm-4">
                                 <input type="text" v-model="topicText" class="form-control" id="topicText" :placeholder="words.topic">
                             </div>
+                            <div class="col-sm-4 tip">{{words.required}}</div>
+                        </div>
+                        <div class="form-group" v-show="isAdvanced">
+                            <label for="topicArr" class="col-sm-2 control-label">{{words.topicArr}}</label>
+                            <div class="col-sm-4">
+                                <input type="text" v-model="topicArr" class="form-control" id="topicArr" :placeholder="words.topicArr">
+                            </div>
+                            <div class="col-sm-4 tip">{{words.topicArrTip}} ( {{words.required}} )</div>
+                        </div>
+                        <div class="form-group" v-show="isAdvanced">
+                            <label for="related" class="col-sm-2 control-label">{{words.related}}</label>
+                            <div class="col-sm-4">
+                                <input type="text" v-model="related" class="form-control" id="related" :placeholder="words.related">
+                            </div>
+                            <div class="col-sm-4 tip">{{words.optional}}</div>
                         </div>
                         <div class="form-group">
                             <label for="excludeText" class="col-sm-2 control-label">{{words.exclude}}</label>
                             <div class="col-sm-4">
-                                <input type="password" v-model="excludeText" class="form-control" id="excludeText" :placeholder="words.exclude">
+                                <input type="text" v-model="excludeText" class="form-control" id="excludeText" :placeholder="words.exclude">
                             </div>
+                            <div class="col-sm-4 tip">{{words.optional}}</div>
                         </div>
                         <div class="form-group">
                             <div class="col-sm-offset-2 col-sm-10">
-                                <button type="submit" class="btn btn-primary" >{{words.create}}</button>
+                                <button type="submit" class="btn btn-primary" @click.stop.prevent="createSubmit" >{{words.create}}</button>
                             </div>
                         </div>
                     </fieldset>
@@ -53,23 +80,38 @@
             const words = Local().setting;
             return{
                 words,
+                isAdvanced: false,
                 total: 0,
                 remainder: 0,
+                radioVal: "",
+                topicArr: "",
+                related: "",
                 topicText: "",
                 excludeText: "",
                 groups: [{
-                    id: "", value: 0, text: "人物"
+                    id: "", value: 0, text: words.groups[0]
                 }, {
-                    id: "", value: 1, text: "机构"
+                    id: "", value: 1, text: words.groups[1]
                 }, {
-                    id: "", value: 3, text: "产品"
+                    id: "", value: 2, text: words.groups[2]
                 }, {
-                    id: "", value: 4, text: "项目"
+                    id: "", value: 3, text: words.groups[3]
                 }, {
-                    id: "", value: 5, text: "事件"
+                    id: "", value: 4, text: words.groups[4]
                 }, {
-                    id: "", value: 6, text: "其他"
+                    id: "", value: 5, text: words.groups[5]
+                }, {
+                    id: "", value: 6, text: words.groups[6]
                 }]
+            }
+        },
+        methods: {
+            setAdvanced(isAdvanced){
+                this.isAdvanced = isAdvanced;
+            },
+            createSubmit(){
+                console.log(this.isAdvanced, this.radioVal, this.topicArr, this.related, this.topicText, this.excludeText);
+                //history.go(-1);
             }
         },
         filters: {

@@ -48,9 +48,17 @@ export const zh_CN = {
         addTitle: "添加主题",
         addDecH: "新建监测方案",
         addDec: "您已经创建了 {0} 个监测主题方案，还能再创建 {1} 个！",
-        groups: "话题分组",
+        required: "必填",
+        optional: "选填",
+        groupTitle: "话题分组",
         topic: "新主题",
+        topicArr: "主题词组",
+        topicArrTip: "主题词组用空格隔开，是或的关系",
+        related: "关联词",
+        quickBtn: "快速模式",
+        advancedBtn: "高级模式",
         exclude: "排除词",
+        groups: ["人物", "机构", "产品", "项目", "事件", "品牌", "其他"],
         create: "创建提交"
     },
     common: {
