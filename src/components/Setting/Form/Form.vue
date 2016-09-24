@@ -57,6 +57,11 @@
                             </div>
                             <div class="col-sm-4 tip">{{words.optional}}</div>
                         </div>
+                        <div class="form-group" v-show="errorTip">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <div class="error">* {{errorTip}}</div>
+                            </div>
+                        </div>
                         <div class="form-group">
                             <div class="col-sm-offset-2 col-sm-10">
                                 <button type="submit" class="btn btn-primary" @click.stop.prevent="createSubmit" >{{words.create}}</button>
@@ -89,6 +94,7 @@
                 related: "",
                 topicText: "",
                 excludeText: "",
+                errorTip: "",
                 groups: [{
                     id: "", value: 0, text: words.groups[0]
                 }, {
@@ -122,7 +128,7 @@
                 }, str);
             }
         },
-        created(){
+        ready(){
             switch(this.$route.name){
                 case "settingAdd":
                     this.title = this.words.addDecH;
