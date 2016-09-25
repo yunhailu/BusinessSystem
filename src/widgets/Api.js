@@ -123,6 +123,18 @@ export const getSummaryDetail = params => {
 };
 
 /**
+ *  Encapsulate `get topic list` interface
+ *
+ *  @return {Promise} With Topic List.
+ */
+export const getSentimentDetail = params => {
+    return Api.request({
+        url: `${rootURI}/sentiment/detail`,
+        params
+    });
+};
+
+/**
  *  Encapsulate `getDashboardDetail` interface
  *
  *  @param {String} id
