@@ -1,0 +1,56 @@
+@import "../../../common.less";
+
+.menu-list{
+  .title{
+    .pd(0 1.4rem);  .bgc(@body-theme);  .c(white);  //.fw(300);
+    .lh(3rem);  .b-top(0.2rem solid @body-title);  font-family: "pingfang-bold";
+    span{
+      .f(1.4rem);  .pd(0 0.5rem);
+    }
+    .plus{  .float-right();  .pd(1rem 0);  .pointer();  }
+  }
+
+  .sidebar-menu{  list-style: none;  .mg(0);  .pd(0);   }
+  .sidebar-menu > li:first-of-type {
+    .b-top(1px solid #dbdbdb);
+    >a{ .b-top(1px solid #fff); }
+  }
+  .sidebar-menu > li{
+    .b-top(1px solid #fff);  .b-bottom(1px solid #dbdbdb);  .mg(0);  .pd(0);
+    >a{
+      .mg-right(0.1rem); .pd(1rem 0.5rem 1rem 2.2rem);   .disB();  .c(@word);  .f(1.3rem);  .fw(300);
+      //.b-top(1px solid #fff);  .b-bottom(1px solid #dbdbdb);
+      .fa{  .w(2rem);  }
+    }
+    >.treeview-menu{
+      .mg(0 0.1rem);   .bgc(#f9f9f9);  .pd(0);
+      >li{
+        .mg(0);
+        >a{
+          .pd(0.5rem 0.5rem 0.5rem 3rem);  .disB();  .f(1.2rem);  .mg(0);  .c(#777);   font-family: "pingfang-bold";
+          .fa{ .w(1.4rem); }
+          .delete{ .float-right();  .pd(0.3rem 0); }
+        }
+      }
+      >li.active > a, >li > a:hover{  .c(#111);  }
+    }
+  }
+  .sidebar-menu > li.active > a,.sidebar-menu > li > a:hover{
+    .c(#222);  .bgc(#f9f9f9);
+  }
+
+
+  /* 必需 */
+  .expand-transition {
+    transition: all .6s ease;
+    //display: block;
+    .h(auto); .opacity(100);
+  }
+
+  /* .expand-enter 定义进入的开始状态 */
+  /* .expand-leave 定义离开的结束状态 */
+  .expand-enter, .expand-leave {
+    //display: none;
+    .h(0);  .opacity(0);
+  }
+}

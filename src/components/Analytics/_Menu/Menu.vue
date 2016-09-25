@@ -8,7 +8,7 @@
                     <img src="images/avatar.png" class="img-circle" alt="User Image" />
                 </div>
                 <div class="pull-left info">
-                    <p>Hello, Jane</p>
+                    <p>Hello, Admin</p>
 
                     <a href="javascript:void(0);"><i class="fa fa-circle text-success"></i> Online</a>
                 </div>
@@ -23,8 +23,7 @@
                 <!--</div>-->
             <!--</form>-->
 
-            <menu-list title="主题" :groups.sync="topicList"></menu-list>
-            <!--<menu-list title="主题1" :menus="AnalyticMenu"></menu-list>-->
+            <menu-list title="主题" :menus="AnalyticMenu"></menu-list>
             <!--<menu-list title="数据源" :menus="ChannelMenu"></menu-list>-->
         </section>
     </aside>
@@ -35,55 +34,29 @@
 <script type="text/ecmascript-6">
     import _ from "underscore";
     import {AnalyticMenu, ChannelMenu} from "../../../config/config";
-    import MenuList from "./MenuList/MenuList.vue";
-    import * as Api from "../../../widgets/Api";
+    import MenuList from "../MenuList/MenuList.vue";
 
     export default{
-        props: [],
         data(){
             return{
                 AnalyticMenu,
-                ChannelMenu,
-                topicList: []
+                ChannelMenu
             }
         },
         components:{
             'menu-list': MenuList
         },
         methods: {
-            getTopicList(){
-                return Api.getTopicList();
-            },
             toggle(menu){
                 console.log(menu, this.MainMenu);
                 _.each(this.MainMenu, menuItem => {
                     if(menuItem.router != menu.router){
-                        menuItem.isActive = false;
-                    } else {
-                        menuItem.isActive = !menuItem.isActive;
-                    }
-                });
+                    menuItem.isActive = false;
+                } else {
+                    menuItem.isActive = !menuItem.isActive;
+                }
+            });
                 //menu.isActive = !menu.isActive;
-            },
-            init(){
-                this.getTopicList().then(resp => {
-                    //console.log('getTopicList', resp);
-                    if(resp.data.code == 0){
-                        this.topicList = _.map(resp.data.data, topic => {
-                            topic.isActive = false;
-                            return topic;
-                        });
-                        //console.log('getTopicList', this.topicList);
-                    }
-                });
-            }
-        },
-        ready(){
-            this.init();
-        },
-        route: {
-            data(){
-                this.init();
             }
         }
     }

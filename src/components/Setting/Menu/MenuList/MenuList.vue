@@ -45,9 +45,9 @@
 </style>
 <script type="text/ecmascript-6">
     import _ from "underscore";
-    import Local from "../../../local/local";
-    import Tips from "../../Common/Tips/Tips.vue"
-    import * as Api from "../../../widgets/Api";
+    import Local from "../../../../local/local";
+    import Tips from "../../../Common/Tips/Tips.vue"
+    import * as Api from "../../../../widgets/Api";
 
     export default{
         props: ['title', 'menus', 'groups'],

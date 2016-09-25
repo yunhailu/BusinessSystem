@@ -35,7 +35,7 @@
 <script type="text/ecmascript-6">
     import _ from "underscore";
     import {AnalyticMenu, ChannelMenu} from "../../../config/config";
-    import MenuList from "../MenuList/MenuList.vue";
+    import MenuList from "./MenuList/MenuList.vue";
     import * as Api from "../../../widgets/Api";
 
     export default{
