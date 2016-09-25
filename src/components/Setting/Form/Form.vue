@@ -25,7 +25,7 @@
                             <label for="" class="col-sm-2 control-label">{{words.groupTitle}}</label>
                             <div class="radio-inline" v-for="group in groups">
                                 <label>
-                                    <input type="radio" name="optionsRadios" id="group.id" :value="group.value" v-model="radioVal">{{group.text}}
+                                    <input type="radio" name="optionsRadios" id="group.id" :value="group.id" v-model="radioVal">{{group.name}}
                                 </label>
                             </div>
                         </div>
@@ -50,6 +50,13 @@
                             </div>
                             <div class="col-sm-4 tip">{{words.optional}}</div>
                         </div>
+                        <!--<div class="form-group">-->
+                            <!--<label for="excludeText" class="col-sm-2 control-label">{{words.exclude}}</label>-->
+                            <!--<div class="col-sm-4">-->
+                                <!--<input type="text" v-model="excludeText" class="form-control" id="excludeText" :placeholder="words.exclude">-->
+                            <!--</div>-->
+                            <!--<div class="col-sm-4 tip">{{words.optional}}</div>-->
+                        <!--</div>-->
                         <div class="form-group">
                             <label for="excludeText" class="col-sm-2 control-label">{{words.exclude}}</label>
                             <div class="col-sm-4">
@@ -60,6 +67,11 @@
                         <div class="form-group" v-show="errorTip">
                             <div class="col-sm-offset-2 col-sm-10">
                                 <div class="error">* {{errorTip}}</div>
+                            </div>
+                        </div>
+                        <div class="form-group" v-show="successTip">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <div class="success">{{successTip}}</div>
                             </div>
                         </div>
                         <div class="form-group">
@@ -79,6 +91,7 @@
 <script type="text/ecmascript-6">
     import _ from "underscore";
     import Local from "../../../local/local";
+    import * as Api from "../../../widgets/Api";
 
     export default{
         data(){
@@ -95,20 +108,19 @@
                 topicText: "",
                 excludeText: "",
                 errorTip: "",
+                successTip: "",
                 groups: [{
-                    id: "", value: 0, text: words.groups[0]
+                    id: 1, value: 1, name: words.groups[0]
                 }, {
-                    id: "", value: 1, text: words.groups[1]
+                    id: 2, value: 2, name: words.groups[1]
                 }, {
-                    id: "", value: 2, text: words.groups[2]
+                    id: 3, value: 3, name: words.groups[2]
                 }, {
-                    id: "", value: 3, text: words.groups[3]
+                    id: 4, value: 4, name: words.groups[3]
                 }, {
-                    id: "", value: 4, text: words.groups[4]
+                    id: 5, value: 5, name: words.groups[4]
                 }, {
-                    id: "", value: 5, text: words.groups[5]
-                }, {
-                    id: "", value: 6, text: words.groups[6]
+                    id: 6, value: 6, name: words.groups[5]
                 }]
             }
         },
@@ -118,7 +130,44 @@
             },
             createSubmit(){
                 console.log(this.isAdvanced, this.radioVal, this.topicArr, this.related, this.topicText, this.excludeText);
+                if(!this.radioVal || !this.topicText){
+                    this.errorTip = "请选择正确的分组和填写新主题";
+                    return ;
+                }
+                this.topicAdd().then( resp => {
+                    //console.log('topicAdd', resp);
+                    this.successTip = "添加成功！";
+                    this.errorTip = "";
+                    this.radioVal = "";
+                    this.topicText = "";
+                });
                 //history.go(-1);
+            },
+//            getTopicList(){
+//                return Api.getTopicList();
+//            },
+            getGroupList(){
+                return Api.getGroupList();
+            },
+            topicAdd(){
+                return Api.topicAdd({
+                    group_id: this.radioVal,
+                    name: this.topicText
+                });
+            },
+            init(){
+                // 拉取 group 列表
+                this.getGroupList().then(resp => {
+                    //console.log("group list", resp);
+                    if(resp.data.code == 0){
+                        this.groups = _.map(resp.data.data.group_list, item => {
+                            return {id: item.id, name: this.words.groups[item.id - 1]};
+                        });
+                    }
+                });
+//                this.getTopicList().then(resp => {
+//                    console.log('getTopicList', resp);
+//                });
             }
         },
         filters: {
@@ -130,6 +179,7 @@
         },
         route: {
             data(){
+                this.init();
                 switch(this.$route.name){
                     case "settingAdd":
                         this.title = this.words.addDecH;

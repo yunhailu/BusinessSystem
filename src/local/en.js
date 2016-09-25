@@ -59,7 +59,7 @@ export const en = {
         quickBtn: "Quick Mode",
         advancedBtn: "Advanced Mode",
         exclude: "Exclude Words",
-        groups: ["People", "Mechanism", "Product", "Project", "Event", "Brand", "Others"],
+        groups: ["People", "Mechanism", "Product", "Project", "Event", "Others"],
         create: "Create"
     },
     common: {

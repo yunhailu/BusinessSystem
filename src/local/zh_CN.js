@@ -59,7 +59,7 @@ export const zh_CN = {
         quickBtn: "快速模式",
         advancedBtn: "高级模式",
         exclude: "排除词",
-        groups: ["人物", "机构", "产品", "项目", "事件", "品牌", "其他"],
+        groups: ["人物", "机构", "产品", "项目", "事件", "其他"],
         create: "创建提交"
     },
     common: {
