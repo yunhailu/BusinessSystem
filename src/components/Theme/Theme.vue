@@ -1,4 +1,5 @@
 <template>
+    <tabs></tabs>
     <span>Theme</span>
     <div class="theme-word">
         <div class="theme-word-chart" v-echarts="themeWordOption" :loading="themeWordLoading"  theme="infographic" :click="clickAction"></div>
@@ -32,6 +33,7 @@
 </style>
 <script>
     import _ from 'underscore';
+    import Tabs from '../Common/Tabs/Tabs.vue';
     import Local from "../../local/local";
     import {Chart, Pie} from '../../config/config';
 
@@ -216,7 +218,7 @@
 //            this.markImage.src = "../../../images/search.png";
         },
         components:{
-
+            Tabs
         }
     }
 </script>

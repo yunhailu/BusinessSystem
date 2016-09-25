@@ -1,4 +1,5 @@
 <template>
+    <tabs ></tabs>
     <span>Influence</span>
     <div class="popular">
         <ul class="popular-list">
@@ -50,6 +51,7 @@
 </style>
 <script>
     import _ from 'underscore';
+    import Tabs from '../Common/Tabs/Tabs.vue';
     import {Chart, Pie} from '../../config/config';
     import Page from '../Common/Page/Page.vue';
 
@@ -372,6 +374,7 @@
             }
         },
         components:{
+            Tabs,
             'page': Page
         }
     }
