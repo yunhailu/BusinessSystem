@@ -35,6 +35,12 @@ module.exports = {
                     require(['../components/Sentiment/Sentiment.vue'], resolve);
                 }
             },
+            '/evaluation': {
+                name: 'evaluation',
+                component (resolve) {
+                    require(['../components/Evaluation/Evaluation.vue'], resolve);
+                }
+            },
             '/influence': {
                 name: 'influence',
                 component (resolve) {

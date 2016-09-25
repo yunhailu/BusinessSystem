@@ -23,14 +23,14 @@ export const en = {
         settingDec: "Setting your data",
     },
     analytics: {
-        tabs: ["Results", "Sentiment", "Influencers", "Theme"],
+        tabs: ["Results", "Sentiment", "Evaluation", "Influencers", "Theme"],
         filters: ["All", "Sentiment", "Countries", "Gender", "Languages"],
-        source: ["All", "WeChat", "Weibo", "Client", "Platforms"]
+        source: ["All", "WeChat", "Weibo", "Client", "Platforms", "Oversea"]
     },
     compare: {
         tabs: ["Results", "Sentiment", "Influencers", "Theme"],
         filters: ["All", "Sentiment", "Countries", "Gender", "Languages"],
-        source: ["All", "WeChat", "Weibo", "Client", "Platforms"]
+        source: ["All", "WeChat", "Weibo", "Client", "Platforms", "Oversea"]
     },
     dashboard: {
         dashboard: "Dashboard",

@@ -36,9 +36,12 @@
                     link: 'sentiment'
                 },{
                     name: words.tabs[2],
-                    link: 'influence'
+                    link: 'evaluation'
                 },{
                     name: words.tabs[3],
+                    link: 'influence'
+                },{
+                    name: words.tabs[4],
                     link: 'theme'
                 }],
 //                filters: words.filters,

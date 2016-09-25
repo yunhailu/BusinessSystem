@@ -4,13 +4,13 @@
     <div class="analytics-panel">
         <div class="analytics-panel-wrap">
             <div class="row tools">
-                <div class="col-md-8">
+                <div class="col-md-7">
                     <div class="search">
                         <input class="search-input" placeholder="Search in Results" v-model="search" />
                         <span class="search-btn" @click="searchAction"><i class="fa fa-search"></i></span>
                     </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-5">
                     <ul class="days-btn">
                         <li>1D</li>
                         <li class="active">7D</li>
