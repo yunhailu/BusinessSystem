@@ -24,7 +24,7 @@
     import Local from '../../../local/local';
 
     export default{
-        props: ['active', 'actions'],
+        props: ['active', 'actions', 'sourceactive'],
         data(){
             const words = Local().analytics;
             return{
@@ -65,6 +65,10 @@
                 this.actions && this.actions(val, idx);
             }
         },
+//        created(){
+//            const sourceActive = this.sourceActive;
+//            this.actions && this.actions("总数", sourceActive);
+//        },
         components:{
 
         }

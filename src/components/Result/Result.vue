@@ -1,5 +1,5 @@
 <template>
-    <tabs :actions="actions"></tabs>
+    <tabs :actions="actions" ></tabs>
     <span>Result</span>
     <div class="charts">
         <!--<div class="arrow animated rubberBand" @click="toggle">-->
@@ -744,6 +744,7 @@
                 overseas: [0,0,1,1,0,0,0,0,0,0,0,1,0,0,0,0,3,0,1,0,0,0,0,0,0,1,1,0,0,0,0,1,0,1,0,0,1,4,0,0,0,0,0,0,0,0,0,0,0,1,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,3,1,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0]
             };
             return{
+                sourceActive: 0,
                 sortVal: "",
                 x: [],
                 lineData: {
@@ -866,7 +867,6 @@
                             data = lineData.all;
                             break;
                     }
-                    console.log("haiwai", idx , data);
                     this.resultChartOption = _.extend({}, this.resultChartOption, {
                         xAxis: _.extend({}, this.resultChartOption.xAxis, {
                             type : 'category',  //category
@@ -1184,9 +1184,6 @@
                 options: [{key: 'time', value: '按时间排序'}, {key: 'browser', value: '浏览数排序'}, {key: 'star', value: '点赞数排序'}]
             }
         },
-        created(){
-            //console.log(this);
-        },
         methods: {
             toggle(){
 //                this.isChartScale = !this.isChartScale;
@@ -1212,7 +1209,7 @@
                         });
                         this.resultChartLoading = false;
                         this.resultPieChartLoading = false;
-                        //this.actions("全部", 0);
+                        this.actions("全部", 0);
 //                        const lineData = this.lineData;
 //                        this.resultChartOption = _.extend({}, this.resultChartOption, {
 //                            xAxis: _.extend({}, this.resultChartOption.xAxis, {
