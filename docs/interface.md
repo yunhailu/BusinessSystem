@@ -1,23 +1,18 @@
 -  summary/detail
 ```
 {
-	code: 0,
-	data: [{
-		key:"happy",
-		value: [{
-			date: "2014.6.8",
-			value: 5
-		},
-		{
-			key:"anger",
-			value: [
-			{
-				date: "2014.6.18",
-				value: 15
-			}
-		]
-	
-	}]
+    code: 0,
+    data: [{
+        "date": "2014.6.8",
+        "values": [{"dSource": "weibo", "value": 5},
+            {"dSource": "weixin", "value": 10}]
+        },
+        {
+        "date": "2014.6.8",
+        "values": [{"dSource": "weibo", "value": 5},
+            {"dSource": "weixin", "value": 10}]
+        },
+    ]
 }
 ```
 

@@ -28,7 +28,7 @@
                     <!--<calendar :show.sync="cal.show" :value.sync="cal.value" :x="cal.x" :y="cal.y" :begin="cal.begin" :end="cal.end" :type="cal.type" :range="cal.range"></calendar>-->
                 <!--</div>-->
             </div>
-            <tabs ></tabs>
+            <!--<tabs ></tabs>-->
 
             <router-view></router-view>
         </div>

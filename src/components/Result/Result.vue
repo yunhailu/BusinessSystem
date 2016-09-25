@@ -1,11 +1,12 @@
 <template>
+    <tabs :actions="actions"></tabs>
     <span>Result</span>
     <div class="charts">
-        <div class="arrow animated rubberBand" @click="toggle">
-            <i class="fa fa-angle-left fa-3x" transition="rotate" :class="[resultPieChartOption.isActive ? 'fa-rotate-180' : '']"></i>
-        </div>
-        <div class="chart" v-echarts="resultChartOption" :loading="resultChartLoading" :class="[resultChartOption.isToggle ? 'active' : '']" :resize="resultChartOption.isToggle"></div>
-        <div class="pie" v-echarts="resultPieChartOption" :loading="resultPieChartLoading" :class="[resultPieChartOption.isActive ? 'active' : '']" translate="show-pie" ></div>
+        <!--<div class="arrow animated rubberBand" @click="toggle">-->
+            <!--<i class="fa fa-angle-left fa-3x" transition="rotate" :class="[resultPieChartOption.isActive ? 'fa-rotate-180' : '']"></i>-->
+        <!--</div>-->
+        <div class="chart" v-echarts="resultChartOption" :loading="resultChartLoading" :class="[resultChartOption.isToggle ? 'active' : '']" :resize="resultChartOption.isToggle" theme="macarons"></div>
+        <div class="pie" v-echarts="resultPieChartOption" :loading="resultPieChartLoading" :class="[resultPieChartOption.isActive ? 'active' : '']" translate="show-pie"  theme="macarons"></div>
     </div>
     <div class="result-panel">
         <div class="row result-panel-tools">
@@ -63,7 +64,9 @@
     import Local from "../../local/local";
     import {Chart, Pie} from '../../config/config';
     import Select from '../Common/Select/Select.vue';
+    import Tabs from '../Common/Tabs/Tabs.vue';
     import Page from '../Common/Page/Page.vue';
+    import * as Api from "../../widgets/Api";
 
     const list = {
         time : [
@@ -734,29 +737,40 @@
     export default{
         data(){
             const data = {
-                happy: [1,4,0,6,1,1,0,0,0,1,0,1,4,0,4,3,0,0,4,1,9,4,0,1,0,0,1,1,1,1,3,1,1,4,0,3,4,3,1,1,1,0,0,0,1,6,1,1,1,3,1,4,3,4,1,0,0,1,3,0,0,1,1,1,1,0,1,0,3,0,0,12,8,3,4,6,0,4,0,3,1,1,0,1,1,1,1,4,1,4,0,9,8,4,1,0,0,1,3,1,4,1,1,1,3,1,1,3,16,0,0,0,4,3,1,0,0,1,0,1,3],
-                anger: [1,4,6,21,4,1,6,4,1,0,0,0,0,3,6,4,3,1,9,3,11,0,1,0,11,4,0,1,0,0,27,3,6,3,4,0,11,4,3,1,0,1,1,8,3,1,6,0,1,12,4,16,1,3,12,1,8,3,3,1,3,1,0,4,1,0,0,1,6,3,14,4,4,6,0,9,1,4,9,0,1,0,1,8,0,1,0,3,1,33,6,21,4,4,1,4,1,0,1,0,3,3,0,1,3,3,8,1,4,1,6,3,3,0,16,1,1,1,0,0,1],
-                sorrow: [0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,1,0,0,0,0,1,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0],
-                disgust: [0,0,0,3,0,0,0,0,0,0,0,0,0,0,1,3,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,3,0,3,1,0,0,0,0,0,0,0,0,1,0,0,0,1,3,0,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,6,1,1,0,0,3,0,0,0,0,1,0,0,0,1,0,0,0,0,1,1,0,0,1,0,0,0,0,0,0,1,1,0,0,0,3,1,0,1,0,0,0,0,0,0,0,0,1,1,0,0],
-                fear: [0,0,1,1,0,0,0,0,0,0,0,1,0,0,0,0,3,0,1,0,0,0,0,0,0,1,1,0,0,0,0,1,0,1,0,0,1,4,0,0,0,0,0,0,0,0,0,0,0,1,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,3,1,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0]
+                wechat: [1,4,0,6,1,1,0,0,0,1,0,1,4,0,4,3,0,0,4,1,9,4,0,1,0,0,1,1,1,1,3,1,1,4,0,3,4,3,1,1,1,0,0,0,1,6,1,1,1,3,1,4,3,4,1,0,0,1,3,0,0,1,1,1,1,0,1,0,3,0,0,12,8,3,4,6,0,4,0,3,1,1,0,1,1,1,1,4,1,4,0,9,8,4,1,0,0,1,3,1,4,1,1,1,3,1,1,3,16,0,0,0,4,3,1,0,0,1,0,1,3],
+                weibo: [1,4,6,21,4,1,6,4,1,0,0,0,0,3,6,4,3,1,9,3,11,0,1,0,11,4,0,1,0,0,27,3,6,3,4,0,11,4,3,1,0,1,1,8,3,1,6,0,1,12,4,16,1,3,12,1,8,3,3,1,3,1,0,4,1,0,0,1,6,3,14,4,4,6,0,9,1,4,9,0,1,0,1,8,0,1,0,3,1,33,6,21,4,4,1,4,1,0,1,0,3,3,0,1,3,3,8,1,4,1,6,3,3,0,16,1,1,1,0,0,1],
+                client: [0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,1,0,0,0,0,1,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0],
+                web: [0,0,0,3,0,0,0,0,0,0,0,0,0,0,1,3,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,3,0,3,1,0,0,0,0,0,0,0,0,1,0,0,0,1,3,0,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,6,1,1,0,0,3,0,0,0,0,1,0,0,0,1,0,0,0,0,1,1,0,0,1,0,0,0,0,0,0,1,1,0,0,0,3,1,0,1,0,0,0,0,0,0,0,0,1,1,0,0],
+                overseas: [0,0,1,1,0,0,0,0,0,0,0,1,0,0,0,0,3,0,1,0,0,0,0,0,0,1,1,0,0,0,0,1,0,1,0,0,1,4,0,0,0,0,0,0,0,0,0,0,0,1,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,3,1,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0]
             };
             return{
                 sortVal: "",
+                x: [],
+                lineData: {
+                    all: [],
+                    wechat: [],
+                    weibo: [],
+                    client: [],
+                    web: [],
+                    overseas: []
+                },
+                words: Local().analytics,
                 selectTitle: Local().common.sortBy,
                 chartInstance: null,
-                resultChartLoading: false,
+                resultChartLoading: true,
                 resultChartOption: {
                     isToggle: true,
                     title: _.extend({}, Chart.title, { show: false}),
                     tooltip: Chart.tooltip,
-                    legend: {
-                        data:['Happy','Anger','Sorrow','Disgust','Fear']
-                    },
+//                    legend: {
+//                        data: ['All']
+//                    },
                     grid: Chart.grid,
                     toolbox: Chart.toolbox,
                     xAxis: _.extend({}, Chart.xAxis, {
                         type : 'category',  //category
-                        data : ["2016-08-21:12","2016-08-21:14","2016-08-21:15","2016-08-21:16","2016-08-21:17","2016-08-21:18","2016-08-21:20","2016-08-21:21","2016-08-22:00","2016-08-22:03","2016-08-22:05","2016-08-22:06","2016-08-22:08","2016-08-22:09","2016-08-22:10","2016-08-22:11","2016-08-22:12","2016-08-22:13","2016-08-22:14","2016-08-22:15","2016-08-22:16","2016-08-22:17","2016-08-22:18","2016-08-22:19","2016-08-22:20","2016-08-22:21","2016-08-22:22","2016-08-23:00","2016-08-23:03","2016-08-23:06","2016-08-23:08","2016-08-23:09","2016-08-23:10","2016-08-23:11","2016-08-23:12","2016-08-23:13","2016-08-23:14","2016-08-23:15","2016-08-23:16","2016-08-23:17","2016-08-23:18","2016-08-23:19","2016-08-23:20","2016-08-23:22","2016-08-23:23","2016-08-24:00","2016-08-24:01","2016-08-24:06","2016-08-24:07","2016-08-24:08","2016-08-24:09","2016-08-24:10","2016-08-24:11","2016-08-24:12","2016-08-24:14","2016-08-24:15","2016-08-24:16","2016-08-24:17","2016-08-24:18","2016-08-24:20","2016-08-24:21","2016-08-24:22","2016-08-25:00","2016-08-25:02","2016-08-25:03","2016-08-25:05","2016-08-25:06","2016-08-25:07","2016-08-25:08","2016-08-25:09","2016-08-25:10","2016-08-25:11","2016-08-25:12","2016-08-25:14","2016-08-25:15","2016-08-25:16","2016-08-25:17","2016-08-25:18","2016-08-25:19","2016-08-25:20","2016-08-25:21","2016-08-25:22","2016-08-25:23","2016-08-26:00","2016-08-26:01","2016-08-26:06","2016-08-26:07","2016-08-26:08","2016-08-26:09","2016-08-26:10","2016-08-26:11","2016-08-26:12","2016-08-26:13","2016-08-26:14","2016-08-26:15","2016-08-26:16","2016-08-26:17","2016-08-26:18","2016-08-26:22","2016-08-26:23","2016-08-27:00","2016-08-27:01","2016-08-27:02","2016-08-27:06","2016-08-27:08","2016-08-27:09","2016-08-27:10","2016-08-27:11","2016-08-27:12","2016-08-27:13","2016-08-27:14","2016-08-27:15","2016-08-27:16","2016-08-27:17","2016-08-27:18","2016-08-27:19","2016-08-27:20","2016-08-28:00","2016-08-28:01","2016-08-28:06","2016-08-28:08"],
+                        //data : ["2016-08-21:12","2016-08-21:14","2016-08-21:15","2016-08-21:16","2016-08-21:17","2016-08-21:18","2016-08-21:20","2016-08-21:21","2016-08-22:00","2016-08-22:03","2016-08-22:05","2016-08-22:06","2016-08-22:08","2016-08-22:09","2016-08-22:10","2016-08-22:11","2016-08-22:12","2016-08-22:13","2016-08-22:14","2016-08-22:15","2016-08-22:16","2016-08-22:17","2016-08-22:18","2016-08-22:19","2016-08-22:20","2016-08-22:21","2016-08-22:22","2016-08-23:00","2016-08-23:03","2016-08-23:06","2016-08-23:08","2016-08-23:09","2016-08-23:10","2016-08-23:11","2016-08-23:12","2016-08-23:13","2016-08-23:14","2016-08-23:15","2016-08-23:16","2016-08-23:17","2016-08-23:18","2016-08-23:19","2016-08-23:20","2016-08-23:22","2016-08-23:23","2016-08-24:00","2016-08-24:01","2016-08-24:06","2016-08-24:07","2016-08-24:08","2016-08-24:09","2016-08-24:10","2016-08-24:11","2016-08-24:12","2016-08-24:14","2016-08-24:15","2016-08-24:16","2016-08-24:17","2016-08-24:18","2016-08-24:20","2016-08-24:21","2016-08-24:22","2016-08-25:00","2016-08-25:02","2016-08-25:03","2016-08-25:05","2016-08-25:06","2016-08-25:07","2016-08-25:08","2016-08-25:09","2016-08-25:10","2016-08-25:11","2016-08-25:12","2016-08-25:14","2016-08-25:15","2016-08-25:16","2016-08-25:17","2016-08-25:18","2016-08-25:19","2016-08-25:20","2016-08-25:21","2016-08-25:22","2016-08-25:23","2016-08-26:00","2016-08-26:01","2016-08-26:06","2016-08-26:07","2016-08-26:08","2016-08-26:09","2016-08-26:10","2016-08-26:11","2016-08-26:12","2016-08-26:13","2016-08-26:14","2016-08-26:15","2016-08-26:16","2016-08-26:17","2016-08-26:18","2016-08-26:22","2016-08-26:23","2016-08-27:00","2016-08-27:01","2016-08-27:02","2016-08-27:06","2016-08-27:08","2016-08-27:09","2016-08-27:10","2016-08-27:11","2016-08-27:12","2016-08-27:13","2016-08-27:14","2016-08-27:15","2016-08-27:16","2016-08-27:17","2016-08-27:18","2016-08-27:19","2016-08-27:20","2016-08-28:00","2016-08-28:01","2016-08-28:06","2016-08-28:08"],
+                        data: [],
                         boundaryGap : false
                     }),
                     yAxis: _.extend({}, Chart.yAxis, {
@@ -765,39 +779,41 @@
                     }),
                     progressive: 4,
                     textStyle: Chart.textStyle,
-                    series : [{
-                        name:'Happy',
-                        type:'bar',
-                        areaStyle: {normal: {}},
-                        stack: 'Total',
-                        data: data.happy
-                    }, {
-                        name:'Anger',
-                        type:'bar',
-                        areaStyle: {normal: {}},
-                        stack: 'Total',
-                        data: data.anger
-                    }, {
-                        name:'Sorrow',
-                        type:'bar',
-                        areaStyle: {normal: {}},
-                        stack: 'Total',
-                        data: data.sorrow
-                    }, {
-                        name:'Disgust',
-                        type:'bar',
-                        areaStyle: {normal: {}},
-                        stack: 'Total',
-                        data: data.disgust
-                    }, {
-                        name:'Fear',
-                        type:'bar',
-                        areaStyle: {normal: {}},
-                        stack: 'Total',
-                        data: data.fear
-                    }]
+                    series : [
+//                        {
+//                        name:'Happy',
+//                        type:'bar',
+//                        areaStyle: {normal: {}},
+//                        stack: 'Total',
+//                        data: data.happy
+//                    }, {
+//                        name:'Anger',
+//                        type:'bar',
+//                        areaStyle: {normal: {}},
+//                        stack: 'Total',
+//                        data: data.anger
+//                    }, {
+//                        name:'Sorrow',
+//                        type:'bar',
+//                        areaStyle: {normal: {}},
+//                        stack: 'Total',
+//                        data: data.sorrow
+//                    }, {
+//                        name:'Disgust',
+//                        type:'bar',
+//                        areaStyle: {normal: {}},
+//                        stack: 'Total',
+//                        data: data.disgust
+//                    }, {
+//                        name:'Fear',
+//                        type:'bar',
+//                        areaStyle: {normal: {}},
+//                        stack: 'Total',
+//                        data: data.fear
+//                    }
+                    ]
                 },
-                resultPieChartLoading: false,
+                resultPieChartLoading: true,
                 resultPieChartOption: {
                     isActive: true,
                     title: _.extend({}, Pie.title, { show: false}),
@@ -806,22 +822,142 @@
                         //orient: 'vertical',
                         //x: 'bottom',
                         bottom: 0,
-                        data:['Happy','Anger','Sorrow','Disgust','Fear']
+                        data: ["微信", "微博", "客户端", "网页", "海外"]
                     }),
                     textStyle: Pie.textStyle,
                     toolbox: Pie.toolbox,
                     series: _.extend({}, Pie.series, {
-                        name: 'Seniment',
+                        name: 'Result',
                         center: ['50%', '45%'],
                         data:[
-                            {value: _.reduce(data.happy, (mome, num) => mome + num, 0), name:'Happy'},
-                            {value:_.reduce(data.anger, (mome, num) => mome + num, 0), name:'Anger'},
-                            {value:_.reduce(data.sorrow, (mome, num) => mome + num, 0), name:'Sorrow'},
-                            {value:_.reduce(data.disgust, (mome, num) => mome + num, 0), name:'Disgust'},
-                            {value:_.reduce(data.fear, (mome, num) => mome + num, 0), name:'Fear'}
+//                            {value: _.reduce(data.happy, (mome, num) => mome + num, 0), name: "微信"},
+//                            {value:_.reduce(data.anger, (mome, num) => mome + num, 0), name:"微博"},
+//                            {value:_.reduce(data.sorrow, (mome, num) => mome + num, 0), name:"客户端"},
+//                            {value:_.reduce(data.disgust, (mome, num) => mome + num, 0), name:"网页"},
+//                            {value:_.reduce(data.fear, (mome, num) => mome + num, 0), name:"海外"}
                         ]
                     })
                 },
+                actions: function(val, idx){
+                    //this.resultChartOption = {};
+                    const lineData = this.lineData;
+                    const x = this.x;
+                    let data;
+                    switch (idx){
+                        case 0:
+                            data = lineData.all;
+                            break;
+                        case 1:
+                            data = lineData.wechat;
+                            break;
+                        case 2:
+                            data = lineData.weibo;
+                            break;
+                        case 3:
+                            data = lineData.client;
+                            break;
+                        case 4:
+                            data = lineData.web;
+                            break;
+                        case 5:
+                            data = lineData.overseas;
+                            break;
+                        default:
+                            data = lineData.all;
+                            break;
+                    }
+                    console.log("haiwai", idx , data);
+                    this.resultChartOption = _.extend({}, this.resultChartOption, {
+                        xAxis: _.extend({}, this.resultChartOption.xAxis, {
+                            type : 'category',  //category
+                            data: x,
+                            boundaryGap : false
+                        }),
+                        series: [{
+                            name:"总数",
+                            type:'line',
+                            areaStyle: {normal: {}},
+                            //stack: 'Total',
+                            data: data
+                        }]
+                    });
+                    if(idx == 0){
+                        this.resultPieChartOption = _.extend({}, this.resultPieChartOption, {
+                            series: _.extend({}, Pie.series, {
+                                name: 'Result',
+                                center: ['50%', '45%'],
+                                data:[
+                                    {value: _.reduce(lineData.wechat, (mome, val) => mome + val, 0), name: "微信"},
+                                    {value: _.reduce(lineData.weibo, (mome, val) => mome + val, 0), name:"微博"},
+                                    {value: _.reduce(lineData.client, (mome, val) => mome + val, 0), name:"客户端"},
+                                    {value: _.reduce(lineData.web, (mome, val) => mome + val, 0), name:"网页"},
+                                    {value: _.reduce(lineData.overseas, (mome, val) => mome + val, 0), name:"海外"}
+                                ]
+                            })
+                        });
+                        this.resultChartOption.isToggle = true;
+                        this.resultPieChartOption.isActive = true;
+                    } else {
+                        this.resultChartOption.isToggle = false;
+                        this.resultPieChartOption.isActive = false;
+                    }
+
+                }.bind(this),
+//                actions: [
+//                    (val, idx) => {
+//                        const lineData = this.lineData;
+//                        const x = this.x;
+//                        this.resultChartOption = _.extend({}, this.resultChartOption, {
+//                            xAxis: _.extend({}, this.resultChartOption.xAxis, {
+//                                type : 'category',  //category
+//                                data: x,
+//                                boundaryGap : false
+//                            }),
+//                            series: [{
+//                                name:'All',
+//                                type:'line',
+//                                areaStyle: {normal: {}},
+//                                stack: 'Total',
+//                                data: lineData.all
+//                            }]
+//                        });
+//                        this.resultPieChartOption = _.extend({}, this.resultPieChartOption, {
+//                            series: _.extend({}, Pie.series, {
+//                                name: 'Result',
+//                                center: ['50%', '45%'],
+//                                data:[
+//                                    {value: _.reduce(lineData.wechat, (mome, val) => mome + val, 0), name: "微信"},
+//                                    {value: _.reduce(lineData.weibo, (mome, val) => mome + val, 0), name:"微博"},
+//                                    {value: _.reduce(lineData.client, (mome, val) => mome + val, 0), name:"客户端"},
+//                                    {value: _.reduce(lineData.web, (mome, val) => mome + val, 0), name:"网页"},
+//                                    {value: _.reduce(lineData.overseas, (mome, val) => mome + val, 0), name:"海外"}
+//                                ]
+//                            })
+//                        });
+//                        this.resultChartOption.isToggle = true;
+//                        this.resultPieChartOption.isActive = true;
+//                    },
+//                    (val, idx) => {
+//                        const lineData = this.lineData;
+//                        const x = this.x;
+//                        this.resultChartOption = _.extend({}, this.resultChartOption, {
+//                            xAxis: _.extend({}, this.resultChartOption.xAxis, {
+//                                type : 'category',  //category
+//                                data: x,
+//                                boundaryGap : false
+//                            }),
+//                            series: [{
+//                                name:'All',
+//                                type:'line',
+//                                areaStyle: {normal: {}},
+//                                stack: 'Total',
+//                                data: lineData.wechat
+//                            }]
+//                        });
+//                        this.resultChartOption.isToggle = false;
+//                        this.resultPieChartOption.isActive = false;
+//                    }
+//                ],
                 isChartScale: true,
                 isActivePie: true,
                 list: [
@@ -1057,6 +1193,59 @@
 //                this.isActivePie = !this.isActivePie;
                 this.resultChartOption.isToggle = !this.resultChartOption.isToggle;
                 this.resultPieChartOption.isActive = !this.resultPieChartOption.isActive;
+            },
+            getSummaryDetail(){
+                Api.getSummaryDetail({}).then(resp => {
+                    console.log('getSummaryDetail', resp);
+                    if(resp.data.code == 0){
+                        const details = resp.data.data;
+                        this.x = _.map(details, detail => detail.date);
+                        console.log("xxxx", this.x);
+                        _.each(details, detail => {
+                            this.lineData.wechat.push(detail.values.wechat);
+                            this.lineData.weibo.push(detail.values.weibo);
+                            this.lineData.client.push(detail.values.client);
+                            this.lineData.web.push(detail.values.web);
+                            this.lineData.overseas.push(detail.values.overseas);
+                            const all = detail.values.wechat + detail.values.weibo + detail.values.client + detail.values.web + detail.values.overseas;
+                            this.lineData.all.push(all);
+                        });
+                        this.resultChartLoading = false;
+                        this.resultPieChartLoading = false;
+                        //this.actions("全部", 0);
+//                        const lineData = this.lineData;
+//                        this.resultChartOption = _.extend({}, this.resultChartOption, {
+//                            xAxis: _.extend({}, this.resultChartOption.xAxis, {
+//                                type : 'category',  //category
+//                                data: x,
+//                                boundaryGap : false
+//                            }),
+//                            series: [{
+//                                name:'All',
+//                                type:'line',
+//                                areaStyle: {normal: {}},
+//                                stack: 'Total',
+//                                data: lineData.all
+//                            }]
+//                        });
+//                        this.resultPieChartOption = _.extend({}, this.resultPieChartOption, {
+//                            series: _.extend({}, Pie.series, {
+//                                name: 'Result',
+//                                center: ['50%', '45%'],
+//                                data:[
+//                                    {value: _.reduce(lineData.wechat, (mome, val) => mome + val, 0), name: "微信"},
+//                                    {value: _.reduce(lineData.weibo, (mome, val) => mome + val, 0), name:"微博"},
+//                                    {value: _.reduce(lineData.client, (mome, val) => mome + val, 0), name:"客户端"},
+//                                    {value: _.reduce(lineData.web, (mome, val) => mome + val, 0), name:"网页"},
+//                                    {value: _.reduce(lineData.overseas, (mome, val) => mome + val, 0), name:"海外"}
+//                                ]
+//                            })
+//                        });
+                    }
+                });
+            },
+            init(){
+                this.getSummaryDetail();
             }
         },
         watch: {
@@ -1072,7 +1261,13 @@
         },
         components:{
             'select-el': Select,
-            'page': Page
+            'page': Page,
+            Tabs
+        },
+        route: {
+            data(){
+                this.init();
+            }
         }
     }
 </script>
