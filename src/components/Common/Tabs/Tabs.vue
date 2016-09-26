@@ -35,10 +35,10 @@
                     name: words.tabs[1],
                     link: 'sentiment'
                 },
-//                    {
-//                    name: words.tabs[2],
-//                    link: 'evaluation'
-//                },
+                    {
+                    name: words.tabs[2],
+                    link: 'comment'
+                },
                     {
                     name: words.tabs[3],
                     link: 'influence'

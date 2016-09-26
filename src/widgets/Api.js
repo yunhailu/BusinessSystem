@@ -111,9 +111,9 @@ export const getTopicList = params => {
 };
 
 /**
- *  Encapsulate `get topic list` interface
+ *  Encapsulate `get Summary Detail` interface
  *
- *  @return {Promise} With Topic List.
+ *  @return {Promise} With Summary Detail.
  */
 export const getSummaryDetail = params => {
     return Api.request({
@@ -123,13 +123,25 @@ export const getSummaryDetail = params => {
 };
 
 /**
- *  Encapsulate `get topic list` interface
+ *  Encapsulate `get Sentiment Detail` interface
  *
- *  @return {Promise} With Topic List.
+ *  @return {Promise} With Sentiment Detail.
  */
 export const getSentimentDetail = params => {
     return Api.request({
         url: `${rootURI}/sentiment/detail`,
+        params
+    });
+};
+
+/**
+ *  Encapsulate `get Comment Detail` interface
+ *
+ *  @return {Promise} With Topic List.
+ */
+export const getCommentDetail = params => {
+    return Api.request({
+        url: `${rootURI}/comment/detail`,
         params
     });
 };

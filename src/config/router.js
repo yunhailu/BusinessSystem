@@ -35,10 +35,10 @@ module.exports = {
                     require(['../components/Sentiment/Sentiment.vue'], resolve);
                 }
             },
-            '/evaluation': {
-                name: 'evaluation',
+            '/comment': {
+                name: 'comment',
                 component (resolve) {
-                    require(['../components/Evaluation/Evaluation.vue'], resolve);
+                    require(['../components/Comment/Comment.vue'], resolve);
                 }
             },
             '/influence': {

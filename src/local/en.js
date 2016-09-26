@@ -23,7 +23,7 @@ export const en = {
         settingDec: "Setting your data",
     },
     analytics: {
-        tabs: ["Results", "Sentiment", "Evaluation", "Influencers", "Theme"],
+        tabs: ["Results", "Sentiment", "Comment", "Influencers", "Theme"],
         filters: ["All", "Sentiment", "Countries", "Gender", "Languages"],
         source: ["All", "WeChat", "Weibo", "Client", "Platforms", "Oversea"]
     },
