@@ -3,7 +3,7 @@
     <div>Evaluation</div>
     <div class="charts">
         <div class="chart commentLeftBar" v-echarts="commentBarOption" :loading="commentBarLoading" theme="macarons"></div><!--theme="infographic"-->
-        <!--<div class="chart commentRightBar" v-echarts="commentChartOption" :loading="commentChartLoading" ></div>-->
+        <div class="chart commentRightBar" v-echarts="commentChartOption" :loading="commentChartLoading" ></div>
     </div>
 </template>
 <style lang="less" scoped>
@@ -84,8 +84,47 @@
                     }]
                 },
 
-                commentChartLoading: true,
-                commentChartOption: {}
+                commentChartLoading: false,
+                commentChartOption: {
+                    tooltip: _.extend({}, Chart.tooltip, {}),
+                    legend: {
+                        data: ['Positive', 'Negative', 'Neutral']
+                    },
+                    grid: _.extend({}, Chart.grid),
+                    toolbox: _.extend({}, Chart.toolbox, {
+                        feature: {
+                            saveAsImage: {}
+                        }
+                    }),
+                    progressive: 4,
+                    textStyle: Chart.textStyle,
+                    xAxis: _.extend({}, Chart.xAxis, {
+                        type: 'value'
+                    }),
+                    yAxis: _.extend({}, Chart.yAxis, {
+                        type: 'category',
+                        data: ['微信', '微博', '网页', '客户端', '海外']
+                    }),
+                    color: _.extend([], Chart.color),
+                    series: [
+                        {
+                            name: 'Positive',
+                            type: 'bar',
+                            stack: '总量',
+                            data: [808,821,872,829,644]
+                        }, {
+                            name: 'Negative',
+                            type: 'bar',
+                            stack: '总量',
+                            data: [783,829,644,829,644]
+                        }, {
+                            name: 'Neutral',
+                            type: 'bar',
+                            stack: '总量',
+                            data: [783,784,882,829,644]
+                        }
+                    ]
+                }
             }
         },
         methods: {
@@ -118,6 +157,30 @@
                             value.data = all[this.commentArr[index]]
                             return value;
                         });
+
+
+//                        lineData: {
+//                            all: {positive: [], negative: [], neutral: []},
+//                            wechat: {positive: [], negative: [], neutral: []},
+//                            weibo: {positive: [], negative: [], neutral: []},
+//                            client: {positive: [], negative: [], neutral: []},
+//                            web: {positive: [], negative: [], neutral: []},
+//                            overseas: {positive: [], negative: [], neutral: []}
+//                        }
+                        this.commentChartLoading = false;
+                        const datas = _.chain(this.lineData)
+                                .filter((value, key) => (key != 'all'))
+                                .map(value => {
+                                    return _.map(value, val => {
+                                        return _.reduce(val, (memo, v) => memo + v, 0);
+                                    });
+                                }).value();
+                        this.commentChartOption.series = _.map(this.commentChartOption.series, (value, index) => {
+                            value.data = _.zip.apply(null,datas)[index];
+                            return value;
+                        });
+                        console.log('datas', datas);
+                        console.log('series', this.commentChartOption.series);
                     }
                 //});
             },
