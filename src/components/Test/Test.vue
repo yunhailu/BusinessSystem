@@ -3,7 +3,8 @@
     <div class="chart" v-echarts="pieChartOption" :loading="barChartLoading" theme="infographic"></div>
     <div class="chart" v-echarts="mapChartOption" :loading="mapChartLoading" theme="macarons"></div>
     <div class="chart" v-echarts="wordChartOption" :loading="wordChartLoading" theme="infographic"></div>
-    <div class="chart" v-echarts="graphChartOption" :loading="grapphChartLoading" theme="infographic"></div>
+    <div class="chart" v-echarts="graphChartOption" :loading="graphChartLoading" theme="infographic"></div>
+    <div class="chart" v-echarts="shuBarOption" :loading="shuBarLoading" theme="infographic"></div>
     <!--<div class="chart" v-echarts="mapChartOption" :loading="barChartLoading"></div>-->
 
     <!--<input type="text" @click="showCalendar" v-model="value" placeholder="请输入日期">-->
@@ -14,9 +15,11 @@
     @import "Test.less";
 </style>
 <script>
+    import _ from 'underscore';
     import Echart from 'echarts';
     import Calendar from '../Common/Calendar/Calendar.vue';
     import China from 'echarts/map/js/china';
+    import { Chart } from '../../config/config';
 
     export default{
         data(){
@@ -449,7 +452,7 @@
                     }
                 },
 
-                grapphChartLoading: false,
+                graphChartLoading: false,
                 graphChartOption: {
                     title: {
                         text: 'Les Miserables',
@@ -500,6 +503,46 @@
                             }
                         }
                     ]
+                },
+
+                shuBarLoading: false,
+                shuBarOption: {
+                    tooltip: _.extend({}, Chart.tooltip, {}),
+//                         legend: {
+//                             data: [this.words.positive, this.words.negative,this. words.neutral]
+//                         },
+                    grid: _.extend({}, Chart.grid),
+                    toolbox: _.extend({}, Chart.toolbox, {
+                        feature: {
+                            saveAsImage: {}
+                        }
+                    }),
+                    progressive: 4,
+                    textStyle: Chart.textStyle,
+                    xAxis: _.extend({}, Chart.xAxis, {
+                        show: false,
+                        type: 'value'
+                    }),
+                    yAxis: _.extend({}, Chart.yAxis, {
+                        type: 'category',
+                        show: false,
+                        data: ["积极", "消极", "中立"]
+                    }),
+                    color: _.extend([], Chart.color2),
+                    series: [{
+                        type: 'bar',
+                        name: 'Sentiment',
+                        itemStyle: {
+                            normal: {
+                                color: function(params) {
+                                    // build a color map as your need.
+                                    var colorList = _.extend({}, Chart.color);
+                                    return colorList[params.dataIndex]
+                                }
+                            }
+                        },
+                        data: [712,621,810]
+                    }]
                 },
 
                 cal: {

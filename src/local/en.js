@@ -27,6 +27,12 @@ export const en = {
         filters: ["All", "Sentiment", "Countries", "Gender", "Languages"],
         source: ["All", "WeChat", "Weibo", "Client", "Platforms", "Oversea"]
     },
+    comment: {
+        comment: "Comments",
+        positive: "Positive",
+        negative: "Negative",
+        neutral: "Neutral"
+    },
     compare: {
         tabs: ["Results", "Sentiment", "Influencers", "Theme"],
         filters: ["All", "Sentiment", "Countries", "Gender", "Languages"],
@@ -69,6 +75,11 @@ export const en = {
         select: "-- Select --",
         prevPage: "Prev",
         nextPage: "Next",
-        deleteTip: "Are you sure ?"
+        deleteTip: "Are you sure ?",
+        wechat: "WeChat",
+        weibo: "Weibo",
+        client: "Client",
+        web: "Web",
+        overseas: "Overseas"
     }
 };

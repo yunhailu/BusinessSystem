@@ -27,6 +27,12 @@ export const zh_CN = {
         filters: ["全部", "情绪指数", "地域分布", "性别分布", "语言分布"],
         source: ["全部", "微信", "微博", "客户端", "网页", "海外"]
     },
+    comment: {
+        comment: "评价指数",
+        positive: "积极",
+        negative: "消极",
+        neutral: "中立"
+    },
     compare: {
         tabs: ["信息汇总", "情绪分析", "影响力分析", "主题分析"],
         filters: ["全部", "情绪指数", "地域分布", "性别分布", "语言分布"],
@@ -69,6 +75,11 @@ export const zh_CN = {
         select: "-- 请选择 --",
         prevPage: "上一页",
         nextPage: "下一页",
-        deleteTip: "确定要删除么？"
+        deleteTip: "确定要删除么？",
+        wechat: "微信",
+        weibo: "微博",
+        client: "客户端",
+        web: "网页",
+        overseas: "海外"
     }
 };
