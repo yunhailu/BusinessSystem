@@ -23,10 +23,9 @@
                     <td><i class="fa fa-line-chart"></i> <span>Influencers</span></td>
                     <td><i class="fa fa-comments"></i> <span>Number of Posts</span></td>
                     <td><i class="fa fa-bar-chart"></i> <span>Sentiment</span></td>
-                    <td>Reach</td>
-                    <td>Reach per mention</td>
-                    <td>Engagment</td>
-                    <td>Engagment per mention</td>
+                    <td>Like</td>
+                    <td>Resend</td>
+                    <td>Rate</td>
                 </tr>
             </thead>
             <tbody v-if="influancerTable.length">
@@ -34,10 +33,9 @@
                     <td>{{item.influencer}}</td>
                     <td>{{item.posts}}</td>
                     <td class="barTd"><div class="sentimentBar" v-echarts="item.sentiment | barFormat"></div></td>
-                    <td>{{item.reach}}</td>
-                    <td>{{item.reachMention}}</td>
-                    <td>{{item.engagment}}</td>
-                    <td>{{item.engagmentMention}}</td>
+                    <td>{{item.like}}</td>
+                    <td>{{item.resend}}</td>
+                    <td>{{item.rate.value}}</td>
                 </tr>
             </tbody>
         </table>
@@ -83,42 +81,15 @@
                 });
             },
             getInfluenceList(){
-                //Api.getInfluenceList({}).then(resp => {
-
-                    const resp = {data: {code:0, data: [{
-                        id: "1234",
-                        influencer: "台湾",
-                        posts: 6,
-                        like: 123,
-                        resend: 32,
-                        sentiment: {
-                            happy: 5, anger: 15, sorrow: 10, disgust: 0, fear: 5
-                        },
-                        rate: {
-                            key: "up",
-                            value: "24%"
-                        }
-                    },{
-                        "id": "1234",
-                        "influencer": "台湾1",
-                        "posts": 6,
-                        "like": 123,
-                        "resend": 32,
-                        "sentiment": {
-                            happy: 3, anger: 5, sorrow: 10, disgust: 3, fear: 5
-                        },
-                        "rate": {
-                            "key": "up",
-                            "value": "24%"
-                        }
-                    }] }};
+                Api.getInfluenceList({}).then(resp => {
+                    //const resp = {data: {code:0, data: [{id: "1234", influencer: "台湾", posts: 6, like: 123, resend: 32, sentiment: {happy: 5, anger: 15, sorrow: 10, disgust: 0, fear: 5}, rate: {key: "up", value: "24%"}},{"id": "1234", "influencer": "台湾1", "posts": 6, "like": 123, "resend": 32, "sentiment": {happy: 3, anger: 5, sorrow: 10, disgust: 3, fear: 5}, "rate": {"key": "up", "value": "24%"}}] }};
                     if(resp.data.code ==0){
                         const influanceInfos = resp.data.data;
                         this.influancerTable = _.map(influanceInfos, info => {
                             return info;
                         });
                     }
-                //});
+                });
             },
             init(){
                 this.getPopularList();
