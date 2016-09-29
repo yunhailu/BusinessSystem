@@ -147,6 +147,30 @@ export const getCommentDetail = params => {
 };
 
 /**
+ *  Encapsulate `get Influence Popular List` interface
+ *
+ *  @return {Promise} With Influence Popular List.
+ */
+export const getPopularList = params => {
+    return Api.request({
+        url: `${rootURI}/influence/popularList`,
+        params
+    });
+};
+
+/**
+ *  Encapsulate `get Influence List` interface
+ *
+ *  @return {Promise} With Influence List.
+ */
+export const getInfluenceList = params => {
+    return Api.request({
+        url: `${rootURI}/influence/list`,
+        params
+    });
+};
+
+/**
  *  Encapsulate `getDashboardDetail` interface
  *
  *  @param {String} id

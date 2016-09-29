@@ -33,6 +33,9 @@ export const en = {
         negative: "Negative",
         neutral: "Neutral"
     },
+    influence: {
+        noTableTips: "No Data !"
+    },
     compare: {
         tabs: ["Results", "Sentiment", "Influencers", "Theme"],
         filters: ["All", "Sentiment", "Countries", "Gender", "Languages"],

@@ -7,7 +7,7 @@
                 <i class="fa" :class="[item.icon ? 'fa-'+item.icon : 'fa-cog']"></i>
                 <span class="popular-list-item-title">{{item.title}}</span>
                 <div class="popular-list-item-con">
-                    <div>{{item.type}}</div>
+                    <div>{{item.source}}</div>
                     <div class="popular-list-item-con-link">
                         <a :href="item.link"  target="_blank">{{item.link}}</a>
                     </div>
@@ -29,8 +29,8 @@
                     <td>Engagment per mention</td>
                 </tr>
             </thead>
-            <tbody>
-                <tr v-for="(index, item) in influancerTable" :class="[index % 2 == 0 ? '' : '']">
+            <tbody v-if="influancerTable.length">
+                <tr id="item.id" v-for="(index, item) in influancerTable" :class="[index % 2 == 0 ? '' : '']">
                     <td>{{item.influencer}}</td>
                     <td>{{item.posts}}</td>
                     <td class="barTd"><div class="sentimentBar" v-echarts="item.sentiment | barFormat"></div></td>
@@ -41,249 +41,88 @@
                 </tr>
             </tbody>
         </table>
+        <div v-if="influancerTable.length" class="paging">
+            <page></page>
+        </div>
+        <div v-if="!influancerTable.length" class="noTableTips">{{noTableTips}}</div>
     </div>
-    <div class="paging">
-        <page></page>
-    </div>
+
 </template>
 <style lang="less" scoped>
     @import "Influence.less";
 </style>
-<script>
+<script type="text/ecmascript-6">
     import _ from 'underscore';
-    import Tabs from '../Common/Tabs/Tabs.vue';
     import {Chart, Pie} from '../../config/config';
+    import Local from '../../local/local';
+    import * as Api from '../../widgets/Api';
+    import Tabs from '../Common/Tabs/Tabs.vue';
     import Page from '../Common/Page/Page.vue';
 
     export default{
         data(){
+            const words = Local().influence;
             return{
-                popularList: [{
-                    icon: "user",
-                    title: "Most active author",
-                    link: "http://www.baidu.com",
-                    post: "114",
-                    type: "New Online"
-                },{
-                    icon: "user-plus",
-                    title: "Most influence author",
-                    link: "http://www.baidu.com",
-                    post: "101",
-                    type: "New Online"
-                },{
-                    icon: "edge",
-                    title: "Most active site",
-                    link: "http://www.baidu.com",
-                    post: "84",
-                    type: "New Online"
-                },{
-                    icon: "chrome",
-                    title: "Most influence site",
-                    link: "http://www.baidu.com",
-                    post: "75",
-                    type: "New Online"
-                }],
-                influancerTable: [{
-                    influencer: "fa biao yu",
-                    posts: 140,
-                    sentiment: {
-                        happy: 3, anger: 5, sorrow: 10, disgust: 3, fear: 5
-                    },
-                    reach: 0,
-                    reachMention: 0,
-                    engagment: 0,
-                    engagmentMention: 0
-                },{
-                    influencer: "IE = Edge",
-                    posts: 14,
-                    sentiment: {
-                        happy: 5, anger: 5, sorrow: 2, disgust: 13, fear: 5
-                    },
-                    reach: 0,
-                    reachMention: 0,
-                    engagment: 0,
-                    engagmentMention: 0
-                },{
-                    influencer: "mei ri qian dao",
-                    posts: 10,
-                    sentiment: {
-                        happy: 3, anger: 5, sorrow: 10, disgust: 3, fear: 5
-                    },
-                    reach: 0,
-                    reachMention: 0,
-                    engagment: 0,
-                    engagmentMention: 0
-                },{
-                    influencer: "shi jian",
-                    posts: 103,
-                    sentiment: {
-                        happy: 7, anger: 2, sorrow: 12, disgust: 5, fear: 5
-                    },
-                    reach: 0,
-                    reachMention: 0,
-                    engagment: 0,
-                    engagmentMention: 0
-                },{
-                    influencer: "fa biao yu",
-                    posts: 64,
-                    sentiment: {
-                        happy: 5, anger: 15, sorrow: 10, disgust: 0, fear: 5
-                    },
-                    reach: 0,
-                    reachMention: 0,
-                    engagment: 0,
-                    engagmentMention: 0
-                }, {
-                    influencer: "fa biao yu",
-                    posts: 140,
-                    sentiment: {
-                        happy: 3, anger: 5, sorrow: 10, disgust: 3, fear: 5
-                    },
-                    reach: 0,
-                    reachMention: 0,
-                    engagment: 0,
-                    engagmentMention: 0
-                },{
-                    influencer: "IE = Edge",
-                    posts: 14,
-                    sentiment: {
-                        happy: 5, anger: 5, sorrow: 2, disgust: 13, fear: 5
-                    },
-                    reach: 0,
-                    reachMention: 0,
-                    engagment: 0,
-                    engagmentMention: 0
-                },{
-                    influencer: "mei ri qian dao",
-                    posts: 10,
-                    sentiment: {
-                        happy: 3, anger: 5, sorrow: 10, disgust: 3, fear: 5
-                    },
-                    reach: 0,
-                    reachMention: 0,
-                    engagment: 0,
-                    engagmentMention: 0
-                },{
-                    influencer: "shi jian",
-                    posts: 103,
-                    sentiment: {
-                        happy: 7, anger: 2, sorrow: 12, disgust: 5, fear: 5
-                    },
-                    reach: 0,
-                    reachMention: 0,
-                    engagment: 0,
-                    engagmentMention: 0
-                },{
-                    influencer: "fa biao yu",
-                    posts: 64,
-                    sentiment: {
-                        happy: 5, anger: 15, sorrow: 10, disgust: 0, fear: 5
-                    },
-                    reach: 0,
-                    reachMention: 0,
-                    engagment: 0,
-                    engagmentMention: 0
-                },{
-                    influencer: "fa biao yu",
-                    posts: 140,
-                    sentiment: {
-                        happy: 3, anger: 5, sorrow: 10, disgust: 3, fear: 5
-                    },
-                    reach: 0,
-                    reachMention: 0,
-                    engagment: 0,
-                    engagmentMention: 0
-                },{
-                    influencer: "IE = Edge",
-                    posts: 14,
-                    sentiment: {
-                        happy: 5, anger: 5, sorrow: 2, disgust: 13, fear: 5
-                    },
-                    reach: 0,
-                    reachMention: 0,
-                    engagment: 0,
-                    engagmentMention: 0
-                },{
-                    influencer: "mei ri qian dao",
-                    posts: 10,
-                    sentiment: {
-                        happy: 3, anger: 5, sorrow: 10, disgust: 3, fear: 5
-                    },
-                    reach: 0,
-                    reachMention: 0,
-                    engagment: 0,
-                    engagmentMention: 0
-                },{
-                    influencer: "shi jian",
-                    posts: 103,
-                    sentiment: {
-                        happy: 7, anger: 2, sorrow: 12, disgust: 5, fear: 5
-                    },
-                    reach: 0,
-                    reachMention: 0,
-                    engagment: 0,
-                    engagmentMention: 0
-                },{
-                    influencer: "fa biao yu",
-                    posts: 64,
-                    sentiment: {
-                        happy: 5, anger: 15, sorrow: 10, disgust: 0, fear: 5
-                    },
-                    reach: 0,
-                    reachMention: 0,
-                    engagment: 0,
-                    engagmentMention: 0
-                },{
-                    influencer: "fa biao yu",
-                    posts: 140,
-                    sentiment: {
-                        happy: 3, anger: 5, sorrow: 10, disgust: 3, fear: 5
-                    },
-                    reach: 0,
-                    reachMention: 0,
-                    engagment: 0,
-                    engagmentMention: 0
-                },{
-                    influencer: "IE = Edge",
-                    posts: 14,
-                    sentiment: {
-                        happy: 5, anger: 5, sorrow: 2, disgust: 13, fear: 5
-                    },
-                    reach: 0,
-                    reachMention: 0,
-                    engagment: 0,
-                    engagmentMention: 0
-                },{
-                    influencer: "mei ri qian dao",
-                    posts: 10,
-                    sentiment: {
-                        happy: 3, anger: 5, sorrow: 10, disgust: 3, fear: 5
-                    },
-                    reach: 0,
-                    reachMention: 0,
-                    engagment: 0,
-                    engagmentMention: 0
-                },{
-                    influencer: "shi jian",
-                    posts: 103,
-                    sentiment: {
-                        happy: 7, anger: 2, sorrow: 12, disgust: 5, fear: 5
-                    },
-                    reach: 0,
-                    reachMention: 0,
-                    engagment: 0,
-                    engagmentMention: 0
-                },{
-                    influencer: "fa biao yu",
-                    posts: 64,
-                    sentiment: {
-                        happy: 5, anger: 15, sorrow: 10, disgust: 0, fear: 5
-                    },
-                    reach: 0,
-                    reachMention: 0,
-                    engagment: 0,
-                    engagmentMention: 0
-                }]
+                popularList: [],
+                influancerTable: [],
+                noTableTips: words.noTableTips
+            }
+        },
+        methods: {
+            getPopularList(){
+                const icons = ["user", "user-plus", "edge", "chrome"];
+                Api.getPopularList({}).then(resp => {
+                    //const resp = {data: {code: 0, data: [{ "id": "12345678", "link": "http://www.baidu.com", "title": "Most active author", "source": "Online News", "value": "shi jian", "post": 64 },{ "id": "12345678", "link": "http://www.baidu.com", "title": "Most active author", "source": "Online News", "value": "shi jian", "post": 64 },{ "id": "12345678", "link": "http://www.baidu.com", "title": "Most active author", "source": "Online News", "value": "shi jian", "post": 64 },{ "id": "12345678", "link": "http://www.baidu.com", "title": "Most active author", "source": "Online News", "value": "shi jian", "post": 64 }]}};
+                    if(resp.data.code ==0){
+                        const popularList = resp.data.data;
+                        this.popularList = _.map(popularList, (item, index) => {
+                            item.icon = icons[index];
+                            return item;
+                        });
+                    }
+                });
+            },
+            getInfluenceList(){
+                //Api.getInfluenceList({}).then(resp => {
+
+                    const resp = {data: {code:0, data: [{
+                        id: "1234",
+                        influencer: "台湾",
+                        posts: 6,
+                        like: 123,
+                        resend: 32,
+                        sentiment: {
+                            happy: 5, anger: 15, sorrow: 10, disgust: 0, fear: 5
+                        },
+                        rate: {
+                            key: "up",
+                            value: "24%"
+                        }
+                    },{
+                        "id": "1234",
+                        "influencer": "台湾1",
+                        "posts": 6,
+                        "like": 123,
+                        "resend": 32,
+                        "sentiment": {
+                            happy: 3, anger: 5, sorrow: 10, disgust: 3, fear: 5
+                        },
+                        "rate": {
+                            "key": "up",
+                            "value": "24%"
+                        }
+                    }] }};
+                    if(resp.data.code ==0){
+                        const influanceInfos = resp.data.data;
+                        this.influancerTable = _.map(influanceInfos, info => {
+                            return info;
+                        });
+                    }
+                //});
+            },
+            init(){
+                this.getPopularList();
+                this.getInfluenceList();
             }
         },
         filters: {
@@ -376,6 +215,11 @@
         components:{
             Tabs,
             'page': Page
+        },
+        route: {
+            data(){
+                this.init();
+            }
         }
     }
 </script>

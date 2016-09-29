@@ -33,6 +33,9 @@ export const zh_CN = {
         negative: "消极",
         neutral: "中立"
     },
+    influence: {
+        noTableTips: "暂时没有数据"
+    },
     compare: {
         tabs: ["信息汇总", "情绪分析", "影响力分析", "主题分析"],
         filters: ["全部", "情绪指数", "地域分布", "性别分布", "语言分布"],
