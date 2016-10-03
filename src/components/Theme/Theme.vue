@@ -208,6 +208,9 @@
             clickAction(e){
                 console.log(e);
                 alert(e.name + ": " + e.value);
+            },
+            init(){
+
             }
         },
         created(){
@@ -219,6 +222,11 @@
         },
         components:{
             Tabs
+        },
+        route: {
+            data(){
+                this.init();
+            }
         }
     }
 </script>

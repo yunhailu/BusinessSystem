@@ -171,6 +171,42 @@ export const getInfluenceList = params => {
 };
 
 /**
+ *  Encapsulate `get theme word cloud` interface
+ *
+ *  @return {Promise} With Theme Word Cloud.
+ */
+export const getWordCloud = params => {
+    return Api.request({
+        url: `${rootURI}/theme/wordcloud`,
+        params
+    });
+};
+
+/**
+ *  Encapsulate `get theme Trend List` interface
+ *
+ *  @return {Promise} With Theme Trend List.
+ */
+export const getTrendList = params => {
+    return Api.request({
+        url: `${rootURI}/theme/trendList`,
+        params
+    });
+};
+
+/**
+ *  Encapsulate `get theme Detail` interface
+ *
+ *  @return {Promise} With Theme Detail.
+ */
+export const getThemeDetail = params => {
+    return Api.request({
+        url: `${rootURI}/theme/detail`,
+        params
+    });
+};
+
+/**
  *  Encapsulate `getDashboardDetail` interface
  *
  *  @param {String} id
