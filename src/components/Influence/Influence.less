@@ -10,6 +10,8 @@
       &-title{ .vm();  .f(1.5rem);  .ff("pingfang-bold"); }
       &-con{
         .vm(); .f(1.2rem);
+        &-link{ .text-hidden(); }
+        &-source{ .text-hidden(); }
       }
     }
     &-item:hover{ .c(white);  .bgc(@body-theme); }
@@ -29,6 +31,10 @@
     .sentimentBar{
       .w(100%);  .h(1.6rem);  //.pa();  .top(0); .bottom(0);  .left(0);  .right(0);
     }
+  }
+  .rate{
+    .fa-level-up,.fa-arrow-up{ .c(@flag-green); }
+    .fa-level-down,.fa-arrow-down{ .c(@flag-red); }
   }
 
   .noTableTips{ .tc(); .mg(1rem 0); }

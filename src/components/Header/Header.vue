@@ -24,7 +24,7 @@
                         </a>
                     </li>
                     <li class="dropdown quit right" @click="quit">
-                        <a href="javascript:void(0);"><i class="fa fa-sign-out"></i> {{words.quit}}</a>
+                        <a href="javascript:void(0);"><i class="fa fa-power-off"></i> {{words.quit}}</a>
                     </li>
                 </ul>
             </div>

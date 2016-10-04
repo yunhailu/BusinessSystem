@@ -67,6 +67,7 @@
 		"sentiment": {
 			happy: 3, anger: 5, sorrow: 10, disgust: 3, fear: 5
 		},
+        "comments": 203,
 		"rate": {	
 			"key": "up",
 			"value": "24%"
@@ -80,12 +81,13 @@
 //待确认
 {
 	code: 0,
-	data: [{
-		"id": "12345678",
-		"title": "Most active author"
-		"source": "Online News",
-		"value": "shi jian",
-		"post": 64
+	data: [{ 
+        "id": "12345678", 
+        "link": "http://www.baidu.com", 
+        "title": "Most active author", 
+        "source": "Online News", 
+        "value": "shi jian", 
+        "post": 64
 	}]
 }
 ```

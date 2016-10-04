@@ -34,7 +34,14 @@ export const zh_CN = {
         neutral: "中立"
     },
     influence: {
-        noTableTips: "暂时没有数据"
+        noTableTips: "暂时没有数据",
+        influencer: "影响力者",
+        numberOfPosts: "发布量",
+        sentiment: "情绪指数",
+        like: "点赞数",
+        resend: "转发数",
+        comments: "评论数",
+        rate: "浮动比率"
     },
     compare: {
         tabs: ["信息汇总", "情绪分析", "影响力分析", "主题分析"],

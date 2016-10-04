@@ -34,7 +34,14 @@ export const en = {
         neutral: "Neutral"
     },
     influence: {
-        noTableTips: "No Data !"
+        noTableTips: "No Data !",
+        influencer: "Influencer",
+        numberOfPosts: "Number of Posts",
+        sentiment: "Sentiment",
+        like: "Like",
+        resend: "Share",
+        comments: "Comments",
+        rate: "Rate"
     },
     compare: {
         tabs: ["Results", "Sentiment", "Influencers", "Theme"],

@@ -153,7 +153,7 @@ export const getCommentDetail = params => {
  */
 export const getPopularList = params => {
     return Api.request({
-        url: `${rootURI}/influence/popularList`,
+        url: `${rootURI}/influence/popularlist`,
         params
     });
 };
