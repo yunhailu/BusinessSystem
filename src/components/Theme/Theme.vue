@@ -210,23 +210,18 @@
                     if(resp.data.code == 0){
                         const details = resp.data.data;
                         this.themeLineLoading = false;
-                        console.log('details[0].values', details[0].values);
                         this.themeLineOption.xAxis.data = _.map(details, detail => detail.date);
                         this.themeLineOption.legend.data = _.map(details[0].values, item => item.name);
-                        console.log('legend', this.themeLineOption.legend);
-                        //console.log(this.themeLineOption.xAxis.data, this.themeBestOption.legend);
                         this.themeLineOption.series = _.map(this.themeLineOption.legend.data, legend => {
                             const data = _.chain(details)
                                     .map(detail => (_.filter(detail.values, value => (value.name == legend))[0]))
                                     .map(item => item.value).value();
-                            //console.log(legend, data);
                             return ({
                                 name: legend,
                                 type:'line',
                                 data
                             });
                         });
-                        console.log('series', this.themeBestOption.series);
                     }
                 });
             },
