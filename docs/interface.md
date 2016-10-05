@@ -50,7 +50,30 @@
 
 -  sentiment/detail
 ```
-//同 1
+{
+    code: 0,
+        data: [{
+                "date":"2016-08-01",
+                "values":{
+                    "weibo":{"happy":21,"anger":12,"sorrow":12,"disgust":45,"fear":40},
+                    "wechat":{"happy":8,"anger":6,"sorrow":1,"disgust":0,"fear":0},
+                    "web":{"happy":25,"anger":1,"sorrow":2,"disgust":24,"fear":4},
+                    "client":{"happy":5,"anger":1,"sorrow":1,"disgust":8,"fear":7},
+                    "overseas":{"happy":0,"anger":10,"sorrow":24,"disgust":9,"fear":45}
+                }
+            },
+            {
+                "date":"2016-08-02",
+                "values":{
+                    "weibo":{"happy":20,"anger":4,"sorrow":18,"disgust":32,"fear":12},
+                    "wechat":{"happy":2,"anger":32,"sorrow":4,"disgust":8,"fear":6},
+                    "web":{"happy":10,"anger":20,"sorrow":2,"disgust":6,"fear":10},
+                    "client":{"happy":5,"anger":16,"sorrow":0,"disgust":6,"fear":30},
+                    "overseas":{"happy":12,"anger":36,"sorrow":14,"disgust":35,"fear":20}
+                }
+            }
+        ]
+}
 ```
 
 -  influence/list
@@ -123,7 +146,28 @@
 
 -  theme/detail
 ```
-//同1
+{
+    code: 0,
+    data: [
+        "date": "2016-08-21:12"
+        "values": [{
+            "name": "韩寒",
+            "value": 0
+        },{
+            "name": "网易新闻",
+            "value": 14
+        },{
+            "name": "美国选举",
+            "value": 3
+        },{
+            "name": "新浪微博",
+            "value": 1
+        },{
+            "name": "柳叶刀",
+            "value": 8
+        }]
+    ]
+}
 ```
 
 -  compare/sentiment(是3)

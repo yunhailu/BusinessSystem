@@ -195,9 +195,9 @@ export const getTrendList = params => {
 };
 
 /**
- *  Encapsulate `get theme Trend List` interface
+ *  Encapsulate `get theme Theme Best` interface
  *
- *  @return {Promise} With Theme Trend List.
+ *  @return {Promise} With Theme Theme Best.
  */
 export const getThemeBest = params => {
     return Api.request({
@@ -214,7 +214,7 @@ export const getThemeBest = params => {
  */
 export const getThemeDetail = params => {
     return Api.request({
-        url: `${rootURI}/theme/detail`,
+        url: `${myURI}/theme/detail`,
         params
     });
 };

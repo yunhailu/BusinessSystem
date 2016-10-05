@@ -1142,7 +1142,7 @@
             },
             getSentimentDetail(){
                 Api.getSentimentDetail({}).then(resp => {
-                    console.log("getSentimentDetail", resp);
+                    console.log("getSentimentDetail", JSON.stringify(resp.data.data));
                     if(resp.data.code == 0){
                         const details = resp.data.data;
                         this.x = _.map(details, detail => detail.date);

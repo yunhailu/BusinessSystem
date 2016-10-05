@@ -43,6 +43,9 @@ export const en = {
         comments: "Comments",
         rate: "Rate"
     },
+    theme: {
+        topics: "Topical Topics"
+    },
     compare: {
         tabs: ["Results", "Sentiment", "Influencers", "Theme"],
         filters: ["All", "Sentiment", "Countries", "Gender", "Languages"],

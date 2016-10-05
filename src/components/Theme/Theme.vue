@@ -25,8 +25,8 @@
         </div>
     </div>
     <div class="theme-chart">
-        <div class="chart best"  v-echarts="themeBestOption" :loading="themeBestLoading"  theme="macarons"></div>
         <div class="chart"  v-echarts="themeLineOption" :loading="themeLineLoading"  theme="macarons"></div>
+        <div class="chart best"  v-echarts="themeBestOption" :loading="themeBestLoading"  theme="macarons"></div>
     </div>
 </template>
 <style lang="less" scoped>
@@ -48,7 +48,9 @@
                 disgust: [0,0,0,3,0,0,0,0,0,0,0,0,0,0,1,3,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,3,0,3,1,0,0,0,0,0,0,0,0,1,0,0,0,1,3,0,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,6,1,1,0,0,3,0,0,0,0,1,0,0,0,1,0,0,0,0,1,1,0,0,1,0,0,0,0,0,0,1,1,0,0,0,3,1,0,1,0,0,0,0,0,0,0,0,1,1,0,0],
                 fear: [0,0,1,1,0,0,0,0,0,0,0,1,0,0,0,0,3,0,1,0,0,0,0,0,0,1,1,0,0,0,0,1,0,1,0,0,1,4,0,0,0,0,0,0,0,0,0,0,0,1,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,3,1,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0]
             };
+            const words = Local().theme;
             return{
+                words,
                 themeWordLoading: true,
                 themeWordOption: {
                     tooltip: {},
@@ -87,12 +89,13 @@
                 downList: [],
 
                 themeBestOption: {
+                    title: _.extend({}, Chart.title, {text: words.topics, left: 10, top: 20}),
                     tooltip: _.extend({}, Chart.tooltip),
 //                    legend: {
 //                        data: ['话题排行']
 //                    },
                     grid: _.extend({}, Chart.grid),
-                    //color: _.extend([], Chart.color),
+                    textStyle: _.extend({}, Chart.textStyle),
                     xAxis: _.extend({}, Chart.xAxis, { type: 'value' }),
                     yAxis: _.extend({}, Chart.yAxis, {
                         type: 'category',
@@ -100,13 +103,13 @@
                     }),
                     series: [
                         {
-                            name: '话题排行',
+                            name: words.topics,
                             type: 'bar',
                             stack: 'Total',
                             itemStyle: {
                                 normal: {
                                     color: function(params){
-                                        let colorList = _.extend([], Chart.color);
+                                        let colorList = _.extend([], Chart.color3).reverse();
                                         if(colorList.length < 20){
                                             colorList = colorList.concat(colorList);
                                         }
@@ -117,7 +120,9 @@
                             label: {
                                 normal: {
                                     show: true,
-                                    position: 'insideRight'
+                                    position: 'insideRight',
+                                    textStyle: {fontWeight: 'lighter', fontSize: 10},
+                                    lineHeight: 12
                                 }
                             },
                             data: []
@@ -136,7 +141,7 @@
                     //color: _.extend([], Chart.color),
                     //backgroundColor: '#f9f9f9',
                     legend: {
-                        data:['Happy','Anger','Sorrow','Disgust','Fear']
+                        data:[]
                     },
                     dataZoom: _.extend({}, Chart.dataZoom),
                     grid: _.extend({}, Chart.grid, {
@@ -158,39 +163,9 @@
                     }),
                     progressive: 4,
                     textStyle: Chart.textStyle,
-                    series : [{
-                        name:'Happy',
-                        type:'line',
-                        //areaStyle: {normal: {}},
-                        //stack: 'Total',
-                        data: data.happy
-                    }, {
-                        name:'Anger',
-                        type:'line',
-                        //areaStyle: {normal: {}},
-                        //stack: 'Total',
-                        data: data.anger
-                    }, {
-                        name:'Sorrow',
-                        type:'line',
-                        //areaStyle: {normal: {}},
-                        //stack: 'Total',
-                        data: data.sorrow
-                    }, {
-                        name:'Disgust',
-                        type:'line',
-                        //areaStyle: {normal: {}},
-                        //stack: 'Total',
-                        data: data.disgust
-                    }, {
-                        name:'Fear',
-                        type:'line',
-                        //areaStyle: {normal: {}},
-                        //stack: 'Total',
-                        data: data.fear
-                    }]
+                    series : []
                 },
-                themeLineLoading: false
+                themeLineLoading: true
             }
         },
         methods: {
@@ -218,7 +193,7 @@
             },
             getThemeBest(){
                 return Api.getThemeBest({}).then(resp => {
-                    console.log('getThemeBest',resp);
+                    //console.log('getThemeBest',resp);
                     if(resp.data.code == 0){
                         const bestList = _.sortBy(resp.data.data, 'value');
                         const yAxis = _.map(bestList, value => value.name);
@@ -229,10 +204,37 @@
                     }
                 });
             },
+            getThemeDetail(){
+                Api.getThemeDetail({}).then(resp => {
+                    //console.log('getThemeDetail', resp.data);
+                    if(resp.data.code == 0){
+                        const details = resp.data.data;
+                        this.themeLineLoading = false;
+                        console.log('details[0].values', details[0].values);
+                        this.themeLineOption.xAxis.data = _.map(details, detail => detail.date);
+                        this.themeLineOption.legend.data = _.map(details[0].values, item => item.name);
+                        console.log('legend', this.themeLineOption.legend);
+                        //console.log(this.themeLineOption.xAxis.data, this.themeBestOption.legend);
+                        this.themeLineOption.series = _.map(this.themeLineOption.legend.data, legend => {
+                            const data = _.chain(details)
+                                    .map(detail => (_.filter(detail.values, value => (value.name == legend))[0]))
+                                    .map(item => item.value).value();
+                            //console.log(legend, data);
+                            return ({
+                                name: legend,
+                                type:'line',
+                                data
+                            });
+                        });
+                        console.log('series', this.themeBestOption.series);
+                    }
+                });
+            },
             init(){
                 this.getTrendList();
                 this.getWordCloud();
                 this.getThemeBest();
+                this.getThemeDetail();
             }
         },
         created(){

@@ -43,6 +43,9 @@ export const zh_CN = {
         comments: "评论数",
         rate: "浮动比率"
     },
+    theme: {
+        topics: "话题排行"
+    },
     compare: {
         tabs: ["信息汇总", "情绪分析", "影响力分析", "主题分析"],
         filters: ["全部", "情绪指数", "地域分布", "性别分布", "语言分布"],
