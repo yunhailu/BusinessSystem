@@ -55,6 +55,12 @@ module.exports = {
             }
         }
     },
+    ':type/detail/:id' : {
+        name: 'detail',
+        component (resolve) {
+            require(['../components/Detail/Detail.vue'], resolve);
+        }
+    },
     'compare': {
         name: 'compare',
         auth: true,

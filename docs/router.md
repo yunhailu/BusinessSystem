@@ -12,6 +12,7 @@
  sentiment         |   /#!/analytics/sentiment           |      null                            |         主界面 Analytics 页的情绪分析标签            
  influence         |   /#!/analytics/influence           |      null                            |         主界面 Analytics 页的影响力分析标签            
  theme             |   /#!/analytics/theme               |      null                            |         主界面 Analytics 页的主题分析标签            
+ detail            |   /#!/:type/detail/:id              |      'type': 分析类型, 'id': 详情id  |         主界面 Analytics 页中各个分析里的详情页            
  compare           |   /#!/compare                       |      null                            |         主界面 Compare 页            
  dashboard         |   /#!/dashboard                     |      null                            |         主界面 Dashboard 页            
  dashboardDetail   |   /#!/dashboard/:id                 |      'id': 快捷报告id                |         主界面 Dashboard 的详情页            

@@ -1,40 +1,25 @@
 <template>
-	<div class="detail">
-		<ul>
-			<li v-for="addr in addrMap" @click="changeAddr(addr)">
-				{{addr.city}}--{{addr.area}}
-			</li>
-		</ul>
 
-		<div v-if="defaultAddr">
-			{{defaultAddr.city}} -- {{defaultAddr.area}}
-		</div>
-	</div>
 </template>
-<style lang="less">
-	@import "detail.less";
+<style lang="less" scoped>
+	@import "Detail.less";
 </style>
-<script>
-
-	import { addrMaps, defaultAddr} from '../../vuex/getters'
-	import changeAddr from '../../vuex/actions'
+<script type="text/ecmascript-6">
+	import _ from 'underscore';
 
 	export default {
-		name: 'detail',
-		created: function() {
-			console.log('detail created')
-		},
-		vuex: {
-			getters: {
-				addrMap: addrMaps,
-				defaultAddr: defaultAddr
-			},
+		data(){
+			return {
 
-			actions: {
-				changeAddr: changeAddr
 			}
 		},
 		methods: {
+			init(){}
+		},
+		route: {
+			data(){
+				this.init();
+			}
 		}
 	}
 </script>
