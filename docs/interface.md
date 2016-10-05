@@ -103,7 +103,7 @@
 }
 ```
 
--  theme/trendList		
+-  theme/trendlist		
 ```
 //待确认
 {

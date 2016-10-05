@@ -7,7 +7,7 @@ import VueResource from 'vue-resource';
 
 Vue.use(VueResource);
 
-//const rootURI = "http://business.com:3000";
+const myURI = "http://127.0.0.1:3000";
 const rootURI = "http://118.244.212.122";
 
 const Api = {
@@ -177,7 +177,7 @@ export const getInfluenceList = params => {
  */
 export const getWordCloud = params => {
     return Api.request({
-        url: `${rootURI}/theme/wordcloud`,
+        url: `${myURI}/theme/wordcloud`,
         params
     });
 };
@@ -189,10 +189,23 @@ export const getWordCloud = params => {
  */
 export const getTrendList = params => {
     return Api.request({
-        url: `${rootURI}/theme/trendList`,
+        url: `${myURI}/theme/trendlist`,
         params
     });
 };
+
+/**
+ *  Encapsulate `get theme Trend List` interface
+ *
+ *  @return {Promise} With Theme Trend List.
+ */
+export const getThemeBest = params => {
+    return Api.request({
+        url: `${myURI}/theme/best`,
+        params
+    });
+};
+
 
 /**
  *  Encapsulate `get theme Detail` interface
