@@ -177,7 +177,7 @@ export const getInfluenceList = params => {
  */
 export const getWordCloud = params => {
     return Api.request({
-        url: `${myURI}/theme/wordcloud`,
+        url: `${rootURI}/theme/wordcloud`,
         params
     });
 };
@@ -189,7 +189,7 @@ export const getWordCloud = params => {
  */
 export const getTrendList = params => {
     return Api.request({
-        url: `${myURI}/theme/trendlist`,
+        url: `${rootURI}/theme/trendlist`,
         params
     });
 };
@@ -201,7 +201,7 @@ export const getTrendList = params => {
  */
 export const getThemeBest = params => {
     return Api.request({
-        url: `${myURI}/theme/best`,
+        url: `${rootURI}/theme/best`,
         params
     });
 };
@@ -214,7 +214,7 @@ export const getThemeBest = params => {
  */
 export const getThemeDetail = params => {
     return Api.request({
-        url: `${myURI}/theme/detail`,
+        url: `${rootURI}/theme/detail`,
         params
     });
 };

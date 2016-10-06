@@ -46,6 +46,16 @@ export const zh_CN = {
     theme: {
         topics: "话题排行"
     },
+    detail: {
+        article: "相关文章",
+        userInfo: "用户信息",
+        content: "正文",
+        source: "来源",
+        shareChart: "转发示意图",
+        publish: "发布时间",
+        view: "查看原文",
+        desc: "描述："
+    },
     compare: {
         tabs: ["信息汇总", "情绪分析", "影响力分析", "主题分析"],
         filters: ["全部", "情绪指数", "地域分布", "性别分布", "语言分布"],

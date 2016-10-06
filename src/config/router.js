@@ -57,6 +57,7 @@ module.exports = {
     },
     ':type/detail/:id' : {
         name: 'detail',
+        auth: true,
         component (resolve) {
             require(['../components/Detail/Detail.vue'], resolve);
         }

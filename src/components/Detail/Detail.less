@@ -1,3 +1,47 @@
 @import "../common.less";
 
+.detail{
+  .bgc(@bg-color);  padding-bottom: 2rem;
+  &-card{
+    .bgc(white);  .pd(2rem);  .disIB(); .mg(2rem 0 0);
+    .b-top(0.4rem solid @body-theme);  .br(0.3rem);
+    .shadow(0 2px 10px #ccc);  .h(24rem);
 
+    &-title{
+      .f(1.8rem);  .lh(2.4rem);  .w(100%);  .h(2.4rem);  .b-bottom(1px solid @body-theme);
+    }
+  }
+  &-content{
+    .w(73%);
+    &-sub{
+      .pd(0.5rem 0); .f(1.2rem);  .c(#999);
+      span{ .pd(0 2rem 0 0); };
+    }
+    &-con{
+      .pd(1rem 0 0);   .text-num-hidden(5);
+    }
+  }
+  &-info{
+    .w(25%);  .float-right();
+    &-avatar{
+      .w(8rem);  .h(8rem);  .float-right();  .mg(2rem 0.5rem 0);
+    }
+    &-detail{
+      .mg(2rem 0.5rem);
+      &-item{ .lh(2.4rem); .text-hidden(); }
+    }
+  }
+  &-chart{
+    .w(73%);
+  }
+  &-article{
+    .w(25%);  .float-right();
+    &-list{
+      .pd(2rem 0.5rem);
+      &-item{
+        .lh(2rem);  .text-hidden();
+        .fa{ .c(@body-theme); }
+      }
+    }
+  }
+}

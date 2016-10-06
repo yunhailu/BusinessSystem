@@ -20,7 +20,8 @@
         </div>
         <ul class="result-panel-list">
             <li class="result-panel-list-item row" v-for="item in list">
-                <a :href="item.url" target="_blank">
+                <!--<a :href="item.url" target="_blank">-->
+                <a v-link="{name: 'detail', params:{type:'result', id:'12345678'}}" target="_blank">
                     <div class="result-panel-list-item-left col-md-8">
                         <i class="fa fa-paperclip fa-3x"></i>
                         <div class="result-panel-list-item-left-con">

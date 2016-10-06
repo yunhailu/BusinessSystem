@@ -46,6 +46,16 @@ export const en = {
     theme: {
         topics: "Topical Topics"
     },
+    detail: {
+        article: "Article",
+        userInfo: "Hot User",
+        content: "Content",
+        source: "Source",
+        shareChart: "Share Charts",
+        publish: "Publish",
+        view: "View Original",
+        desc: "Desc:"
+    },
     compare: {
         tabs: ["Results", "Sentiment", "Influencers", "Theme"],
         filters: ["All", "Sentiment", "Countries", "Gender", "Languages"],
