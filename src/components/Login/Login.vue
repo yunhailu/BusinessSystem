@@ -5,7 +5,7 @@
                 <fieldset>
                     <legend>
                         <img class="logo-icon" src="images/logo.jpg" />
-                        <span>沃德商业智能系统平台</span>
+                        <span>沃德网络品牌气象站</span>
                     </legend>
                     <div class="form-group">
                         <label for="inputEmail3" class="col-sm-2 control-label">用户名</label>

@@ -3,7 +3,7 @@
  */
 export const zh_CN = {
     header: {
-        title: "商业智能管理系统",
+        title: "沃德网络品牌气象站",
         home: "主页",
         analytics: "数据分析",
         dashboard: "快捷报告",
@@ -23,7 +23,7 @@ export const zh_CN = {
         settingDec: "设置您所需要的监测信息"
     },
     hotEvent: {
-        hotsRiver: "热点事件河流图",
+        hotsRiver: "热点事件散点图",
         sentiment: "情绪比例",
         hotsRanking: "实时热点排行",
         todayHotsRanking: "今日热点排行",
@@ -112,10 +112,10 @@ export const zh_CN = {
         client: "客户端",
         web: "网页",
         overseas: "海外",
-        happy: "高兴",
+        happy: "满意",
         anger: "愤怒",
-        sorrow: "悲哀",
-        disgust: "厌恶",
-        fear: "恐惧"
+        sorrow: "失望",
+        disgust: "反感",
+        fear: "害怕"
     }
 };

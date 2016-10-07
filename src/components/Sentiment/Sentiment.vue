@@ -24,7 +24,9 @@
 
     export default{
         data(){
+            const common = Local().common;
             return{
+                common,
                 options: [{key: 'time', value: '按时间排序'}, {key: 'browser', value: '浏览数排序'}, {key: 'star', value: '点赞数排序'}],
                 list: list.time,
                 sortVal: "",
@@ -62,7 +64,7 @@
                         }
                     }),
                     legend: {
-                        data:['Happy','Anger','Sorrow','Disgust','Fear']
+                        data:[common.happy,common.anger,common.sorrow,common.disgust,common.fear]
                     },
                     dataZoom: _.extend({}, Chart.dataZoom),
                     color:_.extend( Chart.color, {}),
@@ -82,31 +84,31 @@
                     progressive: 4,
                     textStyle: Chart.textStyle,
                     series : [{
-                        name:'Happy',
+                        name:common.happy,
                         type:'line',
                         //areaStyle: {normal: {}},
                         stack: 'Total',
                         data: []
                     }, {
-                        name:'Anger',
+                        name:common.anger,
                         type:'line',
                         //areaStyle: {normal: {}},
                         stack: 'Total',
                         data: []
                     }, {
-                        name:'Sorrow',
+                        name:common.sorrow,
                         type:'line',
                         //areaStyle: {normal: {}},
                         stack: 'Total',
                         data: []
                     }, {
-                        name:'Disgust',
+                        name:common.disgust,
                         type:'line',
                         //areaStyle: {normal: {}},
                         stack: 'Total',
                         data: []
                     }, {
-                        name:'Fear',
+                        name:common.fear,
                         type:'line',
                         //areaStyle: {normal: {}},
                         stack: 'Total',
@@ -119,7 +121,7 @@
                 sentimentChartOption: {
                     tooltip: _.extend({}, Chart.tooltip, {}),
                     legend: {
-                        data: ['Happy', 'Anger', 'Sorrow', 'Disgust', 'Fear']
+                        data: [common.happy, common.anger, common.sorrow, common.disgust, common.fear]
                     },
                     grid: _.extend({}, Chart.grid),
                     toolbox: _.extend({}, Chart.toolbox, {
@@ -143,27 +145,27 @@
                     color: _.extend([], Chart.color),
                     series: [
                         {
-                            name: 'Happy',
+                            name: common.happy,
                             type: 'bar',
                             stack: '总量',
                             data: []
                         }, {
-                            name: 'Anger',
+                            name: common.anger,
                             type: 'bar',
                             stack: '总量',
                             data: []
                         }, {
-                            name: 'Sorrow',
+                            name: common.sorrow,
                             type: 'bar',
                             stack: '总量',
                             data: []
                         }, {
-                            name: 'Disgust',
+                            name: common.disgust,
                             type: 'bar',
                             stack: '总量',
                             data: []
                         }, {
-                            name: 'Fear',
+                            name: common.fear,
                             type: 'bar',
                             stack: '总量',
                             data: []

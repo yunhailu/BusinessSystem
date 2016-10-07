@@ -2,7 +2,9 @@
     <div class="hot-panel">
         <div class="row">
             <div class="col-md-12 hot-river">
-                <card-panel :title="words.hotsRiver"></card-panel>
+                <card-panel :title="words.hotsRiver">
+                    <div v-echarts="scatterOption" :loading="scatterLoading" class="hot-river-scatter" theme=""></div>
+                </card-panel>
             </div>
         </div>
         <div class="row">
@@ -132,6 +134,129 @@
                 },
 
                 hotsTodayRanking: [],
+
+                scatterOption: {
+                    tooltip: { position: 'top' },
+                    textStyle: {
+                        fontFamily: 'pingfang'
+                    },
+                    title: [{
+                        textBaseline: 'middle',
+                        top: '15%',
+                        text: "里约奥运会"
+                    },{
+                        textBaseline: 'middle',
+                        top: '40%',
+                        text: "南海问题"
+                    },{
+                        textBaseline: 'middle',
+                        top: '65%',
+                        text: "美国选举"
+                    },{
+                        textBaseline: 'middle',
+                        top: '90%',
+                        text: "货币战争"
+                    }],
+                    singleAxis: [{
+                        left: 150,
+                        type: 'category',
+                        boundaryGap: false,
+                        data: ['12a', '1a', '2a', '3a', '4a', '5a', '6a', '7a', '8a', '9a','10a','11a', '12p', '1p', '2p', '3p', '4p', '5p', '6p', '7p', '8p', '9p', '10p', '11p'],
+                        top: '10%',
+                        height: (100 / 7 - 10) + '%',
+                        axisLine: {
+                            lineStyle: {color: '#aaa'}
+                        },
+                        splitLine: {
+                            lineStyle: {type: 'dashed'}
+                        },
+                        axisLabel: {
+                            interval: 2
+                        }
+                    },{
+                        left: 150,
+                        type: 'category',
+                        boundaryGap: false,
+                        data: ['12a', '1a', '2a', '3a', '4a', '5a', '6a', '7a', '8a', '9a','10a','11a', '12p', '1p', '2p', '3p', '4p', '5p', '6p', '7p', '8p', '9p', '10p', '11p'],
+                        top: '35%',
+                        height: (100 / 7 - 10) + '%',
+                        axisLine: {
+                            lineStyle: {color: '#aaa'}
+                        },
+                        splitLine: {
+                            lineStyle: {type: 'dashed'}
+                        },
+                        axisLabel: {
+                            interval: 2
+                        }
+                    },{
+                        left: 150,
+                        type: 'category',
+                        boundaryGap: false,
+                        data: ['12a', '1a', '2a', '3a', '4a', '5a', '6a', '7a', '8a', '9a','10a','11a', '12p', '1p', '2p', '3p', '4p', '5p', '6p', '7p', '8p', '9p', '10p', '11p'],
+                        top: '60%',
+                        height: (100 / 7 - 10) + '%',
+                        axisLine: {
+                            lineStyle: {color: '#aaa'}
+                        },
+                        splitLine: {
+                            lineStyle: {type: 'dashed'}
+                        },
+                        axisLabel: {
+                            interval: 2
+                        }
+                    },{
+                        left: 150,
+                        type: 'category',
+                        boundaryGap: false,
+                        data: ['12a', '1a', '2a', '3a', '4a', '5a', '6a', '7a', '8a', '9a','10a','11a', '12p', '1p', '2p', '3p', '4p', '5p', '6p', '7p', '8p', '9p', '10p', '11p'],
+                        top: '80%',
+                        height: (100 / 5 - 10) + '%',
+                        axisLine: {
+                            lineStyle: {color: '#aaa'}
+                        },
+                        splitLine: {
+                            lineStyle: {type: 'dashed'}
+                        },
+                        axisLabel: {
+                            interval: 2
+                        }
+                    }],
+                    series: [{
+                        singleAxisIndex: 0,
+                        coordinateSystem: 'singleAxis',
+                        type: 'scatter',
+                        data: [[0,2],[1,4],[2,5],[3,6],[4,0],[5,0],[6,0],[7,0],[8,1],[9,2],[10,3],[11,2],[12,4],[13,3],[14,5],[15,4],[16,5],[17,6],[18,7],[19,7],[20,8],[21,7],[22,6],[23,5]],
+                        symbolSize: function (dataItem) {
+                            return dataItem[1] * 4;
+                        }
+                    },{
+                        singleAxisIndex: 1,
+                        coordinateSystem: 'singleAxis',
+                        type: 'scatter',
+                        data: [[0,13],[1,12],[2,7],[3,5],[4,0],[5,0],[6,0],[7,0],[8,0],[9,2],[10,2],[11,3],[12,4],[13,5],[14,6],[15,7],[16,8],[17,7],[18,9],[19,12],[20,15],[21,13],[22,15],[23,15]],
+                        symbolSize: function (dataItem) {
+                            return dataItem[1] * 4;
+                        }
+                    },{
+                        singleAxisIndex: 2,
+                        coordinateSystem: 'singleAxis',
+                        type: 'scatter',
+                        data: [[0,4],[1,2],[2,7],[3,5],[4,0],[5,0],[6,0],[7,0],[8,0],[9,2],[10,2],[11,3],[12,4],[13,5],[14,6],[15,7],[16,8],[17,7],[18,6],[19,7],[20,6],[21,4],[22,5],[23,3]],
+                        symbolSize: function (dataItem) {
+                            return dataItem[1] * 4;
+                        }
+                    },{
+                        singleAxisIndex: 3,
+                        coordinateSystem: 'singleAxis',
+                        type: 'scatter',
+                        data: [[0,2],[1,4],[2,5],[3,6],[4,0],[5,0],[6,0],[7,0],[8,1],[9,2],[10,3],[11,2],[12,4],[13,3],[14,5],[15,4],[16,5],[17,6],[18,7],[19,7],[20,8],[21,7],[22,6],[23,5]],
+                        symbolSize: function (dataItem) {
+                            return dataItem[1] * 4;
+                        }
+                    }]
+                },
+                scatterLoading: false
             }
         },
         methods: {
