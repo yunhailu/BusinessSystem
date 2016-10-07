@@ -6,16 +6,19 @@
         <div class="chart commentRightBar" v-echarts="commentChartOption" :loading="commentChartLoading" v-show="isShow" theme="macarons"></div>
         <div class="chart commentRightBar" v-echarts="commentPieOption" :loading="commentChartLoading" v-show="!isShow" theme="macarons"></div>
     </div>
+    <list-panel :list="list" :options="options" :select-title="selectTitle" :select-value.sync="sortVal"></list-panel>
 </template>
 <style lang="less" scoped>
     @import "Comment.less";
 </style>
 <script type="text/ecmascript-6">
     import _ from 'underscore';
-    import Tabs from '../Common/Tabs/Tabs.vue';
     import { Chart, Pie } from '../../config/config';
     import Local from '../../local/local';
     import * as Api from '../../widgets/Api';
+    import { list } from "../../config/tmpData";
+    import ListPanel from '../Common/ListPanel/ListPanel.vue';
+    import Tabs from '../Common/Tabs/Tabs.vue';
 
     export default{
         data(){
@@ -23,6 +26,10 @@
             return{
                 words,
                 common,
+                selectTitle: Local().common.sortBy,
+                list: list.time,
+                options: [{key: 'time', value: '按时间排序'}, {key: 'browser', value: '浏览数排序'}, {key: 'star', value: '点赞数排序'}],
+                sortVal: "",
                 x: [],
                 isShow: true,
                 commentArr: ["positive", "negative", "neutral"],
@@ -215,7 +222,7 @@
                 this.getCommentDetail();
             }
         },
-        components:{ Tabs },
+        components:{ Tabs, ListPanel },
         route: {
             data(){
                 this.init();
