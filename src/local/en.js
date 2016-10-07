@@ -52,6 +52,7 @@ export const en = {
         content: "Content",
         source: "Source",
         shareChart: "Share Charts",
+        timeline: "Share Time Line",
         publish: "Publish",
         view: "View Original",
         desc: "Desc:"

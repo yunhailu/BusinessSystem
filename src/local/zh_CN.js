@@ -52,6 +52,7 @@ export const zh_CN = {
         content: "正文",
         source: "来源",
         shareChart: "转发示意图",
+        timeline: "转发时间曲线",
         publish: "发布时间",
         view: "查看原文",
         desc: "描述："
