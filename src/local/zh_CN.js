@@ -22,6 +22,13 @@ export const zh_CN = {
         setting: "监测设置",
         settingDec: "设置您所需要的监测信息"
     },
+    hotEvent: {
+        hotsRiver: "热点事件河流图",
+        sentiment: "情绪比例",
+        hotsRanking: "实时热点排行",
+        todayHotsRanking: "今日热点排行",
+        wordsRanking: "热词排行"
+    },
     analytics: {
         tabs: ["信息汇总", "情绪分析", "评价分析", "影响力分析", "主题分析"],
         filters: ["全部", "情绪指数", "地域分布", "性别分布", "语言分布"],
@@ -104,6 +111,11 @@ export const zh_CN = {
         weibo: "微博",
         client: "客户端",
         web: "网页",
-        overseas: "海外"
+        overseas: "海外",
+        happy: "高兴",
+        anger: "愤怒",
+        sorrow: "悲哀",
+        disgust: "厌恶",
+        fear: "恐惧"
     }
 };

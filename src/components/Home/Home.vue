@@ -32,10 +32,11 @@
 						</ul>
 					</div>
 				</div>
-
+				<hot-event></hot-event>
 			</div>
 		</div>
 	</div>
+
 </template>
 <style lang="less">
 	@import "Home.less";
@@ -43,6 +44,7 @@
 <script type="text/ecmascript-6">
 	import {redirect} from "../../widgets/Auth";
 	import HeaderComponent from '../Header/Header.vue';
+	import HotEvent from '../HotEvent/HotEvent.vue';
 	import Local from "../../local/local";
 
 	export default{
@@ -87,7 +89,7 @@
 			}
 		},
 		components:{
-			'header-component': HeaderComponent
+			HeaderComponent, HotEvent
 		},
 		route:{
 

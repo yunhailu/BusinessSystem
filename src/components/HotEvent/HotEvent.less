@@ -1,0 +1,42 @@
+@import "../common.less";
+
+@card-height: 26rem;
+
+.hot-panel{
+  .w(100%);
+  .row{ .mg-top(2rem); }
+
+  .hot-river{  }
+
+  .hot-sentiment{
+    .h(@card-height);
+    &-pie{  .w(100%);  .h(100%);  }
+  }
+
+  .hot-ranking{
+    .h(@card-height);
+    &-list{
+      &-item{
+        .lh(1.4rem);  .pd(1.5rem 0 0);
+        &-index{ .vm();  .disIB();  .w(2rem);  .h(2rem);  .bgc(@body-theme);  .tc(); .lh(2rem); .c(white);  .br(0.2rem);  .ff("pingfang-bold"); }
+        &-text{ .vm();  .disIB(); .text-hidden();  .pd(0 0.5rem);  .w(80%); }
+      }
+    }
+  }
+
+  .hot-words{
+    .h(@card-height);
+    &-cloud{ .w(100%);  .h(100%);  }
+  }
+
+  .hot-today{
+    .h(@card-height);
+    &-list{
+      &-item{
+        .lh(1.4rem);  .pd(1.5rem 0 0);
+        &-index{ .vm();  .disIB();  .w(2rem);  .h(2rem);  .bgc(@body-theme);  .tc(); .lh(2rem); .c(white);  .br(0.2rem);  .ff("pingfang-bold"); }
+        &-text{ .vm();  .disIB(); .text-hidden();  .pd(0 0.5rem);  .w(80%); }
+      }
+    }
+  }
+}

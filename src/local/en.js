@@ -22,6 +22,13 @@ export const en = {
         setting: "Setting",
         settingDec: "Setting your data",
     },
+    hotEvent: {
+        hotsRiver: "Hot Event River",
+        sentiment: "Sentiment",
+        hotsRanking: "Hot Pot Ranking",
+        todayHotsRanking: "Today Hot Pot Ranking",
+        wordsRanking: "Words Ranking"
+    },
     analytics: {
         tabs: ["Results", "Sentiment", "Comment", "Influencers", "Theme"],
         filters: ["All", "Sentiment", "Countries", "Gender", "Languages"],
@@ -104,6 +111,11 @@ export const en = {
         weibo: "Weibo",
         client: "Client",
         web: "Web",
-        overseas: "Overseas"
+        overseas: "Overseas",
+        happy: "Happy",
+        anger: "Anger",
+        sorrow: "Sorrow",
+        disgust: "Disgust",
+        fear: "Fear"
     }
 };
