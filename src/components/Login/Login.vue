@@ -5,7 +5,7 @@
                 <fieldset>
                     <legend>
                         <img class="logo-icon" src="images/logo.jpg" />
-                        <span>沃德网络品牌气象站</span>
+                        <span>沃德品牌气象站</span>
                     </legend>
                     <div class="form-group">
                         <label for="inputEmail3" class="col-sm-2 control-label">用户名</label>
@@ -23,7 +23,7 @@
                         <div class="col-sm-offset-2 col-sm-10">
                             <div class="checkbox">
                                 <label>
-                                    <input type="checkbox"> Remember me
+                                    <input type="checkbox"> 记住密码
                                 </label>
                             </div>
                         </div>

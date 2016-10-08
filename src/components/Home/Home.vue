@@ -58,13 +58,13 @@
 					icon: "fa-adjust",
 				},
 				dashboardList: [{
-					name: "Ali Pictures 7d",
+					name: "阿里影业",
 					link: ""
 				},{
-					name: "Hillary About China",
+					name: "中国希拉里",
 					link: ""
 				},{
-					name: "Brand Listening",
+					name: "品牌听力",
 					link: ""
 				}],
 				items: [{

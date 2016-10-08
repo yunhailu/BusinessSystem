@@ -1,5 +1,5 @@
 <template>
-    <span>Compare Panel</span>
+    <!--<span>Compare Panel</span>-->
     <div class="compare-charts">
         <div class="chart" v-echarts="compareChartOption" :loading="compareChartLoading" theme="macarons"></div>
         <div class="chart radar" v-echarts="compareRadarOption" :loading="compareRadarLoading" theme="macarons"></div>
@@ -35,7 +35,9 @@
                     [91,45,75,30,34,23]
                 ]
             };
+            const common = Local().common;
             return{
+                common,
                 compareChartLoading: false,
                 compareChartOption: {
                     title: _.extend({}, Chart.title, { show: false}),
@@ -128,11 +130,11 @@
                     color: _.extend([], Chart.color),
                     radar: {
                         indicator: [
-                            {name: 'Happy', max: 100},
-                            {name: 'Anger', max: 100},
-                            {name: 'Sorrow', max: 100},
-                            {name: 'Disgust', max: 100},
-                            {name: 'Fear', max: 100}
+                            {name: common.happy, max: 100},
+                            {name: common.anger, max: 100},
+                            {name: common.sorrow, max: 100},
+                            {name: common.disgust, max: 100},
+                            {name: common.fear, max: 100}
                         ],
                         shape: 'circle',
                         splitNumber: 5,

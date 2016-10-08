@@ -6,7 +6,7 @@
             <div class="row tools">
                 <div class="col-md-7">
                     <div class="search">
-                        <input class="search-input" placeholder="Search in Results" v-model="search" />
+                        <input class="search-input" placeholder="搜索" v-model="search" />
                         <span class="search-btn" @click="searchAction"><i class="fa fa-search"></i></span>
                     </div>
                 </div>

@@ -10,11 +10,11 @@
                     <table class="table table-hover  table-striped">
                         <thead>
                         <tr>
-                            <td><i class="fa fa-fire"></i> <span>REPORT TITLE</span></td>
-                            <td><i class="fa fa-exchange"></i> <span>LAST CHANGE</span></td>
-                            <td><i class="fa fa-cube"></i> <span>TRIGGER</span></td>
-                            <td><i class="fa fa-tags"></i> LAST SENT</td>
-                            <td><i class="fa fa-edit"></i> ACTIONS</td>
+                            <td><i class="fa fa-fire"></i> <span>{{words.reportTitle}}</span></td>
+                            <td><i class="fa fa-exchange"></i> <span>{{words.lastChange}}</span></td>
+                            <td><i class="fa fa-cube"></i> <span>{{words.trigger}}</span></td>
+                            <td><i class="fa fa-tags"></i> {{words.lastSent}}</td>
+                            <td><i class="fa fa-edit"></i> {{words.actions}}</td>
                         </tr>
                         </thead>
                         <tbody>
@@ -45,85 +45,88 @@
 </style>
 <script type="text/ecmascript-6">
     import _ from "underscore";
+    import Local from "../../local/local";
     import HeaderComponent from '../Header/Header.vue';
     import Page from '../Common/Page/Page.vue';
 
     export default{
         data(){
+            const words = Local().reports;
             return{
+                words,
                 name: "Reports & Alerts",
                 reports: [{
                     id: 123,
-                    title: "Ali Pictuers 7d",
+                    title: "阿里影业",
                     lastChange: "03/08/16 14:39",
                     trigger: "/",
-                    lastSent: "Never sent"
+                    lastSent: "从未发送"
                 }, {
                     id: 456,
-                    title: "Hillary about China",
+                    title: "中国希拉里",
                     lastChange: "03/08/16 17:57",
                     trigger: "/",
-                    lastSent: "Never sent"
+                    lastSent: "从未发送"
                 }, {
                     id: 789,
-                    title: "Brand Listening",
+                    title: "品牌听力",
                     lastChange: "05/08/16 10:13",
                     trigger: "/",
-                    lastSent: "Never sent"
+                    lastSent: "从未发送"
                 }, {
                     id: 135,
-                    title: "Ali Pictuers 7d",
+                    title: "阿里影业",
                     lastChange: "03/08/16 14:39",
                     trigger: "/",
-                    lastSent: "Never sent"
+                    lastSent: "从未发送"
                 }, {
                     id: 246,
-                    title: "Hillary about China",
+                    title: "中国希拉里",
                     lastChange: "03/08/16 17:57",
                     trigger: "/",
-                    lastSent: "Never sent"
+                    lastSent: "从未发送"
                 }, {
                     id: 357,
-                    title: "Brand Listening",
+                    title: "品牌听力",
                     lastChange: "05/08/16 10:13",
                     trigger: "/",
-                    lastSent: "Never sent"
+                    lastSent: "从未发送"
                 } ,{
                     id: 468,
-                    title: "Ali Pictuers 7d",
+                    title: "阿里影业",
                     lastChange: "03/08/16 14:39",
                     trigger: "/",
-                    lastSent: "Never sent"
+                    lastSent: "从未发送"
                 }, {
                     id: 579,
-                    title: "Hillary about China",
+                    title: "中国希拉里",
                     lastChange: "03/08/16 17:57",
                     trigger: "/",
-                    lastSent: "Never sent"
+                    lastSent: "从未发送"
                 }, {
                     id: 680,
-                    title: "Brand Listening",
+                    title: "品牌听力",
                     lastChange: "05/08/16 10:13",
                     trigger: "/",
-                    lastSent: "Never sent"
+                    lastSent: "从未发送"
                 }, {
                     id: 147,
-                    title: "Ali Pictuers 7d",
+                    title: "阿里影业",
                     lastChange: "03/08/16 14:39",
                     trigger: "/",
-                    lastSent: "Never sent"
+                    lastSent: "从未发送"
                 }, {
                     id: 258,
-                    title: "Hillary about China",
+                    title: "中国希拉里",
                     lastChange: "03/08/16 17:57",
                     trigger: "/",
-                    lastSent: "Never sent"
+                    lastSent: "从未发送"
                 }, {
                     id: 369,
-                    title: "Brand Listening",
+                    title: "品牌听力",
                     lastChange: "05/08/16 10:13",
                     trigger: "/",
-                    lastSent: "Never sent"
+                    lastSent: "从未发送"
                 }]
             }
         },

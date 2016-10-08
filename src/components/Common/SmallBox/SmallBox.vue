@@ -8,7 +8,7 @@
             <i class="fa" :class="option.icon"></i>
         </div>
         <div class="small-box-footer">
-            More info <i class="fa fa-arrow-circle-right"></i>
+            更多信息 <i class="fa fa-arrow-circle-right"></i>
         </div>
     </div>
 </template>

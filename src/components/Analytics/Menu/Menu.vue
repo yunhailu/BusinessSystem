@@ -8,9 +8,9 @@
                     <img src="images/avatar.png" class="img-circle" alt="User Image" />
                 </div>
                 <div class="pull-left info">
-                    <p>Hello, Jane</p>
+                    <p>你好, 管理员</p>
 
-                    <a href="javascript:void(0);"><i class="fa fa-circle text-success"></i> Online</a>
+                    <a href="javascript:void(0);"><i class="fa fa-circle text-success"></i> 在线</a>
                 </div>
             </div>
 

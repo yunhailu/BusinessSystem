@@ -26,22 +26,22 @@
             return{
                 words,
                 boxes: [{
-                    title: "Add",
+                    title: "添加",
                     icon: "fa-plus",
                     theme: "bg-aqua",
-                    dec: "Add your Topic",
+                    dec: "添加您的主题",
                     link: {name: "settingAdd"}
                 },{
-                    title: "Edit",
+                    title: "编辑",
                     icon: "fa-edit",
                     theme: "bg-yellow",
-                    dec: "Edit your Topic",
+                    dec: "编辑您的主题",
                     link: ""
                 },{
-                    title: "Delete",
+                    title: "删除",
                     icon: "fa-close",
                     theme: "bg-red",
-                    dec: "Delete your Topic",
+                    dec: "删除您的主题",
                     link: ""
                 }]
             }

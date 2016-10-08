@@ -18,18 +18,18 @@
                         <div class="list-panel-list-item-left-con">
                             <div class="title">{{{item.title}}}</div>
                             <div class="detail">{{{item.content}}}</div>
-                            <div class="time">published on {{item.pDate}}</div>
+                            <div class="time">发布于 {{item.pDate}}</div>
                         </div>
                     </div>
                     <div class="list-panel-list-item-right col-md-4">
                         <i class="fa fa-flag fa-2x icon"></i>
                         <div class="item-data">
                             <div class="row">
-                                <div class="col-md-3 title">MATCHES</div>
-                                <div class="col-md-9">Carrival Group</div>
+                                <div class="col-md-3 title">匹配</div>
+                                <div class="col-md-9">优步Ubar</div>
                             </div>
                             <div class="row">
-                                <div class="col-md-3 title">METRICS</div>
+                                <div class="col-md-3 title">指标</div>
                                 <div class="col-md-3"><i class="fa fa-wechat"></i> 12</div>
                                 <div class="col-md-3"><i class="fa fa-weibo"></i> 14</div>
                                 <div class="col-md-3"><i class="fa fa-internet-explorer"></i> 14</div>

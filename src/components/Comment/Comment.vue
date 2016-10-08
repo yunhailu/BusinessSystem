@@ -1,6 +1,6 @@
 <template>
     <tabs :actions="actions" ></tabs>
-    <div>Evaluation</div>
+    <!--<div>Evaluation</div>-->
     <div class="charts">
         <div class="chart commentLeftBar" v-echarts="commentBarOption" :loading="commentBarLoading" theme="macarons"></div><!--theme="infographic"-->
         <div class="chart commentRightBar" v-echarts="commentChartOption" :loading="commentChartLoading" v-show="isShow" theme="macarons"></div>

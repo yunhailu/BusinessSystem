@@ -43,19 +43,19 @@
                     icon: "fa-adjust",
                 },
                 dashboardList: [{
-                    name: "Ali Pictures 7d",
+                    name: "阿里影业",
                     link: {
                         name: "dashboardDetail",
                         params:{ id: "123" }
                     }
                 },{
-                    name: "Hillary About China",
+                    name: "中国希拉里",
                     link: {
                         name: "dashboardDetail",
                         params:{ id: "456" }
                     }
                 },{
-                    name: "Brand Listening",
+                    name: "品牌听力",
                     link: {
                         name: "dashboardDetail",
                         params:{ id: "789" }

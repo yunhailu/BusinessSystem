@@ -99,6 +99,13 @@ export const en = {
         groups: ["People", "Mechanism", "Product", "Project", "Event", "Others"],
         create: "Create"
     },
+    reports: {
+        reportTitle: "REPORT TITLE",
+        lastChange: "LAST CHANGE",
+        trigger: "TRIGGER",
+        lastSent: "LAST SENT",
+        actions: "ACTIONS"
+    },
     common: {
         weeks: ['Sun', 'Mon', 'Tues', 'Wed', 'Thur', 'Fri', 'Sat'],
         buttons:['OK', 'Cancel'],

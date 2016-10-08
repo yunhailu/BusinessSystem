@@ -3,7 +3,7 @@
  */
 export const zh_CN = {
     header: {
-        title: "沃德网络品牌气象站",
+        title: "沃德品牌气象站",
         home: "主页",
         analytics: "数据分析",
         dashboard: "快捷报告",
@@ -42,7 +42,7 @@ export const zh_CN = {
     },
     influence: {
         noTableTips: "暂时没有数据",
-        influencer: "影响力者",
+        influencer: "影响者",
         numberOfPosts: "发布量",
         sentiment: "情绪指数",
         like: "点赞数",
@@ -98,6 +98,13 @@ export const zh_CN = {
         exclude: "排除词",
         groups: ["人物", "机构", "产品", "项目", "事件", "其他"],
         create: "创建提交"
+    },
+    reports: {
+        reportTitle: "报告标题",
+        lastChange: "最新更改",
+        trigger: "触发",
+        lastSent: "最后发送",
+        actions: "动作"
     },
     common: {
         weeks: ['日', '一', '二', '三', '四', '五', '六'],

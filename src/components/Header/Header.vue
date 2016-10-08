@@ -20,7 +20,7 @@
                     <li class="dropdown user user-menu right">
                         <a href="javascript:void(0);" class="dropdown-toggle" >
                             <i class="glyphicon glyphicon-user"></i>
-                            <span>Admin <i class="caret"></i></span>
+                            <span>管理员 <i class="caret"></i></span>
                         </a>
                     </li>
                     <li class="dropdown quit right" @click="quit">
