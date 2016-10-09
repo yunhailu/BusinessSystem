@@ -8,7 +8,7 @@ import VueResource from 'vue-resource';
 Vue.use(VueResource);
 
 const myURI = "http://127.0.0.1:3000";
-const rootURI = "http://118.244.212.122";
+const rootURI = "http://118.244.212.122:8008";
 
 const Api = {
     request({url="", params= {}, method= "jsonp"}={}){
