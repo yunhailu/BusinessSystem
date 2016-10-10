@@ -96,6 +96,15 @@
                         trigger: 'axis',
                         axisPointer: {
                             type: 'cross'
+                        },
+                        formatter: function (obj) {
+                            var value = obj.value;
+                            return '<div style="border-bottom: 1px solid rgba(255,255,255,.3); font-size: 18px;padding-bottom: 7px;margin-bottom: 7px">'
+                                    + obj.seriesName
+                                    + '</div>'
+                                    + '转发数：' + value[1] + '<br>'
+                                    + '点赞数：' + value[2] + '<br>'
+                                    + '评论数：' + value[5] + '<br>';
                         }
                     }),
                     textStyle: _.extend({}, Chart.textStyle),
