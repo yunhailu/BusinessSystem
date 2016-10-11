@@ -25,6 +25,7 @@
         </div>
     </div>
     <div class="theme-chart">
+        <div class="chart"  v-echarts="themeScatterOption" :loading="themeScatterLoading"  theme="macarons"></div>
         <div class="chart"  v-echarts="themeLineOption" :loading="themeLineLoading"  theme="macarons"></div>
         <div class="chart best"  v-echarts="themeBestOption" :loading="themeBestLoading"  theme="macarons"></div>
     </div>
@@ -36,7 +37,8 @@
     import _ from 'underscore';
     import Tabs from '../Common/Tabs/Tabs.vue';
     import Local from "../../local/local";
-    import {Chart, Pie} from '../../config/config';
+    import { Chart, Pie } from '../../config/config';
+    import { themeScatterData } from '../../config/tmpData';
     import * as Api from '../../widgets/Api';
 
     export default{
@@ -80,6 +82,166 @@
                 upList: [],
 
                 downList: [],
+
+                themeScatterOption: {
+                    legend: _.extend({}, Chart.legend, {
+                        y: 'top',
+                        data: ['南海问题', '每日关注', '货币战争', '网易新闻', '阿里影业'],
+                        textStyle: {
+                            //color: '#fff',
+//                            fontSize: 16
+                        }
+                    }),
+                    tooltip: _.extend({}, Chart.tooltip, {
+                        trigger: 'axis',
+                        axisPointer: {
+                            type: 'cross'
+                        },
+                        formatter: function (obj) {
+                            var value = obj.value;
+                            return '<div style="border-bottom: 1px solid rgba(255,255,255,.3); font-size: 18px;padding-bottom: 7px;margin-bottom: 7px">'
+                                    + obj.seriesName
+                                    + '</div>'
+                                    + '转发数：' + value[1] + '<br>'
+                                    + '点赞数：' + value[2] + '<br>'
+                                    + '评论数：' + value[5] + '<br>';
+                        }
+                    }),
+                    textStyle: _.extend({}, Chart.textStyle),
+                    visualMap: [
+                        {
+                            right: '0%',
+                            top: '10%',
+                            dimension: 2,
+                            min: 0,
+                            max: 300,
+                            itemWidth: 30,
+                            itemHeight: 120,
+                            calculable: true,
+                            precision: 0.1,
+                            text: ['圆形大小：文章转发数'],
+                            textGap: 30,
+//                            textStyle: {
+//                                color: '#fff'
+//                            },
+                            inRange: {
+                                symbolSize: [10, 70]
+                            },
+                            outOfRange: {
+                                symbolSize: [10, 70],
+                                color: ['rgba(50,50,50,.2)']
+                            },
+                            controller: {
+                                inRange: {
+                                    color: ['#aeaeae']
+                                },
+                                outOfRange: {
+                                    color: ['#444']
+                                }
+                            }
+                        }
+                    ],
+                    grid: _.extend({}, Chart.grid, {
+                        right: '10%'
+                    }),
+                    xAxis:  _.extend({}, Chart.xAxis, {
+                        type : 'category',  //category
+                        data : ["2016-08-21:12","2016-08-21:14","2016-08-21:15","2016-08-21:16","2016-08-21:17","2016-08-21:18","2016-08-21:20","2016-08-21:22","2016-08-22:00","2016-08-22:03","2016-08-22:05","2016-08-22:06","2016-08-22:08","2016-08-22:09","2016-08-22:10","2016-08-22:11","2016-08-22:12","2016-08-22:13","2016-08-22:14","2016-08-22:15","2016-08-22:16","2016-08-22:17","2016-08-22:18","2016-08-22:19","2016-08-22:20","2016-08-22:21","2016-08-22:22","2016-08-23:00","2016-08-23:03","2016-08-23:06","2016-08-23:08","2016-08-23:09","2016-08-23:10","2016-08-23:11","2016-08-23:12","2016-08-23:13","2016-08-23:14","2016-08-23:15","2016-08-23:16","2016-08-23:17","2016-08-23:18","2016-08-23:19","2016-08-23:20","2016-08-23:22","2016-08-23:23","2016-08-24:00","2016-08-24:01","2016-08-24:06","2016-08-24:07","2016-08-24:08","2016-08-24:09","2016-08-24:10","2016-08-24:11","2016-08-24:12","2016-08-24:14","2016-08-24:15","2016-08-24:16","2016-08-24:17","2016-08-24:18","2016-08-24:20","2016-08-24:21","2016-08-24:22","2016-08-25:00","2016-08-25:02","2016-08-25:03","2016-08-25:05","2016-08-25:06","2016-08-25:07","2016-08-25:08","2016-08-25:09","2016-08-25:10","2016-08-25:11","2016-08-25:12","2016-08-25:14","2016-08-25:15","2016-08-25:16","2016-08-25:17","2016-08-25:18","2016-08-25:19","2016-08-25:20","2016-08-25:21","2016-08-25:22","2016-08-25:23","2016-08-26:00","2016-08-26:01","2016-08-26:06","2016-08-26:07","2016-08-26:08","2016-08-26:09","2016-08-26:10","2016-08-26:11","2016-08-26:12","2016-08-26:13","2016-08-26:14","2016-08-26:15","2016-08-26:16","2016-08-26:17","2016-08-26:18","2016-08-26:22","2016-08-26:23","2016-08-27:00","2016-08-27:01","2016-08-27:02","2016-08-27:06","2016-08-27:08","2016-08-27:09","2016-08-27:10","2016-08-27:11","2016-08-27:12","2016-08-27:13","2016-08-27:14","2016-08-27:15","2016-08-27:16","2016-08-27:17","2016-08-27:18","2016-08-27:19","2016-08-27:20","2016-08-28:00","2016-08-28:01","2016-08-28:06","2016-08-28:08"],
+                        //type: 'value',
+                        name: '日期',
+                        nameGap: 16,
+                        nameTextStyle: {
+                            fontSize: 14
+                        },
+                        max: 31,
+                        splitLine: {
+                            show: false
+                        },
+//                        axisLine: {
+//                            lineStyle: {
+//                                color: '#eee'
+//                            }
+//                        }
+                    }),
+                    yAxis: _.extend({}, Chart.yAxis, {
+                        type: 'value',
+                        name: '文章数量',
+                        nameLocation: 'end',
+                        nameGap: 20,
+                        splitLine: {
+                            show: false
+                        }
+                    }),
+                    series: [
+                        {
+                            name: '南海问题',
+                            type: 'scatter',
+                            itemStyle: {
+                                normal: {
+                                    opacity: 0.8,
+                                    shadowBlur: 10,
+                                    shadowOffsetX: 0,
+                                    shadowOffsetY: 0,
+                                    shadowColor: 'rgba(0, 0, 0, 0.3)'
+                                }
+                            },
+                            data: themeScatterData.dataBJ
+                        }, {
+                            name: '每日关注',
+                            type: 'scatter',
+                            itemStyle: {
+                                normal: {
+                                    opacity: 0.8,
+                                    shadowBlur: 10,
+                                    shadowOffsetX: 0,
+                                    shadowOffsetY: 0,
+                                    shadowColor: 'rgba(0, 0, 0, 0.3)'
+                                }
+                            },
+                            data: themeScatterData.dataSH
+                        }, {
+                            name: '货币战争',
+                            type: 'scatter',
+                            itemStyle: {
+                                normal: {
+                                    opacity: 0.8,
+                                    shadowBlur: 10,
+                                    shadowOffsetX: 0,
+                                    shadowOffsetY: 0,
+                                    shadowColor: 'rgba(0, 0, 0, 0.3)'
+                                }
+                            },
+                            data: themeScatterData.dataGZ
+                        },{
+                            name: '网易新闻',
+                            type: 'scatter',
+                            itemStyle: {
+                                normal: {
+                                    opacity: 0.8,
+                                    shadowBlur: 10,
+                                    shadowOffsetX: 0,
+                                    shadowOffsetY: 0,
+                                    shadowColor: 'rgba(0, 0, 0, 0.3)'
+                                }
+                            },
+                            data: themeScatterData.dataWeb
+                        }, {
+                            name: '阿里影业',
+                            type: 'scatter',
+                            itemStyle: {
+                                normal: {
+                                    opacity: 0.8,
+                                    shadowBlur: 10,
+                                    shadowOffsetX: 0,
+                                    shadowOffsetY: 0,
+                                    shadowColor: 'rgba(0, 0, 0, 0.3)'
+                                }
+                            },
+                            data: themeScatterData.dataClient
+                        }
+                    ]
+                },
+                themeScatterLoading: false,
 
                 themeBestOption: {
                     title: _.extend({}, Chart.title, {text: words.topics, left: 10, top: 20}),

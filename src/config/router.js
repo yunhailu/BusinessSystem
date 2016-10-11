@@ -3,6 +3,13 @@
  */
 
 module.exports = {
+    '/': {
+        name: 'home',
+        auth: true,
+        component (resolve) {
+            require(['../components/Home/Home.vue'], resolve);
+        }
+    },
     '/home': {
         name: 'home',
         auth: true,
