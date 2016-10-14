@@ -17,6 +17,8 @@ export const en = {
         analyticsDec: "Search and Analyze your data stream instantly",
         dashboard: "Dashboard",
         dashboardDec: "Build custom dashboards with the KPIs of your choice",
+        compare: "Compare",
+        compareDec: "Compare",
         reports: "Reports & Alerts",
         reportsDec: "Create, send and schedule customised reports",
         setting: "Setting",

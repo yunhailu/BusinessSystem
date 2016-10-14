@@ -4,7 +4,7 @@
 		<div class="home-panel-wrap">
 			<div class="container">
 				<ul class="home-panel-wrap-list row">
-					<li class="home-panel-wrap-list-item col-md-4"  v-for="item in items">
+					<li class="home-panel-wrap-list-item col-md-3"  v-for="item in items">
 						<div class="home-panel-wrap-list-item-container">
 							<a v-link="item.link" class="home-panel-wrap-list-item-container-link">
 								<i class="fa fa-2x icon" :class="item.icon"></i>
@@ -73,6 +73,12 @@
 					dec: words.analyticsDec,
 					icon: "fa-line-chart",
 					link: {name: 'analytics'}
+				},{
+					id: "compare",
+					name: words.compare,
+					dec: words.compareDec,
+					icon: "fa-balance-scale",
+					link: {name: 'compare'}
 				},{
 					id: "reports",
 					name: words.reports,
