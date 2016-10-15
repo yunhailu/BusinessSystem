@@ -9,16 +9,16 @@
         </div>
         <div class="row">
             <div class="col-md-9 hot-sentiment">
-                <card-panel :title="words.sentiment">
+                <card-panel :title="words.sentiment | title">
                     <div v-echarts="sentimentOption" :loading="sentimentLoading" class="hot-sentiment-pie" theme=""></div><!--infographic,macarons-->
                 </card-panel>
             </div>
             <div class="col-md-3 hot-ranking">
                 <card-panel :title="words.hotsRanking">
                     <ul class="hot-ranking-list">
-                        <li v-for="item in hotsRanking"  class="hot-ranking-list-item">
+                        <li v-for="item in hotsRanking"  class="hot-ranking-list-item" @click="showDetail(item);">
                             <span class="hot-ranking-list-item-index">{{ ($index + 1) }}</span>
-                            <span class="hot-ranking-list-item-text">{{item.text}}</span>
+                            <span class="hot-ranking-list-item-text">{{item.name}}</span>
                         </li>
                     </ul>
                 </card-panel>
@@ -26,14 +26,14 @@
         </div>
         <div class="row">
             <div class="col-md-9 hot-words">
-                <card-panel :title="words.wordsRanking">
+                <card-panel :title="words.wordsRanking | title">
                     <div v-echarts="hotWordsOption" :loading="hotWordsLoading" class="hot-words-cloud" ></div>
                 </card-panel>
             </div>
             <div class="col-md-3 hot-today">
                 <card-panel :title="words.todayHotsRanking">
                     <ul class="hot-today-list">
-                        <li v-for="item in hotsTodayRanking"  class="hot-today-list-item">
+                        <li v-for="item in hotsTodayRanking"  class="hot-today-list-item" @click="showDetail(item);">
                             <span class="hot-today-list-item-index">{{ ($index + 1) }}</span>
                             <span class="hot-today-list-item-text">{{item.name}}</span>
                         </li>
@@ -61,6 +61,11 @@
             const common = Local().common;
             return{
                 words, common,
+                activeHot: {
+                    name: "",
+                    id: ""
+                },
+                // 热点情绪占比
                 sentimentOption: {
                     title: _.extend({}, Pie.title, { show: false}),
                     tooltip: _.extend({}, Pie.tooltip),
@@ -78,7 +83,7 @@
                         center: ['30%', '50%'],
                         //roseType : 'area',
                         data:[
-                            {value:43, name: common.happy}, {value: 78, name: common.anger}, {value: 123, name: common.sorrow}, {value: 234, name: common.disgust}, {value: 345, name: common.fear}
+                            //{value:43, name: common.happy}, {value: 78, name: common.anger}, {value: 123, name: common.sorrow}, {value: 234, name: common.disgust}, {value: 345, name: common.fear}
                         ]
                     }), _.extend({}, Pie.series, {
                         name: words.sentiment,
@@ -86,20 +91,16 @@
                         center: ['70%', '50%'],
                         roseType : 'radius',
                         data:[
-                            {value:43, name: common.happy}, {value: 78, name: common.anger}, {value: 123, name: common.sorrow}, {value: 234, name: common.disgust}, {value: 345, name: common.fear}
+                            //{value:43, name: common.happy}, {value: 78, name: common.anger}, {value: 123, name: common.sorrow}, {value: 234, name: common.disgust}, {value: 345, name: common.fear}
                         ]
                     })]
                 },
                 sentimentLoading: false,
 
-                hotsRanking: [
-                    {id: "123", text: "不算_否认_路虎"},
-                    {id: "345", text: "冯绍峰_力拔山兮_项羽, 冯绍峰_力拔山兮_项羽"},
-                    {id: "456", text: "那年_希腊_欧洲杯"},
-                    {id: "678", text: "王俊凯触电_长城"},
-                    {id: "890", text: "海选赛区_网红"}
-                ],
+                //实时热点排行
+                hotsRanking: [],
 
+                //热点字符云
                 hotWordsLoading: false,
                 hotWordsOption: {
                     tooltip: {},
@@ -133,157 +134,113 @@
                     }
                 },
 
+                //今日热点排行
                 hotsTodayRanking: [],
 
+                // 热点事件散点图
                 scatterOption: {
-                    tooltip: { position: 'top' },
-                    textStyle: {
-                        fontFamily: 'pingfang'
-                    },
-                    title: [{
-                        textBaseline: 'middle',
-                        top: '15%',
-                        text: "里约奥运会"
-                    },{
-                        textBaseline: 'middle',
-                        top: '40%',
-                        text: "南海问题"
-                    },{
-                        textBaseline: 'middle',
-                        top: '65%',
-                        text: "美国选举"
-                    },{
-                        textBaseline: 'middle',
-                        top: '90%',
-                        text: "货币战争"
-                    }],
-                    singleAxis: [{
-                        left: 150,
-                        type: 'category',
-                        boundaryGap: false,
-                        data: ['12a', '1a', '2a', '3a', '4a', '5a', '6a', '7a', '8a', '9a','10a','11a', '12p', '1p', '2p', '3p', '4p', '5p', '6p', '7p', '8p', '9p', '10p', '11p'],
-                        top: '10%',
-                        height: (100 / 7 - 10) + '%',
-                        axisLine: {
-                            lineStyle: {color: '#aaa'}
-                        },
-                        splitLine: {
-                            lineStyle: {type: 'dashed'}
-                        },
-                        axisLabel: {
-                            interval: 2
-                        }
-                    },{
-                        left: 150,
-                        type: 'category',
-                        boundaryGap: false,
-                        data: ['12a', '1a', '2a', '3a', '4a', '5a', '6a', '7a', '8a', '9a','10a','11a', '12p', '1p', '2p', '3p', '4p', '5p', '6p', '7p', '8p', '9p', '10p', '11p'],
-                        top: '35%',
-                        height: (100 / 7 - 10) + '%',
-                        axisLine: {
-                            lineStyle: {color: '#aaa'}
-                        },
-                        splitLine: {
-                            lineStyle: {type: 'dashed'}
-                        },
-                        axisLabel: {
-                            interval: 2
-                        }
-                    },{
-                        left: 150,
-                        type: 'category',
-                        boundaryGap: false,
-                        data: ['12a', '1a', '2a', '3a', '4a', '5a', '6a', '7a', '8a', '9a','10a','11a', '12p', '1p', '2p', '3p', '4p', '5p', '6p', '7p', '8p', '9p', '10p', '11p'],
-                        top: '60%',
-                        height: (100 / 7 - 10) + '%',
-                        axisLine: {
-                            lineStyle: {color: '#aaa'}
-                        },
-                        splitLine: {
-                            lineStyle: {type: 'dashed'}
-                        },
-                        axisLabel: {
-                            interval: 2
-                        }
-                    },{
-                        left: 150,
-                        type: 'category',
-                        boundaryGap: false,
-                        data: ['12a', '1a', '2a', '3a', '4a', '5a', '6a', '7a', '8a', '9a','10a','11a', '12p', '1p', '2p', '3p', '4p', '5p', '6p', '7p', '8p', '9p', '10p', '11p'],
-                        top: '80%',
-                        height: (100 / 5 - 10) + '%',
-                        axisLine: {
-                            lineStyle: {color: '#aaa'}
-                        },
-                        splitLine: {
-                            lineStyle: {type: 'dashed'}
-                        },
-                        axisLabel: {
-                            interval: 2
-                        }
-                    }],
-                    series: [{
-                        singleAxisIndex: 0,
-                        coordinateSystem: 'singleAxis',
-                        type: 'scatter',
-                        data: [[0,2],[1,4],[2,5],[3,6],[4,0],[5,0],[6,0],[7,0],[8,1],[9,2],[10,3],[11,2],[12,4],[13,3],[14,5],[15,4],[16,5],[17,6],[18,7],[19,7],[20,8],[21,7],[22,6],[23,5]],
-                        symbolSize: function (dataItem) {
-                            return dataItem[1] * 4;
-                        }
-                    },{
-                        singleAxisIndex: 1,
-                        coordinateSystem: 'singleAxis',
-                        type: 'scatter',
-                        data: [[0,13],[1,12],[2,7],[3,5],[4,0],[5,0],[6,0],[7,0],[8,0],[9,2],[10,2],[11,3],[12,4],[13,5],[14,6],[15,7],[16,8],[17,7],[18,9],[19,12],[20,15],[21,13],[22,15],[23,15]],
-                        symbolSize: function (dataItem) {
-                            return dataItem[1] * 4;
-                        }
-                    },{
-                        singleAxisIndex: 2,
-                        coordinateSystem: 'singleAxis',
-                        type: 'scatter',
-                        data: [[0,4],[1,2],[2,7],[3,5],[4,0],[5,0],[6,0],[7,0],[8,0],[9,2],[10,2],[11,3],[12,4],[13,5],[14,6],[15,7],[16,8],[17,7],[18,6],[19,7],[20,6],[21,4],[22,5],[23,3]],
-                        symbolSize: function (dataItem) {
-                            return dataItem[1] * 4;
-                        }
-                    },{
-                        singleAxisIndex: 3,
-                        coordinateSystem: 'singleAxis',
-                        type: 'scatter',
-                        data: [[0,2],[1,4],[2,5],[3,6],[4,0],[5,0],[6,0],[7,0],[8,1],[9,2],[10,3],[11,2],[12,4],[13,3],[14,5],[15,4],[16,5],[17,6],[18,7],[19,7],[20,8],[21,7],[22,6],[23,5]],
-                        symbolSize: function (dataItem) {
-                            return dataItem[1] * 4;
-                        }
-                    }]
+                    tooltip: { position: 'top', formatter(params, ticket, callback){
+                        //console.log(params);
+                        return `值: ${params.value[1]}`;
+                    }},
+                    textStyle: _.extend({}, Chart.textStyle),
+                    title: [],
+                    singleAxis: [],
+                    series: []
                 },
-                scatterLoading: false
+                scatterLoading: true
             }
         },
         methods: {
-            getWordCloud(){
-                return Api.getWordCloud({}).then(resp => {
-                    //console.log('getWordCloud',resp);
+            getHotRealtime(){
+                return Api.getHotRealtime({}).then(resp => {
+                    console.log('getHotRealtime', resp.data);
                     if(resp.data.code == 0){
-                        this.hotWordsLoading = false;
-                        this.hotWordsOption.series.data = resp.data.data;
+                        this.scatterLoading = false;
+                        const scatters = resp.data.data;
+                        if(scatters.length > 1){
+                            this.activeHot = { id: scatters[0].id, name: scatters[0].name };
+                        }
+                        this.showDetail(this.activeHot);
+                        this.scatterOption.title = _.map(scatters, (scatter, index) => {
+                            return ({
+                                textBaseline: 'middle',
+                                textStyle: {fontSize: 16},
+                                top: `${index * 20 + 10}%`,
+                                text: scatter.name
+                            });
+                        });
+                        this.scatterOption.singleAxis = _.map(scatters, (scatter, index) => {
+                            return ({
+                                left: 180,
+                                type: 'category',
+                                boundaryGap: false,
+                                data: _.map(scatter.data, item => item.time),
+                                top: `${4 + index * 20}%`,
+                                height: '10%',
+                                axisLine: {
+                                    lineStyle: {color: '#aaa'}
+                                },
+                                splitLine: {
+                                    lineStyle: {type: 'dashed'}
+                                },
+                                axisLabel: {
+                                    interval: 2
+                                }
+                            });
+                        });
+                        this.scatterOption.series = _.map(scatters, (scatter, index) => {
+                            return ({
+                                singleAxisIndex: index,
+                                coordinateSystem: 'singleAxis',
+                                type: 'scatter',
+                                data: _.map(scatter.data, (item, index) => [index, item.value]),
+                                symbolSize(dataItem) {
+                                    return dataItem[1] * 4;
+                                }
+                            });
+                        });
+                        this.hotsRanking = _.map(scatters, (scatter, index) => ({name: scatter.name, id: scatter.id}));
                     }
                 });
             },
-            getTodayWords(){
-                return Api.getWordCloud({}).then(resp => {
-                    //console.log('getWordCloud',resp);
+            getHotToday(){
+                Api.getHotToday({}).then(resp => {
+                    //console.log(resp.data);
                     if(resp.data.code == 0){
-                        this.hotsTodayRanking = _.filter(resp.data.data, (value, index) => {
-                            return index < 5;
-                        });
+                        this.hotsTodayRanking = _.map(resp.data.data, value => value);
                     }
-                    //console.log(this.hotsTodayRanking);
+                });
+            },
+            showDetail(item){
+                const id = item.id;
+                Api.getHotDetail({id}).then(resp => {
+                    //.log(item, resp.data);
+                    if(resp.data.code == 0){
+                        this.hotWordsLoading = false;
+                        this.hotWordsOption.series.data = resp.data.data.words;
+                        this.sentimentOption.series = _.map(this.sentimentOption.series, value => {
+                            value.data = _.chain(resp.data.data.sentiment)
+                                    .map(item => {
+                                        return {value:item.value, name: this.common[item.key]}
+                                    }).
+                                    sortBy('value').value();
+                            return value;
+                        });
+                        this.activeHot = { id: item.id, name: item.name };
+                    }
                 });
             }
         },
+        filters: {
+            title(title){
+                const hot = this.activeHot.name;
+                return `${title} ( ${hot} )`;
+            }
+        },
         created(){
-            this.getWordCloud();
-            this.getTodayWords();
+            this.getHotRealtime();
+            this.getHotToday();
         },
         components:{ CardPanel }
     }

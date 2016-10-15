@@ -232,3 +232,45 @@ export const getDashboardDetail = params => {
         params
     });
 };
+
+/**
+ *  Encapsulate `实时热点事件（前5名）` interface
+ *
+ *  @param {String}
+ *
+ *  @return {Promise} With Get Hot Realtime.
+ */
+export const getHotRealtime = params => {
+    return Api.request({
+        url: `${myURI}/hot/realtime`,
+        params
+    });
+};
+
+/**
+ *  Encapsulate `今日热点排行` interface
+ *
+ *  @param {String}
+ *
+ *  @return {Promise} With Get Hot Today.
+ */
+export const getHotToday = params => {
+    return Api.request({
+        url: `${myURI}/hot/today`,
+        params
+    });
+};
+
+/**
+ *  Encapsulate `获取热点事件详情` interface
+ *
+ *  @param {String}
+ *
+ *  @return {Promise} With Get Hot Detail.
+ */
+export const getHotDetail = params => {
+    return Api.request({
+        url: `${myURI}/hot/getDetail`,
+        params
+    });
+};
