@@ -277,7 +277,7 @@
                             return index < 5;
                         });
                     }
-                    console.log(this.hotsTodayRanking);
+                    //console.log(this.hotsTodayRanking);
                 });
             }
         },

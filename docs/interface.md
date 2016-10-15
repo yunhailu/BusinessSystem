@@ -1,3 +1,86 @@
+### 一、主页
+##### 1.实时热点事件（前5名）
+- hot/realtime
+- 入参：
+```
+{
+    code: 0,
+    data: [{
+        id: "1234123",
+        name: "里约奥运会",
+        data: [{
+            date: "0:00",   //时间
+            value: 2   //关注值，没有就为0
+        },{
+            date: "1:00",
+            value: 0
+        }]
+    },{
+        id: "12341212",
+        name: "南海问题",
+        data: [{
+            date: "0:00",
+            value: 2
+        }]
+    }]
+}
+```
+
+##### 2.今日热点排行
+- hot/today
+- 入参：
+```
+{
+	code: 0,
+	data: [{
+		id: "1232",
+		name: "柳叶刀"
+	},{
+		id: "1222",
+		name: "里约奥运会"
+	}]
+}
+```
+
+##### 3.获取热点事件详情
+- hot/getDetail
+- 入参：id
+```
+{
+	code: 0,
+	data: {
+		sentiment: [{
+			key: "happy",
+			value: 50
+		},{
+			key: "sorrow",
+			value: 20
+		},{
+			key: "anger",
+			value: 12
+		},{
+			key: "disgust",
+			value: 5
+		},{
+			key: "fear",
+			value: 32
+		}],
+		words: [{
+			id: "2123",
+			value: 523,
+			name: "阿拉希"
+		},{
+			id: "9821",
+			value: 843,
+			name: "网易新闻"
+		}]
+	}
+}
+```
+
+
+### 二、数据分析
+##### 1.信息汇总
 -  summary/detail
 ```
 {
@@ -16,6 +99,7 @@
 }
 ```
 
+##### 2.获取事件详细列表
 -  summary/commentList
 ````
 {
@@ -48,6 +132,7 @@
 }
 ```
 
+##### 3.获取情绪详情
 -  sentiment/detail
 ```
 {
@@ -76,6 +161,7 @@
 }
 ```
 
+##### 4.获取影响力列表信息
 -  influence/list
 ```
 //待确认
@@ -99,6 +185,7 @@
 }
 ```
 
+##### 5.获取最受欢迎的影响力
 -  influence/popularList		
 ```
 //待确认
@@ -115,6 +202,7 @@
 }
 ```
 
+##### 6.获取主题分析的字符云
 -  theme/wordcloud
 ```
 {
@@ -126,6 +214,7 @@
 }
 ```
 
+##### 7.获取主题关键词比率排行（前5位）
 -  theme/trendlist		
 ```
 //待确认
@@ -144,11 +233,12 @@
 }
 ```
 
+##### 8.获取主题详情数据（line图）
 -  theme/detail
 ```
 {
     code: 0,
-    data: [
+    data: [{
         "date": "2016-08-21:12"
         "values": [{
             "name": "韩寒",
@@ -166,8 +256,86 @@
             "name": "柳叶刀",
             "value": 8
         }]
-    ]
+    }]
 }
 ```
 
+##### 9.获取数据源文章数、点赞数、转发数、评论数
+- 入参：source
+- theme/getTopData
+```
+{
+	code: 0,
+	data: [{
+		id: "123321",
+		name: "南海问题",
+		data:[{
+			date:"2016-10-03",
+			article: 347,
+			comment: 201,
+			resend: 53,
+			like: 234
+		}]
+	}]
+}
+```
+
+##### 10.获取主题排行（前20）
+- theme/best
+```
+{
+	code: 0,
+	data: [{
+		id: 495, 
+		name: "韩寒", 
+		value: 69294
+	}]
+}
+```
+
+### 三、数据对比
 -  compare/sentiment(是3)
+
+### 四、监测设置
+##### 1.获取话题列表
+- topic/list
+```
+{
+	code: 0,
+	data: [{
+		group_id: 2, 
+		group_name: "机构", 
+		list: [{
+			topic_id: 30, 
+			topic_name: "优步"
+		}]
+	}]
+}
+```
+
+##### 2.添加话题
+- topic/add
+- 入参：name, group_id
+```
+{
+	code: 0,
+	data: {
+		topic_id:33
+	},
+	message: "success"
+}
+```
+
+
+##### 3.删除话题
+- topic/delete
+- 入参 id
+```
+{
+	code: 0,
+	data: {
+		success: 1
+	},
+	message: "success"
+}
+```

@@ -85,7 +85,7 @@ export const topicAdd = params => {
 };
 
 /**
- *  Encapsulate `topic add` interface
+ *  Encapsulate `topic delete` interface
  *
  *  @param {String} id
  *
