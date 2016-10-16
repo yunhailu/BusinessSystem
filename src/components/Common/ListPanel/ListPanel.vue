@@ -11,7 +11,6 @@
                     <a class="btn btn-default list-panel-tools-filter-item" href="javascript:void(0);" @click="filterItem(15)" :class="[filterActive == 15 ? 'active' : '']">15</a>
                     <a class="btn btn-default list-panel-tools-filter-item" href="javascript:void(0);" @click="filterItem(20)" :class="[filterActive == 20 ? 'active' : '']">20</a>
                 </div>
-
             </div>
             <!--<div class="col-md-4">-->
             <!--<i class="fa fa-th-large"></i>-->
@@ -27,7 +26,16 @@
                         <div class="list-panel-list-item-left-con">
                             <div class="title">{{{item.title}}}</div>
                             <div class="detail">{{{item.content}}}</div>
+                            <div class="source"> {{item.from}} </div>
                             <div class="time">发布于 {{item.pDate}}</div>
+                            <div class="data">
+                                <div class="item" v-if="item.count.likeCount"><i class="fa fa-thumbs-up icon"></i> <span>{{item.count.likeCount}}</span></div>
+                                <div class="item" v-if="item.count.fansCount"><i class="fa fa-user icon"></i> <span>{{item.count.fansCount}}</span></div>
+                                <div class="item" v-if="item.count.viewCount"><i class="fa fa-eye icon"></i> <span>{{item.count.viewCount}}</span></div>
+                                <div class="item" v-if="item.count.shareCount"><i class="fa fa-share icon"></i> <span>{{item.count.shareCount}}</span></div>
+                                <div class="item" v-if="item.count.commentsCount"><i class="fa fa-commenting icon"></i> <span>{{item.count.commentsCount}}</span></div>
+                                <div class="item" v-if="item.count.followCount"><i class="fa fa-plus icon"></i> <span>{{item.count.followCount}}</span></div>
+                            </div>
                         </div>
                     </div>
                     <div class="list-panel-list-item-right col-md-4">
@@ -38,14 +46,17 @@
                                 <div class="col-md-9">优步Ubar</div>
                             </div>
                             <div class="row">
-                                <div class="col-md-3 title">指标</div>
-                                <div class="col-md-3"><i class="fa fa-wechat"></i> 12</div>
-                                <div class="col-md-3"><i class="fa fa-weibo"></i> 14</div>
-                                <div class="col-md-3"><i class="fa fa-internet-explorer"></i> 14</div>
+                                <div class="col-md-4 "><i class="fa fa-flag positive"></i> Positive</div>
+                                <div class="col-md-4 "><i class="fa fa-flag negative"></i> Negative</div>
+                                <div class="col-md-4 "><i class="fa fa-flag neutral"></i> Neutral</div>
+                                <!--<div class="col-md-3 title">指标</div>-->
+                                <!--<div class="col-md-3"><i class="fa fa-wechat"></i> 12</div>-->
+                                <!--<div class="col-md-3"><i class="fa fa-weibo"></i> 14</div>-->
+                                <!--<div class="col-md-3"><i class="fa fa-internet-explorer"></i> 14</div>-->
                             </div>
                             <div class="row">
-                                <div class="col-md-3 col-md-offset-3"><i class="fa fa-eye"></i> {{item.viewCount}}</div>
-                                <div class="col-md-3"><i class="fa fa-thumbs-up"></i> {{item.likeCount}}</div>
+                                <!--<div class="col-md-3 col-md-offset-3"><i class="fa fa-eye"></i> {{item.viewCount}}</div>-->
+                                <!--<div class="col-md-3"><i class="fa fa-thumbs-up"></i> {{item.likeCount}}</div>-->
                             </div>
                         </div>
                     </div>

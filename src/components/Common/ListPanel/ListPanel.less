@@ -27,8 +27,17 @@
         &-con{
           .mg(0 0 0 2.6rem);
           .title{ .c(@body-theme);  .h(2.4rem);  .lh(2.4rem);  .f(1.4rem);  .ff("pingfang-bold");  .text-hidden();  }
-          .detail{ .text-num-hidden(2); .ff("pingfang-bold");   }
-          .time{ .pd(0.5rem 0); }
+          .detail{ /*.text-num-hidden(2);*/ .ff("pingfang-bold"); .text-hidden();   }
+          .data{
+            .disIB();  .vm();  .pd(0 0 0 2rem);
+            .item{
+              .w(5rem);  .disIB(); .pd(0.5rem 0 0);
+              .icon{ .vm();  .mg(0);  .f(1.2rem); .lh(2rem); }
+              span{ .vm(); .f(1.2rem); .lh(1.8rem); .pd(0 0.5rem); }
+            }
+          }
+          .time{ .pd(0.5rem 0 0); .disIB(); .vm(); }
+          .source{ .pd(0.5rem 0.5rem 0); .disIB(); .vm(); }
         }
       }
       &-right{
@@ -47,6 +56,9 @@
           .row{
             .mg(0.7rem 0 0);  .f(1.4rem);
             .title{ .ff(pingfang-bold);  .fw(600); }
+            .positive{ .c(@flag-green);  .b(0.1rem solid #dedede); .pd(0.3rem); }
+            .negative{ .c(@flag-red);  .b(0.1rem solid #dedede); .pd(0.3rem); }
+            .neutral{ .c(@flag-yellow);  .b(0.1rem solid #dedede); .pd(0.3rem); }
           }
         }
 
