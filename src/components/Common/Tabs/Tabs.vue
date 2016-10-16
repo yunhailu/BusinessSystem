@@ -1,4 +1,10 @@
 <template>
+    <div class="add-dashboard">
+        <div class="add-dashboard-btn" @click="showAdd();">
+            <i class="fa fa-plus"></i>
+            <span>{{words.addDashboard}}</span>
+        </div>
+    </div>
     <ul class="row tabs">
         <li v-for="tab in tabs" class="tab" :class="[tab.link == $route.name ? 'active' : '']" >
             <a v-link="{name: tab.link}">{{tab.name}}</a>
@@ -14,20 +20,24 @@
             <span class="con">{{item}}</span>
         </li>
     </ul>
+    <add-dashboard :visiable.sync="showDashboard"></add-dashboard>
 </template>
 <style lang="less" scoped>
     @import "Tabs.less";
 </style>
-<script>
+<script type="text/ecmascript-6">
 //    import HeaderComponent from './components/header.vue'
 //    import OtherComponent from './components/other.vue'
     import Local from '../../../local/local';
+    import AddDashboard from '../../AddDashboard/AddDashboard.vue'
 
     export default{
         props: ['active', 'actions', 'sourceactive'],
         data(){
             const words = Local().analytics;
             return{
+                words,
+                showDashboard: false,
                 tabs: [{
                     name: words.tabs[0],
                     link: 'result'
@@ -65,6 +75,9 @@
                 console.log(val, idx);
                 this.sourceActive = idx;
                 this.actions && this.actions(val, idx);
+            },
+            showAdd(){
+                this.showDashboard = true;
             }
         },
 //        created(){
@@ -72,7 +85,7 @@
 //            this.actions && this.actions("总数", sourceActive);
 //        },
         components:{
-
+            AddDashboard
         }
     }
 </script>

@@ -27,6 +27,8 @@
         <i class="fa fa-spinner fa-spin fa-3x"></i>
         <span class="loadingContent">{{tipsparam.content | defaultValue '载入中...'}}</span>
     </div>
+
+    <div class="zz-tips-dialog" v-if="tipsparam.type=='dialog'"><slot></slot></div>
   </div>
 
   <div class="zz-tips-slide" v-if="visible && tipsparam.type=='slide'" :class="[slide ? 'zz-tips-' + slide : '']" :transition="transitionName">

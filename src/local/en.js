@@ -34,7 +34,8 @@ export const en = {
     analytics: {
         tabs: ["Results", "Sentiment", "Comment", "Influencers", "Theme"],
         filters: ["All", "Sentiment", "Countries", "Gender", "Languages"],
-        source: ["All", "WeChat", "Weibo", "Client", "Platforms", "Oversea"]
+        source: ["All", "WeChat", "Weibo", "Client", "Platforms", "Oversea"],
+        addDashboard: "Add Dashboard"
     },
     comment: {
         comment: "Comments",

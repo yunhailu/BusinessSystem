@@ -39,8 +39,8 @@
                         <div class="list-panel-list-item-left-con">
                             <div class="title">{{{item.title}}}</div>
                             <div class="detail">{{{item.content}}}</div>
-                            <div class="source"> {{item.from}} </div>
-                            <div class="time">发布于 {{item.pDate}}</div>
+                            <!--<div class="source"> {{item.from}} </div>-->
+                            <!--<div class="time">发布于 {{item.pDate}}</div>-->
                             <div class="data">
                                 <div class="item" v-if="item.likeCount" ><i class="fa fa-thumbs-up icon"></i> <span>{{item.likeCount}}</span></div>
                                 <div class="item" v-if="item.fansCount"><i class="fa fa-user icon"></i> <span>{{item.fansCount}}</span></div>
@@ -56,13 +56,23 @@
                         <div class="item-data">
                             <div class="row">
                                 <div class="col-md-3 title">匹配</div>
-                                <div class="col-md-9">优步Ubar</div>
+                                <div class="col-md-9 time">优步Ubar</div>
                             </div>
                             <div class="row">
-                                <div class="col-md-4" :class="[item.sentiment == 'positive' ? 'active': '']"><i class="fa fa-flag positive"></i> {{words.positive}}</div>
-                                <div class="col-md-4" :class="[item.sentiment == 'negative' ? 'active': '']"><i class="fa fa-flag negative"></i> {{words.negative}}</div>
-                                <div class="col-md-4" :class="[item.sentiment == 'neutral' ? 'active': '']"><i class="fa fa-flag neutral"></i> {{words.neutral}}</div>
+                                <div class="col-md-3 title">发布于</div>
+                                <div class="col-md-9 time">{{item.pDate}}</div>
                             </div>
+                            <div class="row">
+                                <div class="col-md-3 title">来源</div>
+                                <div class="col-md-9 time">消费者报</div>
+                            </div>
+
+                            <!--<div class="row">-->
+                                <!--<div class="col-md-4" :class="[item.sentiment == 'positive' ? 'active': '']"><i class="fa fa-flag positive"></i> {{words.positive}}</div>-->
+                                <!--<div class="col-md-4" :class="[item.sentiment == 'negative' ? 'active': '']"><i class="fa fa-flag negative"></i> {{words.negative}}</div>-->
+                                <!--<div class="col-md-4" :class="[item.sentiment == 'neutral' ? 'active': '']"><i class="fa fa-flag neutral"></i> {{words.neutral}}</div>-->
+                            <!--</div>-->
+
                         </div>
                     </div>
                 </a>
