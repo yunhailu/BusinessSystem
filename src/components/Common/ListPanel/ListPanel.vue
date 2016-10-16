@@ -39,16 +39,16 @@
                         </div>
                     </div>
                     <div class="list-panel-list-item-right col-md-4">
-                        <i class="fa fa-flag fa-2x icon"></i>
+                        <i class="fa fa-flag fa-2x icon" :class="item.sentiment | sentiment"></i>
                         <div class="item-data">
                             <div class="row">
                                 <div class="col-md-3 title">匹配</div>
                                 <div class="col-md-9">优步Ubar</div>
                             </div>
                             <div class="row">
-                                <div class="col-md-4 "><i class="fa fa-flag positive"></i> {{words.positive}}</div>
-                                <div class="col-md-4 "><i class="fa fa-flag negative"></i> {{words.negative}}</div>
-                                <div class="col-md-4 "><i class="fa fa-flag neutral"></i> {{words.neutral}}</div>
+                                <div class="col-md-4" :class="[item.sentiment == 'positive' ? 'active': '']"><i class="fa fa-flag positive"></i> {{words.positive}}</div>
+                                <div class="col-md-4" :class="[item.sentiment == 'negative' ? 'active': '']"><i class="fa fa-flag negative"></i> {{words.negative}}</div>
+                                <div class="col-md-4" :class="[item.sentiment == 'neutral' ? 'active': '']"><i class="fa fa-flag neutral"></i> {{words.neutral}}</div>
                             </div>
                         </div>
                     </div>
@@ -83,6 +83,26 @@
             filterItem(num){
                 this.filterActive = num;
                 this.tableList = _.filter(this.list, (item, index) => (index < num));
+            }
+        },
+        filters: {
+            sentiment(flag){
+                let f;
+                switch(flag){
+                    case "positive":
+                        f = "flag-green";
+                        break;
+                    case "negative":
+                        f = "flag-red";
+                        break;
+                    case "neutral":
+                        f = "flag-yellow";
+                        break;
+                    default:
+                        f = "flag-green";
+                        break;
+                }
+                return f;
             }
         },
         created(){

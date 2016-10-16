@@ -51,8 +51,15 @@
         .icon.flag-light-blue{ .c(@flag-light-blue); }
         .icon.flag-green{ .c(@flag-green); }
         .icon.flag-grey{ .c(@flag-grey); }
+        .icon.flag-red{ .c(@flag-red); }
         .item-data{
           .pd(0.8rem 0 );
+          .active{
+            .fw(bold);
+            .positive{.b(0.3rem solid #dedede);}
+            .negative{.b(0.3rem solid #dedede);}
+            .neutral{.b(0.3rem solid #dedede);}
+          }
           .row{
             .mg(0.7rem 0 0);  .f(1.4rem);
             .title{ .ff(pingfang-bold);  .fw(600); }
