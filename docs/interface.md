@@ -112,14 +112,12 @@
 		"pDate": "2016-08-27 18:06:00",
 		"id": "22b4dda636f0242468df1308aa77e1d1",
 		"sentiment": "positive || negative || neutral",  //待确认
-		"count": {		//待确认
-			"likeCount": 12,        //点赞数
-			"fansCount": 5,        //粉丝数
-			"viewCount": 10,        //阅读数
-			"shareCount": 20,        //转发数
-			"commentsCount": 14,        //评论数
-			"followCount": 32        //关注数
-		}
+        "likeCount": 12,        //点赞数
+        "fansCount": 5,        //粉丝数
+        "viewCount": 10,        //阅读数
+        "shareCount": 20,        //转发数
+        "commentsCount": 14,        //评论数
+        "followCount": 32        //关注数
 	}]
 }
 ```
