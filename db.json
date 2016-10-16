@@ -1524,53 +1524,28 @@
                 "values": [
                     {
                         "name": "韩寒",
-                        "value": 17
+                        "value": 12
                     },
                     {
                         "name": "网易新闻",
-                        "value": 3
+                        "value": 5
                     },
                     {
                         "name": "美国选举",
-                        "value": 46
+                        "value": 36
                     },
                     {
                         "name": "新浪微博",
-                        "value": 6
+                        "value": 25
                     },
                     {
                         "name": "柳叶刀",
-                        "value": 42
+                        "value": 29
                     }
                 ]
             },
             {
                 "date": "2016-08-21:14",
-                "values": [
-                    {
-                        "name": "韩寒",
-                        "value": 8
-                    },
-                    {
-                        "name": "网易新闻",
-                        "value": 6
-                    },
-                    {
-                        "name": "美国选举",
-                        "value": 3
-                    },
-                    {
-                        "name": "新浪微博",
-                        "value": 13
-                    },
-                    {
-                        "name": "柳叶刀",
-                        "value": 7
-                    }
-                ]
-            },
-            {
-                "date": "2016-08-21:15",
                 "values": [
                     {
                         "name": "韩寒",
@@ -1582,15 +1557,40 @@
                     },
                     {
                         "name": "美国选举",
-                        "value": 45
+                        "value": 22
                     },
                     {
                         "name": "新浪微博",
-                        "value": 27
+                        "value": 6
                     },
                     {
                         "name": "柳叶刀",
-                        "value": 44
+                        "value": 34
+                    }
+                ]
+            },
+            {
+                "date": "2016-08-21:15",
+                "values": [
+                    {
+                        "name": "韩寒",
+                        "value": 12
+                    },
+                    {
+                        "name": "网易新闻",
+                        "value": 1
+                    },
+                    {
+                        "name": "美国选举",
+                        "value": 0
+                    },
+                    {
+                        "name": "新浪微博",
+                        "value": 10
+                    },
+                    {
+                        "name": "柳叶刀",
+                        "value": 9
                     }
                 ]
             },
@@ -1599,23 +1599,23 @@
                 "values": [
                     {
                         "name": "韩寒",
-                        "value": 15
+                        "value": 1
                     },
                     {
                         "name": "网易新闻",
-                        "value": 4
+                        "value": 1
                     },
                     {
                         "name": "美国选举",
-                        "value": 41
+                        "value": 35
                     },
                     {
                         "name": "新浪微博",
-                        "value": 5
+                        "value": 16
                     },
                     {
                         "name": "柳叶刀",
-                        "value": 29
+                        "value": 55
                     }
                 ]
             },
@@ -1624,23 +1624,23 @@
                 "values": [
                     {
                         "name": "韩寒",
-                        "value": 19
+                        "value": 9
                     },
                     {
                         "name": "网易新闻",
-                        "value": 0
+                        "value": 2
                     },
                     {
                         "name": "美国选举",
-                        "value": 38
+                        "value": 31
                     },
                     {
                         "name": "新浪微博",
-                        "value": 28
+                        "value": 25
                     },
                     {
                         "name": "柳叶刀",
-                        "value": 14
+                        "value": 9
                     }
                 ]
             },
@@ -1649,23 +1649,23 @@
                 "values": [
                     {
                         "name": "韩寒",
-                        "value": 0
+                        "value": 16
                     },
                     {
                         "name": "网易新闻",
-                        "value": 0
+                        "value": 5
                     },
                     {
                         "name": "美国选举",
-                        "value": 18
+                        "value": 30
                     },
                     {
                         "name": "新浪微博",
-                        "value": 21
+                        "value": 28
                     },
                     {
                         "name": "柳叶刀",
-                        "value": 63
+                        "value": 21
                     }
                 ]
             },
@@ -1674,23 +1674,23 @@
                 "values": [
                     {
                         "name": "韩寒",
-                        "value": 6
+                        "value": 0
                     },
                     {
                         "name": "网易新闻",
-                        "value": 9
+                        "value": 2
                     },
                     {
                         "name": "美国选举",
-                        "value": 7
+                        "value": 46
                     },
                     {
                         "name": "新浪微博",
-                        "value": 15
+                        "value": 5
                     },
                     {
                         "name": "柳叶刀",
-                        "value": 26
+                        "value": 4
                     }
                 ]
             },
@@ -1699,7 +1699,7 @@
                 "values": [
                     {
                         "name": "韩寒",
-                        "value": 9
+                        "value": 3
                     },
                     {
                         "name": "网易新闻",
@@ -1707,15 +1707,15 @@
                     },
                     {
                         "name": "美国选举",
-                        "value": 8
+                        "value": 3
                     },
                     {
                         "name": "新浪微博",
-                        "value": 23
+                        "value": 25
                     },
                     {
                         "name": "柳叶刀",
-                        "value": 48
+                        "value": 50
                     }
                 ]
             },
@@ -1724,23 +1724,23 @@
                 "values": [
                     {
                         "name": "韩寒",
-                        "value": 0
+                        "value": 10
                     },
                     {
                         "name": "网易新闻",
-                        "value": 1
+                        "value": 6
                     },
                     {
                         "name": "美国选举",
-                        "value": 34
+                        "value": 3
                     },
                     {
                         "name": "新浪微博",
-                        "value": 20
+                        "value": 7
                     },
                     {
                         "name": "柳叶刀",
-                        "value": 52
+                        "value": 38
                     }
                 ]
             },
@@ -1753,19 +1753,19 @@
                     },
                     {
                         "name": "网易新闻",
-                        "value": 4
+                        "value": 9
                     },
                     {
                         "name": "美国选举",
-                        "value": 25
+                        "value": 10
                     },
                     {
                         "name": "新浪微博",
-                        "value": 1
+                        "value": 21
                     },
                     {
                         "name": "柳叶刀",
-                        "value": 52
+                        "value": 36
                     }
                 ]
             },
@@ -1774,23 +1774,23 @@
                 "values": [
                     {
                         "name": "韩寒",
-                        "value": 12
+                        "value": 10
                     },
                     {
                         "name": "网易新闻",
-                        "value": 4
+                        "value": 3
                     },
                     {
                         "name": "美国选举",
-                        "value": 17
+                        "value": 34
                     },
                     {
                         "name": "新浪微博",
-                        "value": 17
+                        "value": 27
                     },
                     {
                         "name": "柳叶刀",
-                        "value": 19
+                        "value": 20
                     }
                 ]
             },
@@ -1799,23 +1799,23 @@
                 "values": [
                     {
                         "name": "韩寒",
-                        "value": 14
+                        "value": 0
                     },
                     {
                         "name": "网易新闻",
-                        "value": 7
+                        "value": 0
                     },
                     {
                         "name": "美国选举",
-                        "value": 25
+                        "value": 21
                     },
                     {
                         "name": "新浪微博",
-                        "value": 28
+                        "value": 20
                     },
                     {
                         "name": "柳叶刀",
-                        "value": 48
+                        "value": 69
                     }
                 ]
             },
@@ -1824,23 +1824,23 @@
                 "values": [
                     {
                         "name": "韩寒",
-                        "value": 11
+                        "value": 3
                     },
                     {
                         "name": "网易新闻",
-                        "value": 7
+                        "value": 2
                     },
                     {
                         "name": "美国选举",
-                        "value": 4
+                        "value": 38
                     },
                     {
                         "name": "新浪微博",
-                        "value": 7
+                        "value": 22
                     },
                     {
                         "name": "柳叶刀",
-                        "value": 32
+                        "value": 7
                     }
                 ]
             },
@@ -1849,23 +1849,23 @@
                 "values": [
                     {
                         "name": "韩寒",
-                        "value": 11
-                    },
-                    {
-                        "name": "网易新闻",
-                        "value": 2
-                    },
-                    {
-                        "name": "美国选举",
-                        "value": 2
-                    },
-                    {
-                        "name": "新浪微博",
                         "value": 0
                     },
                     {
+                        "name": "网易新闻",
+                        "value": 3
+                    },
+                    {
+                        "name": "美国选举",
+                        "value": 27
+                    },
+                    {
+                        "name": "新浪微博",
+                        "value": 23
+                    },
+                    {
                         "name": "柳叶刀",
-                        "value": 41
+                        "value": 53
                     }
                 ]
             },
@@ -1874,23 +1874,23 @@
                 "values": [
                     {
                         "name": "韩寒",
-                        "value": 7
+                        "value": 8
                     },
                     {
                         "name": "网易新闻",
-                        "value": 4
-                    },
-                    {
-                        "name": "美国选举",
-                        "value": 33
-                    },
-                    {
-                        "name": "新浪微博",
                         "value": 1
                     },
                     {
+                        "name": "美国选举",
+                        "value": 25
+                    },
+                    {
+                        "name": "新浪微博",
+                        "value": 15
+                    },
+                    {
                         "name": "柳叶刀",
-                        "value": 32
+                        "value": 19
                     }
                 ]
             },
@@ -1899,23 +1899,23 @@
                 "values": [
                     {
                         "name": "韩寒",
-                        "value": 12
+                        "value": 9
                     },
                     {
                         "name": "网易新闻",
-                        "value": 2
+                        "value": 6
                     },
                     {
                         "name": "美国选举",
-                        "value": 24
+                        "value": 1
                     },
                     {
                         "name": "新浪微博",
-                        "value": 28
+                        "value": 8
                     },
                     {
                         "name": "柳叶刀",
-                        "value": 7
+                        "value": 43
                     }
                 ]
             },
@@ -1924,23 +1924,23 @@
                 "values": [
                     {
                         "name": "韩寒",
-                        "value": 9
-                    },
-                    {
-                        "name": "网易新闻",
                         "value": 1
                     },
                     {
+                        "name": "网易新闻",
+                        "value": 5
+                    },
+                    {
                         "name": "美国选举",
-                        "value": 14
+                        "value": 33
                     },
                     {
                         "name": "新浪微博",
-                        "value": 16
+                        "value": 25
                     },
                     {
                         "name": "柳叶刀",
-                        "value": 31
+                        "value": 37
                     }
                 ]
             },
@@ -1949,23 +1949,23 @@
                 "values": [
                     {
                         "name": "韩寒",
-                        "value": 19
+                        "value": 8
                     },
                     {
                         "name": "网易新闻",
-                        "value": 3
+                        "value": 1
                     },
                     {
                         "name": "美国选举",
-                        "value": 14
+                        "value": 29
                     },
                     {
                         "name": "新浪微博",
-                        "value": 0
+                        "value": 28
                     },
                     {
                         "name": "柳叶刀",
-                        "value": 50
+                        "value": 59
                     }
                 ]
             },
@@ -1974,23 +1974,23 @@
                 "values": [
                     {
                         "name": "韩寒",
-                        "value": 2
+                        "value": 6
                     },
                     {
                         "name": "网易新闻",
-                        "value": 4
+                        "value": 3
                     },
                     {
                         "name": "美国选举",
-                        "value": 0
+                        "value": 31
                     },
                     {
                         "name": "新浪微博",
-                        "value": 1
+                        "value": 18
                     },
                     {
                         "name": "柳叶刀",
-                        "value": 67
+                        "value": 2
                     }
                 ]
             },
@@ -1999,23 +1999,23 @@
                 "values": [
                     {
                         "name": "韩寒",
-                        "value": 0
+                        "value": 16
                     },
                     {
                         "name": "网易新闻",
-                        "value": 2
+                        "value": 5
                     },
                     {
                         "name": "美国选举",
-                        "value": 2
+                        "value": 12
                     },
                     {
                         "name": "新浪微博",
-                        "value": 21
+                        "value": 3
                     },
                     {
                         "name": "柳叶刀",
-                        "value": 58
+                        "value": 14
                     }
                 ]
             },
@@ -2024,19 +2024,19 @@
                 "values": [
                     {
                         "name": "韩寒",
-                        "value": 2
+                        "value": 18
                     },
                     {
                         "name": "网易新闻",
-                        "value": 1
+                        "value": 8
                     },
                     {
                         "name": "美国选举",
-                        "value": 7
+                        "value": 24
                     },
                     {
                         "name": "新浪微博",
-                        "value": 22
+                        "value": 0
                     },
                     {
                         "name": "柳叶刀",
@@ -2049,23 +2049,23 @@
                 "values": [
                     {
                         "name": "韩寒",
-                        "value": 9
-                    },
-                    {
-                        "name": "网易新闻",
                         "value": 3
                     },
                     {
+                        "name": "网易新闻",
+                        "value": 4
+                    },
+                    {
                         "name": "美国选举",
-                        "value": 13
+                        "value": 37
                     },
                     {
                         "name": "新浪微博",
-                        "value": 29
+                        "value": 15
                     },
                     {
                         "name": "柳叶刀",
-                        "value": 40
+                        "value": 31
                     }
                 ]
             },
@@ -2074,7 +2074,7 @@
                 "values": [
                     {
                         "name": "韩寒",
-                        "value": 5
+                        "value": 3
                     },
                     {
                         "name": "网易新闻",
@@ -2082,15 +2082,15 @@
                     },
                     {
                         "name": "美国选举",
-                        "value": 27
+                        "value": 9
                     },
                     {
                         "name": "新浪微博",
-                        "value": 12
+                        "value": 28
                     },
                     {
                         "name": "柳叶刀",
-                        "value": 45
+                        "value": 4
                     }
                 ]
             },
@@ -2107,15 +2107,15 @@
                     },
                     {
                         "name": "美国选举",
-                        "value": 6
+                        "value": 9
                     },
                     {
                         "name": "新浪微博",
-                        "value": 27
+                        "value": 26
                     },
                     {
                         "name": "柳叶刀",
-                        "value": 59
+                        "value": 11
                     }
                 ]
             },
@@ -2124,11 +2124,11 @@
                 "values": [
                     {
                         "name": "韩寒",
-                        "value": 9
+                        "value": 7
                     },
                     {
                         "name": "网易新闻",
-                        "value": 2
+                        "value": 8
                     },
                     {
                         "name": "美国选举",
@@ -2140,7 +2140,7 @@
                     },
                     {
                         "name": "柳叶刀",
-                        "value": 43
+                        "value": 9
                     }
                 ]
             },
@@ -2149,23 +2149,23 @@
                 "values": [
                     {
                         "name": "韩寒",
-                        "value": 11
-                    },
-                    {
-                        "name": "网易新闻",
                         "value": 1
                     },
                     {
+                        "name": "网易新闻",
+                        "value": 8
+                    },
+                    {
                         "name": "美国选举",
-                        "value": 17
+                        "value": 40
                     },
                     {
                         "name": "新浪微博",
-                        "value": 13
+                        "value": 2
                     },
                     {
                         "name": "柳叶刀",
-                        "value": 62
+                        "value": 28
                     }
                 ]
             },
@@ -2174,23 +2174,23 @@
                 "values": [
                     {
                         "name": "韩寒",
-                        "value": 8
+                        "value": 17
                     },
                     {
                         "name": "网易新闻",
-                        "value": 9
+                        "value": 7
                     },
                     {
                         "name": "美国选举",
-                        "value": 10
+                        "value": 47
                     },
                     {
                         "name": "新浪微博",
-                        "value": 6
+                        "value": 28
                     },
                     {
                         "name": "柳叶刀",
-                        "value": 47
+                        "value": 43
                     }
                 ]
             },
@@ -2199,23 +2199,23 @@
                 "values": [
                     {
                         "name": "韩寒",
-                        "value": 14
+                        "value": 5
                     },
                     {
                         "name": "网易新闻",
-                        "value": 0
+                        "value": 6
                     },
                     {
                         "name": "美国选举",
-                        "value": 0
+                        "value": 9
                     },
                     {
                         "name": "新浪微博",
-                        "value": 25
+                        "value": 9
                     },
                     {
                         "name": "柳叶刀",
-                        "value": 35
+                        "value": 51
                     }
                 ]
             },
@@ -2228,99 +2228,24 @@
                     },
                     {
                         "name": "网易新闻",
-                        "value": 6
+                        "value": 2
                     },
                     {
                         "name": "美国选举",
-                        "value": 42
+                        "value": 29
                     },
                     {
                         "name": "新浪微博",
-                        "value": 25
+                        "value": 22
                     },
                     {
                         "name": "柳叶刀",
-                        "value": 2
+                        "value": 41
                     }
                 ]
             },
             {
                 "date": "2016-08-23:06",
-                "values": [
-                    {
-                        "name": "韩寒",
-                        "value": 1
-                    },
-                    {
-                        "name": "网易新闻",
-                        "value": 3
-                    },
-                    {
-                        "name": "美国选举",
-                        "value": 11
-                    },
-                    {
-                        "name": "新浪微博",
-                        "value": 28
-                    },
-                    {
-                        "name": "柳叶刀",
-                        "value": 68
-                    }
-                ]
-            },
-            {
-                "date": "2016-08-23:08",
-                "values": [
-                    {
-                        "name": "韩寒",
-                        "value": 19
-                    },
-                    {
-                        "name": "网易新闻",
-                        "value": 5
-                    },
-                    {
-                        "name": "美国选举",
-                        "value": 40
-                    },
-                    {
-                        "name": "新浪微博",
-                        "value": 16
-                    },
-                    {
-                        "name": "柳叶刀",
-                        "value": 61
-                    }
-                ]
-            },
-            {
-                "date": "2016-08-23:09",
-                "values": [
-                    {
-                        "name": "韩寒",
-                        "value": 18
-                    },
-                    {
-                        "name": "网易新闻",
-                        "value": 2
-                    },
-                    {
-                        "name": "美国选举",
-                        "value": 17
-                    },
-                    {
-                        "name": "新浪微博",
-                        "value": 18
-                    },
-                    {
-                        "name": "柳叶刀",
-                        "value": 51
-                    }
-                ]
-            },
-            {
-                "date": "2016-08-23:10",
                 "values": [
                     {
                         "name": "韩寒",
@@ -2332,7 +2257,57 @@
                     },
                     {
                         "name": "美国选举",
+                        "value": 41
+                    },
+                    {
+                        "name": "新浪微博",
+                        "value": 19
+                    },
+                    {
+                        "name": "柳叶刀",
+                        "value": 6
+                    }
+                ]
+            },
+            {
+                "date": "2016-08-23:08",
+                "values": [
+                    {
+                        "name": "韩寒",
+                        "value": 11
+                    },
+                    {
+                        "name": "网易新闻",
+                        "value": 8
+                    },
+                    {
+                        "name": "美国选举",
                         "value": 31
+                    },
+                    {
+                        "name": "新浪微博",
+                        "value": 29
+                    },
+                    {
+                        "name": "柳叶刀",
+                        "value": 53
+                    }
+                ]
+            },
+            {
+                "date": "2016-08-23:09",
+                "values": [
+                    {
+                        "name": "韩寒",
+                        "value": 19
+                    },
+                    {
+                        "name": "网易新闻",
+                        "value": 9
+                    },
+                    {
+                        "name": "美国选举",
+                        "value": 29
                     },
                     {
                         "name": "新浪微博",
@@ -2340,7 +2315,32 @@
                     },
                     {
                         "name": "柳叶刀",
-                        "value": 19
+                        "value": 26
+                    }
+                ]
+            },
+            {
+                "date": "2016-08-23:10",
+                "values": [
+                    {
+                        "name": "韩寒",
+                        "value": 9
+                    },
+                    {
+                        "name": "网易新闻",
+                        "value": 7
+                    },
+                    {
+                        "name": "美国选举",
+                        "value": 36
+                    },
+                    {
+                        "name": "新浪微博",
+                        "value": 28
+                    },
+                    {
+                        "name": "柳叶刀",
+                        "value": 15
                     }
                 ]
             },
@@ -2353,19 +2353,19 @@
                     },
                     {
                         "name": "网易新闻",
-                        "value": 0
+                        "value": 5
                     },
                     {
                         "name": "美国选举",
-                        "value": 13
+                        "value": 22
                     },
                     {
                         "name": "新浪微博",
-                        "value": 14
+                        "value": 17
                     },
                     {
                         "name": "柳叶刀",
-                        "value": 35
+                        "value": 57
                     }
                 ]
             },
@@ -2374,23 +2374,23 @@
                 "values": [
                     {
                         "name": "韩寒",
-                        "value": 1
+                        "value": 5
                     },
                     {
                         "name": "网易新闻",
-                        "value": 9
+                        "value": 5
                     },
                     {
                         "name": "美国选举",
-                        "value": 39
+                        "value": 47
                     },
                     {
                         "name": "新浪微博",
-                        "value": 17
+                        "value": 25
                     },
                     {
                         "name": "柳叶刀",
-                        "value": 51
+                        "value": 44
                     }
                 ]
             },
@@ -2399,23 +2399,23 @@
                 "values": [
                     {
                         "name": "韩寒",
-                        "value": 18
-                    },
-                    {
-                        "name": "网易新闻",
-                        "value": 3
-                    },
-                    {
-                        "name": "美国选举",
                         "value": 4
                     },
                     {
+                        "name": "网易新闻",
+                        "value": 5
+                    },
+                    {
+                        "name": "美国选举",
+                        "value": 23
+                    },
+                    {
                         "name": "新浪微博",
-                        "value": 18
+                        "value": 9
                     },
                     {
                         "name": "柳叶刀",
-                        "value": 14
+                        "value": 33
                     }
                 ]
             },
@@ -2424,23 +2424,23 @@
                 "values": [
                     {
                         "name": "韩寒",
-                        "value": 15
+                        "value": 7
                     },
                     {
                         "name": "网易新闻",
-                        "value": 3
+                        "value": 5
                     },
                     {
                         "name": "美国选举",
-                        "value": 38
+                        "value": 7
                     },
                     {
                         "name": "新浪微博",
-                        "value": 13
+                        "value": 15
                     },
                     {
                         "name": "柳叶刀",
-                        "value": 46
+                        "value": 47
                     }
                 ]
             },
@@ -2449,23 +2449,23 @@
                 "values": [
                     {
                         "name": "韩寒",
-                        "value": 16
+                        "value": 9
                     },
                     {
                         "name": "网易新闻",
-                        "value": 2
+                        "value": 5
                     },
                     {
                         "name": "美国选举",
-                        "value": 11
+                        "value": 17
                     },
                     {
                         "name": "新浪微博",
-                        "value": 28
+                        "value": 16
                     },
                     {
                         "name": "柳叶刀",
-                        "value": 67
+                        "value": 12
                     }
                 ]
             },
@@ -2474,23 +2474,23 @@
                 "values": [
                     {
                         "name": "韩寒",
-                        "value": 13
+                        "value": 19
                     },
                     {
                         "name": "网易新闻",
-                        "value": 0
+                        "value": 5
                     },
                     {
                         "name": "美国选举",
-                        "value": 8
+                        "value": 31
                     },
                     {
                         "name": "新浪微博",
-                        "value": 2
+                        "value": 28
                     },
                     {
                         "name": "柳叶刀",
-                        "value": 66
+                        "value": 23
                     }
                 ]
             },
@@ -2499,23 +2499,23 @@
                 "values": [
                     {
                         "name": "韩寒",
-                        "value": 3
+                        "value": 6
                     },
                     {
                         "name": "网易新闻",
-                        "value": 2
+                        "value": 5
                     },
                     {
                         "name": "美国选举",
-                        "value": 27
+                        "value": 7
                     },
                     {
                         "name": "新浪微博",
-                        "value": 23
+                        "value": 10
                     },
                     {
                         "name": "柳叶刀",
-                        "value": 35
+                        "value": 59
                     }
                 ]
             },
@@ -2524,23 +2524,23 @@
                 "values": [
                     {
                         "name": "韩寒",
-                        "value": 12
+                        "value": 4
                     },
                     {
                         "name": "网易新闻",
-                        "value": 0
+                        "value": 9
                     },
                     {
                         "name": "美国选举",
-                        "value": 37
+                        "value": 41
                     },
                     {
                         "name": "新浪微博",
-                        "value": 19
+                        "value": 17
                     },
                     {
                         "name": "柳叶刀",
-                        "value": 64
+                        "value": 18
                     }
                 ]
             },
@@ -2549,23 +2549,23 @@
                 "values": [
                     {
                         "name": "韩寒",
-                        "value": 2
+                        "value": 5
                     },
                     {
                         "name": "网易新闻",
-                        "value": 7
+                        "value": 2
                     },
                     {
                         "name": "美国选举",
-                        "value": 31
+                        "value": 28
                     },
                     {
                         "name": "新浪微博",
-                        "value": 20
+                        "value": 2
                     },
                     {
                         "name": "柳叶刀",
-                        "value": 38
+                        "value": 65
                     }
                 ]
             },
@@ -2574,7 +2574,7 @@
                 "values": [
                     {
                         "name": "韩寒",
-                        "value": 0
+                        "value": 8
                     },
                     {
                         "name": "网易新闻",
@@ -2582,15 +2582,15 @@
                     },
                     {
                         "name": "美国选举",
-                        "value": 13
+                        "value": 41
                     },
                     {
                         "name": "新浪微博",
-                        "value": 18
+                        "value": 2
                     },
                     {
                         "name": "柳叶刀",
-                        "value": 58
+                        "value": 18
                     }
                 ]
             },
@@ -2599,23 +2599,23 @@
                 "values": [
                     {
                         "name": "韩寒",
-                        "value": 9
+                        "value": 13
                     },
                     {
                         "name": "网易新闻",
-                        "value": 3
+                        "value": 9
                     },
                     {
                         "name": "美国选举",
-                        "value": 27
+                        "value": 12
                     },
                     {
                         "name": "新浪微博",
-                        "value": 22
+                        "value": 2
                     },
                     {
                         "name": "柳叶刀",
-                        "value": 41
+                        "value": 8
                     }
                 ]
             },
@@ -2624,11 +2624,11 @@
                 "values": [
                     {
                         "name": "韩寒",
-                        "value": 16
+                        "value": 9
                     },
                     {
                         "name": "网易新闻",
-                        "value": 4
+                        "value": 6
                     },
                     {
                         "name": "美国选举",
@@ -2636,11 +2636,11 @@
                     },
                     {
                         "name": "新浪微博",
-                        "value": 11
+                        "value": 20
                     },
                     {
                         "name": "柳叶刀",
-                        "value": 59
+                        "value": 42
                     }
                 ]
             },
@@ -2649,23 +2649,23 @@
                 "values": [
                     {
                         "name": "韩寒",
-                        "value": 9
+                        "value": 12
                     },
                     {
                         "name": "网易新闻",
-                        "value": 3
+                        "value": 5
                     },
                     {
                         "name": "美国选举",
-                        "value": 47
+                        "value": 9
                     },
                     {
                         "name": "新浪微博",
-                        "value": 10
+                        "value": 22
                     },
                     {
                         "name": "柳叶刀",
-                        "value": 40
+                        "value": 37
                     }
                 ]
             },
@@ -2674,23 +2674,23 @@
                 "values": [
                     {
                         "name": "韩寒",
-                        "value": 17
+                        "value": 6
                     },
                     {
                         "name": "网易新闻",
-                        "value": 4
+                        "value": 7
                     },
                     {
                         "name": "美国选举",
-                        "value": 23
+                        "value": 25
                     },
                     {
                         "name": "新浪微博",
-                        "value": 28
+                        "value": 16
                     },
                     {
                         "name": "柳叶刀",
-                        "value": 26
+                        "value": 28
                     }
                 ]
             },
@@ -2699,23 +2699,23 @@
                 "values": [
                     {
                         "name": "韩寒",
-                        "value": 1
+                        "value": 15
                     },
                     {
                         "name": "网易新闻",
-                        "value": 6
+                        "value": 0
                     },
                     {
                         "name": "美国选举",
-                        "value": 9
+                        "value": 6
                     },
                     {
                         "name": "新浪微博",
-                        "value": 11
+                        "value": 4
                     },
                     {
                         "name": "柳叶刀",
-                        "value": 18
+                        "value": 5
                     }
                 ]
             },
@@ -2724,23 +2724,23 @@
                 "values": [
                     {
                         "name": "韩寒",
-                        "value": 14
+                        "value": 9
                     },
                     {
                         "name": "网易新闻",
-                        "value": 1
+                        "value": 3
                     },
                     {
                         "name": "美国选举",
-                        "value": 11
+                        "value": 33
                     },
                     {
                         "name": "新浪微博",
-                        "value": 7
+                        "value": 23
                     },
                     {
                         "name": "柳叶刀",
-                        "value": 62
+                        "value": 42
                     }
                 ]
             },
@@ -2749,7 +2749,7 @@
                 "values": [
                     {
                         "name": "韩寒",
-                        "value": 9
+                        "value": 6
                     },
                     {
                         "name": "网易新闻",
@@ -2757,15 +2757,15 @@
                     },
                     {
                         "name": "美国选举",
-                        "value": 34
+                        "value": 6
                     },
                     {
                         "name": "新浪微博",
-                        "value": 22
+                        "value": 5
                     },
                     {
                         "name": "柳叶刀",
-                        "value": 49
+                        "value": 27
                     }
                 ]
             },
@@ -2774,23 +2774,23 @@
                 "values": [
                     {
                         "name": "韩寒",
-                        "value": 2
+                        "value": 12
                     },
                     {
                         "name": "网易新闻",
-                        "value": 9
+                        "value": 4
                     },
                     {
                         "name": "美国选举",
-                        "value": 47
+                        "value": 43
                     },
                     {
                         "name": "新浪微博",
-                        "value": 29
+                        "value": 6
                     },
                     {
                         "name": "柳叶刀",
-                        "value": 47
+                        "value": 31
                     }
                 ]
             },
@@ -2799,23 +2799,23 @@
                 "values": [
                     {
                         "name": "韩寒",
-                        "value": 7
-                    },
-                    {
-                        "name": "网易新闻",
                         "value": 0
                     },
                     {
-                        "name": "美国选举",
-                        "value": 2
+                        "name": "网易新闻",
+                        "value": 4
                     },
                     {
-                        "name": "新浪微博",
+                        "name": "美国选举",
                         "value": 26
                     },
                     {
+                        "name": "新浪微博",
+                        "value": 19
+                    },
+                    {
                         "name": "柳叶刀",
-                        "value": 38
+                        "value": 57
                     }
                 ]
             },
@@ -2824,23 +2824,23 @@
                 "values": [
                     {
                         "name": "韩寒",
-                        "value": 14
+                        "value": 8
                     },
                     {
                         "name": "网易新闻",
-                        "value": 4
+                        "value": 8
                     },
                     {
                         "name": "美国选举",
-                        "value": 10
+                        "value": 32
                     },
                     {
                         "name": "新浪微博",
-                        "value": 23
+                        "value": 22
                     },
                     {
                         "name": "柳叶刀",
-                        "value": 20
+                        "value": 13
                     }
                 ]
             },
@@ -2849,23 +2849,23 @@
                 "values": [
                     {
                         "name": "韩寒",
-                        "value": 9
+                        "value": 12
                     },
                     {
                         "name": "网易新闻",
-                        "value": 1
+                        "value": 7
                     },
                     {
                         "name": "美国选举",
-                        "value": 37
+                        "value": 17
                     },
                     {
                         "name": "新浪微博",
-                        "value": 20
+                        "value": 13
                     },
                     {
                         "name": "柳叶刀",
-                        "value": 12
+                        "value": 58
                     }
                 ]
             },
@@ -2874,15 +2874,15 @@
                 "values": [
                     {
                         "name": "韩寒",
-                        "value": 19
+                        "value": 9
                     },
                     {
                         "name": "网易新闻",
-                        "value": 6
+                        "value": 4
                     },
                     {
                         "name": "美国选举",
-                        "value": 31
+                        "value": 32
                     },
                     {
                         "name": "新浪微博",
@@ -2890,7 +2890,7 @@
                     },
                     {
                         "name": "柳叶刀",
-                        "value": 59
+                        "value": 50
                     }
                 ]
             },
@@ -2899,15 +2899,15 @@
                 "values": [
                     {
                         "name": "韩寒",
-                        "value": 16
+                        "value": 15
                     },
                     {
                         "name": "网易新闻",
-                        "value": 1
+                        "value": 8
                     },
                     {
                         "name": "美国选举",
-                        "value": 3
+                        "value": 7
                     },
                     {
                         "name": "新浪微博",
@@ -2915,7 +2915,7 @@
                     },
                     {
                         "name": "柳叶刀",
-                        "value": 9
+                        "value": 34
                     }
                 ]
             },
@@ -2924,23 +2924,23 @@
                 "values": [
                     {
                         "name": "韩寒",
-                        "value": 16
+                        "value": 17
                     },
                     {
                         "name": "网易新闻",
-                        "value": 2
+                        "value": 8
                     },
                     {
                         "name": "美国选举",
-                        "value": 33
+                        "value": 10
                     },
                     {
                         "name": "新浪微博",
-                        "value": 13
+                        "value": 19
                     },
                     {
                         "name": "柳叶刀",
-                        "value": 11
+                        "value": 31
                     }
                 ]
             },
@@ -2949,23 +2949,23 @@
                 "values": [
                     {
                         "name": "韩寒",
-                        "value": 9
+                        "value": 12
                     },
                     {
                         "name": "网易新闻",
-                        "value": 0
+                        "value": 6
                     },
                     {
                         "name": "美国选举",
-                        "value": 8
+                        "value": 18
                     },
                     {
                         "name": "新浪微博",
-                        "value": 15
+                        "value": 18
                     },
                     {
                         "name": "柳叶刀",
-                        "value": 15
+                        "value": 49
                     }
                 ]
             },
@@ -2978,19 +2978,19 @@
                     },
                     {
                         "name": "网易新闻",
-                        "value": 2
+                        "value": 3
                     },
                     {
                         "name": "美国选举",
-                        "value": 2
+                        "value": 8
                     },
                     {
                         "name": "新浪微博",
-                        "value": 7
+                        "value": 20
                     },
                     {
                         "name": "柳叶刀",
-                        "value": 69
+                        "value": 11
                     }
                 ]
             },
@@ -2999,23 +2999,23 @@
                 "values": [
                     {
                         "name": "韩寒",
-                        "value": 19
+                        "value": 16
                     },
                     {
                         "name": "网易新闻",
-                        "value": 3
+                        "value": 4
                     },
                     {
                         "name": "美国选举",
-                        "value": 37
+                        "value": 1
                     },
                     {
                         "name": "新浪微博",
-                        "value": 0
+                        "value": 14
                     },
                     {
                         "name": "柳叶刀",
-                        "value": 37
+                        "value": 51
                     }
                 ]
             },
@@ -3024,7 +3024,7 @@
                 "values": [
                     {
                         "name": "韩寒",
-                        "value": 10
+                        "value": 14
                     },
                     {
                         "name": "网易新闻",
@@ -3032,15 +3032,15 @@
                     },
                     {
                         "name": "美国选举",
-                        "value": 26
+                        "value": 16
                     },
                     {
                         "name": "新浪微博",
-                        "value": 9
+                        "value": 28
                     },
                     {
                         "name": "柳叶刀",
-                        "value": 40
+                        "value": 68
                     }
                 ]
             },
@@ -3049,23 +3049,23 @@
                 "values": [
                     {
                         "name": "韩寒",
-                        "value": 4
+                        "value": 15
                     },
                     {
                         "name": "网易新闻",
-                        "value": 8
+                        "value": 1
                     },
                     {
                         "name": "美国选举",
-                        "value": 13
+                        "value": 49
                     },
                     {
                         "name": "新浪微博",
-                        "value": 16
+                        "value": 28
                     },
                     {
                         "name": "柳叶刀",
-                        "value": 28
+                        "value": 65
                     }
                 ]
             },
@@ -3074,23 +3074,23 @@
                 "values": [
                     {
                         "name": "韩寒",
-                        "value": 10
+                        "value": 18
                     },
                     {
                         "name": "网易新闻",
-                        "value": 1
+                        "value": 2
                     },
                     {
                         "name": "美国选举",
-                        "value": 8
+                        "value": 20
                     },
                     {
                         "name": "新浪微博",
-                        "value": 29
+                        "value": 8
                     },
                     {
                         "name": "柳叶刀",
-                        "value": 15
+                        "value": 26
                     }
                 ]
             },
@@ -3099,23 +3099,23 @@
                 "values": [
                     {
                         "name": "韩寒",
-                        "value": 18
+                        "value": 16
                     },
                     {
                         "name": "网易新闻",
-                        "value": 4
+                        "value": 2
                     },
                     {
                         "name": "美国选举",
-                        "value": 30
+                        "value": 25
                     },
                     {
                         "name": "新浪微博",
-                        "value": 13
+                        "value": 15
                     },
                     {
                         "name": "柳叶刀",
-                        "value": 49
+                        "value": 27
                     }
                 ]
             },
@@ -3124,23 +3124,23 @@
                 "values": [
                     {
                         "name": "韩寒",
-                        "value": 16
+                        "value": 12
                     },
                     {
                         "name": "网易新闻",
-                        "value": 3
+                        "value": 8
                     },
                     {
                         "name": "美国选举",
-                        "value": 23
+                        "value": 16
                     },
                     {
                         "name": "新浪微博",
-                        "value": 0
+                        "value": 17
                     },
                     {
                         "name": "柳叶刀",
-                        "value": 12
+                        "value": 34
                     }
                 ]
             },
@@ -3149,23 +3149,23 @@
                 "values": [
                     {
                         "name": "韩寒",
-                        "value": 15
+                        "value": 7
                     },
                     {
                         "name": "网易新闻",
-                        "value": 5
-                    },
-                    {
-                        "name": "美国选举",
                         "value": 1
                     },
                     {
+                        "name": "美国选举",
+                        "value": 32
+                    },
+                    {
                         "name": "新浪微博",
-                        "value": 26
+                        "value": 9
                     },
                     {
                         "name": "柳叶刀",
-                        "value": 22
+                        "value": 51
                     }
                 ]
             },
@@ -3174,23 +3174,23 @@
                 "values": [
                     {
                         "name": "韩寒",
-                        "value": 6
+                        "value": 1
                     },
                     {
                         "name": "网易新闻",
-                        "value": 8
+                        "value": 3
                     },
                     {
                         "name": "美国选举",
-                        "value": 23
+                        "value": 6
                     },
                     {
                         "name": "新浪微博",
-                        "value": 17
+                        "value": 27
                     },
                     {
                         "name": "柳叶刀",
-                        "value": 3
+                        "value": 42
                     }
                 ]
             },
@@ -3199,23 +3199,23 @@
                 "values": [
                     {
                         "name": "韩寒",
-                        "value": 9
+                        "value": 13
                     },
                     {
                         "name": "网易新闻",
-                        "value": 3
+                        "value": 7
                     },
                     {
                         "name": "美国选举",
-                        "value": 45
+                        "value": 10
                     },
                     {
                         "name": "新浪微博",
-                        "value": 26
+                        "value": 10
                     },
                     {
                         "name": "柳叶刀",
-                        "value": 33
+                        "value": 1
                     }
                 ]
             },
@@ -3224,7 +3224,1107 @@
                 "values": [
                     {
                         "name": "韩寒",
+                        "value": 7
+                    },
+                    {
+                        "name": "网易新闻",
+                        "value": 1
+                    },
+                    {
+                        "name": "美国选举",
+                        "value": 3
+                    },
+                    {
+                        "name": "新浪微博",
+                        "value": 24
+                    },
+                    {
+                        "name": "柳叶刀",
+                        "value": 35
+                    }
+                ]
+            },
+            {
+                "date": "2016-08-25:09",
+                "values": [
+                    {
+                        "name": "韩寒",
+                        "value": 12
+                    },
+                    {
+                        "name": "网易新闻",
+                        "value": 9
+                    },
+                    {
+                        "name": "美国选举",
+                        "value": 14
+                    },
+                    {
+                        "name": "新浪微博",
+                        "value": 0
+                    },
+                    {
+                        "name": "柳叶刀",
+                        "value": 58
+                    }
+                ]
+            },
+            {
+                "date": "2016-08-25:10",
+                "values": [
+                    {
+                        "name": "韩寒",
+                        "value": 12
+                    },
+                    {
+                        "name": "网易新闻",
+                        "value": 5
+                    },
+                    {
+                        "name": "美国选举",
+                        "value": 48
+                    },
+                    {
+                        "name": "新浪微博",
+                        "value": 2
+                    },
+                    {
+                        "name": "柳叶刀",
+                        "value": 44
+                    }
+                ]
+            },
+            {
+                "date": "2016-08-25:11",
+                "values": [
+                    {
+                        "name": "韩寒",
+                        "value": 3
+                    },
+                    {
+                        "name": "网易新闻",
+                        "value": 6
+                    },
+                    {
+                        "name": "美国选举",
+                        "value": 34
+                    },
+                    {
+                        "name": "新浪微博",
+                        "value": 20
+                    },
+                    {
+                        "name": "柳叶刀",
+                        "value": 21
+                    }
+                ]
+            },
+            {
+                "date": "2016-08-25:12",
+                "values": [
+                    {
+                        "name": "韩寒",
                         "value": 19
+                    },
+                    {
+                        "name": "网易新闻",
+                        "value": 4
+                    },
+                    {
+                        "name": "美国选举",
+                        "value": 48
+                    },
+                    {
+                        "name": "新浪微博",
+                        "value": 10
+                    },
+                    {
+                        "name": "柳叶刀",
+                        "value": 67
+                    }
+                ]
+            },
+            {
+                "date": "2016-08-25:14",
+                "values": [
+                    {
+                        "name": "韩寒",
+                        "value": 14
+                    },
+                    {
+                        "name": "网易新闻",
+                        "value": 9
+                    },
+                    {
+                        "name": "美国选举",
+                        "value": 46
+                    },
+                    {
+                        "name": "新浪微博",
+                        "value": 27
+                    },
+                    {
+                        "name": "柳叶刀",
+                        "value": 28
+                    }
+                ]
+            },
+            {
+                "date": "2016-08-25:15",
+                "values": [
+                    {
+                        "name": "韩寒",
+                        "value": 15
+                    },
+                    {
+                        "name": "网易新闻",
+                        "value": 1
+                    },
+                    {
+                        "name": "美国选举",
+                        "value": 30
+                    },
+                    {
+                        "name": "新浪微博",
+                        "value": 21
+                    },
+                    {
+                        "name": "柳叶刀",
+                        "value": 26
+                    }
+                ]
+            },
+            {
+                "date": "2016-08-25:16",
+                "values": [
+                    {
+                        "name": "韩寒",
+                        "value": 9
+                    },
+                    {
+                        "name": "网易新闻",
+                        "value": 6
+                    },
+                    {
+                        "name": "美国选举",
+                        "value": 14
+                    },
+                    {
+                        "name": "新浪微博",
+                        "value": 3
+                    },
+                    {
+                        "name": "柳叶刀",
+                        "value": 24
+                    }
+                ]
+            },
+            {
+                "date": "2016-08-25:17",
+                "values": [
+                    {
+                        "name": "韩寒",
+                        "value": 7
+                    },
+                    {
+                        "name": "网易新闻",
+                        "value": 3
+                    },
+                    {
+                        "name": "美国选举",
+                        "value": 43
+                    },
+                    {
+                        "name": "新浪微博",
+                        "value": 23
+                    },
+                    {
+                        "name": "柳叶刀",
+                        "value": 31
+                    }
+                ]
+            },
+            {
+                "date": "2016-08-25:18",
+                "values": [
+                    {
+                        "name": "韩寒",
+                        "value": 17
+                    },
+                    {
+                        "name": "网易新闻",
+                        "value": 9
+                    },
+                    {
+                        "name": "美国选举",
+                        "value": 12
+                    },
+                    {
+                        "name": "新浪微博",
+                        "value": 3
+                    },
+                    {
+                        "name": "柳叶刀",
+                        "value": 2
+                    }
+                ]
+            },
+            {
+                "date": "2016-08-25:19",
+                "values": [
+                    {
+                        "name": "韩寒",
+                        "value": 4
+                    },
+                    {
+                        "name": "网易新闻",
+                        "value": 1
+                    },
+                    {
+                        "name": "美国选举",
+                        "value": 0
+                    },
+                    {
+                        "name": "新浪微博",
+                        "value": 22
+                    },
+                    {
+                        "name": "柳叶刀",
+                        "value": 12
+                    }
+                ]
+            },
+            {
+                "date": "2016-08-25:20",
+                "values": [
+                    {
+                        "name": "韩寒",
+                        "value": 2
+                    },
+                    {
+                        "name": "网易新闻",
+                        "value": 9
+                    },
+                    {
+                        "name": "美国选举",
+                        "value": 35
+                    },
+                    {
+                        "name": "新浪微博",
+                        "value": 9
+                    },
+                    {
+                        "name": "柳叶刀",
+                        "value": 30
+                    }
+                ]
+            },
+            {
+                "date": "2016-08-25:21",
+                "values": [
+                    {
+                        "name": "韩寒",
+                        "value": 6
+                    },
+                    {
+                        "name": "网易新闻",
+                        "value": 0
+                    },
+                    {
+                        "name": "美国选举",
+                        "value": 15
+                    },
+                    {
+                        "name": "新浪微博",
+                        "value": 12
+                    },
+                    {
+                        "name": "柳叶刀",
+                        "value": 43
+                    }
+                ]
+            },
+            {
+                "date": "2016-08-25:22",
+                "values": [
+                    {
+                        "name": "韩寒",
+                        "value": 2
+                    },
+                    {
+                        "name": "网易新闻",
+                        "value": 4
+                    },
+                    {
+                        "name": "美国选举",
+                        "value": 23
+                    },
+                    {
+                        "name": "新浪微博",
+                        "value": 10
+                    },
+                    {
+                        "name": "柳叶刀",
+                        "value": 47
+                    }
+                ]
+            },
+            {
+                "date": "2016-08-25:23",
+                "values": [
+                    {
+                        "name": "韩寒",
+                        "value": 13
+                    },
+                    {
+                        "name": "网易新闻",
+                        "value": 2
+                    },
+                    {
+                        "name": "美国选举",
+                        "value": 31
+                    },
+                    {
+                        "name": "新浪微博",
+                        "value": 25
+                    },
+                    {
+                        "name": "柳叶刀",
+                        "value": 55
+                    }
+                ]
+            },
+            {
+                "date": "2016-08-26:00",
+                "values": [
+                    {
+                        "name": "韩寒",
+                        "value": 3
+                    },
+                    {
+                        "name": "网易新闻",
+                        "value": 7
+                    },
+                    {
+                        "name": "美国选举",
+                        "value": 37
+                    },
+                    {
+                        "name": "新浪微博",
+                        "value": 12
+                    },
+                    {
+                        "name": "柳叶刀",
+                        "value": 30
+                    }
+                ]
+            },
+            {
+                "date": "2016-08-26:01",
+                "values": [
+                    {
+                        "name": "韩寒",
+                        "value": 12
+                    },
+                    {
+                        "name": "网易新闻",
+                        "value": 0
+                    },
+                    {
+                        "name": "美国选举",
+                        "value": 28
+                    },
+                    {
+                        "name": "新浪微博",
+                        "value": 21
+                    },
+                    {
+                        "name": "柳叶刀",
+                        "value": 48
+                    }
+                ]
+            },
+            {
+                "date": "2016-08-26:06",
+                "values": [
+                    {
+                        "name": "韩寒",
+                        "value": 1
+                    },
+                    {
+                        "name": "网易新闻",
+                        "value": 0
+                    },
+                    {
+                        "name": "美国选举",
+                        "value": 21
+                    },
+                    {
+                        "name": "新浪微博",
+                        "value": 1
+                    },
+                    {
+                        "name": "柳叶刀",
+                        "value": 51
+                    }
+                ]
+            },
+            {
+                "date": "2016-08-26:07",
+                "values": [
+                    {
+                        "name": "韩寒",
+                        "value": 3
+                    },
+                    {
+                        "name": "网易新闻",
+                        "value": 4
+                    },
+                    {
+                        "name": "美国选举",
+                        "value": 8
+                    },
+                    {
+                        "name": "新浪微博",
+                        "value": 6
+                    },
+                    {
+                        "name": "柳叶刀",
+                        "value": 19
+                    }
+                ]
+            },
+            {
+                "date": "2016-08-26:08",
+                "values": [
+                    {
+                        "name": "韩寒",
+                        "value": 15
+                    },
+                    {
+                        "name": "网易新闻",
+                        "value": 4
+                    },
+                    {
+                        "name": "美国选举",
+                        "value": 17
+                    },
+                    {
+                        "name": "新浪微博",
+                        "value": 20
+                    },
+                    {
+                        "name": "柳叶刀",
+                        "value": 13
+                    }
+                ]
+            },
+            {
+                "date": "2016-08-26:09",
+                "values": [
+                    {
+                        "name": "韩寒",
+                        "value": 14
+                    },
+                    {
+                        "name": "网易新闻",
+                        "value": 4
+                    },
+                    {
+                        "name": "美国选举",
+                        "value": 39
+                    },
+                    {
+                        "name": "新浪微博",
+                        "value": 4
+                    },
+                    {
+                        "name": "柳叶刀",
+                        "value": 41
+                    }
+                ]
+            },
+            {
+                "date": "2016-08-26:10",
+                "values": [
+                    {
+                        "name": "韩寒",
+                        "value": 0
+                    },
+                    {
+                        "name": "网易新闻",
+                        "value": 3
+                    },
+                    {
+                        "name": "美国选举",
+                        "value": 22
+                    },
+                    {
+                        "name": "新浪微博",
+                        "value": 25
+                    },
+                    {
+                        "name": "柳叶刀",
+                        "value": 34
+                    }
+                ]
+            },
+            {
+                "date": "2016-08-26:11",
+                "values": [
+                    {
+                        "name": "韩寒",
+                        "value": 0
+                    },
+                    {
+                        "name": "网易新闻",
+                        "value": 1
+                    },
+                    {
+                        "name": "美国选举",
+                        "value": 39
+                    },
+                    {
+                        "name": "新浪微博",
+                        "value": 14
+                    },
+                    {
+                        "name": "柳叶刀",
+                        "value": 55
+                    }
+                ]
+            },
+            {
+                "date": "2016-08-26:12",
+                "values": [
+                    {
+                        "name": "韩寒",
+                        "value": 7
+                    },
+                    {
+                        "name": "网易新闻",
+                        "value": 4
+                    },
+                    {
+                        "name": "美国选举",
+                        "value": 36
+                    },
+                    {
+                        "name": "新浪微博",
+                        "value": 7
+                    },
+                    {
+                        "name": "柳叶刀",
+                        "value": 62
+                    }
+                ]
+            },
+            {
+                "date": "2016-08-26:13",
+                "values": [
+                    {
+                        "name": "韩寒",
+                        "value": 13
+                    },
+                    {
+                        "name": "网易新闻",
+                        "value": 0
+                    },
+                    {
+                        "name": "美国选举",
+                        "value": 1
+                    },
+                    {
+                        "name": "新浪微博",
+                        "value": 8
+                    },
+                    {
+                        "name": "柳叶刀",
+                        "value": 21
+                    }
+                ]
+            },
+            {
+                "date": "2016-08-26:14",
+                "values": [
+                    {
+                        "name": "韩寒",
+                        "value": 4
+                    },
+                    {
+                        "name": "网易新闻",
+                        "value": 1
+                    },
+                    {
+                        "name": "美国选举",
+                        "value": 4
+                    },
+                    {
+                        "name": "新浪微博",
+                        "value": 18
+                    },
+                    {
+                        "name": "柳叶刀",
+                        "value": 38
+                    }
+                ]
+            },
+            {
+                "date": "2016-08-26:15",
+                "values": [
+                    {
+                        "name": "韩寒",
+                        "value": 2
+                    },
+                    {
+                        "name": "网易新闻",
+                        "value": 6
+                    },
+                    {
+                        "name": "美国选举",
+                        "value": 45
+                    },
+                    {
+                        "name": "新浪微博",
+                        "value": 15
+                    },
+                    {
+                        "name": "柳叶刀",
+                        "value": 21
+                    }
+                ]
+            },
+            {
+                "date": "2016-08-26:16",
+                "values": [
+                    {
+                        "name": "韩寒",
+                        "value": 16
+                    },
+                    {
+                        "name": "网易新闻",
+                        "value": 1
+                    },
+                    {
+                        "name": "美国选举",
+                        "value": 2
+                    },
+                    {
+                        "name": "新浪微博",
+                        "value": 9
+                    },
+                    {
+                        "name": "柳叶刀",
+                        "value": 16
+                    }
+                ]
+            },
+            {
+                "date": "2016-08-26:17",
+                "values": [
+                    {
+                        "name": "韩寒",
+                        "value": 13
+                    },
+                    {
+                        "name": "网易新闻",
+                        "value": 5
+                    },
+                    {
+                        "name": "美国选举",
+                        "value": 26
+                    },
+                    {
+                        "name": "新浪微博",
+                        "value": 17
+                    },
+                    {
+                        "name": "柳叶刀",
+                        "value": 67
+                    }
+                ]
+            },
+            {
+                "date": "2016-08-26:18",
+                "values": [
+                    {
+                        "name": "韩寒",
+                        "value": 12
+                    },
+                    {
+                        "name": "网易新闻",
+                        "value": 8
+                    },
+                    {
+                        "name": "美国选举",
+                        "value": 0
+                    },
+                    {
+                        "name": "新浪微博",
+                        "value": 26
+                    },
+                    {
+                        "name": "柳叶刀",
+                        "value": 28
+                    }
+                ]
+            },
+            {
+                "date": "2016-08-26:22",
+                "values": [
+                    {
+                        "name": "韩寒",
+                        "value": 17
+                    },
+                    {
+                        "name": "网易新闻",
+                        "value": 2
+                    },
+                    {
+                        "name": "美国选举",
+                        "value": 19
+                    },
+                    {
+                        "name": "新浪微博",
+                        "value": 29
+                    },
+                    {
+                        "name": "柳叶刀",
+                        "value": 27
+                    }
+                ]
+            },
+            {
+                "date": "2016-08-26:23",
+                "values": [
+                    {
+                        "name": "韩寒",
+                        "value": 13
+                    },
+                    {
+                        "name": "网易新闻",
+                        "value": 2
+                    },
+                    {
+                        "name": "美国选举",
+                        "value": 28
+                    },
+                    {
+                        "name": "新浪微博",
+                        "value": 29
+                    },
+                    {
+                        "name": "柳叶刀",
+                        "value": 61
+                    }
+                ]
+            },
+            {
+                "date": "2016-08-27:00",
+                "values": [
+                    {
+                        "name": "韩寒",
+                        "value": 8
+                    },
+                    {
+                        "name": "网易新闻",
+                        "value": 7
+                    },
+                    {
+                        "name": "美国选举",
+                        "value": 3
+                    },
+                    {
+                        "name": "新浪微博",
+                        "value": 13
+                    },
+                    {
+                        "name": "柳叶刀",
+                        "value": 0
+                    }
+                ]
+            },
+            {
+                "date": "2016-08-27:01",
+                "values": [
+                    {
+                        "name": "韩寒",
+                        "value": 2
+                    },
+                    {
+                        "name": "网易新闻",
+                        "value": 5
+                    },
+                    {
+                        "name": "美国选举",
+                        "value": 12
+                    },
+                    {
+                        "name": "新浪微博",
+                        "value": 28
+                    },
+                    {
+                        "name": "柳叶刀",
+                        "value": 43
+                    }
+                ]
+            },
+            {
+                "date": "2016-08-27:02",
+                "values": [
+                    {
+                        "name": "韩寒",
+                        "value": 4
+                    },
+                    {
+                        "name": "网易新闻",
+                        "value": 0
+                    },
+                    {
+                        "name": "美国选举",
+                        "value": 43
+                    },
+                    {
+                        "name": "新浪微博",
+                        "value": 28
+                    },
+                    {
+                        "name": "柳叶刀",
+                        "value": 41
+                    }
+                ]
+            },
+            {
+                "date": "2016-08-27:06",
+                "values": [
+                    {
+                        "name": "韩寒",
+                        "value": 16
+                    },
+                    {
+                        "name": "网易新闻",
+                        "value": 5
+                    },
+                    {
+                        "name": "美国选举",
+                        "value": 16
+                    },
+                    {
+                        "name": "新浪微博",
+                        "value": 5
+                    },
+                    {
+                        "name": "柳叶刀",
+                        "value": 59
+                    }
+                ]
+            },
+            {
+                "date": "2016-08-27:08",
+                "values": [
+                    {
+                        "name": "韩寒",
+                        "value": 4
+                    },
+                    {
+                        "name": "网易新闻",
+                        "value": 8
+                    },
+                    {
+                        "name": "美国选举",
+                        "value": 43
+                    },
+                    {
+                        "name": "新浪微博",
+                        "value": 14
+                    },
+                    {
+                        "name": "柳叶刀",
+                        "value": 45
+                    }
+                ]
+            },
+            {
+                "date": "2016-08-27:09",
+                "values": [
+                    {
+                        "name": "韩寒",
+                        "value": 0
+                    },
+                    {
+                        "name": "网易新闻",
+                        "value": 6
+                    },
+                    {
+                        "name": "美国选举",
+                        "value": 36
+                    },
+                    {
+                        "name": "新浪微博",
+                        "value": 16
+                    },
+                    {
+                        "name": "柳叶刀",
+                        "value": 5
+                    }
+                ]
+            },
+            {
+                "date": "2016-08-27:10",
+                "values": [
+                    {
+                        "name": "韩寒",
+                        "value": 10
+                    },
+                    {
+                        "name": "网易新闻",
+                        "value": 6
+                    },
+                    {
+                        "name": "美国选举",
+                        "value": 34
+                    },
+                    {
+                        "name": "新浪微博",
+                        "value": 7
+                    },
+                    {
+                        "name": "柳叶刀",
+                        "value": 59
+                    }
+                ]
+            },
+            {
+                "date": "2016-08-27:11",
+                "values": [
+                    {
+                        "name": "韩寒",
+                        "value": 1
+                    },
+                    {
+                        "name": "网易新闻",
+                        "value": 3
+                    },
+                    {
+                        "name": "美国选举",
+                        "value": 8
+                    },
+                    {
+                        "name": "新浪微博",
+                        "value": 24
+                    },
+                    {
+                        "name": "柳叶刀",
+                        "value": 2
+                    }
+                ]
+            },
+            {
+                "date": "2016-08-27:12",
+                "values": [
+                    {
+                        "name": "韩寒",
+                        "value": 9
+                    },
+                    {
+                        "name": "网易新闻",
+                        "value": 2
+                    },
+                    {
+                        "name": "美国选举",
+                        "value": 39
+                    },
+                    {
+                        "name": "新浪微博",
+                        "value": 0
+                    },
+                    {
+                        "name": "柳叶刀",
+                        "value": 24
+                    }
+                ]
+            },
+            {
+                "date": "2016-08-27:13",
+                "values": [
+                    {
+                        "name": "韩寒",
+                        "value": 8
+                    },
+                    {
+                        "name": "网易新闻",
+                        "value": 9
+                    },
+                    {
+                        "name": "美国选举",
+                        "value": 28
+                    },
+                    {
+                        "name": "新浪微博",
+                        "value": 22
+                    },
+                    {
+                        "name": "柳叶刀",
+                        "value": 19
+                    }
+                ]
+            },
+            {
+                "date": "2016-08-27:14",
+                "values": [
+                    {
+                        "name": "韩寒",
+                        "value": 12
+                    },
+                    {
+                        "name": "网易新闻",
+                        "value": 6
+                    },
+                    {
+                        "name": "美国选举",
+                        "value": 14
+                    },
+                    {
+                        "name": "新浪微博",
+                        "value": 20
+                    },
+                    {
+                        "name": "柳叶刀",
+                        "value": 21
+                    }
+                ]
+            },
+            {
+                "date": "2016-08-27:15",
+                "values": [
+                    {
+                        "name": "韩寒",
+                        "value": 9
+                    },
+                    {
+                        "name": "网易新闻",
+                        "value": 1
+                    },
+                    {
+                        "name": "美国选举",
+                        "value": 24
+                    },
+                    {
+                        "name": "新浪微博",
+                        "value": 21
+                    },
+                    {
+                        "name": "柳叶刀",
+                        "value": 41
+                    }
+                ]
+            },
+            {
+                "date": "2016-08-27:16",
+                "values": [
+                    {
+                        "name": "韩寒",
+                        "value": 9
                     },
                     {
                         "name": "网易新闻",
@@ -3240,1107 +4340,7 @@
                     },
                     {
                         "name": "柳叶刀",
-                        "value": 43
-                    }
-                ]
-            },
-            {
-                "date": "2016-08-25:09",
-                "values": [
-                    {
-                        "name": "韩寒",
-                        "value": 5
-                    },
-                    {
-                        "name": "网易新闻",
-                        "value": 6
-                    },
-                    {
-                        "name": "美国选举",
-                        "value": 25
-                    },
-                    {
-                        "name": "新浪微博",
-                        "value": 5
-                    },
-                    {
-                        "name": "柳叶刀",
-                        "value": 37
-                    }
-                ]
-            },
-            {
-                "date": "2016-08-25:10",
-                "values": [
-                    {
-                        "name": "韩寒",
-                        "value": 19
-                    },
-                    {
-                        "name": "网易新闻",
-                        "value": 7
-                    },
-                    {
-                        "name": "美国选举",
-                        "value": 29
-                    },
-                    {
-                        "name": "新浪微博",
-                        "value": 5
-                    },
-                    {
-                        "name": "柳叶刀",
                         "value": 40
-                    }
-                ]
-            },
-            {
-                "date": "2016-08-25:11",
-                "values": [
-                    {
-                        "name": "韩寒",
-                        "value": 2
-                    },
-                    {
-                        "name": "网易新闻",
-                        "value": 1
-                    },
-                    {
-                        "name": "美国选举",
-                        "value": 25
-                    },
-                    {
-                        "name": "新浪微博",
-                        "value": 22
-                    },
-                    {
-                        "name": "柳叶刀",
-                        "value": 41
-                    }
-                ]
-            },
-            {
-                "date": "2016-08-25:12",
-                "values": [
-                    {
-                        "name": "韩寒",
-                        "value": 8
-                    },
-                    {
-                        "name": "网易新闻",
-                        "value": 1
-                    },
-                    {
-                        "name": "美国选举",
-                        "value": 23
-                    },
-                    {
-                        "name": "新浪微博",
-                        "value": 16
-                    },
-                    {
-                        "name": "柳叶刀",
-                        "value": 29
-                    }
-                ]
-            },
-            {
-                "date": "2016-08-25:14",
-                "values": [
-                    {
-                        "name": "韩寒",
-                        "value": 7
-                    },
-                    {
-                        "name": "网易新闻",
-                        "value": 0
-                    },
-                    {
-                        "name": "美国选举",
-                        "value": 47
-                    },
-                    {
-                        "name": "新浪微博",
-                        "value": 11
-                    },
-                    {
-                        "name": "柳叶刀",
-                        "value": 54
-                    }
-                ]
-            },
-            {
-                "date": "2016-08-25:15",
-                "values": [
-                    {
-                        "name": "韩寒",
-                        "value": 19
-                    },
-                    {
-                        "name": "网易新闻",
-                        "value": 0
-                    },
-                    {
-                        "name": "美国选举",
-                        "value": 28
-                    },
-                    {
-                        "name": "新浪微博",
-                        "value": 8
-                    },
-                    {
-                        "name": "柳叶刀",
-                        "value": 40
-                    }
-                ]
-            },
-            {
-                "date": "2016-08-25:16",
-                "values": [
-                    {
-                        "name": "韩寒",
-                        "value": 4
-                    },
-                    {
-                        "name": "网易新闻",
-                        "value": 8
-                    },
-                    {
-                        "name": "美国选举",
-                        "value": 19
-                    },
-                    {
-                        "name": "新浪微博",
-                        "value": 26
-                    },
-                    {
-                        "name": "柳叶刀",
-                        "value": 2
-                    }
-                ]
-            },
-            {
-                "date": "2016-08-25:17",
-                "values": [
-                    {
-                        "name": "韩寒",
-                        "value": 3
-                    },
-                    {
-                        "name": "网易新闻",
-                        "value": 7
-                    },
-                    {
-                        "name": "美国选举",
-                        "value": 23
-                    },
-                    {
-                        "name": "新浪微博",
-                        "value": 2
-                    },
-                    {
-                        "name": "柳叶刀",
-                        "value": 14
-                    }
-                ]
-            },
-            {
-                "date": "2016-08-25:18",
-                "values": [
-                    {
-                        "name": "韩寒",
-                        "value": 16
-                    },
-                    {
-                        "name": "网易新闻",
-                        "value": 9
-                    },
-                    {
-                        "name": "美国选举",
-                        "value": 9
-                    },
-                    {
-                        "name": "新浪微博",
-                        "value": 19
-                    },
-                    {
-                        "name": "柳叶刀",
-                        "value": 46
-                    }
-                ]
-            },
-            {
-                "date": "2016-08-25:19",
-                "values": [
-                    {
-                        "name": "韩寒",
-                        "value": 19
-                    },
-                    {
-                        "name": "网易新闻",
-                        "value": 2
-                    },
-                    {
-                        "name": "美国选举",
-                        "value": 14
-                    },
-                    {
-                        "name": "新浪微博",
-                        "value": 22
-                    },
-                    {
-                        "name": "柳叶刀",
-                        "value": 3
-                    }
-                ]
-            },
-            {
-                "date": "2016-08-25:20",
-                "values": [
-                    {
-                        "name": "韩寒",
-                        "value": 4
-                    },
-                    {
-                        "name": "网易新闻",
-                        "value": 3
-                    },
-                    {
-                        "name": "美国选举",
-                        "value": 27
-                    },
-                    {
-                        "name": "新浪微博",
-                        "value": 26
-                    },
-                    {
-                        "name": "柳叶刀",
-                        "value": 20
-                    }
-                ]
-            },
-            {
-                "date": "2016-08-25:21",
-                "values": [
-                    {
-                        "name": "韩寒",
-                        "value": 14
-                    },
-                    {
-                        "name": "网易新闻",
-                        "value": 7
-                    },
-                    {
-                        "name": "美国选举",
-                        "value": 25
-                    },
-                    {
-                        "name": "新浪微博",
-                        "value": 26
-                    },
-                    {
-                        "name": "柳叶刀",
-                        "value": 62
-                    }
-                ]
-            },
-            {
-                "date": "2016-08-25:22",
-                "values": [
-                    {
-                        "name": "韩寒",
-                        "value": 3
-                    },
-                    {
-                        "name": "网易新闻",
-                        "value": 8
-                    },
-                    {
-                        "name": "美国选举",
-                        "value": 41
-                    },
-                    {
-                        "name": "新浪微博",
-                        "value": 23
-                    },
-                    {
-                        "name": "柳叶刀",
-                        "value": 58
-                    }
-                ]
-            },
-            {
-                "date": "2016-08-25:23",
-                "values": [
-                    {
-                        "name": "韩寒",
-                        "value": 5
-                    },
-                    {
-                        "name": "网易新闻",
-                        "value": 3
-                    },
-                    {
-                        "name": "美国选举",
-                        "value": 36
-                    },
-                    {
-                        "name": "新浪微博",
-                        "value": 4
-                    },
-                    {
-                        "name": "柳叶刀",
-                        "value": 69
-                    }
-                ]
-            },
-            {
-                "date": "2016-08-26:00",
-                "values": [
-                    {
-                        "name": "韩寒",
-                        "value": 9
-                    },
-                    {
-                        "name": "网易新闻",
-                        "value": 3
-                    },
-                    {
-                        "name": "美国选举",
-                        "value": 32
-                    },
-                    {
-                        "name": "新浪微博",
-                        "value": 19
-                    },
-                    {
-                        "name": "柳叶刀",
-                        "value": 33
-                    }
-                ]
-            },
-            {
-                "date": "2016-08-26:01",
-                "values": [
-                    {
-                        "name": "韩寒",
-                        "value": 14
-                    },
-                    {
-                        "name": "网易新闻",
-                        "value": 1
-                    },
-                    {
-                        "name": "美国选举",
-                        "value": 25
-                    },
-                    {
-                        "name": "新浪微博",
-                        "value": 27
-                    },
-                    {
-                        "name": "柳叶刀",
-                        "value": 15
-                    }
-                ]
-            },
-            {
-                "date": "2016-08-26:06",
-                "values": [
-                    {
-                        "name": "韩寒",
-                        "value": 18
-                    },
-                    {
-                        "name": "网易新闻",
-                        "value": 4
-                    },
-                    {
-                        "name": "美国选举",
-                        "value": 38
-                    },
-                    {
-                        "name": "新浪微博",
-                        "value": 2
-                    },
-                    {
-                        "name": "柳叶刀",
-                        "value": 28
-                    }
-                ]
-            },
-            {
-                "date": "2016-08-26:07",
-                "values": [
-                    {
-                        "name": "韩寒",
-                        "value": 10
-                    },
-                    {
-                        "name": "网易新闻",
-                        "value": 6
-                    },
-                    {
-                        "name": "美国选举",
-                        "value": 3
-                    },
-                    {
-                        "name": "新浪微博",
-                        "value": 19
-                    },
-                    {
-                        "name": "柳叶刀",
-                        "value": 30
-                    }
-                ]
-            },
-            {
-                "date": "2016-08-26:08",
-                "values": [
-                    {
-                        "name": "韩寒",
-                        "value": 15
-                    },
-                    {
-                        "name": "网易新闻",
-                        "value": 9
-                    },
-                    {
-                        "name": "美国选举",
-                        "value": 9
-                    },
-                    {
-                        "name": "新浪微博",
-                        "value": 18
-                    },
-                    {
-                        "name": "柳叶刀",
-                        "value": 59
-                    }
-                ]
-            },
-            {
-                "date": "2016-08-26:09",
-                "values": [
-                    {
-                        "name": "韩寒",
-                        "value": 7
-                    },
-                    {
-                        "name": "网易新闻",
-                        "value": 5
-                    },
-                    {
-                        "name": "美国选举",
-                        "value": 3
-                    },
-                    {
-                        "name": "新浪微博",
-                        "value": 27
-                    },
-                    {
-                        "name": "柳叶刀",
-                        "value": 48
-                    }
-                ]
-            },
-            {
-                "date": "2016-08-26:10",
-                "values": [
-                    {
-                        "name": "韩寒",
-                        "value": 17
-                    },
-                    {
-                        "name": "网易新闻",
-                        "value": 5
-                    },
-                    {
-                        "name": "美国选举",
-                        "value": 17
-                    },
-                    {
-                        "name": "新浪微博",
-                        "value": 15
-                    },
-                    {
-                        "name": "柳叶刀",
-                        "value": 52
-                    }
-                ]
-            },
-            {
-                "date": "2016-08-26:11",
-                "values": [
-                    {
-                        "name": "韩寒",
-                        "value": 13
-                    },
-                    {
-                        "name": "网易新闻",
-                        "value": 4
-                    },
-                    {
-                        "name": "美国选举",
-                        "value": 16
-                    },
-                    {
-                        "name": "新浪微博",
-                        "value": 25
-                    },
-                    {
-                        "name": "柳叶刀",
-                        "value": 32
-                    }
-                ]
-            },
-            {
-                "date": "2016-08-26:12",
-                "values": [
-                    {
-                        "name": "韩寒",
-                        "value": 12
-                    },
-                    {
-                        "name": "网易新闻",
-                        "value": 7
-                    },
-                    {
-                        "name": "美国选举",
-                        "value": 40
-                    },
-                    {
-                        "name": "新浪微博",
-                        "value": 29
-                    },
-                    {
-                        "name": "柳叶刀",
-                        "value": 17
-                    }
-                ]
-            },
-            {
-                "date": "2016-08-26:13",
-                "values": [
-                    {
-                        "name": "韩寒",
-                        "value": 15
-                    },
-                    {
-                        "name": "网易新闻",
-                        "value": 6
-                    },
-                    {
-                        "name": "美国选举",
-                        "value": 40
-                    },
-                    {
-                        "name": "新浪微博",
-                        "value": 7
-                    },
-                    {
-                        "name": "柳叶刀",
-                        "value": 34
-                    }
-                ]
-            },
-            {
-                "date": "2016-08-26:14",
-                "values": [
-                    {
-                        "name": "韩寒",
-                        "value": 17
-                    },
-                    {
-                        "name": "网易新闻",
-                        "value": 4
-                    },
-                    {
-                        "name": "美国选举",
-                        "value": 39
-                    },
-                    {
-                        "name": "新浪微博",
-                        "value": 16
-                    },
-                    {
-                        "name": "柳叶刀",
-                        "value": 31
-                    }
-                ]
-            },
-            {
-                "date": "2016-08-26:15",
-                "values": [
-                    {
-                        "name": "韩寒",
-                        "value": 11
-                    },
-                    {
-                        "name": "网易新闻",
-                        "value": 3
-                    },
-                    {
-                        "name": "美国选举",
-                        "value": 26
-                    },
-                    {
-                        "name": "新浪微博",
-                        "value": 19
-                    },
-                    {
-                        "name": "柳叶刀",
-                        "value": 27
-                    }
-                ]
-            },
-            {
-                "date": "2016-08-26:16",
-                "values": [
-                    {
-                        "name": "韩寒",
-                        "value": 0
-                    },
-                    {
-                        "name": "网易新闻",
-                        "value": 3
-                    },
-                    {
-                        "name": "美国选举",
-                        "value": 1
-                    },
-                    {
-                        "name": "新浪微博",
-                        "value": 18
-                    },
-                    {
-                        "name": "柳叶刀",
-                        "value": 12
-                    }
-                ]
-            },
-            {
-                "date": "2016-08-26:17",
-                "values": [
-                    {
-                        "name": "韩寒",
-                        "value": 6
-                    },
-                    {
-                        "name": "网易新闻",
-                        "value": 2
-                    },
-                    {
-                        "name": "美国选举",
-                        "value": 21
-                    },
-                    {
-                        "name": "新浪微博",
-                        "value": 24
-                    },
-                    {
-                        "name": "柳叶刀",
-                        "value": 8
-                    }
-                ]
-            },
-            {
-                "date": "2016-08-26:18",
-                "values": [
-                    {
-                        "name": "韩寒",
-                        "value": 13
-                    },
-                    {
-                        "name": "网易新闻",
-                        "value": 4
-                    },
-                    {
-                        "name": "美国选举",
-                        "value": 19
-                    },
-                    {
-                        "name": "新浪微博",
-                        "value": 25
-                    },
-                    {
-                        "name": "柳叶刀",
-                        "value": 34
-                    }
-                ]
-            },
-            {
-                "date": "2016-08-26:22",
-                "values": [
-                    {
-                        "name": "韩寒",
-                        "value": 3
-                    },
-                    {
-                        "name": "网易新闻",
-                        "value": 2
-                    },
-                    {
-                        "name": "美国选举",
-                        "value": 33
-                    },
-                    {
-                        "name": "新浪微博",
-                        "value": 9
-                    },
-                    {
-                        "name": "柳叶刀",
-                        "value": 69
-                    }
-                ]
-            },
-            {
-                "date": "2016-08-26:23",
-                "values": [
-                    {
-                        "name": "韩寒",
-                        "value": 13
-                    },
-                    {
-                        "name": "网易新闻",
-                        "value": 4
-                    },
-                    {
-                        "name": "美国选举",
-                        "value": 18
-                    },
-                    {
-                        "name": "新浪微博",
-                        "value": 1
-                    },
-                    {
-                        "name": "柳叶刀",
-                        "value": 27
-                    }
-                ]
-            },
-            {
-                "date": "2016-08-27:00",
-                "values": [
-                    {
-                        "name": "韩寒",
-                        "value": 3
-                    },
-                    {
-                        "name": "网易新闻",
-                        "value": 1
-                    },
-                    {
-                        "name": "美国选举",
-                        "value": 29
-                    },
-                    {
-                        "name": "新浪微博",
-                        "value": 15
-                    },
-                    {
-                        "name": "柳叶刀",
-                        "value": 12
-                    }
-                ]
-            },
-            {
-                "date": "2016-08-27:01",
-                "values": [
-                    {
-                        "name": "韩寒",
-                        "value": 16
-                    },
-                    {
-                        "name": "网易新闻",
-                        "value": 3
-                    },
-                    {
-                        "name": "美国选举",
-                        "value": 19
-                    },
-                    {
-                        "name": "新浪微博",
-                        "value": 12
-                    },
-                    {
-                        "name": "柳叶刀",
-                        "value": 33
-                    }
-                ]
-            },
-            {
-                "date": "2016-08-27:02",
-                "values": [
-                    {
-                        "name": "韩寒",
-                        "value": 5
-                    },
-                    {
-                        "name": "网易新闻",
-                        "value": 5
-                    },
-                    {
-                        "name": "美国选举",
-                        "value": 2
-                    },
-                    {
-                        "name": "新浪微博",
-                        "value": 16
-                    },
-                    {
-                        "name": "柳叶刀",
-                        "value": 29
-                    }
-                ]
-            },
-            {
-                "date": "2016-08-27:06",
-                "values": [
-                    {
-                        "name": "韩寒",
-                        "value": 16
-                    },
-                    {
-                        "name": "网易新闻",
-                        "value": 8
-                    },
-                    {
-                        "name": "美国选举",
-                        "value": 22
-                    },
-                    {
-                        "name": "新浪微博",
-                        "value": 18
-                    },
-                    {
-                        "name": "柳叶刀",
-                        "value": 54
-                    }
-                ]
-            },
-            {
-                "date": "2016-08-27:08",
-                "values": [
-                    {
-                        "name": "韩寒",
-                        "value": 18
-                    },
-                    {
-                        "name": "网易新闻",
-                        "value": 7
-                    },
-                    {
-                        "name": "美国选举",
-                        "value": 4
-                    },
-                    {
-                        "name": "新浪微博",
-                        "value": 28
-                    },
-                    {
-                        "name": "柳叶刀",
-                        "value": 23
-                    }
-                ]
-            },
-            {
-                "date": "2016-08-27:09",
-                "values": [
-                    {
-                        "name": "韩寒",
-                        "value": 8
-                    },
-                    {
-                        "name": "网易新闻",
-                        "value": 5
-                    },
-                    {
-                        "name": "美国选举",
-                        "value": 47
-                    },
-                    {
-                        "name": "新浪微博",
-                        "value": 3
-                    },
-                    {
-                        "name": "柳叶刀",
-                        "value": 30
-                    }
-                ]
-            },
-            {
-                "date": "2016-08-27:10",
-                "values": [
-                    {
-                        "name": "韩寒",
-                        "value": 10
-                    },
-                    {
-                        "name": "网易新闻",
-                        "value": 4
-                    },
-                    {
-                        "name": "美国选举",
-                        "value": 20
-                    },
-                    {
-                        "name": "新浪微博",
-                        "value": 24
-                    },
-                    {
-                        "name": "柳叶刀",
-                        "value": 39
-                    }
-                ]
-            },
-            {
-                "date": "2016-08-27:11",
-                "values": [
-                    {
-                        "name": "韩寒",
-                        "value": 15
-                    },
-                    {
-                        "name": "网易新闻",
-                        "value": 7
-                    },
-                    {
-                        "name": "美国选举",
-                        "value": 3
-                    },
-                    {
-                        "name": "新浪微博",
-                        "value": 14
-                    },
-                    {
-                        "name": "柳叶刀",
-                        "value": 24
-                    }
-                ]
-            },
-            {
-                "date": "2016-08-27:12",
-                "values": [
-                    {
-                        "name": "韩寒",
-                        "value": 5
-                    },
-                    {
-                        "name": "网易新闻",
-                        "value": 8
-                    },
-                    {
-                        "name": "美国选举",
-                        "value": 13
-                    },
-                    {
-                        "name": "新浪微博",
-                        "value": 23
-                    },
-                    {
-                        "name": "柳叶刀",
-                        "value": 64
-                    }
-                ]
-            },
-            {
-                "date": "2016-08-27:13",
-                "values": [
-                    {
-                        "name": "韩寒",
-                        "value": 1
-                    },
-                    {
-                        "name": "网易新闻",
-                        "value": 8
-                    },
-                    {
-                        "name": "美国选举",
-                        "value": 20
-                    },
-                    {
-                        "name": "新浪微博",
-                        "value": 24
-                    },
-                    {
-                        "name": "柳叶刀",
-                        "value": 57
-                    }
-                ]
-            },
-            {
-                "date": "2016-08-27:14",
-                "values": [
-                    {
-                        "name": "韩寒",
-                        "value": 10
-                    },
-                    {
-                        "name": "网易新闻",
-                        "value": 0
-                    },
-                    {
-                        "name": "美国选举",
-                        "value": 34
-                    },
-                    {
-                        "name": "新浪微博",
-                        "value": 20
-                    },
-                    {
-                        "name": "柳叶刀",
-                        "value": 29
-                    }
-                ]
-            },
-            {
-                "date": "2016-08-27:15",
-                "values": [
-                    {
-                        "name": "韩寒",
-                        "value": 2
-                    },
-                    {
-                        "name": "网易新闻",
-                        "value": 9
-                    },
-                    {
-                        "name": "美国选举",
-                        "value": 15
-                    },
-                    {
-                        "name": "新浪微博",
-                        "value": 25
-                    },
-                    {
-                        "name": "柳叶刀",
-                        "value": 68
-                    }
-                ]
-            },
-            {
-                "date": "2016-08-27:16",
-                "values": [
-                    {
-                        "name": "韩寒",
-                        "value": 1
-                    },
-                    {
-                        "name": "网易新闻",
-                        "value": 5
-                    },
-                    {
-                        "name": "美国选举",
-                        "value": 25
-                    },
-                    {
-                        "name": "新浪微博",
-                        "value": 0
-                    },
-                    {
-                        "name": "柳叶刀",
-                        "value": 41
                     }
                 ]
             },
@@ -4349,56 +4349,6 @@
                 "values": [
                     {
                         "name": "韩寒",
-                        "value": 9
-                    },
-                    {
-                        "name": "网易新闻",
-                        "value": 0
-                    },
-                    {
-                        "name": "美国选举",
-                        "value": 31
-                    },
-                    {
-                        "name": "新浪微博",
-                        "value": 6
-                    },
-                    {
-                        "name": "柳叶刀",
-                        "value": 37
-                    }
-                ]
-            },
-            {
-                "date": "2016-08-27:18",
-                "values": [
-                    {
-                        "name": "韩寒",
-                        "value": 11
-                    },
-                    {
-                        "name": "网易新闻",
-                        "value": 0
-                    },
-                    {
-                        "name": "美国选举",
-                        "value": 40
-                    },
-                    {
-                        "name": "新浪微博",
-                        "value": 10
-                    },
-                    {
-                        "name": "柳叶刀",
-                        "value": 47
-                    }
-                ]
-            },
-            {
-                "date": "2016-08-27:19",
-                "values": [
-                    {
-                        "name": "韩寒",
                         "value": 17
                     },
                     {
@@ -4407,36 +4357,11 @@
                     },
                     {
                         "name": "美国选举",
-                        "value": 0
+                        "value": 28
                     },
                     {
                         "name": "新浪微博",
-                        "value": 23
-                    },
-                    {
-                        "name": "柳叶刀",
-                        "value": 25
-                    }
-                ]
-            },
-            {
-                "date": "2016-08-27:20",
-                "values": [
-                    {
-                        "name": "韩寒",
-                        "value": 3
-                    },
-                    {
-                        "name": "网易新闻",
-                        "value": 1
-                    },
-                    {
-                        "name": "美国选举",
-                        "value": 7
-                    },
-                    {
-                        "name": "新浪微博",
-                        "value": 22
+                        "value": 16
                     },
                     {
                         "name": "柳叶刀",
@@ -4445,40 +4370,65 @@
                 ]
             },
             {
-                "date": "2016-08-28:00",
+                "date": "2016-08-27:18",
                 "values": [
                     {
                         "name": "韩寒",
-                        "value": 19
+                        "value": 8
                     },
                     {
                         "name": "网易新闻",
-                        "value": 0
+                        "value": 6
                     },
                     {
                         "name": "美国选举",
-                        "value": 16
+                        "value": 23
                     },
                     {
                         "name": "新浪微博",
-                        "value": 15
+                        "value": 23
                     },
                     {
                         "name": "柳叶刀",
-                        "value": 29
+                        "value": 44
                     }
                 ]
             },
             {
-                "date": "2016-08-28:01",
+                "date": "2016-08-27:19",
                 "values": [
                     {
                         "name": "韩寒",
-                        "value": 4
+                        "value": 10
                     },
                     {
                         "name": "网易新闻",
-                        "value": 4
+                        "value": 9
+                    },
+                    {
+                        "name": "美国选举",
+                        "value": 10
+                    },
+                    {
+                        "name": "新浪微博",
+                        "value": 29
+                    },
+                    {
+                        "name": "柳叶刀",
+                        "value": 45
+                    }
+                ]
+            },
+            {
+                "date": "2016-08-27:20",
+                "values": [
+                    {
+                        "name": "韩寒",
+                        "value": 5
+                    },
+                    {
+                        "name": "网易新闻",
+                        "value": 3
                     },
                     {
                         "name": "美国选举",
@@ -4490,7 +4440,57 @@
                     },
                     {
                         "name": "柳叶刀",
-                        "value": 6
+                        "value": 36
+                    }
+                ]
+            },
+            {
+                "date": "2016-08-28:00",
+                "values": [
+                    {
+                        "name": "韩寒",
+                        "value": 1
+                    },
+                    {
+                        "name": "网易新闻",
+                        "value": 7
+                    },
+                    {
+                        "name": "美国选举",
+                        "value": 13
+                    },
+                    {
+                        "name": "新浪微博",
+                        "value": 7
+                    },
+                    {
+                        "name": "柳叶刀",
+                        "value": 62
+                    }
+                ]
+            },
+            {
+                "date": "2016-08-28:01",
+                "values": [
+                    {
+                        "name": "韩寒",
+                        "value": 10
+                    },
+                    {
+                        "name": "网易新闻",
+                        "value": 8
+                    },
+                    {
+                        "name": "美国选举",
+                        "value": 38
+                    },
+                    {
+                        "name": "新浪微博",
+                        "value": 17
+                    },
+                    {
+                        "name": "柳叶刀",
+                        "value": 38
                     }
                 ]
             },
@@ -4499,23 +4499,23 @@
                 "values": [
                     {
                         "name": "韩寒",
-                        "value": 13
+                        "value": 5
                     },
                     {
                         "name": "网易新闻",
-                        "value": 7
+                        "value": 3
                     },
                     {
                         "name": "美国选举",
-                        "value": 10
+                        "value": 39
                     },
                     {
                         "name": "新浪微博",
-                        "value": 26
+                        "value": 7
                     },
                     {
                         "name": "柳叶刀",
-                        "value": 4
+                        "value": 29
                     }
                 ]
             },
@@ -4524,23 +4524,23 @@
                 "values": [
                     {
                         "name": "韩寒",
-                        "value": 5
+                        "value": 7
                     },
                     {
                         "name": "网易新闻",
-                        "value": 9
+                        "value": 1
                     },
                     {
                         "name": "美国选举",
-                        "value": 13
+                        "value": 14
                     },
                     {
                         "name": "新浪微博",
-                        "value": 25
+                        "value": 21
                     },
                     {
                         "name": "柳叶刀",
-                        "value": 5
+                        "value": 56
                     }
                 ]
             }
@@ -4559,39 +4559,39 @@
                     },
                     {
                         "time": "1:00",
-                        "value": 4
+                        "value": 1
                     },
                     {
                         "time": "2:00",
-                        "value": 7
-                    },
-                    {
-                        "time": "3:00",
-                        "value": 10
-                    },
-                    {
-                        "time": "4:00",
-                        "value": 7
-                    },
-                    {
-                        "time": "5:00",
-                        "value": 3
-                    },
-                    {
-                        "time": "6:00",
-                        "value": 3
-                    },
-                    {
-                        "time": "7:00",
-                        "value": 3
-                    },
-                    {
-                        "time": "8:00",
                         "value": 2
                     },
                     {
+                        "time": "3:00",
+                        "value": 3
+                    },
+                    {
+                        "time": "4:00",
+                        "value": 1
+                    },
+                    {
+                        "time": "5:00",
+                        "value": 8
+                    },
+                    {
+                        "time": "6:00",
+                        "value": 5
+                    },
+                    {
+                        "time": "7:00",
+                        "value": 6
+                    },
+                    {
+                        "time": "8:00",
+                        "value": 5
+                    },
+                    {
                         "time": "9:00",
-                        "value": 10
+                        "value": 9
                     },
                     {
                         "time": "10:00",
@@ -4599,19 +4599,19 @@
                     },
                     {
                         "time": "11:00",
-                        "value": 2
+                        "value": 6
                     },
                     {
                         "time": "12:00",
-                        "value": 4
+                        "value": 7
                     },
                     {
                         "time": "13:00",
-                        "value": 1
+                        "value": 5
                     },
                     {
                         "time": "14:00",
-                        "value": 5
+                        "value": 1
                     },
                     {
                         "time": "15:00",
@@ -4627,23 +4627,23 @@
                     },
                     {
                         "time": "18:00",
-                        "value": 8
+                        "value": 1
                     },
                     {
                         "time": "19:00",
-                        "value": 9
+                        "value": 10
                     },
                     {
                         "time": "20:00",
-                        "value": 6
+                        "value": 3
                     },
                     {
                         "time": "21:00",
-                        "value": 4
+                        "value": 10
                     },
                     {
                         "time": "22:00",
-                        "value": 10
+                        "value": 8
                     },
                     {
                         "time": "23:00",
@@ -4657,31 +4657,31 @@
                 "data": [
                     {
                         "time": "0:00",
-                        "value": 1
+                        "value": 2
                     },
                     {
                         "time": "1:00",
-                        "value": 7
+                        "value": 3
                     },
                     {
                         "time": "2:00",
-                        "value": 5
+                        "value": 10
                     },
                     {
                         "time": "3:00",
-                        "value": 9
+                        "value": 6
                     },
                     {
                         "time": "4:00",
-                        "value": 8
+                        "value": 4
                     },
                     {
                         "time": "5:00",
-                        "value": 7
+                        "value": 5
                     },
                     {
                         "time": "6:00",
-                        "value": 9
+                        "value": 6
                     },
                     {
                         "time": "7:00",
@@ -4689,67 +4689,67 @@
                     },
                     {
                         "time": "8:00",
-                        "value": 6
+                        "value": 10
                     },
                     {
                         "time": "9:00",
-                        "value": 8
-                    },
-                    {
-                        "time": "10:00",
-                        "value": 5
-                    },
-                    {
-                        "time": "11:00",
                         "value": 3
                     },
                     {
-                        "time": "12:00",
-                        "value": 8
+                        "time": "10:00",
+                        "value": 6
                     },
                     {
-                        "time": "13:00",
-                        "value": 9
-                    },
-                    {
-                        "time": "14:00",
-                        "value": 10
-                    },
-                    {
-                        "time": "15:00",
-                        "value": 4
-                    },
-                    {
-                        "time": "16:00",
-                        "value": 1
-                    },
-                    {
-                        "time": "17:00",
-                        "value": 10
-                    },
-                    {
-                        "time": "18:00",
-                        "value": 10
-                    },
-                    {
-                        "time": "19:00",
-                        "value": 8
-                    },
-                    {
-                        "time": "20:00",
-                        "value": 8
-                    },
-                    {
-                        "time": "21:00",
-                        "value": 1
-                    },
-                    {
-                        "time": "22:00",
+                        "time": "11:00",
                         "value": 5
                     },
                     {
-                        "time": "23:00",
+                        "time": "12:00",
+                        "value": 7
+                    },
+                    {
+                        "time": "13:00",
+                        "value": 1
+                    },
+                    {
+                        "time": "14:00",
+                        "value": 7
+                    },
+                    {
+                        "time": "15:00",
                         "value": 6
+                    },
+                    {
+                        "time": "16:00",
+                        "value": 10
+                    },
+                    {
+                        "time": "17:00",
+                        "value": 9
+                    },
+                    {
+                        "time": "18:00",
+                        "value": 8
+                    },
+                    {
+                        "time": "19:00",
+                        "value": 7
+                    },
+                    {
+                        "time": "20:00",
+                        "value": 1
+                    },
+                    {
+                        "time": "21:00",
+                        "value": 9
+                    },
+                    {
+                        "time": "22:00",
+                        "value": 1
+                    },
+                    {
+                        "time": "23:00",
+                        "value": 1
                     }
                 ]
             },
@@ -4763,55 +4763,55 @@
                     },
                     {
                         "time": "1:00",
-                        "value": 1
-                    },
-                    {
-                        "time": "2:00",
-                        "value": 5
-                    },
-                    {
-                        "time": "3:00",
-                        "value": 9
-                    },
-                    {
-                        "time": "4:00",
-                        "value": 10
-                    },
-                    {
-                        "time": "5:00",
-                        "value": 2
-                    },
-                    {
-                        "time": "6:00",
-                        "value": 6
-                    },
-                    {
-                        "time": "7:00",
-                        "value": 2
-                    },
-                    {
-                        "time": "8:00",
-                        "value": 4
-                    },
-                    {
-                        "time": "9:00",
-                        "value": 1
-                    },
-                    {
-                        "time": "10:00",
-                        "value": 7
-                    },
-                    {
-                        "time": "11:00",
                         "value": 3
                     },
                     {
-                        "time": "12:00",
+                        "time": "2:00",
+                        "value": 2
+                    },
+                    {
+                        "time": "3:00",
+                        "value": 8
+                    },
+                    {
+                        "time": "4:00",
+                        "value": 7
+                    },
+                    {
+                        "time": "5:00",
+                        "value": 5
+                    },
+                    {
+                        "time": "6:00",
+                        "value": 8
+                    },
+                    {
+                        "time": "7:00",
                         "value": 10
                     },
                     {
-                        "time": "13:00",
+                        "time": "8:00",
+                        "value": 7
+                    },
+                    {
+                        "time": "9:00",
+                        "value": 2
+                    },
+                    {
+                        "time": "10:00",
+                        "value": 10
+                    },
+                    {
+                        "time": "11:00",
+                        "value": 5
+                    },
+                    {
+                        "time": "12:00",
                         "value": 1
+                    },
+                    {
+                        "time": "13:00",
+                        "value": 2
                     },
                     {
                         "time": "14:00",
@@ -4819,31 +4819,31 @@
                     },
                     {
                         "time": "15:00",
-                        "value": 4
+                        "value": 5
                     },
                     {
                         "time": "16:00",
-                        "value": 3
+                        "value": 5
                     },
                     {
                         "time": "17:00",
-                        "value": 5
+                        "value": 10
                     },
                     {
                         "time": "18:00",
-                        "value": 9
+                        "value": 7
                     },
                     {
                         "time": "19:00",
-                        "value": 5
+                        "value": 1
                     },
                     {
                         "time": "20:00",
-                        "value": 9
+                        "value": 10
                     },
                     {
                         "time": "21:00",
-                        "value": 3
+                        "value": 6
                     },
                     {
                         "time": "22:00",
@@ -4865,15 +4865,15 @@
                     },
                     {
                         "time": "1:00",
-                        "value": 7
+                        "value": 9
                     },
                     {
                         "time": "2:00",
-                        "value": 4
+                        "value": 6
                     },
                     {
                         "time": "3:00",
-                        "value": 3
+                        "value": 4
                     },
                     {
                         "time": "4:00",
@@ -4881,27 +4881,27 @@
                     },
                     {
                         "time": "5:00",
-                        "value": 4
+                        "value": 1
                     },
                     {
                         "time": "6:00",
-                        "value": 6
+                        "value": 8
                     },
                     {
                         "time": "7:00",
-                        "value": 2
+                        "value": 7
                     },
                     {
                         "time": "8:00",
-                        "value": 5
+                        "value": 4
                     },
                     {
                         "time": "9:00",
-                        "value": 3
+                        "value": 10
                     },
                     {
                         "time": "10:00",
-                        "value": 9
+                        "value": 10
                     },
                     {
                         "time": "11:00",
@@ -4909,39 +4909,39 @@
                     },
                     {
                         "time": "12:00",
-                        "value": 10
+                        "value": 5
                     },
                     {
                         "time": "13:00",
-                        "value": 8
+                        "value": 5
                     },
                     {
                         "time": "14:00",
-                        "value": 4
+                        "value": 3
                     },
                     {
                         "time": "15:00",
-                        "value": 4
+                        "value": 2
                     },
                     {
                         "time": "16:00",
-                        "value": 1
+                        "value": 2
                     },
                     {
                         "time": "17:00",
-                        "value": 10
-                    },
-                    {
-                        "time": "18:00",
-                        "value": 9
-                    },
-                    {
-                        "time": "19:00",
                         "value": 6
                     },
                     {
-                        "time": "20:00",
+                        "time": "18:00",
                         "value": 3
+                    },
+                    {
+                        "time": "19:00",
+                        "value": 8
+                    },
+                    {
+                        "time": "20:00",
+                        "value": 10
                     },
                     {
                         "time": "21:00",
@@ -4953,7 +4953,7 @@
                     },
                     {
                         "time": "23:00",
-                        "value": 10
+                        "value": 4
                     }
                 ]
             },
@@ -4963,63 +4963,63 @@
                 "data": [
                     {
                         "time": "0:00",
-                        "value": 1
-                    },
-                    {
-                        "time": "1:00",
-                        "value": 1
-                    },
-                    {
-                        "time": "2:00",
-                        "value": 1
-                    },
-                    {
-                        "time": "3:00",
-                        "value": 7
-                    },
-                    {
-                        "time": "4:00",
-                        "value": 7
-                    },
-                    {
-                        "time": "5:00",
-                        "value": 6
-                    },
-                    {
-                        "time": "6:00",
-                        "value": 3
-                    },
-                    {
-                        "time": "7:00",
-                        "value": 7
-                    },
-                    {
-                        "time": "8:00",
-                        "value": 3
-                    },
-                    {
-                        "time": "9:00",
                         "value": 2
                     },
                     {
-                        "time": "10:00",
+                        "time": "1:00",
+                        "value": 8
+                    },
+                    {
+                        "time": "2:00",
+                        "value": 6
+                    },
+                    {
+                        "time": "3:00",
+                        "value": 5
+                    },
+                    {
+                        "time": "4:00",
+                        "value": 6
+                    },
+                    {
+                        "time": "5:00",
+                        "value": 10
+                    },
+                    {
+                        "time": "6:00",
+                        "value": 7
+                    },
+                    {
+                        "time": "7:00",
                         "value": 3
                     },
                     {
-                        "time": "11:00",
+                        "time": "8:00",
                         "value": 1
                     },
                     {
-                        "time": "12:00",
+                        "time": "9:00",
                         "value": 10
                     },
                     {
-                        "time": "13:00",
+                        "time": "10:00",
+                        "value": 5
+                    },
+                    {
+                        "time": "11:00",
+                        "value": 4
+                    },
+                    {
+                        "time": "12:00",
                         "value": 9
                     },
                     {
+                        "time": "13:00",
+                        "value": 5
+                    },
+                    {
                         "time": "14:00",
-                        "value": 10
+                        "value": 8
                     },
                     {
                         "time": "15:00",
@@ -5027,19 +5027,19 @@
                     },
                     {
                         "time": "16:00",
-                        "value": 6
+                        "value": 5
                     },
                     {
                         "time": "17:00",
-                        "value": 9
+                        "value": 5
                     },
                     {
                         "time": "18:00",
-                        "value": 6
+                        "value": 9
                     },
                     {
                         "time": "19:00",
-                        "value": 7
+                        "value": 8
                     },
                     {
                         "time": "20:00",
@@ -5047,15 +5047,15 @@
                     },
                     {
                         "time": "21:00",
-                        "value": 2
+                        "value": 1
                     },
                     {
                         "time": "22:00",
-                        "value": 5
+                        "value": 8
                     },
                     {
                         "time": "23:00",
-                        "value": 1
+                        "value": 10
                     }
                 ]
             }
@@ -5092,89 +5092,89 @@
             "sentiment": [
                 {
                     "key": "happy",
-                    "value": 201
+                    "value": 519
                 },
                 {
                     "key": "sorrow",
-                    "value": 632
+                    "value": 653
                 },
                 {
                     "key": "anger",
-                    "value": 244
+                    "value": 66
                 },
                 {
                     "key": "disgust",
-                    "value": 189
+                    "value": 181
                 },
                 {
                     "key": "fear",
-                    "value": 57
+                    "value": 22
                 }
             ],
             "words": [
                 {
                     "id": 0,
-                    "value": 925,
+                    "value": 765,
                     "name": "阿拉希"
                 },
                 {
                     "id": 1,
-                    "value": 862,
+                    "value": 803,
                     "name": "网易新闻"
                 },
                 {
                     "id": 2,
-                    "value": 290,
+                    "value": 206,
                     "name": "今日头条"
                 },
                 {
                     "id": 3,
-                    "value": 572,
+                    "value": 377,
                     "name": "QQ空间"
                 },
                 {
                     "id": 4,
-                    "value": 360,
+                    "value": 506,
                     "name": "房间调控"
                 },
                 {
                     "id": 5,
-                    "value": 319,
+                    "value": 729,
                     "name": "今日说法"
                 },
                 {
                     "id": 6,
-                    "value": 140,
+                    "value": 685,
                     "name": "叙利亚冲突"
                 },
                 {
                     "id": 7,
-                    "value": 540,
+                    "value": 290,
                     "name": "南海问题"
                 },
                 {
                     "id": 8,
-                    "value": 38,
+                    "value": 210,
                     "name": "知乎"
                 },
                 {
                     "id": 9,
-                    "value": 261,
+                    "value": 523,
                     "name": "货币战争"
                 },
                 {
                     "id": 10,
-                    "value": 449,
+                    "value": 297,
                     "name": "舆情分析"
                 },
                 {
                     "id": 11,
-                    "value": 166,
+                    "value": 449,
                     "name": "美国选举"
                 },
                 {
                     "id": 12,
-                    "value": 98,
+                    "value": 378,
                     "name": "新浪微博"
                 }
             ]

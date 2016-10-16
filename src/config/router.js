@@ -104,10 +104,16 @@ module.exports = {
             require(['../components/Setting/Setting.vue'], resolve);
         },
         subRoutes:{
+            // '/': {
+            //     name: 'settingDefault',
+            //     component (resolve) {
+            //         require(['../components/Setting/Default/Default.vue'], resolve);
+            //     }
+            // },
             '/': {
-                name: 'settingDefault',
+                name: 'settingAdd',
                 component (resolve) {
-                    require(['../components/Setting/Default/Default.vue'], resolve);
+                    require(['../components/Setting/Form/Form.vue'], resolve);
                 }
             },
             '/add': {
