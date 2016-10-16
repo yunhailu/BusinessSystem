@@ -40,7 +40,8 @@ export const en = {
         comment: "Comments",
         positive: "Positive",
         negative: "Negative",
-        neutral: "Neutral"
+        neutral: "Neutral",
+        all: "All"
     },
     influence: {
         noTableTips: "No Data !",

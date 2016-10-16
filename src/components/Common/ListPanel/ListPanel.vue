@@ -4,6 +4,19 @@
             <div class="col-md-3">
                 <select-el :options="options" :title="selectTitle" :value.sync="selectValue"></select-el>
             </div>
+            <div class="col-md-3 list-panel-tools-flag">
+                <!--<div class="list-panel-tools-flag-title">情绪筛选</div>-->
+                <div class="btn-group list-panel-tools-flag">
+                    <a class="btn btn-default list-panel-tools-flag-item" href="javascript:void(0);" @click="sentimentItem('all');" :class="[sentimentActive == 'all' ? 'active' : '']">{{words.all}}</a>
+                    <a class="btn btn-default list-panel-tools-flag-item" href="javascript:void(0);" @click="sentimentItem('positive')" :class="[sentimentActive == 'positive' ? 'active' : '']">{{words.positive}}</a>
+                    <a class="btn btn-default list-panel-tools-flag-item" href="javascript:void(0);" @click="sentimentItem('negative')" :class="[sentimentActive == 'negative' ? 'active' : '']">{{words.negative}}</a>
+                    <a class="btn btn-default list-panel-tools-flag-item" href="javascript:void(0);" @click="sentimentItem('neutral')" :class="[sentimentActive == 'neutral' ? 'active' : '']">{{words.neutral}}</a>
+                </div>
+                <!--<div class="item all"><i class="fa fa-flag fa-2x"></i></div>-->
+                <!--<div class="item positive"><i class="fa fa-flag fa-2x"></i></div>-->
+                <!--<div class="item negative"><i class="fa fa-flag fa-2x"></i></div>-->
+                <!--<div class="item neutral"><i class="fa fa-flag fa-2x"></i></div>-->
+            </div>
             <div class="col-md-3">
                 <div class="btn-group list-panel-tools-filter">
                     <a class="btn btn-default list-panel-tools-filter-item" href="javascript:void(0);" @click="filterItem(5);" :class="[filterActive == 5 ? 'active' : '']"> 5</a>
@@ -76,13 +89,24 @@
             return{
                 words,
                 tableList: [],
-                filterActive: 10
+                filterActive: 10,
+                sentimentActive: 'all'
             }
         },
         methods: {
             filterItem(num){
                 this.filterActive = num;
                 this.tableList = _.filter(this.list, (item, index) => (index < num));
+            },
+            sentimentItem(flag){
+                this.sentimentActive = flag;
+                if(flag == 'all'){
+                    this.tableList = _.extend([], this.list);
+                    return ;
+                }
+                this.tableList = _.filter(this.list, (item, index) => {
+                    return item.sentiment == flag;
+                });
             }
         },
         filters: {
@@ -105,8 +129,20 @@
                 return f;
             }
         },
+//        computed: {
+//            list(){
+//                return this.list;
+//            }
+//        },
+        watch: {
+            list(val){
+                this.tableList = val;
+                //this.sentimentItem('all');
+            }
+        },
         created(){
             this.filterItem(10);
+            this.sentimentItem('all');
         },
         components:{
             SelectEl, Page

@@ -277,3 +277,15 @@ export const getHotDetail = params => {
         params
     });
 };
+
+/**
+ *  Encapsulate `get Comment List` interface
+ *
+ *  @return {Promise} With Comment List.
+ */
+export const getCommentList = params => {
+    return Api.request({
+        url: `${rootURI}/comment/list`,
+        params
+    });
+};

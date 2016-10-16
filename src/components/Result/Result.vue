@@ -26,7 +26,8 @@
         data(){
             return{
                 sourceActive: 0,
-                list: list.time,
+                //list: list.time,
+                list: [],
                 options: [{key: 'time', value: '按时间排序'}, {key: 'browser', value: '浏览数排序'}, {key: 'star', value: '点赞数排序'}],
                 sortVal: "",
                 x: [],
@@ -165,7 +166,6 @@
                         const details = resp.data.data;
                         this.x = _.map(details, detail => detail.date);
                         //console.log("xxxx", this.x);
-                        this.lineData
                         _.each(details, detail => {
                             this.lineData.wechat.push(detail.values.wechat);
                             this.lineData.weibo.push(detail.values.weibo);
@@ -178,6 +178,14 @@
                         this.resultChartLoading = false;
                         this.resultPieChartLoading = false;
                         this.actions("全部", 0);
+                    }
+                });
+            },
+            getCommentList(){
+                Api.getCommentList({}).then(resp => {
+                    console.log(resp.data);
+                    if(resp.data.code == 0){
+                        this.list = resp.data.data;
                     }
                 });
             },
@@ -194,6 +202,7 @@
             init(){
                 this.initData();
                 this.getSummaryDetail();
+                this.getCommentList();
             }
         },
         watch: {

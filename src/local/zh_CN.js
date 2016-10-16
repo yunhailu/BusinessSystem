@@ -40,7 +40,8 @@ export const zh_CN = {
         comment: "评价指数",
         positive: "积极",
         negative: "消极",
-        neutral: "中立"
+        neutral: "中立",
+        all: "全部"
     },
     influence: {
         noTableTips: "暂时没有数据",
