@@ -1,8 +1,17 @@
 <template>
     <div class="list-panel">
         <div class="row list-panel-tools">
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <select-el :options="options" :title="selectTitle" :value.sync="selectValue"></select-el>
+            </div>
+            <div class="col-md-3">
+                <div class="btn-group list-panel-tools-filter">
+                    <a class="btn btn-default list-panel-tools-filter-item" href="javascript:void(0);" @click="filterItem(5);" :class="[filterActive == 5 ? 'active' : '']"> 5</a>
+                    <a class="btn btn-default list-panel-tools-filter-item" href="javascript:void(0);" @click="filterItem(10)" :class="[filterActive == 10 ? 'active' : '']">10</a>
+                    <a class="btn btn-default list-panel-tools-filter-item" href="javascript:void(0);" @click="filterItem(15)" :class="[filterActive == 15 ? 'active' : '']">15</a>
+                    <a class="btn btn-default list-panel-tools-filter-item" href="javascript:void(0);" @click="filterItem(20)" :class="[filterActive == 20 ? 'active' : '']">20</a>
+                </div>
+
             </div>
             <!--<div class="col-md-4">-->
             <!--<i class="fa fa-th-large"></i>-->
@@ -10,7 +19,7 @@
             <!--</div>-->
         </div>
         <ul class="list-panel-list">
-            <li class="list-panel-list-item row" v-for="item in list">
+            <li class="list-panel-list-item row" v-for="item in tableList">
                 <!--<a :href="item.url" target="_blank">-->
                 <a v-link="{name: 'detail', params:{type:'result', id:'12345678'}}" target="_blank">
                     <div class="list-panel-list-item-left col-md-8">
@@ -43,15 +52,16 @@
                 </a>
             </li>
         </ul>
-        <div class="list-panel-pager">
-            <page></page>
-        </div>
+        <!--<div class="list-panel-pager">-->
+            <!--<page></page>-->
+        <!--</div>-->
     </div>
 </template>
 <style lang="less" scoped>
     @import "ListPanel.less";
 </style>
-<script>
+<script type="text/ecmascript-6">
+    import _ from 'underscore';
     import SelectEl from '../Select/Select.vue';
     import Page from '../Page/Page.vue';
 
@@ -59,8 +69,18 @@
         props: ["list", "options", "selectTitle", "selectValue"],
         data(){
             return{
-
+                tableList: [],
+                filterActive: 10
             }
+        },
+        methods: {
+            filterItem(num){
+                this.filterActive = num;
+                this.tableList = _.filter(this.list, (item, index) => (index < num));
+            }
+        },
+        created(){
+            this.filterItem(10);
         },
         components:{
             SelectEl, Page

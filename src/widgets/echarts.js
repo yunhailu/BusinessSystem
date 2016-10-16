@@ -16,7 +16,7 @@ import WordCloud from 'echarts-wordcloud';
 
 module.exports = {
     deep: true,
-    params: ['loading', 'resize', 'theme', 'click'],
+    params: ['loading', 'resize', 'theme', 'click', 'img'],
     paramWatchers: {
         loading: function (val, oldVal) {
             var _this = this;
@@ -72,6 +72,8 @@ module.exports = {
 
         Vue.nextTick(function () {
             _this.instance.setOption(options);
+            _this.params.img = _this.instance.getDataURL("jpg");
+            //console.log(_this.instance.getDataURL("jpg"));
             if(options.series.type != 'wordCloud' || _.some(options.series, item => {return item.type == 'wordCloud'})){
                 _this.instance.resize();
             }

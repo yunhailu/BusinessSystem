@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-md-12 hot-river">
                 <card-panel :title="words.hotsRiver">
-                    <div v-echarts="scatterOption" :loading="scatterLoading" class="hot-river-scatter" theme=""></div>
+                    <div v-echarts="scatterOption" :loading="scatterLoading" class="hot-river-scatter" theme="" :img.sync="img"></div>
                 </card-panel>
             </div>
         </div>
@@ -61,6 +61,7 @@
             const common = Local().common;
             return{
                 words, common,
+                img: "",
                 activeHot: {
                     name: "",
                     id: ""
@@ -175,7 +176,7 @@
                                 left: 180,
                                 type: 'category',
                                 boundaryGap: false,
-                                data: _.map(scatter.data, item => item.time),
+                                data: _.map(scatter.data, item => item.date),
                                 top: `${4 + index * 20}%`,
                                 height: '10%',
                                 axisLine: {
@@ -190,13 +191,17 @@
                             });
                         });
                         this.scatterOption.series = _.map(scatters, (scatter, index) => {
+                            const max = _.chain(scatter.data)
+                                        .map(value => value.value)
+                                        .max(value => value).value(),
+                                    step = Math.ceil(max / 50);
                             return ({
                                 singleAxisIndex: index,
                                 coordinateSystem: 'singleAxis',
                                 type: 'scatter',
                                 data: _.map(scatter.data, (item, index) => [index, item.value]),
                                 symbolSize(dataItem) {
-                                    return dataItem[1] * 4;
+                                    return dataItem[1] / step;
                                 }
                             });
                         });
@@ -228,6 +233,7 @@
                             return value;
                         });
                         this.activeHot = { id: item.id, name: item.name };
+                        console.log('Image url: ',this.img);
                     }
                 });
             }

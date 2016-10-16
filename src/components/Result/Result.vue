@@ -165,6 +165,7 @@
                         const details = resp.data.data;
                         this.x = _.map(details, detail => detail.date);
                         //console.log("xxxx", this.x);
+                        this.lineData
                         _.each(details, detail => {
                             this.lineData.wechat.push(detail.values.wechat);
                             this.lineData.weibo.push(detail.values.weibo);
@@ -180,7 +181,18 @@
                     }
                 });
             },
+            initData(){
+                this.lineData = {
+                    all: [],
+                    wechat: [],
+                    weibo: [],
+                    client: [],
+                    web: [],
+                    overseas: []
+                };
+            },
             init(){
+                this.initData();
                 this.getSummaryDetail();
             }
         },

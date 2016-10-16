@@ -242,7 +242,8 @@ export const getDashboardDetail = params => {
  */
 export const getHotRealtime = params => {
     return Api.request({
-        url: `${myURI}/hot/realtime`,
+        //url: `${myURI}/hot/realtime`,
+        url: `${rootURI}/hotspot/reallist`,
         params
     });
 };
@@ -256,7 +257,8 @@ export const getHotRealtime = params => {
  */
 export const getHotToday = params => {
     return Api.request({
-        url: `${myURI}/hot/today`,
+        //url: `${myURI}/hot/today`,
+        url: `${rootURI}/hotspot/todaylist`,
         params
     });
 };
@@ -270,7 +272,8 @@ export const getHotToday = params => {
  */
 export const getHotDetail = params => {
     return Api.request({
-        url: `${myURI}/hot/getDetail`,
+        //url: `${myURI}/hot/getDetail`,
+        url: `${rootURI}/hotspot/detail`,
         params
     });
 };
