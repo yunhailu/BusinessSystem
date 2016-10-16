@@ -84,7 +84,8 @@
                     if(data.code == 0){
                         Cookie.set('business_uid', data.data.user_id);
                         Cookie.set('business_name', data.data.user_name);
-                        location.hash = '#!/home';
+                        //location.hash = '#!/home';
+                        this.$router.go({name: 'home'});
                     } else {
                         this.errorTip = data.message;
                     }
