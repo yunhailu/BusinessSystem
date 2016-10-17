@@ -31,6 +31,7 @@
     import _ from 'underscore';
     import HeaderComponent from '../Header/Header.vue';
     import Local from "../../local/local";
+    import * as Api from "../../widgets/Api";
 
     export default{
         data(){
@@ -63,8 +64,30 @@
                 }],
             }
         },
+        methods: {
+            getDashboardList(){
+                Api.getDashboardList({}).then(resp => {
+                    console.log('getDashboardList', resp.data);
+                    if(resp.data.code == 0){
+                        const list = resp.data.data;
+                        this.dashboardList = _.map(list, item => {
+                            item.link = {name: 'dashboardDetail', params: {id: item.id}};
+                            return item;
+                        });
+                    }
+                });
+            },
+            init(){
+                this.getDashboardList();
+            }
+        },
         components:{
             HeaderComponent
+        },
+        route:{
+            data(){
+                this.init();
+            }
         }
     }
 </script>

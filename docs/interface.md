@@ -120,7 +120,7 @@
         "followCount": 32        //关注数
 	}]
 }
-```
+````
 
 ##### 3.获取情绪详情
 -  sentiment/detail
@@ -327,5 +327,32 @@
 		success: 1
 	},
 	message: "success"
+}
+```
+
+### 五、Dashboard报表
+##### 1.获取 dashboard 列表、
+- dashboard/list
+- 入参: user_id(如果cookie里包含，地址栏可不传)
+```
+{
+    code: 0,
+    message: "success",
+    data: [{
+        id: 1,
+        name: "alipicture_7d",
+        data: [{
+            topic: "ali",
+            subtopic: "",
+            source: "web",
+            time_interval: 7,
+            time_dimension: 1,
+            summary: 1,
+            sentiment: 0,
+            comment: 0,
+            influence: 0,
+            theme: 0
+        }]
+    }]
 }
 ```

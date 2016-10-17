@@ -289,3 +289,45 @@ export const getCommentList = params => {
         params
     });
 };
+
+/**
+ * Dashboard Interface
+ * */
+
+/**
+ *  Encapsulate `get Dashboard List` interface
+ *  
+ *  @param  {String} user_id
+ *  @return {Promise} With Dashboard List.
+ */
+export const getDashboardList = params => {
+    return Api.request({
+        url: `${rootURI}/dashboard/list`,
+        params
+    });
+};
+
+/**
+ *  Encapsulate `get Dashboard Add` interface
+ *
+ *  @return {Promise} With Dashboard Add.
+ */
+export const getDashboardAdd = params => {
+    return Api.request({
+        url: `${rootURI}/dashboard/add`,
+        params
+    });
+};
+
+/**
+ *  Encapsulate `get Dashboard Delete` interface
+ *
+ *  @param  {String}  id
+ *  @return {Promise} With Dashboard Delete.
+ */
+export const getDashboardDelete = params => {
+    return Api.request({
+        url: `${rootURI}/dashboard/delete`,
+        params
+    });
+};

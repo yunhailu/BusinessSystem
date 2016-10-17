@@ -23,7 +23,7 @@
 						<ul class="row dashboard-items">
 							<li class="col-md-3 item" v-for="item in dashboardList">
 								<div class="item-con" >
-									<a class="item-con-link">
+									<a v-link="item.link" class="item-con-link">
 										<i class="fa fa-2x" :class="dashboard.icon"></i>
 										<span>{{item.name}}</span>
 									</a>
@@ -42,10 +42,12 @@
 	@import "Home.less";
 </style>
 <script type="text/ecmascript-6">
+	import _ from 'underscore';
 	import {redirect} from "../../widgets/Auth";
 	import HeaderComponent from '../Header/Header.vue';
 	import HotEvent from '../HotEvent/HotEvent.vue';
 	import Local from "../../local/local";
+	import * as Api from "../../widgets/Api";
 
 	export default{
 		data(){
@@ -57,16 +59,7 @@
 					dec: words.dashboardDec,
 					icon: "fa-adjust",
 				},
-				dashboardList: [{
-					name: "阿里影业",
-					link: ""
-				},{
-					name: "中国希拉里",
-					link: ""
-				},{
-					name: "品牌听力",
-					link: ""
-				}],
+				dashboardList: [],
 				items: [{
 					id: "analytics",
 					name: words.analytics,
@@ -94,11 +87,30 @@
 				}]
 			}
 		},
+		methods: {
+			getDashboardList(){
+				Api.getDashboardList({}).then(resp => {
+					console.log('getDashboardList', resp.data);
+					if(resp.data.code == 0){
+						const list = resp.data.data;
+						this.dashboardList = _.map(list, item => {
+							item.link = {name: 'dashboardDetail', params: {id: item.id}};
+							return item;
+						});
+					}
+				});
+			},
+			init(){
+				this.getDashboardList();
+			}
+		},
 		components:{
 			HeaderComponent, HotEvent
 		},
 		route:{
-
+			data(){
+				this.init();
+			}
 		}
 	}
 </script>
