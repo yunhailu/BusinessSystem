@@ -20,7 +20,7 @@
                     <li class="dropdown user user-menu right">
                         <a href="javascript:void(0);" class="dropdown-toggle" >
                             <i class="glyphicon glyphicon-user"></i>
-                            <span>管理员 <i class="caret"></i></span>
+                            <span>{{nickName}} <i class="caret"></i></span>
                         </a>
                     </li>
                     <li class="dropdown quit right" @click="quit">
@@ -37,6 +37,7 @@
 <script type="text/ecmascript-6">
     import Cookie from "js-cookie";
     import Local from "../../local/local";
+    import { getCookie } from '../../widgets/Cookie';
 
     export default{
         props: ["active"],
@@ -44,6 +45,7 @@
             const words = Local().header;
             return{
                 words,
+                nickName: getCookie('business_name'),
                 tabs: [{
                     id: "home",
                     name: words.home,
@@ -81,6 +83,12 @@
             quit(){
                 Cookie.remove('business_uid');
                 this.$router.go({name: "login"});
+            },
+            initData(){
+                this.nickName = getCookie('business_name');
+            },
+            init(){
+                this.initData();
             }
         }
     }
