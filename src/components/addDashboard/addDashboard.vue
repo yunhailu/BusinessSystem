@@ -25,8 +25,11 @@
                 <form class="form-horizontal" role="form">
                     <div class="form-group">
                         <label for="selectName" class="col-sm-3 control-label">选择已存在名称</label>
-                        <div class="col-sm-8">
-                            <input type="email" class="form-control" id="selectName" placeholder="报表名称">
+                        <!--<div class="col-sm-8">-->
+                            <!--<input type="email" class="form-control" id="selectName" placeholder="报表名称">-->
+                        <!--</div>-->
+                        <div class="col-sm-8 selectEl">
+                            <select-el :options="selectOptions" :title="selectTitle" :value.sync="selectValue"></select-el>
                         </div>
                     </div>
                     <div class="form-group">
@@ -44,13 +47,19 @@
     @import "addDashboard.less";
 </style>
 <script type="text/ecmascript-6">
+    import _ from 'underscore';
     import Tips from '../Common/Tips/Tips.vue';
+    import SelectEl from '../Common/Select/Select.vue';
+    import * as Api from '../../widgets/Api';
 
     export default{
         props: ['visiable'],
         data(){
             return{
                 isNew: true,
+                selectOptions: [],  //{key: 'time', value: '按时间排序'}
+                selectTitle: "",
+                selectValue: 0,
                 addParams: {
                     type: "dialog",
                     //content: common.deleteTip,
@@ -68,10 +77,22 @@
             },
             close(){
                 this.visiable = false;
+            },
+            getDashboardList(){
+                Api.getDashboardList({}).then(resp => {
+                    console.log('getDashboardList', resp.data);
+                    if(resp.data.code == 0){
+                        const list = resp.data.data;
+                        this.selectOptions = _.map(list, item => ({key: item.id, value: item.name}));
+                    }
+                });
             }
         },
+        created(){
+            this.getDashboardList();
+        },
         components:{
-            Tips
+            Tips, SelectEl
         }
     }
 </script>
