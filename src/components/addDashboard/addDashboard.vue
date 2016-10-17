@@ -10,7 +10,7 @@
                     <div class="form-group">
                         <label for="dashName" class="col-sm-3 control-label">新增名称</label>
                         <div class="col-sm-8">
-                            <input type="email" class="form-control" id="dashName" placeholder="报表名称">
+                            <input type="text" v-model="newName" class="form-control" id="dashName" placeholder="报表名称">
                         </div>
                     </div>
                     <div class="form-group">
@@ -60,6 +60,7 @@
                 selectOptions: [],  //{key: 'time', value: '按时间排序'}
                 selectTitle: "",
                 selectValue: 0,
+                newName: "",
                 addParams: {
                     type: "dialog",
                     //content: common.deleteTip,
@@ -85,6 +86,12 @@
                         const list = resp.data.data;
                         this.selectOptions = _.map(list, item => ({key: item.id, value: item.name}));
                     }
+                });
+            },
+            getDashboardAdd(){
+                const name = this.newName;
+                Api.getDashboardAdd({name}).then(resp => {
+                    console.log('add', resp.data);
                 });
             }
         },

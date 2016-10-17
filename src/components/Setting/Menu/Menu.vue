@@ -8,7 +8,7 @@
                     <img src="images/avatar.png" class="img-circle" alt="User Image" />
                 </div>
                 <div class="pull-left info">
-                    <p>你好, 管理员</p>
+                    <p>你好, {{nickName}}</p>
 
                     <a href="javascript:void(0);"><i class="fa fa-circle text-success"></i> 在线</a>
                 </div>
@@ -37,6 +37,7 @@
     import {AnalyticMenu, ChannelMenu} from "../../../config/config";
     import MenuList from "./MenuList/MenuList.vue";
     import * as Api from "../../../widgets/Api";
+    import { getCookie } from '../../../widgets/Cookie';
 
     export default{
         props: [],
@@ -44,7 +45,8 @@
             return{
                 AnalyticMenu,
                 ChannelMenu,
-                topicList: []
+                topicList: [],
+                nickName: getCookie('business_name')
             }
         },
         components:{

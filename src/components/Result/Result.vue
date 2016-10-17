@@ -183,7 +183,7 @@
             },
             getCommentList(){
                 Api.getCommentList({}).then(resp => {
-                    console.log(resp.data);
+                    //console.log(resp.data);
                     if(resp.data.code == 0){
                         this.list = resp.data.data;
                     }
