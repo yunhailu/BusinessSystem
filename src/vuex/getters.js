@@ -1,12 +1,10 @@
-
-export const addrMaps = state => {
-	return state.address.addrMap
-}
-
-export const defaultAddr = state => {
-	return state.address.defaultAddr
-}
-
+/**
+ * Topic List
+ * */
 export const topicList = state => {
 	return state.topic.list;
-}
+};
+
+export const topicGroupActiveId = state => {
+	return state.topic.active_group_id;
+};

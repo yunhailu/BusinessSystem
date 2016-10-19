@@ -61,11 +61,8 @@
         computed: {
             list(){
                 let list = [];
-                _.each(this.topicList, (item,index) => {
+                _.each(this.topicList, item => {
                     list.push(_.extend({}, item));
-//                    if(index == 0){
-//                        list[0].isActive = true;
-//                    }
                 });
                 return list;
             }
@@ -80,10 +77,11 @@
                 Api.getTopicList({}).then(resp => {
                     //console.log('getTopicList', resp);
                     if(resp.data.code == 0){
-                        const topicList = _.map(resp.data.data, topic => {
+                        let topicList = _.map(resp.data.data, topic => {
                             topic.isActive = false;
                             return topic;
                         });
+                        _.first(topicList).isActive = true;
                         this.setTopicList(topicList);
                     }
                 });
