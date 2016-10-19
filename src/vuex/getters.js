@@ -6,3 +6,7 @@ export const addrMaps = state => {
 export const defaultAddr = state => {
 	return state.address.defaultAddr
 }
+
+export const topicList = state => {
+	return state.topic.list;
+}

@@ -48,6 +48,8 @@
     import Local from "../../../../local/local";
     import Tips from "../../../Common/Tips/Tips.vue"
     import * as Api from "../../../../widgets/Api";
+    //import { topicList } from '../../../../vuex/getters';
+    import { setTopicList } from "../../../../vuex/actions";
 
     export default{
         props: ['title', 'menus', 'groups'],
@@ -93,16 +95,30 @@
             }
         },
         components:{ Tips },
+        vuex: {
+            actions: { setTopicList },
+            //getters: { topicList }
+        },
         methods: {
             toggle(group){
                 console.log(group);
-                _.each(this.groups, item => {
+//                _.each(this.groupList, item => {
+//                    if(group.group_id != item.group_id){
+//                        item.isActive = false;
+//                    } else {
+//                        item.isActive = !item.isActive;
+//                    }
+//                });
+                const groups = _.map(this.groups, item => {
                     if(group.group_id != item.group_id){
                         item.isActive = false;
                     } else {
                         item.isActive = !item.isActive;
                     }
+                    return item;
                 });
+                console.log('groups',groups);
+                this.setTopicList(groups);
                 //menu.isActive = !menu.isActive;
             },
             addTopicAction(){

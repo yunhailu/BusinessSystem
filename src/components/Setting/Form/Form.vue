@@ -92,6 +92,8 @@
     import _ from "underscore";
     import Local from "../../../local/local";
     import * as Api from "../../../widgets/Api";
+    import { setTopicList } from "../../../vuex/actions";
+    import { topicList } from '../../../vuex/getters';
 
     export default{
         data(){
@@ -124,22 +126,38 @@
                 }]
             }
         },
+        vuex: {
+            actions: { setTopicList },
+            getters: { topicList }
+        },
         methods: {
             setAdvanced(isAdvanced){
                 this.isAdvanced = isAdvanced;
             },
             createSubmit(){
-                console.log(this.isAdvanced, this.radioVal, this.topicArr, this.related, this.topicText, this.excludeText);
+                //console.log(this.isAdvanced, this.radioVal, this.topicArr, this.related, this.topicText, this.excludeText);
                 if(!this.radioVal || !this.topicText){
                     this.errorTip = "请选择正确的分组和填写新主题";
                     return ;
                 }
                 this.topicAdd().then( resp => {
                     //console.log('topicAdd', resp);
-                    this.successTip = "添加成功！";
-                    this.errorTip = "";
-                    this.radioVal = "";
-                    this.topicText = "";
+                    if(resp.data.code == 0){
+                        this.successTip = "添加成功！";
+                        this.errorTip = "";
+                        this.radioVal = "";
+                        this.topicText = "";
+
+                        return Api.getTopicList({});
+
+                    }
+                }).then(resp => {
+                    console.log('topic list',resp);
+                    console.log('topicList',this.topicList);
+                    if(resp.data.code == 0){
+                        const topicList = resp.data.data;
+                        this.setTopicList(topicList);
+                    }
                 });
                 //history.go(-1);
             },
