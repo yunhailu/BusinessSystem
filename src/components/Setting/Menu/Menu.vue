@@ -24,8 +24,6 @@
             <!--</form>-->
 
             <menu-list title="主题" :groups.sync="list"></menu-list>
-            <!--<menu-list title="主题1" :menus="AnalyticMenu"></menu-list>-->
-            <!--<menu-list title="数据源" :menus="ChannelMenu"></menu-list>-->
         </section>
     </aside>
 </template>
@@ -47,7 +45,6 @@
             return{
                 AnalyticMenu,
                 ChannelMenu,
-                //topicList: [],
                 nickName: getCookie('business_name')
             }
         },
