@@ -22,7 +22,6 @@
             </li>
         </ul>
     </div>
-    <tips :visible.sync="showDeleteComfirm" :tipsparam.sync="loadingTipParam"></tips>
 </template>
 <style lang="less" scoped>
     @import "MenuList.less";
@@ -32,72 +31,39 @@
     import Local from "../../../../local/local";
     import Tips from "../../../Common/Tips/Tips.vue"
     import * as Api from "../../../../widgets/Api";
+    import { topicList } from '../../../../vuex/getters';
+    import { setTopicList } from "../../../../vuex/actions";
 
     export default{
-        props: ['title', 'menus', 'groups'],
+        props: ['title', 'menus', 'groups', 'action'],
         data(){
             const common = Local().common;
             return{
-                common,
-                deleteTopic: {},
-                showDeleteComfirm: false,
-                loadingTipParam: {
-                    type: "confirm",
-                    content: common.deleteTip,
-                    callback: () => {
-                        console.log(this.deleteTopic);
-                        Api.topicDelete({id: this.deleteTopic.topic_id}).then(resp => {
-                            console.log('topicDelete', resp);
-                            // resp.data.data.success  1: 成功, 0: 失败
-                            if(resp.data.code == 0 && resp.data.data.success){
-//                                const _this = this;
-//                                this.groups = _.map(this.groups, group => {
-//                                    if(_this.deleteTopic.group_id == group.group_id){
-//                                        return _.filter(group.list, topic => {
-//                                            console.log('72',topic.topic_id, _this.deleteTopic.topic_id);
-//                                            return topic.topic_id != _this.deleteTopic.topic_id;
-//                                        });
-//                                    } else {
-//                                        return group;
-//                                    }
-//                                });
-                                /*
-                                * TODO: 删除不刷新左侧列表的问题
-                                * */
-//                                Api.getTopicList().then(resp => {
-//                                    if(resp.data.code){
-//                                        this.groups = resp.data.data;
-//                                    }
-//                                });
-                            }
-                        });
-                    },
-                    failback: () => { this.deleteTopic = {}; }
-                }
+                common
             }
         },
         components:{ Tips },
+        vuex: {
+            actions: { setTopicList },
+            getters: { topicList }
+        },
         methods: {
             toggle(group){
                 console.log(group);
-                _.each(this.groups, item => {
+                const groups = _.map(this.groups, item => {
                     if(group.group_id != item.group_id){
                         item.isActive = false;
                     } else {
                         item.isActive = !item.isActive;
                     }
+                    return item;
                 });
-                //menu.isActive = !menu.isActive;
+                console.log('groups',groups);
+                this.setTopicList(groups);
             },
             addTopicAction(){
                 this.$router.go({name: "settingAdd"});
             }
-//            deleteTopicAction(item, group_id){
-//                console.log('group_id', group_id);
-//                this.deleteTopic = item;
-//                this.deleteTopic.group_id = group_id;
-//                this.showDeleteComfirm = true;
-//            }
         }
     }
 </script>

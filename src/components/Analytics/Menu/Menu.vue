@@ -23,9 +23,7 @@
                 <!--</div>-->
             <!--</form>-->
 
-            <menu-list title="主题" :groups.sync="topicList"></menu-list>
-            <!--<menu-list title="主题1" :menus="AnalyticMenu"></menu-list>-->
-            <!--<menu-list title="数据源" :menus="ChannelMenu"></menu-list>-->
+            <menu-list title="主题" :groups.sync="list" :action="topicAction()"></menu-list>
         </section>
     </aside>
 </template>
@@ -38,6 +36,8 @@
     import MenuList from "./MenuList/MenuList.vue";
     import * as Api from "../../../widgets/Api";
     import { getCookie } from '../../../widgets/Cookie';
+    import { topicList } from '../../../vuex/getters';
+    import { setTopicList } from "../../../vuex/actions";
 
     export default{
         props: [],
@@ -45,16 +45,47 @@
             return{
                 AnalyticMenu,
                 ChannelMenu,
-                topicList: [],
+                //topicList: [],
                 nickName: getCookie('business_name')
             }
         },
         components:{
             'menu-list': MenuList
         },
+        vuex: {
+            actions: { setTopicList },
+            getters: { topicList }
+        },
+        computed: {
+            list(){
+                let list = [];
+                _.each(this.topicList, item => {
+                    list.push(_.extend({}, item));
+                });
+                return list;
+            }
+        },
         methods: {
-            getTopicList(){
-                return Api.getTopicList();
+//            getTopicList(){
+//                return Api.getTopicList();
+//            },
+            getTopics(){
+                console.log('vuex getTopicList:',this.getTopicList);
+                if(this.topicList.length){
+                    //this.topicList = this.getTopicList;
+                    return;
+                }
+                Api.getTopicList({}).then(resp => {
+                    //console.log('getTopicList', resp);
+                    if(resp.data.code == 0){
+                        let topicList = _.map(resp.data.data, topic => {
+                            topic.isActive = false;
+                            return topic;
+                        });
+                        _.first(topicList).isActive = true;
+                        this.setTopicList(topicList);
+                    }
+                });
             },
             toggle(menu){
                 console.log(menu, this.MainMenu);
@@ -67,26 +98,23 @@
                 });
                 //menu.isActive = !menu.isActive;
             },
+            topicAction(){
+                return (item, group_id) => {
+                    console.log('topicAction',item, group_id);
+                    //this.$router.go({name: 'settingEdit', params: {topic_id: item.topic_id, group_id}});
+                };
+            },
             init(){
-                this.getTopicList().then(resp => {
-                    //console.log('getTopicList', resp);
-                    if(resp.data.code == 0){
-                        this.topicList = _.map(resp.data.data, topic => {
-                            topic.isActive = false;
-                            return topic;
-                        });
-                        //console.log('getTopicList', this.topicList);
-                    }
-                });
+                this.getTopics();
             }
         },
         ready(){
             this.init();
         },
-        route: {
-            data(){
-                this.init();
-            }
-        }
+//        route: {
+//            data(){
+//                this.init();
+//            }
+//        }
     }
 </script>
