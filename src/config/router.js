@@ -122,7 +122,7 @@ module.exports = {
                     require(['../components/Setting/Form/Form.vue'], resolve);
                 }
             },
-            '/edit/:topic_id': {
+            '/edit/:group_id/:topic_id': {
                 name: 'settingEdit',
                 component (resolve) {
                     require(['../components/Setting/Form/Form.vue'], resolve);

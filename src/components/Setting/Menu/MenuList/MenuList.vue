@@ -12,7 +12,7 @@
                     <i class="fa pull-right" :class="[group.isActive ? 'fa-angle-down' : 'fa-angle-left']"></i>
                 </a>
                 <ul class="treeview-menu" v-show="group.isActive" transition="expand">
-                    <li v-for="topic in group.list" :id="topic.topic_id" @click="editTopicAction(topic);">
+                    <li v-for="topic in group.list" :id="topic.topic_id" @click="editTopicAction(topic,group.group_id);">
                         <a href="javascript:void(0);">
                             <i class="fa fa-angle-double-right"></i> {{topic.topic_name}}
                             <i class="fa fa-remove delete" @click.stop.prevent="comfirmDeleteTopic(topic,group.group_id);"></i>
@@ -36,7 +36,7 @@
     import { setTopicList } from "../../../../vuex/actions";
 
     export default{
-        props: ['title', 'menus', 'groups'],
+        props: ['title', 'menus', 'groups', 'action'],
         data(){
             const common = Local().common;
             return{
@@ -76,8 +76,9 @@
             addTopicAction(){
                 this.$router.go({name: "settingAdd"});
             },
-            editTopicAction(item){
-                console.log('edit', item);
+            editTopicAction(item,group_id){
+                //console.log('edit', item, group_id);
+                this.action(item, group_id);
             },
             comfirmDeleteTopic(item, group_id){
                 console.log('group_id', group_id);

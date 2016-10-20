@@ -76,7 +76,7 @@
                         </div>
                         <div class="form-group">
                             <div class="col-sm-offset-2 col-sm-10">
-                                <button type="submit" class="btn btn-primary" @click.stop.prevent="createSubmit" >{{words.create}}</button>
+                                <button type="submit" class="btn btn-primary" @click.stop.prevent="create" >{{words.create}}</button>
                             </div>
                         </div>
                     </fieldset>
@@ -134,6 +134,23 @@
             setAdvanced(isAdvanced){
                 this.isAdvanced = isAdvanced;
             },
+            create(){
+                switch(this.$route.name){
+                    case "settingAdd":
+                        this.createSubmit();
+                        break;
+                    case "settingEdit":
+                        this.updateSubmit();
+                        break;
+                    default:
+                        break;
+                }
+            },
+            updateSubmit(){
+                console.log('update submit', this.topicText, this.radioVal, this.$route.params.topic_id);
+//                this.topicText = topic.topic_name;
+//                this.radioVal = topic.topic_id
+            },
             createSubmit(){
                 //console.log(this.isAdvanced, this.radioVal, this.topicArr, this.related, this.topicText, this.excludeText);
                 if(!this.radioVal || !this.topicText){
@@ -179,6 +196,20 @@
                     name: this.topicText
                 });
             },
+            updateInit(){
+                const group_id = this.$route.params.group_id;
+                const topic_id = this.$route.params.topic_id;
+                const group = _.chain(this.topicList)
+                        .map(group => _.extend({}, group))
+                        .filter(group => (group.group_id == group_id))
+                        .first().value();
+                const topic = _.chain(group.list)
+                        .filter(topic => (topic.topic_id == topic_id))
+                        .first().value();
+                this.topicText = topic.topic_name;
+                this.radioVal = group_id;
+                //console.log('topic', this.topicText, this.radioVal);
+            },
             init(){
                 // 拉取 group 列表
                 this.getGroupList().then(resp => {
@@ -189,9 +220,10 @@
                         });
                     }
                 });
-//                this.getTopicList().then(resp => {
-//                    console.log('getTopicList', resp);
-//                });
+                if(this.$route.name == 'settingEdit'){
+                    setTimeout(this.updateInit ,1000)
+                }
+
             }
         },
         filters: {
