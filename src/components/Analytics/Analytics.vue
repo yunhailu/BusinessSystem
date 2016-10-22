@@ -12,12 +12,12 @@
                 </div>
                 <div class="col-md-5">
                     <ul class="days-btn">
-                        <li>1D</li>
-                        <li class="active">7D</li>
-                        <li>30D</li>
-                        <li>自定义</li>
+                        <li @click="selectTime(1);" :class="[selectTimeTag == 1 ? 'active' : '']">1D</li>
+                        <li @click="selectTime(7);" :class="[selectTimeTag == 7 ? 'active' : '']" class="active">7D</li>
+                        <li @click="selectTime(30);" :class="[selectTimeTag == 30 ? 'active' : '']">30D</li>
+                        <li @click="selectTime(0);" :class="[selectTimeTag == 0 ? 'active' : '']">自定义</li>
                     </ul>
-                    <div class="diyDate">
+                    <div class="diyDate" v-show="isTimeDiy">
                         <span class="date" @click="showCalendar"><i class="fa fa-calendar fa-2x  icon"></i> {{cal.value}}</span>
                         <calendar :show.sync="cal.show" :value.sync="cal.value" :x="cal.x" :y="cal.y" :begin="cal.begin" :end="cal.end" :type="cal.type" :range="cal.range"></calendar>
                     </div>
@@ -58,6 +58,8 @@
                     y: 0,
                     range:true//是否多选
                 },
+                selectTimeTag: 7,
+                isTimeDiy: false,
                 tabActive: 'result'
             }
         },
@@ -70,6 +72,10 @@
         methods: {
             searchAction(){
                 console.log(this.search);
+            },
+            selectTime(num){
+                this.selectTimeTag = num;
+                this.isTimeDiy = (num == 0) ? true : false;
             },
             showCalendar:function(e){
                 e.stopPropagation();
