@@ -360,7 +360,7 @@
 - dashboard/add
 - 入参 
 必选参数:name,topic，
-可选参数:subtopic,source,time_interval,time_dimension
+可选参数:subtopic,source,time_interval,time_dimension(1:天, 0:小时)
 任选参数:summary,sentiment,comment,influence,theme
 - 示例:$host/dashboard/add?name=alipicture_3d&topic=ali&source=web&summary=1
 ```

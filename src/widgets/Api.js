@@ -310,13 +310,45 @@ export const getDashboardList = params => {
 /**
  *  Encapsulate `get Dashboard Add` interface
  *
- *  @param  {String}  name
- *  @param  {String}  topic
+ *  @param  {String}  name  （必选）
+ *  @param  {String}  topic  （必选）
+ *  @param  {String}  subtopic
+ *  @param  {String}  source
+ *  @param  {String}  time_interval   时间间隔
+ *  @param  {String}  time_dimension(1:天, 0:小时)
+ *  @param  {String}  summary
+ *  @param  {String}  sentiment
+ *  @param  {String}  comment
+ *  @param  {String}  influence
+ *  @param  {String}  theme
  *  @return {Promise} With Dashboard Add.
  */
 export const getDashboardAdd = params => {
     return Api.request({
         url: `${rootURI}/dashboard/add`,
+        params
+    });
+};
+
+/**
+ *  Encapsulate `get Dashboard Update` interface
+ *
+ *  @param  {String}  id  （必选）
+ *  @param  {String}  topic  （必选）
+ *  @param  {String}  subtopic
+ *  @param  {String}  source
+ *  @param  {String}  time_interval   时间间隔
+ *  @param  {String}  time_dimension(1:天, 0:小时)
+ *  @param  {String}  summary
+ *  @param  {String}  sentiment
+ *  @param  {String}  comment
+ *  @param  {String}  influence
+ *  @param  {String}  theme
+ *  @return {Promise} With Dashboard Add.
+ */
+export const getDashboardUpdate = params => {
+    return Api.request({
+        url: `${rootURI}/dashboard/update`,
         params
     });
 };

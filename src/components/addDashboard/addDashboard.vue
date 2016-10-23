@@ -18,7 +18,7 @@
                     </div>
                     <div class="form-group">
                         <div class="col-sm-offset-3 col-sm-8">
-                            <button type="submit" class="btn btn-primary" @click="getDashboardAdd">{{words.addBtn}}</button>
+                            <button type="submit" class="btn btn-primary" @click="addDashboard">{{words.addBtn}}</button>
                             <button type="submit" class="btn btn-default" @click="close">{{words.cancel}}</button>
                         </div>
                     </div>
@@ -37,7 +37,7 @@
                     </div>
                     <div class="form-group">
                         <div class="col-sm-offset-3 col-sm-8">
-                            <button type="submit" class="btn btn-primary">{{words.importBtn}}</button>
+                            <button type="submit" class="btn btn-primary" @click="importDashborad">{{words.importBtn}}</button>
                             <button type="submit" class="btn btn-default" @click="close">{{words.cancel}}</button>
                         </div>
                     </div>
@@ -102,20 +102,48 @@
                     }
                 });
             },
-            getDashboardAdd(){
+            addDashboard(){
                 const name = this.newName,
-                        topic = this.activeAnalyticsTopic.topic_name,
-                        topic_id = this.activeAnalyticsTopic.topic_id;
+                            topic = this.activeAnalyticsTopic.topic_name,
+                            topic_id = this.activeAnalyticsTopic.topic_id,
+                            subtopic = this.analyticsSubTopic,
+                            source = this.analyticsSource,
+                            time_interval = this.analyticsTimeRange,
+                            time_dimension = 1;
                 console.log(this.analyticsType, this.analyticsTimeRange, this.analyticsSource, this.analyticsSubTopic);
                 if(!name){
                     this.addTip = this.words.addTips;
                     return;
                 }
-//                Api.getDashboardAdd({name, topic, topic_id}).then(resp => {
-//                    console.log('add', resp.data);
-//                    this.newName = "";
-//                    this.addTip = "";
-//                });
+                let params = {name, topic, topic_id, subtopic, source, time_interval, time_dimension};
+                params[this.analyticsType] = 1;
+
+                Api.getDashboardAdd(params).then(resp => {
+                    console.log('add', resp.data);
+                    this.close();
+                    this.newName = "";
+                    this.addTip = "";
+                });
+            },
+            importDashborad(){
+                console.log(123, this.selectValue);
+                const id = this.selectValue.key,
+                            topic = this.activeAnalyticsTopic.topic_name,
+                            topic_id = this.activeAnalyticsTopic.topic_id,
+                            subtopic = this.analyticsSubTopic,
+                            source = this.analyticsSource,
+                            time_interval = this.analyticsTimeRange,
+                            time_dimension = 1;
+                let params = {id, topic, topic_id, subtopic, source, time_interval, time_dimension};
+                params[this.analyticsType] = 1;
+                Api.getDashboardUpdate(params).then(resp => {
+                    console.log(resp.data);
+                    if(resp.data.code == 0 && resp.data.data.data == 1){
+                        this.close();
+                    } else {
+                        this.importTip = this.words.importTip;
+                    }
+                });
             }
         },
         created(){

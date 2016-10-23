@@ -82,6 +82,7 @@ export const en = {
         importTitle: "Import Dashboard",
         importLabel: "Select Dashboard",
         importBtn: "Import",
+        importTip: "Import Error !",
         cancel: "Cancel"
     },
     dashboard: {

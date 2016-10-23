@@ -82,6 +82,7 @@ export const zh_CN = {
         importTitle: "导入已有的报表",
         importLabel: "选择已存在名称",
         importBtn: "确认导入",
+        importTip: "导入不正确",
         cancel: "取消"
     },
     dashboard: {
