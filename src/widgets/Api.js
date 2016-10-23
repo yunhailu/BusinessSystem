@@ -323,7 +323,7 @@ export const getDashboardList = params => {
  *  @param  {String}  theme
  *  @return {Promise} With Dashboard Add.
  */
-export const getDashboardAdd = params => {
+export const addDashboard = params => {
     return Api.request({
         url: `${rootURI}/dashboard/add`,
         params
@@ -346,7 +346,7 @@ export const getDashboardAdd = params => {
  *  @param  {String}  theme
  *  @return {Promise} With Dashboard Add.
  */
-export const getDashboardUpdate = params => {
+export const updateDashboard = params => {
     return Api.request({
         url: `${rootURI}/dashboard/update`,
         params
@@ -359,7 +359,7 @@ export const getDashboardUpdate = params => {
  *  @param  {String}  id
  *  @return {Promise} With Dashboard Delete.
  */
-export const getDashboardDelete = params => {
+export const deleteDashboard = params => {
     return Api.request({
         url: `${rootURI}/dashboard/delete`,
         params

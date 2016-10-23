@@ -118,7 +118,7 @@
                 let params = {name, topic, topic_id, subtopic, source, time_interval, time_dimension};
                 params[this.analyticsType] = 1;
 
-                Api.getDashboardAdd(params).then(resp => {
+                Api.addDashboard(params).then(resp => {
                     console.log('add', resp.data);
                     this.close();
                     this.newName = "";
@@ -136,7 +136,7 @@
                             time_dimension = 1;
                 let params = {id, topic, topic_id, subtopic, source, time_interval, time_dimension};
                 params[this.analyticsType] = 1;
-                Api.getDashboardUpdate(params).then(resp => {
+                Api.updateDashboard(params).then(resp => {
                     console.log(resp.data);
                     if(resp.data.code == 0 && resp.data.data.data == 1){
                         this.close();

@@ -16,6 +16,9 @@
                                         <span>{{item.name}}</span>
                                     </a>
                                 </div>
+                                <div class="item-close" @click="deleteDashboard(item)">
+                                    <i class="fa" :class="[activeId != item.id ? 'fa-close' : 'fa-spinner fa-spin']"></i>
+                                </div>
                             </li>
                         </ul>
                     </div>
@@ -38,30 +41,13 @@
             const words = Local().dashboard;
             return{
                 words,
+                activeId: '',
                 dashboard: {
                     name: words.dashboard,
                     dec: words.dashboardDec,
                     icon: "fa-adjust",
                 },
-                dashboardList: [{
-                    name: "阿里影业",
-                    link: {
-                        name: "dashboardDetail",
-                        params:{ id: "123" }
-                    }
-                },{
-                    name: "中国希拉里",
-                    link: {
-                        name: "dashboardDetail",
-                        params:{ id: "456" }
-                    }
-                },{
-                    name: "品牌听力",
-                    link: {
-                        name: "dashboardDetail",
-                        params:{ id: "789" }
-                    }
-                }],
+                dashboardList: [],
             }
         },
         methods: {
@@ -70,11 +56,35 @@
                     console.log('getDashboardList', resp.data);
                     if(resp.data.code == 0){
                         const list = resp.data.data;
+                        /**
+                         *   {
+                         *       name: "阿里影业",
+                         *       link: {
+                         *           name: "dashboardDetail",
+                         *           params:{ id: "123" }
+                         *       }
+                         *   }
+                         * */
                         this.dashboardList = _.map(list, item => {
                             item.link = {name: 'dashboardDetail', params: {id: item.id}};
                             return item;
                         });
                     }
+                });
+            },
+            deleteDashboard(item){
+                console.log(item);
+                if(this.activeId == item.id) return ;
+                const id = item.id || "";
+                this.activeId = id;
+                Api.deleteDashboard({ id }).then(resp => {
+                    console.log(resp.data);
+                    if(resp.data.code == 0 && resp.data.data.data == 1){
+                        this.dashboardList = _.filter(this.dashboardList, dashboard => {
+                            return dashboard.id != id;
+                        });
+                    }
+                    this.activeId = "";
                 });
             },
             init(){
