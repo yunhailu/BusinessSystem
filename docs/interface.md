@@ -331,7 +331,7 @@
 ```
 
 ### 五、Dashboard报表
-##### 1.获取 dashboard 列表、
+##### 1.获取 dashboard 列表
 - dashboard/list
 - 入参: user_id(如果cookie里包含，地址栏可不传)
 ```
@@ -356,3 +356,54 @@
     }]
 }
 ```
+
+- dashboard/add
+- 入参 
+必选参数:name,topic，
+可选参数:subtopic,source,time_interval,time_dimension
+任选参数:summary,sentiment,comment,influence,theme
+- 示例:$host/dashboard/add?name=alipicture_3d&topic=ali&source=web&summary=1
+```
+{
+	code: 0,
+	data: {
+		dashboard_id: 24
+	},
+	message: "success"
+}
+```
+
+
+#####  更新快捷报告
+- dashboard/update
+- 入参 
+必选参数:id,topic，
+可选参数:subtopic,source,time_interval,time_dimension
+任选参数:summary,sentiment,comment,influence,theme
+- 示例:$host/dashboard/update?id=24&topic=taobao&source=weixin&sentiment=1
+```
+{
+	code: 0,
+	data: {
+		data: 1
+	},
+	message: "success"
+}
+```
+
+
+#####  删除快捷报告(整体)
+- dashboard/delete
+- 入参 
+必选参数:id
+- 示例:$host/dashboard/delete?id=24
+```
+{
+	code: 0,
+	data: {
+		data: 1
+	},
+	message: "success"
+}
+```
+

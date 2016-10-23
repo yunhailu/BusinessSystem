@@ -11,3 +11,7 @@ export const setTopicList = (store, list) => {
 export const setTopicGroupActiveId = (store, group_id) => {
 	store.dispatch(types.UPDATE_TOPIC_ACTIVE_GROUP_ID, group_id);
 };
+
+export const setActiveTopic = (store, topic) => {
+	store.dispatch(types.UPDATE_ACTIVE_TOPIC, topic);
+};

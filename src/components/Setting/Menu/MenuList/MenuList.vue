@@ -12,7 +12,7 @@
                     <i class="fa pull-right" :class="[group.isActive ? 'fa-angle-down' : 'fa-angle-left']"></i>
                 </a>
                 <ul class="treeview-menu" v-show="group.isActive" transition="expand">
-                    <li v-for="topic in group.list" :id="topic.topic_id" @click="editTopicAction(topic,group.group_id);">
+                    <li v-for="topic in group.list" :id="topic.topic_id" @click="editTopicAction(topic,group.group_id);" :class="topic | isActive" >
                         <a href="javascript:void(0);">
                             <i class="fa fa-angle-double-right"></i> {{topic.topic_name}}
                             <i class="fa fa-remove delete" @click.stop.prevent="comfirmDeleteTopic(topic,group.group_id);"></i>
@@ -32,8 +32,8 @@
     import Local from "../../../../local/local";
     import Tips from "../../../Common/Tips/Tips.vue"
     import * as Api from "../../../../widgets/Api";
-    import { topicList } from '../../../../vuex/getters';
-    import { setTopicList } from "../../../../vuex/actions";
+    import { topicList, activeTopic } from '../../../../vuex/getters';
+    import { setTopicList, setActiveTopic } from "../../../../vuex/actions";
 
     export default{
         props: ['title', 'menus', 'groups', 'action'],
@@ -55,8 +55,8 @@
         },
         components:{ Tips },
         vuex: {
-            actions: { setTopicList },
-            getters: { topicList }
+            actions: { setTopicList, setActiveTopic },
+            getters: { topicList, activeTopic }
         },
         methods: {
             toggle(group){
@@ -79,6 +79,12 @@
             editTopicAction(item,group_id){
                 //console.log('edit', item, group_id);
                 this.action(item, group_id);
+                this.selectTopic(item);
+            },
+            selectTopic(topic){
+                console.log(topic);
+                const active = [topic];
+                this.setActiveTopic(active)
             },
             comfirmDeleteTopic(item, group_id){
                 console.log('group_id', group_id);
@@ -104,6 +110,11 @@
                         _this.setTopicList(list);
                     }
                 });
+            }
+        },
+        filters: {
+            isActive(topic){
+                return _.some(this.activeTopic, item => _.isEqual(item, topic)) ? 'active' : '';
             }
         }
     }

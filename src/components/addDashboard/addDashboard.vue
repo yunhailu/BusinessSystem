@@ -15,7 +15,7 @@
                     </div>
                     <div class="form-group">
                         <div class="col-sm-offset-3 col-sm-8">
-                            <button type="submit" class="btn btn-primary">提交</button>
+                            <button type="submit" class="btn btn-primary" @click="getDashboardAdd">提交</button>
                             <button type="submit" class="btn btn-default" @click="close">取消</button>
                         </div>
                     </div>
@@ -90,9 +90,10 @@
             },
             getDashboardAdd(){
                 const name = this.newName;
-                Api.getDashboardAdd({name}).then(resp => {
-                    console.log('add', resp.data);
-                });
+                console.log(name);
+//                Api.getDashboardAdd({name}).then(resp => {
+//                    console.log('add', resp.data);
+//                });
             }
         },
         created(){

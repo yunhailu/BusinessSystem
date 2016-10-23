@@ -8,3 +8,7 @@ export const topicList = state => {
 export const topicGroupActiveId = state => {
 	return state.topic.active_group_id;
 };
+
+export const activeTopic = state => {
+	return state.topic.active_topic;
+};
