@@ -9,6 +9,14 @@ export const topicGroupActiveId = state => {
 	return state.topic.active_group_id;
 };
 
-export const activeTopic = state => {
-	return state.topic.active_topic;
+export const activeAnalyticsTopic = state => {
+	return state.topic.active_analytics_topic;
+};
+
+export const activeCompareTopic = state => {
+	return state.topic.active_compare_topic;
+};
+
+export const activeSettingTopic = state => {
+	return state.topic.active_setting_topic;
 };

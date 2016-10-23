@@ -36,8 +36,8 @@
     import MenuList from "./MenuList/MenuList.vue";
     import * as Api from "../../../widgets/Api";
     import { getCookie } from '../../../widgets/Cookie';
-    import { topicList, activeTopic } from '../../../vuex/getters';
-    import { setTopicList, setActiveTopic } from "../../../vuex/actions";
+    import { topicList, activeAnalyticsTopic } from '../../../vuex/getters';
+    import { setTopicList, setActiveAnalyticsTopic } from "../../../vuex/actions";
 
     export default{
         props: [],
@@ -53,8 +53,8 @@
             'menu-list': MenuList
         },
         vuex: {
-            actions: { setTopicList, setActiveTopic },
-            getters: { topicList, activeTopic }
+            actions: { setTopicList, setActiveAnalyticsTopic },
+            getters: { topicList, activeAnalyticsTopic }
         },
         computed: {
             list(){
@@ -73,6 +73,7 @@
                 console.log('vuex getTopicList:',this.getTopicList);
                 if(this.topicList.length){
                     //this.topicList = this.getTopicList;
+                    this.initActiveTopic();
                     return;
                 }
                 Api.getTopicList({}).then(resp => {
@@ -89,11 +90,11 @@
                 });
             },
             initActiveTopic(){
-                let active = _.map(this.activeTopic, topic => _.extend({}, topic));
-                if(!active.length){
+                let active = _.extend({}, this.activeAnalyticsTopic);
+                if(_.isEmpty(active)){
                     const group = _.first(this.topicList);
-                    active = [_.first(group.list)];
-                    this.setActiveTopic(active);
+                    active = _.first(group.list);
+                    this.setActiveAnalyticsTopic(active);
                 }
             },
             toggle(menu){

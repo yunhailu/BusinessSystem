@@ -36,8 +36,8 @@
     import MenuList from "./MenuList/MenuList.vue";
     import * as Api from "../../../widgets/Api";
     import { getCookie } from '../../../widgets/Cookie';
-    import { topicList, activeTopic } from '../../../vuex/getters';
-    import { setTopicList, setActiveTopic } from "../../../vuex/actions";
+    import { topicList, activeSettingTopic } from '../../../vuex/getters';
+    import { setTopicList, setActiveSettingTopic } from "../../../vuex/actions";
 
     export default{
         props: [],
@@ -52,8 +52,8 @@
             'menu-list': MenuList
         },
         vuex: {
-            actions: { setTopicList, setActiveTopic },
-            getters: { topicList, activeTopic }
+            actions: { setTopicList, setActiveSettingTopic },
+            getters: { topicList, activeSettingTopic }
         },
         computed: {
             list(){
@@ -80,17 +80,8 @@
                         });
                         _.first(topicList).isActive = true;
                         this.setTopicList(topicList);
-                        this.initActiveTopic();
                     }
                 });
-            },
-            initActiveTopic(){
-                let active = _.map(this.activeTopic, topic => _.extend({}, topic));
-                if(!active.length){
-                    const group = _.first(this.topicList);
-                    active = [_.first(group.list)];
-                    this.setActiveTopic(active);
-                }
             },
             toggle(menu){
                 console.log(menu, this.MainMenu);

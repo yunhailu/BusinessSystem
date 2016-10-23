@@ -32,8 +32,8 @@
     import Local from "../../../../local/local";
     import Tips from "../../../Common/Tips/Tips.vue"
     import * as Api from "../../../../widgets/Api";
-    import { topicList, activeTopic } from '../../../../vuex/getters';
-    import { setTopicList, setActiveTopic } from "../../../../vuex/actions";
+    import { topicList, activeSettingTopic } from '../../../../vuex/getters';
+    import { setTopicList, setActiveSettingTopic } from "../../../../vuex/actions";
 
     export default{
         props: ['title', 'menus', 'groups', 'action'],
@@ -55,8 +55,8 @@
         },
         components:{ Tips },
         vuex: {
-            actions: { setTopicList, setActiveTopic },
-            getters: { topicList, activeTopic }
+            actions: { setTopicList, setActiveSettingTopic },
+            getters: { topicList, activeSettingTopic }
         },
         methods: {
             toggle(group){
@@ -82,9 +82,7 @@
                 this.selectTopic(item);
             },
             selectTopic(topic){
-                console.log(topic);
-                const active = [topic];
-                this.setActiveTopic(active)
+                this.setActiveSettingTopic(topic)
             },
             comfirmDeleteTopic(item, group_id){
                 console.log('group_id', group_id);
@@ -114,7 +112,7 @@
         },
         filters: {
             isActive(topic){
-                return _.some(this.activeTopic, item => _.isEqual(item, topic)) ? 'active' : '';
+                return _.isEqual(this.activeSettingTopic, topic) ? 'active' : '';
             }
         }
     }

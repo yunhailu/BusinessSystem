@@ -31,8 +31,8 @@
     import Local from "../../../../local/local";
     import Tips from "../../../Common/Tips/Tips.vue"
     import * as Api from "../../../../widgets/Api";
-    import { topicList, activeTopic } from '../../../../vuex/getters';
-    import { setTopicList, setActiveTopic } from "../../../../vuex/actions";
+    import { topicList, activeAnalyticsTopic } from '../../../../vuex/getters';
+    import { setTopicList, setActiveAnalyticsTopic } from "../../../../vuex/actions";
 
     export default{
         props: ['title', 'menus', 'groups', 'action'],
@@ -44,8 +44,8 @@
         },
         components:{ Tips },
         vuex: {
-            actions: { setTopicList, setActiveTopic },
-            getters: { topicList, activeTopic }
+            actions: { setTopicList, setActiveAnalyticsTopic },
+            getters: { topicList, activeAnalyticsTopic }
         },
         methods: {
             toggle(group){
@@ -63,8 +63,8 @@
             },
             selectTopic(topic){
                 console.log(topic);
-                const active = [topic];
-                this.setActiveTopic(active)
+                const active = topic;
+                this.setActiveAnalyticsTopic(active)
             },
             addTopicAction(){
                 this.$router.go({name: "settingAdd"});
@@ -72,7 +72,7 @@
         },
         filters: {
             isActive(topic){
-                return _.some(this.activeTopic, item => _.isEqual(item, topic)) ? 'active' : '';
+                return _.isEqual(this.activeAnalyticsTopic, topic) ? 'active' : '';
             }
         }
     }
