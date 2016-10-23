@@ -7,7 +7,7 @@
     </div>
     <ul class="row tabs">
         <li v-for="tab in tabs" class="tab" :class="[tab.link == $route.name ? 'active' : '']" >
-            <a v-link="{name: tab.link}">{{tab.name}}</a>
+            <a v-link="{name: tab.link}" @click="changeTab(tab);">{{tab.name}}</a>
         </li>
     </ul>
     <!--<ul class="row items filters">-->
@@ -30,9 +30,15 @@
 //    import OtherComponent from './components/other.vue'
     import Local from '../../../local/local';
     import AddDashboard from '../../AddDashboard/AddDashboard.vue'
+    import { analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic } from '../../../vuex/getters';
+    import { setAnalyticsType, setAnalyticsTimeRange, setAnalyticsSource, setAnalyticsSubTopic } from "../../../vuex/actions";
 
     export default{
         props: ['active', 'actions', 'sourceactive'],
+        vuex: {
+            actions: { setAnalyticsType, setAnalyticsTimeRange, setAnalyticsSource, setAnalyticsSubTopic },
+            getters: { analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic }
+        },
         data(){
             const words = Local().analytics;
             return{
@@ -40,7 +46,7 @@
                 showDashboard: false,
                 tabs: [{
                     name: words.tabs[0],
-                    link: 'result'
+                    link: 'summary'
                 },{
                     name: words.tabs[1],
                     link: 'sentiment'
@@ -72,20 +78,36 @@
                 this.filterActive = idx;
             },
             sourceAction(val, idx){
-                console.log(val, idx);
+                console.log(val, idx, this.$route);
                 this.sourceActive = idx;
                 this.actions && this.actions(val, idx);
+                const source = ["all", "wechat", "weibo", "client", "web", "oversea"];
+                if(this.$route.path.indexOf('analytics') > -1){
+                    this.setAnalyticsSource(source[idx]);
+                }
+            },
+            changeTab(tab){
+                console.log(tab);
+                this.setAnalyticsType(this.$route.name);
             },
             showAdd(){
                 this.showDashboard = true;
             }
         },
-//        created(){
-//            const sourceActive = this.sourceActive;
-//            this.actions && this.actions("总数", sourceActive);
-//        },
+        ready(){
+            if(this.$route.path.indexOf('analytics') > -1){
+                this.setAnalyticsType(this.$route.name);
+                const source = ["all", "wechat", "weibo", "client", "web", "oversea"];
+                this.setAnalyticsSource(source[0]);
+            }
+        },
         components:{
             AddDashboard
-        }
+        },
+//        route: {
+//            data(){
+//
+//            }
+//        }
     }
 </script>

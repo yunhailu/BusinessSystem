@@ -73,6 +73,17 @@ export const zh_CN = {
         filters: ["全部", "情绪指数", "地域分布", "性别分布", "语言分布"],
         source: ["全部", "微信", "微博", "客户端", "网页", "海外"]
     },
+    addDashboard:{
+        addTitle: "添加新的报表",
+        addLabel: "新增名称",
+        addBtn: "确认新增",
+        addTips: "请输入正确的报表名称！",
+        placeholder: "报表名称",
+        importTitle: "导入已有的报表",
+        importLabel: "选择已存在名称",
+        importBtn: "确认导入",
+        cancel: "取消"
+    },
     dashboard: {
         dashboard: "快捷报告",
         dashboardDec: "用你的 KPI 数据构建客户快捷报告",

@@ -8,7 +8,7 @@
  login             |   /#!/login                         |      null                            |         登录页              
  home              |   /#!/home                          |      null                            |         主界面 Home 页            
  analytics         |   /#!/analytics                     |      null                            |         主界面 Analytics 页（默认信息汇总）            
- result            |   /#!/analytics/result              |      null                            |         主界面 Analytics 页的信息汇总标签            
+ summary           |   /#!/analytics/summary             |      null                            |         主界面 Analytics 页的信息汇总标签            
  sentiment         |   /#!/analytics/sentiment           |      null                            |         主界面 Analytics 页的情绪分析标签            
  influence         |   /#!/analytics/influence           |      null                            |         主界面 Analytics 页的影响力分析标签            
  theme             |   /#!/analytics/theme               |      null                            |         主界面 Analytics 页的主题分析标签            

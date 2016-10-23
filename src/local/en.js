@@ -73,6 +73,17 @@ export const en = {
         filters: ["All", "Sentiment", "Countries", "Gender", "Languages"],
         source: ["All", "WeChat", "Weibo", "Client", "Platforms", "Oversea"]
     },
+    addDashboard:{
+        addTitle: "Add New Dashboard",
+        addLabel: "New Name",
+        addBtn: "Create",
+        addTips: "Please input dashboard name !",
+        placeholder: "Dashboard Name",
+        importTitle: "Import Dashboard",
+        importLabel: "Select Dashboard",
+        importBtn: "Import",
+        cancel: "Cancel"
+    },
     dashboard: {
         dashboard: "Dashboard",
         dashboardDec: "Build custom dashboards with the KPIs of your choice",

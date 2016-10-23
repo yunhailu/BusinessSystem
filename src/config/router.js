@@ -25,13 +25,13 @@ module.exports = {
         },
         subRoutes: {
             '/': {
-                name: 'result',
+                name: 'summary',
                 component (resolve) {
                     require(['../components/Result/Result.vue'], resolve);
                 }
             },
-            '/result': {
-                name: 'result',
+            '/summary': {
+                name: 'summary',
                 component (resolve) {
                     require(['../components/Result/Result.vue'], resolve);
                 }

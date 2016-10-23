@@ -20,3 +20,23 @@ export const activeCompareTopic = state => {
 export const activeSettingTopic = state => {
 	return state.topic.active_setting_topic;
 };
+
+
+/**
+ * Analytics
+ * */
+export const analyticsType = state => {
+	return state.analytics.type;
+};
+
+export const analyticsTimeRange = state => {
+	return state.analytics.timeRange;
+};
+
+export const analyticsSource = state => {
+	return state.analytics.source;
+};
+
+export const analyticsSubTopic = state => {
+	return state.analytics.subtopic;
+};

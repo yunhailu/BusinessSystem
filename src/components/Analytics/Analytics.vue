@@ -43,6 +43,8 @@
     import Calendar from '../Common/Calendar/Calendar.vue';
     //import Tabs from './Tabs/Tabs.vue';
     import Local from "../../local/local";
+    import { analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic } from '../../vuex/getters';
+    import { setAnalyticsType, setAnalyticsTimeRange, setAnalyticsSource, setAnalyticsSubTopic } from "../../vuex/actions";
 
     export default{
         data(){
@@ -63,6 +65,10 @@
                 tabActive: 'result'
             }
         },
+        vuex: {
+            actions: { setAnalyticsType, setAnalyticsTimeRange, setAnalyticsSource, setAnalyticsSubTopic },
+            getters: { analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic }
+        },
         components:{
             'header-component': HeaderComponent,
             'menu-component': MenuComponent,
@@ -72,10 +78,12 @@
         methods: {
             searchAction(){
                 console.log(this.search);
+                this.setAnalyticsSubTopic(this.search);
             },
             selectTime(num){
                 this.selectTimeTag = num;
                 this.isTimeDiy = (num == 0) ? true : false;
+                this.setAnalyticsTimeRange(num);
             },
             showCalendar:function(e){
                 e.stopPropagation();
@@ -91,6 +99,9 @@
                 setTimeout(function(){
                     document.addEventListener('click',bindHide,false);
                 },500);
+            },
+            init(){
+
             }
         },
         route: {

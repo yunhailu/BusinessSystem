@@ -310,6 +310,8 @@ export const getDashboardList = params => {
 /**
  *  Encapsulate `get Dashboard Add` interface
  *
+ *  @param  {String}  name
+ *  @param  {String}  topic
  *  @return {Promise} With Dashboard Add.
  */
 export const getDashboardAdd = params => {
