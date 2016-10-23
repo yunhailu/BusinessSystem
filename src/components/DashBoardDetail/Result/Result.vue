@@ -6,8 +6,8 @@
         <!--<div class="arrow animated rubberBand" @click="toggle">-->
             <!--<i class="fa fa-angle-left fa-3x" transition="rotate" :class="[resultPieChartOption.isActive ? 'fa-rotate-180' : '']"></i>-->
         <!--</div>-->
-        <div class="chart" v-echarts="resultChartOption" :loading="resultChartLoading" :class="[resultChartOption.isToggle ? 'active' : '']" :resize="resultChartOption.isToggle" theme="macarons"></div>
-        <div class="pie" v-echarts="resultPieChartOption" :loading="resultPieChartLoading" :class="[resultPieChartOption.isActive ? 'active' : '']" translate="show-pie"  theme="macarons"></div>
+        <div class="chart" v-echarts="resultChartOption" :loading="resultChartLoading" :class="[data.source=='all' ? 'active' : '']" :resize="resultChartOption.isToggle" theme="macarons"></div>
+        <div class="pie" v-echarts="resultPieChartOption" :loading="resultPieChartLoading" :class="[data.source=='all' ? 'active' : '']" translate="show-pie"  theme="macarons"></div>
     </div>
     <list-panel :list="list" :options="options" :select-title="selectTitle" :select-value.sync="sortVal"></list-panel>
 </template>
@@ -162,6 +162,11 @@
                 this.resultPieChartOption.isActive = !this.resultPieChartOption.isActive;
             },
             getSummaryDetail(){
+                const subtopic = this.data.subtopic,
+                        source = this.data.source,
+                        time_dimension = this.data.time_dimension,
+                        time_interval = this.data.time_interval,
+                        topic = this.data.topic;
                 Api.getSummaryDetail({}).then(resp => {
                     //console.log('getSummaryDetail', resp);
                     if(resp.data.code == 0){
