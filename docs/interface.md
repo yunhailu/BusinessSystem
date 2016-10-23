@@ -357,6 +357,7 @@
 }
 ```
 
+#####  添加快捷报告
 - dashboard/add
 - 入参 
 必选参数:name,topic，
@@ -404,6 +405,29 @@
 		data: 1
 	},
 	message: "success"
+}
+```
+
+##### 获取单个dashboard的详细信息
+- dashboard/detail
+- 入参：id(必选)
+- 示例:$host/dashboard/detail?id=1
+```
+{
+    code: 0,
+    data: {
+        id: 1,
+        topic: 'ali picture 7d'
+        subtopic: 'ali',
+        source: 'web',
+        time_interval: '7',
+        time_dimension: 1
+        summary: 1,
+        sentiment: 0,
+        comment: 1,
+        influence: 0,
+        theme: 0
+    }
 }
 ```
 

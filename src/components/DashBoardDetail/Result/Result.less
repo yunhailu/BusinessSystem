@@ -1,7 +1,6 @@
 @import "../../common.less";
 
 //@list-bg: white;
-@list-bg: @bg-color;
 @flag-blue: #337ab7;
 @flag-yellow: #f0ad4e;
 @flag-light-blue: #46b8da;
@@ -9,10 +8,10 @@
 @flag-red: #f2dede;
 @flag-grey: @word;
 
+
 .panel-title{
   .mg(0.5rem 1rem);  .pd(0.5rem 1rem);  .disB();  .tc();  .bgc(#eee);
 }
-
 .charts{
   .pd(0);  .mg(0);  .h(28rem);  .w(100%);   .pr();
   .chart.active{ .w(73%); }
@@ -30,60 +29,6 @@
     i{ .mgc();  .top(13rem); .pr();   }
   }
   .arrow:hover{ .bgc(#eee);  .pointer(); }
-}
-
-.result-panel{
-  .pd(0);  .mg(2rem 0);   .w(100%);   .pr();  .bgc(@list-bg);
-  //.b-top(0.1rem solid #dedede);
-
-  &-tools{
-    .pd(0.6rem 0);  .mg(0);  .b-top(0.1rem solid #dedede);
-  }
-
-  &-list{
-      .b-top(0.1rem solid #dedede);
-    &-item{
-      .b-top(0.1rem solid #fff);  .b-bottom(0.1rem solid #dedede);  .mg(0);  .c(@word);
-      &-left{
-        .pd(1rem 2rem 1rem);  .b-right(0.1rem solid #dedede);
-        .fa{ .mg(1rem 0);  .float-left();  .c(@word); }
-        &-con{
-          .mg(0 0 0 2.6rem);
-          .title{ .c(@body-theme);  .h(2.4rem);  .lh(2.4rem);  .f(1.4rem);  .ff("pingfang-bold");  .text-hidden();  }
-          .detail{ .text-num-hidden(2); .ff("pingfang-bold");   }
-          .time{ .pd(0.5rem 0); }
-        }
-      }
-      &-right{
-        .pd(2rem 2rem 3 rem);
-        .icon{
-          .w(2rem);  .h(2rem);  .b(0.1rem solid #dedede);  .tc();
-          .lh(2rem);  .tc();  .pa();  .top(-1rem);  .bgc(@list-bg);
-        }
-        .icon.flag-blue{ .c(@flag-blue); }
-        .icon.flag-yellow{ .c(@flag-yellow); }
-        .icon.flag-light-blue{ .c(@flag-light-blue); }
-        .icon.flag-green{ .c(@flag-green); }
-        .icon.flag-grey{ .c(@flag-grey); }
-        .item-data{
-          .pd(0.8rem 0 );
-          .row{
-            .mg(0.7rem 0 0);  .f(1.4rem);
-            .title{ .ff(pingfang-bold);  .fw(600); }
-          }
-        }
-
-      }
-    }
-    &-item:hover{
-      .bgc(white);
-      .icon{ .bgc(white); }
-    }
-  }
-
-  &-pager{
-    .w(100%);  .tc();
-  }
 }
 
 .rotate-transition{

@@ -219,19 +219,19 @@ export const getThemeDetail = params => {
     });
 };
 
-/**
- *  Encapsulate `getDashboardDetail` interface
- *
- *  @param {String} id
- *
- *  @return {Promise} With dashboard detail info.
- */
-export const getDashboardDetail = params => {
-    return Api.request({
-        url: `${rootURI}/dashboard/${params.id}`,
-        params
-    });
-};
+// /**
+//  *  Encapsulate `getDashboardDetail` interface
+//  *
+//  *  @param {String} id
+//  *
+//  *  @return {Promise} With dashboard detail info.
+//  */
+// export const getDashboardDetail = params => {
+//     return Api.request({
+//         url: `${rootURI}/dashboard/${params.id}`,
+//         params
+//     });
+// };
 
 /**
  *  Encapsulate `实时热点事件（前5名）` interface
@@ -362,6 +362,20 @@ export const updateDashboard = params => {
 export const deleteDashboard = params => {
     return Api.request({
         url: `${rootURI}/dashboard/delete`,
+        params
+    });
+};
+
+/**
+ *  Encapsulate `getDashboardDetail` interface
+ *
+ *  @param {String} id
+ *
+ *  @return {Promise} With dashboard detail info.
+ */
+export const getDashboardDetail = params => {
+    return Api.request({
+        url: `${rootURI}/dashboard/detail`,
         params
     });
 };

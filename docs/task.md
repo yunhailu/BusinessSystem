@@ -28,5 +28,12 @@
 - 2016.10.22
     - 1.时间选择器
     - 2.添加vuex主题的状态机
+        
+- 2016.10.23
+    - 1.分离 analytics, compare, setting 菜单焦点状态
+    - 2.analytics 设置时间、副标题、数据来源、分类的参数
+    - 3.添加dashboard功能
+    - 4.导入已存在的dashboard功能
+    - 5.整体删除dashboard功能
     
     
