@@ -35,5 +35,6 @@
     - 3.添加dashboard功能
     - 4.导入已存在的dashboard功能
     - 5.整体删除dashboard功能
+    - 6.dashboard 详情页中，summary已经搞定
     
     

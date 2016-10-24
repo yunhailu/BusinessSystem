@@ -90,6 +90,7 @@ export const en = {
         dashboardDec: "Build custom dashboards with the KPIs of your choice",
         result: "Result",
         sentiment: "Sentiment",
+        comment: "Comment",
         influence: "Influence",
         theme: "Theme"
     },

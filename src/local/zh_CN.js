@@ -90,6 +90,7 @@ export const zh_CN = {
         dashboardDec: "用你的 KPI 数据构建客户快捷报告",
         result: "态势分析",
         sentiment: "情绪分析",
+        comment: "评价分析",
         influence: "影响力分析",
         theme: "主题分析"
     },

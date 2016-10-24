@@ -10,16 +10,16 @@
                     <result-component :title="words.result" :data="detail"></result-component>
                 </div>
                 <div class="dashboard-detail-wrap-module" v-if="detail.sentiment">
-                    <sentiment-component :title="words.sentiment"></sentiment-component>
+                    <sentiment-component :title="words.sentiment" :data="detail"></sentiment-component>
                 </div>
                 <div class="dashboard-detail-wrap-module" v-if="detail.comment">
-                    <sentiment-component :title="words.sentiment"></sentiment-component>
+                    <comment-component :title="words.comment" :data="detail"></comment-component>
                 </div>
                 <div class="dashboard-detail-wrap-module" v-if="detail.influence">
-                    <influence-component :title="words.influence"></influence-component>
+                    <influence-component :title="words.influence" :data="detail"></influence-component>
                 </div>
                 <div class="dashboard-detail-wrap-module" v-if="detail.theme">
-                    <theme-component :title="words.theme"></theme-component>
+                    <theme-component :title="words.theme" :data="detail"></theme-component>
                 </div>
             </div>
         </div>
@@ -33,6 +33,7 @@
     import HeaderComponent from '../Header/Header.vue';
     import InfluenceComponent from './Influence/Influence.vue';
     import ResultComponent from './Result/Result.vue';
+    import CommentComponent from './Comment/Comment.vue';
     import SentimentComponent from './Sentiment/Sentiment.vue';
     import ThemeComponent from './Theme/Theme.vue';
 
@@ -69,6 +70,7 @@
             HeaderComponent,
             ResultComponent,
             InfluenceComponent,
+            CommentComponent,
             SentimentComponent,
             ThemeComponent
         },
