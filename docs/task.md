@@ -37,4 +37,6 @@
     - 5.整体删除dashboard功能
     - 6.dashboard 详情页中，summary已经搞定
     
+- 2016.10.24
+    - 1.在dashboard中，添加情绪、评价、影响力、主题的各个分析图表
     

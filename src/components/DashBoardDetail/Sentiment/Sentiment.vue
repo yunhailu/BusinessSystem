@@ -1,7 +1,10 @@
 <template>
     <!--<tabs :actions="actions" ></tabs>-->
     <!--<span>Sentiment</span>-->
-    <span class="panel-title">{{title}}</span>
+    <div class="panel-title">
+        <span class="panel-title-text">{{title}}</span>
+        <div class="panel-title-delete"><i class="fa fa-minus"></i></div>
+    </div>
     <div class="charts">
         <div class="chart timeBar" v-echarts="sentimentBarOption" :loading="sentimentBarLoading" ></div><!--theme="infographic"-->
         <div class="chart percentBar" v-echarts="sentimentChartOption" :loading="sentimentChartLoading" ></div>

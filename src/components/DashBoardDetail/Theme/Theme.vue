@@ -1,7 +1,10 @@
 <template>
     <!--<tabs></tabs>-->
     <!--<span>Theme</span>-->
-    <span class="panel-title">{{title}}</span>
+    <div class="panel-title">
+        <span class="panel-title-text">{{title}}</span>
+        <div class="panel-title-delete"><i class="fa fa-minus"></i></div>
+    </div>
     <div class="theme-word">
         <div class="theme-word-chart" v-echarts="themeWordOption" :loading="themeWordLoading"  theme="infographic" :click="clickAction"></div>
         <div class="theme-word-ranking">

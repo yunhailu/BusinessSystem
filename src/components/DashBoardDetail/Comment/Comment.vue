@@ -1,7 +1,10 @@
 <template>
     <!--<tabs :actions="actions" ></tabs>-->
     <!--<div>Evaluation</div>-->
-    <span class="panel-title">{{title}}</span>
+    <div class="panel-title">
+        <span class="panel-title-text">{{title}}</span>
+        <div class="panel-title-delete"><i class="fa fa-minus"></i></div>
+    </div>
     <div class="charts">
         <div class="chart commentLeftBar" v-echarts="commentBarOption" :loading="commentBarLoading" theme="macarons"></div><!--theme="infographic"-->
         <div class="chart commentRightBar" v-echarts="commentChartOption" :loading="commentChartLoading" v-show="isShow" theme="macarons"></div>

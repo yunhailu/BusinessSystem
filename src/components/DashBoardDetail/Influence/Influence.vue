@@ -1,7 +1,10 @@
 <template>
     <!--<tabs ></tabs>-->
     <!--<span>Influence</span>-->
-    <span class="panel-title">{{title}}</span>
+    <div class="panel-title">
+        <span class="panel-title-text">{{title}}</span>
+        <div class="panel-title-delete"><i class="fa fa-minus"></i></div>
+    </div>
     <!--<div class="popular">-->
         <!--<ul class="popular-list">-->
             <!--<li class="popular-list-item" v-for="item in popularList">-->

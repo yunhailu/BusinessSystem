@@ -1,7 +1,10 @@
 <template>
     <!--<tabs :actions="actions" ></tabs>-->
     <!--<span>Result</span>-->
-    <span class="panel-title">{{title}}</span>
+    <div class="panel-title">
+        <span class="panel-title-text">{{title}}</span>
+        <div class="panel-title-delete"><i class="fa fa-minus"></i></div>
+    </div>
     <div class="charts">
         <!--<div class="arrow animated rubberBand" @click="toggle">-->
             <!--<i class="fa fa-angle-left fa-3x" transition="rotate" :class="[resultPieChartOption.isActive ? 'fa-rotate-180' : '']"></i>-->
