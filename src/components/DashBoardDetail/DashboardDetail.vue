@@ -7,19 +7,19 @@
                     <div class="title"><i class="fa fa-thumb-tack"></i> <span>{{name}}</span></div>
                 </div>
                 <div class="dashboard-detail-wrap-module" v-if="detail.summary">
-                    <result-component :title="words.result" :data="detail"></result-component>
+                    <result-component :title="words.result" :data="detail" :remove="removeItem"></result-component>
                 </div>
                 <div class="dashboard-detail-wrap-module" v-if="detail.sentiment">
-                    <sentiment-component :title="words.sentiment" :data="detail"></sentiment-component>
+                    <sentiment-component :title="words.sentiment" :data="detail" :remove="removeItem"></sentiment-component>
                 </div>
                 <div class="dashboard-detail-wrap-module" v-if="detail.comment">
-                    <comment-component :title="words.comment" :data="detail"></comment-component>
+                    <comment-component :title="words.comment" :data="detail" :remove="removeItem"></comment-component>
                 </div>
                 <div class="dashboard-detail-wrap-module" v-if="detail.influence">
-                    <influence-component :title="words.influence" :data="detail"></influence-component>
+                    <influence-component :title="words.influence" :data="detail" :remove="removeItem"></influence-component>
                 </div>
                 <div class="dashboard-detail-wrap-module" v-if="detail.theme">
-                    <theme-component :title="words.theme" :data="detail"></theme-component>
+                    <theme-component :title="words.theme" :data="detail" :remove="removeItem"></theme-component>
                 </div>
             </div>
         </div>
@@ -39,7 +39,7 @@
 
 
     import Local from "../../local/local";
-    import * as API from "../../widgets/Api";
+    import * as Api from "../../widgets/Api";
 
     export default{
         data(){
@@ -53,13 +53,29 @@
         methods: {
             getDashboardDetail(){
                 const id = this.$route.params.id;
-                API.getDashboardDetail({ id }).then(resp => {
+                Api.getDashboardDetail({ id }).then(resp => {
                     console.log("getDashboardDetail", resp.data);
                     if(resp.data.code == 0){
                         const detail = resp.data.data;
                         this.name = detail.name;
                         this.details = detail.data;
                     }
+                });
+            },
+            removeItem(detail, category, callback){
+                const params = {
+                    id: this.$route.params.id,
+                    topic: detail.topic
+                };
+                params[category] = 0;
+                Api.removeDashboardItem(params).then(resp => {
+                    console.log(resp.data);
+                    _.each(this.details, detail => {
+                        if(detail.topic == params.topic){
+                            detail[category] = 0;
+                        }
+                    });
+                    callback && callback(resp.data);
                 });
             },
             init(){

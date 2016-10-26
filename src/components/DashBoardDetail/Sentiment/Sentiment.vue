@@ -3,7 +3,7 @@
     <!--<span>Sentiment</span>-->
     <div class="panel-title">
         <span class="panel-title-text">{{title}}</span>
-        <div class="panel-title-delete"><i class="fa fa-minus"></i></div>
+        <div class="panel-title-delete" @click="deleteItem();"><i class="fa fa-minus"></i></div>
     </div>
     <div class="charts">
         <div class="chart timeBar" v-echarts="sentimentBarOption" :loading="sentimentBarLoading" ></div><!--theme="infographic"-->
@@ -27,7 +27,7 @@
 
 
     export default{
-        props: ['title', 'data'],
+        props: ['title', 'data', 'remove'],
         data(){
             const common = Local().common;
             return{
@@ -257,6 +257,10 @@
                     }
 
                 });
+            },
+            deleteItem(){
+                const detail = this.data;
+                this.remove(detail, 'sentiment');
             },
             init(){
                 this.getSentimentDetail();

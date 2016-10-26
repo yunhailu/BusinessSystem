@@ -3,7 +3,7 @@
     <!--<span>Result</span>-->
     <div class="panel-title">
         <span class="panel-title-text">{{title}}</span>
-        <div class="panel-title-delete"><i class="fa fa-minus"></i></div>
+        <div class="panel-title-delete" @click="deleteItem();"><i class="fa fa-minus"></i></div>
     </div>
     <div class="charts">
         <!--<div class="arrow animated rubberBand" @click="toggle">-->
@@ -27,7 +27,7 @@
     import Tabs from '../../Common/Tabs/Tabs.vue';
 
     export default{
-        props: ['title', 'data'],
+        props: ['title', 'data', 'remove'],
         data(){
             return{
                 sourceActive: 0,
@@ -198,6 +198,10 @@
                         this.list = resp.data.data;
                     }
                 });
+            },
+            deleteItem(){
+                const detail = this.data;
+                this.remove(detail, 'summary');
             },
             initData(){
                 this.lineData = {

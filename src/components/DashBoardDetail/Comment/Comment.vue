@@ -3,7 +3,7 @@
     <!--<div>Evaluation</div>-->
     <div class="panel-title">
         <span class="panel-title-text">{{title}}</span>
-        <div class="panel-title-delete"><i class="fa fa-minus"></i></div>
+        <div class="panel-title-delete" @click="deleteItem();"><i class="fa fa-minus"></i></div>
     </div>
     <div class="charts">
         <div class="chart commentLeftBar" v-echarts="commentBarOption" :loading="commentBarLoading" theme="macarons"></div><!--theme="infographic"-->
@@ -25,7 +25,7 @@
     import Tabs from '../../Common/Tabs/Tabs.vue';
 
     export default{
-        props: ['title', 'data'],
+        props: ['title', 'data', 'remove'],
         data(){
             const words = Local().comment, common = Local().common;
             return{
@@ -226,6 +226,10 @@
                     return ({ value: _.reduce(value, (memo, val) => memo + val, 0),name: this.words[key] });
                 });
 
+            },
+            deleteItem(){
+                const detail = this.data;
+                this.remove(detail, 'comment');
             },
             init(){
                 this.getCommentDetail();

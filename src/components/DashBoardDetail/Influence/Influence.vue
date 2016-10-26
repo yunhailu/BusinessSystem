@@ -3,7 +3,7 @@
     <!--<span>Influence</span>-->
     <div class="panel-title">
         <span class="panel-title-text">{{title}}</span>
-        <div class="panel-title-delete"><i class="fa fa-minus"></i></div>
+        <div class="panel-title-delete" @click="deleteItem();"><i class="fa fa-minus"></i></div>
     </div>
     <!--<div class="popular">-->
         <!--<ul class="popular-list">-->
@@ -64,7 +64,7 @@
     import Page from '../../Common/Page/Page.vue';
 
     export default{
-        props: ['title', 'data'],
+        props: ['title', 'data', 'remove'],
         data(){
             const words = Local().influence;
             return{
@@ -103,6 +103,10 @@
                         });
                     }
                 });
+            },
+            deleteItem(){
+                const detail = this.data;
+                this.remove(detail, 'influence');
             },
             init(){
                 this.getPopularList();

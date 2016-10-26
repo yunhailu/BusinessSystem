@@ -245,7 +245,6 @@
                                 const summary = _.reduce(this.lineData[key][this.sentimentArr[index]], (memo, val) => {
                                     return memo + val;
                                 }, 0);
-                                //this.sentimentChartOption.series[index].data = [];
                                 this.sentimentChartOption.series[index].data.push(summary);
                             }.bind(this));
                         }.bind(this));
@@ -274,6 +273,34 @@
                         happy: [], anger: [], sorrow: [], disgust: [], fear: []
                     }
                 };
+                this.sentimentChartOption.series = [
+                    {
+                        name: this.common.happy,
+                        type: 'bar',
+                        stack: '总量',
+                        data: []
+                    }, {
+                        name: this.common.anger,
+                        type: 'bar',
+                        stack: '总量',
+                        data: []
+                    }, {
+                        name: this.common.sorrow,
+                        type: 'bar',
+                        stack: '总量',
+                        data: []
+                    }, {
+                        name: this.common.disgust,
+                        type: 'bar',
+                        stack: '总量',
+                        data: []
+                    }, {
+                        name: this.common.fear,
+                        type: 'bar',
+                        stack: '总量',
+                        data: []
+                    }
+                ];
             },
             init(){
                 this.initData();

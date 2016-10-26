@@ -379,3 +379,23 @@ export const getDashboardDetail = params => {
         params
     });
 };
+
+/**
+ *  Encapsulate `getDashboardRemoveItem` interface
+ *
+ *  @param {String} id (必选)
+ *  @param {String} topic_id (必选)
+ *  @param {Number} summary (可选)
+ *  @param {Number} sentiment (可选)
+ *  @param {Number} comment (可选)
+ *  @param {Number} influence (可选)
+ *  @param {Number} theme (可选)
+ *
+ *  @return {Promise} With remove dashboard item info.
+ */
+export const removeDashboardItem = params => {
+    return Api.request({
+        url: `${rootURI}/dashboard/remove`,
+        params
+    });
+};
