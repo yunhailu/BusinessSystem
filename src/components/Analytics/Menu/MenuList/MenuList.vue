@@ -49,7 +49,7 @@
         },
         methods: {
             toggle(group){
-                console.log(group);
+                //console.log(group);
                 const groups = _.map(this.groups, item => {
                     if(group.group_id != item.group_id){
                         item.isActive = false;
@@ -58,11 +58,11 @@
                     }
                     return item;
                 });
-                console.log('groups',groups);
+                //console.log('groups',groups);
                 this.setTopicList(groups);
             },
             selectTopic(topic){
-                console.log(topic);
+                //console.log(topic);
                 const active = topic;
                 this.setActiveAnalyticsTopic(active)
             },

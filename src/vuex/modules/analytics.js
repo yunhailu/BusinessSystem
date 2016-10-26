@@ -4,7 +4,7 @@
 import { UPDATE_TYPE, UPDATE_TIME_RANGE, UPDATE_SOURCE, UPDATE_SUBTOPIC } from '../mutations-types'
 
 const state = {
-    type: 'result',
+    type: 'summary',
     timeRange: '7',
     source: 'all',
     subtopic: ''

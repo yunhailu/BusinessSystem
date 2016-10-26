@@ -58,6 +58,7 @@
     import * as Api from '../../widgets/Api';
     import Tabs from '../Common/Tabs/Tabs.vue';
     import Page from '../Common/Page/Page.vue';
+    import { analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic, activeAnalyticsTopic } from '../../vuex/getters';
 
     export default{
         data(){
@@ -67,6 +68,23 @@
                 popularList: [],
                 influancerTable: [],
                 noTableTips: words.noTableTips
+            }
+        },
+        vuex: {
+            getters: {analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic, activeAnalyticsTopic}
+        },
+        watch: {
+            activeAnalyticsTopic: {
+                handler(val){
+                    //this.commentBarLoading = true;
+                    //this.commentChartLoading = true;
+                    this.init(val);
+                }
+            }
+        },
+        ready(){
+            if(this.activeAnalyticsTopic && this.activeAnalyticsTopic.topic_id){
+                this.init();
             }
         },
         methods: {
@@ -194,10 +212,10 @@
             Tabs,
             'page': Page
         },
-        route: {
-            data(){
-                this.init();
-            }
-        }
+//        route: {
+//            data(){
+//                this.init();
+//            }
+//        }
     }
 </script>

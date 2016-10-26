@@ -20,6 +20,7 @@
     import Local from "../../local/local";
     import {Chart, Pie} from '../../config/config';
     import * as Api from '../../widgets/Api';
+    import { analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic, activeAnalyticsTopic } from '../../vuex/getters';
 
 
     export default{
@@ -174,6 +175,9 @@
                 }
             }
         },
+        vuex: {
+            getters: {analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic, activeAnalyticsTopic}
+        },
         methods: {
             actions(val, idx){
                 let source = "";
@@ -241,6 +245,7 @@
                                 const summary = _.reduce(this.lineData[key][this.sentimentArr[index]], (memo, val) => {
                                     return memo + val;
                                 }, 0);
+                                //this.sentimentChartOption.series[index].data = [];
                                 this.sentimentChartOption.series[index].data.push(summary);
                             }.bind(this));
                         }.bind(this));
@@ -248,11 +253,46 @@
 
                 });
             },
+            initData(){
+                this.lineData = {
+                    all: {
+                        happy: [], anger: [], sorrow: [], disgust: [], fear: []
+                    },
+                    wechat: {
+                        happy: [], anger: [], sorrow: [], disgust: [], fear: []
+                    },
+                    weibo: {
+                        happy: [], anger: [], sorrow: [], disgust: [], fear: []
+                    },
+                    client: {
+                        happy: [], anger: [], sorrow: [], disgust: [], fear: []
+                    },
+                    web: {
+                        happy: [], anger: [], sorrow: [], disgust: [], fear: []
+                    },
+                    overseas: {
+                        happy: [], anger: [], sorrow: [], disgust: [], fear: []
+                    }
+                };
+            },
             init(){
+                this.initData();
                 this.getSentimentDetail();
             }
         },
+        ready(){
+            if(this.activeAnalyticsTopic && this.activeAnalyticsTopic.topic_id){
+                this.init();
+            }
+        },
         watch: {
+            activeAnalyticsTopic: {
+                handler(val){
+                    this.sentimentBarLoading = true;
+                    this.sentimentChartLoading = true;
+                    this.init(val);
+                }
+            },
             sortVal: {
                 handler(val, oldVal){
                     if(val != oldVal){
@@ -266,10 +306,10 @@
         components:{
             Tabs, ListPanel
         },
-        route: {
-            data(){
-                this.init();
-            }
-        }
+//        route: {
+//            data(){
+//                this.init();
+//            }
+//        }
     }
 </script>

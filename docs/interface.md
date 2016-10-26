@@ -432,7 +432,7 @@
 ```
 
 ##### 删除dashboard中某个分析
-- dashboard/delete/item
+- dashboard/remove
 - 入参：id(必选), topic_id(必选)
 任选参数:summary,sentiment,comment,influence,theme
 - 示例:$host/dashboard/detail?id=1&topic_id=1&summary=0

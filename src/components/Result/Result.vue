@@ -21,6 +21,7 @@
     import { list } from "../../config/tmpData";
     import ListPanel from '../Common/ListPanel/ListPanel.vue';
     import Tabs from '../Common/Tabs/Tabs.vue';
+    import { analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic, activeAnalyticsTopic } from '../../vuex/getters';
 
     export default{
         data(){
@@ -152,6 +153,9 @@
                 isActivePie: true
             }
         },
+        vuex: {
+            getters: {analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic, activeAnalyticsTopic}
+        },
         methods: {
             toggle(){
 //                this.isChartScale = !this.isChartScale;
@@ -199,13 +203,21 @@
                     overseas: []
                 };
             },
-            init(){
+            init(topic){
+                console.log('topic', topic);
                 this.initData();
                 this.getSummaryDetail();
                 this.getCommentList();
             }
         },
         watch: {
+            activeAnalyticsTopic: {
+                handler(val){
+                    this.resultChartLoading = true;
+                    this.resultPieChartLoading = true;
+                    this.init(val);
+                }
+            },
             sortVal: {
                 handler(val, oldVal){
                     if(val != oldVal){
@@ -216,13 +228,18 @@
                 }
             }
         },
+        ready(){
+            if(this.activeAnalyticsTopic && this.activeAnalyticsTopic.topic_id){
+                this.init();
+            }
+        },
         components:{
             Tabs, ListPanel
         },
-        route: {
-            data(){
-                this.init();
-            }
-        }
+//        route: {
+//            data(){
+//                this.init();
+//            }
+//        }
     }
 </script>
