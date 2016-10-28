@@ -123,6 +123,22 @@ export const zh_CN = {
         lastSent: "最后发送",
         actions: "动作"
     },
+    profile: {
+        mineTitle: "我的信息",
+        addTitle: "添加新用户",
+        userName: "用户名",
+        newUserName: "新用户名",
+        gender: "性别",
+        male: "男",
+        female: "女",
+        tel: "手机号码",
+        email: "电子邮箱",
+        password: "密码",
+        rePassword: "确认密码",
+        createBtn: "提交创建",
+        modifyBtn: "提交修改",
+        resetBtn: "重置"
+    },
     common: {
         weeks: ['日', '一', '二', '三', '四', '五', '六'],
         buttons:['确定', '取消'],

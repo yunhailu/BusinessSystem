@@ -65,7 +65,8 @@
             removeItem(detail, category, callback){
                 const params = {
                     id: this.$route.params.id,
-                    topic: detail.topic
+                    topic: detail.topic,
+                    topic_id: detail.topic_id
                 };
                 params[category] = 0;
                 Api.removeDashboardItem(params).then(resp => {

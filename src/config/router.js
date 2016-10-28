@@ -130,6 +130,12 @@ module.exports = {
             }
         }
     },
+    '/profile': {
+        name: 'profile',
+        component (resolve) {
+            require(['../components/Profile/Profile.vue'], resolve);
+        }
+    },
     '/login': {
         name: 'login',
         component (resolve) {

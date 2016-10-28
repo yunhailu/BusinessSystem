@@ -41,7 +41,6 @@
     import HeaderComponent from '../Header/Header.vue';
     import MenuComponent from './Menu/Menu.vue';
     import Calendar from '../Common/Calendar/Calendar.vue';
-    //import Tabs from './Tabs/Tabs.vue';
     import Local from "../../local/local";
     import { analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic } from '../../vuex/getters';
     import { setAnalyticsType, setAnalyticsTimeRange, setAnalyticsSource, setAnalyticsSubTopic } from "../../vuex/actions";

@@ -123,6 +123,22 @@ export const en = {
         lastSent: "LAST SENT",
         actions: "ACTIONS"
     },
+    profile: {
+        mineTitle: "My Information",
+        addTitle: "Add New User",
+        userName: "User Name",
+        newUserName: "New User Name",
+        gender: "Gender",
+        male: "Male",
+        female: "Female",
+        tel: "Telephone",
+        email: "E-mail",
+        password: "Password",
+        rePassword: "Confirm Password",
+        createBtn: "Create Submit",
+        modifyBtn: "Modify Submit",
+        resetBtn: "Reset"
+    },
     common: {
         weeks: ['Sun', 'Mon', 'Tues', 'Wed', 'Thur', 'Fri', 'Sat'],
         buttons:['OK', 'Cancel'],

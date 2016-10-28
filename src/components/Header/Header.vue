@@ -18,7 +18,7 @@
             <div class="navbar-right">
                 <ul class="nav navbar-nav">
                     <li class="dropdown user user-menu right">
-                        <a href="javascript:void(0);" class="dropdown-toggle" >
+                        <a href="javascript:void(0);" v-link="{name: 'profile'}" class="dropdown-toggle" >
                             <i class="glyphicon glyphicon-user"></i>
                             <span>{{nickName}} <i class="caret"></i></span>
                         </a>
