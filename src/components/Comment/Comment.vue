@@ -1,5 +1,5 @@
 <template>
-    <tabs :actions="actions" ></tabs>
+    <tabs :actions="actions" :datas="commentNums"></tabs>
     <!--<div>Evaluation</div>-->
     <div class="charts">
         <div class="chart commentLeftBar" v-echarts="commentBarOption" :loading="commentBarLoading" theme="macarons"></div><!--theme="infographic"-->
@@ -117,7 +117,9 @@
                         center: ['50%', '45%'],
                         data:[]
                     })
-                }
+                },
+
+                commentNums: []
             }
         },
         methods: {
@@ -162,7 +164,17 @@
                             return value;
                         });
                         //console.log('datas', datas);
-                        console.log('series', this.commentChartOption.series);
+                        //console.log('series', this.commentChartOption.series);
+
+                        console.log(this.lineData.all);
+                        this.commentNums = [
+                            _.chain(this.lineData.all).map(item => _.reduce(item, (memo, val) => (memo + val), 0)).reduce((memo, val) => (memo, val), 0).value(),
+                            _.chain(this.lineData.wechat).map(item => _.reduce(item, (memo, val) => (memo + val), 0)).reduce((memo, val) => (memo, val), 0).value(),
+                            _.chain(this.lineData.weibo).map(item => _.reduce(item, (memo, val) => (memo + val), 0)).reduce((memo, val) => (memo, val), 0).value(),
+                            _.chain(this.lineData.client).map(item => _.reduce(item, (memo, val) => (memo + val), 0)).reduce((memo, val) => (memo, val), 0).value(),
+                            _.chain(this.lineData.web).map(item => _.reduce(item, (memo, val) => (memo + val), 0)).reduce((memo, val) => (memo, val), 0).value(),
+                            _.chain(this.lineData.overseas).map(item => _.reduce(item, (memo, val) => (memo + val), 0)).reduce((memo, val) => (memo, val), 0).value()
+                        ];
                     }
                 });
             },

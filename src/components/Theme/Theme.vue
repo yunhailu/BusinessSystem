@@ -1,5 +1,5 @@
 <template>
-    <tabs></tabs>
+    <tabs :datas="themeNums"></tabs>
     <!--<span>Theme</span>-->
     <div class="theme-word">
         <div class="theme-word-chart" v-echarts="themeWordOption" :loading="themeWordLoading"  theme="infographic" :click="clickAction"></div>
@@ -320,7 +320,9 @@
                     textStyle: Chart.textStyle,
                     series : []
                 },
-                themeLineLoading: true
+                themeLineLoading: true,
+
+                themeNums: [0,0,0,0,0,0]
             }
         },
         vuex: {

@@ -16,8 +16,8 @@
         <!--</li>-->
     <!--</ul>-->
     <ul class="row items source">
-        <li v-for="item in source" class="item" :class="[sourceActive == $index ? 'active' : '']" @click="sourceAction(item, $index)">
-            <span class="con">{{item}}</span>
+        <li v-for="(index, item) in source" class="item" :class="[sourceActive == $index ? 'active' : '']" @click="sourceAction(item, $index)">
+            <span class="con">{{item.name}} {{datas.length ? '(' + datas[index] + ')' : ''}}<i class="fa fa-spinner fa-spin" v-show="!datas.length"></i></span>
         </li>
     </ul>
     <add-dashboard :visiable.sync="showDashboard"></add-dashboard>
@@ -26,15 +26,14 @@
     @import "Tabs.less";
 </style>
 <script type="text/ecmascript-6">
-//    import HeaderComponent from './components/header.vue'
-//    import OtherComponent from './components/other.vue'
+    import _ from 'underscore';
     import Local from '../../../local/local';
     import AddDashboard from '../../AddDashboard/AddDashboard.vue'
     import { analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic } from '../../../vuex/getters';
     import { setAnalyticsType, setAnalyticsTimeRange, setAnalyticsSource, setAnalyticsSubTopic } from "../../../vuex/actions";
 
     export default{
-        props: ['active', 'actions', 'sourceactive'],
+        props: ['active', 'actions', 'sourceactive', 'datas'],
         vuex: {
             actions: { setAnalyticsType, setAnalyticsTimeRange, setAnalyticsSource, setAnalyticsSubTopic },
             getters: { analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic }
@@ -47,15 +46,13 @@
                 tabs: [{
                     name: words.tabs[0],
                     link: 'summary'
-                },{
+                }, {
                     name: words.tabs[1],
                     link: 'sentiment'
-                },
-                    {
+                }, {
                     name: words.tabs[2],
                     link: 'comment'
-                },
-                    {
+                }, {
                     name: words.tabs[3],
                     link: 'influence'
                 },{
@@ -64,7 +61,15 @@
                 }],
 //                filters: words.filters,
 //                filterActive: 0,
-                source: words.source,
+                //source: words.source,
+                source: [
+                    { name: words.source[0] },
+                    { name: words.source[1] },
+                    { name: words.source[2] },
+                    { name: words.source[3] },
+                    { name: words.source[4] },
+                    { name: words.source[5] }
+                ],
                 sourceActive: 0
 //                filters: [{
 //                    name: words.filters[0],
@@ -99,11 +104,30 @@
                 this.setAnalyticsType(this.$route.name);
                 const source = ["all", "wechat", "weibo", "client", "web", "oversea"];
                 this.setAnalyticsSource(source[0]);
+                console.log('datas', this.datas);
             }
         },
-        components:{
-            AddDashboard
+        filters: {
+            formatNum(num){
+                let value;
+                switch (true){
+                    case num > 10000:
+                        value = `${(num / 10000).toFixed(1)}w+`;
+                        break;
+                    case num > 10000:
+                        value = `${(num / 10000).toFixed(1)}w+`;
+                        break;
+                    case num > 1000:
+                        value = `${(num / 1000).toFixed(1)}k+`;
+                        break;
+                    default:
+                        value = num;
+                        break;
+                }
+                return value;
+            }
         },
+        components:{ AddDashboard },
 //        route: {
 //            data(){
 //

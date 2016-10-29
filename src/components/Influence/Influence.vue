@@ -1,5 +1,5 @@
 <template>
-    <tabs ></tabs>
+    <tabs :datas="influancerNums"></tabs>
     <!--<span>Influence</span>-->
     <div class="popular">
         <ul class="popular-list">
@@ -67,6 +67,7 @@
                 words,
                 popularList: [],
                 influancerTable: [],
+                influancerNums: [0,0,0,0,0,0],
                 noTableTips: words.noTableTips
             }
         },

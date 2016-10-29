@@ -1,5 +1,5 @@
 <template>
-    <tabs :actions="actions" ></tabs>
+    <tabs :actions="actions" :datas="sentimentNums"></tabs>
     <!--<span>Sentiment</span>-->
     <div class="charts">
         <div class="chart timeBar" v-echarts="sentimentBarOption" :loading="sentimentBarLoading" ></div><!--theme="infographic"-->
@@ -172,7 +172,8 @@
                             data: []
                         }
                     ]
-                }
+                },
+                sentimentNums: []
             }
         },
         vuex: {
@@ -248,6 +249,17 @@
                                 this.sentimentChartOption.series[index].data.push(summary);
                             }.bind(this));
                         }.bind(this));
+
+                        console.log('all', this.lineData.all);
+                        console.log('wechat', this.lineData.wechat);
+                        this.sentimentNums = [
+                            _.chain(this.lineData.all).map(item => _.reduce(item, (memo, val) => (memo + val), 0)).reduce((memo, val) => (memo, val), 0).value(),
+                            _.chain(this.lineData.wechat).map(item => _.reduce(item, (memo, val) => (memo + val), 0)).reduce((memo, val) => (memo, val), 0).value(),
+                            _.chain(this.lineData.weibo).map(item => _.reduce(item, (memo, val) => (memo + val), 0)).reduce((memo, val) => (memo, val), 0).value(),
+                            _.chain(this.lineData.client).map(item => _.reduce(item, (memo, val) => (memo + val), 0)).reduce((memo, val) => (memo, val), 0).value(),
+                            _.chain(this.lineData.web).map(item => _.reduce(item, (memo, val) => (memo + val), 0)).reduce((memo, val) => (memo, val), 0).value(),
+                            _.chain(this.lineData.overseas).map(item => _.reduce(item, (memo, val) => (memo + val), 0)).reduce((memo, val) => (memo, val), 0).value()
+                        ];
                     }
 
                 });

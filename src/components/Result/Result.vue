@@ -1,5 +1,5 @@
 <template>
-    <tabs :actions="actions" ></tabs>
+    <tabs :actions="actions" :datas="summaryNums"></tabs>
     <!--<span>Result</span>-->
     <div class="charts">
         <!--<div class="arrow animated rubberBand" @click="toggle">-->
@@ -150,7 +150,9 @@
                 }.bind(this),
 
                 isChartScale: true,
-                isActivePie: true
+                isActivePie: true,
+
+                summaryNums: []
             }
         },
         vuex: {
@@ -165,7 +167,7 @@
             },
             getSummaryDetail(){
                 Api.getSummaryDetail({}).then(resp => {
-                    //console.log('getSummaryDetail', resp);
+                    console.log('getSummaryDetail', resp.data);
                     if(resp.data.code == 0){
                         const details = resp.data.data;
                         this.x = _.map(details, detail => detail.date);
@@ -182,6 +184,14 @@
                         this.resultChartLoading = false;
                         this.resultPieChartLoading = false;
                         this.actions("全部", 0);
+                        this.summaryNums = [
+                                _.reduce(this.lineData.all, (memo, value) => (memo + value), 0),
+                                _.reduce(this.lineData.wechat, (memo, value) => (memo + value), 0),
+                                _.reduce(this.lineData.weibo, (memo, value) => (memo + value), 0),
+                                _.reduce(this.lineData.client, (memo, value) => (memo + value), 0),
+                                _.reduce(this.lineData.web, (memo, value) => (memo + value), 0),
+                                _.reduce(this.lineData.overseas, (memo, value) => (memo + value), 0)
+                        ];
                     }
                 });
             },
