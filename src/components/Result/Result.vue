@@ -15,13 +15,14 @@
 </style>
 <script type="text/ecmascript-6">
     import _ from 'underscore';
+    import moment from 'moment';
     import Local from "../../local/local";
     import * as Api from "../../widgets/Api";
     import { Chart, Pie } from '../../config/config';
     import { list } from "../../config/tmpData";
     import ListPanel from '../Common/ListPanel/ListPanel.vue';
     import Tabs from '../Common/Tabs/Tabs.vue';
-    import { analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic, activeAnalyticsTopic } from '../../vuex/getters';
+    import { analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic, analyticsStart, analyticsEnd, activeAnalyticsTopic } from '../../vuex/getters';
 
     export default{
         data(){
@@ -64,7 +65,13 @@
                     }),
                     progressive: 4,
                     textStyle: Chart.textStyle,
-                    series : []
+                    series : [{
+                        name:"总数",
+                        type:'line',
+                        areaStyle: {normal: {}},
+                        //stack: 'Total',
+                        data: []
+                    }]
                 },
                 resultPieChartLoading: true,
                 resultPieChartOption: {
@@ -79,11 +86,27 @@
                     }),
                     textStyle: Pie.textStyle,
                     toolbox: Pie.toolbox,
-                    series: _.extend({}, Pie.series, {
-                        name: 'Result',
+                    series: [_.extend({}, Pie.series, {
+                        name: '微信',
                         center: ['50%', '45%'],
                         data:[]
-                    })
+                    }), _.extend({}, Pie.series, {
+                        name: '微博',
+                        center: ['50%', '45%'],
+                        data:[]
+                    }),_.extend({}, Pie.series, {
+                        name: '客户端',
+                        center: ['50%', '45%'],
+                        data:[]
+                    }),_.extend({}, Pie.series, {
+                        name: '网页',
+                        center: ['50%', '45%'],
+                        data:[]
+                    }),_.extend({}, Pie.series, {
+                        name: '海外',
+                        center: ['50%', '45%'],
+                        data:[]
+                    })]
                 },
                 actions: function(val, idx){
                     //this.resultChartOption = {};
@@ -156,17 +179,26 @@
             }
         },
         vuex: {
-            getters: {analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic, activeAnalyticsTopic}
+            getters: {analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic, analyticsStart, analyticsEnd, activeAnalyticsTopic}
         },
         methods: {
             toggle(){
-//                this.isChartScale = !this.isChartScale;
-//                this.isActivePie = !this.isActivePie;
                 this.resultChartOption.isToggle = !this.resultChartOption.isToggle;
                 this.resultPieChartOption.isActive = !this.resultPieChartOption.isActive;
             },
             getSummaryDetail(){
-                Api.getSummaryDetail({}).then(resp => {
+                console.log(this.analyticsType, this.analyticsTimeRange, this.analyticsSource, this.analyticsSubTopic, this.activeAnalyticsTopic);
+                const topic_id = this.activeAnalyticsTopic.topic_id,
+                        topic = this.activeAnalyticsTopic.topic_name,
+                        subtopic = this.analyticsSubTopic,
+                        source = this.analyticsSource,
+                        time_interval = this.analyticsTimeRange,
+                        time_dimension = time_interval > 7 ? 1 : 0,
+                        end = this.analyticsEnd,
+                        start = this.analyticsStart;
+                //console.log(start, end);
+
+                Api.getSummaryDetail({topic_id, topic, subtopic, source, start, end, time_dimension}).then(resp => {
                     console.log('getSummaryDetail', resp.data);
                     if(resp.data.code == 0){
                         const details = resp.data.data;

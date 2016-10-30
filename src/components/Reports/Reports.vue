@@ -136,6 +136,7 @@
             },
             emailAction(report){
                 console.log('email', report);
+                location.href = "mailto:test@163.com;test1@163.com?CC=test@163.com&BCC=test@163.com&Subject=Hello&Body=你好";
             },
             copyAction(report){
                 console.log('copy', report);

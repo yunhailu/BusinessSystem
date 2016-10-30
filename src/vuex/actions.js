@@ -43,3 +43,11 @@ export const setAnalyticsSource = (store, source) => {
 export const setAnalyticsSubTopic = (store, subtopic) => {
 	store.dispatch(types.UPDATE_SUBTOPIC, subtopic);
 };
+
+export const setAnalyticsStart = (store, start) => {
+	store.dispatch(types.UPDATE_START, start);
+};
+
+export const setAnalyticsEnd = (store, end) => {
+	store.dispatch(types.UPDATE_END, end);
+};

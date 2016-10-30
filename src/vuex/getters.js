@@ -40,3 +40,11 @@ export const analyticsSource = state => {
 export const analyticsSubTopic = state => {
 	return state.analytics.subtopic;
 };
+
+export const analyticsStart = state => {
+	return state.analytics.start;
+};
+
+export const analyticsEnd = state => {
+	return state.analytics.end;
+};

@@ -18,15 +18,11 @@
                         <li @click="selectTime(0);" :class="[selectTimeTag == 0 ? 'active' : '']">自定义</li>
                     </ul>
                     <div class="diyDate" v-show="isTimeDiy">
-                        <span class="date" @click="showCalendar"><i class="fa fa-calendar fa-2x  icon"></i> {{cal.value}}</span>
-                        <calendar :show.sync="cal.show" :value.sync="cal.value" :x="cal.x" :y="cal.y" :begin="cal.begin" :end="cal.end" :type="cal.type" :range="cal.range"></calendar>
+                        <span class="date" @click="showCalendar"><i class="fa fa-calendar fa-2x  icon"></i> {{dateVal}}</span>
+                        <calendar :show.sync="cal.show" :value.sync="dateVal" :x="cal.x" :y="cal.y" :begin.sync="cal.begin" :end.sync="cal.end" :type="cal.type" :range="cal.range"></calendar>
                     </div>
 
                 </div>
-                <!--<div class="col-md-2">-->
-                    <!--<span class="date" @click="showCalendar"> {{cal.value}}</span>-->
-                    <!--<calendar :show.sync="cal.show" :value.sync="cal.value" :x="cal.x" :y="cal.y" :begin="cal.begin" :end="cal.end" :type="cal.type" :range="cal.range"></calendar>-->
-                <!--</div>-->
             </div>
             <!--<tabs ></tabs>-->
 
@@ -38,23 +34,25 @@
     @import "Analytics.less";
 </style>
 <script  type="text/ecmascript-6">
+    import moment from 'moment';
     import HeaderComponent from '../Header/Header.vue';
     import MenuComponent from './Menu/Menu.vue';
     import Calendar from '../Common/Calendar/Calendar.vue';
     import Local from "../../local/local";
-    import { analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic } from '../../vuex/getters';
-    import { setAnalyticsType, setAnalyticsTimeRange, setAnalyticsSource, setAnalyticsSubTopic } from "../../vuex/actions";
+    import { analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic, analyticsStart, analyticsEnd } from '../../vuex/getters';
+    import { setAnalyticsType, setAnalyticsTimeRange, setAnalyticsSource, setAnalyticsSubTopic, setAnalyticsStart, setAnalyticsEnd  } from "../../vuex/actions";
 
     export default{
         data(){
             return{
                 search: '',
+                dateVal: `${ moment().subtract(7, 'days').format('YYYY-MM-DD')} ~ ${moment().format('YYYY-MM-DD')}`,
                 cal: {
                     show: false,
                     type: "date", //date datetime
-                    value: "2015-12-11",
-                    begin: "2015-12-20",
-                    end: "2015-12-25",
+                    begin: moment().subtract(7, 'days').format('YYYY-MM-DD'),
+                    end: moment().format('YYYY-MM-DD'),
+                    //value: `${ moment().subtract(7, 'days').format('YYYY-MM-DD')} ~ ${moment().format('YYYY-MM-DD')}`,
                     x: 0,
                     y: 0,
                     range:true//是否多选
@@ -65,8 +63,8 @@
             }
         },
         vuex: {
-            actions: { setAnalyticsType, setAnalyticsTimeRange, setAnalyticsSource, setAnalyticsSubTopic },
-            getters: { analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic }
+            actions: { setAnalyticsType, setAnalyticsTimeRange, setAnalyticsSource, setAnalyticsSubTopic, setAnalyticsStart, setAnalyticsEnd },
+            getters: { analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic, analyticsStart, analyticsEnd }
         },
         components:{
             'header-component': HeaderComponent,
@@ -81,8 +79,15 @@
             },
             selectTime(num){
                 this.selectTimeTag = num;
-                this.isTimeDiy = (num == 0) ? true : false;
-                this.setAnalyticsTimeRange(num);
+                if(num == 0){
+                    this.isTimeDiy = true;
+                    this.dateVal = this.analyticsStart + ' ~ ' + this.analyticsEnd;
+                } else {
+                    this.isTimeDiy = false;
+                    this.setAnalyticsTimeRange(num);
+                    this.setAnalyticsStart(moment().subtract(num, 'days').format('YYYY-MM-DD'));
+                    this.setAnalyticsEnd(moment().format('YYYY-MM-DD'));
+                }
             },
             showCalendar:function(e){
                 e.stopPropagation();
@@ -100,8 +105,30 @@
                 },500);
             },
             init(){
-
+                const start = moment(this.cal.begin, "YYYY-MM-DD");
+                const end = moment(this.cal.end, "YYYY-MM-DD");
+                const days = end.diff(start)/1000/3600/24;
+                this.setAnalyticsStart(this.cal.begin);
+                this.setAnalyticsEnd(this.cal.end);
+                this.setAnalyticsTimeRange(days);
             }
+        },
+        watch: {
+            dateVal: {
+                handler(val){
+                    //console.log('date',val);
+                    const start = moment(val.split(' ~ ')[0], "YYYY-MM-DD");
+                    const end = moment(val.split(' ~ ')[1], "YYYY-MM-DD");
+                    const days = end.diff(start)/1000/3600/24;
+                    this.setAnalyticsStart(val.split(' ~ ')[0]);
+                    this.setAnalyticsEnd(val.split(' ~ ')[1]);
+                    this.setAnalyticsTimeRange(days);
+                    console.log(val.split(' ~ ')[0], val.split(' ~ ')[1], days);
+                }
+            }
+        },
+        ready(){
+            this.init();
         },
         route: {
             data(){
