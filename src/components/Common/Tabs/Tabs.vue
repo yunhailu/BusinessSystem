@@ -17,7 +17,8 @@
     <!--</ul>-->
     <ul class="row items source">
         <li v-for="(index, item) in source" class="item" :class="[sourceActive == $index ? 'active' : '']" @click="sourceAction(item, $index)">
-            <span class="con">{{item.name}} {{datas.length ? '(' + datas[index] + ')' : ''}}<i class="fa fa-spinner fa-spin" v-show="!datas.length"></i></span>
+            <!--<span class="con">{{item.name}} {{datas[index] | showNum datas}}<i class="fa fa-spinner fa-spin" v-show="!datas.length"></i></span>-->
+            <span class="con">{{item.name | showNum datas[index] datas}}<i class="fa fa-spinner fa-spin" v-show="!datas.length"></i></span>
         </li>
     </ul>
     <add-dashboard :visiable.sync="showDashboard"></add-dashboard>
@@ -108,6 +109,11 @@
             }
         },
         filters: {
+            showNum(name, num, datas){
+                if(!datas.length) return name;
+                if(num && num > -1) return `${name}(${num})`;
+                return `${name}`;
+            },
             formatNum(num){
                 let value;
                 switch (true){

@@ -195,8 +195,9 @@
                     }
                 });
             },
-            getCommentList(){
-                Api.getCommentList({}).then(resp => {
+            getCommentList(type = 'time'){
+                const topic_id = this.activeAnalyticsTopic.topic_id;
+                Api.getCommentList({type, topic_id}).then(resp => {
                     //console.log(resp.data);
                     if(resp.data.code == 0){
                         this.list = resp.data.data;
@@ -232,8 +233,9 @@
                 handler(val, oldVal){
                     if(val != oldVal){
                         // 展示不同的列表信息
-                        //console.log(val, oldVal);
-                        this.list = list[val.key];
+                        console.log(val, oldVal);
+                        //this.list = list[val.key];
+                        this.getCommentList(val.key);
                     }
                 }
             }

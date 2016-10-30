@@ -101,6 +101,7 @@
 
 ##### 2.获取事件详细列表
 -  summary/commentList
+- 入参 type(time, browser, star), topic_id
 ````
 {
 	code: 0,

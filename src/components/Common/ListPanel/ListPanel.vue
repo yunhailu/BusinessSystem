@@ -7,22 +7,18 @@
             <div class="col-md-3 list-panel-tools-flag">
                 <!--<div class="list-panel-tools-flag-title">情绪筛选</div>-->
                 <div class="btn-group list-panel-tools-flag">
-                    <a class="btn btn-default list-panel-tools-flag-item" href="javascript:void(0);" @click="sentimentItem('all');" :class="[sentimentActive == 'all' ? 'active' : '']">{{words.all}}</a>
-                    <a class="btn btn-default list-panel-tools-flag-item" href="javascript:void(0);" @click="sentimentItem('positive')" :class="[sentimentActive == 'positive' ? 'active' : '']">{{words.positive}}</a>
-                    <a class="btn btn-default list-panel-tools-flag-item" href="javascript:void(0);" @click="sentimentItem('negative')" :class="[sentimentActive == 'negative' ? 'active' : '']">{{words.negative}}</a>
-                    <a class="btn btn-default list-panel-tools-flag-item" href="javascript:void(0);" @click="sentimentItem('neutral')" :class="[sentimentActive == 'neutral' ? 'active' : '']">{{words.neutral}}</a>
+                    <a class="btn btn-default list-panel-tools-flag-item" href="javascript:void(0);" @click="setSentiment('all');" :class="[sentimentActive == 'all' ? 'active' : '']">{{words.all}}</a>
+                    <a class="btn btn-default list-panel-tools-flag-item" href="javascript:void(0);" @click="setSentiment('positive')" :class="[sentimentActive == 'positive' ? 'active' : '']">{{words.positive}}</a>
+                    <a class="btn btn-default list-panel-tools-flag-item" href="javascript:void(0);" @click="setSentiment('negative')" :class="[sentimentActive == 'negative' ? 'active' : '']">{{words.negative}}</a>
+                    <a class="btn btn-default list-panel-tools-flag-item" href="javascript:void(0);" @click="setSentiment('neutral')" :class="[sentimentActive == 'neutral' ? 'active' : '']">{{words.neutral}}</a>
                 </div>
-                <!--<div class="item all"><i class="fa fa-flag fa-2x"></i></div>-->
-                <!--<div class="item positive"><i class="fa fa-flag fa-2x"></i></div>-->
-                <!--<div class="item negative"><i class="fa fa-flag fa-2x"></i></div>-->
-                <!--<div class="item neutral"><i class="fa fa-flag fa-2x"></i></div>-->
             </div>
             <div class="col-md-3">
                 <div class="btn-group list-panel-tools-filter">
-                    <a class="btn btn-default list-panel-tools-filter-item" href="javascript:void(0);" @click="filterItem(5);" :class="[filterActive == 5 ? 'active' : '']"> 5</a>
-                    <a class="btn btn-default list-panel-tools-filter-item" href="javascript:void(0);" @click="filterItem(10)" :class="[filterActive == 10 ? 'active' : '']">10</a>
-                    <a class="btn btn-default list-panel-tools-filter-item" href="javascript:void(0);" @click="filterItem(15)" :class="[filterActive == 15 ? 'active' : '']">15</a>
-                    <a class="btn btn-default list-panel-tools-filter-item" href="javascript:void(0);" @click="filterItem(20)" :class="[filterActive == 20 ? 'active' : '']">20</a>
+                    <a class="btn btn-default list-panel-tools-filter-item" href="javascript:void(0);" @click="setCount(5);" :class="[filterActive == 5 ? 'active' : '']"> 5</a>
+                    <a class="btn btn-default list-panel-tools-filter-item" href="javascript:void(0);" @click="setCount(20)" :class="[filterActive == 20 ? 'active' : '']">20</a>
+                    <a class="btn btn-default list-panel-tools-filter-item" href="javascript:void(0);" @click="setCount(50)" :class="[filterActive == 50 ? 'active' : '']">50</a>
+                    <a class="btn btn-default list-panel-tools-filter-item" href="javascript:void(0);" @click="setCount(100)" :class="[filterActive == 100 ? 'active' : '']">100</a>
                 </div>
             </div>
             <!--<div class="col-md-4">-->
@@ -41,14 +37,6 @@
                             <div class="detail">{{{item.content}}}</div>
                             <div class="time">发布于 {{item.pDate}}</div>
                             <div class="source">来源 {{item.from}} </div>
-                            <!--<div class="data">-->
-                                <!--<div class="item" v-if="item.likeCount" ><i class="fa fa-thumbs-up icon"></i> <span>{{item.likeCount}}</span></div>-->
-                                <!--<div class="item" v-if="item.fansCount"><i class="fa fa-user icon"></i> <span>{{item.fansCount}}</span></div>-->
-                                <!--<div class="item" v-if="item.viewCount"><i class="fa fa-eye icon"></i> <span>{{item.viewCount}}</span></div>-->
-                                <!--<div class="item" v-if="item.shareCount"><i class="fa fa-share icon"></i> <span>{{item.shareCount}}</span></div>-->
-                                <!--<div class="item" v-if="item.commentsCount"><i class="fa fa-commenting icon"></i> <span>{{item.commentsCount}}</span></div>-->
-                                <!--<div class="item" v-if="item.followCount"><i class="fa fa-plus icon"></i> <span>{{item.followCount}}</span></div>-->
-                            <!--</div>-->
                         </div>
                     </div>
                     <div class="list-panel-list-item-right col-md-4">
@@ -70,21 +58,6 @@
                                 </div>
                                 <div class="col-md-offset-3 col-md-9 time"></div>
                             </div>
-                            <!--<div class="row">-->
-                                <!--<div class="col-md-3 title">发布于</div>-->
-                                <!--<div class="col-md-9 time">{{item.pDate}}</div>-->
-                            <!--</div>-->
-                            <!--<div class="row">-->
-                                <!--<div class="col-md-3 title">来源</div>-->
-                                <!--<div class="col-md-9 time">消费者报</div>-->
-                            <!--</div>-->
-
-                            <!--<div class="row">-->
-                                <!--<div class="col-md-4" :class="[item.sentiment == 'positive' ? 'active': '']"><i class="fa fa-flag positive"></i> {{words.positive}}</div>-->
-                                <!--<div class="col-md-4" :class="[item.sentiment == 'negative' ? 'active': '']"><i class="fa fa-flag negative"></i> {{words.negative}}</div>-->
-                                <!--<div class="col-md-4" :class="[item.sentiment == 'neutral' ? 'active': '']"><i class="fa fa-flag neutral"></i> {{words.neutral}}</div>-->
-                            <!--</div>-->
-
                         </div>
                     </div>
                 </a>
@@ -111,24 +84,25 @@
             return{
                 words,
                 tableList: [],
-                filterActive: 10,
+                filterActive: 20,
                 sentimentActive: 'all'
             }
         },
         methods: {
-            filterItem(num){
-                this.filterActive = num;
-                this.tableList = _.filter(this.list, (item, index) => (index < num));
+            setCount(count){
+                this.filterActive = count;
+                this.filterItem(count, this.sentimentActive);
             },
-            sentimentItem(flag){
+            setSentiment(flag){
                 this.sentimentActive = flag;
+                this.filterItem(this.filterActive, flag);
+            },
+            filterItem(count, flag){
                 if(flag == 'all'){
-                    this.tableList = _.extend([], this.list);
+                    this.tableList = _.filter(this.list, (item, index) => (index < count));
                     return ;
                 }
-                this.tableList = _.filter(this.list, (item, index) => {
-                    return item.sentiment == flag;
-                });
+                this.tableList = _.filter(this.list, (item, index) => (index < count && item.sentiment == flag));
             }
         },
         filters: {
@@ -159,12 +133,11 @@
         watch: {
             list(val){
                 this.tableList = val;
-                //this.sentimentItem('all');
             }
         },
-        created(){
-            this.filterItem(10);
-            this.sentimentItem('all');
+        ready(){
+            this.setCount(this.filterActive);
+            this.setSentiment('all');
         },
         components:{
             SelectEl, Page
