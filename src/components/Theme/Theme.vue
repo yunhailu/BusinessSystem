@@ -392,22 +392,8 @@
                     if(resp.data.code == 0){
                         this.themeWordLoading = false;
                         this.themeWordOption.series.data = resp.data.data;
-                    }
-                });
-            },
-            getThemeBest(){
-                const topic_id = this.activeAnalyticsTopic.topic_id,
-                        topic = this.activeAnalyticsTopic.topic_name,
-                        subtopic = this.analyticsSubTopic,
-                        source = this.analyticsSource,
-                        time_interval = this.analyticsTimeRange,
-                        time_dimension = time_interval > 7 ? 1 : 0,
-                        end = this.analyticsEnd,
-                        start = this.analyticsStart;
-                return Api.getThemeBest({topic_id, topic, subtopic, source, start, end, time_dimension}).then(resp => {
-                    //console.log('getThemeBest',resp);
-                    if(resp.data.code == 0){
-                        const bestList = _.sortBy(resp.data.data, 'value');
+
+                        const bestList = _.chain(resp.data.data).filter((item, index) => (index <= 20)).sortBy('value').value();
                         const yAxis = _.map(bestList, value => value.name);
                         const data = _.map(bestList, value => value.value);
                         this.themeBestLoading = false;
@@ -416,6 +402,27 @@
                     }
                 });
             },
+//            getThemeBest(){
+//                const topic_id = this.activeAnalyticsTopic.topic_id,
+//                        topic = this.activeAnalyticsTopic.topic_name,
+//                        subtopic = this.analyticsSubTopic,
+//                        source = this.analyticsSource,
+//                        time_interval = this.analyticsTimeRange,
+//                        time_dimension = time_interval > 7 ? 1 : 0,
+//                        end = this.analyticsEnd,
+//                        start = this.analyticsStart;
+//                return Api.getThemeBest({topic_id, topic, subtopic, source, start, end, time_dimension}).then(resp => {
+//                    //console.log('getThemeBest',resp);
+//                    if(resp.data.code == 0){
+//                        const bestList = _.sortBy(resp.data.data, 'value');
+//                        const yAxis = _.map(bestList, value => value.name);
+//                        const data = _.map(bestList, value => value.value);
+//                        this.themeBestLoading = false;
+//                        this.themeBestOption.yAxis.data = yAxis;
+//                        this.themeBestOption.series[0].data = data;
+//                    }
+//                });
+//            },
             getThemeDetail(){
                 const topic_id = this.activeAnalyticsTopic.topic_id,
                         topic = this.activeAnalyticsTopic.topic_name,
@@ -448,7 +455,7 @@
             init(){
                 this.getTrendList();
                 this.getWordCloud();
-                this.getThemeBest();
+                //this.getThemeBest();
                 this.getThemeDetail();
             }
         },
