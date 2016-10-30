@@ -40,7 +40,7 @@
     import { Chart, Pie } from '../../config/config';
     import { themeScatterData } from '../../config/tmpData';
     import * as Api from '../../widgets/Api';
-    import { analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic, activeAnalyticsTopic } from '../../vuex/getters';
+    import { analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic, analyticsStart, analyticsEnd, activeAnalyticsTopic } from '../../vuex/getters';
 
     export default{
         data(){
@@ -326,7 +326,7 @@
             }
         },
         vuex: {
-            getters: {analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic, activeAnalyticsTopic}
+            getters: {analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic, analyticsStart, analyticsEnd, activeAnalyticsTopic}
         },
         watch: {
             activeAnalyticsTopic: {
@@ -349,7 +349,15 @@
                 alert(e.name + ": " + e.value);
             },
             getTrendList(){
-                return Api.getTrendList({}).then(resp => {
+                const topic_id = this.activeAnalyticsTopic.topic_id,
+                    topic = this.activeAnalyticsTopic.topic_name,
+                    subtopic = this.analyticsSubTopic,
+                    source = this.analyticsSource,
+                    time_interval = this.analyticsTimeRange,
+                    time_dimension = time_interval > 7 ? 1 : 0,
+                    end = this.analyticsEnd,
+                    start = this.analyticsStart;
+                return Api.getTrendList({topic_id, topic, subtopic, source, start, end, time_dimension}).then(resp => {
                     //console.log('getTrendList', resp);
                     if(resp.data.code == 0){
                         this.upList = resp.data.data.up;
@@ -358,7 +366,15 @@
                 });
             },
             getWordCloud(){
-                return Api.getWordCloud({}).then(resp => {
+                const topic_id = this.activeAnalyticsTopic.topic_id,
+                        topic = this.activeAnalyticsTopic.topic_name,
+                        subtopic = this.analyticsSubTopic,
+                        source = this.analyticsSource,
+                        time_interval = this.analyticsTimeRange,
+                        time_dimension = time_interval > 7 ? 1 : 0,
+                        end = this.analyticsEnd,
+                        start = this.analyticsStart;
+                return Api.getWordCloud({topic_id, topic, subtopic, source, start, end, time_dimension}).then(resp => {
                     //console.log('getWordCloud',resp);
                     if(resp.data.code == 0){
                         this.themeWordLoading = false;
@@ -367,7 +383,15 @@
                 });
             },
             getThemeBest(){
-                return Api.getThemeBest({}).then(resp => {
+                const topic_id = this.activeAnalyticsTopic.topic_id,
+                        topic = this.activeAnalyticsTopic.topic_name,
+                        subtopic = this.analyticsSubTopic,
+                        source = this.analyticsSource,
+                        time_interval = this.analyticsTimeRange,
+                        time_dimension = time_interval > 7 ? 1 : 0,
+                        end = this.analyticsEnd,
+                        start = this.analyticsStart;
+                return Api.getThemeBest({topic_id, topic, subtopic, source, start, end, time_dimension}).then(resp => {
                     //console.log('getThemeBest',resp);
                     if(resp.data.code == 0){
                         const bestList = _.sortBy(resp.data.data, 'value');
@@ -380,7 +404,15 @@
                 });
             },
             getThemeDetail(){
-                Api.getThemeDetail({}).then(resp => {
+                const topic_id = this.activeAnalyticsTopic.topic_id,
+                        topic = this.activeAnalyticsTopic.topic_name,
+                        subtopic = this.analyticsSubTopic,
+                        source = this.analyticsSource,
+                        time_interval = this.analyticsTimeRange,
+                        time_dimension = time_interval > 7 ? 1 : 0,
+                        end = this.analyticsEnd,
+                        start = this.analyticsStart;
+                Api.getThemeDetail({topic_id, topic, subtopic, source, start, end, time_dimension}).then(resp => {
                     //console.log('getThemeDetail', resp.data);
                     if(resp.data.code == 0){
                         const details = resp.data.data;

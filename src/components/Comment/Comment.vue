@@ -19,7 +19,7 @@
     import { list } from "../../config/tmpData";
     import ListPanel from '../Common/ListPanel/ListPanel.vue';
     import Tabs from '../Common/Tabs/Tabs.vue';
-    import { analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic, activeAnalyticsTopic } from '../../vuex/getters';
+    import { analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic, analyticsStart, analyticsEnd, activeAnalyticsTopic } from '../../vuex/getters';
 
     export default{
         data(){
@@ -124,7 +124,15 @@
         },
         methods: {
             getCommentDetail(){
-                Api.getCommentDetail({}).then(resp => {
+                const topic_id = this.activeAnalyticsTopic.topic_id,
+                    topic = this.activeAnalyticsTopic.topic_name,
+                    subtopic = this.analyticsSubTopic,
+                    source = this.analyticsSource,
+                    time_interval = this.analyticsTimeRange,
+                    time_dimension = time_interval > 7 ? 1 : 0,
+                    end = this.analyticsEnd,
+                    start = this.analyticsStart;
+                Api.getCommentDetail({ topic_id, topic, subtopic, source, start, end, time_dimension }).then(resp => {
                     console.log('getCommentDetail', resp.data);
                     if(resp.data.code == 0){
                         const details = resp.data.data;
@@ -212,7 +220,7 @@
             }
         },
         vuex: {
-            getters: {analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic, activeAnalyticsTopic}
+            getters: {analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic, analyticsStart, analyticsEnd, activeAnalyticsTopic}
         },
         ready(){
             if(this.activeAnalyticsTopic && this.activeAnalyticsTopic.topic_id){

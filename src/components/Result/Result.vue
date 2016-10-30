@@ -187,7 +187,7 @@
                 this.resultPieChartOption.isActive = !this.resultPieChartOption.isActive;
             },
             getSummaryDetail(){
-                console.log(this.analyticsType, this.analyticsTimeRange, this.analyticsSource, this.analyticsSubTopic, this.activeAnalyticsTopic);
+                //console.log(this.analyticsType, this.analyticsTimeRange, this.analyticsSource, this.analyticsSubTopic, this.activeAnalyticsTopic);
                 const topic_id = this.activeAnalyticsTopic.topic_id,
                         topic = this.activeAnalyticsTopic.topic_name,
                         subtopic = this.analyticsSubTopic,
@@ -228,8 +228,15 @@
                 });
             },
             getCommentList(type = 'time'){
-                const topic_id = this.activeAnalyticsTopic.topic_id;
-                Api.getCommentList({type, topic_id}).then(resp => {
+                const topic_id = this.activeAnalyticsTopic.topic_id,
+                        topic = this.activeAnalyticsTopic.topic_name,
+                        subtopic = this.analyticsSubTopic,
+                        source = this.analyticsSource,
+                        time_interval = this.analyticsTimeRange,
+                        time_dimension = time_interval > 7 ? 1 : 0,
+                        end = this.analyticsEnd,
+                        start = this.analyticsStart;
+                Api.getCommentList({type, topic_id, topic, subtopic, source, start, end, time_dimension}).then(resp => {
                     //console.log(resp.data);
                     if(resp.data.code == 0){
                         this.list = resp.data.data;

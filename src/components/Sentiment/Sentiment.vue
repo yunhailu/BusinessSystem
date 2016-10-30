@@ -20,7 +20,7 @@
     import Local from "../../local/local";
     import {Chart, Pie} from '../../config/config';
     import * as Api from '../../widgets/Api';
-    import { analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic, activeAnalyticsTopic } from '../../vuex/getters';
+    import { analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic, analyticsStart, analyticsEnd, activeAnalyticsTopic } from '../../vuex/getters';
 
 
     export default{
@@ -177,7 +177,7 @@
             }
         },
         vuex: {
-            getters: {analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic, activeAnalyticsTopic}
+            getters: { analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic, analyticsStart, analyticsEnd, activeAnalyticsTopic }
         },
         methods: {
             actions(val, idx){
@@ -209,7 +209,15 @@
                 });
             },
             getSentimentDetail(){
-                Api.getSentimentDetail({}).then(resp => {
+                const topic_id = this.activeAnalyticsTopic.topic_id,
+                        topic = this.activeAnalyticsTopic.topic_name,
+                        subtopic = this.analyticsSubTopic,
+                        source = this.analyticsSource,
+                        time_interval = this.analyticsTimeRange,
+                        time_dimension = time_interval > 7 ? 1 : 0,
+                        end = this.analyticsEnd,
+                        start = this.analyticsStart;
+                Api.getSentimentDetail({ topic_id, topic, subtopic, source, start, end, time_dimension }).then(resp => {
                     //console.log("getSentimentDetail", JSON.stringify(resp.data.data));
                     if(resp.data.code == 0){
                         const details = resp.data.data;

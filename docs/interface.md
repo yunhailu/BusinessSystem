@@ -82,6 +82,14 @@
 ### 二、数据分析
 ##### 1.信息汇总
 -  summary/detail
+- 参数： 
+     - topic_id:91
+     - topic:滴滴
+     - subtopic:
+     - source:all
+     - start:2016-10-23
+     - end:2016-10-30
+     - time_dimension:0    
 ```
 {
     code: 0,
@@ -101,6 +109,14 @@
 
 ##### 2.获取事件详细列表
 -  summary/commentList
+- 参数： 
+     - topic_id:91
+     - topic:滴滴
+     - subtopic:
+     - source:all
+     - start:2016-10-23
+     - end:2016-10-30
+     - time_dimension:0    
 - 入参 type(time, browser, star), topic_id
 ````
 {
@@ -125,6 +141,14 @@
 
 ##### 3.获取情绪详情
 -  sentiment/detail
+- 参数： 
+     - topic_id:91
+     - topic:滴滴
+     - subtopic:
+     - source:all
+     - start:2016-10-23
+     - end:2016-10-30
+     - time_dimension:0    
 ```
 {
     code: 0,
@@ -195,6 +219,14 @@
 
 ##### 6.获取主题分析的字符云
 -  theme/wordcloud
+- 参数： 
+     - topic_id:91
+     - topic:滴滴
+     - subtopic:
+     - source:all
+     - start:2016-10-23
+     - end:2016-10-30
+     - time_dimension:0    
 ```
 {
 	code: 0,
@@ -211,12 +243,7 @@
 //待确认
 {
 	code: 0,
-	data: {
-		"up": [{	//5个
-			"key": "自己",
-			"value": "121%"
-		}],
-		"down": [{
+	data: [{	//5个
 			"key": "自己",
 			"value": "121%"
 		}]
@@ -226,6 +253,14 @@
 
 ##### 8.获取主题详情数据（line图）
 -  theme/detail
+- 参数： 
+     - topic_id:91
+     - topic:滴滴
+     - subtopic:
+     - source:all
+     - start:2016-10-23
+     - end:2016-10-30
+     - time_dimension:0    
 ```
 {
     code: 0,

@@ -58,7 +58,7 @@
     import * as Api from '../../widgets/Api';
     import Tabs from '../Common/Tabs/Tabs.vue';
     import Page from '../Common/Page/Page.vue';
-    import { analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic, activeAnalyticsTopic } from '../../vuex/getters';
+    import { analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic, analyticsStart, analyticsEnd, activeAnalyticsTopic } from '../../vuex/getters';
 
     export default{
         data(){
@@ -72,7 +72,7 @@
             }
         },
         vuex: {
-            getters: {analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic, activeAnalyticsTopic}
+            getters: {analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic, analyticsStart, analyticsEnd, activeAnalyticsTopic}
         },
         watch: {
             activeAnalyticsTopic: {
@@ -91,7 +91,15 @@
         methods: {
             getPopularList(){
                 const icons = ["user", "user-plus", "edge", "chrome"];
-                Api.getPopularList({}).then(resp => {
+                const topic_id = this.activeAnalyticsTopic.topic_id,
+                        topic = this.activeAnalyticsTopic.topic_name,
+                        subtopic = this.analyticsSubTopic,
+                        source = this.analyticsSource,
+                        time_interval = this.analyticsTimeRange,
+                        time_dimension = time_interval > 7 ? 1 : 0,
+                        end = this.analyticsEnd,
+                        start = this.analyticsStart;
+                Api.getPopularList({topic_id, topic, subtopic, source, start, end, time_dimension}).then(resp => {
                     //const resp = {data: {code: 0, data: [{ "id": "12345678", "link": "http://www.baidu.com", "title": "Most active author", "source": "Online News", "value": "shi jian", "post": 64 },{ "id": "12345678", "link": "http://www.baidu.com", "title": "Most active author", "source": "Online News", "value": "shi jian", "post": 64 },{ "id": "12345678", "link": "http://www.baidu.com", "title": "Most active author", "source": "Online News", "value": "shi jian", "post": 64 },{ "id": "12345678", "link": "http://www.baidu.com", "title": "Most active author", "source": "Online News", "value": "shi jian", "post": 64 }]}};
                     if(resp.data.code ==0){
                         const popularList = resp.data.data;
@@ -103,7 +111,15 @@
                 });
             },
             getInfluenceList(){
-                Api.getInfluenceList({}).then(resp => {
+                const topic_id = this.activeAnalyticsTopic.topic_id,
+                        topic = this.activeAnalyticsTopic.topic_name,
+                        subtopic = this.analyticsSubTopic,
+                        source = this.analyticsSource,
+                        time_interval = this.analyticsTimeRange,
+                        time_dimension = time_interval > 7 ? 1 : 0,
+                        end = this.analyticsEnd,
+                        start = this.analyticsStart;
+                Api.getInfluenceList({topic_id, topic, subtopic, source, start, end, time_dimension}).then(resp => {
                     //const resp = {data: {code:0, data: [{id: "1234", influencer: "台湾", posts: 6, like: 123, resend: 32, sentiment: {happy: 5, anger: 15, sorrow: 10, disgust: 0, fear: 5}, rate: {key: "up", value: "24%"}},{"id": "1234", "influencer": "台湾1", "posts": 6, "like": 123, "resend": 32, "sentiment": {happy: 3, anger: 5, sorrow: 10, disgust: 3, fear: 5}, "rate": {"key": "up", "value": "24%"}}] }};
                     if(resp.data.code ==0){
                         const influanceInfos = resp.data.data;
