@@ -5,23 +5,33 @@
         <div class="theme-word-chart" v-echarts="themeWordOption" :loading="themeWordLoading"  theme="infographic" :click="clickAction"></div>
         <div class="theme-word-ranking">
             <dl class="list up-list">
-                <dt class="list-title">UP</dt>
-                <dd v-for="item in upList" class="list-item up-list-item">
+                <dt class="list-title">排名变化</dt>
+                <dd v-for="item in trendList" class="list-item up-list-item">
                     <div :id="item.id">
-                        <i class="fa fa-level-up"></i>
-                        <span class="list-item-con">{{item.rate}} - {{item.name}}</span>
+                        <i class="fa fa-level-up" v-if="item.trend == 'up'"></i>
+                        <i class="fa fa-level-down" v-if="item.trend == 'down'"></i>
+                        <span class="list-item-con">{{item.name}} - {{item.rate}}</span>
                     </div>
                 </dd>
             </dl>
-            <dl class="list down-list">
-                <dt class="list-title">DOWN</dt>
-                <dd v-for="item in downList" class="list-item down-list-item">
-                    <div :id="item.id">
-                        <i class="fa fa-level-down"></i>
-                        <span class="list-item-con">{{item.rate}} - {{item.name}}</span>
-                    </div>
-                </dd>
-            </dl>
+            <!--<dl class="list up-list">-->
+                <!--<dt class="list-title">UP</dt>-->
+                <!--<dd v-for="item in upList" class="list-item up-list-item">-->
+                    <!--<div :id="item.id">-->
+                        <!--<i class="fa fa-level-up"></i>-->
+                        <!--<span class="list-item-con">{{item.rate}} - {{item.name}}</span>-->
+                    <!--</div>-->
+                <!--</dd>-->
+            <!--</dl>-->
+            <!--<dl class="list down-list">-->
+                <!--<dt class="list-title">DOWN</dt>-->
+                <!--<dd v-for="item in downList" class="list-item down-list-item">-->
+                    <!--<div :id="item.id">-->
+                        <!--<i class="fa fa-level-down"></i>-->
+                        <!--<span class="list-item-con">{{item.rate}} - {{item.name}}</span>-->
+                    <!--</div>-->
+                <!--</dd>-->
+            <!--</dl>-->
         </div>
     </div>
     <div class="theme-chart">
@@ -82,6 +92,8 @@
                 upList: [],
 
                 downList: [],
+
+                trendList: [],
 
                 themeScatterOption: {
                     legend: _.extend({}, Chart.legend, {
@@ -360,8 +372,9 @@
                 return Api.getTrendList({topic_id, topic, subtopic, source, start, end, time_dimension}).then(resp => {
                     //console.log('getTrendList', resp);
                     if(resp.data.code == 0){
-                        this.upList = resp.data.data.up;
-                        this.downList = resp.data.data.down;
+                        this.trendList = resp.data.data;
+//                        this.upList = resp.data.data.up;
+//                        this.downList = resp.data.data.down;
                     }
                 });
             },
