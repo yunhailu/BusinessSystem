@@ -71,7 +71,7 @@ module.exports = {
         var options = val;
 
         Vue.nextTick(function () {
-            _this.instance.setOption(options);
+            _this.instance.setOption(options,true);
             _this.params.img = _this.instance.getDataURL("jpg");
             //console.log(_this.instance.getDataURL("jpg"));
             if(options.series.type != 'wordCloud' || _.some(options.series, item => {return item.type == 'wordCloud'})){

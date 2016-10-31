@@ -41,10 +41,29 @@ export const analyticsSubTopic = state => {
 	return state.analytics.subtopic;
 };
 
-export const analyticsStart = state => {
-	return state.analytics.start;
+/**
+ * Compare
+ * */
+export const compareType = state => {
+	return state.compare.compare_type;
 };
 
-export const analyticsEnd = state => {
-	return state.analytics.end;
+export const compareTimeRange = state => {
+	return state.compare.compare_time_Range;
+};
+
+export const compareSource = state => {
+	return state.compare.compare_source;
+};
+
+export const compareSubTopic = state => {
+	return state.compare.compare_subtopic;
+};
+
+export const compareStart = state => {
+	return state.compare.compare_start;
+};
+
+export const compareEnd = state => {
+	return state.compare.compare_end;
 };

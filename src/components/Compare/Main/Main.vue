@@ -13,28 +13,13 @@
     import _ from 'underscore';
     import Local from "../../../local/local";
     import {Chart, Pie} from '../../../config/config';
+    import * as Api from "../../../widgets/Api";
+    import { topicList, activeCompareTopic, topicGroupActiveId, compareSource, compareSubTopic, compareStart, compareEnd, compareTimeRange } from '../../../vuex/getters';
+    import { setTopicList, setActiveCompareTopic, setTopicGroupActiveId, setCompareSource, setCompareSubTopic, setCompareStart, setCompareEnd, setCompareTimeRange  } from "../../../vuex/actions";
 
     export default{
         props: [],
         data(){
-            const data = {
-                didi: [1,4,0,6,1,1,0,0,0,1,0,1,4,0,4,3,0,0,4,1,9,4,0,1,0,0,1,1,1,1,3,1,1,4,0,3,4,3,1,1,1,0,0,0,1,6,1,1,1,3,1,4,3,4,1,0,0,1,3,0,0,1,1,1,1,0,1,0,3,0,0,12,8,3,4,6,0,4,0,3,1,1,0,1,1,1,1,4,1,4,0,9,8,4,1,0,0,1,3,1,4,1,1,1,3,1,1,3,16,0,0,0,4,3,1,0,0,1,0,1,3],
-                ubar: [1,4,6,21,4,1,6,4,1,0,0,0,0,3,6,4,3,1,9,3,11,0,1,0,11,4,0,1,0,0,27,3,6,3,4,0,11,4,3,1,0,1,1,8,3,1,6,0,1,12,4,16,1,3,12,1,8,3,3,1,3,1,0,4,1,0,0,1,6,3,14,4,4,6,0,9,1,4,9,0,1,0,1,8,0,1,0,3,1,33,6,21,4,4,1,4,1,0,1,0,3,3,0,1,3,3,8,1,4,1,6,3,3,0,16,1,1,1,0,0,1],
-                yidao: [5,10,2,0,4,0,0,5,0,0,1,10,0,0,20,4,0,2,0,0,1,0,2,0,3,0,0,1,2,2,3,0,3,0,3,0,1,1,0,3,0,0,1,0,4,5,0,5,0,1,1,0,1,0,2,3,2,0,11,0,10,4,5,0,0,1,0,0,0,6,2,0,3,3,0,1,4,6,4,0,0,4,1,2,4,0,3,1,0,4,3,2,1,8,2,1,3,4,4,6,0,1,1,2,0,1,4,2,1,2,2,1,3,1,1,1,3,5,6,4,1],
-                disgust: [0,0,0,3,0,0,0,0,0,0,0,0,0,0,1,3,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,3,0,3,1,0,0,0,0,0,0,0,0,1,0,0,0,1,3,0,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,6,1,1,0,0,3,0,0,0,0,1,0,0,0,1,0,0,0,0,1,1,0,0,1,0,0,0,0,0,0,1,1,0,0,0,3,1,0,1,0,0,0,0,0,0,0,0,1,1,0,0],
-                fear: [0,0,1,1,0,0,0,0,0,0,0,1,0,0,0,0,3,0,1,0,0,0,0,0,0,1,1,0,0,0,0,1,0,1,0,0,1,4,0,0,0,0,0,0,0,0,0,0,0,1,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,3,1,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0]
-            };
-            const radar = {
-                didi: [
-                    [55,9,56,46,18,6]
-                ],
-                ubar: [
-                    [26,37,27,63,27,13]
-                ],
-                yidao: [
-                    [91,45,75,30,34,23]
-                ]
-            };
             const common = Local().common;
             return{
                 common,
@@ -43,15 +28,14 @@
                     title: _.extend({}, Chart.title, { show: false}),
                     tooltip: Chart.tooltip,
                     legend: {
-                        data:['滴滴','Ubar','易道']
+                        data:[]
                     },
                     grid: Chart.grid,
                     toolbox: Chart.toolbox,
                     color: _.extend([], Chart.color),
-                    //color: _.extend([], ['#F9713C', '#B3E4A1', 'rgb(238, 197, 102)']),
                     xAxis: _.extend({}, Chart.xAxis, {
-                        type : 'category',  //category
-                        data : ["2016-08-21:12","2016-08-21:14","2016-08-21:15","2016-08-21:16","2016-08-21:17","2016-08-21:18","2016-08-21:20","2016-08-21:21","2016-08-22:00","2016-08-22:03","2016-08-22:05","2016-08-22:06","2016-08-22:08","2016-08-22:09","2016-08-22:10","2016-08-22:11","2016-08-22:12","2016-08-22:13","2016-08-22:14","2016-08-22:15","2016-08-22:16","2016-08-22:17","2016-08-22:18","2016-08-22:19","2016-08-22:20","2016-08-22:21","2016-08-22:22","2016-08-23:00","2016-08-23:03","2016-08-23:06","2016-08-23:08","2016-08-23:09","2016-08-23:10","2016-08-23:11","2016-08-23:12","2016-08-23:13","2016-08-23:14","2016-08-23:15","2016-08-23:16","2016-08-23:17","2016-08-23:18","2016-08-23:19","2016-08-23:20","2016-08-23:22","2016-08-23:23","2016-08-24:00","2016-08-24:01","2016-08-24:06","2016-08-24:07","2016-08-24:08","2016-08-24:09","2016-08-24:10","2016-08-24:11","2016-08-24:12","2016-08-24:14","2016-08-24:15","2016-08-24:16","2016-08-24:17","2016-08-24:18","2016-08-24:20","2016-08-24:21","2016-08-24:22","2016-08-25:00","2016-08-25:02","2016-08-25:03","2016-08-25:05","2016-08-25:06","2016-08-25:07","2016-08-25:08","2016-08-25:09","2016-08-25:10","2016-08-25:11","2016-08-25:12","2016-08-25:14","2016-08-25:15","2016-08-25:16","2016-08-25:17","2016-08-25:18","2016-08-25:19","2016-08-25:20","2016-08-25:21","2016-08-25:22","2016-08-25:23","2016-08-26:00","2016-08-26:01","2016-08-26:06","2016-08-26:07","2016-08-26:08","2016-08-26:09","2016-08-26:10","2016-08-26:11","2016-08-26:12","2016-08-26:13","2016-08-26:14","2016-08-26:15","2016-08-26:16","2016-08-26:17","2016-08-26:18","2016-08-26:22","2016-08-26:23","2016-08-27:00","2016-08-27:01","2016-08-27:02","2016-08-27:06","2016-08-27:08","2016-08-27:09","2016-08-27:10","2016-08-27:11","2016-08-27:12","2016-08-27:13","2016-08-27:14","2016-08-27:15","2016-08-27:16","2016-08-27:17","2016-08-27:18","2016-08-27:19","2016-08-27:20","2016-08-28:00","2016-08-28:01","2016-08-28:06","2016-08-28:08"],
+                        type : 'category',
+                        data : [],
                         boundaryGap : false
                     }),
                     yAxis: _.extend({}, Chart.yAxis, {
@@ -60,25 +44,7 @@
                     }),
                     progressive: 4,
                     textStyle: Chart.textStyle,
-                    series : [{
-                        name:'滴滴',
-                        type:'bar',
-                        areaStyle: {normal: {}},
-                        stack: 'Total',
-                        data: data.didi
-                    }, {
-                        name:'Ubar',
-                        type:'bar',
-                        areaStyle: {normal: {}},
-                        stack: 'Total',
-                        data: data.ubar
-                    }, {
-                        name:'易道',
-                        type:'bar',
-                        areaStyle: {normal: {}},
-                        stack: 'Total',
-                        data: data.yidao
-                    }]
+                    series : []
                 },
 
                 comparePieLoading: false,
@@ -86,46 +52,27 @@
                     title: _.extend({}, Pie.title, { show: false}),
                     tooltip: _.extend({}, Pie.tooltip),
                     legend: _.extend({}, Pie.legend, {
-                        //orient: 'vertical',
-                        //x: 'bottom',
                         bottom: 0,
-                        data:['滴滴','Ubar','易道']
+                        data:[]
                     }),
                     textStyle: Pie.textStyle,
                     toolbox: Pie.toolbox,
                     color: _.extend([], Chart.color),
-                    //color: _.extend([], ['#F9713C', '#B3E4A1', 'rgb(238, 197, 102)']),
                     series: _.extend({}, Pie.series, {
                         name: 'Compare',
                         radius: ['25%', '60%'],
-                        data:[
-                            {value: _.reduce(data.didi, (mome, num) => mome + num, 0), name:'滴滴'},
-                            {value:_.reduce(data.ubar, (mome, num) => mome + num, 0), name:'Ubar'},
-                            {value:_.reduce(data.yidao, (mome, num) => mome + num, 0), name:'易道'}
-                        ]
+                        data:[]
                     })
                 },
 
                 compareRadarLoading: false,
                 compareRadarOption: {
                     backgroundColor: '-webkit-radial-gradient(#e9e9e9 5%, #f9f9f9 60%);',
-                    //backgroundColor: '#e9e9e9',
                     title: {
-                        //text: 'AQI - 雷达图',
-//                        left: 'center',
-//                        textStyle: {
-//                            color: '#999'
-//                        }
                     },
                     legend: {
                         bottom: 1,
-                        data: ['滴滴', 'Ubar', '易道'],
-//                        itemGap: 20,
-//                        textStyle: {
-//                            color: '#fff',
-//                            fontSize: 14
-//                        },
-//                        selectedMode: 'single'
+                        data: [],
                     },
                     color: _.extend([], Chart.color),
                     radar: {
@@ -161,73 +108,244 @@
                             }
                         }
                     },
-                    series: [{
-                        name: '滴滴',
-                        type: 'radar',
-                        lineStyle: {
-                            normal: {
-                                width: 1.5,
-                                opacity: 0.5
-                            }
-                        },
-                        data: radar.didi,
-                        symbol: 'none',
-                        itemStyle: {
-                            normal: {
-                                //color: '#F9713C'
-                            }
-                        },
-                        areaStyle: {
-                            normal: {
-                                opacity: 0.1
-                            }
-                        }
-                    }, {
-                        name: 'Ubar',
-                        type: 'radar',
-                        lineStyle: {
-                            normal: {
-                                width: 1.5,
-                                opacity: 0.5
-                            }
-                        },
-                        data: radar.ubar,
-                        symbol: 'none',
-                        itemStyle: {
-                            normal: {
-                                //color: '#B3E4A1'
-                            }
-                        },
-                        areaStyle: {
-                            normal: {
-                                opacity: 0.1
-                            }
-                        }
-                    }, {
-                        name: '易道',
-                        type: 'radar',
-                        lineStyle: {
-                            normal: {
-                                width: 1.5,
-                                opacity: 0.5
-                            }
-                        },
-                        data: radar.yidao,
-                        symbol: 'none',
-                        itemStyle: {
-                            normal: {
-                                //color: 'rgb(238, 197, 102)'
-                            }
-                        },
-                        areaStyle: {
-                            normal: {
-                                opacity: 0.1
-                            }
-                        }
-                    }]
+                    series: []
                 }
             }
         },
+        methods:{
+        },
+        vuex:{
+            actions:{setTopicList ,setActiveCompareTopic ,setTopicGroupActiveId, setCompareSource, setCompareSubTopic, setCompareStart, setCompareEnd, setCompareTimeRange},
+            getters:{topicList ,activeCompareTopic , topicGroupActiveId, compareSource, compareSubTopic, compareStart, compareEnd, compareTimeRange  }
+        },
+        watch:{
+            activeCompareTopic: {
+                handler(val, oldVal){
+                    const currentList = this.topicList;
+                    const currentGroupId = this.topicGroupActiveId;
+                    const currentGroup = _.find(currentList,item =>item.group_id ==currentGroupId);//
+                    if(val.length ==0){
+                        this.comparePieOption.legend.data=[];
+                        this.comparePieOption.series.data=[];
+                        this.compareRadarOption.legend.data=[];
+                        this.compareRadarOption.series=[];
+                        this.compareChartOption.legend.data=[];
+                        this.compareChartOption.series=[]
+                        return ;
+                    }
+                   if(val.length !=0 && oldVal.length !=0 && _.find(currentGroup.list,item => item.topic_name == oldVal[0].topic_name) !=undefined){
+                       if(val.length > oldVal.length){
+                           this.compareChartLoading = true;
+                           this.comparePieLoading = true;
+                           this.compareRadarLoading = true;
+                           var newTopic = _.difference(val, oldVal);
+                           const topicParams = {
+                               topic_id:newTopic[0] ? newTopic[0].topic_id :'',
+                               topic:newTopic[0] ? newTopic[0].topic_name :'',
+                               subtopic:this.compareSubTopic,
+                               source:this.compareSource,
+                               start:this.compareStart,
+                               end:this.compareEnd,
+                               time_dimension:this.compareTimeRange<=10 ? 0 :1
+                           };
+                           Api.getSummaryDetail(topicParams).then(resp =>{
+                               if(resp.data.code ==0){
+                                   this.compareChartLoading = false;
+                                   this.comparePieLoading = false;
+                                   const newTopicData =resp.data.data;
+                                   const intervalDate = _.pluck(newTopicData,'date');
+                                   const newChart =_.map(newTopicData,function(item) {
+                                       return _.reduce(_.values(item.values), function (memo, num) {
+                                           return memo + num;
+                                       }, 0);
+                                   });
+                                   this.compareChartOption.legend.data.push(newTopic[0].topic_name);
+                                   this.compareChartOption.xAxis.data=intervalDate;
+                                   this.compareChartOption.series.push(
+                                           {
+                                               name:newTopic[0].topic_name,
+                                               type:'bar',
+                                               areaStyle: {normal: {}},
+                                               stack: 'Total',
+                                               data: newChart
+                                           }
+                                   );
+                                   this.comparePieOption.legend.data.push(newTopic[0].topic_name);
+                                   this.comparePieOption.series.data.push(
+                                           {
+                                               value: _.reduce(newChart, (mome, num) => mome + num, 0),
+                                               name:newTopic[0].topic_name
+                                           }
+                                   );
+                               }
+                           });
+                           Api.getSentimentDetail(topicParams).then(resp =>{
+                               this.compareRadarLoading = false;
+                               if(resp.data.code == 0){
+                                   const details = resp.data.data;
+                                   const _this = this;
+                                   let all = {happy: [], anger:[], sorrow:[], disgust:[], fear:[]};
+                                   _.each(details,(detail,index) => {
+                                       _.each(detail.values,(value,key) =>{
+                                           all.happy.push(details[index].values[key].happy);
+                                           all.anger.push(details[index].values[key].anger);
+                                           all.sorrow.push(details[index].values[key].sorrow);
+                                           all.disgust.push(details[index].values[key].disgust);
+                                           all.fear.push(details[index].values[key].fear);
+                                       })
+                                   })
+                                   const valAll =_.values(all);
+                                   const radar = _.map(_.values(all),item => {
+                                               return _.reduce(item, function(memo, num){ return memo + num; }, 0);
+                                           }
+                                   );
+                                   const allNumber = _.reduce(radar, function(memo, num){ return memo + num; }, 0);
+                                   const newRadar =[_.map(radar,item =>{
+                                       return (item/allNumber)*100;
+                                   })];
+                                   this.compareRadarOption.legend.data.push(newTopic[0].topic_name);
+                                   this.compareRadarOption.series.push(
+                                           {
+                                               name: newTopic[0].topic_name,
+                                               type: 'radar',
+                                               lineStyle: {
+                                                   normal: {
+                                                       width: 1.5,
+                                                       opacity: 0.5
+                                                   }
+                                               },
+                                               data: newRadar,
+                                               symbol: 'none',
+                                               itemStyle: {
+                                                   normal: {
+                                                       //color: '#F9713C'
+                                                   }
+                                               },
+                                               areaStyle: {
+                                                   normal: {
+                                                       opacity: 0.1
+                                                   }
+                                               }
+                                           }
+                                   )
+                               }
+                           })
+
+                       } else {
+
+                           var oldTopic = _.difference(oldVal, val);
+                           const idx = this.compareChartOption.legend.data.indexOf(oldTopic[0].topic_name)
+                           this.compareChartOption.legend.data.splice(idx,1);
+                           this.compareChartOption.series.splice(idx,1)
+                           this.comparePieOption.legend.data.splice(idx,1);
+                           this.comparePieOption.series.data.splice(idx,1);
+                           this.compareRadarOption.legend.data.splice(idx,1);
+                           this.compareRadarOption.series.splice(idx,1);
+                       }
+                   } else {
+                       this.compareChartLoading = true;
+                       this.comparePieLoading = true;
+                       this.compareRadarLoading = true;
+                       var newTopic = _.difference(val, oldVal);
+                       const topicParams = {
+                           topic_id:newTopic[0] ? newTopic[0].topic_id :'',
+                           topic:newTopic[0] ? newTopic[0].topic_name :'',
+                           subtopic:this.compareSubTopic,
+                           source:this.compareSource,
+                           start:this.compareStart,
+                           end:this.compareEnd,
+                           time_dimension:this.compareTimeRange<=10 ? 0 :1
+                       };
+                       Api.getSummaryDetail(topicParams).then(resp =>{//---------------------------------------------------这里参数
+                           if(resp.data.code ==0){
+                               this.compareChartLoading = false;
+                               this.comparePieLoading = false;
+                               const newTopicData =resp.data.data;
+                               const intervalDate = _.pluck(newTopicData,'date');
+                               const newChart =_.map(newTopicData,function(item) {
+                                   return _.reduce(_.values(item.values), function (memo, num) {
+                                       return memo + num;
+                                   }, 0);
+                               });
+                               this.compareChartOption.legend.data=[newTopic[0].topic_name];
+                               this.compareChartOption.xAxis.data=intervalDate;
+                               this.compareChartOption.series=[
+                                       {
+                                           name:newTopic[0].topic_name,
+                                           type:'bar',
+                                           areaStyle: {normal: {}},
+                                           stack: 'Total',
+                                           data: newChart
+                                       }
+                               ];
+                               this.comparePieOption.legend.data=[newTopic[0].topic_name];
+                               this.comparePieOption.series.data=[
+                                       {
+                                           value: _.reduce(newChart, (mome, num) => mome + num, 0),
+                                           name:newTopic[0].topic_name
+                                       }
+                               ];
+                           }
+                       });
+                       Api.getSentimentDetail(topicParams).then(resp =>{
+                           this.compareRadarLoading = false;
+                           if(resp.data.code == 0){
+                               const details = resp.data.data;
+                               const _this = this;
+                               let all = {happy: [], anger:[], sorrow:[], disgust:[], fear:[]};
+                               _.each(details,(detail,index) => {
+                                   _.each(detail.values,(value,key) =>{
+                                       all.happy.push(details[index].values[key].happy);
+                                       all.anger.push(details[index].values[key].anger);
+                                       all.sorrow.push(details[index].values[key].sorrow);
+                                       all.disgust.push(details[index].values[key].disgust);
+                                       all.fear.push(details[index].values[key].fear);
+                                   })
+                               })
+                               const valAll =_.values(all);
+                               const radar = _.map(_.values(all),item => {
+                                           return _.reduce(item, function(memo, num){ return memo + num; }, 0);
+                                       }
+                               );
+                               const allNumber = _.reduce(radar, function(memo, num){ return memo + num; }, 0);
+                               const newRadar =[_.map(radar,item =>{
+                                   return (item/allNumber)*100;
+                               })];
+                               this.compareRadarOption.legend.data=[newTopic[0].topic_name];
+                               this.compareRadarOption.series=[
+                                       {
+                                           name: newTopic[0].topic_name,
+                                           type: 'radar',
+                                           lineStyle: {
+                                               normal: {
+                                                   width: 1.5,
+                                                   opacity: 0.5
+                                               }
+                                           },
+                                           data: newRadar,
+                                           symbol: 'none',
+                                           itemStyle: {
+                                               normal: {
+                                                   //color: '#F9713C'
+                                               }
+                                           },
+                                           areaStyle: {
+                                               normal: {
+                                                   opacity: 0.1
+                                               }
+                                           }
+                                       }
+                               ]
+                           }
+                       })
+                   }
+
+                }
+            }
+        },
+       /* ready(){
+            this.init();
+        },*/
         components:{
 
         }

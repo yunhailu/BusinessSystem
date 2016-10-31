@@ -1,12 +1,10 @@
 /**
  * Created by yunhailu on 2016/10/23.
  */
-import { UPDATE_TYPE, UPDATE_TIME_RANGE, UPDATE_SOURCE, UPDATE_SUBTOPIC, UPDATE_START, UPDATE_END } from '../mutations-types'
+import { UPDATE_TYPE, UPDATE_TIME_RANGE, UPDATE_SOURCE, UPDATE_SUBTOPIC } from '../mutations-types'
 
 const state = {
     type: 'summary',
-    start: '',
-    end: '',
     timeRange: '7',
     source: 'all',
     subtopic: ''
@@ -24,13 +22,6 @@ const mutations = {
     },
     [UPDATE_SUBTOPIC](state, subtopic){
         state.subtopic = subtopic;
-    },
-
-    [UPDATE_START](state, start){
-        state.start = start;
-    },
-    [UPDATE_END](state, end){
-        state.end = end;
     }
 }
 
