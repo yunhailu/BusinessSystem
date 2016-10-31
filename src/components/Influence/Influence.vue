@@ -41,9 +41,9 @@
                 </tr>
             </tbody>
         </table>
-        <div v-if="influancerTable.length" class="paging">
-            <page></page>
-        </div>
+        <!--<div v-if="influancerTable.length" class="paging">-->
+            <!--<page></page>-->
+        <!--</div>-->
         <div v-if="!influancerTable.length" class="noTableTips">{{noTableTips}}</div>
     </div>
     <pop-list :item="selectItem" :pops="popList" :visiable.sync="popVisiable"></pop-list>
@@ -67,6 +67,7 @@
             return{
                 words,
                 popularList: [],
+                influancerList: [],
                 influancerTable: [],
                 influancerNums: [0,0,0,0,0,0],
                 noTableTips: words.noTableTips,
@@ -84,6 +85,20 @@
                     //this.commentBarLoading = true;
                     //this.commentChartLoading = true;
                     this.init(val);
+                }
+            },
+            analyticsSource: {
+                handler(val){
+                    console.log('analyticsSource', val);
+                    if(val == 'all'){
+                        this.influancerTable = _.filter(this.influancerList, (info, index) => {
+                            return (index < 20);
+                        });
+                        return ;
+                    }
+                    this.influancerTable = _.filter(this.influancerList, (info, index) => {
+                        return (info.source == val && index < 20);
+                    });
                 }
             }
         },
@@ -166,8 +181,9 @@
                     //const resp = {data: {code:0, data: [{id: "1234", influencer: "台湾", posts: 6, like: 123, resend: 32, sentiment: {happy: 5, anger: 15, sorrow: 10, disgust: 0, fear: 5}, rate: {key: "up", value: "24%"}},{"id": "1234", "influencer": "台湾1", "posts": 6, "like": 123, "resend": 32, "sentiment": {happy: 3, anger: 5, sorrow: 10, disgust: 3, fear: 5}, "rate": {"key": "up", "value": "24%"}}] }};
                     if(resp.data.code ==0){
                         const influanceInfos = resp.data.data;
-                        this.influancerTable = _.map(influanceInfos, info => {
-                            return info;
+                        this.influancerList = _.map(influanceInfos, info => info);
+                        this.influancerTable = _.filter(this.influancerList, (info, index) => {
+                            return (index < 20);
                         });
                     }
                 });
