@@ -338,6 +338,77 @@
 	}]
 }
 ```
+##### 11.详情页面的接口定义（接口1--正文、作者详情信息）
+-aticle/detail
+-入参：id
+{
+    code:0,
+data:[
+"aticle":
+{
+      "id": "1234",
+      "source": “文章来源”,
+      "postDate": "2016-04-17 19:32",
+      "link": "https://www.weibo.com",
+      "content": "现在看和以前看完全两种感受看着看着就流泪了@轻断食",   //文章内容
+},
+      "author":
+              {
+                  "name":" 小小黑",
+                  "gender":"男",
+                  "address":"北京 朝阳",
+                  "description":"不在沉默中爆发，就在沉默中的灭亡！！！"
+              },
+}]
+##### 12.详情页面的接口定义（接口2--相关文章的列表）
+-aticle/correlation
+-入参：id
+{
+	code:0,
+	"data":
+            [
+              {"title":" 相关文章的标题1", "link":"https://www.weibo.com1"},
+              {"title":" 相关文章的标题2", "link":"https://www.weibo.com2"},
+              {"title":" 相关文章的标题3", "link":"https://www.weibo.com3"},
+              {"title":" 相关文章的标题4", "link":"https://www.weibo.com4"},
+              {"title":" 相关文章的标题5", "link":"https://www.weibo.com5"},
+              {"title":" 相关文章的标题6", "link":"https://www.weibo.com6"},
+              {"title":" 相关文章的标题7", "link":"https://www.weibo.com7"},
+              {"title":" 相关文章的标题8", "link":"https://www.weibo.com8"}
+            ]
+      }]
+}
+##### 13.详情页面的接口定义（接口3--转发关系图）
+-aticle/forwardlevel
+-入参：id
+
+{ code:0,
+  data:[
+  datas:[{  "id":"0",
+                "name":"Myriel",
+                "value":28.68,
+                "level":0}],
+  links:[{
+              "src":"1",
+              "dst":"0",
+	}]
+  ]
+}
+
+##### 14.详情页面的接口定义（接口4--转发曲线图）
+-aticle/forward
+-入参：id
+{ code: 0,
+    data: [{
+        "date": "2016-10-30",
+        "value": 5
+        },]
+    }
+
+
+
+
+
 
 ### 三、数据对比
 -  compare/sentiment(是3)
