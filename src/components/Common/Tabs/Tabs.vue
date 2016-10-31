@@ -29,7 +29,7 @@
 <script type="text/ecmascript-6">
     import _ from 'underscore';
     import Local from '../../../local/local';
-    import AddDashboard from '../../AddDashboard/AddDashboard.vue'
+    import AddDashboard from '../../addDashboard/addDashboard.vue'
     import { analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic } from '../../../vuex/getters';
     import { setAnalyticsType, setAnalyticsTimeRange, setAnalyticsSource, setAnalyticsSubTopic } from "../../../vuex/actions";
 

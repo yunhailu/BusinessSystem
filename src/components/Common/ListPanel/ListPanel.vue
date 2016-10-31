@@ -29,7 +29,7 @@
         <ul class="list-panel-list">
             <li class="list-panel-list-item row" v-for="item in tableList">
                 <!--<a :href="item.url" target="_blank">-->
-                <a v-link="{name: 'detail', params:{type:'summary', id:'12345678'}}" target="_blank">
+                <a  @click="showDetail(item);" href="javascript:void(0);" target="_blank">
                     <div class="list-panel-list-item-left col-md-8">
                         <i class="fa fa-paperclip fa-3x"></i>
                         <div class="list-panel-list-item-left-con">
@@ -44,7 +44,7 @@
                         <div class="item-data">
                             <div class="row">
                                 <div class="col-md-3 title">匹配</div>
-                                <div class="col-md-9 time">优步Ubar</div>
+                                <div class="col-md-9 time">{{activeAnalyticsTopic.topic_name}}</div>
                             </div>
                             <div class="row">
                                 <div class="col-md-3 title">指标</div>
@@ -76,6 +76,7 @@
     import Local from '../../../local/local';
     import SelectEl from '../Select/Select.vue';
     import Page from '../Page/Page.vue';
+    import { activeAnalyticsTopic } from '../../../vuex/getters';
 
     export default{
         props: ["list", "options", "selectTitle", "selectValue"],
@@ -87,6 +88,9 @@
                 filterActive: 20,
                 sentimentActive: 'all'
             }
+        },
+        vuex: {
+            getters: { activeAnalyticsTopic }
         },
         methods: {
             setCount(count){
@@ -103,6 +107,17 @@
                     return ;
                 }
                 this.tableList = _.filter(this.list, (item, index) => (index < count && item.sentiment == flag));
+            },
+            showDetail(item){
+                console.log('showDetail', item);
+                console.log('route', this.$route);
+                this.$router.go({
+                    name: 'detail',
+                    params: {
+                        type: this.$route.name,
+                        id: item.id
+                    }
+                });
             }
         },
         filters: {
