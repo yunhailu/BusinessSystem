@@ -5,10 +5,11 @@
         <!--<div class="arrow animated rubberBand" @click="toggle">-->
             <!--<i class="fa fa-angle-left fa-3x" transition="rotate" :class="[resultPieChartOption.isActive ? 'fa-rotate-180' : '']"></i>-->
         <!--</div>-->
-        <div class="chart" v-echarts="resultChartOption" :loading="resultChartLoading" :class="[resultChartOption.isToggle ? 'active' : '']" :resize="resultChartOption.isToggle" theme="macarons"></div>
+        <div class="chart" v-echarts="resultChartOption" :click="clickChartAction" :loading="resultChartLoading" :class="[resultChartOption.isToggle ? 'active' : '']" :resize="resultChartOption.isToggle" theme="macarons"></div>
         <div class="pie" v-echarts="resultPieChartOption" :loading="resultPieChartLoading" :class="[resultPieChartOption.isActive ? 'active' : '']" translate="show-pie"  theme="macarons"></div>
     </div>
     <list-panel :list="list" :options="options" :select-title="selectTitle" :select-value.sync="sortVal"></list-panel>
+    <tips :visible.sync="loadingParams.visiable" :tipsparam.sync="loadingParams"></tips>
 </template>
 <style lang="less" scoped>
     @import "Result.less";
@@ -22,11 +23,17 @@
     import { list } from "../../config/tmpData";
     import ListPanel from '../Common/ListPanel/ListPanel.vue';
     import Tabs from '../Common/Tabs/Tabs.vue';
+    import Tips from '../Common/Tips/Tips.vue';
     import { analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic, analyticsStart, analyticsEnd, activeAnalyticsTopic } from '../../vuex/getters';
 
     export default{
         data(){
             return{
+                loadingParams: {
+                    visiable: false,
+                    type: 'loading',
+                    content: "请稍后......"
+                },
                 sourceActive: 0,
                 //list: list.time,
                 list: [],
@@ -186,6 +193,25 @@
                 this.resultChartOption.isToggle = !this.resultChartOption.isToggle;
                 this.resultPieChartOption.isActive = !this.resultPieChartOption.isActive;
             },
+            clickChartAction(opts){
+                console.log('clickChartAction opts', opts);
+                this.loadingParams.visiable = true;
+                const topic_id = this.activeAnalyticsTopic.topic_id,
+                        topic = this.activeAnalyticsTopic.topic_name,
+                        subtopic = this.analyticsSubTopic,
+                        source = this.analyticsSource,
+                        time_dimension = 0,
+                        type = "time",
+                        end = opts.name.split(":")[0],
+                        start = opts.name.split(":")[0];
+                Api.getCommentList({type, topic_id, topic, subtopic, source, start, end, time_dimension}).then(resp => {
+                    //console.log(resp.data);
+                    this.loadingParams.visiable = false;
+                    if(resp.data.code == 0){
+                        this.list = resp.data.data;
+                    }
+                });
+            },
             getSummaryDetail(){
                 //console.log(this.analyticsType, this.analyticsTimeRange, this.analyticsSource, this.analyticsSubTopic, this.activeAnalyticsTopic);
                 const topic_id = this.activeAnalyticsTopic.topic_id,
@@ -285,7 +311,7 @@
             }
         },
         components:{
-            Tabs, ListPanel
+            Tabs, ListPanel, Tips
         },
 //        route: {
 //            data(){

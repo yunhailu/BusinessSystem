@@ -2,21 +2,23 @@
     <tabs :actions="actions" :datas="sentimentNums"></tabs>
     <!--<span>Sentiment</span>-->
     <div class="charts">
-        <div class="chart timeBar" v-echarts="sentimentBarOption" :loading="sentimentBarLoading" ></div><!--theme="infographic"-->
+        <div class="chart timeBar" :click="clickChartAction" v-echarts="sentimentBarOption" :loading="sentimentBarLoading" ></div><!--theme="infographic"-->
         <div class="chart percentBar" v-echarts="sentimentChartOption" :loading="sentimentChartLoading" ></div>
     </div>
     <!--<div class="charts"></div>-->
 
     <list-panel :list="list" :options="options" :select-title="selectTitle" :select-value.sync="sortVal"></list-panel>
+    <tips :visible.sync="loadingParams.visiable" :tipsparam.sync="loadingParams"></tips>
 </template>
 <style lang="less" scoped>
     @import "Sentiment.less";
 </style>
 <script type="text/ecmascript-6">
     import _ from 'underscore';
-    import { list } from "../../config/tmpData";
+    //import { list } from "../../config/tmpData";
     import ListPanel from '../Common/ListPanel/ListPanel.vue';
     import Tabs from '../Common/Tabs/Tabs.vue';
+    import Tips from '../Common/Tips/Tips.vue';
     import Local from "../../local/local";
     import {Chart, Pie} from '../../config/config';
     import * as Api from '../../widgets/Api';
@@ -28,8 +30,14 @@
             const common = Local().common;
             return{
                 common,
+                loadingParams: {
+                    visiable: false,
+                    type: 'loading',
+                    content: "请稍后......"
+                },
                 options: [{key: 'time', value: '按时间排序'}, {key: 'browser', value: '浏览数排序'}, {key: 'star', value: '点赞数排序'}],
-                list: list.time,
+                //list: list.time,
+                list: [],
                 sortVal: "",
                 x: [],
                 sentimentArr: ["happy", "anger", "sorrow", "disgust", "fear"],
@@ -208,6 +216,41 @@
                     this.sentimentBarOption.series[this.sentimentMap[key]].data = value;
                 });
             },
+            clickChartAction(opts){
+                console.log('clickChartAction opts', opts);
+                this.loadingParams.visiable = true;
+                const topic_id = this.activeAnalyticsTopic.topic_id,
+                        topic = this.activeAnalyticsTopic.topic_name,
+                        subtopic = this.analyticsSubTopic,
+                        source = this.analyticsSource,
+                        time_dimension = 0,
+                        type = "time",
+                        end = opts.name.split(":")[0],
+                        start = opts.name.split(":")[0];
+                Api.getCommentList({type, topic_id, topic, subtopic, source, start, end, time_dimension}).then(resp => {
+                    //console.log(resp.data);
+                    this.loadingParams.visiable = false;
+                    if(resp.data.code == 0){
+                        this.list = resp.data.data;
+                    }
+                });
+            },
+            getCommentList(type = 'time'){
+                const topic_id = this.activeAnalyticsTopic.topic_id,
+                        topic = this.activeAnalyticsTopic.topic_name,
+                        subtopic = this.analyticsSubTopic,
+                        source = this.analyticsSource,
+                        time_interval = this.analyticsTimeRange,
+                        time_dimension = time_interval > 7 ? 1 : 0,
+                        end = this.analyticsEnd,
+                        start = this.analyticsStart;
+                Api.getCommentList({type, topic_id, topic, subtopic, source, start, end, time_dimension}).then(resp => {
+                    //console.log(resp.data);
+                    if(resp.data.code == 0){
+                        this.list = resp.data.data;
+                    }
+                });
+            },
             getSentimentDetail(){
                 const topic_id = this.activeAnalyticsTopic.topic_id,
                         topic = this.activeAnalyticsTopic.topic_name,
@@ -325,6 +368,7 @@
             init(){
                 this.initData();
                 this.getSentimentDetail();
+                this.getCommentList();
             }
         },
         ready(){
@@ -345,13 +389,14 @@
                     if(val != oldVal){
                         // 展示不同的列表信息
                         //console.log(val, oldVal);
-                        this.list = list[val.key];
+                        //this.list = list[val.key];
+                        this.getCommentList(val.key);
                     }
                 }
             }
         },
         components:{
-            Tabs, ListPanel
+            Tabs, ListPanel, Tips
         },
 //        route: {
 //            data(){
