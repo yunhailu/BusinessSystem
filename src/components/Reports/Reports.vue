@@ -13,21 +13,20 @@
                             <td><i class="fa fa-fire"></i> <span>{{words.reportTitle}}</span></td>
                             <td><i class="fa fa-exchange"></i> <span>{{words.lastChange}}</span></td>
                             <td><i class="fa fa-cube"></i> <span>{{words.trigger}}</span></td>
-                            <td><i class="fa fa-tags"></i> {{words.lastSent}}</td>
+                            <!--<td><i class="fa fa-tags"></i> {{words.lastSent}}</td>-->
                             <td><i class="fa fa-edit"></i> {{words.actions}}</td>
                         </tr>
                         </thead>
                         <tbody>
                         <tr v-for="(index, report) in reports" :class="[index % 2 == 0 ? '' : '']">
-                            <td>{{report.title}}</td>
-                            <td>{{report.lastChange}}</td>
-                            <td>{{report.trigger}}</td>
-                            <td>{{report.lastSent}}</td>
+                            <td>{{report.name}}</td>
+                            <td>{{report.date}}</td>
+                            <!--<td>{{report.trigger}}</td>-->
+                            <td> / </td>
+                            <!--<td>{{report.lastSent}}</td>-->
                             <td>
-                                <i class="fa fa-pencil actionBtn" @click="editAction(report);"></i>
+                                <i class="fa fa-eye actionBtn" @click="viewAction(report);"></i>
                                 <i class="fa fa-envelope-o actionBtn" @click="emailAction(report);"></i>
-                                <i class="fa fa-copy actionBtn" @click="copyAction(report);"></i>
-                                <i class="fa fa-download actionBtn" @click="downloadAction(report);"></i>
                             </td>
                         </tr>
                         </tbody>
@@ -48,106 +47,43 @@
     import Local from "../../local/local";
     import HeaderComponent from '../Header/Header.vue';
     import Page from '../Common/Page/Page.vue';
+    import * as Api from '../../widgets/Api';
+    import { getCookie } from '../../widgets/Cookie';
 
     export default{
         data(){
             const words = Local().reports;
             return{
                 words,
-                name: "Reports & Alerts",
-                reports: [{
-                    id: 123,
-                    title: "阿里影业",
-                    lastChange: "03/08/16 14:39",
-                    trigger: "/",
-                    lastSent: "从未发送"
-                }, {
-                    id: 456,
-                    title: "中国希拉里",
-                    lastChange: "03/08/16 17:57",
-                    trigger: "/",
-                    lastSent: "从未发送"
-                }, {
-                    id: 789,
-                    title: "品牌听力",
-                    lastChange: "05/08/16 10:13",
-                    trigger: "/",
-                    lastSent: "从未发送"
-                }, {
-                    id: 135,
-                    title: "阿里影业",
-                    lastChange: "03/08/16 14:39",
-                    trigger: "/",
-                    lastSent: "从未发送"
-                }, {
-                    id: 246,
-                    title: "中国希拉里",
-                    lastChange: "03/08/16 17:57",
-                    trigger: "/",
-                    lastSent: "从未发送"
-                }, {
-                    id: 357,
-                    title: "品牌听力",
-                    lastChange: "05/08/16 10:13",
-                    trigger: "/",
-                    lastSent: "从未发送"
-                } ,{
-                    id: 468,
-                    title: "阿里影业",
-                    lastChange: "03/08/16 14:39",
-                    trigger: "/",
-                    lastSent: "从未发送"
-                }, {
-                    id: 579,
-                    title: "中国希拉里",
-                    lastChange: "03/08/16 17:57",
-                    trigger: "/",
-                    lastSent: "从未发送"
-                }, {
-                    id: 680,
-                    title: "品牌听力",
-                    lastChange: "05/08/16 10:13",
-                    trigger: "/",
-                    lastSent: "从未发送"
-                }, {
-                    id: 147,
-                    title: "阿里影业",
-                    lastChange: "03/08/16 14:39",
-                    trigger: "/",
-                    lastSent: "从未发送"
-                }, {
-                    id: 258,
-                    title: "中国希拉里",
-                    lastChange: "03/08/16 17:57",
-                    trigger: "/",
-                    lastSent: "从未发送"
-                }, {
-                    id: 369,
-                    title: "品牌听力",
-                    lastChange: "05/08/16 10:13",
-                    trigger: "/",
-                    lastSent: "从未发送"
-                }]
+                name: "报告",
+                reports: []
             }
         },
+        ready(){
+            this.init();
+        },
         methods: {
-            editAction(report){
-                console.log('edit', report);
+            viewAction(report){
+                console.log('view', report);
+                this.$router.go({ name: 'dashboardDetail', params: { id: report.id } });
             },
             emailAction(report){
                 console.log('email', report);
-                location.href = "mailto:test@163.com;test1@163.com?CC=test@163.com&BCC=test@163.com&Subject=Hello&Body=你好";
+                location.href = `mailto:test@163.com;test1@163.com?CC=test@163.com&BCC=test@163.com&Subject=发送报告-${report.name}&Body=你好`;
             },
-            copyAction(report){
-                console.log('copy', report);
+            getDashboardList(){
+                const user_id = getCookie('business_id');
+                Api.getDashboardList({ user_id }).then(resp => {
+                    //console.log(resp.data);
+                    if(resp.data.code == 0){
+                        this.reports = resp.data.data;
+                    }
+                });
             },
-            downloadAction(report){
-                console.log('download', report);
+            init(){
+                this.getDashboardList();
             }
         },
-        components:{
-            HeaderComponent,
-            Page
-        }
+        components:{ HeaderComponent, Page }
     }
 </script>

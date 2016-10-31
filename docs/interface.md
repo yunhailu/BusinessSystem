@@ -341,25 +341,27 @@
 ##### 11.详情页面的接口定义（接口1--正文、作者详情信息）
 -aticle/detail
 -入参：id
+```
 {
     code:0,
-data:[
-"aticle":
-{
-      "id": "1234",
-      "source": “文章来源”,
-      "postDate": "2016-04-17 19:32",
-      "link": "https://www.weibo.com",
-      "content": "现在看和以前看完全两种感受看着看着就流泪了@轻断食",   //文章内容
-},
-      "author":
-              {
-                  "name":" 小小黑",
-                  "gender":"男",
-                  "address":"北京 朝阳",
-                  "description":"不在沉默中爆发，就在沉默中的灭亡！！！"
-              },
-}]
+    data:[{
+        "aticle": {
+              "id": "1234",
+              "source": “文章来源”,
+              "postDate": "2016-04-17 19:32",
+              "link": "https://www.weibo.com",
+              "content": "现在看和以前看完全两种感受看着看着就流泪了@轻断食",   //文章内容
+        },
+        "author":{
+            "name":" 小小黑",
+            "gender":"男",
+            "address":"北京 朝阳",
+            "description":"不在沉默中爆发，就在沉默中的灭亡！！！"
+        },
+    }]
+}
+```
+
 ##### 12.详情页面的接口定义（接口2--相关文章的列表）
 -aticle/correlation
 -入参：id
@@ -468,6 +470,7 @@ data:[
     data: [{
         id: 1,
         name: "alipicture_7d",
+        date: "2016-10-31 20:00",
         data: [{
             topic: "ali",
             subtopic: "",
