@@ -84,6 +84,8 @@
                     if(data.code == 0){
                         Cookie.set('business_uid', data.data.user_id);
                         Cookie.set('business_name', data.data.user_name);
+                        Cookie.set('business_admin', data.data.isAdmin);
+                        Cookie.set('business_email', data.data.email);
                         //location.hash = '#!/home';
                         this.$router.go({name: 'home'});
                     } else {

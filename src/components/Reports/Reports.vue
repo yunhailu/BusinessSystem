@@ -69,7 +69,7 @@
             },
             emailAction(report){
                 console.log('email', report);
-                location.href = `mailto:test@163.com;test1@163.com?CC=test@163.com&BCC=test@163.com&Subject=发送报告-${report.name}&Body=你好`;
+                location.href = `mailto:${getCookie('business_email')}?CC=${getCookie('business_email')}&BCC=${getCookie('business_email')}&Subject=发送报告-${report.name}&Body=你好`;
             },
             getDashboardList(){
                 const user_id = getCookie('business_id');
