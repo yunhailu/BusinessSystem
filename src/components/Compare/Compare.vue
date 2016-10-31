@@ -4,7 +4,7 @@
     <div class="compare-panel">
         <div class="compare-panel-wrap">
             <div class="row tools">
-                <div class="col-md-8">
+                <div class="col-md-7">
                     <div class="search">
                         <input class="search-input" placeholder="Search in Results" v-model="search" />
                         <span class="search-btn" @click="searchAction"><i class="fa fa-search"></i></span>
@@ -12,14 +12,14 @@
                 </div>
                 <div class="col-md-4">
                     <ul class="days-btn">
-                        <li>1D</li>
-                        <li class="active">7D</li>
-                        <li>30D</li>
-                        <li>自定义</li>
+                        <li @click="selectTime(1);" :class="[selectTimeTag == 1 ? 'active' : '']">1D</li>
+                        <li @click="selectTime(7);" :class="[selectTimeTag == 7 ? 'active' : '']" class="active">7D</li>
+                        <li @click="selectTime(30);" :class="[selectTimeTag == 30 ? 'active' : '']">30D</li>
+                        <li @click="selectTime(0);" :class="[selectTimeTag == 0 ? 'active' : '']">自定义</li>
                     </ul>
                     <div class="diyDate">
-                        <span class="date" @click="showCalendar"><i class="fa fa-calendar fa-2x  icon"></i> {{cal.value}}</span>
-                        <calendar :show.sync="cal.show" :value.sync="cal.value" :x="cal.x" :y="cal.y" :begin="cal.begin" :end="cal.end" :type="cal.type" :range="cal.range"></calendar>
+                        <span class="date" @click="showCalendar"><i class="fa fa-calendar fa-2x  icon"></i> {{dateVal}}</span>
+                        <calendar :show.sync="cal.show" :value.sync="dateVal" :x="cal.x" :y="cal.y" :begin.sync="cal.begin" :end.sync="cal.end" :type="cal.type" :range="cal.range"></calendar>
                     </div>
 
                 </div>
@@ -35,29 +35,39 @@
     @import "Compare.less";
 </style>
 <script  type="text/ecmascript-6">
+    import moment from 'moment';
     import HeaderComponent from '../Header/Header.vue';
     import MenuComponent from './Menu/Menu.vue';
     import Calendar from '../Common/Calendar/Calendar.vue';
     import Tabs from './Tabs/Tabs.vue';
     import Main from './Main/Main.vue';
     import Local from "../../local/local";
+    import { compareType, compareTimeRange, compareSource, compareSubTopic, compareStart, compareEnd } from '../../vuex/getters';
+    import { setCompareType, setCompareTimeRange, setCompareSource, setCompareSubTopic, setCompareStart, setCompareEnd  } from "../../vuex/actions";
 
     export default{
         data(){
             return{
                 search: '',
+                dateVal: `${ moment().subtract(7, 'days').format('YYYY-MM-DD')} ~ ${moment().format('YYYY-MM-DD')}`,
                 cal: {
                     show: false,
                     type: "date", //date datetime
-                    value: "2015-12-11",
-                    begin: "2015-12-20",
-                    end: "2015-12-25",
+                    begin: moment().subtract(7, 'days').format('YYYY-MM-DD'),
+                    end: moment().format('YYYY-MM-DD'),
+                    //value: `${ moment().subtract(7, 'days').format('YYYY-MM-DD')} ~ ${moment().format('YYYY-MM-DD')}`,
                     x: 0,
                     y: 0,
                     range:true//是否多选
                 },
+                selectTimeTag: 7,
+                isTimeDiy: false,
                 tabActive: 'result'
             }
+        },
+        vuex:{
+            getters:{ compareType, compareTimeRange, compareSource, compareSubTopic, compareStart, compareEnd },
+            actions:{ setCompareType, setCompareTimeRange, setCompareSource, setCompareSubTopic, setCompareStart, setCompareEnd  }
         },
         components:{
             'header-component': HeaderComponent,
@@ -69,6 +79,19 @@
         methods: {
             searchAction(){
                 console.log(this.search);
+                this.setCompareSubTopic(this.search);
+            },
+            selectTime(num){
+                this.selectTimeTag = num;
+                if(num == 0){
+                    this.isTimeDiy = true;
+                    this.dateVal = this.compareStart + ' ~ ' + this.compareEnd;
+                } else {
+                    this.isTimeDiy = false;
+                    this.setCompareTimeRange(num);
+                    this.setCompareStart(moment().subtract(num, 'days').format('YYYY-MM-DD'));
+                    this.setCompareEnd(moment().format('YYYY-MM-DD'));
+                }
             },
             showCalendar:function(e){
                 e.stopPropagation();
@@ -84,7 +107,32 @@
                 setTimeout(function(){
                     document.addEventListener('click',bindHide,false);
                 },500);
+            },
+            init(){
+                const start = moment(this.cal.begin, "YYYY-MM-DD");
+                const end = moment(this.cal.end, "YYYY-MM-DD");
+                const days = end.diff(start)/1000/3600/24;
+                this.setCompareStart(this.cal.begin);
+                this.setCompareEnd(this.cal.end);
+                this.setCompareTimeRange(days);
             }
+        },
+        watch: {
+            dateVal: {
+                handler(val){
+                    //console.log('date',val);
+                    const start = moment(val.split(' ~ ')[0], "YYYY-MM-DD");
+                    const end = moment(val.split(' ~ ')[1], "YYYY-MM-DD");
+                    const days = end.diff(start)/1000/3600/24;
+                    this.setCompareStart(val.split(' ~ ')[0]);
+                    this.setCompareEnd(val.split(' ~ ')[1]);
+                    this.setCompareTimeRange(days);
+                    console.log(val.split(' ~ ')[0], val.split(' ~ ')[1], days);
+                }
+            }
+        },
+        ready(){
+            this.init();
         },
         route: {
             data(){

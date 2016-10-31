@@ -51,3 +51,29 @@ export const setAnalyticsStart = (store, start) => {
 export const setAnalyticsEnd = (store, end) => {
 	store.dispatch(types.UPDATE_END, end);
 };
+
+/**
+ * Compare
+ * */
+export const setCompareType = (store, type) => {
+	store.dispatch(types.UPDATE_COMPARE_TYPE, type);
+};
+
+export const setCompareTimeRange = (store, timeRange) => {
+	store.dispatch(types.UPDATE_COMPARE_TIME_RANGE, timeRange);
+};
+
+export const setCompareSource = (store, source) => {
+	store.dispatch(types.UPDATE_COMPARE_SOURCE, source);
+};
+
+export const setCompareSubTopic = (store, subtopic) => {
+	store.dispatch(types.UPDATE_COMPARE_SUBTOPIC, subtopic);
+};
+export const setCompareStart = (store, start) => {
+	store.dispatch(types.UPDATE_COMPARE_START, start);
+};
+
+export const setCompareEnd = (store, end) => {
+	store.dispatch(types.UPDATE_COMPARE_END, end);
+};

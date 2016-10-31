@@ -7,7 +7,7 @@
         </div>
         <ul class="sidebar-menu">
             <li v-for="group in groups" :class="[group.list.length ? 'treeview' : '', group.isActive ? 'active' : '']">
-                <a href="javascript:void(0);" @click="toggle(group);" v-show="group.list.length">
+                <a href="javascript:void(0);" @click="toggle(group,$index);" v-show="group.list.length">
                     <i class="fa" :class="group.icon || 'fa-bar-chart' "></i> <span>{{group.group_name}}</span>
                     <i class="fa pull-right" :class="[group.isActive ? 'fa-angle-down' : 'fa-angle-left']"></i>
                 </a>
@@ -31,85 +31,81 @@
     import Local from "../../../../local/local";
     import Tips from "../../../Common/Tips/Tips.vue"
     import * as Api from "../../../../widgets/Api";
-    import { topicList, activeCompareTopic } from '../../../../vuex/getters';
-    import { setTopicList, setActiveCompareTopic } from "../../../../vuex/actions";
+    import { topicList, activeCompareTopic, topicGroupActiveId} from '../../../../vuex/getters';
+    import { setTopicList, setActiveCompareTopic, setTopicGroupActiveId} from "../../../../vuex/actions";
 console.log('aaa');
     export default{
         props: ['title', 'menus', 'groups', 'action'],
         data(){
             const common = Local().common;
-
             return{
                 common
             }
         },
         components:{ Tips },
         vuex: {
-            actions: { setTopicList, setActiveCompareTopic },
-            getters: { topicList, activeCompareTopic }
+            actions: { setTopicList, setActiveCompareTopic ,setTopicGroupActiveId},
+            getters: { topicList, activeCompareTopic ,topicGroupActiveId}
         },
         methods: {
             toggle(group){
                 const groups = _.map(this.groups, item => {
                     if(group.group_id != item.group_id){
                         item.isActive = false;
-                        this.setActiveCompareTopic(null);
-                        this.initActiveTopic(group);
+                        //this.setActiveCompareTopic(null);
+                        //this.initActiveTopic(group);
                     } else {
                         item.isActive = !item.isActive;
                     }
                     return item;
                 });
-                console.log('groups2',groups);
+                //获取当前list对象
+                console.log('当前group',group);
                 this.setTopicList(groups);
-                console.log(_.map(this.activeCompareTopic,item=>item));
-                //this.initActiveTopic();
+                this.setTopicGroupActiveId(group.group_id)
             },
-
             change(topic){
                 let src =_.map(this.activeCompareTopic,item=>item);
-                console.log('点击前的',src);//[]
+                let activeGroupId = this.topicGroupActiveId;
+                //判断id的list是否有
+                let groupActive = _.find(this.groups,item =>item.group_id ==activeGroupId);
                 const active = topic;
-                console.log('点击的id',topic.topic_id);
-                console.log(src.findIndex(value => value==topic.topic_id));//undefined
-                if(src.findIndex(value => value==topic.topic_id)!=-1){
-                console.log('del');
-                    src.splice(src.indexOf(active.topic_id),1);
-                console.log('删除后的',src);
-                    this.setActiveCompareTopic(src);
-                    return ;
-                }else {
-                 console.log('add');
-                      src.push(active.topic_id);
-                console.log('添加后的',src);
+                if(src.length != 0 && _.find(groupActive.list,item =>item.topic_id ==_.first(src).topic_id) != undefined){
+                    if(src.findIndex(value => value==topic)!=-1){
+                        console.log('del');
+                            src.splice(src.indexOf(topic),1);
+                        console.log('删除后的',src);
+                            this.setActiveCompareTopic(src);
+                            return ;
+                    } else {
+                         console.log('add');
+                              src.push(active);
+                        console.log('添加后的',src);
+                            this.setActiveCompareTopic(src);
+                    }
+                } else {
+                    src = [];
+                    src.push(topic);
+                    console.log(src);
                     this.setActiveCompareTopic(src);
                 }
-
             },
-
-            initActiveTopic(group){
-            console.log(group);
-            console.log('topicList2',this.topicList);
+            /*initActiveTopic(group){
+            this.group = group;
                 let active =_.map(this.activeCompareTopic,item=>item);
-                console.log('aaa',active);//[]
                 if(active.length =='0'){
-                console.log('is into if');
-                    //const active = _.first(group.list);
                     console.log('group',group);
-                    active.push((_.first(group.list)).topic_id);
-                    console.log('after init',active);
+                    active.push(_.first(group.list));
                     this.setActiveCompareTopic(active);
-                    console.log(this.activeCompareTopic);
                 }
-            },
+            },*/
             addTopicAction(){
                 this.$router.go({name: "settingAdd"});
             }
         },
         filters: {
             isActive(topic){
-                //return _.isEqual(this.activeCompareTopic, topic) ? 'active' : '';
-                return _.map(this.activeCompareTopic,item=>item).findIndex(value => value==topic.topic_id)!=-1 ? 'active' : '';                                                                               //return this.activeArray[topic].topic_id===topic.id ? 'active' : '';
+                return _.map(this.activeCompareTopic,item=>item).findIndex(value => value==topic)!=-1 ? 'active' : '';                                                                               //return this.activeArray[topic].topic_id===topic.id ? 'active' : '';
             }
         }
     }

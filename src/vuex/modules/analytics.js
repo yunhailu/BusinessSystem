@@ -5,8 +5,8 @@ import { UPDATE_TYPE, UPDATE_TIME_RANGE, UPDATE_SOURCE, UPDATE_SUBTOPIC, UPDATE_
 
 const state = {
     type: 'summary',
-    start: '',
-    end: '',
+    start:'',
+    end:'',
     timeRange: '7',
     source: 'all',
     subtopic: ''
@@ -16,6 +16,12 @@ const mutations = {
     [UPDATE_TYPE](state, type) {
         state.type = type;
     },
+    [UPDATE_START](state, start) {
+        state.start = start;
+    },
+    [UPDATE_END](state, end) {
+        state.end = end;
+    },
     [UPDATE_TIME_RANGE](state, timeRange) {
         state.timeRange = timeRange;
     },
@@ -24,13 +30,6 @@ const mutations = {
     },
     [UPDATE_SUBTOPIC](state, subtopic){
         state.subtopic = subtopic;
-    },
-
-    [UPDATE_START](state, start){
-        state.start = start;
-    },
-    [UPDATE_END](state, end){
-        state.end = end;
     }
 }
 
