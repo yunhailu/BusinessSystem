@@ -4,6 +4,7 @@
         <div class="container">
             <div class="dashboard-detail-wrap" v-for="detail in details">
                 <div class="dashboard-detail-wrap-title">
+                    <div class="saveBtn" @click="saveAction();"><i class="fa fa-save"></i> <span>{{words.save}}</span></div>
                     <div class="title"><i class="fa fa-thumb-tack"></i> <span>{{name}}</span></div>
                 </div>
                 <div class="dashboard-detail-wrap-module" v-if="detail.summary">
@@ -78,6 +79,9 @@
                     });
                     callback && callback(resp.data);
                 });
+            },
+            saveAction(){
+                window.print();
             },
             init(){
                 this.getDashboardDetail();

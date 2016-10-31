@@ -32,7 +32,7 @@ export const zh_CN = {
         wordsRanking: "热词排行"
     },
     analytics: {
-        tabs: ["态势分析", "情绪分析", "评价分析", "影响力分析", "主题分析"],
+        tabs: ["品牌关注", "品牌情绪", "品牌评价", "品牌影响力", "品牌印象"],
         filters: ["全部", "情绪指数", "地域分布", "性别分布", "语言分布"],
         source: ["全部", "微信", "微博", "客户端", "网页", "海外"],
         addDashboard: "添加快捷报告"
@@ -69,7 +69,7 @@ export const zh_CN = {
         desc: "描述："
     },
     compare: {
-        tabs: ["态势分析", "情绪分析", "影响力分析", "主题分析"],
+        tabs: ["品牌关注", "品牌情绪","品牌评价", "品牌影响力", "品牌印象"],
         filters: ["全部", "情绪指数", "地域分布", "性别分布", "语言分布"],
         source: ["全部", "微信", "微博", "客户端", "网页", "海外"]
     },
@@ -88,11 +88,12 @@ export const zh_CN = {
     dashboard: {
         dashboard: "快捷报告",
         dashboardDec: "用你的 KPI 数据构建客户快捷报告",
-        result: "态势分析",
-        sentiment: "情绪分析",
-        comment: "评价分析",
-        influence: "影响力分析",
-        theme: "主题分析"
+        result: "品牌关注",
+        sentiment: "品牌情绪",
+        comment: "品牌评价",
+        influence: "品牌影响力",
+        theme: "品牌印象",
+        save: "打印或保存"
     },
     setting: {
         title: "设置你的项目",

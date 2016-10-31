@@ -199,7 +199,7 @@
                 //console.log(start, end);
 
                 Api.getSummaryDetail({topic_id, topic, subtopic, source, start, end, time_dimension}).then(resp => {
-                    console.log('getSummaryDetail', resp.data);
+                    //console.log('getSummaryDetail', resp.data);
                     if(resp.data.code == 0){
                         const details = resp.data.data;
                         this.x = _.map(details, detail => detail.date);
@@ -254,7 +254,7 @@
                 };
             },
             init(topic){
-                console.log('topic', topic);
+                //console.log('topic', topic);
                 this.initData();
                 this.getSummaryDetail();
                 this.getCommentList();
@@ -272,7 +272,7 @@
                 handler(val, oldVal){
                     if(val != oldVal){
                         // 展示不同的列表信息
-                        console.log(val, oldVal);
+                        //console.log(val, oldVal);
                         //this.list = list[val.key];
                         this.getCommentList(val.key);
                     }

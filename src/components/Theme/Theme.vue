@@ -372,7 +372,7 @@
                 return Api.getTrendList({topic_id, topic, subtopic, source, start, end, time_dimension}).then(resp => {
                     //console.log('getTrendList', resp);
                     if(resp.data.code == 0){
-                        this.trendList = resp.data.data;
+                        this.trendList = _.filter(resp.data.data, (item, index) => (index < 10));
 //                        this.upList = resp.data.data.up;
 //                        this.downList = resp.data.data.down;
                     }
