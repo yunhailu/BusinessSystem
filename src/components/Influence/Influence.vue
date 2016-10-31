@@ -30,7 +30,7 @@
                 </tr>
             </thead>
             <tbody v-if="influancerTable.length">
-                <tr id="item.id" v-for="(index, item) in influancerTable" @click="popList(item);" :class="[index % 2 == 0 ? '' : '']">
+                <tr id="item.id" v-for="(index, item) in influancerTable" @click="showPopList(item);" :class="[index % 2 == 0 ? '' : '']">
                     <td>{{item.influencer}}</td>
                     <td>{{item.post}}</td>
                     <td class="barTd"><div class="sentimentBar" v-echarts="item.sentiment | barFormat"></div></td>
@@ -46,7 +46,7 @@
         </div>
         <div v-if="!influancerTable.length" class="noTableTips">{{noTableTips}}</div>
     </div>
-    <pop-list :poplist="popList" :visiable="popVisiable"></pop-list>
+    <pop-list :item="selectItem" :pops="popList" :visiable.sync="popVisiable"></pop-list>
 </template>
 <style lang="less" scoped>
     @import "Influence.less";
@@ -71,6 +71,7 @@
                 influancerNums: [0,0,0,0,0,0],
                 noTableTips: words.noTableTips,
                 popList: [],
+                selectItem: {},
                 popVisiable: false
             }
         },
@@ -92,9 +93,44 @@
             }
         },
         methods: {
-            popList(item){
+            showPopList(item){
                 console.log(item);
                 this.popVisiable = true;
+
+                const resp = this.getArticles();
+                if(resp.data.code == 0){
+                    this.popList = resp.data.data;
+                    this.selectItem = item;
+                }
+
+            },
+            getArticles(){
+                return {
+                    data:{
+                        "code": 0,
+                        "data": [{
+                            "id": "123",
+                            "title": "今日头条",
+                            "context": "今日头条今日头条今日头条今日头条今日头条今日头条今日头条今日头条今日头条今日头条今日头条今日头条今日头条",
+                            "date": "2016-10-20"
+                        },{
+                            "id": "123",
+                            "title": "今日头条",
+                            "context": "今日头条今日头条今日头条今日头条今日头条今日头条今日头条今日头条今日头条今日头条今日头条今日头条今日头条",
+                            "date": "2016-10-20"
+                        },{
+                            "id": "123",
+                            "title": "今日头条",
+                            "context": "今日头条今日头条今日头条今日头条今日头条今日头条今日头条今日头条今日头条今日头条今日头条今日头条今日头条",
+                            "date": "2016-10-20"
+                        },{
+                            "id": "123",
+                            "title": "今日头条",
+                            "context": "今日头条今日头条今日头条今日头条今日头条今日头条今日头条今日头条今日头条今日头条今日头条今日头条今日头条",
+                            "date": "2016-10-20"
+                        }]
+                    }
+                }
             },
             getPopularList(){
                 const icons = ["user", "user-plus", "edge", "chrome"];

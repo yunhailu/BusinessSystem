@@ -1,6 +1,26 @@
 @import "../../common.less";
 
+@line-color: #cfcfcf;
 
 .pop-list{
-
+  .h(30rem);  overflow: auto;  .pointer();
+  &-wrap{
+    .pd(1rem 0);
+    &-items{
+      .b-top(1px solid @line-color);
+      &-item{
+        .b-bottom(1px solid @line-color); .pd(0.5rem);
+        .icon{ .tc(); .float-left();  .h(3rem); .w(3rem); .lh(3rem);  .c(@word);  .f(1.4rem);  }
+        .con{
+          .mg-left(3rem);
+          .title{ .c(@body-theme);  .lh(2rem);  .ff('pingfang-bold'); .f(1.4rem); }
+          .context{ .text-hidden(); .w(85%); .f(1.2rem); .lh(2rem); }
+          .date{ .f(1.2rem); .lh(1.6rem); }
+          .influencer{ .pd(0 1rem); .f(1.2rem); .lh(1.6rem); }
+        }
+      }
+    }
+  }
 }
+
+.closeBtn{ .float-right(); }

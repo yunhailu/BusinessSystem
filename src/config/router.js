@@ -62,7 +62,7 @@ module.exports = {
             }
         }
     },
-    ':type/detail/:id' : {
+    '/:type/detail/:id' : {
         name: 'detail',
         auth: true,
         component (resolve) {

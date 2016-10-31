@@ -52,7 +52,8 @@ export const en = {
         like: "Like",
         resend: "Share",
         comments: "Comments",
-        rate: "Rate"
+        rate: "Rate",
+        close: "Close"
     },
     theme: {
         topics: "Topical Topics"
