@@ -19,7 +19,7 @@ const login = {
 	},
 	auth(to, callback) {
 		const user = Cookie.get('business_uid');
-		if(user && user == 'admin'){
+		if(user){
 			location.hash = '#!/' + hash;
 			return true;
 		}

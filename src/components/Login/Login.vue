@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <div class="login-page">
-            <form class="form-horizontal">
+            <form class="form-horizontal" v-on:submit.prevent>
                 <fieldset>
                     <legend>
                         <img class="logo-icon" src="images/logo.jpg" />
