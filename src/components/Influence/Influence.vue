@@ -30,7 +30,7 @@
                 </tr>
             </thead>
             <tbody v-if="influancerTable.length">
-                <tr id="item.id" v-for="(index, item) in influancerTable" :class="[index % 2 == 0 ? '' : '']">
+                <tr id="item.id" v-for="(index, item) in influancerTable" @click="popList(item);" :class="[index % 2 == 0 ? '' : '']">
                     <td>{{item.influencer}}</td>
                     <td>{{item.post}}</td>
                     <td class="barTd"><div class="sentimentBar" v-echarts="item.sentiment | barFormat"></div></td>
@@ -46,7 +46,7 @@
         </div>
         <div v-if="!influancerTable.length" class="noTableTips">{{noTableTips}}</div>
     </div>
-
+    <pop-list :poplist="popList" :visiable="popVisiable"></pop-list>
 </template>
 <style lang="less" scoped>
     @import "Influence.less";
@@ -58,6 +58,7 @@
     import * as Api from '../../widgets/Api';
     import Tabs from '../Common/Tabs/Tabs.vue';
     import Page from '../Common/Page/Page.vue';
+    import PopList from './PopList/PopList.vue';
     import { analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic, analyticsStart, analyticsEnd, activeAnalyticsTopic } from '../../vuex/getters';
 
     export default{
@@ -68,7 +69,9 @@
                 popularList: [],
                 influancerTable: [],
                 influancerNums: [0,0,0,0,0,0],
-                noTableTips: words.noTableTips
+                noTableTips: words.noTableTips,
+                popList: [],
+                popVisiable: false
             }
         },
         vuex: {
@@ -89,6 +92,10 @@
             }
         },
         methods: {
+            popList(item){
+                console.log(item);
+                this.popVisiable = true;
+            },
             getPopularList(){
                 const icons = ["user", "user-plus", "edge", "chrome"];
                 const topic_id = this.activeAnalyticsTopic.topic_id,
@@ -226,7 +233,7 @@
             }
         },
         components:{
-            Tabs,
+            Tabs, PopList,
             'page': Page
         },
 //        route: {

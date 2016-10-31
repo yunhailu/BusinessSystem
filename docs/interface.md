@@ -200,7 +200,27 @@
 }
 ```
 
-##### 5.获取最受欢迎的影响力
+##### 5.影响力某人的发布文章
+- influence/articles
+- 参数： id
+```
+{
+    "code": 0,
+    "data": [{
+        "id": "123",
+        "title": "今日头条",
+        "context": "今日头条今日头条今日头条今日头条今日头条今日头条今日头条今日头条今日头条今日头条今日头条今日头条今日头条",
+        "date": "2016-10-20"
+    },{
+        "id": "123",
+        "title": "今日头条",
+        "context": "今日头条今日头条今日头条今日头条今日头条今日头条今日头条今日头条今日头条今日头条今日头条今日头条今日头条",
+        "date": "2016-10-20"
+    }]
+}
+```
+
+##### 6.获取最受欢迎的影响力
 -  influence/popularList		
 ```
 //待确认
@@ -217,7 +237,7 @@
 }
 ```
 
-##### 6.获取主题分析的字符云
+##### 7.获取主题分析的字符云
 -  theme/wordcloud
 - 参数： 
      - topic_id:91
@@ -237,7 +257,7 @@
 }
 ```
 
-##### 7.获取主题关键词比率排行（前5位）
+##### 8.获取主题关键词比率排行（前5位）
 -  theme/trendlist		
 ```
 //待确认
@@ -251,7 +271,7 @@
 }
 ```
 
-##### 8.获取主题详情数据（line图）
+##### 9.获取主题详情数据（line图）
 -  theme/detail
 - 参数： 
      - topic_id:91
@@ -286,7 +306,7 @@
 }
 ```
 
-##### 9.获取数据源文章数、点赞数、转发数、评论数
+##### 10.获取数据源文章数、点赞数、转发数、评论数
 - 入参：source
 - theme/getTopData
 ```
@@ -306,7 +326,7 @@
 }
 ```
 
-##### 10.获取主题排行（前20）
+##### 11.获取主题排行（前20）
 - theme/best
 ```
 {
@@ -318,6 +338,77 @@
 	}]
 }
 ```
+##### 11.详情页面的接口定义（接口1--正文、作者详情信息）
+-aticle/detail
+-入参：id
+{
+    code:0,
+data:[
+"aticle":
+{
+      "id": "1234",
+      "source": “文章来源”,
+      "postDate": "2016-04-17 19:32",
+      "link": "https://www.weibo.com",
+      "content": "现在看和以前看完全两种感受看着看着就流泪了@轻断食",   //文章内容
+},
+      "author":
+              {
+                  "name":" 小小黑",
+                  "gender":"男",
+                  "address":"北京 朝阳",
+                  "description":"不在沉默中爆发，就在沉默中的灭亡！！！"
+              },
+}]
+##### 12.详情页面的接口定义（接口2--相关文章的列表）
+-aticle/correlation
+-入参：id
+{
+	code:0,
+	"data":
+            [
+              {"title":" 相关文章的标题1", "link":"https://www.weibo.com1"},
+              {"title":" 相关文章的标题2", "link":"https://www.weibo.com2"},
+              {"title":" 相关文章的标题3", "link":"https://www.weibo.com3"},
+              {"title":" 相关文章的标题4", "link":"https://www.weibo.com4"},
+              {"title":" 相关文章的标题5", "link":"https://www.weibo.com5"},
+              {"title":" 相关文章的标题6", "link":"https://www.weibo.com6"},
+              {"title":" 相关文章的标题7", "link":"https://www.weibo.com7"},
+              {"title":" 相关文章的标题8", "link":"https://www.weibo.com8"}
+            ]
+      }]
+}
+##### 13.详情页面的接口定义（接口3--转发关系图）
+-aticle/forwardlevel
+-入参：id
+
+{ code:0,
+  data:[
+  datas:[{  "id":"0",
+                "name":"Myriel",
+                "value":28.68,
+                "level":0}],
+  links:[{
+              "src":"1",
+              "dst":"0",
+	}]
+  ]
+}
+
+##### 14.详情页面的接口定义（接口4--转发曲线图）
+-aticle/forward
+-入参：id
+{ code: 0,
+    data: [{
+        "date": "2016-10-30",
+        "value": 5
+        },]
+    }
+
+
+
+
+
 
 ### 三、数据对比
 -  compare/sentiment(是3)

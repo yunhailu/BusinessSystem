@@ -15,7 +15,7 @@
 
         .list{
             &-title{
-                .f(1.4rem);
+                .f(1.4rem);  .pd(1rem 0);
             }
             &-item{
                 .fa{  .disIB();  .vm(); }
@@ -26,7 +26,8 @@
         }
         .up-list{
              &-item{
-                 .fa{ .c(@flag-green); }
+                 .fa-level-up{ .c(@flag-green); }
+                 .fa-level-down{ .c(@flag-red); }
              }
          }
         .down-list{

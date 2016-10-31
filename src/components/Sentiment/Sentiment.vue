@@ -240,7 +240,7 @@
                             all.fear.push(this.lineData.wechat.fear[index] + this.lineData.weibo.fear[index] + this.lineData.client.fear[index] + this.lineData.web.fear[index] + this.lineData.overseas.fear[index]);
                         });
                         this.lineData.all = all;
-                        console.log(this.lineData);
+                        //console.log(this.lineData);
 
                         this.sentimentBarLoading = false;
                         this.sentimentChartLoading = false;
@@ -258,8 +258,8 @@
                             }.bind(this));
                         }.bind(this));
 
-                        console.log('all', this.lineData.all);
-                        console.log('wechat', this.lineData.wechat);
+                        //console.log('all', this.lineData.all);
+                        //console.log('wechat', this.lineData.wechat);
                         this.sentimentNums = [
                             _.chain(this.lineData.all).map(item => _.reduce(item, (memo, val) => (memo + val), 0)).reduce((memo, val) => (memo, val), 0).value(),
                             _.chain(this.lineData.wechat).map(item => _.reduce(item, (memo, val) => (memo + val), 0)).reduce((memo, val) => (memo, val), 0).value(),

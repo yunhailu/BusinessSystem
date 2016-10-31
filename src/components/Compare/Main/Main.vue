@@ -1,4 +1,4 @@
-<template>
+﻿<template>
     <!--<span>Compare Panel</span>-->
     <div class="compare-charts">
         <div class="chart" v-echarts="compareChartOption" :loading="compareChartLoading" theme="macarons"></div>
@@ -123,7 +123,7 @@
                 handler(val, oldVal){
                     const currentList = this.topicList;
                     const currentGroupId = this.topicGroupActiveId;
-                    const currentGroup = _.find(currentList,item =>item.group_id ==currentGroupId);//
+                    const currentGroup = _.find(currentList,item =>item.group_id ==currentGroupId);
                     if(val.length ==0){
                         this.comparePieOption.legend.data=[];
                         this.comparePieOption.series.data=[];
@@ -256,7 +256,7 @@
                            end:this.compareEnd,
                            time_dimension:this.compareTimeRange<=10 ? 0 :1
                        };
-                       Api.getSummaryDetail(topicParams).then(resp =>{//---------------------------------------------------这里参数
+                       Api.getSummaryDetail(topicParams).then(resp =>{
                            if(resp.data.code ==0){
                                this.compareChartLoading = false;
                                this.comparePieLoading = false;

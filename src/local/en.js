@@ -92,7 +92,8 @@ export const en = {
         sentiment: "Sentiment",
         comment: "Comment",
         influence: "Influence",
-        theme: "Theme"
+        theme: "Theme",
+        save: "Print & Save"
     },
     setting: {
         title: "Project Set-up",
