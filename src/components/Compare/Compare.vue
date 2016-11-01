@@ -127,6 +127,7 @@
                     this.setCompareStart(val.split(' ~ ')[0]);
                     this.setCompareEnd(val.split(' ~ ')[1]);
                     this.setCompareTimeRange(days);
+                    console.log(this.compareStart,this.compareEnd,this.compareTimeRange);
                     console.log(val.split(' ~ ')[0], val.split(' ~ ')[1], days);
                 }
             }
