@@ -436,6 +436,7 @@
                     //console.log('getThemeDetail', resp.data);
                     if(resp.data.code == 0){
                         const details = resp.data.data;
+                        //if(details.length) return ;
                         this.themeLineLoading = false;
                         this.themeLineOption.xAxis.data = _.map(details, detail => detail.date);
                         this.themeLineOption.legend.data = _.map(details[0].values, item => item.name);
