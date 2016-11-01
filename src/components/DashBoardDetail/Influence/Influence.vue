@@ -45,9 +45,9 @@
                 </tr>
             </tbody>
         </table>
-        <div v-if="influancerTable.length" class="paging">
-            <page></page>
-        </div>
+        <!--<div v-if="influancerTable.length" class="paging">-->
+            <!--<page></page>-->
+        <!--</div>-->
         <div v-if="!influancerTable.length" class="noTableTips">{{noTableTips}}</div>
     </div>
 
@@ -57,6 +57,7 @@
 </style>
 <script type="text/ecmascript-6">
     import _ from 'underscore';
+    import moment from 'moment';
     import {Chart, Pie} from '../../../config/config';
     import Local from '../../../local/local';
     import * as Api from '../../../widgets/Api';
@@ -75,26 +76,17 @@
             }
         },
         methods: {
-            getPopularList(){
-                const icons = ["user", "user-plus", "edge", "chrome"];
-                Api.getPopularList({}).then(resp => {
-                    //const resp = {data: {code: 0, data: [{ "id": "12345678", "link": "http://www.baidu.com", "title": "Most active author", "source": "Online News", "value": "shi jian", "post": 64 },{ "id": "12345678", "link": "http://www.baidu.com", "title": "Most active author", "source": "Online News", "value": "shi jian", "post": 64 },{ "id": "12345678", "link": "http://www.baidu.com", "title": "Most active author", "source": "Online News", "value": "shi jian", "post": 64 },{ "id": "12345678", "link": "http://www.baidu.com", "title": "Most active author", "source": "Online News", "value": "shi jian", "post": 64 }]}};
-                    if(resp.data.code ==0){
-                        const popularList = resp.data.data;
-                        this.popularList = _.map(popularList, (item, index) => {
-                            item.icon = icons[index];
-                            return item;
-                        });
-                    }
-                });
-            },
             getInfluenceList(){
                 const subtopic = this.data.subtopic,
+                        topic_id = this.data.topic_id,
                         source = this.data.source,
-                        time_dimension = this.data.time_dimension,
                         time_interval = this.data.time_interval,
+                        //time_dimension = this.data.time_dimension,
+                        time_dimension = time_interval > 7 ? 1 : 0,
+                        start = moment().subtract(time_interval, 'days').format('YYYY-MM-DD'),
+                        end = moment().format('YYYY-MM-DD'),
                         topic = this.data.topic;
-                Api.getInfluenceList({}).then(resp => {
+                Api.getInfluenceList({ subtopic, topic_id, source, time_dimension, start, end, topic }).then(resp => {
                     //const resp = {data: {code:0, data: [{id: "1234", influencer: "台湾", posts: 6, like: 123, resend: 32, sentiment: {happy: 5, anger: 15, sorrow: 10, disgust: 0, fear: 5}, rate: {key: "up", value: "24%"}},{"id": "1234", "influencer": "台湾1", "posts": 6, "like": 123, "resend": 32, "sentiment": {happy: 3, anger: 5, sorrow: 10, disgust: 3, fear: 5}, "rate": {"key": "up", "value": "24%"}}] }};
                     if(resp.data.code ==0){
                         const influanceInfos = resp.data.data;
@@ -109,7 +101,6 @@
                 this.remove(detail, 'influence');
             },
             init(){
-                this.getPopularList();
                 this.getInfluenceList();
             }
         },

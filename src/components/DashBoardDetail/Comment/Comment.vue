@@ -17,10 +17,11 @@
 </style>
 <script type="text/ecmascript-6">
     import _ from 'underscore';
+    import moment from 'moment';
     import { Chart, Pie } from '../../../config/config';
     import Local from '../../../local/local';
     import * as Api from '../../../widgets/Api';
-    import { list } from "../../../config/tmpData";
+    //import { list } from "../../../config/tmpData";
     import ListPanel from '../../Common/ListPanel/ListPanel.vue';
     import Tabs from '../../Common/Tabs/Tabs.vue';
 
@@ -32,7 +33,7 @@
                 words,
                 common,
                 selectTitle: Local().common.sortBy,
-                list: list.time,
+                //list: list.time,
                 options: [{key: 'time', value: '按时间排序'}, {key: 'browser', value: '浏览数排序'}, {key: 'star', value: '点赞数排序'}],
                 sortVal: "",
                 x: [],
@@ -146,12 +147,16 @@
         },
         methods: {
             getCommentDetail(){
-                Api.getCommentDetail({}).then(resp => {
-                    const subtopic = this.data.subtopic,
-                            source = this.data.source,
-                            time_dimension = this.data.time_dimension,
-                            time_interval = this.data.time_interval,
-                            topic = this.data.topic;
+                const subtopic = this.data.subtopic,
+                        topic_id = this.data.topic_id,
+                        source = this.data.source,
+                        time_interval = this.data.time_interval,
+                        //time_dimension = this.data.time_dimension,
+                        time_dimension = time_interval > 7 ? 1 : 0,
+                        start = moment().subtract(time_interval, 'days').format('YYYY-MM-DD'),
+                        end = moment().format('YYYY-MM-DD'),
+                        topic = this.data.topic;
+                Api.getCommentDetail({ subtopic, topic_id, source, time_dimension, start, end, topic }).then(resp => {
                     console.log('getCommentDetail', resp);
                     if(resp.data.code == 0){
                         const details = resp.data.data;

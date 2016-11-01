@@ -9,27 +9,19 @@
         <div class="theme-word-chart" v-echarts="themeWordOption" :loading="themeWordLoading"  theme="infographic" :click="clickAction"></div>
         <div class="theme-word-ranking">
             <dl class="list up-list">
-                <dt class="list-title">UP</dt>
-                <dd v-for="item in upList" class="list-item up-list-item">
+                <dt class="list-title">排名变化</dt>
+                <dd v-for="item in trendList" class="list-item up-list-item">
                     <div :id="item.id">
-                        <i class="fa fa-level-up"></i>
-                        <span class="list-item-con">{{item.rate}} - {{item.name}}</span>
-                    </div>
-                </dd>
-            </dl>
-            <dl class="list down-list">
-                <dt class="list-title">DOWN</dt>
-                <dd v-for="item in downList" class="list-item down-list-item">
-                    <div :id="item.id">
-                        <i class="fa fa-level-down"></i>
-                        <span class="list-item-con">{{item.rate}} - {{item.name}}</span>
+                        <i class="fa fa-level-up" v-if="item.trend == 'up'"></i>
+                        <i class="fa fa-level-down" v-if="item.trend == 'down'"></i>
+                        <span class="list-item-con">{{item.name}} - {{item.rate}}</span>
                     </div>
                 </dd>
             </dl>
         </div>
     </div>
     <div class="theme-chart">
-        <div class="chart"  v-echarts="themeScatterOption" :loading="themeScatterLoading"  theme="macarons"></div>
+        <!--<div class="chart"  v-echarts="themeScatterOption" :loading="themeScatterLoading"  theme="macarons"></div>-->
         <div class="chart"  v-echarts="themeLineOption" :loading="themeLineLoading"  theme="macarons"></div>
         <div class="chart best"  v-echarts="themeBestOption" :loading="themeBestLoading"  theme="macarons"></div>
     </div>
@@ -39,6 +31,7 @@
 </style>
 <script type="text/ecmascript-6">
     import _ from 'underscore';
+    import moment from 'moment';
     import Tabs from '../../Common/Tabs/Tabs.vue';
     import Local from "../../../local/local";
     import { Chart, Pie } from '../../../config/config';
@@ -333,33 +326,41 @@
                 alert(e.name + ": " + e.value);
             },
             getTrendList(){
-                return Api.getTrendList({}).then(resp => {
+                const subtopic = this.data.subtopic,
+                    topic_id = this.data.topic_id,
+                    source = this.data.source,
+                    time_interval = this.data.time_interval,
+                    //time_dimension = this.data.time_dimension,
+                    time_dimension = time_interval > 7 ? 1 : 0,
+                    start = moment().subtract(time_interval, 'days').format('YYYY-MM-DD'),
+                    end = moment().format('YYYY-MM-DD'),
+                    topic = this.data.topic;
+                return Api.getTrendList({topic_id, topic, subtopic, source, start, end, time_dimension}).then(resp => {
                     //console.log('getTrendList', resp);
                     if(resp.data.code == 0){
-                        this.upList = resp.data.data.up;
-                        this.downList = resp.data.data.down;
+                        this.trendList = _.filter(resp.data.data, (item, index) => (index < 10));
+//                        this.upList = resp.data.data.up;
+//                        this.downList = resp.data.data.down;
                     }
                 });
             },
             getWordCloud(){
                 const subtopic = this.data.subtopic,
-                    source = this.data.source,
-                    time_dimension = this.data.time_dimension,
-                    time_interval = this.data.time_interval,
-                    topic = this.data.topic;
-                return Api.getWordCloud({}).then(resp => {
+                        topic_id = this.data.topic_id,
+                        source = this.data.source,
+                        time_interval = this.data.time_interval,
+                        //time_dimension = this.data.time_dimension,
+                        time_dimension = time_interval > 7 ? 1 : 0,
+                        start = moment().subtract(time_interval, 'days').format('YYYY-MM-DD'),
+                        end = moment().format('YYYY-MM-DD'),
+                        topic = this.data.topic;
+                return Api.getWordCloud({ topic_id, topic, subtopic, source, start, end, time_dimension }).then(resp => {
                     //console.log('getWordCloud',resp);
                     if(resp.data.code == 0){
                         this.themeWordLoading = false;
                         this.themeWordOption.series.data = resp.data.data;
-                    }
-                });
-            },
-            getThemeBest(){
-                return Api.getThemeBest({}).then(resp => {
-                    //console.log('getThemeBest',resp);
-                    if(resp.data.code == 0){
-                        const bestList = _.sortBy(resp.data.data, 'value');
+
+                        const bestList = _.chain(resp.data.data).filter((item, index) => (index <= 20)).sortBy('value').value();
                         const yAxis = _.map(bestList, value => value.name);
                         const data = _.map(bestList, value => value.value);
                         this.themeBestLoading = false;
@@ -368,8 +369,30 @@
                     }
                 });
             },
+//            getThemeBest(){
+//                return Api.getThemeBest({}).then(resp => {
+//                    //console.log('getThemeBest',resp);
+//                    if(resp.data.code == 0){
+//                        const bestList = _.sortBy(resp.data.data, 'value');
+//                        const yAxis = _.map(bestList, value => value.name);
+//                        const data = _.map(bestList, value => value.value);
+//                        this.themeBestLoading = false;
+//                        this.themeBestOption.yAxis.data = yAxis;
+//                        this.themeBestOption.series[0].data = data;
+//                    }
+//                });
+//            },
             getThemeDetail(){
-                Api.getThemeDetail({}).then(resp => {
+                const subtopic = this.data.subtopic,
+                    topic_id = this.data.topic_id,
+                    source = this.data.source,
+                    time_interval = this.data.time_interval,
+                    //time_dimension = this.data.time_dimension,
+                    time_dimension = time_interval > 7 ? 1 : 0,
+                    start = moment().subtract(time_interval, 'days').format('YYYY-MM-DD'),
+                    end = moment().format('YYYY-MM-DD'),
+                    topic = this.data.topic;
+                Api.getThemeDetail({ topic_id, topic, subtopic, source, start, end, time_dimension }).then(resp => {
                     //console.log('getThemeDetail', resp.data);
                     if(resp.data.code == 0){
                         const details = resp.data.data;
@@ -396,7 +419,7 @@
             init(){
                 this.getTrendList();
                 this.getWordCloud();
-                this.getThemeBest();
+                //this.getThemeBest();
                 this.getThemeDetail();
             }
         },

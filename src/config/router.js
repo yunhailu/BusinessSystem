@@ -169,11 +169,5 @@ module.exports = {
         component (resolve) {
             require(['../components/Test/Test.vue'], resolve);
         }
-    },
-    '/detail': {
-        name: 'detail',
-        component (resolve) {
-            require(['../components/Detail/Detail.vue'], resolve);
-        }
     }
 };

@@ -18,7 +18,8 @@
 </style>
 <script type="text/ecmascript-6">
     import _ from 'underscore';
-    import { list } from "../../../config/tmpData";
+    import moment from 'moment';
+    //import { list } from "../../../config/tmpData";
     import ListPanel from '../../Common/ListPanel/ListPanel.vue';
     import Tabs from '../../Common/Tabs/Tabs.vue';
     import Local from "../../../local/local";
@@ -33,7 +34,7 @@
             return{
                 common,
                 options: [{key: 'time', value: '按时间排序'}, {key: 'browser', value: '浏览数排序'}, {key: 'star', value: '点赞数排序'}],
-                list: list.time,
+                //list: list.time,
                 sortVal: "",
                 x: [],
                 sentimentArr: ["happy", "anger", "sorrow", "disgust", "fear"],
@@ -210,11 +211,15 @@
             },
             getSentimentDetail(){
                 const subtopic = this.data.subtopic,
-                    source = this.data.source,
-                    time_dimension = this.data.time_dimension,
-                    time_interval = this.data.time_interval,
-                    topic = this.data.topic;
-                Api.getSentimentDetail({}).then(resp => {
+                        topic_id = this.data.topic_id,
+                        source = this.data.source,
+                        time_interval = this.data.time_interval,
+                        //time_dimension = this.data.time_dimension,
+                        time_dimension = time_interval > 7 ? 1 : 0,
+                        start = moment().subtract(time_interval, 'days').format('YYYY-MM-DD'),
+                        end = moment().format('YYYY-MM-DD'),
+                        topic = this.data.topic;
+                Api.getSentimentDetail({ subtopic, topic_id, source, time_dimension, start, end, topic }).then(resp => {
                     //console.log("getSentimentDetail", JSON.stringify(resp.data.data));
                     if(resp.data.code == 0){
                         const details = resp.data.data;
@@ -272,7 +277,7 @@
                     if(val != oldVal){
                         // 展示不同的列表信息
                         //console.log(val, oldVal);
-                        this.list = list[val.key];
+                        //this.list = list[val.key];
                     }
                 }
             }

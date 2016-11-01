@@ -114,6 +114,8 @@
         },
         methods:{
         },
+        ready(){
+        },
         vuex:{
             actions:{setTopicList ,setActiveCompareTopic ,setTopicGroupActiveId, setCompareSource, setCompareSubTopic, setCompareStart, setCompareEnd, setCompareTimeRange},
             getters:{topicList ,activeCompareTopic , topicGroupActiveId, compareSource, compareSubTopic, compareStart, compareEnd, compareTimeRange  }
@@ -123,16 +125,9 @@
                 handler(val, oldVal){
                     const currentList = this.topicList;
                     const currentGroupId = this.topicGroupActiveId;
+                    const activeCompareTopic = this.activeCompareTopic;
+                    console.log(currentList,currentGroupId,activeCompareTopic);
                     const currentGroup = _.find(currentList,item =>item.group_id ==currentGroupId);
-                    if(val.length ==0){
-                        this.comparePieOption.legend.data=[];
-                        this.comparePieOption.series.data=[];
-                        this.compareRadarOption.legend.data=[];
-                        this.compareRadarOption.series=[];
-                        this.compareChartOption.legend.data=[];
-                        this.compareChartOption.series=[]
-                        return ;
-                    }
                    if(val.length !=0 && oldVal.length !=0 && _.find(currentGroup.list,item => item.topic_name == oldVal[0].topic_name) !=undefined){
                        if(val.length > oldVal.length){
                            this.compareChartLoading = true;
@@ -236,40 +231,49 @@
                            var oldTopic = _.difference(oldVal, val);
                            const idx = this.compareChartOption.legend.data.indexOf(oldTopic[0].topic_name)
                            this.compareChartOption.legend.data.splice(idx,1);
-                           this.compareChartOption.series.splice(idx,1)
+                           this.compareChartOption.series.splice(idx,1);
                            this.comparePieOption.legend.data.splice(idx,1);
                            this.comparePieOption.series.data.splice(idx,1);
                            this.compareRadarOption.legend.data.splice(idx,1);
                            this.compareRadarOption.series.splice(idx,1);
                        }
                    } else {
-                       this.compareChartLoading = true;
-                       this.comparePieLoading = true;
-                       this.compareRadarLoading = true;
-                       var newTopic = _.difference(val, oldVal);
-                       const topicParams = {
-                           topic_id:newTopic[0] ? newTopic[0].topic_id :'',
-                           topic:newTopic[0] ? newTopic[0].topic_name :'',
-                           subtopic:this.compareSubTopic,
-                           source:this.compareSource,
-                           start:this.compareStart,
-                           end:this.compareEnd,
-                           time_dimension:this.compareTimeRange<=10 ? 0 :1
-                       };
-                       Api.getSummaryDetail(topicParams).then(resp =>{
-                           if(resp.data.code ==0){
-                               this.compareChartLoading = false;
-                               this.comparePieLoading = false;
-                               const newTopicData =resp.data.data;
-                               const intervalDate = _.pluck(newTopicData,'date');
-                               const newChart =_.map(newTopicData,function(item) {
-                                   return _.reduce(_.values(item.values), function (memo, num) {
-                                       return memo + num;
-                                   }, 0);
-                               });
-                               this.compareChartOption.legend.data=[newTopic[0].topic_name];
-                               this.compareChartOption.xAxis.data=intervalDate;
-                               this.compareChartOption.series=[
+                           console.log(this.compareStart,this.compareEnd);
+                           console.log('loading',this.compareChartLoading);
+                           this.compareChartLoading = true;
+                           this.comparePieLoading = true;
+                           this.compareRadarLoading = true;
+                           var newTopic = _.difference(val, oldVal);
+                           const topicParams = {
+                               topic_id:newTopic[0] ? newTopic[0].topic_id :'',
+                               topic:newTopic[0] ? newTopic[0].topic_name :'',
+                               subtopic:this.compareSubTopic,
+                               source:this.compareSource,
+                               start:this.compareStart,
+                               end:this.compareEnd,
+                               time_dimension:this.compareTimeRange<=10 ? 0 :1
+                           };
+                           console.log('第一次切换',topicParams);
+                           Api.getSummaryDetail(topicParams).then(resp =>{
+                               if(resp.data.code ==0){
+                                   //图片加载
+                                   console.log('loading2',this.compareChartLoading);
+                                   this.compareChartLoading = false;
+                                   console.log('b')
+                                   this.comparePieLoading = false;
+                                   console.log('c')
+                                   const newTopicData =resp.data.data;
+                                   console.log('这是数据1',newTopicData)
+                                   const intervalDate = _.pluck(newTopicData,'date');
+                                   const newChart =_.map(newTopicData,function(item) {
+                                       return _.reduce(_.values(item.values), function (memo, num) {
+                                           return memo + num;
+                                       }, 0);
+                                   });
+                                   console.log(this.compareChartOption)
+                                   this.compareChartOption.legend.data=[newTopic[0].topic_name];
+                                   this.compareChartOption.xAxis.data=intervalDate;
+                                   this.compareChartOption.series=[
                                        {
                                            name:newTopic[0].topic_name,
                                            type:'bar',
@@ -277,42 +281,42 @@
                                            stack: 'Total',
                                            data: newChart
                                        }
-                               ];
-                               this.comparePieOption.legend.data=[newTopic[0].topic_name];
-                               this.comparePieOption.series.data=[
+                                   ];
+                                   this.comparePieOption.legend.data=[newTopic[0].topic_name];
+                                   this.comparePieOption.series.data=[
                                        {
                                            value: _.reduce(newChart, (mome, num) => mome + num, 0),
                                            name:newTopic[0].topic_name
                                        }
-                               ];
-                           }
-                       });
-                       Api.getSentimentDetail(topicParams).then(resp =>{
-                           this.compareRadarLoading = false;
-                           if(resp.data.code == 0){
-                               const details = resp.data.data;
-                               const _this = this;
-                               let all = {happy: [], anger:[], sorrow:[], disgust:[], fear:[]};
-                               _.each(details,(detail,index) => {
-                                   _.each(detail.values,(value,key) =>{
-                                       all.happy.push(details[index].values[key].happy);
-                                       all.anger.push(details[index].values[key].anger);
-                                       all.sorrow.push(details[index].values[key].sorrow);
-                                       all.disgust.push(details[index].values[key].disgust);
-                                       all.fear.push(details[index].values[key].fear);
+                                   ];
+                               }
+                           });
+                           Api.getSentimentDetail(topicParams).then(resp =>{
+                               this.compareRadarLoading = false;
+                               if(resp.data.code == 0){
+                                   const details = resp.data.data;
+                                   console.log('这是数据2',details)
+                                   let all = {happy: [], anger:[], sorrow:[], disgust:[], fear:[]};
+                                   _.each(details,(detail,index) => {
+                                       _.each(detail.values,(value,key) =>{
+                                           all.happy.push(details[index].values[key].happy);
+                                           all.anger.push(details[index].values[key].anger);
+                                           all.sorrow.push(details[index].values[key].sorrow);
+                                           all.disgust.push(details[index].values[key].disgust);
+                                           all.fear.push(details[index].values[key].fear);
+                                       })
                                    })
-                               })
-                               const valAll =_.values(all);
-                               const radar = _.map(_.values(all),item => {
-                                           return _.reduce(item, function(memo, num){ return memo + num; }, 0);
-                                       }
-                               );
-                               const allNumber = _.reduce(radar, function(memo, num){ return memo + num; }, 0);
-                               const newRadar =[_.map(radar,item =>{
-                                   return (item/allNumber)*100;
-                               })];
-                               this.compareRadarOption.legend.data=[newTopic[0].topic_name];
-                               this.compareRadarOption.series=[
+                                   const valAll =_.values(all);
+                                   const radar = _.map(_.values(all),item => {
+                                               return _.reduce(item, function(memo, num){ return memo + num; }, 0);
+                                           }
+                                   );
+                                   const allNumber = _.reduce(radar, function(memo, num){ return memo + num; }, 0);
+                                   const newRadar =[_.map(radar,item =>{
+                                       return (item/allNumber)*100;
+                                   })];
+                                   this.compareRadarOption.legend.data=[newTopic[0].topic_name];
+                                   this.compareRadarOption.series=[
                                        {
                                            name: newTopic[0].topic_name,
                                            type: 'radar',
@@ -335,17 +339,14 @@
                                                }
                                            }
                                        }
-                               ]
-                           }
-                       })
+                                   ]
+                               }
+                           })
                    }
 
                 }
             }
         },
-       /* ready(){
-            this.init();
-        },*/
         components:{
 
         }
