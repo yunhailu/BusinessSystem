@@ -91,6 +91,7 @@
                         });
                         _.first(topicList).isActive = true;
                         this.setTopicList(topicList);
+                        console.log('第一次查看',this.topicList);
                         this.initActiveTopic();
                     }
                 });
@@ -100,6 +101,7 @@
                 if(_.isEmpty(active)){
                     const group = _.first(this.topicList);
                     active.push(_.first(group.list));
+                    this.setActiveCompareTopic([]);
                     this.setActiveCompareTopic(active);
                     this.setTopicGroupActiveId(group.group_id);
                 }

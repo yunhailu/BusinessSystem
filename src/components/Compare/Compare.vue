@@ -6,7 +6,7 @@
             <div class="row tools">
                 <div class="col-md-7">
                     <div class="search">
-                        <input class="search-input" placeholder="Search in Results" v-model="search" />
+                        <input class="search-input" placeholder="搜索" v-model="search" />
                         <span class="search-btn" @click="searchAction"><i class="fa fa-search"></i></span>
                     </div>
                 </div>
@@ -17,7 +17,7 @@
                         <li @click="selectTime(30);" :class="[selectTimeTag == 30 ? 'active' : '']">30D</li>
                         <li @click="selectTime(0);" :class="[selectTimeTag == 0 ? 'active' : '']">自定义</li>
                     </ul>
-                    <div class="diyDate">
+                    <div class="diyDate" v-show="isTimeDiy">
                         <span class="date" @click="showCalendar"><i class="fa fa-calendar fa-2x  icon"></i> {{dateVal}}</span>
                         <calendar :show.sync="cal.show" :value.sync="dateVal" :x="cal.x" :y="cal.y" :begin.sync="cal.begin" :end.sync="cal.end" :type="cal.type" :range="cal.range"></calendar>
                     </div>
