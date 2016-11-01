@@ -399,3 +399,20 @@ export const removeDashboardItem = params => {
         params
     });
 };
+
+// 详情页面的接口1
+export const getPageDetail = params => {
+    return Api.request({
+        url: `${rootURI}/article/detail`,
+        params
+    });
+};
+
+// 详情页面的接口 2
+// export const getPageDetai = params => {
+//     return Api.request({
+//         url: `${rootURI}/aticle/detail`,
+//         params
+//     });
+// };
+
