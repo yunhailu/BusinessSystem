@@ -111,12 +111,10 @@
             showDetail(item){
                 console.log('showDetail', item);
                 console.log('route', this.$route);
+                const type = this.$route.name, id = item.id;
                 this.$router.go({
                     name: 'detail',
-                    params: {
-                        type: this.$route.name,
-                        id: item.id
-                    }
+                    params: { type, id }
                 });
             }
         },
