@@ -112,10 +112,14 @@
                 console.log('showDetail', item);
                 console.log('route', this.$route);
                 const type = this.$route.name, id = item.id;
-                this.$router.go({
-                    name: 'detail',
-                    params: { type, id }
-                });
+                if(id){
+                    this.$router.go({
+                        name: 'detail',
+                        params: { type, id }
+                    });
+                } else {
+                    location.href = `${item.url}`;
+                }
             }
         },
         filters: {
