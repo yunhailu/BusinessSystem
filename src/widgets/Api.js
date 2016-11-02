@@ -399,3 +399,65 @@ export const removeDashboardItem = params => {
         params
     });
 };
+
+/**  详情页面的接口1
+ *  Encapsulate `getPageDetail` interface
+ *
+ *  @param {String} id
+ *
+ *  @return {Promise} With Detail detail info.
+ */
+
+export const getPageDetail = params => {
+    return Api.request({
+        url: `${rootURI}/article/detail`,
+        params
+    });
+};
+
+/**  相关文章的标题接口2
+ *  Encapsulate `getArticleCorrelation` interface
+ *
+ *  @param {String} id
+ *
+ *  @return {Promise} With Detail detail info.
+ */
+
+export const getArticleCorrelation = params => {
+    return Api.request({
+        url: `${rootURI}/article/correlation`,
+        params
+    });
+};
+
+
+
+/** 关系气泡图的接口3
+ *  Encapsulate `getArticleCorrelation` interface
+ *
+ *  @param {String} id
+ *
+ *  @return {Promise} With Detail detail info.
+ */
+
+export const getArticleForward = params => {
+    return Api.request({
+        url: `${rootURI}/article/forwardlevel`,
+        params
+    });
+};
+
+/** 关系气泡图的接口 4
+ *  Encapsulate `getArticleCorrelation` interface
+ *
+ *  @param {String} id
+ *
+ *  @return {Promise} With Detail detail info.
+ */
+
+export const getArticleLine = params => {
+    return Api.request({
+        url: `${rootURI}/article/forward`,
+        params
+    });
+};

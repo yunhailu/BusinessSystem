@@ -15,6 +15,8 @@
 </style>
 <script>
     import Local from '../../../local/local';
+    import {compareSource } from '../../../vuex/getters';
+    import {setCompareSource } from "../../../vuex/actions";
 
     export default{
         props: ['active'],
@@ -38,10 +40,15 @@
                 sourceActive: 0
             }
         },
+        vuex:{
+            getters:{compareSource},
+            actions:{setCompareSource}
+        },
         methods: {
             sourceAction(val, idx){
                 console.log(val, idx);
                 this.sourceActive = idx;
+                this.setCompareSource(val);
             }
         },
         components:{
