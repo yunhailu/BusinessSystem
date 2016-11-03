@@ -42,8 +42,8 @@
     import Tabs from './Tabs/Tabs.vue';
     import Main from './Main/Main.vue';
     import Local from "../../local/local";
-    import { compareType, compareTimeRange, compareSource, compareSubTopic, compareStart, compareEnd } from '../../vuex/getters';
-    import { setCompareType, setCompareTimeRange, setCompareSource, setCompareSubTopic, setCompareStart, setCompareEnd  } from "../../vuex/actions";
+    import { compareType, compareTimeRange, compareSource, compareSubTopic, compareStart, compareEnd, compareTimeRangeString } from '../../vuex/getters';
+    import { setCompareType, setCompareTimeRange, setCompareSource, setCompareSubTopic, setCompareStart, setCompareEnd , setCompareTimeRangeString } from "../../vuex/actions";
 
     export default{
         data(){
@@ -66,8 +66,8 @@
             }
         },
         vuex:{
-            getters:{ compareType, compareTimeRange, compareSource, compareSubTopic, compareStart, compareEnd },
-            actions:{ setCompareType, setCompareTimeRange, setCompareSource, setCompareSubTopic, setCompareStart, setCompareEnd  }
+            getters:{ compareType, compareTimeRange, compareSource, compareSubTopic, compareStart, compareEnd , compareTimeRangeString},
+            actions:{ setCompareType, setCompareTimeRange, setCompareSource, setCompareSubTopic, setCompareStart, setCompareEnd , setCompareTimeRangeString }
         },
         components:{
             'header-component': HeaderComponent,
@@ -91,7 +91,14 @@
                     this.setCompareTimeRange(num);
                     this.setCompareStart(moment().subtract(num, 'days').format('YYYY-MM-DD'));
                     this.setCompareEnd(moment().format('YYYY-MM-DD'));
+                    this.dateVal = `${ moment().subtract(num, 'days').format('YYYY-MM-DD')} ~ ${moment().format('YYYY-MM-DD')}`;
+                    this.setCompareTimeRangeString(this.dateVal);
+                    //console.log('这是想要的数据0',this.compareTimeRangeString);
                 }
+
+
+                console.log('在这里测试时间切换',num);
+                console.log('this.dateVal',this.dateVal);
             },
             showCalendar:function(e){
                 e.stopPropagation();
@@ -129,6 +136,8 @@
                     this.setCompareTimeRange(days);
                     console.log(this.compareStart,this.compareEnd,this.compareTimeRange);
                     console.log(val.split(' ~ ')[0], val.split(' ~ ')[1], days);
+                    this.setCompareTimeRangeString(this.dateVal);
+                    //console.log('这是日历改变后的数据',this.compareTimeRangeString);
                 }
             }
         },

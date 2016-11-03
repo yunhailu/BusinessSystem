@@ -1,7 +1,7 @@
 /**
  * Created by zfyan on 2016/10/30.
  */
-import { UPDATE_COMPARE_TYPE, UPDATE_COMPARE_TIME_RANGE, UPDATE_COMPARE_SOURCE, UPDATE_COMPARE_SUBTOPIC,UPDATE_COMPARE_START,UPDATE_COMPARE_END } from '../mutations-types'
+import { UPDATE_COMPARE_TYPE, UPDATE_COMPARE_TIME_RANGE, UPDATE_COMPARE_SOURCE, UPDATE_COMPARE_SUBTOPIC, UPDATE_COMPARE_START,UPDATE_COMPARE_END, UPDATE_COMPARE_TIME_RANGE_STRING } from '../mutations-types'
 
 const state ={
     compare_type: 'summary',
@@ -9,7 +9,8 @@ const state ={
     compare_end: '',
     compare_time_Range: '7',
     compare_source: 'all',
-    compare_subtopic: ''
+    compare_subtopic: '',
+    compare_time_Range_String:''
 }
 
 const mutations = {
@@ -30,6 +31,9 @@ const mutations = {
     },
     [UPDATE_COMPARE_END](state, end){
         state.compare_end = end;
+    },
+    [UPDATE_COMPARE_TIME_RANGE_STRING](state, timeRangeString){
+        state.compare_time_Range_String = timeRangeString;
     }
 }
 

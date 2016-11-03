@@ -75,3 +75,7 @@ export const compareStart = state => {
 export const compareEnd = state => {
 	return state.compare.compare_end;
 };
+
+export const compareTimeRangeString = state => {
+	return state.compare.compare_time_Range_String;
+};

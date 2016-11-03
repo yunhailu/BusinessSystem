@@ -6,11 +6,11 @@
         </div>
         <nav class="navbar navbar-static-top" role="navigation">
             <div class="navbar-center">
-                <ul class="nav navbar-nav">
+                <ul class="nav navbar-nav ">
                     <li class="tab-item" v-for="tab in tabs">
                         <a href="javascript:void(0);" v-link="{name: tab.link}" :class="active == tab.id ? 'active' : ''">
                             <i class="fa fa-2x" :class="[tab.icon]" aria-hidden="true"></i>
-                            <span>{{tab.name}}</span>
+                            <span class="header-font">{{tab.name}}</span>
                         </a>
                     </li>
                 </ul>
@@ -21,11 +21,11 @@
                         <!--<a href="javascript:void(0);" v-link="{name: 'profile'}" class="dropdown-toggle" >-->
                         <a href="javascript:void(0);" class="dropdown-toggle" >
                             <i class="glyphicon glyphicon-user"></i>
-                            <span>{{nickName}} <i class="caret"></i></span>
+                            <span class="header-font">{{nickName}} <i class="caret"></i></span>
                         </a>
                     </li>
                     <li class="dropdown quit right" @click="quit">
-                        <a href="javascript:void(0);"><i class="fa fa-power-off"></i> {{words.quit}}</a>
+                        <a href="javascript:void(0);"  class="header-font"><i class="fa fa-power-off"></i> {{words.quit}}</a>
                     </li>
                 </ul>
             </div>

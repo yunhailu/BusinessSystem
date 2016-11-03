@@ -79,9 +79,18 @@
                     progressive: 4,
                     textStyle: Chart.textStyle,
                     series : [
-                        { name: words.positive, type: 'line', areaStyle: {normal: {}}, stack: 'Total', data: [] },
-                        { name: words.negative, type:'line', areaStyle: {normal: {}}, stack: 'Total', data: [] },
-                        { name: words.neutral, type:'line', areaStyle: {normal: {}}, stack: 'Total', data: [] }
+                        { name: words.positive, type: 'line',
+                            //areaStyle: {normal: {}},
+                            //stack: 'Total',
+                            data: [] },
+                        { name: words.negative, type:'line',
+                            //areaStyle: {normal: {}},
+                            //stack: 'Total',
+                            data: [] },
+                        { name: words.neutral, type:'line',
+                            //areaStyle: {normal: {}},
+                            //stack: 'Total',
+                            data: [] }
                     ]
                 },
 
