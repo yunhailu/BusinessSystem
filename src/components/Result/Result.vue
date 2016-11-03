@@ -177,6 +177,8 @@
                         this.resultChartOption.isToggle = false;
                         this.resultPieChartOption.isActive = false;
                     }
+                    //console.log(val, idx);
+                    //this.getCommentList();
                 }.bind(this),
 
                 isChartScale: true,
@@ -264,6 +266,7 @@
                         start = this.analyticsStart;
                 Api.getCommentList({type, topic_id, topic, subtopic, source, start, end, time_dimension}).then(resp => {
                     //console.log(resp.data);
+                    this.loadingParams.visiable = false;
                     if(resp.data.code == 0){
                         this.list = resp.data.data;
                     }
@@ -292,6 +295,12 @@
                     this.resultChartLoading = true;
                     this.resultPieChartLoading = true;
                     this.init(val);
+                }
+            },
+            analyticsSource: {
+                handler(val){
+                    this.loadingParams.visiable = true;
+                    this.getCommentList();
                 }
             },
             sortVal: {

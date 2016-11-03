@@ -161,6 +161,7 @@
                         start = this.analyticsStart;
                 Api.getCommentList({type, topic_id, topic, subtopic, source, start, end, time_dimension}).then(resp => {
                     //console.log(resp.data);
+                    this.loadingParams.visiable = false;
                     if(resp.data.code == 0){
                         this.list = resp.data.data;
                     }
@@ -245,7 +246,7 @@
                 this.commentPieOption.series.data = _.map(this.lineData[map[idx]], (value, key) => {
                     return ({ value: _.reduce(value, (memo, val) => memo + val, 0),name: this.words[key] });
                 });
-
+                //this.getCommentList();
             },
             initData(){
                 this.lineData = {
@@ -277,6 +278,12 @@
                     this.commentBarLoading = true;
                     this.commentChartLoading = true;
                     this.init(val);
+                }
+            },
+            analyticsSource: {
+                handler(val){
+                    this.loadingParams.visiable = true;
+                    this.getCommentList();
                 }
             },
             sortVal: {
