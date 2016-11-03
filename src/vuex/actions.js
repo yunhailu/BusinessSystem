@@ -77,3 +77,7 @@ export const setCompareStart = (store, start) => {
 export const setCompareEnd = (store, end) => {
 	store.dispatch(types.UPDATE_COMPARE_END, end);
 };
+
+export const setCompareTimeRangeString = (store, timeRangeString) => {
+	store.dispatch(types.UPDATE_COMPARE_TIME_RANGE_STRING, timeRangeString);
+};
