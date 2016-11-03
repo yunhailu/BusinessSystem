@@ -1,6 +1,7 @@
 <template>
     <header-component active="analytics"></header-component>
         <div class="container">
+            <br>
             <div class="row">
                 <div class="col-md-9 detail-content">
                     <card-panel :title="words.content" >
@@ -24,7 +25,7 @@
                     </card-panel>
                 </div>
             </div>
-
+<br>
             <div class="row">
                 <div class="col-md-9 detail-chart">
                     <card-panel :title="words.shareChart" >
@@ -93,228 +94,44 @@
                 graphChartLoading: false,
                 graphChartOption: {
                     title: {
-                        //text: '转发层级',
-                        //subtext: 'Default layout',
-                        //top: 'bottom',
-                        //left: 'left'
+                       text: '      转发数：',
+                        textStyle: {
+                            fontStyle: 'normal',
+                            fontWeight: 'border',
+                            fontSize: 16,
+                        },
+                        top:0,
+                        left: 'left'
                     },
                     tooltip: {},
                     legend: {
-                        data: ["传播源点", "一层转发", "二层转发", "三层转发", "四层转发", "五层转发", "六层转发", "七层转发", "七层以上"],
+                        data: ["传播源点", "一层转发", "二层转发", "三层转发", "四层转发", "五层转发", "六层转发","六层以上"],
                         left: 10,
+                        top:23,
                         width: 120
                     },
                     animationDuration: 1500,
                     animationEasingUpdate: 'quinticInOut',
+                    lineStyle: {
+                        normal: {
+                            color: '#aaa',
+                            width: 1,
+                            type:'solid'}},
                     series: [
                         {
                             name: '传播路径',
                             type: 'graph',
-                            layout: 'none',
-                            data: [
-                                {
-                                    "id": "0",
-                                    "name": "111111",
-                                    "itemStyle": null,
-                                    "symbolSize": 18.685715,
-                                    "attributes": {"modularity_class": 0},
-                                    "x": Math.random() * Math.random() * 1000 + Math.random(),
-                                    "y": Math.random() * Math.random() * 1000 + Math.random(),
-                                    "value": 8.685715,
-                                    "label": {"normal": {"show": false}},
-                                    "category": 0
-                                },
-
-                                {
-                                    "id": "1",
-                                    "name": "22222",
-                                    "itemStyle": null,
-                                    "symbolSize": 16.6666666666665,   //大小。
-                                    "attributes": {"modularity_class": 0},
-                                    "x": -417.26337, "y": 406.03506,
-                                    "value": 4,
-                                    "label": {
-                                        "normal": {"show": false}
-                                    },
-                                    "category": 2
-                                },
-
-                                {
-                                    "id": "2",
-                                    "name": "MlleBaptistine",
-                                    "itemStyle": null,
-                                    "symbolSize": 16.323809333333333,
-                                    "x": -212.76357,
-                                    "y": 245.29176,
-                                    "attributes": {"modularity_class": 1},
-                                    "value": 9.485714,
-                                    "label": {"normal": {"show": false}},
-                                    "category": 3
-                                },
-                                {
-                                    "id": "3",
-                                    "name": "MmeMagloire",
-                                    "itemStyle": null,
-                                    "symbolSize": 16.323809333333333,
-                                    "x": -242.82404,
-                                    "y": 235.26283,
-                                    "attributes": {"modularity_class": 1},
-                                    "value": 9.485714,
-                                    "label": {"normal": {"show": false}},
-                                    "category": 4
-                                },
-                                {
-                                    "id": "4",
-                                    "name": "CountessDeLo",
-                                    "itemStyle": null,
-                                    "symbolSize": 12.6666666666666665,
-                                    "x": -379.30386,
-                                    "y": 429.06424,
-                                    "attributes": {"modularity_class": 0},
-                                    "value": 4,
-                                    "label": {"normal": {"show": false}},
-                                    "category": 5
-                                },
-                                {
-                                    "id": "5",
-                                    "name": "Geborand",
-                                    "itemStyle": null,
-                                    "symbolSize": 21.6666666666666665,
-                                    "x": -417.26337,
-                                    "y": 406.03506,
-                                    "attributes": {"modularity_class": 0},
-                                    "value": 4,
-                                    "label": {"normal": {"show": false}},
-                                    "category": 4
-                                },
-                                {
-                                    "id": "6",
-                                    "name": "Champtercier",
-                                    "itemStyle": null,
-                                    "symbolSize": 12.6666666666666665,
-                                    "x": -332.6012,
-                                    "y": 485.16974,
-                                    "attributes": {"modularity_class": 0},
-                                    "value": 4,
-                                    "label": {"normal": {"show": false}},
-                                    "category": 4
-                                },
-                                {
-                                    "id": "7",
-                                    "name": "Cravatte",
-                                    "itemStyle": null,
-                                    "symbolSize": 12.6666666666666665,
-                                    "x": -382.69568,
-                                    "y": 475.09113,
-                                    "attributes": {"modularity_class": 0},
-                                    "value": 4,
-                                    "label": {"normal": {"show": false}},
-                                    "category": 6
-                                },
-                                {
-                                    "id": "8",
-                                    "name": "Count",
-                                    "itemStyle": null,
-                                    "symbolSize": 21.6666666666666665,
-                                    "x": -320.384,
-                                    "y": 387.17325,
-                                    "attributes": {"modularity_class": 0},
-                                    "value": 4,
-                                    "label": {"normal": {"show": false}},
-                                    "category": 7
-                                },
-                                {
-                                    "id": "9",
-                                    "name": "OldMan",
-                                    "itemStyle": null,
-                                    "symbolSize": 12.6666666666666665,
-                                    "x": -344.39832,
-                                    "y": 451.16772,
-                                    "attributes": {"modularity_class": 0},
-                                    "value": 4,
-                                    "label": {"normal": {"show": false}},
-                                    "category": 8
-                                },
-                                {
-                                    "id": "10",
-                                    "name": "Labarre",
-                                    "itemStyle": null,
-                                    "symbolSize": 12.6666666666666665,
-                                    "x": -89.34107,
-                                    "y": 234.56128,
-                                    "attributes": {"modularity_class": 1},
-                                    "value": 4,
-                                    "label": {"normal": {"show": false}},
-                                    "category": 1
-                                },
-                                {
-                                    "id": "11",
-                                    "name": "Valjean",
-                                    "itemStyle": null,
-                                    "symbolSize": 16.66666666666667,
-                                    "x": -87.93029,
-                                    "y": -6.8120565,
-                                    "attributes": {"modularity_class": 1},
-                                    "value": 100,
-                                    "label": {"normal": {"show": true}},
-                                    "category": 1
-                                },
-                                {
-                                    "id": "12",
-                                    "name": "Marguerite",
-                                    "itemStyle": null,
-                                    "symbolSize": 14.495239333333333,
-                                    "x": -339.77908,
-                                    "y": -184.69139,
-                                    "attributes": {"modularity_class": 1},
-                                    "value": 6.742859,
-                                    "label": {"normal": {"show": false}},
-                                    "category": 1
-                                },
-                                {
-                                    "id": "13",
-                                    "name": "MmeDeR",
-                                    "itemStyle": null,
-                                    "symbolSize": 12.6666666666666665,
-                                    "x": -194.31313,
-                                    "y": 178.55301,
-                                    "attributes": {"modularity_class": 1},
-                                    "value": 4,
-                                    "label": {"normal": {"show": false}},
-                                    "category": 1
-                                },
-                                {
-                                    "id": "14",
-                                    "name": "Isabeau",
-                                    "itemStyle": null,
-                                    "symbolSize": 12.6666666666666665,
-                                    "x": -158.05168,
-                                    "y": 201.99768,
-                                    "attributes": {"modularity_class": 1},
-                                    "value": 4,
-                                    "label": {"normal": {"show": false}},
-                                    "category": 1
-                                },],
-                            links: [
-                                {"id": "0", "name": null, "source": "1", "target": "0", "lineStyle": {"normal": {}}},
-                                {"id": "1", "name": null, "source": "2", "target": "0", "lineStyle": {"normal": {}}},
-                                {"id": "2", "name": null, "source": "3", "target": "0", "lineStyle": {"normal": {}}},
-                                {"id": "3", "name": null, "source": "3", "target": "2", "lineStyle": {"normal": {}}},
-                                {"id": "4", "name": null, "source": "4", "target": "0", "lineStyle": {"normal": {}}},
-                                {"id": "5", "name": null, "source": "5", "target": "0", "lineStyle": {"normal": {}}},
-                                {"id": "6", "name": null, "source": "6", "target": "0", "lineStyle": {"normal": {}}},
-                                {"id": "7", "name": null, "source": "7", "target": "0", "lineStyle": {"normal": {}}},
-                                {"id": "8", "name": null, "source": "8", "target": "0", "lineStyle": {"normal": {}}},
-                                {"id": "9", "name": null, "source": "9", "target": "0", "lineStyle": {"normal": {}}},
-                                {"id": "10", "name": null, "source": "11", "target": "0", "lineStyle": {"normal": {}}},
-                                {
-                                    "id": null,
-                                    "name": null,
-                                    "source": "11",
-                                    "target": "2",
-                                    "lineStyle": {"normal": {}}
-                                },],
-                            categories: [{"name": "传播源点"}, {"name": "一层转发"}, {"name": "二层转发"}, {"name": "三层转发"}, {"name": "四层转发"}, {"name": "五层转发"}, {"name": "六层转发"}, {"name": "七层转发"}, {"name": "七层以上"}],
+                            layout: 'force',
+                            force: {
+                                initLayout:"circular",
+                                repulsion: 50,
+                                gravity: 0.1,
+                                layoutAnimation: true,
+                            },
+                            draggable:true,
+                            data: [],
+                            links: [],
+                            categories: [{"name": "传播源点"}, {"name": "一层转发"}, {"name": "二层转发"}, {"name": "三层转发"}, {"name": "四层转发"}, {"name": "五层转发"}, {"name": "六层转发"}, {"name": "六层以上"}],
                             roam: true,
                             label: {
                                 normal: {
@@ -396,31 +213,39 @@
 
                         const firstdata = resp.data.data.datas;
                         const firstlink = resp.data.data.links;
+
+                        const nodestyle0={normal:{show:false}};
+                        const nodestyle1={modularity_class:0};
                         const newDateS = _.map(firstdata, (item)=> {
+                           // item.name=item.id;
                             item.category = item.level;
-                            item.symbolSize = item.value * (0.5);
+                            item.symbolSize = 15;
                             item.itemStyle = "null";
-                            item.attributes = "{'modularity_class':0}";
-                            item.label = "{'normal':{'show':false}}";
-                            item.x = Math.random() * (-1) * Math.random() * 1000;
-                            item.y = Math.random() * Math.random() * 1000;
+                            item.attributes = nodestyle1;
+                            item.label = nodestyle0;
+                            //item.x = Math.random() * (-1) * Math.random() * 1000;
+                            //item.y = Math.random() * Math.random() * 1000;
                             return item;
                         });
 
+                        const newDateScout=_.size(newDateS)-1;
+
+                        const linstyle0={normal:{color:'#000',width:1,type:'solid'}};
                         const newDateL = _.map(firstlink, (item)=> {
-                            item.source = item.src;
-                            item.target = item.dst;
-                            item.lineStyle = "{'normal':{}}";
+                            item.name="";
+                            item.source = ''+item.src+'';
+                            item.target = ''+item.dst+'';
+                            item.lineStyle=linstyle0;
+                            // item.value =40;
+
                             return item;
                         });
-
 
                         console.log(newDateS);
                         console.log(newDateL);
-                        console.log(resp.data.data.datas);
-
                         this.graphChartOption.series[0].data = newDateS;
                         this.graphChartOption.series[0].links = newDateL;
+                        this.graphChartOption.title.text="转发次数："+newDateScout+"次";
 
 
                         //this.acticles = resp.data.data;
@@ -459,9 +284,6 @@
 
 
             },
-            
-
-
 
             init(){
                 console.log(this.$route.params);
