@@ -6,7 +6,7 @@
         </div>
         <nav class="navbar navbar-static-top" role="navigation">
             <div class="navbar-center">
-                <ul class="nav navbar-nav">
+                <ul class="nav navbar-nav ">
                     <li class="tab-item" v-for="tab in tabs">
                         <a href="javascript:void(0);" v-link="{name: tab.link}" :class="active == tab.id ? 'active' : ''">
                             <i class="fa fa-2x" :class="[tab.icon]" aria-hidden="true"></i>
