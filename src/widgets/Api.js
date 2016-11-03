@@ -447,17 +447,4 @@ export const getArticleForward = params => {
     });
 };
 
-/** 关系气泡图的接口 4
- *  Encapsulate `getArticleCorrelation` interface
- *
- *  @param {String} id
- *
- *  @return {Promise} With Detail detail info.
- */
 
-export const getArticleLine = params => {
-    return Api.request({
-        url: `${rootURI}/article/forward`,
-        params
-    });
-};

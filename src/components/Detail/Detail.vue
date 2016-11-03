@@ -18,7 +18,7 @@
                         <img src="../../../images/avatar.png" class="detail-info-avatar"  />
                         <div class="detail-info-detail">
                             <div class="detail-info-detail-item">{{author.name}}</div>
-                            <div class="detail-info-detail-item">{{author.gender}} | <a :href="article.link" target="_blank">去主页看看</a></div>
+                            <div class="detail-info-detail-item">{{author.gender}} | <a :href="article.home" target="_blank">去主页看看</a></div>
                             <div class="detail-info-detail-item">{{author.address}}</div>
                             <div class="detail-info-detail-intro">{{words.desc}} {{author.description}}</div>
                         </div>
@@ -34,11 +34,14 @@
                 </div>
                 <div class="col-md-3 detail-article">
                     <card-panel :title="words.article" >
-                        <ul class="detail-article-list">
-                            <li class="detail-article-list-item" v-for="acticle in acticles">
-                                <a :href="acticle.link" target="_blank"><i class="fa fa-bookmark"></i> {{acticle.title}}</a>
-                            </li>
-                        </ul>
+                        <!--<ul class="detail-article-list">-->
+                            <!--<li class="detail-article-list-item" v-for="acticle in acticles">-->
+                                <!--<a :href="acticle.link" target="_blank"><i class="fa fa-bookmark"></i> {{acticle.title}}</a>-->
+                            <!--</li>-->
+                        <!--</ul>-->
+                        <div class="detail-timeline-chart" v-echarts="timeclevelOption" :loading="timelineLoading" theme="macarons"></div>
+
+
                     </card-panel>
                 </div>
                 <div class="col-md-3 detail-timeline">
@@ -72,24 +75,26 @@
                     address: "",
                     description: "",
                     gender: "",
-                    name: ""
+                    name: "",
+
                 },
                 article: {
                     source: '',
                     postDate: '',
                     link: '',
-                    content: ''
+                    content: '',
+                    home:""
                 },
 
-                acticles: [
-                    {link: "", tilte: ""},
-                    {link: "", tilte: ""},
-                    {link: "", tilte: ""},
-                    {link: "", tilte: ""},
-                    {link: "", tilte: ""},
-                    {link: "", tilte: ""},
-                    {link: "", tilte: ""}
-                ],
+                // acticles: [
+                //     {link: "", tilte: ""},
+                //     {link: "", tilte: ""},
+                //     {link: "", tilte: ""},
+                //     {link: "", tilte: ""},
+                //     {link: "", tilte: ""},
+                //     {link: "", tilte: ""},
+                //     {link: "", tilte: ""}
+                // ],
 
                 graphChartLoading: false,
                 graphChartOption: {
@@ -101,9 +106,12 @@
                             fontSize: 16,
                         },
                         top:0,
-                        left: 'left'
+                        left: 'right'
                     },
-                    tooltip: {},
+                    tooltip: {
+
+                        formatter: '{b}'
+                    },
                     legend: {
                         data: ["传播源点", "一层转发", "二层转发", "三层转发", "四层转发", "五层转发", "六层转发","六层以上"],
                         left: 10,
@@ -112,11 +120,7 @@
                     },
                     animationDuration: 1500,
                     animationEasingUpdate: 'quinticInOut',
-                    lineStyle: {
-                        normal: {
-                            color: '#aaa',
-                            width: 1,
-                            type:'solid'}},
+
                     series: [
                         {
                             name: '传播路径',
@@ -155,7 +159,7 @@
                     xAxis: _.extend({}, Chart.xAxis, {
                         type: 'category',  //category
                         data: cardTimeline.xAxis,
-                        boundaryGap: false,
+                        boundaryGap: true,
                         splitLine: {
                             lineStyle: {
                                 type: 'dotted' //solid  dashed  dotted
@@ -175,7 +179,42 @@
                         //stack: 'Total',
                         data: cardTimeline.data
                     }]
+                },
+
+                timeclevelOption: {
+                    title: _.extend({}, Chart.title, {show: false}),
+                    tooltip: _.extend({}, Chart.tooltip, {
+                        axisPointer: {type: 'line'}
+                    }),
+                    grid: _.extend({}, Chart.grid, {
+                        left: '3%', right: '6%', top: '5%', bottom: '0%'
+                    }),
+                    //toolbox: Chart.toolbox,
+                    xAxis: _.extend({}, Chart.xAxis, {
+                        type: 'category',  //category
+                        data: cardTimeline.xAxis,
+                        boundaryGap: true,
+                        splitLine: {
+                            lineStyle: {
+                                type: 'dotted' //solid  dashed  dotted
+                            }
+                        }
+                    }),
+                    yAxis: _.extend({}, Chart.yAxis, {
+                        type: 'value',
+                        boundaryGap: false
+                    }),
+                    progressive: 4,
+                    textStyle: Chart.textStyle,
+                    series: [{
+                        name: "层级",
+                        type: 'bar',
+                        //areaStyle: {normal: {}},
+                        //stack: 'Total',
+                        data: cardTimeline.data
+                    }]
                 }
+
             }
         },
         methods: {
@@ -200,7 +239,7 @@
                 Api.getArticleCorrelation({id}).then(resp => {
                     console.log("getArticleCorrelation", resp.data);
                     if (resp.data.code == 0) {
-                        this.acticles = resp.data.data;
+                        //this.acticles = resp.data.data;
                     }
                 });
             },
@@ -236,6 +275,7 @@
                             item.source = ''+item.src+'';
                             item.target = ''+item.dst+'';
                             item.lineStyle=linstyle0;
+                            item.lineStyle=linstyle0;
                             // item.value =40;
 
                             return item;
@@ -248,27 +288,12 @@
                         this.graphChartOption.title.text="转发次数："+newDateScout+"次";
 
 
-                        //this.acticles = resp.data.data;
-
-
-                    }
-                });
-
-
-            },
-            getArticleLine(){
-
-                Api.getArticleLine().then(resp => {
-                    console.log("getArticleLine", resp.data);
-                    if (resp.data.code == 0) {
-
-                        
-
-                        const newDate1 = _.map(resp.data.data, (item)=> {
+                        //转发的line 的数据请求的
+                        const newDate1 = _.map(resp.data.data.forward, (item)=> {
                             return item.date;
 
                         });
-                        const newDate2 = _.map(resp.data.data, (item)=> {
+                        const newDate2 = _.map(resp.data.data.forward, (item)=> {
                             return item.value;
 
                         });
@@ -278,6 +303,8 @@
 
                         console.log(newDate2);
 
+                        //this.acticles = resp.data.data;
+
 
                     }
                 });
@@ -285,12 +312,13 @@
 
             },
 
+
             init(){
                 console.log(this.$route.params);
                 this.getPageDetail();
                 this.getArticleCorrelation();
                 this.getArticleForward();
-                this.getArticleLine();
+
 
                 // this.DEEE();
 
