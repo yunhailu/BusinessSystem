@@ -8,19 +8,19 @@
                         <span>沃德品牌气象站</span>
                     </legend>
                     <div class="form-group">
-                        <label for="inputEmail3" class="col-sm-2 control-label">用户名</label>
+                        <label for="inputEmail3" class="col-sm-2 control-label login-font">用户名</label>
                         <div class="col-sm-4">
                             <input type="text" v-model="userName" class="form-control" id="inputEmail3" placeholder="UserName">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="inputPassword3" class="col-sm-2 control-label">密码</label>
+                        <label for="inputPassword3" class="col-sm-2 control-label login-font">密码</label>
                         <div class="col-sm-4">
                             <input type="password" v-model="password" class="form-control" id="inputPassword3" placeholder="Password">
                         </div>
                     </div>
                     <div class="form-group">
-                        <div class="col-sm-offset-2 col-sm-10">
+                        <div class="col-sm-offset-2 col-sm-10 login-font">
                             <div class="checkbox">
                                 <label>
                                     <input type="checkbox"> 记住密码
