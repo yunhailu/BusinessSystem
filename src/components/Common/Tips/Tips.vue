@@ -81,6 +81,7 @@
 
         }else{
           document.body.style.position = 'static';
+          ScrollHandler.enableScroll();
         }
       }
     },

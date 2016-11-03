@@ -215,6 +215,7 @@
                 _.each(this.lineData[source], (value, key) => {
                     this.sentimentBarOption.series[this.sentimentMap[key]].data = value;
                 });
+                //this.getCommentList();
             },
             clickChartAction(opts){
                 console.log('clickChartAction opts', opts);
@@ -246,6 +247,7 @@
                         start = this.analyticsStart;
                 Api.getCommentList({type, topic_id, topic, subtopic, source, start, end, time_dimension}).then(resp => {
                     //console.log(resp.data);
+                    this.loadingParams.visiable = false;
                     if(resp.data.code == 0){
                         this.list = resp.data.data;
                     }
@@ -382,6 +384,12 @@
                     this.sentimentBarLoading = true;
                     this.sentimentChartLoading = true;
                     this.init(val);
+                }
+            },
+            analyticsSource: {
+                handler(val){
+                    this.loadingParams.visiable = true;
+                    this.getCommentList();
                 }
             },
             sortVal: {
