@@ -59,7 +59,7 @@ export const zh_CN = {
         topics: "话题排行"
     },
     detail: {
-        article: "相关文章",
+        article: "层级转发关系",
         userInfo: "用户信息",
         content: "正文",
         source: "来源",
