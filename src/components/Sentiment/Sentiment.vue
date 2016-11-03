@@ -96,31 +96,31 @@
                         name:common.happy,
                         type:'line',
                         //areaStyle: {normal: {}},
-                        stack: 'Total',
+                        //stack: 'Total',
                         data: []
                     }, {
                         name:common.anger,
                         type:'line',
                         //areaStyle: {normal: {}},
-                        stack: 'Total',
+                        //stack: 'Total',
                         data: []
                     }, {
                         name:common.sorrow,
                         type:'line',
                         //areaStyle: {normal: {}},
-                        stack: 'Total',
+                        //stack: 'Total',
                         data: []
                     }, {
                         name:common.disgust,
                         type:'line',
                         //areaStyle: {normal: {}},
-                        stack: 'Total',
+                        //stack: 'Total',
                         data: []
                     }, {
                         name:common.fear,
                         type:'line',
                         //areaStyle: {normal: {}},
-                        stack: 'Total',
+                        //stack: 'Total',
                         data: []
                     }]
                 },
@@ -214,6 +214,7 @@
                 }
                 _.each(this.lineData[source], (value, key) => {
                     this.sentimentBarOption.series[this.sentimentMap[key]].data = value;
+                    console.log('chakanshuju',value)
                 });
                 //this.getCommentList();
             },
@@ -316,6 +317,7 @@
                     }
 
                 });
+                console.log('查看测试数据',this.lineData);
             },
             initData(){
                 this.lineData = {
@@ -371,6 +373,7 @@
                 this.initData();
                 this.getSentimentDetail();
                 this.getCommentList();
+                console.log('chakanshuju',this.lineData);
             }
         },
         ready(){

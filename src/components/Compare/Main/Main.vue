@@ -165,9 +165,9 @@
                     this.compareChartOption.series.push(
                             {
                                 name:key,
-                                type:'bar',
+                                type:'line',
                                 areaStyle: {normal: {}},
-                                stack: 'Total',
+                                //stack: 'Total',
                                 data: item
                             }
                     );
@@ -179,24 +179,6 @@
                             }
                     );
                 })
-                /*this.compareChartOption.legend.data.push(newTopic[0].topic_name);
-                this.compareChartOption.xAxis.data=intervalDate;
-                this.compareChartOption.series.push(
-                        {
-                            name:newTopic[0].topic_name,
-                            type:'bar',
-                            areaStyle: {normal: {}},
-                            stack: 'Total',
-                            data: newChart
-                        }
-                );
-                this.comparePieOption.legend.data.push(newTopic[0].topic_name);
-                this.comparePieOption.series.data.push(
-                        {
-                            value: _.reduce(newChart, (mome, num) => mome + num, 0),
-                            name:newTopic[0].topic_name
-                        }
-                );*/
             },
             mapRadarData(radarData,intervalDate){
                 this.initRadar();
