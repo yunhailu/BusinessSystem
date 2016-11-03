@@ -47,6 +47,7 @@
         <div v-if="!influancerTable.length" class="noTableTips">{{noTableTips}}</div>
     </div>
     <pop-list :item="selectItem" :pops="popList" :visiable.sync="popVisiable"></pop-list>
+    <tips :visible.sync="loadingParams.visiable" :tipsparam.sync="loadingParams"></tips>
 </template>
 <style lang="less" scoped>
     @import "Influence.less";
@@ -59,13 +60,19 @@
     import Tabs from '../Common/Tabs/Tabs.vue';
     import Page from '../Common/Page/Page.vue';
     import PopList from './PopList/PopList.vue';
-    import { analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic, analyticsStart, analyticsEnd, activeAnalyticsTopic } from '../../vuex/getters';
+    import Tips from '../Common/Tips/Tips.vue';
+    import { analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic, analyticsDateChange, analyticsStart, analyticsEnd, activeAnalyticsTopic } from '../../vuex/getters';
 
     export default{
         data(){
             const words = Local().influence;
             return{
                 words,
+                loadingParams: {
+                    visiable: false,
+                    type: 'loading',
+                    content: "请稍后......"
+                },
                 popularList: [],
                 influancerList: [],
                 influancerTable: [],
@@ -77,7 +84,7 @@
             }
         },
         vuex: {
-            getters: {analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic, analyticsStart, analyticsEnd, activeAnalyticsTopic}
+            getters: {analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic, analyticsDateChange, analyticsStart, analyticsEnd, activeAnalyticsTopic}
         },
         watch: {
             activeAnalyticsTopic: {
@@ -85,6 +92,12 @@
                     //this.commentBarLoading = true;
                     //this.commentChartLoading = true;
                     this.init(val);
+                }
+            },
+            analyticsDateChange: {
+                handler(val){
+                    this.loadingParams.visiable = true;
+                    this.init();
                 }
             },
             analyticsSource: {
@@ -158,7 +171,7 @@
                         end = this.analyticsEnd,
                         start = this.analyticsStart;
                 Api.getPopularList({topic_id, topic, subtopic, source, start, end, time_dimension}).then(resp => {
-                    //const resp = {data: {code: 0, data: [{ "id": "12345678", "link": "http://www.baidu.com", "title": "Most active author", "source": "Online News", "value": "shi jian", "post": 64 },{ "id": "12345678", "link": "http://www.baidu.com", "title": "Most active author", "source": "Online News", "value": "shi jian", "post": 64 },{ "id": "12345678", "link": "http://www.baidu.com", "title": "Most active author", "source": "Online News", "value": "shi jian", "post": 64 },{ "id": "12345678", "link": "http://www.baidu.com", "title": "Most active author", "source": "Online News", "value": "shi jian", "post": 64 }]}};
+                    this.loadingParams.visiable = false;
                     if(resp.data.code ==0){
                         const popularList = resp.data.data;
                         this.popularList = _.map(popularList, (item, index) => {
@@ -178,7 +191,7 @@
                         end = this.analyticsEnd,
                         start = this.analyticsStart;
                 Api.getInfluenceList({topic_id, topic, subtopic, source, start, end, time_dimension}).then(resp => {
-                    //const resp = {data: {code:0, data: [{id: "1234", influencer: "台湾", posts: 6, like: 123, resend: 32, sentiment: {happy: 5, anger: 15, sorrow: 10, disgust: 0, fear: 5}, rate: {key: "up", value: "24%"}},{"id": "1234", "influencer": "台湾1", "posts": 6, "like": 123, "resend": 32, "sentiment": {happy: 3, anger: 5, sorrow: 10, disgust: 3, fear: 5}, "rate": {"key": "up", "value": "24%"}}] }};
+                    this.loadingParams.visiable = false;
                     if(resp.data.code ==0){
                         const influanceInfos = resp.data.data;
                         this.influancerList = _.map(influanceInfos, info => info);
@@ -285,7 +298,7 @@
             }
         },
         components:{
-            Tabs, PopList,
+            Tabs, PopList, Tips,
             'page': Page
         },
 //        route: {

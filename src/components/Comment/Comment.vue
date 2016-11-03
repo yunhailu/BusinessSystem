@@ -21,7 +21,7 @@
     import ListPanel from '../Common/ListPanel/ListPanel.vue';
     import Tabs from '../Common/Tabs/Tabs.vue';
     import Tips from '../Common/Tips/Tips.vue';
-    import { analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic, analyticsStart, analyticsEnd, activeAnalyticsTopic } from '../../vuex/getters';
+    import { analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic, analyticsDateChange, analyticsStart, analyticsEnd, activeAnalyticsTopic } from '../../vuex/getters';
 
     export default{
         data(){
@@ -186,7 +186,8 @@
                     end = this.analyticsEnd,
                     start = this.analyticsStart;
                 Api.getCommentDetail({ topic_id, topic, subtopic, source, start, end, time_dimension }).then(resp => {
-                    console.log('getCommentDetail', resp.data);
+                    //console.log('getCommentDetail', resp.data);
+                    this.loadingParams.visiable = false;
                     if(resp.data.code == 0){
                         const details = resp.data.data;
                         this.x = _.map(details, detail => detail.date);
@@ -274,7 +275,7 @@
             }
         },
         vuex: {
-            getters: {analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic, analyticsStart, analyticsEnd, activeAnalyticsTopic}
+            getters: {analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic, analyticsDateChange, analyticsStart, analyticsEnd, activeAnalyticsTopic}
         },
         ready(){
             if(this.activeAnalyticsTopic && this.activeAnalyticsTopic.topic_id){
@@ -287,6 +288,12 @@
                     this.commentBarLoading = true;
                     this.commentChartLoading = true;
                     this.init(val);
+                }
+            },
+            analyticsDateChange: {
+                handler(val){
+                    this.loadingParams.visiable = true;
+                    this.init();
                 }
             },
             analyticsSource: {
