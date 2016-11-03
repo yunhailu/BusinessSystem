@@ -356,6 +356,12 @@
                     this.init(val);
                 }
             },
+            analyticsSubTopic: {
+                handler(val){
+                    this.loadingParams.visiable = true;
+                    this.init();
+                }
+            },
             analyticsDateChange: {
                 handler(val){
                     this.loadingParams.visiable = true;

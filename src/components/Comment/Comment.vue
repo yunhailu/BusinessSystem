@@ -296,6 +296,12 @@
                     this.init();
                 }
             },
+            analyticsSubTopic: {
+                handler(val){
+                    this.loadingParams.visiable = true;
+                    this.init();
+                }
+            },
             analyticsSource: {
                 handler(val){
                     this.loadingParams.visiable = true;

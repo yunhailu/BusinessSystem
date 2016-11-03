@@ -310,6 +310,12 @@
                     this.getCommentList();
                 }
             },
+            analyticsSubTopic: {
+                handler(val){
+                    this.loadingParams.visiable = true;
+                    this.init();
+                }
+            },
             sortVal: {
                 handler(val, oldVal){
                     if(val != oldVal){
