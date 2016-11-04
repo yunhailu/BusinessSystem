@@ -29,7 +29,7 @@
             <div class="row">
                 <div class="col-md-9 detail-chart">
                     <card-panel :title="words.shareChart" >
-                        <div class="chart" v-echarts="graphChartOption" :loading="graphChartLoading" theme="infographic"></div>
+                        <div class="chart" v-echarts="graphChartOption" :click="graphChartAction"  :loading="graphChartLoading" theme="infographic"></div>
                     </card-panel>
                 </div>
                 <div class="col-md-3 detail-article">
@@ -86,17 +86,8 @@
                     home:""
                 },
 
-                // acticles: [
-                //     {link: "", tilte: ""},
-                //     {link: "", tilte: ""},
-                //     {link: "", tilte: ""},
-                //     {link: "", tilte: ""},
-                //     {link: "", tilte: ""},
-                //     {link: "", tilte: ""},
-                //     {link: "", tilte: ""}
-                // ],
 
-                graphChartLoading: false,
+                graphChartLoading: true,
                 graphChartOption: {
                     title: {
                        text: '      转发数：',
@@ -146,6 +137,7 @@
                         }
                     ]
                 },
+                graphChartLoading: false,
                 timelineLoading: false,
                 timelineOption: {
                     title: _.extend({}, Chart.title, {show: false}),
@@ -158,7 +150,7 @@
                     //toolbox: Chart.toolbox,
                     xAxis: _.extend({}, Chart.xAxis, {
                         type: 'category',  //category
-                        data: cardTimeline.xAxis,
+                        data: [],
                         boundaryGap: true,
                         splitLine: {
                             lineStyle: {
@@ -177,10 +169,11 @@
                         type: 'line',
                         //areaStyle: {normal: {}},
                         //stack: 'Total',
-                        data: cardTimeline.data
+                        data: []
                     }]
                 },
 
+                timeclevelOption: false,
                 timeclevelOption: {
                     title: _.extend({}, Chart.title, {show: false}),
                     tooltip: _.extend({}, Chart.tooltip, {
@@ -192,7 +185,7 @@
                     //toolbox: Chart.toolbox,
                     xAxis: _.extend({}, Chart.xAxis, {
                         type: 'category',  //category
-                        data: cardTimeline.xAxis,
+                        data: ['一层','二层','三层','四层','五层','六层'],
                         boundaryGap: true,
                         splitLine: {
                             lineStyle: {
@@ -207,17 +200,26 @@
                     progressive: 4,
                     textStyle: Chart.textStyle,
                     series: [{
-                        name: "层级",
+                        name: "数量",
                         type: 'bar',
                         //areaStyle: {normal: {}},
                         //stack: 'Total',
-                        data: cardTimeline.data
+                        data: []
                     }]
                 }
+
 
             }
         },
         methods: {
+            //单击事件
+
+            graphChartAction(params){
+               window.open(params.data.link);
+                console.log(params);
+
+            },
+
             getPageDetail(){
                 const id = this.$route.params.id;
                 Api.getPageDetail({id}).then(resp => {
@@ -225,8 +227,10 @@
                     if (resp.data.code == 0) {
 
                         //接口的详情的数据的更新
+                        const description =resp.data.data.author.description.substring(0,80)+'...';
                          this.author = resp.data.data.author;
                          this.article = resp.data.data.article;
+                        this.author.description=description;
 
                     }
                     else {
@@ -250,11 +254,8 @@
                     if (resp.data.code == 0) {
 
 
-                        const firstdata = resp.data.data.datas;
-                        const firstlink = resp.data.data.links;
-
-                        const nodestyle0={normal:{show:false}};
-                        const nodestyle1={modularity_class:0};
+                        const firstdata = resp.data.data.datas, firstlink = resp.data.data.links;
+                        const nodestyle0={normal:{show:false}}, nodestyle1={modularity_class:0};
                         const newDateS = _.map(firstdata, (item)=> {
                            // item.name=item.id;
                             item.category = item.level;
@@ -267,26 +268,36 @@
                             return item;
                         });
 
-                        const newDateScout=_.size(newDateS)-1;
-
-                        const linstyle0={normal:{color:'#000',width:1,type:'solid'}};
-                        const newDateL = _.map(firstlink, (item)=> {
+                        const newDateScout=_.size(newDateS)-1,
+                                linstyle0={normal:{color:'#000',width:1,type:'solid'}},
+                                lablestyle0={normal:{show:false}},
+                                newDateL = _.map(firstlink, (item)=> {
                             item.name="";
                             item.source = ''+item.src+'';
                             item.target = ''+item.dst+'';
                             item.lineStyle=linstyle0;
-                            item.lineStyle=linstyle0;
+                            item.label=lablestyle0;
                             // item.value =40;
 
                             return item;
                         });
 
-                        console.log(newDateS);
-                        console.log(newDateL);
+                        //层级的统计！---start-
+                        const filterCountx=[];
+                        filterCountx[0]=_.size(_.filter(newDateS, function(item){ return item.level==1; }));
+                        filterCountx[1]=_.size(_.filter(newDateS, function(item){ return item.level==2; }));
+                        filterCountx[2]=_.size(_.filter(newDateS, function(item){ return item.level==3; }));
+                        filterCountx[3]=_.size(_.filter(newDateS, function(item){ return item.level==4; }));
+                        filterCountx[4]=_.size(_.filter(newDateS, function(item){ return item.level==5; }));
+                        filterCountx[5]=_.size(_.filter(newDateS, function(item){ return item.level==6; }));
+                        //层级的统计！---end----
+
+                        // console.log(filterCountx);
+                        // console.log(newDateS);
+                        // console.log(newDateL);
                         this.graphChartOption.series[0].data = newDateS;
                         this.graphChartOption.series[0].links = newDateL;
                         this.graphChartOption.title.text="转发次数："+newDateScout+"次";
-
 
                         //转发的line 的数据请求的
                         const newDate1 = _.map(resp.data.data.forward, (item)=> {
@@ -299,6 +310,7 @@
                         });
 
                         this.timelineOption.series[0].data = newDate2;
+                        this.timeclevelOption.series[0].data = filterCountx;
                         this.timelineOption.xAxis.data = newDate1;
 
                         console.log(newDate2);
