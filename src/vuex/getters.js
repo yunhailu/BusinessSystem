@@ -33,6 +33,10 @@ export const analyticsTimeRange = state => {
 	return state.analytics.timeRange;
 };
 
+export const analyticsDateChange = state => {
+	return state.analytics.dateChange;
+};
+
 export const analyticsSource = state => {
 	return state.analytics.source;
 };

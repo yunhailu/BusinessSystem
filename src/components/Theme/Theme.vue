@@ -39,6 +39,7 @@
         <div class="chart"  v-echarts="themeLineOption" :loading="themeLineLoading"  theme="macarons"></div>
         <div class="chart best"  v-echarts="themeBestOption" :loading="themeBestLoading"  theme="macarons"></div>
     </div>
+    <tips :visible.sync="loadingParams.visiable" :tipsparam.sync="loadingParams"></tips>
 </template>
 <style lang="less" scoped>
     @import "Theme.less";
@@ -46,17 +47,23 @@
 <script type="text/ecmascript-6">
     import _ from 'underscore';
     import Tabs from '../Common/Tabs/Tabs.vue';
+    import Tips from '../Common/Tips/Tips.vue';
     import Local from "../../local/local";
     import { Chart, Pie } from '../../config/config';
     import { themeScatterData } from '../../config/tmpData';
     import * as Api from '../../widgets/Api';
-    import { analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic, analyticsStart, analyticsEnd, activeAnalyticsTopic } from '../../vuex/getters';
+    import { analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic, analyticsDateChange, analyticsStart, analyticsEnd, activeAnalyticsTopic } from '../../vuex/getters';
 
     export default{
         data(){
             const words = Local().theme;
             return{
                 words,
+                loadingParams: {
+                    visiable: false,
+                    type: 'loading',
+                    content: "请稍后......"
+                },
                 themeWordLoading: true,
                 themeWordOption: {
                     tooltip: {},
@@ -338,7 +345,7 @@
             }
         },
         vuex: {
-            getters: {analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic, analyticsStart, analyticsEnd, activeAnalyticsTopic}
+            getters: {analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic, analyticsDateChange, analyticsStart, analyticsEnd, activeAnalyticsTopic}
         },
         watch: {
             activeAnalyticsTopic: {
@@ -347,6 +354,18 @@
                     this.themeLineLoading = true;
                     this.themeWordLoading = true;
                     this.init(val);
+                }
+            },
+            analyticsSubTopic: {
+                handler(val){
+                    this.loadingParams.visiable = true;
+                    this.init();
+                }
+            },
+            analyticsDateChange: {
+                handler(val){
+                    this.loadingParams.visiable = true;
+                    this.init();
                 }
             }
         },
@@ -389,6 +408,7 @@
                         start = this.analyticsStart;
                 return Api.getWordCloud({topic_id, topic, subtopic, source, start, end, time_dimension}).then(resp => {
                     //console.log('getWordCloud',resp);
+                    this.loadingParams.visiable = false;
                     if(resp.data.code == 0){
                         this.themeWordLoading = false;
                         this.themeWordOption.series.data = resp.data.data;
@@ -468,7 +488,7 @@
 //            this.markImage.src = "../../../images/search.png";
         },
         components:{
-            Tabs
+            Tabs, Tips
         },
 //        route: {
 //            data(){

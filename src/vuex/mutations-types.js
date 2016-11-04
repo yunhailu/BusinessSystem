@@ -23,6 +23,8 @@ export const UPDATE_SOURCE = 'UPDATE_SOURCE';
 
 export const UPDATE_SUBTOPIC = 'UPDATE_SUBTOPIC';
 
+export const UPDATE_DATE_CHANGE = 'UPDATE_DATE_CHANGE';
+
 export const UPDATE_START = 'UPDATE_START';
 
 export const UPDATE_END = 'UPDATE_END';

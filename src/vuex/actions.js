@@ -36,6 +36,10 @@ export const setAnalyticsTimeRange = (store, timeRange) => {
 	store.dispatch(types.UPDATE_TIME_RANGE, timeRange);
 };
 
+export const setAnalyticsDateChange = (store, value) => {
+	store.dispatch(types.UPDATE_DATE_CHANGE, value);
+};
+
 export const setAnalyticsSource = (store, source) => {
 	store.dispatch(types.UPDATE_SOURCE, source);
 };

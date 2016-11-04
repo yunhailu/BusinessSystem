@@ -39,8 +39,8 @@
     import MenuComponent from './Menu/Menu.vue';
     import Calendar from '../Common/Calendar/Calendar.vue';
     import Local from "../../local/local";
-    import { analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic, analyticsStart, analyticsEnd } from '../../vuex/getters';
-    import { setAnalyticsType, setAnalyticsTimeRange, setAnalyticsSource, setAnalyticsSubTopic, setAnalyticsStart, setAnalyticsEnd  } from "../../vuex/actions";
+    import { analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic, analyticsDateChange, analyticsStart, analyticsEnd } from '../../vuex/getters';
+    import { setAnalyticsType, setAnalyticsTimeRange, setAnalyticsSource, setAnalyticsSubTopic, setAnalyticsDateChange, setAnalyticsStart, setAnalyticsEnd  } from "../../vuex/actions";
 
     export default{
         data(){
@@ -63,8 +63,8 @@
             }
         },
         vuex: {
-            actions: { setAnalyticsType, setAnalyticsTimeRange, setAnalyticsSource, setAnalyticsSubTopic, setAnalyticsStart, setAnalyticsEnd },
-            getters: { analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic, analyticsStart, analyticsEnd }
+            actions: { setAnalyticsType, setAnalyticsTimeRange, setAnalyticsSource, setAnalyticsSubTopic, setAnalyticsDateChange, setAnalyticsStart, setAnalyticsEnd },
+            getters: { analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic, analyticsDateChange, analyticsStart, analyticsEnd }
         },
         components:{
             'header-component': HeaderComponent,
@@ -87,6 +87,7 @@
                     this.setAnalyticsTimeRange(num);
                     this.setAnalyticsStart(moment().subtract(num, 'days').format('YYYY-MM-DD'));
                     this.setAnalyticsEnd(moment().format('YYYY-MM-DD'));
+                    this.setAnalyticsDateChange(this.analyticsDateChange + 1);
                 }
             },
             showCalendar:function(e){
@@ -123,7 +124,8 @@
                     this.setAnalyticsStart(val.split(' ~ ')[0]);
                     this.setAnalyticsEnd(val.split(' ~ ')[1]);
                     this.setAnalyticsTimeRange(days);
-                    console.log(val.split(' ~ ')[0], val.split(' ~ ')[1], days);
+                    //console.log(val.split(' ~ ')[0], val.split(' ~ ')[1], days);
+                    this.setAnalyticsDateChange(this.analyticsDateChange + 1);
                 }
             }
         },

@@ -22,7 +22,7 @@
     import Local from "../../local/local";
     import {Chart, Pie} from '../../config/config';
     import * as Api from '../../widgets/Api';
-    import { analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic, analyticsStart, analyticsEnd, activeAnalyticsTopic } from '../../vuex/getters';
+    import { analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic, analyticsDateChange, analyticsStart, analyticsEnd, activeAnalyticsTopic } from '../../vuex/getters';
 
 
     export default{
@@ -185,7 +185,7 @@
             }
         },
         vuex: {
-            getters: { analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic, analyticsStart, analyticsEnd, activeAnalyticsTopic }
+            getters: { analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic, analyticsDateChange, analyticsStart, analyticsEnd, activeAnalyticsTopic }
         },
         methods: {
             actions(val, idx){
@@ -265,6 +265,7 @@
                         start = this.analyticsStart;
                 Api.getSentimentDetail({ topic_id, topic, subtopic, source, start, end, time_dimension }).then(resp => {
                     //console.log("getSentimentDetail", JSON.stringify(resp.data.data));
+                    this.loadingParams.visiable = false;
                     if(resp.data.code == 0){
                         const details = resp.data.data;
                         this.x = _.map(details, detail => detail.date);
@@ -387,6 +388,18 @@
                     this.sentimentBarLoading = true;
                     this.sentimentChartLoading = true;
                     this.init(val);
+                }
+            },
+            analyticsDateChange: {
+                handler(val){
+                    this.loadingParams.visiable = true;
+                    this.init();
+                }
+            },
+            analyticsSubTopic: {
+                handler(val){
+                    this.loadingParams.visiable = true;
+                    this.init();
                 }
             },
             analyticsSource: {
