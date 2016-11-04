@@ -138,6 +138,7 @@
                     ]
                 },
                 graphChartLoading: false,
+
                 timelineLoading: false,
                 timelineOption: {
                     title: _.extend({}, Chart.title, {show: false}),
