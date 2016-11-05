@@ -9,6 +9,7 @@ Vue.use(VueResource);
 
 const myURI = "http://127.0.0.1:3000";
 const rootURI = "http://118.244.212.122:8008";
+const plainURI = "http://192.168.1.76";
 
 const Api = {
     request({url="", params= {}, method= "jsonp"}={}){
@@ -396,6 +397,22 @@ export const getDashboardDetail = params => {
 export const removeDashboardItem = params => {
     return Api.request({
         url: `${rootURI}/dashboard/remove`,
+        params
+    });
+};
+
+/**
+ *  Encapsulate `Export Dashboard` interface
+ *
+ *  @param {String} id (必选)
+ *  @param {String} imgs (必选) [{key:'summary-master', value:'base64'}]
+ *
+ *  @return {Promise} With remove dashboard item info.
+ */
+export const exportReport = params => {
+    return Api.request({
+        url: `${plainURI}/export/report`,
+        //method: "post",
         params
     });
 };

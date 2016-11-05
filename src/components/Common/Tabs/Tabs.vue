@@ -53,12 +53,12 @@
                 }, {
                     name: words.tabs[2],
                     link: 'comment'
-                }, {
-                    name: words.tabs[3],
-                    link: 'influence'
                 },{
                     name: words.tabs[4],
                     link: 'theme'
+                }, {
+                    name: words.tabs[3],
+                    link: 'influence'
                 }],
 //                filters: words.filters,
 //                filterActive: 0,

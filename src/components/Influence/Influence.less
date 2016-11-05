@@ -1,15 +1,15 @@
 @import "../common.less";
 
 .popular{
-  .w(100%);  .pd(1rem 0);
+  .w(100%);  .pd(10px 0);
   &-list{
-    .pd(1rem);
+    .pd(10px);
     &-item{
-      .w(23%);  .disIB();  .pd(1rem); .mg(0 1%);  .br(0.2rem);  .pointer();  .bgc(white);  //.c(#888);
-      .fa{ .f(1.5rem); }
-      &-title{ .vm();  .f(1.5rem);  .ff("pingfang-bold"); }
+      .w(23%);  .disIB();  .pd(10px); .mg(0 1%);  .br(2px);  .pointer();  .bgc(white);  //.c(#888);
+      .fa{ .f(15px); }
+      &-title{ .vm();  .f(15px);  .ff("pingfang-bold"); }
       &-con{
-        .vm(); .f(1.2rem);
+        .vm(); .f(12px);
         &-link{ .text-hidden(); }
         &-source{ .text-hidden(); }
       }
@@ -20,8 +20,8 @@
 }
 
 .influenceTable{
-  .pd(0.1rem);  .mg(1rem 2rem);
-  table{ .bgc(white); .b(0.1rem solid white); }
+  .pd(1px);  .mg(1px 2px);
+  table{ .bgc(white); .b(1px solid white); }
   table>thead{
     .bgc(@body-theme);  .c(white);  .ff("pingfang-bold");
   }
@@ -29,7 +29,7 @@
   .barTd{
     .w(30%);
     .sentimentBar{
-      .w(100%);  .h(1.6rem);  //.pa();  .top(0); .bottom(0);  .left(0);  .right(0);
+      .w(100%);  .h(16px);  //.pa();  .top(0); .bottom(0);  .left(0);  .right(0);
     }
   }
   .rate{
@@ -37,7 +37,7 @@
     .fa-level-down,.fa-arrow-down{ .c(@flag-red); }
   }
 
-  .noTableTips{ .tc(); .mg(1rem 0); }
+  .noTableTips{ .tc(); .mg(10px 0); }
   .paging{
     .w(100%);  .tc();
   }

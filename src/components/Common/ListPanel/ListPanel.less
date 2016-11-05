@@ -4,20 +4,20 @@
 @list-bg: @bg-color;
 
 .list-panel{
-  .pd(0);  .mg(2rem 0);   .w(100%);   .pr();  .bgc(@list-bg);
-  //.b-top(0.1rem solid #dedede);
+  .pd(0);  .mg(20px 0);   .w(100%);   .pr();  .bgc(@list-bg);
+  //.b-top(1px solid #dedede);
 
   &-tools{
-    .pd(0.6rem 0);  .mg(0);  .b-top(0.1rem solid #dedede);  .h(3.6rem);
+    .pd(6px 0);  .mg(0);  .b-top(1px solid #dedede);  .h(36px);
     &-filter{
       &-item{
-        .w(3.5rem); .h(2.3rem); .lh(2.3rem); .pd(0);
+        .w(35px); .h(23px); .lh(23px); .pd(0);
       }
       .active{ .bgc(@body-theme); .c(white); }
     }
     &-flag{
-      &-title{ .c(@body-theme);  .f(1.4rem);  .fw(bold); .disIB(); .pd(0 1rem); }
-      &-item{  .pd(0 0.5rem);  .disIB();  .f(1.2rem); .w(3.5rem); .h(2.3rem); .lh(2.3rem);  }
+      &-title{ .c(@body-theme);  .f(14px);  .fw(bold); .disIB(); .pd(0 10px); }
+      &-item{  .pd(0 5px);  .disIB();  .f(12px); .w(35px); .h(23px); .lh(23px);  }
       .all{ .c(@flag-grey);}
       .positive{ .c(@flag-green); }
       .negative{ .c(@flag-red);}
@@ -27,33 +27,33 @@
   }
 
   &-list{
-    .b-top(0.1rem solid #dedede);
+    .b-top(1px solid #dedede);
     &-item{
-      .b-top(0.1rem solid #fff);  .b-bottom(0.1rem solid #dedede);  .mg(0);  .c(@word); .h(8.2rem);
+      .b-top(1px solid #fff);  .b-bottom(1px solid #dedede);  .mg(0);  .c(@word); .h(82px);
       &-left{
-        .pd(1rem 2rem 1rem);  .b-right(0.1rem solid #dedede);
-        .fa{ .mg(1rem 0);  .float-left();  .c(@word); }
+        .pd(10px 20px 10px);  .b-right(1px solid #dedede);
+        .fa{ .mg(10px 0);  .float-left();  .c(@word); }
         &-con{
-          .mg(0 0 0 2.6rem);
-          .title{ .c(@body-theme);  .h(2.4rem);  .lh(2.4rem);  .f(1.4rem);  .ff("pingfang-bold");  .text-hidden();  }
-          .detail{ /*.text-num-hidden(2);*/ .ff("pingfang-bold"); .text-hidden(); }
+          .mg(0 0 0 26px);
+          .title{ .c(@body-theme);  .h(24px);  .lh(24px);  .f(14px);  .ff("pingfang-bold");  .text-hidden();  }
+          .detail{ /*.text-num-hidden(2);*/ .ff("pingfang-bold"); .text-hidden();   }
           //.data{
-          //  .disIB();  .vm();  .pd(0 0 0 2rem);
+          //  .disIB();  .vm();  .pd(0 0 0 20px);
           //  .item{
-          //    .w(5rem);  .disIB(); .pd(0.5rem 0 0);
-          //    .icon{ .vm();  .mg(0);  .f(1.2rem); .lh(2rem); }
-          //    span{ .vm(); .f(1.2rem); .lh(1.8rem); .pd(0 0.5rem); }
+          //    .w(50px);  .disIB(); .pd(5px 0 0);
+          //    .icon{ .vm();  .mg(0);  .f(12px); .lh(20px); }
+          //    span{ .vm(); .f(12px); .lh(18px); .pd(0 5px); }
           //  }
           //}
-          .time{ .pd(0.5rem 0 0); .disIB(); .vm();}
-          .source{ .pd(0.5rem 0.5rem 0); .disIB(); .vm(); }
+          .time{ .pd(5px 0 0); .disIB(); .vm(); }
+          .source{ .pd(5px 5px 0); .disIB(); .vm(); }
         }
       }
       &-right{
-        .pd(2rem 2rem 3 rem);
+        .pd(20px 20px 30px);
         .icon{
-          .w(2rem);  .h(2rem);  .b(0.1rem solid #dedede);  .tc();
-          .lh(2rem);  .tc();  .pa();  .top(-1rem);  .bgc(@list-bg);
+          .w(20px);  .h(20px);  .b(1px solid #dedede);  .tc();
+          .lh(20px);  .tc();  .pa();  .top(-10px);  .bgc(@list-bg);
         }
         .icon.flag-blue{ .c(@flag-blue); }
         .icon.flag-yellow{ .c(@flag-yellow); }
@@ -62,23 +62,23 @@
         .icon.flag-grey{ .c(@flag-grey); }
         .icon.flag-red{ .c(@flag-red); }
         .item-data{
-          .pd(0.6rem 0 );
+          .pd(6px 0 );
           .active{
             .fw(bold);
-            .positive{.b(0.3rem solid #dedede);}
-            .negative{.b(0.3rem solid #dedede);}
-            .neutral{.b(0.3rem solid #dedede);}
+            .positive{.b(3px solid #dedede);}
+            .negative{.b(3px solid #dedede);}
+            .neutral{.b(3px solid #dedede);}
           }
           .row{
-            .mg(0.5rem 0 0);  .f(1.4rem);
+            .mg(5px 0 0);  .f(14px);
             .title{ .ff(pingfang-bold);  .fw(600); }
             .time{
-              .f(1.2rem);
-              .item{ .disIB();  .w(30%); .lh(2rem); }
+              .f(12px);
+              .item{ .disIB();  .w(30%); .lh(20px); }
             }
-            .positive{ .c(@flag-green);  .b(0.1rem solid #dedede); .pd(0.3rem); }
-            .negative{ .c(@flag-red);  .b(0.1rem solid #dedede); .pd(0.3rem); }
-            .neutral{ .c(@flag-yellow);  .b(0.1rem solid #dedede); .pd(0.3rem); }
+            .positive{ .c(@flag-green);  .b(1px solid #dedede); .pd(3px); }
+            .negative{ .c(@flag-red);  .b(1px solid #dedede); .pd(3px); }
+            .neutral{ .c(@flag-yellow);  .b(1px solid #dedede); .pd(3px); }
           }
         }
 
