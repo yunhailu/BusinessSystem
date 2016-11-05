@@ -66,7 +66,7 @@
                     title: _.extend({}, Chart.title, { show: false}),
                     tooltip: _.extend({}, Chart.tooltip, {
                         axisPointer : {
-                            type : 'line'
+                            type : 'line',
                         }
                     }),
                     legend: {
