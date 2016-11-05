@@ -8,12 +8,17 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-9 hot-sentiment">
-                <card-panel :title="words.sentiment | title">
-                    <div v-echarts="sentimentOption" :loading="sentimentLoading" class="hot-sentiment-pie" theme=""></div><!--infographic,macarons-->
+            <div class="col-md-6 hot-today">
+                <card-panel :title="words.todayHotsRanking">
+                    <ul class="hot-today-list">
+                        <li v-for="item in hotsTodayRanking"  class="hot-today-list-item" @click="showDetail(item);">
+                            <span class="hot-today-list-item-index">{{ ($index + 1) }}</span>
+                            <span class="hot-today-list-item-text">{{item.name}}</span>
+                        </li>
+                    </ul>
                 </card-panel>
             </div>
-            <div class="col-md-3 hot-ranking">
+            <div class="col-md-6 hot-ranking">
                 <card-panel :title="words.hotsRanking">
                     <ul class="hot-ranking-list">
                         <li v-for="item in hotsRanking"  class="hot-ranking-list-item" @click="showDetail(item);">
@@ -24,22 +29,21 @@
                 </card-panel>
             </div>
         </div>
+
+
+
         <div class="row">
-            <div class="col-md-9 hot-words">
+            <div class="col-md-6 hot-sentiment">
+                <card-panel :title="words.sentiment | title">
+                    <div v-echarts="sentimentOption" :loading="sentimentLoading" class="hot-sentiment-pie" theme=""></div><!--infographic,macarons-->
+                </card-panel>
+            </div>
+            <div class="col-md-6 hot-words">
                 <card-panel :title="words.wordsRanking | title">
                     <div v-echarts="hotWordsOption" :loading="hotWordsLoading" class="hot-words-cloud" ></div>
                 </card-panel>
             </div>
-            <div class="col-md-3 hot-today">
-                <card-panel :title="words.todayHotsRanking">
-                    <ul class="hot-today-list">
-                        <li v-for="item in hotsTodayRanking"  class="hot-today-list-item" @click="showDetail(item);">
-                            <span class="hot-today-list-item-index">{{ ($index + 1) }}</span>
-                            <span class="hot-today-list-item-text">{{item.name}}</span>
-                        </li>
-                    </ul>
-                </card-panel>
-            </div>
+
         </div>
         <div class="row">
             <div class="col-md-12 hot-river">
@@ -87,16 +91,8 @@
                     //toolbox: Pie.toolbox,
                     series: [_.extend({}, Pie.series, {
                         name: words.sentiment,
-                        radius: ['25%', '65%'],
-                        center: ['30%', '50%'],
-                        //roseType : 'area',
-                        data:[
-                            //{value:43, name: common.happy}, {value: 78, name: common.anger}, {value: 123, name: common.sorrow}, {value: 234, name: common.disgust}, {value: 345, name: common.fear}
-                        ]
-                    }), _.extend({}, Pie.series, {
-                        name: words.sentiment,
                         radius: ['25%', '80%'],
-                        center: ['70%', '50%'],
+                        center: ['50%', '50%'],
                         roseType : 'radius',
                         data:[
                             //{value:43, name: common.happy}, {value: 78, name: common.anger}, {value: 123, name: common.sorrow}, {value: 234, name: common.disgust}, {value: 345, name: common.fear}

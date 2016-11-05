@@ -266,7 +266,14 @@
                                 {value:335, name:'男'},
                                 {value:310, name:'女'}
                             ],
+                            label: {
+                                normal: {
+                                    show:true,
+                                    formatter: " {b}:({d}%)"
+
+                                }},
                             itemStyle: {
+
                                 emphasis: {
                                     shadowBlur: 10,
                                     shadowOffsetX: 0,
