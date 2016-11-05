@@ -1,5 +1,5 @@
 @import "../common.less";
-@h: 42px;
+@h: 50px;
 @left-w: 180px;
 
 .header{
@@ -24,7 +24,8 @@
       .nav{
         margin-left: 20px;
         .tab-item{
-          a>span{ padding-left: 3px; .f(12px); }
+          .h(@h);
+          a>span{ padding-left: 3px; .f(12px); .h(@h); }
           a{
             .fw(bold);  color: rgba(255, 255, 255, 0.8);
             padding-left: 20px;  padding-right: 20px;
