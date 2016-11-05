@@ -194,7 +194,7 @@
                         orient: 'vertical',
                         x : 'right',
                         y : 'bottom',
-                        data:['满意','愤怒','失望','反感','害怕']
+                        data:[common.happy,common.anger,common.sorrow,common.disgust,common.fear]
                     },
 
                     color:_.extend( Chart.color, {}),
@@ -291,11 +291,11 @@
                 }
                 //this.sentimentPieOption.series[0].name = source;
                 this.sentimentPieOption.series[0].data =[
-                    {value:_.reduce(this.lineData[source].happy,(mome, val) => mome + val, 0), name:'满意'},
-                    {value:_.reduce(this.lineData[source].anger,(mome, val) => mome + val, 0), name:'愤怒'},
-                    {value:_.reduce(this.lineData[source].sorrow,(mome, val) => mome + val, 0), name:'失望'},
-                    {value:_.reduce(this.lineData[source].disgust,(mome, val) => mome + val, 0), name:'反感'},
-                    {value:_.reduce(this.lineData[source].fear,(mome, val) => mome + val, 0), name:'害怕'}
+                    {value:_.reduce(this.lineData[source].happy,(mome, val) => mome + val, 0), name:this.common.happy},
+                    {value:_.reduce(this.lineData[source].anger,(mome, val) => mome + val, 0), name:this.common.anger},
+                    {value:_.reduce(this.lineData[source].sorrow,(mome, val) => mome + val, 0), name:this.common.sorrow},
+                    {value:_.reduce(this.lineData[source].disgust,(mome, val) => mome + val, 0), name:this.common.disgust},
+                    {value:_.reduce(this.lineData[source].fear,(mome, val) => mome + val, 0), name:this.common.fear}
                 ];
                 _.each(this.lineData[source], (value, key) => {
                     this.sentimentBarOption.series[this.sentimentMap[key]].data = value;
