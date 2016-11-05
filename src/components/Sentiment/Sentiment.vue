@@ -3,7 +3,8 @@
     <!--<span>Sentiment</span>-->
     <div class="charts">
         <div class="chart timeBar" :click="clickChartAction" v-echarts="sentimentBarOption" :loading="sentimentBarLoading" ></div><!--theme="infographic"-->
-        <div class="chart percentBar" v-echarts="sentimentChartOption" :loading="sentimentChartLoading" ></div>
+        <!--<div class="chart percentBar" v-echarts="sentimentChartOption" :loading="sentimentChartLoading" ></div>-->
+        <div class="chart percentBar" v-echarts="sentimentPieOption" :loading="sentimentPieLoading"></div>
     </div>
     <!--<div class="charts"></div>-->
 
@@ -126,7 +127,7 @@
                 },
 
 
-                sentimentChartLoading: true,
+               /* sentimentChartLoading: true,
                 sentimentChartOption: {
                     tooltip: _.extend({}, Chart.tooltip, {}),
                     legend: {
@@ -180,6 +181,77 @@
                             data: []
                         }
                     ]
+                },*/
+               sentimentPieLoading:false,
+                sentimentPieOption:{
+
+                    legend: {
+                        orient: 'vertical',
+                        x : 'right',
+                        y : 'bottom',
+                        data:['满意','愤怒','失望','反感','害怕']
+                    },
+
+                    color:_.extend( Chart.color, {}),
+                    textStyle: Pie.textStyle,
+                    toolbox: Pie.toolbox,
+                    series: [
+
+                        {
+                            label:{
+                                normal:{
+                                    show:true,
+                                    formatter:"{b}:({d}%)"
+                                }
+                            },
+                            name:'',
+                            type:'pie',
+                            radius: '60%',
+                            center: ['50%', '50%'],
+                            data:[]
+                        }
+                    ]
+                    /*isActive: true,
+                    title: _.extend({}, Pie.title, { show: false}),
+                    tooltip : {
+                        trigger: 'item',
+                        formatter: "{a} <br/>{b} : {c} ({d}%)"
+                    },
+                    legend: _.extend({}, Pie.legend, {
+                        //orient: 'vertical',
+                        //x: 'bottom',
+                        bottom: 0,
+                        data: ["满意", "愤怒", "失望", "反感", "害怕"]
+                    }),
+                    textStyle: Pie.textStyle,
+                    toolbox: Pie.toolbox,
+                    series: [
+                        {
+                            name:'',
+                            type:'pie',
+                            radius: ['30%', '70%'],
+                            avoidLabelOverlap: false,
+                            label: {
+                                normal: {
+                                    show: false,
+                                    position: 'center'
+                                },
+                                emphasis: {
+                                    show: true,
+                                    textStyle: {
+                                        fontSize: '30',
+                                        fontWeight: 'bold'
+                                    }
+                                }
+                            },
+                            labelLine: {
+                                normal: {
+                                    show: false
+                                }
+                            },
+                            data:[]
+                        }
+                    ]*/
                 },
                 sentimentNums: []
             }
@@ -212,6 +284,14 @@
                     default:
                         break;
                 }
+                //this.sentimentPieOption.series[0].name = source;
+                this.sentimentPieOption.series[0].data =[
+                    {value:_.reduce(this.lineData[source].happy,(mome, val) => mome + val, 0), name:'满意'},
+                    {value:_.reduce(this.lineData[source].anger,(mome, val) => mome + val, 0), name:'愤怒'},
+                    {value:_.reduce(this.lineData[source].sorrow,(mome, val) => mome + val, 0), name:'失望'},
+                    {value:_.reduce(this.lineData[source].disgust,(mome, val) => mome + val, 0), name:'反感'},
+                    {value:_.reduce(this.lineData[source].fear,(mome, val) => mome + val, 0), name:'害怕'}
+                ];
                 _.each(this.lineData[source], (value, key) => {
                     this.sentimentBarOption.series[this.sentimentMap[key]].data = value;
                     console.log('chakanshuju',value)
@@ -290,12 +370,13 @@
                         //console.log(this.lineData);
 
                         this.sentimentBarLoading = false;
-                        this.sentimentChartLoading = false;
+                        //this.sentimentChartLoading = false;
+                        this.sentimentPieLoading = false;
                         this.sentimentBarOption.xAxis.data = this.x;
 
                         this.actions("", 0);
 
-                        _.each(this.sentimentChartOption.series, function(value, index){
+                        /*_.each(this.sentimentChartOption.series, function(value, index){
                             _.each(this.lineData, function(val, key){
                                 if(key == "all") return;
                                 const summary = _.reduce(this.lineData[key][this.sentimentArr[index]], (memo, val) => {
@@ -303,7 +384,7 @@
                                 }, 0);
                                 this.sentimentChartOption.series[index].data.push(summary);
                             }.bind(this));
-                        }.bind(this));
+                        }.bind(this));*/
 
                         //console.log('all', this.lineData.all);
                         //console.log('wechat', this.lineData.wechat);
@@ -341,7 +422,7 @@
                         happy: [], anger: [], sorrow: [], disgust: [], fear: []
                     }
                 };
-                this.sentimentChartOption.series = [
+                /*this.sentimentChartOption.series = [
                     {
                         name: this.common.happy,
                         type: 'bar',
@@ -368,7 +449,7 @@
                         stack: '总量',
                         data: []
                     }
-                ];
+                ];*/
             },
             init(){
                 this.initData();
@@ -386,7 +467,8 @@
             activeAnalyticsTopic: {
                 handler(val){
                     this.sentimentBarLoading = true;
-                    this.sentimentChartLoading = true;
+                    //this.sentimentChartLoading = true;
+                    this.sentimentPieLoading = true;
                     this.init(val);
                 }
             },
