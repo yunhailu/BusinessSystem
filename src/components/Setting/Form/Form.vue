@@ -12,9 +12,9 @@
                     <a class="btn btn-default" :class="[!isAdvanced ? 'btn-primary ' : '']" href="javascript:void(0);" @click="setAdvanced(false);">
                         <i class="fa fa-plane" title="Align Left"></i> {{words.quickBtn}}
                     </a>
-                    <a class="btn btn-default" :class="[isAdvanced ? 'btn-primary ' : '']" href="javascript:void(0);" @click="setAdvanced(true);">
-                        <i class="fa fa-key" title="Align Center"></i> {{words.advancedBtn}}
-                    </a>
+                    <!--<a class="btn btn-default" :class="[isAdvanced ? 'btn-primary ' : '']" href="javascript:void(0);" @click="setAdvanced(true);">-->
+                        <!--<i class="fa fa-key" title="Align Center"></i> {{words.advancedBtn}}-->
+                    <!--</a>-->
                 </div>
             </div>
 
