@@ -1,33 +1,33 @@
 @import "../common.less";
-@h: 4.2rem;
-@left-w: 18rem;
+@h: 42px;
+@left-w: 180px;
 
 .header{
-  .pr();  .z(1030);  max-height: 10rem;
+  .pr();  .z(1030);  max-height: 100px;
   .top(0);  .left(0);  .right(0);
 
   .logo{
-    .float-left();  .f(1.8rem);  .lh(@h);  .tc();  .bgc(@body-title);  .c(#f9f9f9);
-    .pd(0 1rem);  .fw(500);  .disB();  .w(@left-w);  .h(@h);
+    .float-left();  .f(18px);  .lh(@h);  .tc();  .bgc(@body-title);  .c(#f9f9f9);
+    .pd(5px 10px);  .fw(500);  .disB();  .w(@left-w);  .h(50px);
     span{
       .text-shadow(1px 1px 5px #333);
       font-family: 'pingfang-bold', 'pingfang', 'microsoft yahei';
     }
-    img{ .w(2.4rem); .h(2.4rem); .vm(); .disIB();  }
+    img{ .w(24px); .h(24px); .vm(); .disIB();  }
   }
 
   .navbar{
     .h(@h);  .mg(auto auto 0 @left-w);   .bgc(@body-theme);
-    //.header-font{ .f(1.4rem); }
+    //.header-font{ .f(14px); }
     .navbar-center{
       .mg(0);
       .nav{
-        margin-left: 2rem;
+        margin-left: 20px;
         .tab-item{
-          a>span{ padding-left: 0.3rem; .f(1.2rem); }
+          a>span{ padding-left: 3px; .f(12px); }
           a{
             .fw(bold);  color: rgba(255, 255, 255, 0.8);
-            padding-left: 2rem;  padding-right: 2rem;
+            padding-left: 20px;  padding-right: 20px;
             .glyphicon{margin-right: 5px;}
           }
           a:hover{
@@ -35,8 +35,8 @@
           }
           a:focus{
             .fw(bold);   .c(@body-theme);  background: rgba(255, 255, 255, 0.9);
-            //padding-left: 3rem;  padding-right: 3rem;
-            //span{ .f(1.4rem); }
+            //padding-left: 30px;  padding-right: 30px;
+            //span{ .f(14px); }
           }
           a.active{
             .fw(bold);   .c(@body-theme);  background: rgba(255, 255, 255, 0.9);
@@ -48,10 +48,10 @@
     .navbar-right{
       .mg(0);
       .nav{
-        margin-right: 1rem;
+        margin-right: 10px;
         li>a{
           .fw(bold);  color: rgba(255, 255, 255, 0.8);
-          .glyphicon{margin-right: 5px;}
+          .glyphicon{margin-right: 5px;}  .f(12px);
         }
         li>a:hover, li>a:focus{
           .fw(bold);   .c(#f6f6f6);  background: rgba(0, 0, 0, 0.1);

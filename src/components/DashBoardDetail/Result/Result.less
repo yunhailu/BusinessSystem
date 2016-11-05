@@ -10,26 +10,26 @@
 
 
 .panel-title{
-  .mg(0.5rem 1rem);  .pd(0.5rem 1rem);  .disB();  .tc();  .bgc(#eee);
+  .mg(5px 10px);  .pd(5px 10px);  .disB();  .tc();  .bgc(#eee);
   &-text{}
   &-delete{ .float-right();  .c(#999);  .pointer(); }
   &-delete:hover{ .c(#666); }
 }
 .charts{
-  .pd(0);  .mg(0);  .h(28rem);  .w(100%);   .pr();
+  .pd(0);  .mg(0);  .h(280px);  .w(100%);   .pr();
   .chart.active{ .w(73%); }
   .chart{
-    .w(96%);  .h(28rem); .pd(0 1rem);
-    .disIB();  //.pd(1rem);
+    .w(96%);  .h(280px); .pd(0 10px);
+    .disIB();  //.pd(10px);
   }
   .pie.active{ .w(23%); .disIB();  .opacity(100); }
   .pie{
-    .w(23%);  .h(28rem);  .opacity(0);  .pa();  .right(2rem);
-    .disIB();  //.pd(1rem);
+    .w(23%);  .h(280px);  .opacity(0);  .pa();  .right(20px);
+    .disIB();  //.pd(10px);
   }
   .arrow{
-    .w(2rem);  .h(28rem);  .c(@word);  .float-right();  .tc();
-    i{ .mgc();  .top(13rem); .pr();   }
+    .w(20px);  .h(280px);  .c(@word);  .float-right();  .tc();
+    i{ .mgc();  .top(130px); .pr();   }
   }
   .arrow:hover{ .bgc(#eee);  .pointer(); }
 }

@@ -1,7 +1,7 @@
 @import "../../common.less";
 
 .panel-title{
-  .mg(0.5rem 1rem);  .pd(0.5rem 1rem);  .disB();  .tc();  .bgc(#eee);
+  .mg(5px 10px);  .pd(5px 10px);  .disB();  .tc();  .bgc(#eee);
   &-text{}
   &-delete{ .float-right();  .c(#999);  .pointer(); }
   &-delete:hover{ .c(#666); }
@@ -10,25 +10,25 @@
   .pd(0);  .mg(0);   .w(100%);   .pr();  .tc();
   .chart.active{ .w(73%); }
   .chart{
-    .w(96%);  .h(20rem); .pd(0 1rem);
-    .disIB();  .pd(2rem 0);
+    .w(96%);  .h(200px); .pd(0 10px);
+    .disIB();  .pd(20px 0);
   }
-  .commentRightBar{ .h(30rem);  .w(25%);.disIB(); }
-  .commentLeftBar{ .h(30rem);  .w(70%);  .disIB(); }
+  .commentRightBar{ .h(300px);  .w(25%);.disIB(); }
+  .commentLeftBar{ .h(300px);  .w(70%);  .disIB(); }
 
 
   .line{
-    .w(96%);  .h(1px); .pd(0);  .mg(2rem auto);
+    .w(96%);  .h(1px); .pd(0);  .mg(20px auto);
     .disIB();  .bgc(@word);
   }
   .pie.active{ .w(23%); .disIB();  .opacity(100); }
   .pie{
-    .w(23%);  .h(28rem);  .opacity(0);  .pa();  .right(2rem);
-    .disIB();  //.pd(1rem);
+    .w(23%);  .h(280px);  .opacity(0);  .pa();  .right(20px);
+    .disIB();  //.pd(10px);
   }
   .arrow{
-    .w(2rem);  .h(28rem);  .c(@word);  .float-right();  .tc();
-    i{ .mgc();  .top(13rem); .pr();   }
+    .w(20px);  .h(280px);  .c(@word);  .float-right();  .tc();
+    i{ .mgc();  .top(130px); .pr();   }
   }
   .arrow:hover{ .bgc(#eee);  .pointer(); }
 }

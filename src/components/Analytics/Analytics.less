@@ -1,30 +1,30 @@
 @import "../common.less";
 
 .analytics-panel{
-  .bgc(@bg-color);   .mg-left(18rem);
+  .bgc(@bg-color);   .mg-left(180px);
   &-wrap{
     .tools{
-      .h(3.6rem);  .pd(1rem 0);  .mg(0);
+      .h(36px);  .pd(10px 0);  .mg(0);
       .search{
-        .w(100%);  .h(2.4rem);
-        .bgc(#e6e6e6);  .br(0.2rem);
-        &-input{  .w(80%);  .input-transparent();  .h(1.2rem);  .c(#666);  .disIB();  .mg(0.5rem 1rem); }
-        &-btn{ .float-right();  .disIB();  .pointer(); .pd(0.5rem 1rem); }
+        .w(100%);  .h(24px);
+        .bgc(#e6e6e6);  .br(2px);
+        &-input{  .w(80%);  .input-transparent();  .h(12px);  .c(#666);  .disIB();  .mg(5px 10px); }
+        &-btn{ .float-right();  .disIB();  .pointer(); .pd(3px 10px); }
       }
       .days-btn{
-        .h(2.4rem);  overflow: hidden;;  .float-left();  .w(12.5rem);
+        .h(24px);  overflow: hidden;;  .float-left();  .w(150px);
         li{
-          .disIB();  .lh(2.4rem);  .pd(0 0.3rem);  .pointer();  .br(0.4rem);  .c(@word);
+          .disIB();  .lh(24px);  .pd(0 3px);  .pointer();  .br(4px);  .c(@word);
         }
         li.active{ .bgc(@body-theme);  .c(white);  }
       }
       .diyDate{
-        .mg-left(12.5rem);
+        .mg-left(125px);
         .date{
           .icon{
-            .float-left();  .lh(2.4rem);  .pd(0 0.7rem);
+            .float-left();  .lh(24px);  .pd(0 7px);
           }
-          .w(100%);  .h(2.4rem);  .lh(2.4rem);  .c(@word);  .tc();  .disB();  .bgc(#f3f3f3);  .br(0.2rem);
+          .w(100%);  .h(24px);  .lh(24px);  .c(@word);  .tc();  .disB();  .bgc(#f3f3f3);  .br(2px);
         }
       }
     }

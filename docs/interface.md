@@ -576,3 +576,17 @@
 }
 ```
 
+##### dashboard导出
+- export/report
+- id: dashboard id(必选)，imgs (必选)
+- Request
+```
+{
+    id: '1231',
+    imgs: '[{key:"summary-master", value: "base64"}]'
+}
+```
+- Response
+````
+{ code: 0, data: {} }
+````

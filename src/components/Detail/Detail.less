@@ -1,53 +1,53 @@
 @import "../common.less";
 
-@card-height: 24rem;
+@card-height: 240px;
 
 .detail{
-  .bgc(@bg-color);  padding-bottom: 2rem;
-  .row{ .mg-top(2rem) };
+  .bgc(@bg-color);  padding-bottom: 20px;
+  .row{ .mg-top(20px) };
 
   &-content{
     .h(@card-height);
     &-sub{
-      .pd(0.5rem 0); .f(1.2rem);  .c(#999);
-      span{ .pd(0 2rem 0 0); };
+      .pd(5px 0); .f(12px);  .c(#999);
+      span{ .pd(0 2px 0 0); };
     }
     &-con{
       .ust(text);
-      .pd(1rem 0.5rem);   .text-num-hidden(5);
+      .pd(10px 5px);   .text-num-hidden(5);
     }
   }
 
   &-info{
     .h(@card-height);
     &-avatar{
-      .w(7.2rem);  .h(7.2rem);  .float-right();  .mg(1.5rem 0.5rem 0);
+      .w(72px);  .h(72px);  .float-right();  .mg(15px 5px 0);
     }
     &-detail{
-      .mg(1.5rem 0.5rem);
-      &-item{ .lh(2.4rem); .text-hidden(); }
-      &-intro{ .pd(1rem 0); }
+      .mg(15px 5px);
+      &-item{ .lh(24px); .text-hidden(); }
+      &-intro{ .pd(10px 0); }
     }
   }
 
   &-chart{
-    .h(50rem);
-    .chart{  .pd(2rem 0.5rem);  .w(100%); .h(45rem);  }
+    .h(500px);
+    .chart{  .pd(20px 5px);  .w(100%); .h(450px);  }
   }
 
   &-article{
     .h(@card-height);
     &-list{
-      .pd(2rem 0.5rem);
+      .pd(20px 5px);
       &-item{
-        .lh(2rem);  .text-hidden();
+        .lh(20px);  .text-hidden();
         .fa{ .c(@body-theme); }
       }
     }
   }
 
   &-timeline{
-    .mg-top(2rem); .h(@card-height);
-    &-chart{  .pd(0.5rem);  .w(100%); .h(18rem);   }
+    .mg-top(20px); .h(@card-height);
+    &-chart{  .pd(5px);  .w(100%); .h(180px);   }
   }
 }

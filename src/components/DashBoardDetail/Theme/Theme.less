@@ -1,32 +1,32 @@
 @import "../../common.less";
 
-@theme-word-height: 27rem;
+@theme-word-height: 270px;
 @list-bg: @bg-color;
 
 .panel-title{
-    .mg(0.5rem 1rem);  .pd(0.5rem 1rem);  .disB();  .tc();  .bgc(#eee);
+    .mg(5px 10px);  .pd(5px 10px);  .disB();  .tc();  .bgc(#eee);
     &-text{}
     &-delete{ .float-right();  .c(#999);  .pointer(); }
     &-delete:hover{ .c(#666); }
 }
 .theme-word{
-    .w(100%);  .pd(1rem);
+    .w(100%);  .pd(10px);
     &-chart{
         .w(80%);  .h(@theme-word-height);
         .disIB();
     }
     &-ranking{
         .w(18%);  .h(@theme-word-height);
-        .disIB();  .float-right();  .pd(1rem);
+        .disIB();  .float-right();  .pd(10px);
 
         .list{
             &-title{
-                .f(1.4rem);
+                .f(14px);
             }
             &-item{
                 .fa{  .disIB();  .vm(); }
                 &-con{
-                    .w(80%); .pd(0.3rem);  .disIB();  .text-hidden();  .vm();
+                    .w(80%); .pd(3px);  .disIB();  .text-hidden();  .vm();
                 }
             }
         }
@@ -44,9 +44,9 @@
 }
 
 .theme-chart{
-    .w(100%);  .pd(0 1rem);
+    .w(100%);  .pd(0 10px);
     .chart{
-        .w(100%);  .h(30rem);  .mg(2rem 0);
+        .w(100%);  .h(300px);  .mg(20px 0);
     }
-    .best{ .h(55rem);  .mg(0rem 0 2rem) }
+    .best{ .h(550px);  .mg(0px 0 20px) }
 }
