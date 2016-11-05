@@ -185,6 +185,11 @@
                sentimentPieLoading:false,
                 sentimentPieOption:{
 
+                    tooltip: {
+                        show:true,
+                        trigger: 'item',
+                        formatter:"{b}:({d}%)"
+                    },
                     legend: {
                         orient: 'vertical',
                         x : 'right',
@@ -198,12 +203,12 @@
                     series: [
 
                         {
-                            label:{
+                            /*label:{
                                 normal:{
                                     show:true,
                                     formatter:"{b}:({d}%)"
                                 }
-                            },
+                            },*/
                             name:'',
                             type:'pie',
                             radius: '60%',
