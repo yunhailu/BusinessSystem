@@ -26,9 +26,9 @@
             return{
                 barChartLoading: false,
                 barChartOption: {
-//                    title: {
-//                        text: 'ECharts 入门示例'
-//                    },
+                title: {
+                       text: 'ECharts 入门示例'
+                   },
                     tooltip : {
                         trigger: 'axis',
                         axisPointer : {            // 坐标轴指示器，坐标轴触发有效
@@ -164,10 +164,10 @@
                         formatter: "{a} <br/>{b} : {c} ({d}%)"
                     },
                     legend: {
-//                        orient: 'horizontal',
-//                        left: 'center',
-//                        bottom: 0,
-//                        data:['直达','其它外链','搜索引擎','直接输入网址或书签','cnblogs.com','微博','微信','百度','谷歌','360','必应','其他']
+                        orient: 'horizontal',
+                        left: 'center',
+                        bottom: 0,
+                       data:['直达','其它外链','搜索引擎','直接输入网址或书签','cnblogs.com','微博','微信','百度','谷歌','360','必应','其他']
                     },
                     series: [
                         {
