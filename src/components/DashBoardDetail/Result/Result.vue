@@ -9,8 +9,8 @@
         <!--<div class="arrow animated rubberBand" @click="toggle">-->
             <!--<i class="fa fa-angle-left fa-3x" transition="rotate" :class="[resultPieChartOption.isActive ? 'fa-rotate-180' : '']"></i>-->
         <!--</div>-->
-        <div class="chart" v-echarts="resultChartOption" :loading="resultChartLoading" :class="[data.source=='all' ? 'active' : '']" :resize="resultChartOption.isToggle" theme="macarons"></div>
-        <div class="pie" v-echarts="resultPieChartOption" :loading="resultPieChartLoading" :class="[data.source=='all' ? 'active' : '']" translate="show-pie"  theme="macarons"></div>
+        <div class="chart" v-echarts="resultChartOption" :loading="resultChartLoading" :img.sync="master" :class="[data.source=='all' ? 'active' : '']" :resize="resultChartOption.isToggle" theme="macarons"></div>
+        <div class="pie" v-echarts="resultPieChartOption" :loading="resultPieChartLoading" :img.sync="sub" :class="[data.source=='all' ? 'active' : '']" translate="show-pie"  theme="macarons"></div>
     </div>
     <list-panel :list="list" :options="options" :select-title="selectTitle" :select-value.sync="sortVal"></list-panel>
 </template>
@@ -28,7 +28,7 @@
     import Tabs from '../../Common/Tabs/Tabs.vue';
 
     export default{
-        props: ['title', 'data', 'remove'],
+        props: ['title', 'data', 'remove', 'master', 'sub'],
         data(){
             return{
                 sourceActive: 0,

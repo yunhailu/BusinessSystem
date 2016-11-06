@@ -6,8 +6,9 @@
         <div class="panel-title-delete" @click="deleteItem();"><i class="fa fa-minus"></i></div>
     </div>
     <div class="charts">
-        <div class="chart timeBar" v-echarts="sentimentBarOption" :loading="sentimentBarLoading" ></div><!--theme="infographic"-->
-        <div class="chart percentBar" v-echarts="sentimentChartOption" :loading="sentimentChartLoading" ></div>
+        <div class="chart timeBar" v-echarts="sentimentBarOption" :img.sync="master" :loading="sentimentBarLoading" ></div><!--theme="infographic"-->
+        <div class="chart percentBar" v-echarts="sentimentChartOption" :img.sync="sub" :loading="sentimentChartLoading" ></div>
+        <!--<echarts :options="sentimentChartOption"></echarts>-->
     </div>
     <!--<div class="charts"></div>-->
 
@@ -21,6 +22,7 @@
     import moment from 'moment';
     //import { list } from "../../../config/tmpData";
     import ListPanel from '../../Common/ListPanel/ListPanel.vue';
+    import Echarts from '../../Common/Echarts/Echarts.vue';
     import Tabs from '../../Common/Tabs/Tabs.vue';
     import Local from "../../../local/local";
     import {Chart, Pie} from '../../../config/config';
@@ -28,7 +30,7 @@
 
 
     export default{
-        props: ['title', 'data', 'remove'],
+        props: ['title', 'data', 'remove', 'master', 'sub'],
         data(){
             const common = Local().common;
             return{
@@ -283,7 +285,7 @@
             }
         },
         components:{
-            Tabs, ListPanel
+            Tabs, ListPanel, Echarts
         },
         ready(){
             this.init();

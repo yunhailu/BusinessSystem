@@ -583,7 +583,7 @@
 ```
 {
     id: '1231',
-    imgs: '[{key:"summary-master", value: "base64"}]'
+    imgs: '[{topic_id: 123, key:"summary-master", value: "base64"}]'
 }
 ```
 - Response

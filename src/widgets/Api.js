@@ -5,6 +5,10 @@
 import Vue from 'vue';
 import VueResource from 'vue-resource';
 
+Vue.http.options.emulateJSON = true;
+Vue.http.options.emulateHTTP = true;
+Vue.http.options.xhr = { withCredentials: true };
+
 Vue.use(VueResource);
 
 const myURI = "http://127.0.0.1:3000";
@@ -409,12 +413,21 @@ export const removeDashboardItem = params => {
  *
  *  @return {Promise} With remove dashboard item info.
  */
+// export const exportReport = params => {
+//     return Api.request({
+//         url: `${rootURI}/export/report`,
+//         method: "post",
+//         credentials: true,
+//         emulateHTTP: true,
+//         emulateJSON: true,
+//         params
+//     });
+// };
+// export const exportReport = params => {
+//     return Vue.http.post(`${rootURI}/export/report`, {}, {params , credentials: true});
+// };
 export const exportReport = params => {
-    return Api.request({
-        url: `${plainURI}/export/report`,
-        //method: "post",
-        params
-    });
+    return Vue.http.post(`${rootURI}/export/report`, params);
 };
 
 /**  详情页面的接口1
