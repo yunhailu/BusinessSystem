@@ -31,7 +31,7 @@
                 <!--<a :href="item.url" target="_blank">-->
                 <a  @click="showDetail(item);" href="javascript:void(0);" target="_blank">
                     <div class="list-panel-list-item-left col-md-8">
-                        <i class="fa fa-paperclip fa-3x"></i>
+                        <i class="fa fa-paperclip fa-2x"></i>
                         <div class="list-panel-list-item-left-con">
                             <div class="title">{{{item.title}}}</div>
                             <div class="detail">{{{item.content}}}</div>

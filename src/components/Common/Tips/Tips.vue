@@ -24,7 +24,7 @@
 
     <div class="zz-tips-loading" v-if="tipsparam.type=='loading'">
         <!--<p class="loadingImg"></p>-->
-        <i class="fa fa-spinner fa-spin fa-3x"></i>
+        <i class="fa fa-spinner fa-spin fa-2x"></i>
         <span class="loadingContent">{{tipsparam.content | defaultValue '载入中...'}}</span>
     </div>
 
