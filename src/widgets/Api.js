@@ -413,22 +413,22 @@ export const removeDashboardItem = params => {
  *
  *  @return {Promise} With remove dashboard item info.
  */
-// export const exportReport = params => {
-//     return Api.request({
-//         url: `${rootURI}/export/report`,
-//         method: "post",
-//         credentials: true,
-//         emulateHTTP: true,
-//         emulateJSON: true,
-//         params
-//     });
-// };
-// export const exportReport = params => {
-//     return Vue.http.post(`${rootURI}/export/report`, {}, {params , credentials: true});
-// };
 export const exportReport = params => {
-    return Vue.http.post(`${rootURI}/export/report`, params);
+    return Api.request({
+        url: `${rootURI}/export/report`,
+        // method: "post",
+        // credentials: true,
+        // emulateHTTP: true,
+        // emulateJSON: true,
+        params
+    });
 };
+// export const exportReport = params => {
+//     return Vue.http.get(`${rootURI}/export/report`, params);
+// };
+// export const exportReport = params => {
+//     return Vue.http.post(`${rootURI}/export/report`, params);
+// };
 
 /**  详情页面的接口1
  *  Encapsulate `getPageDetail` interface
