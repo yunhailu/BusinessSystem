@@ -74,7 +74,7 @@ module.exports = {
         Vue.nextTick(function () {
             _this.instance.setOption(options,true);
             _this.params.img = _this.instance.getDataURL("jpg");
-            console.log(_this.instance.getDataURL("jpg"));
+            //console.log(_this.instance.getDataURL("jpg"));
             if(options.series.type != 'wordCloud' || _.some(options.series, item => {return item.type == 'wordCloud'})){
                 _this.instance.resize();
             }

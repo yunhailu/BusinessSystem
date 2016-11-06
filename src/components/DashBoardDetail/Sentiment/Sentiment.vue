@@ -22,7 +22,7 @@
     import moment from 'moment';
     //import { list } from "../../../config/tmpData";
     import ListPanel from '../../Common/ListPanel/ListPanel.vue';
-    import Echarts from '../../Common/Echarts/Echarts.vue';
+    //import Echarts from '../../Common/Echarts/Echarts.vue';
     import Tabs from '../../Common/Tabs/Tabs.vue';
     import Local from "../../../local/local";
     import {Chart, Pie} from '../../../config/config';
@@ -285,7 +285,7 @@
             }
         },
         components:{
-            Tabs, ListPanel, Echarts
+            Tabs, ListPanel, //Echarts
         },
         ready(){
             this.init();
