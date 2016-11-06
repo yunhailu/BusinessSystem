@@ -1,9 +1,9 @@
 <template>
     <div class="menu-list">
         <div class="title">
-            <i class="fa fa-2x fa-laptop"></i>
+            <i class="fa fa-laptop"></i>
             <span>{{title}}</span>
-            <i class="fa fa-plus fa-2x plus" @click="addTopicAction"></i>
+            <i class="fa fa-plus plus" @click="addTopicAction"></i>
         </div>
         <ul class="sidebar-menu">
             <li v-for="group in groups" :class="[group.list.length ? 'treeview' : '', group.isActive ? 'active' : '']">

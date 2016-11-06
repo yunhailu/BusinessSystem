@@ -40,7 +40,7 @@
                         </div>
                     </div>
                     <div class="list-panel-list-item-right col-md-4">
-                        <i class="fa fa-flag fa-2x icon" :class="item.sentiment | sentiment"></i>
+                        <i class="fa fa-flag icon" :class="item.sentiment | sentiment"></i>
                         <div class="item-data">
                             <div class="row">
                                 <div class="col-md-3 title">匹配</div>

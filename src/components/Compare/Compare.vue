@@ -18,7 +18,7 @@
                         <li @click="selectTime(0);" :class="[selectTimeTag == 0 ? 'active' : '']">自定义</li>
                     </ul>
                     <div class="diyDate" v-show="isTimeDiy">
-                        <span class="date" @click="showCalendar"><i class="fa fa-calendar fa-2x  icon"></i> {{dateVal}}</span>
+                        <span class="date" @click="showCalendar"><i class="fa fa-calendar icon"></i> {{dateVal}}</span>
                         <calendar :show.sync="cal.show" :value.sync="dateVal" :x="cal.x" :y="cal.y" :begin.sync="cal.begin" :end.sync="cal.end" :type="cal.type" :range="cal.range"></calendar>
                     </div>
 

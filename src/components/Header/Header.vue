@@ -9,7 +9,7 @@
                 <ul class="nav navbar-nav">
                     <li class="tab-item" v-for="tab in tabs">
                         <a href="javascript:void(0);" v-link="{name: tab.link}" :class="active == tab.id ? 'active' : ''">
-                            <i class="fa fa-2x" :class="[tab.icon]" aria-hidden="true"></i>
+                            <i class="fa" :class="[tab.icon]" aria-hidden="true"></i>
                             <span class="header-font">{{tab.name}}</span>
                         </a>
                     </li>
