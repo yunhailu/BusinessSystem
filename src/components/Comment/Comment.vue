@@ -62,7 +62,7 @@
                         data:[words.positive, words.negative, words.neutral]
                     },
                     dataZoom: _.extend({}, Chart.dataZoom),
-                    color:_.extend( Chart.color, {}),
+                    color:['#2FCC71','#E64D3D', '#F1C40F', '#3598DC', '#737373'],
                     grid: _.extend({}, Chart.grid, { bottom: '40rem' }),
                     toolbox: _.extend({}, Chart.toolbox, {
                         feature: { saveAsImage: {} }
@@ -109,7 +109,7 @@
                         type: 'category',
                         data: [common.wechat, common.weibo, common.web, common.client, common.overseas]
                     }),
-                    color: _.extend([], Chart.color),
+                    color:['#2FCC71','#E64D3D', '#F1C40F', '#3598DC', '#737373'],
                     series: [
                         { name: words.positive, type: 'bar', stack: '总量', data: [] },
                         { name: words.negative, type: 'bar', stack: '总量', data: [] },

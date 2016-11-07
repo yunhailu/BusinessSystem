@@ -93,8 +93,10 @@
                     }),
                     progressive: 4,
                     textStyle: Chart.textStyle,
+                    color:['#2FCC71','#E64D3D', '#F1C40F', '#3598DC', '#737373'],
                     series : [{
                         name:common.happy,
+
                         type:'line',
                         //areaStyle: {normal: {}},
                         //stack: 'Total',
@@ -197,7 +199,7 @@
                         data:[common.happy,common.anger,common.sorrow,common.disgust,common.fear]
                     },
 
-                    color:_.extend( Chart.color, {}),
+                    color:['#2FCC71','#E64D3D', '#F1C40F', '#3598DC', '#737373'],
                     textStyle: Pie.textStyle,
                     toolbox: Pie.toolbox,
                     series: [
