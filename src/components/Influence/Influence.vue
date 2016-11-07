@@ -3,7 +3,7 @@
     <!--<span>Influence</span>-->
     <div class="popular">
         <ul class="popular-list">
-            <li class="popular-list-item" v-for="item in popularList">
+            <li class="popular-list-item" v-for="item in popularList" @click="showPopList(item)">
                 <i class="fa" :class="[item.icon ? 'fa-'+item.icon : 'fa-cog']"></i>
                 <span class="popular-list-item-title">{{item.title}}</span>
                 <div class="popular-list-item-con">
@@ -30,7 +30,7 @@
                 </tr>
             </thead>
             <tbody v-if="influancerTable.length">
-                <tr id="item.id" v-for="(index, item) in influancerTable" :class="[index % 2 == 0 ? '' : '']"><!--@click="showPopList(item);" -->
+                <tr id="item.id" v-for="(index, item) in influancerTable" :class="[index % 2 == 0 ? '' : '']" @click="showPopList(item)" >
                     <td>{{item.influencer}}</td>
                     <td>{{item.post}}</td>
                     <td class="barTd"><div class="sentimentBar" v-echarts="item.sentiment | barFormat"></div></td>
@@ -131,11 +131,46 @@
                 console.log(item);
                 this.popVisiable = true;
 
-                const resp = this.getArticles();
-                if(resp.data.code == 0){
-                    this.popList = resp.data.data;
-                    this.selectItem = item;
-                }
+
+//----start------
+
+                const topic_id = this.activeAnalyticsTopic.topic_id;
+                const author = this.$route.params.author;
+                const size = this.$route.params.size;
+                console.log(topic_id);
+                console.log(author);
+                console.log(size);
+
+                Api.getCommentList({topic_id,author,size}).then(resp => {
+                    //console.log("getCommentList", resp.data);
+                    if (resp.data.code == 0) {
+
+                        console.log(resp.data.data);
+
+
+                        //接口的详情的数据的更新
+                       //操作步骤的过程实现
+                        console.log('11111111111111111111111111111111111');
+                        const newDates = _.map(resp.data.data, (item)=> {
+
+                            item.context = item.content;
+                            item.date =item.pDate;
+                            return item;
+                        });
+
+                        this.popList = newDates;
+                        this.selectItem = item;
+
+
+                    }
+                });
+
+
+                // const resp = this.getArticles();
+                // if(resp.data.code == 0){
+                //     this.popList = resp.data.data;
+                //     this.selectItem = item;
+                // }
 
             },
             getArticles(){
@@ -166,6 +201,7 @@
                     }
                 }
             },
+
             getPopularList(){
                 const icons = ["user", "user-plus", "edge", "chrome"];
                 const topic_id = this.activeAnalyticsTopic.topic_id,
@@ -200,6 +236,8 @@
                     this.loadingParams.visiable = false;
                     if(resp.data.code ==0){
                         const influanceInfos = resp.data.data;
+                        console.log(resp.data.data);
+
                         this.influancerList = _.map(influanceInfos, info => info);
                         this.influancerTable = _.filter(this.influancerList, (info, index) => {
                             return (index < 20);
@@ -307,10 +345,10 @@
             Tabs, PopList, Tips,
             'page': Page
         },
-//        route: {
-//            data(){
-//                this.init();
-//            }
-//        }
+       // route: {
+       //     data(){
+       //         this.init();
+       //     }
+       // }
     }
 </script>
