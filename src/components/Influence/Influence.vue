@@ -131,23 +131,20 @@
                 console.log(item);
                 this.popVisiable = true;
 
-
-//----start------
-
                 const topic_id = this.activeAnalyticsTopic.topic_id;
-                const author = this.$route.params.author;
+                const author = item.influencer;
                 const size = this.$route.params.size;
 
-                Api.getCommentList({topic_id,author,size}).then(resp => {
+                this.getArticles({topic_id,author,size});
+
+            },
+            getArticles(params){
+                Api.getCommentList(params).then(resp => {
                     //console.log("getCommentList", resp.data);
                     if (resp.data.code == 0) {
-
-                        console.log(resp.data.data);
-
-
+                        //console.log(resp.data.data);
                         //接口的详情的数据的更新
-                       //操作步骤的过程实现
-                        console.log('11111111111111111111111111111111111');
+                        //操作步骤的过程实现
                         const newDates = _.map(resp.data.data, (item)=> {
 
                             item.context = item.content;
@@ -161,42 +158,6 @@
 
                     }
                 });
-
-
-                // const resp = this.getArticles();
-                // if(resp.data.code == 0){
-                //     this.popList = resp.data.data;
-                //     this.selectItem = item;
-                // }
-
-            },
-            getArticles(){
-                return {
-                    data:{
-                        "code": 0,
-                        "data": [{
-                            "id": "123",
-                            "title": "今日头条",
-                            "context": "今日头条今日头条今日头条今日头条今日头条今日头条今日头条今日头条今日头条今日头条今日头条今日头条今日头条",
-                            "date": "2016-10-20"
-                        },{
-                            "id": "123",
-                            "title": "今日头条",
-                            "context": "今日头条今日头条今日头条今日头条今日头条今日头条今日头条今日头条今日头条今日头条今日头条今日头条今日头条",
-                            "date": "2016-10-20"
-                        },{
-                            "id": "123",
-                            "title": "今日头条",
-                            "context": "今日头条今日头条今日头条今日头条今日头条今日头条今日头条今日头条今日头条今日头条今日头条今日头条今日头条",
-                            "date": "2016-10-20"
-                        },{
-                            "id": "123",
-                            "title": "今日头条",
-                            "context": "今日头条今日头条今日头条今日头条今日头条今日头条今日头条今日头条今日头条今日头条今日头条今日头条今日头条",
-                            "date": "2016-10-20"
-                        }]
-                    }
-                }
             },
 
             getPopularList(){
