@@ -132,10 +132,10 @@
                 }];
                 //const imgs = JSON.stringify(imgsObj);
                 const imgs = JSON.stringify(this.imgs);
-                window.open(`http://118.244.212.122:8008/export/report?id=${id}&imgs=${imgs}`);
-//                Api.exportReport({ id, imgs }).then(resp => {
-//                    console.log(resp);
-//                });
+                //window.open(`http://118.244.212.122:8008/export/report?id=${id}&imgs=${imgs}`);
+                Api.exportReport({ id, imgs }).then(resp => {
+                    console.log(resp);
+                });
             },
             saveAction(){
                 //window.print();
