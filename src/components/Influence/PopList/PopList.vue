@@ -43,7 +43,8 @@
         },
         methods: {
             showDetail(pop){
-                this.$router.go({ name: 'detail', params: { type: 'influence', id: pop.id } });
+               // this.$router.go({ name: 'detail', params: { type: 'influence', id: pop.id } });
+                window.open(pop.url);
             },
             closeTip(){
                 this.visiable = false;

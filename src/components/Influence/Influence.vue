@@ -137,9 +137,6 @@
                 const topic_id = this.activeAnalyticsTopic.topic_id;
                 const author = this.$route.params.author;
                 const size = this.$route.params.size;
-                console.log(topic_id);
-                console.log(author);
-                console.log(size);
 
                 Api.getCommentList({topic_id,author,size}).then(resp => {
                     //console.log("getCommentList", resp.data);
