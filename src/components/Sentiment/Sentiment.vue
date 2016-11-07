@@ -302,6 +302,7 @@
                     console.log('chakanshuju',value)
                 });
                 //this.getCommentList();
+
             },
             clickChartAction(opts){
                 console.log('clickChartAction opts', opts);
@@ -393,13 +394,39 @@
 
                         //console.log('all', this.lineData.all);
                         //console.log('wechat', this.lineData.wechat);
-                        this.sentimentNums = [
+                        /*this.sentimentNums = [
                             _.chain(this.lineData.all).map(item => _.reduce(item, (memo, val) => (memo + val), 0)).reduce((memo, val) => (memo, val), 0).value(),
                             _.chain(this.lineData.wechat).map(item => _.reduce(item, (memo, val) => (memo + val), 0)).reduce((memo, val) => (memo, val), 0).value(),
                             _.chain(this.lineData.weibo).map(item => _.reduce(item, (memo, val) => (memo + val), 0)).reduce((memo, val) => (memo, val), 0).value(),
                             _.chain(this.lineData.client).map(item => _.reduce(item, (memo, val) => (memo + val), 0)).reduce((memo, val) => (memo, val), 0).value(),
                             _.chain(this.lineData.web).map(item => _.reduce(item, (memo, val) => (memo + val), 0)).reduce((memo, val) => (memo, val), 0).value(),
                             _.chain(this.lineData.overseas).map(item => _.reduce(item, (memo, val) => (memo + val), 0)).reduce((memo, val) => (memo, val), 0).value()
+                        ];*/
+                        const allNums=_.reduce(this.lineData.all.happy,(mome, val) => mome + val, 0)+_.reduce(this.lineData.all.anger,(mome, val) => mome + val, 0)
+                                +_.reduce(this.lineData.all.sorrow,(mome, val) => mome + val, 0)+_.reduce(this.lineData.all.disgust,(mome, val) => mome + val, 0)
+                                +_.reduce(this.lineData.all.fear,(mome, val) => mome + val, 0);
+                        const wechatNums=_.reduce(this.lineData.wechat.happy,(mome, val) => mome + val, 0)+_.reduce(this.lineData.wechat.anger,(mome, val) => mome + val, 0)
+                                +_.reduce(this.lineData.wechat.sorrow,(mome, val) => mome + val, 0)+_.reduce(this.lineData.wechat.disgust,(mome, val) => mome + val, 0)
+                                +_.reduce(this.lineData.wechat.fear,(mome, val) => mome + val, 0);
+                        const weiboNums=_.reduce(this.lineData.weibo.happy,(mome, val) => mome + val, 0)+_.reduce(this.lineData.weibo.anger,(mome, val) => mome + val, 0)
+                                +_.reduce(this.lineData.weibo.sorrow,(mome, val) => mome + val, 0)+_.reduce(this.lineData.weibo.disgust,(mome, val) => mome + val, 0)
+                                +_.reduce(this.lineData.weibo.fear,(mome, val) => mome + val, 0);
+                        const clientNums=_.reduce(this.lineData.client.happy,(mome, val) => mome + val, 0)+_.reduce(this.lineData.client.anger,(mome, val) => mome + val, 0)
+                                +_.reduce(this.lineData.client.sorrow,(mome, val) => mome + val, 0)+_.reduce(this.lineData.client.disgust,(mome, val) => mome + val, 0)
+                                +_.reduce(this.lineData.client.fear,(mome, val) => mome + val, 0);
+                        const webNums=_.reduce(this.lineData.web.happy,(mome, val) => mome + val, 0)+_.reduce(this.lineData.web.anger,(mome, val) => mome + val, 0)
+                                +_.reduce(this.lineData.web.sorrow,(mome, val) => mome + val, 0)+_.reduce(this.lineData.web.disgust,(mome, val) => mome + val, 0)
+                                +_.reduce(this.lineData.web.fear,(mome, val) => mome + val, 0);
+                        const overseasNums=_.reduce(this.lineData.overseas.happy,(mome, val) => mome + val, 0)+_.reduce(this.lineData.overseas.anger,(mome, val) => mome + val, 0)
+                                +_.reduce(this.lineData.overseas.sorrow,(mome, val) => mome + val, 0)+_.reduce(this.lineData.overseas.disgust,(mome, val) => mome + val, 0)
+                                +_.reduce(this.lineData.overseas.fear,(mome, val) => mome + val, 0);
+                        this.sentimentNums =[
+                            allNums,
+                            wechatNums,
+                            weiboNums,
+                            clientNums,
+                            webNums,
+                            overseasNums
                         ];
                     }
 
@@ -460,7 +487,7 @@
                 this.initData();
                 this.getSentimentDetail();
                 this.getCommentList();
-                console.log('chakanshuju',this.lineData);
+                console.log('chakanshuju',this.lineData,this.sentimentNums);
             }
         },
         ready(){

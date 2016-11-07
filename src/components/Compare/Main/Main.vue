@@ -14,8 +14,8 @@
     import Local from "../../../local/local";
     import {Chart, Pie} from '../../../config/config';
     import * as Api from "../../../widgets/Api";
-    import { topicList, activeCompareTopic, topicGroupActiveId, compareSource, compareSubTopic, compareStart, compareEnd, compareTimeRange, compareTimeRangeString } from '../../../vuex/getters';
-    import { setTopicList, setActiveCompareTopic, setTopicGroupActiveId, setCompareSource, setCompareSubTopic, setCompareStart, setCompareEnd, setCompareTimeRange, setCompareTimeRangeString  } from "../../../vuex/actions";
+    import { topicList, activeCompareTopic, topicGroupActiveId, compareSource, compareSubTopic, compareStart, compareEnd, compareTimeRange, compareTimeRangeString, compareSourceCount } from '../../../vuex/getters';
+    import { setTopicList, setActiveCompareTopic, setTopicGroupActiveId, setCompareSource, setCompareSubTopic, setCompareStart, setCompareEnd, setCompareTimeRange, setCompareTimeRangeString, setCompareSourceCount  } from "../../../vuex/actions";
 
     export default{
         props: [],
@@ -240,6 +240,37 @@
                 this.VariableChartData.web[newTopic[0].topic_name]=web;
                 this.VariableChartData.overseas[newTopic[0 ].topic_name]=overseas;
                 console.log('VariableChartData',this.VariableChartData);
+                console.log('values',_.values(this.VariableChartData.all))
+                /*const midAllCount = _.map(_.values(this.VariableChartData.all),item=>{
+                    return _.reduce(item, function(memo, num){ return memo + num; }, 0);
+                });
+                const midWechatCount = _.map(_.values(this.VariableChartData.wechat),item=>{
+                    return _.reduce(item, function(memo, num){ return memo + num; }, 0);
+                });
+                const midWeiboCount = _.map(_.values(this.VariableChartData.weibo),item=>{
+                    return _.reduce(item, function(memo, num){ return memo + num; }, 0);
+                });
+                const midClientCount = _.map(_.values(this.VariableChartData.client),item=>{
+                    return _.reduce(item, function(memo, num){ return memo + num; }, 0);
+                });
+                const midWebCount = _.map(_.values(this.VariableChartData.web),item=>{
+                    return _.reduce(item, function(memo, num){ return memo + num; }, 0);
+                });
+                const midOverseasCount = _.map(_.values(this.VariableChartData.overseas),item=>{
+                    return _.reduce(item, function(memo, num){ return memo + num; }, 0);
+                });
+                console.log('midCount',midAllCount)
+                let compareSourceCount = this.compareSourceCount;
+                compareSourceCount.all = _.reduce(midAllCount, function(memo, num){ return memo + num; }, 0);
+                compareSourceCount.wechat = _.reduce(midWechatCount, function(memo, num){ return memo + num; }, 0);
+                compareSourceCount.weibo = _.reduce(midWeiboCount, function(memo, num){ return memo + num; }, 0);
+                compareSourceCount.client = _.reduce(midClientCount, function(memo, num){ return memo + num; }, 0);
+                compareSourceCount.web = _.reduce(midWebCount, function(memo, num){ return memo + num; }, 0);
+                compareSourceCount.overseas = _.reduce(midOverseasCount, function(memo, num){ return memo + num; }, 0);
+                console.log('___',compareSourceCount)
+                this.setCompareSourceCount(_.values(compareSourceCount));
+                //console.log('....',this.compareSourceCount.all);
+                console.log('查看修改',this.compareSourceCount)*/
             },
             //添加雷达数据处理
             dealRadarData(newTopic,details){
@@ -464,8 +495,8 @@
 
         },
         vuex:{
-            actions:{setTopicList ,setActiveCompareTopic ,setTopicGroupActiveId, setCompareSource, setCompareSubTopic, setCompareStart, setCompareEnd, setCompareTimeRange, setCompareTimeRangeString},
-            getters:{topicList ,activeCompareTopic , topicGroupActiveId, compareSource, compareSubTopic, compareStart, compareEnd, compareTimeRange, compareTimeRangeString  }
+            actions:{setTopicList ,setActiveCompareTopic ,setTopicGroupActiveId, setCompareSource, setCompareSubTopic, setCompareStart, setCompareEnd, setCompareTimeRange, setCompareTimeRangeString, setCompareSourceCount},
+            getters:{topicList ,activeCompareTopic , topicGroupActiveId, compareSource, compareSubTopic, compareStart, compareEnd, compareTimeRange, compareTimeRangeString, compareSourceCount  }
         },
         watch:{
             activeCompareTopic: {
@@ -568,7 +599,6 @@
                     console.log(this.compareSource);
                     //判断修改后的源
                     this.changeSource();
-
                     //展示修改后的源,刷新
 console.log(this.data);
                 }
@@ -577,7 +607,6 @@ console.log(this.data);
                 handler(){
                     const intervalDate = this.intervalTime;
                     this.mapData(this.data,intervalDate);
-
                 }
             },
 

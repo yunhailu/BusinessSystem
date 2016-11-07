@@ -193,6 +193,7 @@
                         this.x = _.map(details, detail => detail.date);
                         const _this = this;
                         //console.log("xxxx", this.x);
+                        console.log('dddd',details);
                         let all = {positive: [], negative:[], neutral:[]};
                         _.each(details, (detail, index) => {
                             _.each(detail.values, (value, key) => {
@@ -228,14 +229,46 @@
                         //console.log('datas', datas);
                         //console.log('series', this.commentChartOption.series);
 
-                        console.log(this.lineData.all);
-                        this.commentNums = [
+                        console.log('this.lindeData',this.lineData);
+                        /*this.commentNums = [
                             _.chain(this.lineData.all).map(item => _.reduce(item, (memo, val) => (memo + val), 0)).reduce((memo, val) => (memo, val), 0).value(),
                             _.chain(this.lineData.wechat).map(item => _.reduce(item, (memo, val) => (memo + val), 0)).reduce((memo, val) => (memo, val), 0).value(),
                             _.chain(this.lineData.weibo).map(item => _.reduce(item, (memo, val) => (memo + val), 0)).reduce((memo, val) => (memo, val), 0).value(),
                             _.chain(this.lineData.client).map(item => _.reduce(item, (memo, val) => (memo + val), 0)).reduce((memo, val) => (memo, val), 0).value(),
                             _.chain(this.lineData.web).map(item => _.reduce(item, (memo, val) => (memo + val), 0)).reduce((memo, val) => (memo, val), 0).value(),
                             _.chain(this.lineData.overseas).map(item => _.reduce(item, (memo, val) => (memo + val), 0)).reduce((memo, val) => (memo, val), 0).value()
+                        ];*/
+                        /*const allNums=_.reduce(this.lineData.all.negative,(mome, val) => mome + val, 0)+_.reduce(this.lineData.all.neutral,(mome, val) => mome + val, 0)
+                        +_.reduce(this.lineData.all.positive,(mome, val) => mome + val, 0);*/
+
+                        const wechatNums=_.reduce(this.lineData.wechat.negative,(mome, val) => mome + val, 0)+_.reduce(this.lineData.wechat.neutral,(mome, val) => mome + val, 0)
+                        +_.reduce(this.lineData.wechat.positive,(mome, val) => mome + val, 0);
+
+                        const weiboNums=_.reduce(this.lineData.weibo.negative,(mome, val) => mome + val, 0)+_.reduce(this.lineData.weibo.neutral,(mome, val) => mome + val, 0)
+                        +_.reduce(this.lineData.weibo.positive,(mome, val) => mome + val, 0);
+
+                        const clientNums=_.reduce(this.lineData.client.negative,(mome, val) => mome + val, 0)+_.reduce(this.lineData.client.neutral,(mome, val) => mome + val, 0)
+                        +_.reduce(this.lineData.client.positive,(mome, val) => mome + val, 0);
+
+                        const webNums=_.reduce(this.lineData.web.negative,(mome, val) => mome + val, 0)+_.reduce(this.lineData.web.neutral,(mome, val) => mome + val, 0)
+                        +_.reduce(this.lineData.web.positive,(mome, val) => mome + val, 0);
+
+                        const overseasNums=_.reduce(this.lineData.overseas.negative,(mome, val) => mome + val, 0)+_.reduce(this.lineData.overseas.neutral,(mome, val) => mome + val, 0)
+                        +_.reduce(this.lineData.overseas.positive,(mome, val) => mome + val, 0);
+
+                        console.log(wechatNums+weiboNums+clientNums+webNums+overseasNums,
+                                wechatNums,
+                                weiboNums,
+                                clientNums,
+                                webNums,
+                                overseasNums);
+                        this.commentNums =[
+                            wechatNums+weiboNums+clientNums+webNums+overseasNums,
+                            wechatNums,
+                            weiboNums,
+                            clientNums,
+                            webNums,
+                            overseasNums
                         ];
                     }
                 });
@@ -257,6 +290,7 @@
                     return ({ value: _.reduce(value, (memo, val) => memo + val, 0),name: this.words[key] });
                 });
                 //this.getCommentList();
+
             },
             initData(){
                 this.lineData = {
@@ -272,6 +306,7 @@
                 this.initData();
                 this.getCommentDetail();
                 this.getCommentList();
+                console.log('这个数据是什么',this.lineData)
             }
         },
         vuex: {

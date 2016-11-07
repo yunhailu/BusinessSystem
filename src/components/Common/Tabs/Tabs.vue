@@ -110,6 +110,7 @@
         },
         filters: {
             showNum(name, num, datas){
+                console.log('datas',datas);
                 if(!datas.length) return name;
                 if(num && num > -1) return `${name}(${num})`;
                 return `${name}`;
