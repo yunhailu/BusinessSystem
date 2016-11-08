@@ -1,5 +1,7 @@
 ﻿<template>
+    <tabs :datas="compareNums"></tabs>
     <!--<span>Compare Panel</span>-->
+
     <div class="compare-charts">
         <div class="chart" v-echarts="compareChartOption" :loading="compareChartLoading" theme="macarons"></div>
         <div class="chart radar" v-echarts="compareRadarOption" :loading="compareRadarLoading" theme="macarons"></div>
@@ -12,6 +14,7 @@
 <script type="text/ecmascript-6">
     import _ from 'underscore';
     import Local from "../../../local/local";
+    import  Tabs from '../Tabs/Tabs.vue';
     import {Chart, Pie} from '../../../config/config';
     import * as Api from "../../../widgets/Api";
     import { topicList, activeCompareTopic, topicGroupActiveId, compareSource, compareSubTopic, compareStart, compareEnd, compareTimeRange, compareTimeRangeString, compareSourceCount } from '../../../vuex/getters';
@@ -129,7 +132,8 @@
                         }
                     },
                     series: []
-                }
+                },
+                compareNums:[]
             }
         },
         methods:{
@@ -240,37 +244,17 @@
                 this.VariableChartData.web[newTopic[0].topic_name]=web;
                 this.VariableChartData.overseas[newTopic[0 ].topic_name]=overseas;
                 console.log('VariableChartData',this.VariableChartData);
-                console.log('values',_.values(this.VariableChartData.all))
-                /*const midAllCount = _.map(_.values(this.VariableChartData.all),item=>{
-                    return _.reduce(item, function(memo, num){ return memo + num; }, 0);
-                });
-                const midWechatCount = _.map(_.values(this.VariableChartData.wechat),item=>{
-                    return _.reduce(item, function(memo, num){ return memo + num; }, 0);
-                });
-                const midWeiboCount = _.map(_.values(this.VariableChartData.weibo),item=>{
-                    return _.reduce(item, function(memo, num){ return memo + num; }, 0);
-                });
-                const midClientCount = _.map(_.values(this.VariableChartData.client),item=>{
-                    return _.reduce(item, function(memo, num){ return memo + num; }, 0);
-                });
-                const midWebCount = _.map(_.values(this.VariableChartData.web),item=>{
-                    return _.reduce(item, function(memo, num){ return memo + num; }, 0);
-                });
-                const midOverseasCount = _.map(_.values(this.VariableChartData.overseas),item=>{
-                    return _.reduce(item, function(memo, num){ return memo + num; }, 0);
-                });
-                console.log('midCount',midAllCount)
-                let compareSourceCount = this.compareSourceCount;
-                compareSourceCount.all = _.reduce(midAllCount, function(memo, num){ return memo + num; }, 0);
-                compareSourceCount.wechat = _.reduce(midWechatCount, function(memo, num){ return memo + num; }, 0);
-                compareSourceCount.weibo = _.reduce(midWeiboCount, function(memo, num){ return memo + num; }, 0);
-                compareSourceCount.client = _.reduce(midClientCount, function(memo, num){ return memo + num; }, 0);
-                compareSourceCount.web = _.reduce(midWebCount, function(memo, num){ return memo + num; }, 0);
-                compareSourceCount.overseas = _.reduce(midOverseasCount, function(memo, num){ return memo + num; }, 0);
-                console.log('___',compareSourceCount)
-                this.setCompareSourceCount(_.values(compareSourceCount));
-                //console.log('....',this.compareSourceCount.all);
-                console.log('查看修改',this.compareSourceCount)*/
+                console.log('values',_.values(this.VariableChartData.all));
+
+                console.log(this.VariableChartData.all);
+                console.log('JSON',JSON.stringify(this.VariableChartData.all));
+                console.log(typeof this.VariableChartData.all);
+
+                console.log('查看watch是不是首席变化');
+                //tabs
+                this.getSourceCount();
+
+
             },
             //添加雷达数据处理
             dealRadarData(newTopic,details){
@@ -435,6 +419,7 @@
                         this.mapData(this.data,intervalDate);
                     }
                 });
+
             },
             //加上后only一个数据sen
             dealAddOnlyOneSentimentData(newTopic,topicParams){
@@ -452,6 +437,41 @@
                         this.mapRadarData(this.radarData,intervalDate);
                     }
                 })
+            },
+//
+            getSourceCount(){
+                console.log(_.values(this.VariableChartData.all));
+                const midAllCount = _.map(_.values(this.VariableChartData.all),item=>{
+                    return _.reduce(item, function(memo, num){ return memo + num; }, 0);
+                });
+                const midWechatCount = _.map(_.values(this.VariableChartData.wechat),item=>{
+                    return _.reduce(item, function(memo, num){ return memo + num; }, 0);
+                });
+                const midWeiboCount = _.map(_.values(this.VariableChartData.weibo),item=>{
+                    return _.reduce(item, function(memo, num){ return memo + num; }, 0);
+                });
+                const midClientCount = _.map(_.values(this.VariableChartData.client),item=>{
+                    return _.reduce(item, function(memo, num){ return memo + num; }, 0);
+                });
+                const midWebCount = _.map(_.values(this.VariableChartData.web),item=>{
+                    return _.reduce(item, function(memo, num){ return memo + num; }, 0);
+                });
+                const midOverseasCount = _.map(_.values(this.VariableChartData.overseas),item=>{
+                    return _.reduce(item, function(memo, num){ return memo + num; }, 0);
+                });
+                console.log('midCount',midAllCount)
+                let compareSourceCount = this.compareSourceCount;
+                compareSourceCount.all = _.reduce(midAllCount, function(memo, num){ return memo + num; }, 0);
+                compareSourceCount.wechat = _.reduce(midWechatCount, function(memo, num){ return memo + num; }, 0);
+                compareSourceCount.weibo = _.reduce(midWeiboCount, function(memo, num){ return memo + num; }, 0);
+                compareSourceCount.client = _.reduce(midClientCount, function(memo, num){ return memo + num; }, 0);
+                compareSourceCount.web = _.reduce(midWebCount, function(memo, num){ return memo + num; }, 0);
+                compareSourceCount.overseas = _.reduce(midOverseasCount, function(memo, num){ return memo + num; }, 0);
+                console.log('___',compareSourceCount);
+                this.compareNums = _.values(compareSourceCount);
+//                this.setCompareSourceCount(_.values(compareSourceCount));
+                //console.log('....',this.compareSourceCount.all);
+                console.log('查看修改',this.compareNums);
             },
             //切换赋值
             changeSource(){
@@ -514,9 +534,11 @@
                         this.compareRadarOption.legend.data=[];
                         this.compareRadarOption.series=[];
                         this.initData();
+                        this.compareNums = [0,0,0,0,0,0];
                         return ;
                     }else if(oldVal.length == 0){
                         //新值不为空---如果老值为空
+                        this.compareNums=[];
                         const newTopic = val;
                         const topicParams = {
                             topic_id:_.isEmpty(newTopic) ? '' : newTopic[0].topic_id,
@@ -529,7 +551,6 @@
                         };
                         this.dealAddOnlyOneSummaryData(newTopic,topicParams);
                         this.dealAddOnlyOneSentimentData(newTopic,topicParams);
-
                     }else{
                         //都不为空,判断是否是同一个group--yes
                         if(_.find(currentGroup.list,function(item){return item.topic_name == oldVal[0].topic_name;}) !=undefined){
@@ -537,6 +558,7 @@
                                 //this.compareChartLoading = true;
                                 //this.comparePieLoading = true;
                                 //this.compareRadarLoading = true;
+                                this.compareNums=[];
                                 const newTopic = _.difference(val, oldVal);
                                 console.log(newTopic);
                                 const topicParams = {
@@ -551,6 +573,7 @@
                                 this.dealAddSummaryData(newTopic,topicParams);
                                 this.dealAddSentimentData(newTopic,topicParams);
                             } else {
+                                this.compareNums=[];
                                 var oldTopic = _.difference(oldVal, val);
                                 console.log(oldTopic);
                                 console.log('pre',this.VariableRadarData)
@@ -573,9 +596,19 @@
                                 this.radarData = this.VariableRadarData.all;
                                 this.mapData(this.data,intervalDate);
                                 this.mapRadarData(this.radarData,intervalDate);
+
+                                console.log(this.VariableChartData.all);
+                                console.log('JSON',JSON.stringify(this.VariableChartData.all));
+                                console.log(typeof this.VariableChartData.all);
+
+                                console.log('查看watch是不是首席变化');
+                                //tabs
+                                this.getSourceCount();
+
                             };
                         }else {
-                            console.log('这里对空数据做出判断')
+                            console.log('这里对空数据做出判断');
+                            this.compareNums=[];
                             const newTopic = val;
                             const topicParams = {
                                 topic_id:_.isEmpty(newTopic) ? '' : newTopic[0].topic_id,
@@ -592,6 +625,7 @@
                         }
 
                     }
+
                 }
             },
             compareSource:{
@@ -607,6 +641,7 @@ console.log(this.data);
                 handler(){
                     const intervalDate = this.intervalTime;
                     this.mapData(this.data,intervalDate);
+                    console.log('查看data是不是首席变化');
                 }
             },
 
@@ -622,6 +657,7 @@ console.log(this.data);
                 handler(){
                     const intervalDate = this.intervalTime;
                     this.mapRadarData(this.radarData,intervalDate);
+                    console.log('查看radar是不是首席变化');
                 }
             },
             compareTimeRangeString:{
@@ -650,7 +686,7 @@ console.log(this.data);
             }*/
         },
         components:{
-
+            Tabs
         }
     }
 </script>

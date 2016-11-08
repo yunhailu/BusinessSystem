@@ -24,7 +24,7 @@
 
                 </div>
             </div>
-            <tabs ></tabs>
+            <!--<tabs ></tabs>-->
 
             <!--<router-view></router-view>-->
             <main></main>
@@ -73,7 +73,7 @@
             'header-component': HeaderComponent,
             'menu-component': MenuComponent,
             'calendar': Calendar,
-            'tabs': Tabs,
+            //'tabs': Tabs,
             'main': Main
         },
         methods: {
