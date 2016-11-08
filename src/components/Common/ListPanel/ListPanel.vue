@@ -1,6 +1,6 @@
 <template>
     <div class="list-panel">
-        <div class="row list-panel-tools">
+        <div class="row list-panel-tools" v-if="isShowTools">
             <div class="col-md-3">
                 <select-el :options="options" :title="selectTitle" :value.sync="selectValue"></select-el>
             </div>
@@ -81,7 +81,7 @@
     import { activeAnalyticsTopic } from '../../../vuex/getters';
 
     export default{
-        props: ["list", "options", "selectTitle", "selectValue"],
+        props: ["list", "options", "selectTitle", "selectValue", "tools"],
         data(){
             const words = Local().comment;
             const common = Local().common;
@@ -92,6 +92,12 @@
                 tableList: [],
                 filterActive: 20,
                 sentimentActive: 'all'
+            }
+        },
+        computed: {
+            isShowTools(){
+                if(this.tools === false) return false;
+                return true;
             }
         },
         vuex: {

@@ -19,7 +19,7 @@
             <echarts :options="resultPieChartOption" initOptions="resultPieChartOption" :img.sync="sub" theme="macarons"></echarts>
         </div>
     </div>
-    <list-panel :list="list" :options="options" :select-title="selectTitle" :select-value.sync="sortVal"></list-panel>
+    <list-panel :list="list" :options="options" :select-title="selectTitle" :select-value.sync="sortVal" :tools="isShowTools"></list-panel>
 </template>
 <style lang="less" scoped>
     @import "Result.less";
@@ -39,6 +39,7 @@
         props: ['title', 'data', 'remove', 'master', 'sub'],
         data(){
             return{
+                isShowTools: false,
                 sourceActive: 0,
                 //list: list.time,
                 list: [],
@@ -217,7 +218,7 @@
                 Api.getCommentList({ type, subtopic, topic_id, source, time_dimension, start, end, topic }).then(resp => {
                     //console.log(resp.data);
                     if(resp.data.code == 0){
-                        this.list = resp.data.data;
+                        this.list = _.filter(resp.data.data, (item, index) => { return index < 20; });
                     }
                 });
             },
