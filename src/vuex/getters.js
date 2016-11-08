@@ -83,3 +83,7 @@ export const compareEnd = state => {
 export const compareTimeRangeString = state => {
 	return state.compare.compare_time_Range_String;
 };
+
+export const compareSourceCount = state => {
+	return state.compare.compare_source_Count;
+};
