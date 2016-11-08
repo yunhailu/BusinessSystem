@@ -87,7 +87,7 @@
                 console.log(val, idx, this.$route);
                 this.sourceActive = idx;
                 this.actions && this.actions(val, idx);
-                const source = ["all", "wechat", "weibo", "client", "web", "oversea"];
+                const source = ["all", "wechat", "weibo", "client", "web", "overseas"];
                 if(this.$route.path.indexOf('analytics') > -1){
                     this.setAnalyticsSource(source[idx]);
                 }
