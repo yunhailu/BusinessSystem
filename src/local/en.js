@@ -158,6 +158,8 @@ export const en = {
         anger: "Anger",
         sorrow: "Sorrow",
         disgust: "Disgust",
-        fear: "Fear"
+        fear: "Fear",
+        nullTip: "Null",
+        loadingTip: "Loading"
     }
 };

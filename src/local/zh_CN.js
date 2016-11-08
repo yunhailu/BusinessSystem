@@ -158,6 +158,8 @@ export const zh_CN = {
         anger: "愤怒",
         sorrow: "失望",
         disgust: "反感",
-        fear: "害怕"
+        fear: "害怕",
+        nullTip: "数据为空",
+        loadingTip: "等待加载..."
     }
 };

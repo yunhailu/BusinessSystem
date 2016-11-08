@@ -26,12 +26,13 @@
             <!--<i class="fa fa-th-list"></i>-->
             <!--</div>-->
         </div>
-        <ul class="list-panel-list">
+        <ul class="list-panel-list" v-if="tableList.length">
             <li class="list-panel-list-item row" v-for="item in tableList">
                 <!--<a :href="item.url" target="_blank">-->
                 <a  @click="showDetail(item);" href="javascript:void(0);" target="_blank">
                     <div class="list-panel-list-item-left col-md-8">
-                        <i class="fa fa-paperclip fa-2x"></i>
+                        <i class="fa fa-paperclip fa-2
+                        x"></i>
                         <div class="list-panel-list-item-left-con">
                             <div class="title">{{{item.title}}}</div>
                             <div class="detail">{{{item.content}}}</div>
@@ -63,6 +64,7 @@
                 </a>
             </li>
         </ul>
+        <div v-if="!tableList.length" class="list-panel-tip">{{listTip}}</div>
         <!--<div class="list-panel-pager">-->
             <!--<page></page>-->
         <!--</div>-->
@@ -82,8 +84,11 @@
         props: ["list", "options", "selectTitle", "selectValue"],
         data(){
             const words = Local().comment;
+            const common = Local().common;
             return{
                 words,
+                common,
+                listTip: common.nullTip,
                 tableList: [],
                 filterActive: 20,
                 sentimentActive: 'all'
