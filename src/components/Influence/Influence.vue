@@ -261,8 +261,7 @@
                         }]
                     }
                 }
-=======
->>>>>>> c8596e4278e0e7e3bc964a0dc26c2f7f5b126928
+
             },
             getPopularList(){
                 const icons = ["user", "user-plus", "edge", "chrome"];
