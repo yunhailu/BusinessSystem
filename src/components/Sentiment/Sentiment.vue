@@ -205,12 +205,12 @@
                     series: [
 
                         {
-                            /*label:{
+                            label:{
                                 normal:{
                                     show:true,
-                                    formatter:"{b}:({d}%)"
+                                    formatter:"{d}%"
                                 }
-                            },*/
+                            },
                             name:'',
                             type:'pie',
                             radius: '60%',
