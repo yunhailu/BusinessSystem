@@ -3,8 +3,8 @@
     <!--<div>Evaluation</div>-->
     <div class="charts">
         <div class="chart commentLeftBar" v-echarts="commentBarOption" :click="clickChartAction" :loading="commentBarLoading" theme="macarons"></div><!--theme="infographic"-->
-        <div class="chart commentRightBar" v-echarts="commentChartOption" :loading="commentChartLoading" v-show="isShow" theme="macarons"></div>
-        <!--<div class="chart commentRightBar" v-echarts="commentPieOption2" :loading="commentPieLoading2" v-show="isShow" theme="macarons"></div>-->
+        <!--<div class="chart commentRightBar" v-echarts="commentChartOption" :loading="commentChartLoading" v-show="isShow" theme="macarons"></div>-->
+        <div class="chart commentRightBar" v-echarts="commentPieOption2" :loading="commentPieLoading2" v-show="isShow" theme="macarons"></div>
         <div class="chart commentRightBar" v-echarts="commentPieOption" :loading="commentChartLoading" v-show="!isShow" theme="macarons"></div>
     </div>
     <list-panel :list="list" :options="options" :select-title="selectTitle" :select-value.sync="sortVal"></list-panel>
@@ -95,7 +95,7 @@
                     ]
                 },
 
-                /*commentPieLoading2:true,
+                commentPieLoading2:true,
                 commentPieOption2:{
                     tooltip: {
                         show:true,
@@ -106,7 +106,7 @@
                         bottom: 0,
                         data: [words.positive, words.negative, words.neutral]
                     }),
-                    color:['#2FCC71','#E64D3D', '#F1C40F', '#3598DC', '#737373'],
+                    color: _.extend([], Chart.color),
                     textStyle: Pie.textStyle,
                     toolbox: Pie.toolbox,
                     series: [
@@ -125,8 +125,8 @@
                             data:[]
                         }
                     ]
-                },*/
-                commentChartLoading: true,
+                },
+               /* commentChartLoading: true,
                 commentChartOption: {
                     tooltip: _.extend({}, Chart.tooltip, {}),
                     legend: { data: [words.positive, words.negative, words.neutral], bottom: 0 },
@@ -147,7 +147,7 @@
                         { name: words.negative, type: 'bar', stack: '总量', data: [] },
                         { name: words.neutral, type: 'bar', stack: '总量', data: [] }
                     ]
-                },
+                },*/
 
                 commentPieOption: {
                     isActive: true,
@@ -257,7 +257,7 @@
                             return value;
                         });
 
-                        this.commentChartLoading = false;
+                        /*this.commentChartLoading = false;
                         const datas = _.chain(this.lineData)
                                 .filter((value, key) => (key != 'all'))
                                 .map(value => {
@@ -268,7 +268,12 @@
                         this.commentChartOption.series = _.map(this.commentChartOption.series, (value, index) => {
                             value.data = _.zip.apply(null,datas)[index];
                             return value;
-                        });
+                        });*/
+                        this.commentPieLoading2= false;
+                        this.commentPieOption2.series[0].data =[
+                            {value:_.reduce(this.lineData.all.positive,(mome, val) => mome + val, 0), name:this.words.positive},
+                            {value:_.reduce(this.lineData.all.negative,(mome, val) => mome + val, 0), name:this.words.negative},
+                            {value:_.reduce(this.lineData.all.neutral,(mome, val) => mome + val, 0), name:this.words.neutral},]
                         //console.log('datas', datas);
                         //console.log('series', this.commentChartOption.series);
 
@@ -325,6 +330,10 @@
 
                 if(idx == 0){
                     this.isShow = true;
+                    this.commentPieOption2.series[0].data =[
+                        {value:_.reduce(this.lineData.all.positive,(mome, val) => mome + val, 0), name:this.words.positive},
+                        {value:_.reduce(this.lineData.all.negative,(mome, val) => mome + val, 0), name:this.words.negative},
+                        {value:_.reduce(this.lineData.all.neutral,(mome, val) => mome + val, 0), name:this.words.neutral},]
                     return;
                 }
 
