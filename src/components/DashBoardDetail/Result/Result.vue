@@ -9,8 +9,15 @@
         <!--<div class="arrow animated rubberBand" @click="toggle">-->
             <!--<i class="fa fa-angle-left fa-3x" transition="rotate" :class="[resultPieChartOption.isActive ? 'fa-rotate-180' : '']"></i>-->
         <!--</div>-->
-        <div class="chart" v-echarts="resultChartOption" :loading="resultChartLoading" :img.sync="master" :class="[data.source=='all' ? 'active' : '']" :resize="resultChartOption.isToggle" theme="macarons"></div>
-        <div class="pie" v-echarts="resultPieChartOption" :loading="resultPieChartLoading" :img.sync="sub" :class="[data.source=='all' ? 'active' : '']" translate="show-pie"  theme="macarons"></div>
+        <!--<div class="chart" v-echarts="resultChartOption" :loading="resultChartLoading" :img.sync="master" :class="[data.source=='all' ? 'active' : '']" :resize="resultChartOption.isToggle" theme="macarons"></div>-->
+        <!--<div class="pie" v-echarts="resultPieChartOption" :loading="resultPieChartLoading" :img.sync="sub" :class="[data.source=='all' ? 'active' : '']" translate="show-pie"  theme="macarons"></div>-->
+
+        <div class="chart" :img.sync="master" :class="[data.source=='all' ? 'active' : '']" :resize="resultChartOption.isToggle" theme="macarons">
+            <echarts :options="resultChartOption" initOptions="resultChartOption" :img.sync="master" theme="macarons"></echarts>
+        </div>
+        <div class="pie" :img.sync="sub" :class="[data.source=='all' ? 'active' : '']" translate="show-pie"  theme="macarons">
+            <echarts :options="resultPieChartOption" initOptions="resultPieChartOption" :img.sync="sub" theme="macarons"></echarts>
+        </div>
     </div>
     <list-panel :list="list" :options="options" :select-title="selectTitle" :select-value.sync="sortVal"></list-panel>
 </template>
@@ -26,6 +33,7 @@
     import { list } from "../../../config/tmpData";
     import ListPanel from '../../Common/ListPanel/ListPanel.vue';
     import Tabs from '../../Common/Tabs/Tabs.vue';
+    import Echarts from '../../Common/Echarts/Echarts.vue';
 
     export default{
         props: ['title', 'data', 'remove', 'master', 'sub'],
@@ -246,7 +254,7 @@
             }
         },
         components:{
-            Tabs, ListPanel
+            Tabs, ListPanel, Echarts
         },
         ready(){
             this.init();

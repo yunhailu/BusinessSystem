@@ -6,7 +6,10 @@
         <div class="panel-title-delete" @click="deleteItem();"><i class="fa fa-minus"></i></div>
     </div>
     <div class="theme-word">
-        <div class="theme-word-chart" v-echarts="themeWordOption" :loading="themeWordLoading"  theme="infographic" :click="clickAction"></div>
+        <!--<div class="theme-word-chart" v-echarts="themeWordOption" :loading="themeWordLoading"  theme="infographic" :click="clickAction"></div>-->
+        <div class="theme-word-chart">
+            <echarts :options="themeWordOption" initOptions="themeWordOption" :img.sync="wordcloud" theme="infographic"></echarts>
+        </div>
         <div class="theme-word-ranking">
             <dl class="list up-list">
                 <dt class="list-title">排名变化</dt>
@@ -22,8 +25,17 @@
     </div>
     <div class="theme-chart">
         <!--<div class="chart"  v-echarts="themeScatterOption" :loading="themeScatterLoading"  theme="macarons"></div>-->
-        <div class="chart"  v-echarts="themeLineOption" :loading="themeLineLoading"  theme="macarons"></div>
-        <div class="chart best"  v-echarts="themeBestOption" :loading="themeBestLoading"  theme="macarons"></div>
+
+        <!--<div class="chart"  v-echarts="themeLineOption" :loading="themeLineLoading"  theme="macarons"></div>-->
+        <!--<div class="chart best"  v-echarts="themeBestOption" :loading="themeBestLoading"  theme="macarons"></div>-->
+
+
+        <div class="chart"  v-echarts="themeLineOption" >
+            <echarts :options="themeLineOption" initOptions="themeLineOption" :img.sync="bar" theme="macarons"></echarts>
+        </div>
+        <div class="chart best"  v-echarts="themeBestOption" >
+            <echarts :options="themeBestOption" initOptions="themeBestOption" :img.sync="top" theme="macarons"></echarts>
+        </div>
     </div>
 </template>
 <style lang="less" scoped>
@@ -33,13 +45,14 @@
     import _ from 'underscore';
     import moment from 'moment';
     import Tabs from '../../Common/Tabs/Tabs.vue';
+    import Echarts from '../../Common/Echarts/Echarts.vue';
     import Local from "../../../local/local";
     import { Chart, Pie } from '../../../config/config';
     import { themeScatterData } from '../../../config/tmpData';
     import * as Api from '../../../widgets/Api';
 
     export default{
-        props: ['title', 'data', 'remove'],
+        props: ['title', 'data', 'remove', 'wordcloud', 'bar', 'top'],
         data(){
             const words = Local().theme;
             return{
@@ -431,7 +444,7 @@
 //            this.markImage.src = "../../../images/search.png";
         },
         components:{
-            Tabs
+            Tabs, Echarts
         },
         ready(){
             this.init();
