@@ -106,7 +106,7 @@
                         bottom: 0,
                         data: [words.positive, words.negative, words.neutral]
                     }),
-                    color: _.extend([], Chart.color),
+                    color:['#2FCC71','#E64D3D', '#F1C40F', '#3598DC', '#737373'],
                     textStyle: Pie.textStyle,
                     toolbox: Pie.toolbox,
                     series: [
@@ -159,7 +159,7 @@
                     }),
                     textStyle: Pie.textStyle,
                     toolbox: Pie.toolbox,
-                    color: _.extend([], Chart.color),
+                    color: ['#2FCC71','#E64D3D', '#F1C40F', '#3598DC', '#737373'],
                     series: _.extend({}, Pie.series, {
                         radius: ['40%', '85%'],
                         name: words.comment,
