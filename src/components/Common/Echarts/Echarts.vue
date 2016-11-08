@@ -2,10 +2,10 @@
     <div class="echarts"></div>
 </template>
 
-<style>
+<style lang="less" scoped>
     .echarts {
-        width: 600px;
-        height: 400px;
+        width: 100%;
+        height: 100%;
     }
 </style>
 
@@ -40,7 +40,7 @@
         'globalout'
     ]
     export default {
-        props: ['options', 'theme', 'initOptions', 'group'],
+        props: ['options', 'theme', 'initOptions', 'group', 'img'],
         data: function () {
             return {
                 chart: null
@@ -88,7 +88,7 @@
                 this.chart.hideLoading()
             },
             getDataURL: function () {
-                return this.chart.getDataURL()
+                return this.chart.getDataURL("jpg")
             },
             clear: function () {
                 this.chart.clear()
@@ -103,25 +103,26 @@
             chart.setOption(this.options)
             this.$watch('options', options => {
                 chart.setOption(options, true)
-        }, { deep: true })
+            }, { deep: true })
             chart.group = this.group
             this.$watch('group', (group) => {
                 chart.group = group
-        })
+            })
             // expose ECharts events as custom events
             ACTION_EVENTS.forEach(event => {
                 chart.on(event, params => {
-                this.$dispatch(event, params)
-        })
-        })
+                    this.$dispatch(event, params)
+                 })
+            })
             // mouse events of ECharts should be renamed to prevent
             // name collision with DOM events
             MOUSE_EVENTS.forEach(event => {
                 chart.on(event, params => {
-                this.$dispatch('chart' + event, params)
-        })
-        })
-            this.chart = chart
+                    this.$dispatch('chart' + event, params)
+                })
+            })
+            this.chart = chart;
+            this.img = this.getDataURL();
         },
         connect: function (group) {
             if (typeof group !== 'string') {

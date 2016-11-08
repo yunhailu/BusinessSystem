@@ -131,20 +131,27 @@
                 console.log(item);
                 this.popVisiable = true;
 
-
-//----start------
-
                 const topic_id = this.activeAnalyticsTopic.topic_id;
-                const author = this.$route.params.author;
+                const author = item.influencer;
                 const size = this.$route.params.size;
 
-                Api.getCommentList({topic_id,author,size}).then(resp => {
+                this.getArticles({topic_id,author,size});
+
+            },
+            getArticles(params){
+                Api.getCommentList(params).then(resp => {
                     //console.log("getCommentList", resp.data);
                     if (resp.data.code == 0) {
+<<<<<<< HEAD
                         console.log(resp.data.data);
                         //接口的详情的数据的更新
                        //操作步骤的过程实现
                         //console.log('11111111111111111111111111111111111');
+=======
+                        //console.log(resp.data.data);
+                        //接口的详情的数据的更新
+                        //操作步骤的过程实现
+>>>>>>> c8596e4278e0e7e3bc964a0dc26c2f7f5b126928
                         const newDates = _.map(resp.data.data, (item)=> {
 
                             item.context = item.content;
@@ -158,6 +165,7 @@
 
                     }
                 });
+<<<<<<< HEAD
 
 
                 // const resp = this.getArticles();
@@ -253,6 +261,8 @@
                         }]
                     }
                 }
+=======
+>>>>>>> c8596e4278e0e7e3bc964a0dc26c2f7f5b126928
             },
             getPopularList(){
                 const icons = ["user", "user-plus", "edge", "chrome"];

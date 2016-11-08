@@ -8,19 +8,19 @@
                     <div class="title"><i class="fa fa-thumb-tack"></i> <span>{{name}}</span></div>
                 </div>
                 <div class="dashboard-detail-wrap-module" v-if="detail.summary">
-                    <result-component :title="words.result" :data.sync="detail" :remove="removeItem" :master.sync="detail.summarymaster" :sub="detail.summarysub"></result-component>
+                    <result-component :title="words.result" :data.sync="detail" :remove="removeItem" :master.sync="detail.summarymaster" :sub.sync="detail.summarysub"></result-component>
                 </div>
                 <div class="dashboard-detail-wrap-module" v-if="detail.sentiment">
-                    <sentiment-component :title="words.sentiment" :data="detail" :remove="removeItem" :master.sync="detail.sentimentmaster" :sub="detail.sentimentsub"></sentiment-component>
+                    <sentiment-component :title="words.sentiment" :data="detail" :remove="removeItem" :master.sync="detail.sentimentmaster" :sub.sync="detail.sentimentsub"></sentiment-component>
                 </div>
                 <div class="dashboard-detail-wrap-module" v-if="detail.comment">
-                    <comment-component :title="words.comment" :data="detail" :remove="removeItem"></comment-component>
+                    <comment-component :title="words.comment" :data="detail" :remove="removeItem" :master.sync="detail.commentmaster" :sub.sync="detail.commentsub"></comment-component>
                 </div>
                 <div class="dashboard-detail-wrap-module" v-if="detail.influence">
-                    <influence-component :title="words.influence" :data="detail" :remove="removeItem"></influence-component>
+                    <influence-component :title="words.influence" :data="detail" :remove="removeItem" ></influence-component>
                 </div>
                 <div class="dashboard-detail-wrap-module" v-if="detail.theme">
-                    <theme-component :title="words.theme" :data="detail" :remove="removeItem"></theme-component>
+                    <theme-component :title="words.theme" :data="detail" :remove="removeItem" :wordcloud.sync="detail.themewordcloud" :bar.sync="detail.themebar" :top.sync="detail.themetop"></theme-component>
                 </div>
             </div>
         </div>
@@ -67,13 +67,13 @@
                                 imgs.push({ topic: value.topic, topic_id: value.topic_id, key: "sentiment-sub", value: value.sentimentsub});
                             }
                             if(value.comment){
-                                imgs.push({ topic: value.topic, topic_id: value.topic_id, key: "comment-master", value: ""});
-                                imgs.push({ topic: value.topic, topic_id: value.topic_id, key: "comment-sub", value: ""});
+                                imgs.push({ topic: value.topic, topic_id: value.topic_id, key: "comment-master", value: value.commentmaster});
+                                imgs.push({ topic: value.topic, topic_id: value.topic_id, key: "comment-sub", value: value.commentsub});
                             }
                             if(value.theme){
-                                imgs.push({ topic: value.topic, topic_id: value.topic_id, key: "theme-wordcloud", value: ""});
-                                imgs.push({ topic: value.topic, topic_id: value.topic_id, key: "theme-bar", value: ""});
-                                imgs.push({ topic: value.topic, topic_id: value.topic_id, key: "theme-top", value: ""});
+                                imgs.push({ topic: value.topic, topic_id: value.topic_id, key: "theme-wordcloud", value: value.themewordcloud});
+                                imgs.push({ topic: value.topic, topic_id: value.topic_id, key: "theme-bar", value: value.themebar});
+                                imgs.push({ topic: value.topic, topic_id: value.topic_id, key: "theme-top", value: value.themetop});
                             }
                             return imgs;
                         })
@@ -94,11 +94,11 @@
                             value.summarysub = "";
                             value.sentimentmaster = "";
                             value.sentimentsub = "";
-//                            value.summarymaster = "";
-//                            value.summarymaster = "";
-//                            value.summarymaster = "";
-//                            value.summarymaster = "";
-//                            value.summarymaster = "";
+                            value.commentmaster = "";
+                            value.commentsub = "";
+                            value.themewordcloud = "";
+                            value.themebar = "";
+                            value.themetop = "";
                             return value;
                         });
                     }
@@ -122,6 +122,7 @@
                 });
             },
             exportReport(){
+                console.log('exportReport',this.details);
                 this.imgs = this.formatImgs(this.details);
                 console.log('exportReport',this.imgs);
                 const id = this.$route.params.id;
@@ -132,10 +133,13 @@
                 }];
                 //const imgs = JSON.stringify(imgsObj);
                 const imgs = JSON.stringify(this.imgs);
-                window.open(`http://118.244.212.122:8008/export/report?id=${id}&imgs=${imgs}`);
-//                Api.exportReport({ id, imgs }).then(resp => {
-//                    console.log(resp);
-//                });
+                //window.open(`http://118.244.212.122:8008/export/report?id=${id}&imgs=${imgs}`);
+                Api.exportReport({ id, imgs }).then(resp => {
+                    console.log(resp);
+                    if(resp.data.code == 0){
+                        window.open(`${resp.data.data.link}`);
+                    }
+                });
             },
             saveAction(){
                 //window.print();

@@ -3,7 +3,8 @@
     <!--<div>Evaluation</div>-->
     <div class="charts">
         <div class="chart commentLeftBar" v-echarts="commentBarOption" :click="clickChartAction" :loading="commentBarLoading" theme="macarons"></div><!--theme="infographic"-->
-        <div class="chart commentRightBar" v-echarts="commentChartOption" :loading="commentChartLoading" v-show="isShow" theme="macarons"></div>
+        <!--<div class="chart commentRightBar" v-echarts="commentChartOption" :loading="commentChartLoading" v-show="isShow" theme="macarons"></div>-->
+        <div class="chart commentRightBar" v-echarts="commentPieOption2" :loading="commentPieLoading2" v-show="isShow" theme="macarons"></div>
         <div class="chart commentRightBar" v-echarts="commentPieOption" :loading="commentChartLoading" v-show="!isShow" theme="macarons"></div>
     </div>
     <list-panel :list="list" :options="options" :select-title="selectTitle" :select-value.sync="sortVal"></list-panel>
@@ -44,12 +45,12 @@
                 commentArr: ["positive", "negative", "neutral"],
                 commentMap: {"positive": 0, "negative": 1, "neutral": 2},
                 lineData: {
-                    all: {positive: [], negative: [], neutral: []},
                     wechat: {positive: [], negative: [], neutral: []},
                     weibo: {positive: [], negative: [], neutral: []},
                     client: {positive: [], negative: [], neutral: []},
                     web: {positive: [], negative: [], neutral: []},
-                    overseas: {positive: [], negative: [], neutral: []}
+                    overseas: {positive: [], negative: [], neutral: []},
+                    all: {positive: [], negative: [], neutral: []}
                 },
 
                 commentBarLoading: true,
@@ -94,7 +95,38 @@
                     ]
                 },
 
-                commentChartLoading: true,
+                commentPieLoading2:true,
+                commentPieOption2:{
+                    tooltip: {
+                        show:true,
+                        trigger: 'item',
+                        formatter:"{b}:({d}%)"
+                    },
+                    legend: _.extend({}, Pie.legend, {
+                        bottom: 0,
+                        data: [words.positive, words.negative, words.neutral]
+                    }),
+                    color:['#2FCC71','#E64D3D', '#F1C40F', '#3598DC', '#737373'],
+                    textStyle: Pie.textStyle,
+                    toolbox: Pie.toolbox,
+                    series: [
+
+                        {
+                            label:{
+                                normal:{
+                                    show:true,
+                                    formatter:"{d}%"
+                                }
+                            },
+                            name:'',
+                            type:'pie',
+                            radius: '60%',
+                            center: ['50%', '50%'],
+                            data:[]
+                        }
+                    ]
+                },
+               /* commentChartLoading: true,
                 commentChartOption: {
                     tooltip: _.extend({}, Chart.tooltip, {}),
                     legend: { data: [words.positive, words.negative, words.neutral], bottom: 0 },
@@ -115,7 +147,7 @@
                         { name: words.negative, type: 'bar', stack: '总量', data: [] },
                         { name: words.neutral, type: 'bar', stack: '总量', data: [] }
                     ]
-                },
+                },*/
 
                 commentPieOption: {
                     isActive: true,
@@ -127,7 +159,7 @@
                     }),
                     textStyle: Pie.textStyle,
                     toolbox: Pie.toolbox,
-                    color: _.extend([], Chart.color),
+                    color: ['#2FCC71','#E64D3D', '#F1C40F', '#3598DC', '#737373'],
                     series: _.extend({}, Pie.series, {
                         radius: ['40%', '85%'],
                         name: words.comment,
@@ -193,17 +225,29 @@
                         this.x = _.map(details, detail => detail.date);
                         const _this = this;
                         //console.log("xxxx", this.x);
+                        console.log('dddd',details);
                         let all = {positive: [], negative:[], neutral:[]};
                         _.each(details, (detail, index) => {
                             _.each(detail.values, (value, key) => {
                                 this.lineData[key].positive.push(detail.values[key].positive);
                                 this.lineData[key].negative.push(detail.values[key].negative);
                                 this.lineData[key].neutral.push(detail.values[key].neutral);
+                                this.lineData.all.positive.push()
                             });
-                            all.positive.push(this.lineData.wechat.positive[index] + this.lineData.weibo.positive[index] + this.lineData.client.positive[index] + this.lineData.web.positive[index] + this.lineData.overseas.positive[index]);
-                            all.negative.push(_this.lineData.wechat.negative[index] + _this.lineData.weibo.negative[index] + _this.lineData.client.negative[index] + _this.lineData.web.positive[index] + _this.lineData.overseas.positive[index]);
-                            all.neutral.push(_this.lineData.wechat.neutral[index] + _this.lineData.weibo.neutral[index] + _this.lineData.client.neutral[index] + _this.lineData.web.positive[index] + _this.lineData.overseas.positive[index]);
+                           // all.positive.push(this.lineData.wechat.positive[index] + this.lineData.weibo.positive[index] + this.lineData.client.positive[index] + this.lineData.web.positive[index] + this.lineData.overseas.positive[index]);
+                            //all.negative.push(_this.lineData.wechat.negative[index] + _this.lineData.weibo.negative[index] + _this.lineData.client.negative[index] + _this.lineData.web.positive[index] + _this.lineData.overseas.positive[index]);
+                            //all.neutral.push(_this.lineData.wechat.neutral[index] + _this.lineData.weibo.neutral[index] + _this.lineData.client.neutral[index] + _this.lineData.web.positive[index] + _this.lineData.overseas.positive[index]);
                         });
+                        all.positive =_.map(_.zip(this.lineData.wechat.positive,this.lineData.weibo.positive,this.lineData.client.positive,this.lineData.web.positive,this.lineData.overseas.positive),item =>{
+                            return _.reduce(item, function(memo, num){ return memo + num; }, 0);
+                        });
+                        all.negative =_.map(_.zip(this.lineData.wechat.negative,this.lineData.weibo.negative,this.lineData.client.negative,this.lineData.web.negative,this.lineData.overseas.negative),item =>{
+                            return _.reduce(item, function(memo, num){ return memo + num; }, 0);
+                        });
+                        all.neutral =_.map(_.zip(this.lineData.wechat.neutral,this.lineData.weibo.neutral,this.lineData.client.neutral,this.lineData.web.neutral,this.lineData.overseas.neutral),item =>{
+                            return _.reduce(item, function(memo, num){ return memo + num; }, 0);
+                        });
+                        console.log('all',all);
                         this.lineData.all = all;
 
                         this.commentBarLoading = false;
@@ -213,7 +257,7 @@
                             return value;
                         });
 
-                        this.commentChartLoading = false;
+                        /*this.commentChartLoading = false;
                         const datas = _.chain(this.lineData)
                                 .filter((value, key) => (key != 'all'))
                                 .map(value => {
@@ -224,18 +268,55 @@
                         this.commentChartOption.series = _.map(this.commentChartOption.series, (value, index) => {
                             value.data = _.zip.apply(null,datas)[index];
                             return value;
-                        });
+                        });*/
+                        this.commentPieLoading2= false;
+                        this.commentPieOption2.series[0].data =[
+                            {value:_.reduce(this.lineData.all.positive,(mome, val) => mome + val, 0), name:this.words.positive},
+                            {value:_.reduce(this.lineData.all.negative,(mome, val) => mome + val, 0), name:this.words.negative},
+                            {value:_.reduce(this.lineData.all.neutral,(mome, val) => mome + val, 0), name:this.words.neutral},]
                         //console.log('datas', datas);
                         //console.log('series', this.commentChartOption.series);
 
-                        console.log(this.lineData.all);
-                        this.commentNums = [
+                        console.log('this.lindeData',this.lineData);
+                        /*this.commentNums = [
                             _.chain(this.lineData.all).map(item => _.reduce(item, (memo, val) => (memo + val), 0)).reduce((memo, val) => (memo, val), 0).value(),
                             _.chain(this.lineData.wechat).map(item => _.reduce(item, (memo, val) => (memo + val), 0)).reduce((memo, val) => (memo, val), 0).value(),
                             _.chain(this.lineData.weibo).map(item => _.reduce(item, (memo, val) => (memo + val), 0)).reduce((memo, val) => (memo, val), 0).value(),
                             _.chain(this.lineData.client).map(item => _.reduce(item, (memo, val) => (memo + val), 0)).reduce((memo, val) => (memo, val), 0).value(),
                             _.chain(this.lineData.web).map(item => _.reduce(item, (memo, val) => (memo + val), 0)).reduce((memo, val) => (memo, val), 0).value(),
                             _.chain(this.lineData.overseas).map(item => _.reduce(item, (memo, val) => (memo + val), 0)).reduce((memo, val) => (memo, val), 0).value()
+                        ];*/
+                        const allNums=_.reduce(this.lineData.all.negative,(mome, val) => mome + val, 0)+_.reduce(this.lineData.all.neutral,(mome, val) => mome + val, 0)
+                        +_.reduce(this.lineData.all.positive,(mome, val) => mome + val, 0);
+
+                        const wechatNums=_.reduce(this.lineData.wechat.negative,(mome, val) => mome + val, 0)+_.reduce(this.lineData.wechat.neutral,(mome, val) => mome + val, 0)
+                        +_.reduce(this.lineData.wechat.positive,(mome, val) => mome + val, 0);
+
+                        const weiboNums=_.reduce(this.lineData.weibo.negative,(mome, val) => mome + val, 0)+_.reduce(this.lineData.weibo.neutral,(mome, val) => mome + val, 0)
+                        +_.reduce(this.lineData.weibo.positive,(mome, val) => mome + val, 0);
+
+                        const clientNums=_.reduce(this.lineData.client.negative,(mome, val) => mome + val, 0)+_.reduce(this.lineData.client.neutral,(mome, val) => mome + val, 0)
+                        +_.reduce(this.lineData.client.positive,(mome, val) => mome + val, 0);
+
+                        const webNums=_.reduce(this.lineData.web.negative,(mome, val) => mome + val, 0)+_.reduce(this.lineData.web.neutral,(mome, val) => mome + val, 0)
+                        +_.reduce(this.lineData.web.positive,(mome, val) => mome + val, 0);
+
+                        const overseasNums=_.reduce(this.lineData.overseas.negative,(mome, val) => mome + val, 0)+_.reduce(this.lineData.overseas.neutral,(mome, val) => mome + val, 0)
+                        +_.reduce(this.lineData.overseas.positive,(mome, val) => mome + val, 0);
+
+                        console.log(allNums,
+                                wechatNums,
+                                weiboNums,
+                                clientNums,
+                                webNums,
+                                overseasNums);
+                        this.commentNums =[
+                            allNums,
+                            wechatNums,
+                            weiboNums,
+                            clientNums,
+                            webNums,
+                            overseasNums
                         ];
                     }
                 });
@@ -249,6 +330,10 @@
 
                 if(idx == 0){
                     this.isShow = true;
+                    this.commentPieOption2.series[0].data =[
+                        {value:_.reduce(this.lineData.all.positive,(mome, val) => mome + val, 0), name:this.words.positive},
+                        {value:_.reduce(this.lineData.all.negative,(mome, val) => mome + val, 0), name:this.words.negative},
+                        {value:_.reduce(this.lineData.all.neutral,(mome, val) => mome + val, 0), name:this.words.neutral},]
                     return;
                 }
 
@@ -257,15 +342,16 @@
                     return ({ value: _.reduce(value, (memo, val) => memo + val, 0),name: this.words[key] });
                 });
                 //this.getCommentList();
+
             },
             initData(){
                 this.lineData = {
-                    all: {positive: [], negative: [], neutral: []},
                     wechat: {positive: [], negative: [], neutral: []},
                     weibo: {positive: [], negative: [], neutral: []},
                     client: {positive: [], negative: [], neutral: []},
                     web: {positive: [], negative: [], neutral: []},
-                    overseas: {positive: [], negative: [], neutral: []}
+                    overseas: {positive: [], negative: [], neutral: []},
+                    all: {positive: [], negative: [], neutral: []}
                 };
             },
             init(){

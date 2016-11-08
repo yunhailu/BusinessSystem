@@ -6,9 +6,15 @@
         <div class="panel-title-delete" @click="deleteItem();"><i class="fa fa-minus"></i></div>
     </div>
     <div class="charts">
-        <div class="chart timeBar" v-echarts="sentimentBarOption" :img.sync="master" :loading="sentimentBarLoading" ></div><!--theme="infographic"-->
-        <div class="chart percentBar" v-echarts="sentimentChartOption" :img.sync="sub" :loading="sentimentChartLoading" ></div>
-        <!--<echarts :options="sentimentChartOption"></echarts>-->
+        <!--<div class="chart timeBar" v-echarts="sentimentBarOption" :img.sync="master" :loading="sentimentBarLoading" ></div>&lt;!&ndash;theme="infographic"&ndash;&gt;-->
+        <!--<div class="chart percentBar" v-echarts="sentimentChartOption"  :loading="sentimentChartLoading" ></div>-->
+
+        <div class="chart timeBar"  :img.sync="master" :loading="sentimentBarLoading" >
+            <echarts :options="sentimentBarOption" initOptions="sentimentBarOption" :img.sync="master"></echarts>
+        </div><!--theme="infographic"-->
+        <div class="chart percentBar"   :loading="sentimentChartLoading" >
+            <echarts :options="sentimentChartOption" initOptions="sentimentChartOption" :img.sync="sub"></echarts>
+        </div>
     </div>
     <!--<div class="charts"></div>-->
 
@@ -22,7 +28,7 @@
     import moment from 'moment';
     //import { list } from "../../../config/tmpData";
     import ListPanel from '../../Common/ListPanel/ListPanel.vue';
-    //import Echarts from '../../Common/Echarts/Echarts.vue';
+    import Echarts from '../../Common/Echarts/Echarts.vue';
     import Tabs from '../../Common/Tabs/Tabs.vue';
     import Local from "../../../local/local";
     import {Chart, Pie} from '../../../config/config';
@@ -244,7 +250,7 @@
                             all.fear.push(this.lineData.wechat.fear[index] + this.lineData.weibo.fear[index] + this.lineData.client.fear[index] + this.lineData.web.fear[index] + this.lineData.overseas.fear[index]);
                         });
                         this.lineData.all = all;
-                        console.log(this.lineData);
+                        //console.log(this.lineData);
 
                         this.sentimentBarLoading = false;
                         this.sentimentChartLoading = false;
@@ -285,7 +291,7 @@
             }
         },
         components:{
-            Tabs, ListPanel, //Echarts
+            Tabs, ListPanel, Echarts
         },
         ready(){
             this.init();

@@ -85,3 +85,7 @@ export const setCompareEnd = (store, end) => {
 export const setCompareTimeRangeString = (store, timeRangeString) => {
 	store.dispatch(types.UPDATE_COMPARE_TIME_RANGE_STRING, timeRangeString);
 };
+
+export const setCompareSourceCount = (store, sourceCount) => {
+	store.dispatch(types.UPDATE_COMPARE_SOURCE_COUNT, sourceCount);
+};

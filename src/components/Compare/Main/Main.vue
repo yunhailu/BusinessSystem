@@ -1,10 +1,13 @@
 ﻿<template>
+    <tabs :datas="compareNums"></tabs>
     <!--<span>Compare Panel</span>-->
+
     <div class="compare-charts">
         <div class="chart" v-echarts="compareChartOption" :loading="compareChartLoading" theme="macarons"></div>
         <div class="chart radar" v-echarts="compareRadarOption" :loading="compareRadarLoading" theme="macarons"></div>
         <div class="chart pie" v-echarts="comparePieOption" :loading="comparePieLoading" theme="macarons"></div>
     </div>
+    <tips :visible.sync="loadingParams.visiable" :tipsparam.sync="loadingParams"></tips>
 </template>
 <style lang="less" scoped>
     @import "Main.less";
@@ -12,10 +15,12 @@
 <script type="text/ecmascript-6">
     import _ from 'underscore';
     import Local from "../../../local/local";
+    import  Tabs from '../Tabs/Tabs.vue';
+    import  Tips from '../../Common/Tips/Tips.vue';
     import {Chart, Pie} from '../../../config/config';
     import * as Api from "../../../widgets/Api";
-    import { topicList, activeCompareTopic, topicGroupActiveId, compareSource, compareSubTopic, compareStart, compareEnd, compareTimeRange, compareTimeRangeString } from '../../../vuex/getters';
-    import { setTopicList, setActiveCompareTopic, setTopicGroupActiveId, setCompareSource, setCompareSubTopic, setCompareStart, setCompareEnd, setCompareTimeRange, setCompareTimeRangeString  } from "../../../vuex/actions";
+    import { topicList, activeCompareTopic, topicGroupActiveId, compareSource, compareSubTopic, compareStart, compareEnd, compareTimeRange, compareTimeRangeString, compareSourceCount } from '../../../vuex/getters';
+    import { setTopicList, setActiveCompareTopic, setTopicGroupActiveId, setCompareSource, setCompareSubTopic, setCompareStart, setCompareEnd, setCompareTimeRange, setCompareTimeRangeString, setCompareSourceCount  } from "../../../vuex/actions";
 
     export default{
         props: [],
@@ -23,6 +28,11 @@
             const common = Local().common;
             return{
                 common,
+                loadingParams:{
+                    visiable:false,
+                    type:'loading',
+                    content:'请稍后'
+                },
                 data:[],
                 VariableChartData:{
                     all: {},
@@ -129,7 +139,8 @@
                         }
                     },
                     series: []
-                }
+                },
+                compareNums:[]
             }
         },
         methods:{
@@ -240,6 +251,17 @@
                 this.VariableChartData.web[newTopic[0].topic_name]=web;
                 this.VariableChartData.overseas[newTopic[0 ].topic_name]=overseas;
                 console.log('VariableChartData',this.VariableChartData);
+                console.log('values',_.values(this.VariableChartData.all));
+
+                console.log(this.VariableChartData.all);
+                console.log('JSON',JSON.stringify(this.VariableChartData.all));
+                console.log(typeof this.VariableChartData.all);
+
+                console.log('查看watch是不是首席变化');
+                //tabs
+                this.getSourceCount();
+
+
             },
             //添加雷达数据处理
             dealRadarData(newTopic,details){
@@ -374,9 +396,11 @@
             },
             //处理SentimentData
             dealAddSentimentData(newTopic, topicParams){
+                this.loadingParams.visiable = true;
                 Api.getSentimentDetail(topicParams).then(resp =>{
                     //this.compareRadarLoading = false;
                     if(resp.data.code == 0){
+                        this.loadingParams.visiable = false;
                         const details = resp.data.data;
                         const intervalDate = _.pluck(details,'date');
                         this.intervalTime =intervalDate;
@@ -404,13 +428,16 @@
                         this.mapData(this.data,intervalDate);
                     }
                 });
+
             },
             //加上后only一个数据sen
             dealAddOnlyOneSentimentData(newTopic,topicParams){
                 //this.compareRadarLoading = true;
+                this.loadingParams.visiable = true;
                 Api.getSentimentDetail(topicParams).then(resp =>{
                     //this.compareRadarLoading = false;
                     if(resp.data.code == 0){
+                        this.loadingParams.visiable = false;
                         const details = resp.data.data;
                         console.log('details',details)
                         const intervalDate = _.pluck(details,'date');
@@ -422,6 +449,41 @@
                     }
                 })
             },
+//
+            getSourceCount(){
+                console.log(_.values(this.VariableChartData.all));
+                const midAllCount = _.map(_.values(this.VariableChartData.all),item=>{
+                    return _.reduce(item, function(memo, num){ return memo + num; }, 0);
+                });
+                const midWechatCount = _.map(_.values(this.VariableChartData.wechat),item=>{
+                    return _.reduce(item, function(memo, num){ return memo + num; }, 0);
+                });
+                const midWeiboCount = _.map(_.values(this.VariableChartData.weibo),item=>{
+                    return _.reduce(item, function(memo, num){ return memo + num; }, 0);
+                });
+                const midClientCount = _.map(_.values(this.VariableChartData.client),item=>{
+                    return _.reduce(item, function(memo, num){ return memo + num; }, 0);
+                });
+                const midWebCount = _.map(_.values(this.VariableChartData.web),item=>{
+                    return _.reduce(item, function(memo, num){ return memo + num; }, 0);
+                });
+                const midOverseasCount = _.map(_.values(this.VariableChartData.overseas),item=>{
+                    return _.reduce(item, function(memo, num){ return memo + num; }, 0);
+                });
+                console.log('midCount',midAllCount)
+                let compareSourceCount = this.compareSourceCount;
+                compareSourceCount.all = _.reduce(midAllCount, function(memo, num){ return memo + num; }, 0);
+                compareSourceCount.wechat = _.reduce(midWechatCount, function(memo, num){ return memo + num; }, 0);
+                compareSourceCount.weibo = _.reduce(midWeiboCount, function(memo, num){ return memo + num; }, 0);
+                compareSourceCount.client = _.reduce(midClientCount, function(memo, num){ return memo + num; }, 0);
+                compareSourceCount.web = _.reduce(midWebCount, function(memo, num){ return memo + num; }, 0);
+                compareSourceCount.overseas = _.reduce(midOverseasCount, function(memo, num){ return memo + num; }, 0);
+                console.log('___',compareSourceCount);
+                this.compareNums = _.values(compareSourceCount);
+//                this.setCompareSourceCount(_.values(compareSourceCount));
+                //console.log('....',this.compareSourceCount.all);
+                console.log('查看修改',this.compareNums);
+            },
             //切换赋值
             changeSource(){
                 const newSource = this.compareSource;
@@ -432,27 +494,23 @@
                         this.data =this.VariableChartData.all;
                         this.radarData =this.VariableRadarData.all;
                         break;
-                    case '全部':
-                        this.data =this.VariableChartData.all;
-                        this.radarData =this.VariableRadarData.all;
-                        break;
-                    case '微信':
+                    case 'wechat':
                         this.data =this.VariableChartData.wechat;
                         this.radarData =this.VariableRadarData.wechat;
                         break;
-                    case '微博':
+                    case 'weibo':
                         this.data =this.VariableChartData.weibo;
                         this.radarData =this.VariableRadarData.weibo;
                         break;
-                    case '客户端':
+                    case 'client':
                         this.data =this.VariableChartData.client;
                         this.radarData =this.VariableRadarData.client;
                         break;
-                    case '网页':
+                    case 'web':
                         this.data =this.VariableChartData.web;
                         this.radarData =this.VariableRadarData.web;
                         break;
-                    case '海外':
+                    case 'overseas':
                         this.data =this.VariableChartData.overseas;
                         this.radarData =this.VariableRadarData.overseas;
                         break;
@@ -464,8 +522,8 @@
 
         },
         vuex:{
-            actions:{setTopicList ,setActiveCompareTopic ,setTopicGroupActiveId, setCompareSource, setCompareSubTopic, setCompareStart, setCompareEnd, setCompareTimeRange, setCompareTimeRangeString},
-            getters:{topicList ,activeCompareTopic , topicGroupActiveId, compareSource, compareSubTopic, compareStart, compareEnd, compareTimeRange, compareTimeRangeString  }
+            actions:{setTopicList ,setActiveCompareTopic ,setTopicGroupActiveId, setCompareSource, setCompareSubTopic, setCompareStart, setCompareEnd, setCompareTimeRange, setCompareTimeRangeString, setCompareSourceCount},
+            getters:{topicList ,activeCompareTopic , topicGroupActiveId, compareSource, compareSubTopic, compareStart, compareEnd, compareTimeRange, compareTimeRangeString, compareSourceCount  }
         },
         watch:{
             activeCompareTopic: {
@@ -483,9 +541,11 @@
                         this.compareRadarOption.legend.data=[];
                         this.compareRadarOption.series=[];
                         this.initData();
+                        this.compareNums = [0,0,0,0,0,0];
                         return ;
                     }else if(oldVal.length == 0){
                         //新值不为空---如果老值为空
+                        this.compareNums=[];
                         const newTopic = val;
                         const topicParams = {
                             topic_id:_.isEmpty(newTopic) ? '' : newTopic[0].topic_id,
@@ -498,7 +558,6 @@
                         };
                         this.dealAddOnlyOneSummaryData(newTopic,topicParams);
                         this.dealAddOnlyOneSentimentData(newTopic,topicParams);
-
                     }else{
                         //都不为空,判断是否是同一个group--yes
                         if(_.find(currentGroup.list,function(item){return item.topic_name == oldVal[0].topic_name;}) !=undefined){
@@ -506,6 +565,7 @@
                                 //this.compareChartLoading = true;
                                 //this.comparePieLoading = true;
                                 //this.compareRadarLoading = true;
+                                this.compareNums=[];
                                 const newTopic = _.difference(val, oldVal);
                                 console.log(newTopic);
                                 const topicParams = {
@@ -520,6 +580,7 @@
                                 this.dealAddSummaryData(newTopic,topicParams);
                                 this.dealAddSentimentData(newTopic,topicParams);
                             } else {
+                                this.compareNums=[];
                                 var oldTopic = _.difference(oldVal, val);
                                 console.log(oldTopic);
                                 console.log('pre',this.VariableRadarData)
@@ -538,13 +599,22 @@
                                 this.VariableRadarData.overseas=_.omit(this.VariableRadarData.overseas,oldTopic[0].topic_name);
                                 const intervalDate =this.intervalTime;
                                 console.log('after',this.VariableRadarData);
-                                this.data =this.VariableChartData.all;
-                                this.radarData = this.VariableRadarData.all;
+                                /*this.data =this.VariableChartData.all;
+                                this.radarData = this.VariableRadarData.all;*/
                                 this.mapData(this.data,intervalDate);
                                 this.mapRadarData(this.radarData,intervalDate);
+                                console.log(this.VariableChartData.all);
+                                console.log('JSON',JSON.stringify(this.VariableChartData.all));
+                                console.log(typeof this.VariableChartData.all);
+
+                                console.log('查看watch是不是首席变化');
+                                //tabs
+                                this.getSourceCount();
+
                             };
                         }else {
-                            console.log('这里对空数据做出判断')
+                            console.log('这里对空数据做出判断');
+                            this.compareNums=[];
                             const newTopic = val;
                             const topicParams = {
                                 topic_id:_.isEmpty(newTopic) ? '' : newTopic[0].topic_id,
@@ -561,6 +631,7 @@
                         }
 
                     }
+
                 }
             },
             compareSource:{
@@ -568,7 +639,6 @@
                     console.log(this.compareSource);
                     //判断修改后的源
                     this.changeSource();
-
                     //展示修改后的源,刷新
 console.log(this.data);
                 }
@@ -577,22 +647,26 @@ console.log(this.data);
                 handler(){
                     const intervalDate = this.intervalTime;
                     this.mapData(this.data,intervalDate);
-
+                    console.log('查看data是不是首席变化');
                 }
             },
 
             //深度监听varableradardata就好了，他变对应数据就变，判断是哪端
             //当我们在微信页面时，点击一个list
-            /*VariableRadarData:{
+            VariableChartData:{
+                deep:true,
                 handler(){
-                    const intervalDate = this.intervalTime;
-                    this.mapRadarData(this.radarData,intervalDate);
+                    const source = this.compareSource;
+                    console.log('source',source);
+                    this.data = this.VariableChartData[source];
+                    this.radarData = this.VariableRadarData[source];
                 }
-            },*/
+            },
             radarData:{
                 handler(){
                     const intervalDate = this.intervalTime;
                     this.mapRadarData(this.radarData,intervalDate);
+                    console.log('查看radar是不是首席变化');
                 }
             },
             compareTimeRangeString:{
@@ -621,7 +695,7 @@ console.log(this.data);
             }*/
         },
         components:{
-
+            Tabs,Tips
         }
     }
 </script>
