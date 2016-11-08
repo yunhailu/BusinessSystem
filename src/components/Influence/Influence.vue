@@ -3,7 +3,7 @@
     <!--<span>Influence</span>-->
     <div class="popular">
         <ul class="popular-list">
-            <li class="popular-list-item" v-for="item in popularList" @click="showPopList(item)">
+            <li class="popular-list-item" v-for="item in popularList" @click="showNewList(item)">
                 <i class="fa" :class="[item.icon ? 'fa-'+item.icon : 'fa-cog']"></i>
                 <span class="popular-list-item-title">{{item.title}}</span>
                 <div class="popular-list-item-con">
@@ -141,13 +141,10 @@
                 Api.getCommentList({topic_id,author,size}).then(resp => {
                     //console.log("getCommentList", resp.data);
                     if (resp.data.code == 0) {
-
                         console.log(resp.data.data);
-
-
                         //接口的详情的数据的更新
                        //操作步骤的过程实现
-                        console.log('11111111111111111111111111111111111');
+                        //console.log('11111111111111111111111111111111111');
                         const newDates = _.map(resp.data.data, (item)=> {
 
                             item.context = item.content;
@@ -170,6 +167,65 @@
                 // }
 
             },
+            showNewList(item){
+                console.log('11111111111111111111111111111111111');
+
+                const topic_id = this.activeAnalyticsTopic.topic_id,
+                        topic = this.activeAnalyticsTopic.topic_name,
+                        subtopic = this.analyticsSubTopic,
+                        source = this.analyticsSource,
+                        time_interval = this.analyticsTimeRange,
+                        time_dimension = time_interval > 7 ? 1 : 0,
+                        end = this.analyticsEnd,
+                        start = this.analyticsStart;
+                Api.getInfluenceList({topic_id, topic, subtopic, source, start, end, time_dimension}).then(resp => {
+                    this.loadingParams.visiable = false;
+                    if(resp.data.code ==0){
+
+                       // console.log(item.icon);
+                        const influanceInfo = resp.data.data;
+
+                        if(item.icon=='user'){
+                            var influanceInfos =_.sortBy(influanceInfo, function(item){
+                                return -item.post;
+                            });
+                        }
+                        else if (item.icon=='user-plus'){
+
+                            var influanceInfos =_.sortBy(influanceInfo, function(item){
+                                return -item.comments;
+
+                            });
+                        }
+                        else if (item.icon=='edge'){
+                            var influanceInfos =_.sortBy(influanceInfo, function(item){
+                                return -item.shareCount;
+
+                            });
+                        }
+                        else if (item.icon=='chrome'){
+                            var influanceInfos =_.sortBy(influanceInfo, function(item){
+
+                                return -item.rate.value.replace('%',0);
+
+                            });
+                        }
+                        else{
+                            var influanceInfos =_.sortBy(influanceInfo, function(item){
+                            return -item.post;
+                        });}
+
+                      //  console.log(icood);
+
+                       // this.influancerList = _.map(influanceInfos, info => info);
+                        this.influancerTable = _.filter(influanceInfos, (info, index) => {
+                            return (index < 20);
+                        });
+                    }
+                });
+
+            },
+
             getArticles(){
                 return {
                     data:{
@@ -198,7 +254,6 @@
                     }
                 }
             },
-
             getPopularList(){
                 const icons = ["user", "user-plus", "edge", "chrome"];
                 const topic_id = this.activeAnalyticsTopic.topic_id,
@@ -245,6 +300,7 @@
             init(){
                 this.getPopularList();
                 this.getInfluenceList();
+
             }
         },
         filters: {
