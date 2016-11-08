@@ -9,7 +9,7 @@
     <!--<div class="charts"></div>-->
 
     <list-panel :list="list" :options="options" :select-title="selectTitle" :select-value.sync="sortVal"></list-panel>
-    <tips :visible.sync="loadingParams.visiable" :tipsparam.sync="loadingParams"></tips>
+    <!--<tips :visible.sync="loadingParams.visiable" :tipsparam.sync="loadingParams"></tips>-->
 </template>
 <style lang="less" scoped>
     @import "Sentiment.less";

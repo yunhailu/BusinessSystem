@@ -7,6 +7,7 @@
         <div class="chart radar" v-echarts="compareRadarOption" :loading="compareRadarLoading" theme="macarons"></div>
         <div class="chart pie" v-echarts="comparePieOption" :loading="comparePieLoading" theme="macarons"></div>
     </div>
+    <!--<tips :visible.sync="loadingParams.visiable" :tipsparam.sync="loadingParams"></tips>-->
 </template>
 <style lang="less" scoped>
     @import "Main.less";

@@ -58,7 +58,7 @@
             sourceAction(val, idx){
                 console.log(val, idx);
                 this.sourceActive = idx;
-                this.setCompareSource(val);
+                this.setCompareSource(val.name);
             }
         },
         filters:{
@@ -82,8 +82,8 @@
             if(this.$route.path.indexOf('compare') > -1){
                 console.log('datas', this.datas);
                 this.setCompareType(this.$route.name);
-                const source = ["all", "wechat", "weibo", "client", "web", "oversea"];
-                this.setCompareSource(source[0]);
+                //const source = ["all", "wechat", "weibo", "client", "web", "oversea"];
+                //this.setCompareSource(source[0]);
 
             }
         },
