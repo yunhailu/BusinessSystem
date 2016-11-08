@@ -4,6 +4,7 @@
     <div class="charts">
         <div class="chart commentLeftBar" v-echarts="commentBarOption" :click="clickChartAction" :loading="commentBarLoading" theme="macarons"></div><!--theme="infographic"-->
         <div class="chart commentRightBar" v-echarts="commentChartOption" :loading="commentChartLoading" v-show="isShow" theme="macarons"></div>
+        <!--<div class="chart commentRightBar" v-echarts="commentPieOption2" :loading="commentPieLoading2" v-show="isShow" theme="macarons"></div>-->
         <div class="chart commentRightBar" v-echarts="commentPieOption" :loading="commentChartLoading" v-show="!isShow" theme="macarons"></div>
     </div>
     <list-panel :list="list" :options="options" :select-title="selectTitle" :select-value.sync="sortVal"></list-panel>
@@ -94,6 +95,37 @@
                     ]
                 },
 
+                /*commentPieLoading2:true,
+                commentPieOption2:{
+                    tooltip: {
+                        show:true,
+                        trigger: 'item',
+                        formatter:"{b}:({d}%)"
+                    },
+                    legend: _.extend({}, Pie.legend, {
+                        bottom: 0,
+                        data: [words.positive, words.negative, words.neutral]
+                    }),
+                    color:['#2FCC71','#E64D3D', '#F1C40F', '#3598DC', '#737373'],
+                    textStyle: Pie.textStyle,
+                    toolbox: Pie.toolbox,
+                    series: [
+
+                        {
+                            label:{
+                                normal:{
+                                    show:true,
+                                    formatter:"{d}%"
+                                }
+                            },
+                            name:'',
+                            type:'pie',
+                            radius: '60%',
+                            center: ['50%', '50%'],
+                            data:[]
+                        }
+                    ]
+                },*/
                 commentChartLoading: true,
                 commentChartOption: {
                     tooltip: _.extend({}, Chart.tooltip, {}),
