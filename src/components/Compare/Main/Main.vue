@@ -7,7 +7,7 @@
         <div class="chart radar" v-echarts="compareRadarOption" :loading="compareRadarLoading" theme="macarons"></div>
         <div class="chart pie" v-echarts="comparePieOption" :loading="comparePieLoading" theme="macarons"></div>
     </div>
-    <!--<tips :visible.sync="loadingParams.visiable" :tipsparam.sync="loadingParams"></tips>-->
+    <tips :visible.sync="loadingParams.visiable" :tipsparam.sync="loadingParams"></tips>
 </template>
 <style lang="less" scoped>
     @import "Main.less";
@@ -16,6 +16,7 @@
     import _ from 'underscore';
     import Local from "../../../local/local";
     import  Tabs from '../Tabs/Tabs.vue';
+    import  Tips from '../../Common/Tips/Tips.vue';
     import {Chart, Pie} from '../../../config/config';
     import * as Api from "../../../widgets/Api";
     import { topicList, activeCompareTopic, topicGroupActiveId, compareSource, compareSubTopic, compareStart, compareEnd, compareTimeRange, compareTimeRangeString, compareSourceCount } from '../../../vuex/getters';
@@ -27,6 +28,11 @@
             const common = Local().common;
             return{
                 common,
+                loadingParams:{
+                    visiable:false,
+                    type:'loading',
+                    content:'请稍后'
+                },
                 data:[],
                 VariableChartData:{
                     all: {},
@@ -390,9 +396,11 @@
             },
             //处理SentimentData
             dealAddSentimentData(newTopic, topicParams){
+                this.loadingParams.visiable = true;
                 Api.getSentimentDetail(topicParams).then(resp =>{
                     //this.compareRadarLoading = false;
                     if(resp.data.code == 0){
+                        this.loadingParams.visiable = false;
                         const details = resp.data.data;
                         const intervalDate = _.pluck(details,'date');
                         this.intervalTime =intervalDate;
@@ -425,9 +433,11 @@
             //加上后only一个数据sen
             dealAddOnlyOneSentimentData(newTopic,topicParams){
                 //this.compareRadarLoading = true;
+                this.loadingParams.visiable = true;
                 Api.getSentimentDetail(topicParams).then(resp =>{
                     //this.compareRadarLoading = false;
                     if(resp.data.code == 0){
+                        this.loadingParams.visiable = false;
                         const details = resp.data.data;
                         console.log('details',details)
                         const intervalDate = _.pluck(details,'date');
@@ -484,27 +494,23 @@
                         this.data =this.VariableChartData.all;
                         this.radarData =this.VariableRadarData.all;
                         break;
-                    case '全部':
-                        this.data =this.VariableChartData.all;
-                        this.radarData =this.VariableRadarData.all;
-                        break;
-                    case '微信':
+                    case 'wechat':
                         this.data =this.VariableChartData.wechat;
                         this.radarData =this.VariableRadarData.wechat;
                         break;
-                    case '微博':
+                    case 'weibo':
                         this.data =this.VariableChartData.weibo;
                         this.radarData =this.VariableRadarData.weibo;
                         break;
-                    case '客户端':
+                    case 'client':
                         this.data =this.VariableChartData.client;
                         this.radarData =this.VariableRadarData.client;
                         break;
-                    case '网页':
+                    case 'web':
                         this.data =this.VariableChartData.web;
                         this.radarData =this.VariableRadarData.web;
                         break;
-                    case '海外':
+                    case 'overseas':
                         this.data =this.VariableChartData.overseas;
                         this.radarData =this.VariableRadarData.overseas;
                         break;
@@ -593,11 +599,10 @@
                                 this.VariableRadarData.overseas=_.omit(this.VariableRadarData.overseas,oldTopic[0].topic_name);
                                 const intervalDate =this.intervalTime;
                                 console.log('after',this.VariableRadarData);
-                                this.data =this.VariableChartData.all;
-                                this.radarData = this.VariableRadarData.all;
+                                /*this.data =this.VariableChartData.all;
+                                this.radarData = this.VariableRadarData.all;*/
                                 this.mapData(this.data,intervalDate);
                                 this.mapRadarData(this.radarData,intervalDate);
-
                                 console.log(this.VariableChartData.all);
                                 console.log('JSON',JSON.stringify(this.VariableChartData.all));
                                 console.log(typeof this.VariableChartData.all);
@@ -648,12 +653,15 @@ console.log(this.data);
 
             //深度监听varableradardata就好了，他变对应数据就变，判断是哪端
             //当我们在微信页面时，点击一个list
-            /*VariableRadarData:{
+            VariableChartData:{
+                deep:true,
                 handler(){
-                    const intervalDate = this.intervalTime;
-                    this.mapRadarData(this.radarData,intervalDate);
+                    const source = this.compareSource;
+                    console.log('source',source);
+                    this.data = this.VariableChartData[source];
+                    this.radarData = this.VariableRadarData[source];
                 }
-            },*/
+            },
             radarData:{
                 handler(){
                     const intervalDate = this.intervalTime;
@@ -687,7 +695,7 @@ console.log(this.data);
             }*/
         },
         components:{
-            Tabs
+            Tabs,Tips
         }
     }
 </script>
