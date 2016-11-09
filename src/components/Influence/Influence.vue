@@ -135,10 +135,9 @@
                 const author = item.influencer;
                 const size = this.$route.params.size;
 
-                this.getArticles({topic_id,author,size});
-
+                this.getArticlesList({topic_id,author,size});
             },
-            getArticles(params){
+            getArticlesList(params){
                 Api.getCommentList(params).then(resp => {
                     //console.log("getCommentList", resp.data);
                     if (resp.data.code == 0) {
@@ -148,6 +147,8 @@
                             item.date =item.pDate;
                             return item;
                         });
+
+
 
                         this.popList = newDates;
                         this.selectItem = item;
@@ -218,35 +219,7 @@
 
             },
 
-            getArticles(){
-                return {
-                    data:{
-                        "code": 0,
-                        "data": [{
-                            "id": "123",
-                            "title": "今日头条",
-                            "context": "今日头条今日头条今日头条今日头条今日头条今日头条今日头条今日头条今日头条今日头条今日头条今日头条今日头条",
-                            "date": "2016-10-20"
-                        },{
-                            "id": "123",
-                            "title": "今日头条",
-                            "context": "今日头条今日头条今日头条今日头条今日头条今日头条今日头条今日头条今日头条今日头条今日头条今日头条今日头条",
-                            "date": "2016-10-20"
-                        },{
-                            "id": "123",
-                            "title": "今日头条",
-                            "context": "今日头条今日头条今日头条今日头条今日头条今日头条今日头条今日头条今日头条今日头条今日头条今日头条今日头条",
-                            "date": "2016-10-20"
-                        },{
-                            "id": "123",
-                            "title": "今日头条",
-                            "context": "今日头条今日头条今日头条今日头条今日头条今日头条今日头条今日头条今日头条今日头条今日头条今日头条今日头条",
-                            "date": "2016-10-20"
-                        }]
-                    }
-                }
 
-            },
             getPopularList(){
                 const icons = ["user", "user-plus", "edge", "chrome"];
                 const topic_id = this.activeAnalyticsTopic.topic_id,
@@ -281,8 +254,9 @@
                     this.loadingParams.visiable = false;
                     if(resp.data.code ==0){
                         const influanceInfos = resp.data.data;
-                        console.log(resp.data.data);
 
+                        //console.log('00000');
+                        console.log(resp.data.data);
                         this.influancerList = _.map(influanceInfos, info => info);
                         this.influancerTable = _.filter(this.influancerList, (info, index) => {
                             return (index < 20);
