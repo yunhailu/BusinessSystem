@@ -142,16 +142,8 @@
                 Api.getCommentList(params).then(resp => {
                     //console.log("getCommentList", resp.data);
                     if (resp.data.code == 0) {
-<<<<<<< HEAD
-                        console.log(resp.data.data);
-                        //接口的详情的数据的更新
-                       //操作步骤的过程实现
-                        //console.log('11111111111111111111111111111111111');
-=======
-                        //console.log(resp.data.data);
-                        //接口的详情的数据的更新
-                        //操作步骤的过程实现
->>>>>>> c8596e4278e0e7e3bc964a0dc26c2f7f5b126928
+
+
                         const newDates = _.map(resp.data.data, (item)=> {
 
                             item.context = item.content;
@@ -165,15 +157,6 @@
 
                     }
                 });
-<<<<<<< HEAD
-
-
-                // const resp = this.getArticles();
-                // if(resp.data.code == 0){
-                //     this.popList = resp.data.data;
-                //     this.selectItem = item;
-                // }
-
             },
             showNewList(item){
                 console.log('11111111111111111111111111111111111');
@@ -261,8 +244,6 @@
                         }]
                     }
                 }
-=======
->>>>>>> c8596e4278e0e7e3bc964a0dc26c2f7f5b126928
             },
             getPopularList(){
                 const icons = ["user", "user-plus", "edge", "chrome"];
