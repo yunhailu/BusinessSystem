@@ -120,6 +120,14 @@
                     //console.log('date',val);
                     const start = moment(val.split(' ~ ')[0], "YYYY-MM-DD");
                     const end = moment(val.split(' ~ ')[1], "YYYY-MM-DD");
+                    const currentData = moment().format('YYYY-MM-DD');
+                    console.log(currentData,this.compareEnd);
+                    if(moment(end)>moment(currentData)){
+                        alert('请求区间错误,返回最近7天对比数据');
+                        this.dateVal =  `${ moment().subtract(7, 'days').format('YYYY-MM-DD')} ~ ${moment().format('YYYY-MM-DD')}`;
+                        this.selectTime(7);
+                        return ;
+                    }
                     const days = end.diff(start)/1000/3600/24;
                     this.setAnalyticsStart(val.split(' ~ ')[0]);
                     this.setAnalyticsEnd(val.split(' ~ ')[1]);

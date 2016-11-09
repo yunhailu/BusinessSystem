@@ -232,12 +232,12 @@
                                 this.lineData[key].positive.push(detail.values[key].positive);
                                 this.lineData[key].negative.push(detail.values[key].negative);
                                 this.lineData[key].neutral.push(detail.values[key].neutral);
-                                this.lineData.all.positive.push()
                             });
                            // all.positive.push(this.lineData.wechat.positive[index] + this.lineData.weibo.positive[index] + this.lineData.client.positive[index] + this.lineData.web.positive[index] + this.lineData.overseas.positive[index]);
                             //all.negative.push(_this.lineData.wechat.negative[index] + _this.lineData.weibo.negative[index] + _this.lineData.client.negative[index] + _this.lineData.web.positive[index] + _this.lineData.overseas.positive[index]);
                             //all.neutral.push(_this.lineData.wechat.neutral[index] + _this.lineData.weibo.neutral[index] + _this.lineData.client.neutral[index] + _this.lineData.web.positive[index] + _this.lineData.overseas.positive[index]);
                         });
+                        console.log('this.all',this.lineData);
                         all.positive =_.map(_.zip(this.lineData.wechat.positive,this.lineData.weibo.positive,this.lineData.client.positive,this.lineData.web.positive,this.lineData.overseas.positive),item =>{
                             return _.reduce(item, function(memo, num){ return memo + num; }, 0);
                         });

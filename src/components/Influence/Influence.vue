@@ -1,4 +1,4 @@
-<template>
+﻿<template>
     <tabs :datas="influancerNums"></tabs>
     <!--<span>Influence</span>-->
     <div class="popular">
@@ -156,9 +156,6 @@
 
                     }
                 });
-
-
-
             },
             showNewList(item){
                 //console.log('11111111111111111111111111111111111');
