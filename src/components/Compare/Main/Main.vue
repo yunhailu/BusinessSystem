@@ -14,6 +14,7 @@
 </style>
 <script type="text/ecmascript-6">
     import _ from 'underscore';
+    import moment from 'moment';
     import Local from "../../../local/local";
     import  Tabs from '../Tabs/Tabs.vue';
     import  Tips from '../../Common/Tips/Tips.vue';
