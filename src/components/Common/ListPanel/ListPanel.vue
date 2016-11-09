@@ -1,6 +1,6 @@
 <template>
     <div class="list-panel">
-        <div class="row list-panel-tools">
+        <div class="row list-panel-tools" v-if="isShowTools">
             <div class="col-md-3">
                 <select-el :options="options" :title="selectTitle" :value.sync="selectValue"></select-el>
             </div>
@@ -26,12 +26,13 @@
             <!--<i class="fa fa-th-list"></i>-->
             <!--</div>-->
         </div>
-        <ul class="list-panel-list">
+        <ul class="list-panel-list" v-if="tableList.length">
             <li class="list-panel-list-item row" v-for="item in tableList">
                 <!--<a :href="item.url" target="_blank">-->
                 <a  @click="showDetail(item);" href="javascript:void(0);" target="_blank">
                     <div class="list-panel-list-item-left col-md-8">
-                        <i class="fa fa-paperclip fa-2x"></i>
+                        <i class="fa fa-paperclip fa-2
+                        x"></i>
                         <div class="list-panel-list-item-left-con">
                             <div class="title">{{{item.title}}}</div>
                             <div class="detail">{{{item.content}}}</div>
@@ -63,6 +64,7 @@
                 </a>
             </li>
         </ul>
+        <div v-if="!tableList.length" class="list-panel-tip">{{listTip}}</div>
         <!--<div class="list-panel-pager">-->
             <!--<page></page>-->
         <!--</div>-->
@@ -79,14 +81,23 @@
     import { activeAnalyticsTopic } from '../../../vuex/getters';
 
     export default{
-        props: ["list", "options", "selectTitle", "selectValue"],
+        props: ["list", "options", "selectTitle", "selectValue", "tools"],
         data(){
             const words = Local().comment;
+            const common = Local().common;
             return{
                 words,
+                common,
+                listTip: common.nullTip,
                 tableList: [],
                 filterActive: 20,
                 sentimentActive: 'all'
+            }
+        },
+        computed: {
+            isShowTools(){
+                if(this.tools === false) return false;
+                return true;
             }
         },
         vuex: {

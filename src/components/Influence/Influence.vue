@@ -1,4 +1,4 @@
-<template>
+﻿<template>
     <tabs :datas="influancerNums"></tabs>
     <!--<span>Influence</span>-->
     <div class="popular">
@@ -142,8 +142,6 @@
                 Api.getCommentList(params).then(resp => {
                     //console.log("getCommentList", resp.data);
                     if (resp.data.code == 0) {
-
-
                         const newDates = _.map(resp.data.data, (item)=> {
 
                             item.context = item.content;
@@ -159,7 +157,7 @@
                 });
             },
             showNewList(item){
-                console.log('11111111111111111111111111111111111');
+                //console.log('11111111111111111111111111111111111');
 
                 const topic_id = this.activeAnalyticsTopic.topic_id,
                         topic = this.activeAnalyticsTopic.topic_name,
