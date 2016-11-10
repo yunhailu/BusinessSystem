@@ -433,6 +433,7 @@
                             webNums,
                             overseasNums
                         ];
+                        console.log('这个',this.sentimentNums);
                     }
 
                 });
