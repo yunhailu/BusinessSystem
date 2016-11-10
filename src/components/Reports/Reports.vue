@@ -38,6 +38,7 @@
             </div>
         </div>
     </div>
+    <footer-component></footer-component>
 </template>
 <style lang="less" scoped>
     @import "Reports.less";
@@ -49,6 +50,7 @@
     import Page from '../Common/Page/Page.vue';
     import * as Api from '../../widgets/Api';
     import { getCookie } from '../../widgets/Cookie';
+    import FooterComponent from '../Footer/Footer.vue';
 
     export default{
         data(){
@@ -84,6 +86,6 @@
                 this.getDashboardList();
             }
         },
-        components:{ HeaderComponent, Page }
+        components:{ HeaderComponent, Page,FooterComponent }
     }
 </script>

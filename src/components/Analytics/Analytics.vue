@@ -28,7 +28,9 @@
 
             <router-view></router-view>
         </div>
+
     </div>
+    <footer-component></footer-component>
 </template>
 <style lang="less">
     @import "Analytics.less";
@@ -39,6 +41,7 @@
     import MenuComponent from './Menu/Menu.vue';
     import Calendar from '../Common/Calendar/Calendar.vue';
     import Local from "../../local/local";
+    import FooterComponent from '../Footer/Footer.vue';
     import { analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic, analyticsDateChange, analyticsStart, analyticsEnd } from '../../vuex/getters';
     import { setAnalyticsType, setAnalyticsTimeRange, setAnalyticsSource, setAnalyticsSubTopic, setAnalyticsDateChange, setAnalyticsStart, setAnalyticsEnd  } from "../../vuex/actions";
 
@@ -70,7 +73,7 @@
             'header-component': HeaderComponent,
             'menu-component': MenuComponent,
             'calendar': Calendar,
-           // 'tabs': Tabs
+           'footer-component': FooterComponent
         },
         methods: {
             searchAction(){

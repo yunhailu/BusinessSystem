@@ -30,6 +30,7 @@
             <main></main>
         </div>
     </div>
+    <footer-component></footer-component>
 </template>
 <style lang="less">
     @import "Compare.less";
@@ -42,6 +43,7 @@
     import Tabs from './Tabs/Tabs.vue';
     import Main from './Main/Main.vue';
     import Local from "../../local/local";
+    import FooterComponent from '../Footer/Footer.vue';
     import { compareType, compareTimeRange, compareSource, compareSubTopic, compareStart, compareEnd, compareTimeRangeString } from '../../vuex/getters';
     import { setCompareType, setCompareTimeRange, setCompareSource, setCompareSubTopic, setCompareStart, setCompareEnd , setCompareTimeRangeString } from "../../vuex/actions";
 
@@ -73,6 +75,7 @@
             'header-component': HeaderComponent,
             'menu-component': MenuComponent,
             'calendar': Calendar,
+            'footer-component': FooterComponent,
             //'tabs': Tabs,
             'main': Main
         },

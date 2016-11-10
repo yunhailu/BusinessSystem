@@ -23,9 +23,11 @@
                         </ul>
                     </div>
                 </div>
-            </div>
+            </div><footer-component></footer-component>
         </div>
     </div>
+
+
 </template>
 <style lang="less" scoped>
     @import "Dashboard.less";
@@ -35,6 +37,7 @@
     import HeaderComponent from '../Header/Header.vue';
     import Local from "../../local/local";
     import * as Api from "../../widgets/Api";
+    import FooterComponent from '../Footer/Footer.vue';
 
     export default{
         data(){
@@ -92,7 +95,7 @@
             }
         },
         components:{
-            HeaderComponent
+            HeaderComponent,FooterComponent,
         },
         route:{
             data(){

@@ -135,9 +135,9 @@
                 const author = item.influencer;
                 const size = this.$route.params.size;
 
-                this.getArticlesList({topic_id,author,size});
+                this.getArticles({topic_id,author,size});
             },
-            getArticlesList(params){
+            getArticles(params){
                 Api.getCommentList(params).then(resp => {
                     //console.log("getCommentList", resp.data);
                     if (resp.data.code == 0) {

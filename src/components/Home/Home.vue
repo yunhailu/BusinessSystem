@@ -34,8 +34,12 @@
 				<!--</div>-->
 				<hot-event></hot-event>
 			</div>
+			<footer-component></footer-component>
 		</div>
+
 	</div>
+
+
 
 </template>
 <style lang="less">
@@ -46,6 +50,7 @@
 	import {redirect} from "../../widgets/Auth";
 	import HeaderComponent from '../Header/Header.vue';
 	import HotEvent from '../HotEvent/HotEvent.vue';
+	import FooterComponent from '../Footer/Footer.vue';
 	import Local from "../../local/local";
 	import * as Api from "../../widgets/Api";
 
@@ -105,7 +110,7 @@
 			}
 		},
 		components:{
-			HeaderComponent, HotEvent
+			HeaderComponent, HotEvent,FooterComponent
 		},
 		route:{
 			data(){

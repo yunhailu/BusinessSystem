@@ -14,8 +14,10 @@
             <div class="setting-panel-wrap-edit" v-show="activeItem">
 
             </div>
+
         </div>
     </div>
+    <footer-component></footer-component>
 </template>
 <style lang="less" scoped>
     @import "Setting.less";
@@ -24,6 +26,7 @@
     import HeaderComponent from '../Header/Header.vue';
     import MenuComponent from './Menu/Menu.vue';
     import Local from "../../local/local";
+    import FooterComponent from '../Footer/Footer.vue';
 
     export default{
         data(){
@@ -36,7 +39,8 @@
         },
         components:{
             HeaderComponent,
-            MenuComponent
+            MenuComponent,
+            FooterComponent
         }
     }
 </script>

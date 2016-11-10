@@ -41,6 +41,9 @@
                 </fieldset>
             </form>
         </div>
+        <div class="login-footer">
+            <P class="copy">京ICP备14046778号-5 沃民高新科技（北京）股份有限公司提供技术支持 <span> 联系电话：010-88315479</span></P>
+        </div>
     </div>
 </template>
 <style lang="less">
