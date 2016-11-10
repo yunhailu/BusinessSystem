@@ -4,32 +4,26 @@
             <!--<img src="../../../images/logo.jpg" />-->
             <span>{{words.title}}</span>
         </div>
-        <nav class="navbar navbar-static-top" role="navigation">
-            <div class="navbar-center">
-                <ul class="nav navbar-nav">
-                    <li class="tab-item" v-for="tab in tabs">
-                        <a href="javascript:void(0);" v-link="{name: tab.link}" :class="active == tab.id ? 'active' : ''">
-                            <i class="fa" :class="[tab.icon]" aria-hidden="true"></i>
-                            <span class="header-font">{{tab.name}}</span>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-            <div class="navbar-right">
-                <ul class="nav navbar-nav">
-                    <li class="dropdown user user-menu right">
-                        <!--<a href="javascript:void(0);" v-link="{name: 'profile'}" class="dropdown-toggle" >-->
-                        <a href="javascript:void(0);" class="dropdown-toggle" >
-                            <i class="glyphicon glyphicon-user"></i>
-                            <span class="header-font">{{nickName}} <i class="caret"></i></span>
-                        </a>
-                    </li>
-                    <li class="dropdown quit right" @click="quit">
-                        <a href="javascript:void(0);"  class="header-font"><i class="fa fa-power-off"></i> {{words.quit}}</a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
+        <ul class="navbar-center">
+            <li class="tab-item" v-for="tab in tabs">
+                <a href="javascript:void(0);" v-link="{name: tab.link}" :class="active == tab.id ? 'active' : ''">
+                    <i class="fa" :class="[tab.icon]" aria-hidden="true"></i>
+                    <span class="header-font">{{tab.name}}</span>
+                </a>
+            </li>
+        </ul>
+        <ul class="navbar-right">
+            <li class="tab-item">
+                <!--<a href="javascript:void(0);" v-link="{name: 'profile'}" class="dropdown-toggle" >-->
+                <a href="javascript:void(0);" >
+                    <i class="glyphicon glyphicon-user"></i>
+                    <span class="header-font">{{nickName}} <i class="caret"></i></span>
+                </a>
+            </li>
+            <li  class="tab-item" @click="quit">
+                <a href="javascript:void(0);"  class="header-font"><i class="fa fa-power-off"></i> {{words.quit}}</a>
+            </li>
+        </ul>
     </header>
 </template>
 <style lang="less">

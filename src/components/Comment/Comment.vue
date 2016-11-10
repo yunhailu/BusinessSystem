@@ -161,7 +161,7 @@
                     toolbox: Pie.toolbox,
                     color: ['#2FCC71','#E64D3D', '#F1C40F', '#3598DC', '#737373'],
                     series: _.extend({}, Pie.series, {
-                        radius: ['40%', '85%'],
+                        radius: ['20%', '50%'],
                         name: words.comment,
                         center: ['50%', '45%'],
                         data:[]

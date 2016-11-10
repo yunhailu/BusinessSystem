@@ -4,13 +4,13 @@
     <div class="compare-panel">
         <div class="compare-panel-wrap">
             <div class="row tools">
-                <div class="col-md-7">
+                <div class="row-left">
                     <div class="search">
                         <input class="search-input" placeholder="搜索" v-model="search" />
                         <span class="search-btn" @click="searchAction"><i class="fa fa-search"></i></span>
                     </div>
                 </div>
-                <div class="col-md-4">
+                <div class="row-right">
                     <ul class="days-btn">
                         <li @click="selectTime(1);" :class="[selectTimeTag == 1 ? 'active' : '']">1D</li>
                         <li @click="selectTime(7);" :class="[selectTimeTag == 7 ? 'active' : '']" class="active">7D</li>
