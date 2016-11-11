@@ -161,6 +161,7 @@
                         this.resultPieChartOption = _.extend({}, this.resultPieChartOption, {
                             series: _.extend({}, Pie.series, {
                                 name: 'Result',
+                                radius: ['20%', '50%'],
                                 center: ['50%', '45%'],
                                 data:[
                                     {value: _.reduce(lineData.wechat, (mome, val) => mome + val, 0), name: "微信"},
