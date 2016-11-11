@@ -28,9 +28,10 @@
 
             <router-view></router-view>
         </div>
-
     </div>
-    <footer-component></footer-component>
+    <div class="footer1">
+        <P class="copy">京ICP备14046778号-5 沃民高新科技（北京）股份有限公司提供技术支持 <span> 联系电话：010-88315479</span></P>
+    </div>
 </template>
 <style lang="less">
     @import "Analytics.less";
@@ -41,7 +42,6 @@
     import MenuComponent from './Menu/Menu.vue';
     import Calendar from '../Common/Calendar/Calendar.vue';
     import Local from "../../local/local";
-    import FooterComponent from '../Footer/Footer.vue';
     import { analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic, analyticsDateChange, analyticsStart, analyticsEnd } from '../../vuex/getters';
     import { setAnalyticsType, setAnalyticsTimeRange, setAnalyticsSource, setAnalyticsSubTopic, setAnalyticsDateChange, setAnalyticsStart, setAnalyticsEnd  } from "../../vuex/actions";
 
@@ -73,7 +73,6 @@
             'header-component': HeaderComponent,
             'menu-component': MenuComponent,
             'calendar': Calendar,
-           'footer-component': FooterComponent
         },
         methods: {
             searchAction(){

@@ -23,10 +23,10 @@
                         </ul>
                     </div>
                 </div>
-            </div><footer-component></footer-component>
+            </div>
         </div>
     </div>
-
+    <footer-component class="footer"></footer-component>
 
 </template>
 <style lang="less" scoped>
