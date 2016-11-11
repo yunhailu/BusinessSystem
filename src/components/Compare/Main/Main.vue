@@ -427,13 +427,8 @@
                         this.changeSource();
 //处理data问题
                         this.mapData(this.data,intervalDate);
-                    }else if(resp.data.code ==103){
-                    alert('无效关键词');
-                    this.loadingParams.visiable = false;
-                    return ;
-                }
+                    }
                 });
-
             },
             //加上后only一个数据sen
             dealAddOnlyOneSentimentData(newTopic,topicParams){
@@ -650,29 +645,9 @@ console.log(this.data);
             },
             compareSubTopic: {
                 handler(val,oldVal){
-                    //这里重新添加数据，重新请求
-                    //初始化数据
-                    this.initData();
-                    //初始化表
-                    this.initChart();
-                    this.initRadar();
-                    //图表添加数据
-                    this.compareNums=[];
-                    const newTopic = val;
-                    const topicParams = {
-                        topic_id:_.isEmpty(newTopic) ? '' : newTopic[0].topic_id,
-                        topic:_.isEmpty(newTopic) ? '' : newTopic[0].topic_name,
-                        subtopic:this.compareSubTopic,
-                        source:this.compareSource,
-                        start:this.compareStart,
-                        end:this.compareEnd,
-                        time_dimension:this.compareTimeRange<=10 ? 0 :1
-                    };
-                    this.dealAddOnlyOneSummaryData(newTopic,topicParams);
-                    this.dealAddOnlyOneSentimentData(newTopic,topicParams);
-
-
-                }
+                    //只在新值不为空时监控
+                    this.selectCalendar();
+                    }
             },
             data:{
                 handler(){
@@ -681,7 +656,6 @@ console.log(this.data);
                     console.log('查看data是不是首席变化');
                 }
             },
-
             //深度监听varableradardata就好了，他变对应数据就变，判断是哪端
             //当我们在微信页面时，点击一个list
             VariableChartData:{

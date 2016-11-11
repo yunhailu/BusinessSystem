@@ -152,6 +152,13 @@
                     this.setCompareTimeRangeString(this.dateVal);
                     //console.log('这是日历改变后的数据',this.compareTimeRangeString);
                 }
+            },
+            compareSubTopic:{
+                handler(val,oldVal){
+                    if(val ==''){
+                        this.search = '';
+                    }
+                }
             }
         },
         ready(){
