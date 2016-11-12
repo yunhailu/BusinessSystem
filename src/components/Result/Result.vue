@@ -51,7 +51,7 @@
                 words: Local().analytics,
                 selectTitle: Local().common.sortBy,
                 chartInstance: null,
-                resultChartLoading: false,
+                resultChartLoading: true,
                 resultChartOption: {
                     isToggle: true,
                     title: _.extend({}, Chart.title, { show: false}),
