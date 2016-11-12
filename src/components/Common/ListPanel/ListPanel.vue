@@ -64,7 +64,7 @@
                 </a>
             </li>
         </ul>
-        <div v-if="!tableList.length" class="list-panel-tip">{{listTip}}</div>
+        <!--<div v-if="!tableList.length" class="list-panel-tip">{{listTip}}</div>-->
         <!--<div class="list-panel-pager">-->
             <!--<page></page>-->
         <!--</div>-->
@@ -161,11 +161,16 @@
         watch: {
             list(val){
                 this.tableList = val;
+                this.setCount(20);
+            },
+            filterActive(val){
+                this.setCount(this.filterActive);
             }
         },
         ready(){
             this.setCount(this.filterActive);
             this.setSentiment('all');
+
         },
         components:{
             SelectEl, Page

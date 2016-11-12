@@ -34,9 +34,7 @@
 				<!--</div>-->
 				<hot-event></hot-event>
 			</div>
-			<div class="footer2">
-				<P class="copy">京ICP备14046778号-5 沃民高新科技（北京）股份有限公司提供技术支持 <span> 联系电话：010-88315479</span></P>
-			</div>
+			<order-footer-component></order-footer-component>
 		</div>
 
 	</div>
@@ -52,6 +50,7 @@
 	import {redirect} from "../../widgets/Auth";
 	import HeaderComponent from '../Header/Header.vue';
 	import HotEvent from '../HotEvent/HotEvent.vue';
+	import OrderFooterComponent from '../OrderFooter/OrderFooter.vue';
 	import Local from "../../local/local";
 	import * as Api from "../../widgets/Api";
 
@@ -111,7 +110,7 @@
 			}
 		},
 		components:{
-			HeaderComponent, HotEvent
+			HeaderComponent, HotEvent,OrderFooterComponent
 		},
 		route:{
 			data(){

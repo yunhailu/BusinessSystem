@@ -174,7 +174,7 @@
         methods: {
             clickChartAction(opts){
                 console.log('clickChartAction opts', opts);
-                this.loadingParams.visiable = true;
+                //this.loadingParams.visiable = true;
                 const topic_id = this.activeAnalyticsTopic.topic_id,
                         topic = this.activeAnalyticsTopic.topic_name,
                         subtopic = this.analyticsSubTopic,
@@ -185,13 +185,18 @@
                         start = opts.name.split(":")[0];
                 Api.getCommentList({type, topic_id, topic, subtopic, source, start, end, time_dimension}).then(resp => {
                     //console.log(resp.data);
-                    this.loadingParams.visiable = false;
+                    //this.loadingParams.visiable = false;
                     if(resp.data.code == 0){
                         this.list = resp.data.data;
                     }
                 });
             },
             getCommentList(type = 'time'){
+                this.list=[];
+                this.loadingParams.visiable = true;
+                setTimeout(function () {
+                    this.loadingParams.visiable = false;
+                }.bind(this),9000)
                 const topic_id = this.activeAnalyticsTopic.topic_id,
                         topic = this.activeAnalyticsTopic.topic_name,
                         subtopic = this.analyticsSubTopic,
@@ -202,9 +207,10 @@
                         start = this.analyticsStart;
                 Api.getCommentList({type, topic_id, topic, subtopic, source, start, end, time_dimension}).then(resp => {
                     //console.log(resp.data);
-                    this.loadingParams.visiable = false;
+
                     if(resp.data.code == 0){
                         this.list = resp.data.data;
+                        this.loadingParams.visiable = false;
                     }
                 });
             },
@@ -219,8 +225,9 @@
                     start = this.analyticsStart;
                 Api.getCommentDetail({ topic_id, topic, subtopic, source, start, end, time_dimension }).then(resp => {
                     //console.log('getCommentDetail', resp.data);
-                    this.loadingParams.visiable = false;
+                    //this.loadingParams.visiable = false;
                     if(resp.data.code == 0){
+                        //this.loadingParams.visiable = false;
                         const details = resp.data.data;
                         this.x = _.map(details, detail => detail.date);
                         const _this = this;
@@ -378,19 +385,19 @@
             },
             analyticsDateChange: {
                 handler(val){
-                    this.loadingParams.visiable = true;
+                    //this.loadingParams.visiable = true;
                     this.init();
                 }
             },
             analyticsSubTopic: {
                 handler(val){
-                    this.loadingParams.visiable = true;
+                    //this.loadingParams.visiable = true;
                     this.init();
                 }
             },
             analyticsSource: {
                 handler(val){
-                    this.loadingParams.visiable = true;
+                    //this.loadingParams.visiable = true;
                     this.getCommentList();
                 }
             },

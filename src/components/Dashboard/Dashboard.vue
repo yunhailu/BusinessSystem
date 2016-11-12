@@ -59,6 +59,7 @@
                     console.log('getDashboardList', resp.data);
                     if(resp.data.code == 0){
                         const list = resp.data.data;
+                        console.log('这个是报告生成测试',resp);
                         /**
                          *   {
                          *       name: "阿里影业",

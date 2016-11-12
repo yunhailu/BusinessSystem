@@ -1,11 +1,11 @@
 <template>
-    <footer class="footer"> <p>{{coppy}}<span>{{phone}}</span> </p></footer>
+    <footer class="footer1"> <p>{{coppy}}<span>{{phone}}</span> </p></footer>
 </template>
 <style lang="less">
-    @import "Footer.less";
+    @import "OrderFooter.less";
 </style>
 <script type="text/ecmascript-6">
-    import Local from "../../../local/local";
+    import Local from "../../local/local";
     export default{
         data(){
 

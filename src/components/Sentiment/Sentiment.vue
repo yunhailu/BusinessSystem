@@ -311,7 +311,7 @@
             },
             clickChartAction(opts){
                 console.log('clickChartAction opts', opts);
-                this.loadingParams.visiable = true;
+                //this.loadingParams.visiable = true;
                 const topic_id = this.activeAnalyticsTopic.topic_id,
                         topic = this.activeAnalyticsTopic.topic_name,
                         subtopic = this.analyticsSubTopic,
@@ -322,13 +322,19 @@
                         start = opts.name.split(":")[0];
                 Api.getCommentList({type, topic_id, topic, subtopic, source, start, end, time_dimension}).then(resp => {
                     //console.log(resp.data);
-                    this.loadingParams.visiable = false;
+                    //this.loadingParams.visiable = false;
                     if(resp.data.code == 0){
                         this.list = resp.data.data;
+                        console.log('查看list数据条数',this.list);
                     }
                 });
             },
             getCommentList(type = 'time'){
+                this.list=[];
+                this.loadingParams.visiable = true;
+                setTimeout(function () {
+                    this.loadingParams.visiable = false;
+                }.bind(this),9000)
                 const topic_id = this.activeAnalyticsTopic.topic_id,
                         topic = this.activeAnalyticsTopic.topic_name,
                         subtopic = this.analyticsSubTopic,
@@ -339,9 +345,11 @@
                         start = this.analyticsStart;
                 Api.getCommentList({type, topic_id, topic, subtopic, source, start, end, time_dimension}).then(resp => {
                     //console.log(resp.data);
-                    this.loadingParams.visiable = false;
+                    //this.loadingParams.visiable = false;
                     if(resp.data.code == 0){
+                        this.loadingParams.visiable = false;
                         this.list = resp.data.data;
+                        console.log('查看list数据条数2',this.list);
                     }
                 });
             },
@@ -356,7 +364,7 @@
                         start = this.analyticsStart;
                 Api.getSentimentDetail({ topic_id, topic, subtopic, source, start, end, time_dimension }).then(resp => {
                     //console.log("getSentimentDetail", JSON.stringify(resp.data.data));
-                    this.loadingParams.visiable = false;
+                    //this.loadingParams.visiable = false;
                     if(resp.data.code == 0){
                         const details = resp.data.data;
                         this.x = _.map(details, detail => detail.date);
@@ -504,36 +512,38 @@
         watch: {
             activeAnalyticsTopic: {
                 handler(val){
-                    this.sentimentBarLoading = true;
+                    //this.sentimentBarLoading = true;
                     //this.sentimentChartLoading = true;
-                    this.sentimentPieLoading = true;
+                    //this.sentimentPieLoading = true;
                     this.init(val);
                 }
             },
             analyticsDateChange: {
                 handler(val){
-                    this.loadingParams.visiable = true;
+                    //this.loadingParams.visiable = true;
                     this.init();
                 }
             },
             analyticsSubTopic: {
                 handler(val){
-                    this.loadingParams.visiable = true;
+                    //this.loadingParams.visiable = true;
                     this.init();
                 }
             },
             analyticsSource: {
                 handler(val){
-                    this.loadingParams.visiable = true;
+                    //this.loadingParams.visiable = true;
                     this.getCommentList();
                 }
             },
             sortVal: {
                 handler(val, oldVal){
                     if(val != oldVal){
+                        //this.loadingParams.visiable = true;
                         // 展示不同的列表信息
                         //console.log(val, oldVal);
                         //this.list = list[val.key];
+
                         this.getCommentList(val.key);
                     }
                 }
