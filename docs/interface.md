@@ -439,7 +439,7 @@
 
 ##### 2.添加话题
 - topic/add
-- 入参：name, group_id,sentiment=(angry),threshold=100
+- 入参：name, group_id,monitor=(angry),threshold=100
 ```
 {
 	code: 0,
@@ -459,6 +459,18 @@
 	code: 0,
 	data: {
 		success: 1
+	},
+	message: "success"
+}
+```
+##### 4.更新话题
+- topic/update
+- 入参：id,name,group_id,monitor=(angry),threshold=100
+```
+{
+	code: 0,
+	data: {
+		success:1
 	},
 	message: "success"
 }
