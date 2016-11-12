@@ -1,34 +1,37 @@
 <template>
     <header-component active="analytics"></header-component>
-    <menu-component></menu-component>
-    <div class="analytics-panel">
-        <div class="analytics-panel-wrap">
-            <div class="row tools">
-                <div class="row-left">
-                    <div class="search">
-                        <input class="search-input" placeholder="搜索" v-model="search" />
-                        <span class="search-btn" @click="searchAction"><i class="fa fa-search"></i></span>
+    <div class="divAnaBox">
+        <menu-component></menu-component>
+        <div class="analytics-panel">
+            <div class="analytics-panel-wrap">
+                <div class="row tools">
+                    <div class="row-left">
+                        <div class="search">
+                            <input class="search-input" placeholder="搜索" v-model="search" />
+                            <span class="search-btn" @click="searchAction"><i class="fa fa-search"></i></span>
+                        </div>
                     </div>
-                </div>
-                <div class="row-right">
-                    <ul class="days-btn">
-                        <li @click="selectTime(1);" :class="[selectTimeTag == 1 ? 'active' : '']">1D</li>
-                        <li @click="selectTime(7);" :class="[selectTimeTag == 7 ? 'active' : '']" class="active">7D</li>
-                        <li @click="selectTime(30);" :class="[selectTimeTag == 30 ? 'active' : '']">30D</li>
-                        <li @click="selectTime(0);" :class="[selectTimeTag == 0 ? 'active' : '']">自定义</li>
-                    </ul>
-                    <div class="diyDate" v-show="isTimeDiy">
-                        <span class="date" @click="showCalendar"><i class="fa fa-calendar  icon"></i> {{dateVal}}</span>
-                        <calendar :show.sync="cal.show" :value.sync="dateVal" :x="cal.x" :y="cal.y" :begin.sync="cal.begin" :end.sync="cal.end" :type="cal.type" :range="cal.range"></calendar>
-                    </div>
+                    <div class="row-right">
+                        <ul class="days-btn">
+                            <li @click="selectTime(1);" :class="[selectTimeTag == 1 ? 'active' : '']">1D</li>
+                            <li @click="selectTime(7);" :class="[selectTimeTag == 7 ? 'active' : '']" class="active">7D</li>
+                            <li @click="selectTime(30);" :class="[selectTimeTag == 30 ? 'active' : '']">30D</li>
+                            <li @click="selectTime(0);" :class="[selectTimeTag == 0 ? 'active' : '']">自定义</li>
+                        </ul>
+                        <div class="diyDate" v-show="isTimeDiy">
+                            <span class="date" @click="showCalendar"><i class="fa fa-calendar  icon"></i> {{dateVal}}</span>
+                            <calendar :show.sync="cal.show" :value.sync="dateVal" :x="cal.x" :y="cal.y" :begin.sync="cal.begin" :end.sync="cal.end" :type="cal.type" :range="cal.range"></calendar>
+                        </div>
 
+                    </div>
                 </div>
+                <!--<tabs ></tabs>-->
+
+                <router-view></router-view>
             </div>
-            <!--<tabs ></tabs>-->
-
-            <router-view></router-view>
         </div>
     </div>
+    <order-footer></order-footer>
     <!--<order-footer></order-footer>-->
 </template>
 <style lang="less">

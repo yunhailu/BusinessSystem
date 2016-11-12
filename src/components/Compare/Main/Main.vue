@@ -29,6 +29,7 @@
             const common = Local().common;
             return{
                 common,
+                timeout:null,
                 loadingParams:{
                     visiable:false,
                     type:'loading',
@@ -398,10 +399,14 @@
             //处理SentimentData
             dealAddSentimentData(newTopic, topicParams){
                 this.loadingParams.visiable = true;
+                this.timeout = setTimeout(function () {
+                    this.loadingParams.visiable = false;
+                }.bind(this),8000)
                 Api.getSentimentDetail(topicParams).then(resp =>{
                     //this.compareRadarLoading = false;
                     if(resp.data.code == 0){
                         this.loadingParams.visiable = false;
+                        clearTimeout(this.timeout);
                         const details = resp.data.data;
                         const intervalDate = _.pluck(details,'date');
                         this.intervalTime =intervalDate;
@@ -434,10 +439,14 @@
             dealAddOnlyOneSentimentData(newTopic,topicParams){
                 //this.compareRadarLoading = true;
                 this.loadingParams.visiable = true;
+                setTimeout(function () {
+                    this.loadingParams.visiable = false;
+                }.bind(this),8000)
                 Api.getSentimentDetail(topicParams).then(resp =>{
                     //this.compareRadarLoading = false;
                     if(resp.data.code == 0){
                         this.loadingParams.visiable = false;
+                        clearTimeout(this.timeout);
                         const details = resp.data.data;
                         console.log('details',details)
                         const intervalDate = _.pluck(details,'date');
