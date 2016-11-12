@@ -439,7 +439,7 @@
 
 ##### 2.添加话题
 - topic/add
-- 入参：name, group_id
+- 入参：name, group_id,sentiment=(angry),threshold=100
 ```
 {
 	code: 0,
