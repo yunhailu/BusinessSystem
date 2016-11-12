@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-md-12 hot-river">
                 <card-panel :title="words.hotsRiver">
-                    <div v-echarts="scatterOption" :loading="scatterLoading" class="hot-river-scatter" theme="" :img.sync="img"></div>
+                    <div v-echarts="graphChartOption" :loading="graphChartLoading" class="hot-river-scatter" theme="" :img.sync="img"></div>
                 </card-panel>
             </div>
         </div>
@@ -30,8 +30,6 @@
             </div>
         </div>
 
-
-
         <div class="row">
             <div class="col-md-6 hot-sentiment">
                 <card-panel :title="words.sentiment | title">
@@ -45,10 +43,11 @@
             </div>
 
         </div>
+
         <div class="row">
             <div class="col-md-12 hot-river">
                 <card-panel :title="words.hotsRiver">
-                    <div v-echarts="graphChartOption" :loading="graphChartLoading" class="hot-river-scatter" theme="" :img.sync="img"></div>
+                    <div v-echarts="scatterOption" :loading="scatterLoading" class="hot-river-scatter" theme="" :img.sync="img"></div>
                 </card-panel>
             </div>
         </div>
