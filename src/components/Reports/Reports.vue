@@ -50,7 +50,7 @@
     import Page from '../Common/Page/Page.vue';
     import * as Api from '../../widgets/Api';
     import { getCookie } from '../../widgets/Cookie';
-    import FooterComponent from '../Footer/Footer.vue';
+    import FooterComponent from '../OrderFooter/OrderFooter.vue';
 
     export default{
         data(){

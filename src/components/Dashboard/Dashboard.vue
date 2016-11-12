@@ -1,32 +1,35 @@
 <template>
     <header-component active="dashboard"></header-component>
-    <div class="dashboard-panel">
-        <div class="dashboard-panel-wrap">
-            <div class="container">
-                <div class="dashboard-panel-wrap-dashboard row">
-                    <div class="dashboard-panel-wrap-dashboard-container">
-                        <i class="fa icon" :class="dashboard.icon"></i>
-                        <span class="title">{{dashboard.name}}</span>
-                        <div class="dec">{{dashboard.dec}}</div>
-                        <ul class="row dashboard-items">
-                            <li class="col-md-3 item" v-for="item in dashboardList">
-                                <div class="item-con" >
-                                    <a class="item-con-link" v-link="item.link">
-                                        <i class="fa" :class="dashboard.icon"></i>
-                                        <span>{{item.name}}</span>
-                                    </a>
-                                </div>
-                                <div class="item-close" @click="deleteDashboard(item)">
-                                    <i class="fa" :class="[activeId != item.id ? 'fa-close' : 'fa-spinner fa-spin']"></i>
-                                </div>
-                            </li>
-                        </ul>
+    <div class="divDashBox">
+        <div class="dashboard-panel">
+            <div class="dashboard-panel-wrap">
+                <div class="container">
+                    <div class="dashboard-panel-wrap-dashboard row">
+                        <div class="dashboard-panel-wrap-dashboard-container">
+                            <i class="fa icon" :class="dashboard.icon"></i>
+                            <span class="title">{{dashboard.name}}</span>
+                            <div class="dec">{{dashboard.dec}}</div>
+                            <ul class="row dashboard-items">
+                                <li class="col-md-3 item" v-for="item in dashboardList">
+                                    <div class="item-con" >
+                                        <a class="item-con-link" v-link="item.link">
+                                            <i class="fa" :class="dashboard.icon"></i>
+                                            <span>{{item.name}}</span>
+                                        </a>
+                                    </div>
+                                    <div class="item-close" @click="deleteDashboard(item)">
+                                        <i class="fa" :class="[activeId != item.id ? 'fa-close' : 'fa-spinner fa-spin']"></i>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
-            </div><footer-component></footer-component>
+            </div>
         </div>
     </div>
 
+    <footer-component class="footer"></footer-component>
 
 </template>
 <style lang="less" scoped>
@@ -37,7 +40,7 @@
     import HeaderComponent from '../Header/Header.vue';
     import Local from "../../local/local";
     import * as Api from "../../widgets/Api";
-    import FooterComponent from '../Footer/Footer.vue';
+    import FooterComponent from '../OrderFooter/OrderFooter.vue';
 
     export default{
         data(){
@@ -59,6 +62,7 @@
                     console.log('getDashboardList', resp.data);
                     if(resp.data.code == 0){
                         const list = resp.data.data;
+                        console.log('这个是报告生成测试',resp);
                         /**
                          *   {
                          *       name: "阿里影业",

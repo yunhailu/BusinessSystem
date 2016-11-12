@@ -161,6 +161,7 @@
                         this.resultPieChartOption = _.extend({}, this.resultPieChartOption, {
                             series: _.extend({}, Pie.series, {
                                 name: 'Result',
+                                radius: ['20%', '50%'],
                                 center: ['50%', '45%'],
                                 data:[
                                     {value: _.reduce(lineData.wechat, (mome, val) => mome + val, 0), name: "微信"},
@@ -197,7 +198,7 @@
             },
             clickChartAction(opts){
                 console.log('clickChartAction opts', opts);
-                this.loadingParams.visiable = true;
+                //this.loadingParams.visiable = true;
                 const topic_id = this.activeAnalyticsTopic.topic_id,
                         topic = this.activeAnalyticsTopic.topic_name,
                         subtopic = this.analyticsSubTopic,
@@ -208,7 +209,7 @@
                         start = opts.name.split(":")[0];
                 Api.getCommentList({type, topic_id, topic, subtopic, source, start, end, time_dimension}).then(resp => {
                     //console.log(resp.data);
-                    this.loadingParams.visiable = false;
+                    //this.loadingParams.visiable = false;
                     if(resp.data.code == 0){
                         this.list = resp.data.data;
                     }
@@ -228,7 +229,7 @@
 
                 Api.getSummaryDetail({topic_id, topic, subtopic, source, start, end, time_dimension}).then(resp => {
                     //console.log('getSummaryDetail', resp.data);
-                    this.loadingParams.visiable = false;
+                    //this.loadingParams.visiable = false;
                     if(resp.data.code == 0){
                         const details = resp.data.data;
                         this.x = _.map(details, detail => detail.date);
@@ -257,6 +258,11 @@
                 });
             },
             getCommentList(type = 'time'){
+                this.list=[];
+                this.loadingParams.visiable = true;
+                setTimeout(function () {
+                    this.loadingParams.visiable = false;
+                }.bind(this),9000)
                 const topic_id = this.activeAnalyticsTopic.topic_id,
                         topic = this.activeAnalyticsTopic.topic_name,
                         subtopic = this.analyticsSubTopic,
@@ -267,8 +273,9 @@
                         start = this.analyticsStart;
                 Api.getCommentList({type, topic_id, topic, subtopic, source, start, end, time_dimension}).then(resp => {
                     //console.log(resp.data);
-                    this.loadingParams.visiable = false;
+                    //this.loadingParams.visiable = false;
                     if(resp.data.code == 0){
+                        this.loadingParams.visiable = false;
                         this.list = resp.data.data;
                     }
                 });
@@ -300,19 +307,19 @@
             },
             analyticsDateChange: {
                 handler(val){
-                    this.loadingParams.visiable = true;
+                    //this.loadingParams.visiable = true;
                     this.init();
                 }
             },
             analyticsSource: {
                 handler(val){
-                    this.loadingParams.visiable = true;
+                    //this.loadingParams.visiable = true;
                     this.getCommentList();
                 }
             },
             analyticsSubTopic: {
                 handler(val){
-                    this.loadingParams.visiable = true;
+                    //this.loadingParams.visiable = true;
                     this.init();
                 }
             },

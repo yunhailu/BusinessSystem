@@ -72,6 +72,7 @@
                 words,
                 popularList: [],
                 influancerTable: [],
+                influancerList:[],
                 noTableTips: words.noTableTips
             }
         },
@@ -90,9 +91,13 @@
                     //const resp = {data: {code:0, data: [{id: "1234", influencer: "台湾", posts: 6, like: 123, resend: 32, sentiment: {happy: 5, anger: 15, sorrow: 10, disgust: 0, fear: 5}, rate: {key: "up", value: "24%"}},{"id": "1234", "influencer": "台湾1", "posts": 6, "like": 123, "resend": 32, "sentiment": {happy: 3, anger: 5, sorrow: 10, disgust: 3, fear: 5}, "rate": {"key": "up", "value": "24%"}}] }};
                     if(resp.data.code ==0){
                         const influanceInfos = resp.data.data;
-                        this.influancerTable = _.map(influanceInfos, info => {
+                        this.influancerList = _.map(influanceInfos, info => {
                             return info;
                         });
+                        this.influancerTable = _.filter(this.influancerList, (info, index) => {
+                                    return (index < 20);
+                        });
+                    console.log('这是影响力',this.influancerTable)
                     }
                 });
             },

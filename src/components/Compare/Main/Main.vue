@@ -29,6 +29,7 @@
             const common = Local().common;
             return{
                 common,
+                timeout:null,
                 loadingParams:{
                     visiable:false,
                     type:'loading',
@@ -398,10 +399,14 @@
             //处理SentimentData
             dealAddSentimentData(newTopic, topicParams){
                 this.loadingParams.visiable = true;
+                this.timeout = setTimeout(function () {
+                    this.loadingParams.visiable = false;
+                }.bind(this),8000)
                 Api.getSentimentDetail(topicParams).then(resp =>{
                     //this.compareRadarLoading = false;
                     if(resp.data.code == 0){
                         this.loadingParams.visiable = false;
+                        clearTimeout(this.timeout);
                         const details = resp.data.data;
                         const intervalDate = _.pluck(details,'date');
                         this.intervalTime =intervalDate;
@@ -429,16 +434,19 @@
                         this.mapData(this.data,intervalDate);
                     }
                 });
-
             },
             //加上后only一个数据sen
             dealAddOnlyOneSentimentData(newTopic,topicParams){
                 //this.compareRadarLoading = true;
                 this.loadingParams.visiable = true;
+                setTimeout(function () {
+                    this.loadingParams.visiable = false;
+                }.bind(this),8000)
                 Api.getSentimentDetail(topicParams).then(resp =>{
                     //this.compareRadarLoading = false;
                     if(resp.data.code == 0){
                         this.loadingParams.visiable = false;
+                        clearTimeout(this.timeout);
                         const details = resp.data.data;
                         console.log('details',details)
                         const intervalDate = _.pluck(details,'date');
@@ -644,6 +652,12 @@
 console.log(this.data);
                 }
             },
+            compareSubTopic: {
+                handler(val,oldVal){
+                    //只在新值不为空时监控
+                    this.selectCalendar();
+                    }
+            },
             data:{
                 handler(){
                     const intervalDate = this.intervalTime;
@@ -651,7 +665,6 @@ console.log(this.data);
                     console.log('查看data是不是首席变化');
                 }
             },
-
             //深度监听varableradardata就好了，他变对应数据就变，判断是哪端
             //当我们在微信页面时，点击一个list
             VariableChartData:{

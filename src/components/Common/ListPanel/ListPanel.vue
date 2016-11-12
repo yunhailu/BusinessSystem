@@ -1,10 +1,10 @@
 <template>
     <div class="list-panel">
         <div class="row list-panel-tools" v-if="isShowTools">
-            <div class="col-md-3">
+            <div class="row-left">
                 <select-el :options="options" :title="selectTitle" :value.sync="selectValue"></select-el>
             </div>
-            <div class="col-md-3 list-panel-tools-flag">
+            <div class="row-middle list-panel-tools-flag">
                 <!--<div class="list-panel-tools-flag-title">情绪筛选</div>-->
                 <div class="btn-group list-panel-tools-flag">
                     <a class="btn btn-default list-panel-tools-flag-item" href="javascript:void(0);" @click="setSentiment('all');" :class="[sentimentActive == 'all' ? 'active' : '']">{{words.all}}</a>
@@ -13,7 +13,7 @@
                     <a class="btn btn-default list-panel-tools-flag-item" href="javascript:void(0);" @click="setSentiment('neutral')" :class="[sentimentActive == 'neutral' ? 'active' : '']">{{words.neutral}}</a>
                 </div>
             </div>
-            <div class="col-md-3">
+            <div class="row-right">
                 <div class="btn-group list-panel-tools-filter">
                     <a class="btn btn-default list-panel-tools-filter-item" href="javascript:void(0);" @click="setCount(5);" :class="[filterActive == 5 ? 'active' : '']"> 5</a>
                     <a class="btn btn-default list-panel-tools-filter-item" href="javascript:void(0);" @click="setCount(20)" :class="[filterActive == 20 ? 'active' : '']">20</a>
@@ -30,7 +30,7 @@
             <li class="list-panel-list-item row" v-for="item in tableList">
                 <!--<a :href="item.url" target="_blank">-->
                 <a  @click="showDetail(item);" href="javascript:void(0);" target="_blank">
-                    <div class="list-panel-list-item-left col-md-8">
+                    <div class="list-panel-list-item-left list-left">
                         <i class="fa fa-paperclip fa-2
                         x"></i>
                         <div class="list-panel-list-item-left-con">
@@ -40,16 +40,16 @@
                             <div class="source">来源 {{item.from}} </div>
                         </div>
                     </div>
-                    <div class="list-panel-list-item-right col-md-4">
+                    <div class="list-panel-list-item-right list-right">
                         <i class="fa fa-flag icon" :class="item.sentiment | sentiment"></i>
                         <div class="item-data">
                             <div class="row">
-                                <div class="col-md-3 title">匹配</div>
-                                <div class="col-md-9 time">{{activeAnalyticsTopic.topic_name}}</div>
+                                <div class="title">匹配</div>
+                                <div class="time">{{activeAnalyticsTopic.topic_name}}</div>
                             </div>
                             <div class="row">
-                                <div class="col-md-3 title">指标</div>
-                                <div class="col-md-9 time">
+                                <div class="title">指标</div>
+                                <div class="time">
                                     <div class="item" v-if="item.likeCount" ><i class="fa fa-thumbs-up"></i> <span>{{item.likeCount}}</span></div>
                                     <div class="item" v-if="item.fansCount"><i class="fa fa-user"></i> <span>{{item.fansCount}}</span></div>
                                     <div class="item" v-if="item.viewCount"><i class="fa fa-eye"></i> <span>{{item.viewCount}}</span></div>
@@ -64,7 +64,7 @@
                 </a>
             </li>
         </ul>
-        <div v-if="!tableList.length" class="list-panel-tip">{{listTip}}</div>
+        <!--<div v-if="!tableList.length" class="list-panel-tip">{{listTip}}</div>-->
         <!--<div class="list-panel-pager">-->
             <!--<page></page>-->
         <!--</div>-->
@@ -161,11 +161,16 @@
         watch: {
             list(val){
                 this.tableList = val;
+                this.setCount(20);
+            },
+            filterActive(val){
+                this.setCount(this.filterActive);
             }
         },
         ready(){
             this.setCount(this.filterActive);
             this.setSentiment('all');
+
         },
         components:{
             SelectEl, Page

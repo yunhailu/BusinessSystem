@@ -7,6 +7,7 @@
                     <div class="saveBtn" @click="saveAction();"><i class="fa fa-save"></i> <span>{{words.save}}</span></div>
                     <div class="title"><i class="fa fa-thumb-tack"></i> <span>{{name}}</span></div>
                 </div>
+                <div class="relatedTopic">关键词:{{detail.topic}}</div>
                 <div class="dashboard-detail-wrap-module" v-if="detail.summary">
                     <result-component :title="words.result" :data.sync="detail" :remove="removeItem" :master.sync="detail.summarymaster" :sub.sync="detail.summarysub"></result-component>
                 </div>
@@ -22,6 +23,7 @@
                 <div class="dashboard-detail-wrap-module" v-if="detail.theme">
                     <theme-component :title="words.theme" :data="detail" :remove="removeItem" :wordcloud.sync="detail.themewordcloud" :bar.sync="detail.themebar" :top.sync="detail.themetop"></theme-component>
                 </div>
+                <div class="dashed"></div>
             </div>
         </div>
     </div>
