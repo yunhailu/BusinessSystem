@@ -96,22 +96,27 @@
                     series: [_.extend({}, Pie.series, {
                         name: '微信',
                         center: ['50%', '45%'],
+                        radius: ['50%', '95%'],
                         data:[]
                     }), _.extend({}, Pie.series, {
                         name: '微博',
                         center: ['50%', '45%'],
+                        radius: ['50%', '95%'],
                         data:[]
                     }),_.extend({}, Pie.series, {
                         name: '客户端',
                         center: ['50%', '45%'],
+                        radius: ['50%', '95%'],
                         data:[]
                     }),_.extend({}, Pie.series, {
                         name: '网页',
                         center: ['50%', '45%'],
+                        radius: ['50%', '95%'],
                         data:[]
                     }),_.extend({}, Pie.series, {
                         name: '海外',
                         center: ['50%', '45%'],
+                        radius: ['50%', '95%'],
                         data:[]
                     })]
                 },
@@ -161,7 +166,7 @@
                         this.resultPieChartOption = _.extend({}, this.resultPieChartOption, {
                             series: _.extend({}, Pie.series, {
                                 name: 'Result',
-                                radius: ['20%', '50%'],
+                                radius: ['30%', '70%'],
                                 center: ['50%', '45%'],
                                 data:[
                                     {value: _.reduce(lineData.wechat, (mome, val) => mome + val, 0), name: "微信"},

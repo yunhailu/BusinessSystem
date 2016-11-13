@@ -96,6 +96,7 @@
                     series: _.extend({}, Pie.series, {
                         name: 'Result',
                         center: ['50%', '45%'],
+                        radius: ['20%', '60%'],
                         data:[]
                     })
                 },
