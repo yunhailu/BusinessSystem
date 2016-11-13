@@ -9,11 +9,11 @@
         <!--<div class="chart timeBar" v-echarts="sentimentBarOption" :img.sync="master" :loading="sentimentBarLoading" ></div>&lt;!&ndash;theme="infographic"&ndash;&gt;-->
         <!--<div class="chart percentBar" v-echarts="sentimentChartOption"  :loading="sentimentChartLoading" ></div>-->
 
-        <div class="chart timeBar"  :img.sync="master" :loading="sentimentBarLoading" >
-            <echarts :options="sentimentBarOption" initOptions="sentimentBarOption" :img.sync="master"></echarts>
+        <div class="chart timeBar" :loading="sentimentBarLoading" >
+            <echarts :options="sentimentBarOption" :initOptions="sentimentBarOption" :img.sync="master"></echarts>
         </div><!--theme="infographic"-->
         <div class="chart percentBar"   :loading="sentimentChartLoading" >
-            <echarts :options="sentimentChartOption" initOptions="sentimentChartOption" :img.sync="sub"></echarts>
+            <echarts :options="sentimentChartOption" :initOptions="sentimentChartOption" :img.sync="sub"></echarts>
         </div>
     </div>
     <!--<div class="charts"></div>-->

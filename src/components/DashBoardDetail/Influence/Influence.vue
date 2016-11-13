@@ -97,7 +97,7 @@
                         this.influancerTable = _.filter(this.influancerList, (info, index) => {
                                     return (index < 20);
                         });
-                    console.log('这是影响力',this.influancerTable)
+//                      console.log('这是影响力',this.influancerTable)
                     }
                 });
             },
