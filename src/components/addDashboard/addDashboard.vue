@@ -10,7 +10,7 @@
                     <div class="form-group">
                         <label for="dashName" class="col-sm-3 control-label">{{words.addLabel}}</label>
                         <div class="col-sm-8">
-                            <input type="text" v-model="newName" class="form-control" id="dashName" :placeholder="words.placeholder">
+                            <input v-el="input" @keydown.37.stop @keydown.39.stop @keyup.37.stop @keyup.39.stop type="text" v-model="newName" class="form-control" id="dashName" :placeholder="words.placeholder">
                         </div>
                     </div>
                     <div class="col-sm-offset-3 col-sm-8" v-if="addTip">
