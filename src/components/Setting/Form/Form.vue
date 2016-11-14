@@ -50,13 +50,21 @@
                             </div>
                             <div class="col-sm-4 tip">{{words.optional}}</div>
                         </div>
-                        <!--<div class="form-group">-->
-                            <!--<label for="excludeText" class="col-sm-2 control-label">{{words.exclude}}</label>-->
-                            <!--<div class="col-sm-4">-->
-                                <!--<input type="text" v-model="excludeText" class="form-control" id="excludeText" :placeholder="words.exclude">-->
-                            <!--</div>-->
-                            <!--<div class="col-sm-4 tip">{{words.optional}}</div>-->
-                        <!--</div>-->
+
+                        <!-- ---------------mood select--------------------------------------------->
+                        <div class="form-group">
+                            <label for="monitor" class="col-sm-2 control-label">{{words.warningSet}}</label>
+                            <div class="col-sm-4">
+                            <select v-model="monitor"  name="moodSelect" class="form-control moodwSet0" id="monitor" >
+
+                                <option v-for="moodgroup in moodGroups"  :selected="moodgroup.select"  :value="moodgroup.value" >{{moodgroup.name}}</option>
+                            </select>
+                                <input type="text" v-model="threshold" class="form-control moodwSet1 " id="threshold" :placeholder="words.warningValue">
+                            </div>
+                            <div class="col-sm-4 tip">{{words.optional}}</div>
+                        </div>
+
+                        <!-- ------------------------------------------------------------>
                         <div class="form-group">
                             <label for="excludeText" class="col-sm-2 control-label">{{words.exclude}}</label>
                             <div class="col-sm-4">
@@ -94,7 +102,6 @@
     import * as Api from "../../../widgets/Api";
     import { setTopicList } from "../../../vuex/actions";
     import { topicList } from '../../../vuex/getters';
-
     export default{
         data(){
             const words = Local().setting;
@@ -106,11 +113,25 @@
                 remainder: 0,
                 radioVal: "",
                 topicArr: "",
+                threshold:0,
+                monitor:"",
                 related: "",
                 topicText: "",
                 excludeText: "",
                 errorTip: "",
                 successTip: "",
+
+                moodGroups: [{
+                    id: 1, value:"happy", select:'selected',name: words.moodGroups[0]
+                }, {
+                    id: 2, value:"anger", select:'', name: words.moodGroups[1]
+                }, {
+                    id: 3, value:"sorrow", select:'', name: words.moodGroups[2]
+                }, {
+                    id: 4, value:"disgust", select:'', name: words.moodGroups[3]
+                },{
+                    id: 5, value:"fear", select:'', name: words.moodGroups[4]
+                }],
                 groups: [{
                     id: 1, value: 1, name: words.groups[0]
                 }, {
@@ -147,25 +168,62 @@
                 }
             },
             updateSubmit(){
-                console.log('update submit', this.topicText, this.radioVal, this.$route.params.topic_id);
+                //console.log('update submit', this.topicText, this.radioVal,this.threshold,this.monitor, this.$route.params.topic_id);
+
 //                this.topicText = topic.topic_name;
 //                this.radioVal = topic.topic_id
+
+                if(!this.radioVal || !this.topicText ){
+                    this.successTip = "";
+                    this.errorTip = "请选择正确的阈值(整数)分组和填写新主题";
+                    return ;
+                };
+                this.topicUp().then( resp => {
+                    console.log('055555555555550');
+                    console.log('topicUp', resp);
+                    console.log('05555555555555555550');
+                    if(resp.data.code == 0){
+                        this.successTip = "修改成功！";
+                        this.errorTip = "";
+                        //this.radioVal = "";
+                        this.topicText = "";
+                        return Api.getTopicList({});
+                    }
+                }).then(resp => {
+                      console.log(resp.data.code);
+                    // console.log('topicList',this.topicList);
+
+
+                    if(resp.data.code == 0){
+                        let topicList = resp.data.data;
+                        _.each(topicList, group => {
+                            if(group.group_id == this.radioVal){
+                                group.isActive = true;
+                            }
+                        });
+                        this.setTopicList(topicList);
+                        this.radioVal = "";
+                    }
+                });
+
             },
             createSubmit(){
                 //console.log(this.isAdvanced, this.radioVal, this.topicArr, this.related, this.topicText, this.excludeText);
-                if(!this.radioVal || !this.topicText){
+                if(!this.radioVal || !this.topicText ){
                     this.successTip = "";
-                    this.errorTip = "请选择正确的分组和填写新主题";
+                    this.errorTip = "请选择正确的阈值(整数)分组和填写新主题";
                     return ;
-                }
+                };
+                //console.log(this.threshold);
                 this.topicAdd().then( resp => {
-                    //console.log('topicAdd', resp);
+                    console.log('011111111111111111111110');
+                    console.log('topicAdd', resp);
+                    console.log('011111111111111111111110');
                     if(resp.data.code == 0){
                         this.successTip = "添加成功！";
                         this.errorTip = "";
                         //this.radioVal = "";
                         this.topicText = "";
-
                         return Api.getTopicList({});
                     }
                 }).then(resp => {
@@ -193,12 +251,34 @@
             topicAdd(){
                 return Api.topicAdd({
                     group_id: this.radioVal,
-                    name: this.topicText
+                    name: this.topicText,
+                    monitor:this.monitor,
+                    threshold:this.threshold
                 });
             },
+
+            topicUp(){
+                console.log('44444444444444444444444444');
+                console.log(this.$route.params.topic_id);
+                console.log('44444444444444444444444444');
+                return Api.topicUp({
+                    id:this.$route.params.topic_id,
+                    group_id:this.radioVal,
+                    name: this.topicText,
+                    monitor:this.monitor,
+                    threshold:this.threshold
+                });
+            },
+
+
             updateInit(){
                 const group_id = this.$route.params.group_id;
                 const topic_id = this.$route.params.topic_id;
+                const monitor = this.monitor;
+                const threshold = this.threshold;
+                console.log('00000000000000000000000000000');
+                console.log(this.topicList);
+                console.log('00000000000000000000000000000');
                 const group = _.chain(this.topicList)
                         .map(group => _.extend({}, group))
                         .filter(group => (group.group_id == group_id))
@@ -207,8 +287,11 @@
                         .filter(topic => (topic.topic_id == topic_id))
                         .first().value();
                 this.topicText = topic.topic_name;
+
                 this.radioVal = group_id;
-                //console.log('topic', this.topicText, this.radioVal);
+                 this.monitor=monitor;
+                 this.threshold=threshold;
+                console.log('topic', this.topicText,this.threshold,this.monitor, this.radioVal);
             },
             init(){
                 // 拉取 group 列表

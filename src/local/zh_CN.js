@@ -8,7 +8,7 @@ export const zh_CN = {
         analytics: "数据分析",
         dashboard: "报告生成",
         compare: "数据对比",
-        reports: "报告导出",
+        reports: "预警监测",
         setting: "监测设置",
         quit: "退出"
     },
@@ -115,13 +115,15 @@ export const zh_CN = {
         quickBtn: "快速模式",
         advancedBtn: "高级模式",
         exclude: "排除词",
+        moodGroups:["满意","愤怒", "失望", "反感","害怕"],
         groups: ["人物", "机构", "产品", "项目", "事件", "其他"],
         create: "创建提交"
     },
-    reports: {
-        reportTitle: "报告标题",
+    reportsWarning: {
+        reportTitle: "预警标题",
+        sentiment:"情绪",
         lastChange: "最新更改",
-        trigger: "触发",
+        trigger: "阈值",
         lastSent: "最后发送",
         actions: "动作"
     },

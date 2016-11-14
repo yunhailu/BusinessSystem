@@ -1,43 +1,48 @@
 <template>
     <header-component active="reports"></header-component>
     <div class="reports">
-        <div class="reports-wrap">
-            <div class="container">
-                <div class="reports-wrap-title">
-                    <div class="title"><i class="fa fa-lightbulb-o"></i> <span>{{name}}</span></div>
-                </div>
-                <div class="reports-wrap-table">
-                    <table class="table table-hover  table-striped">
-                        <thead>
-                        <tr>
-                            <td><i class="fa fa-fire"></i> <span>{{words.reportTitle}}</span></td>
-                            <td><i class="fa fa-exchange"></i> <span>{{words.lastChange}}</span></td>
-                            <td><i class="fa fa-cube"></i> <span>{{words.trigger}}</span></td>
-                            <!--<td><i class="fa fa-tags"></i> {{words.lastSent}}</td>-->
-                            <td><i class="fa fa-edit"></i> {{words.actions}}</td>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr v-for="(index, report) in reports" :class="[index % 2 == 0 ? '' : '']">
-                            <td>{{report.name}}</td>
-                            <td>{{report.date}}</td>
-                            <!--<td>{{report.trigger}}</td>-->
-                            <td> / </td>
-                            <!--<td>{{report.lastSent}}</td>-->
-                            <td>
-                                <i class="fa fa-eye actionBtn" @click="viewAction(report);"></i>
-                                <i class="fa fa-envelope-o actionBtn" @click="emailAction(report);"></i>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div class="reports-wrap-paging">
-                    <page></page>
-                </div>
+    <div class="reports-wrap">
+        <div class="container">
+            <div class="reports-wrap-title">
+                <div class="title"><i class="fa fa-lightbulb-o"></i> <span>{{name}}</span></div>
+            </div>
+            <div class="reports-wrap-table">
+                <table class="table table-hover  table-striped">
+                    <thead>
+                    <tr>
+                        <td><i class="fa fa-fire"></i> <span>{{words.reportTitle}}</span></td>
+                        <td><i class="fa fa-smile-o"></i> {{words.sentiment}}</td>
+                        <td><i class="fa fa-bell-o"></i> <span>{{words.trigger}}</span></td>
+                        <td><i class="fa fa-exchange"></i> <span>{{words.lastChange}}</span></td>
+                        <!--<td><i class="fa fa-tags"></i> {{words.lastSent}}</td>-->
+                        <td><i class="fa fa-edit"></i> {{words.actions}}</td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr v-for="(index, report) in reports" :class="[index % 2 == 0 ? '' : '']">
+                        <td>{{report.name}}</td>
+                        <td> 高兴</td>
+                        <td>123</td>
+                        <td>{{report.date}}</td>
+                        <!--<td> / </td>-->
+                        <!--<td>{{report.lastSent}}</td>-->
+                        <td>
+
+                            <i class="fa fa-edit  actionBtn" @click="viewAction(report);"></i>
+                            <i class="fa fa-envelope-o actionBtn" @click="emailAction(report);"></i>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="reports-wrap-paging">
+                <page></page>
             </div>
         </div>
     </div>
+</div>
+
+
     <footer-component></footer-component>
 </template>
 <style lang="less" scoped>
@@ -50,15 +55,15 @@
     import Page from '../Common/Page/Page.vue';
     import * as Api from '../../widgets/Api';
     import { getCookie } from '../../widgets/Cookie';
-    import FooterComponent from '../OrderFooter/OrderFooter.vue';
+    import FooterComponent from '../Footer/Footer.vue';
 
     export default{
         data(){
-            const words = Local().reports;
+            const words = Local().reportsWarning;
             return{
                 words,
-                name: "报告",
-                reports: []
+                name: "监测预警",
+                reports: [],
             }
         },
         ready(){

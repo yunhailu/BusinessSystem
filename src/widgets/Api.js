@@ -90,6 +90,22 @@ export const topicAdd = params => {
 };
 
 /**
+ *  Encapsulate `topic add` interface
+ *
+ *  @param {String} name
+ *  @param {String} topic_group_id
+ *
+ *  @return {Promise} With Topic add.
+ */
+export const topicUp = params => {
+    return Api.request({
+        url: `${rootURI}/topic/update`,
+        params
+    });
+};
+
+
+/**
  *  Encapsulate `topic delete` interface
  *
  *  @param {String} id

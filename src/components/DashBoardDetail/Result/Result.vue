@@ -12,11 +12,11 @@
         <!--<div class="chart" v-echarts="resultChartOption" :loading="resultChartLoading" :img.sync="master" :class="[data.source=='all' ? 'active' : '']" :resize="resultChartOption.isToggle" theme="macarons"></div>-->
         <!--<div class="pie" v-echarts="resultPieChartOption" :loading="resultPieChartLoading" :img.sync="sub" :class="[data.source=='all' ? 'active' : '']" translate="show-pie"  theme="macarons"></div>-->
 
-        <div class="chart" :img.sync="master" :class="[data.source=='all' ? 'active' : '']" :resize="resultChartOption.isToggle" theme="macarons">
-            <echarts :options="resultChartOption" initOptions="resultChartOption" :img.sync="master" theme="macarons"></echarts>
+        <div class="chart" :class="[data.source=='all' ? 'active' : '']" :resize="resultChartOption.isToggle" theme="macarons">
+            <echarts :options="resultChartOption" :initOptions="resultChartOption" :img.sync="master" theme="macarons"></echarts>
         </div>
-        <div class="pie" :img.sync="sub" :class="[data.source=='all' ? 'active' : '']" translate="show-pie"  theme="macarons">
-            <echarts :options="resultPieChartOption" initOptions="resultPieChartOption" :img.sync="sub" theme="macarons"></echarts>
+        <div class="pie" :class="[data.source=='all' ? 'active' : '']" translate="show-pie"  theme="macarons">
+            <echarts :options="resultPieChartOption" :initOptions="resultPieChartOption" :img.sync="sub" theme="macarons"></echarts>
         </div>
     </div>
     <list-panel :list="list" :options="options" :select-title="selectTitle" :select-value.sync="sortVal" :tools="isShowTools"></list-panel>
@@ -96,6 +96,7 @@
                     series: _.extend({}, Pie.series, {
                         name: 'Result',
                         center: ['50%', '45%'],
+                        radius: ['20%', '60%'],
                         data:[]
                     })
                 },
