@@ -93,12 +93,7 @@
                     }),
                     textStyle: Pie.textStyle,
                     toolbox: Pie.toolbox,
-                    series: _.extend({}, Pie.series, {
-                        name: 'Result',
-                        center: ['50%', '45%'],
-                        radius: ['20%', '60%'],
-                        data:[]
-                    })
+                    series:[]
                 },
                 actions: function(val, idx){
                     //this.resultChartOption = {};
@@ -144,17 +139,27 @@
                     });
                     if(idx == 0){
                         this.resultPieChartOption = _.extend({}, this.resultPieChartOption, {
-                            series: _.extend({}, Pie.series, {
-                                name: 'Result',
-                                center: ['50%', '45%'],
-                                data:[
-                                    {value: _.reduce(lineData.wechat, (mome, val) => mome + val, 0), name: "微信"},
-                                    {value: _.reduce(lineData.weibo, (mome, val) => mome + val, 0), name:"微博"},
-                                    {value: _.reduce(lineData.client, (mome, val) => mome + val, 0), name:"客户端"},
-                                    {value: _.reduce(lineData.web, (mome, val) => mome + val, 0), name:"网页"},
-                                    {value: _.reduce(lineData.overseas, (mome, val) => mome + val, 0), name:"海外"}
-                                ]
-                            })
+                            series:[
+                                {
+                                    label:{
+                                        normal:{
+                                            show:true,
+                                            formatter:"{d}%"
+                                        }
+                                    },
+                                    name:'',
+                                    type:'pie',
+                                    radius: '50%',
+                                    center: ['50%', '50%'],
+                                    data:[
+                                        {value: _.reduce(lineData.wechat, (mome, val) => mome + val, 0), name: "微信"},
+                                        {value: _.reduce(lineData.weibo, (mome, val) => mome + val, 0), name:"微博"},
+                                        {value: _.reduce(lineData.client, (mome, val) => mome + val, 0), name:"客户端"},
+                                        {value: _.reduce(lineData.web, (mome, val) => mome + val, 0), name:"网页"},
+                                        {value: _.reduce(lineData.overseas, (mome, val) => mome + val, 0), name:"海外"}
+                                    ]
+                                }
+                            ]
                         });
                         this.resultChartOption.isToggle = true;
                         this.resultPieChartOption.isActive = true;
