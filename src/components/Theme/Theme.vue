@@ -2,7 +2,7 @@
     <tabs :datas="themeNums"></tabs>
     <!--<span>Theme</span>-->
     <div class="theme-word">
-        <div class="theme-word-chart" v-echarts="themeWordOption" :loading="themeWordLoading"  theme="infographic" :click="clickAction"></div>
+        <div class="theme-word-chart" v-echarts="themeWordOption" :loading="themeWordLoading"  theme="infographic"></div><!-- :click="clickAction"-->
         <div class="theme-word-ranking">
             <dl class="list up-list">
                 <dt class="list-title">排名变化</dt>

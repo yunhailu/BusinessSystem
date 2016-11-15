@@ -158,8 +158,6 @@
                 });
             },
             showNewList(item){
-                //console.log('11111111111111111111111111111111111');
-
                 const topic_id = this.activeAnalyticsTopic.topic_id,
                         topic = this.activeAnalyticsTopic.topic_name,
                         subtopic = this.analyticsSubTopic,
@@ -293,7 +291,7 @@
                     color: _.extend([], Chart.color),
                     series: [
                         {
-                            name: 'Happy',
+                            name: '满意',
                             type: 'bar',
                             stack: 'sentiment',
                             label: {
@@ -305,7 +303,7 @@
                             data: [val.happy]
                         },
                         {
-                            name: 'Anger',
+                            name: '愤怒',
                             type: 'bar',
                             stack: 'sentiment',
                             label: {
@@ -317,7 +315,7 @@
                             data: [val.anger]
                         },
                         {
-                            name: 'Sorrow',
+                            name: '失望',
                             type: 'bar',
                             stack: 'sentiment',
                             label: {
@@ -329,7 +327,7 @@
                             data: [val.sorrow]
                         },
                         {
-                            name: 'Disgust',
+                            name: '反感',
                             type: 'bar',
                             stack: 'sentiment',
                             label: {
@@ -341,7 +339,7 @@
                             data: [val.disgust]
                         },
                         {
-                            name: 'Fear',
+                            name: '害怕',
                             type: 'bar',
                             stack: 'sentiment',
                             label: {
