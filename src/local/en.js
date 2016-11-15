@@ -116,7 +116,8 @@ export const en = {
         advancedBtn: "Advanced Mode",
         exclude: "Exclude Words",
         groups: ["People", "Mechanism", "Product", "Project", "Event", "Others"],
-        create: "Create"
+        create: "Create",
+        warningSet:"WarningSet"
     },
     reports: {
         reportTitle: "REPORT TITLE",

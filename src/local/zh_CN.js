@@ -117,7 +117,8 @@ export const zh_CN = {
         exclude: "排除词",
         moodGroups:["满意","愤怒", "失望", "反感","害怕"],
         groups: ["人物", "机构", "产品", "项目", "事件", "其他"],
-        create: "创建提交"
+        create: "创建提交",
+        warningSet:"预警设置"
     },
     reportsWarning: {
         reportTitle: "预警标题",

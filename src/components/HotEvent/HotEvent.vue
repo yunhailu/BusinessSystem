@@ -87,14 +87,14 @@
                         data: [common.happy, common.anger, common.sorrow, common.disgust, common.fear]
                     }),
                     textStyle: Pie.textStyle,
-                    //toolbox: Pie.toolbox,
+                    toolbox: Pie.toolbox,
                     series: [_.extend({}, Pie.series, {
                         name: words.sentiment,
                         radius: ['25%', '80%'],
                         center: ['50%', '50%'],
                         roseType : 'radius',
                         data:[
-                            //{value:43, name: common.happy}, {value: 78, name: common.anger}, {value: 123, name: common.sorrow}, {value: 234, name: common.disgust}, {value: 345, name: common.fear}
+                            {value:43, name: common.happy}, {value: 78, name: common.anger}, {value: 123, name: common.sorrow}, {value: 234, name: common.disgust}, {value: 345, name: common.fear}
                         ]
                     })]
                 },
@@ -291,15 +291,16 @@
                     if(resp.data.code == 0){
                         this.hotWordsLoading = false;
                         this.hotWordsOption.series.data = resp.data.data.words;
-                        this.sentimentOption.series = _.map(this.sentimentOption.series, value => {
+                        /*this.sentimentOption.series = _.map(this.sentimentOption.series, value => {
                             value.data = _.chain(resp.data.data.sentiment)
                                     .map(item => {
                                         return {value:item.value, name: this.common[item.key]}
                                     }).
                                     sortBy('value').value();
                             return value;
-                        });
+                        });*/
                         this.activeHot = { id: item.id, name: item.name };
+                        console.log('查看shuju',this.sentimentOption.series);
                         console.log('Image url: ',this.img);
                     }
                 });
