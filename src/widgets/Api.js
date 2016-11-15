@@ -507,7 +507,7 @@ export const getMonitorList = params => {
 };
 
 /**监测设置的情绪选择的接口
- *  Encapsulate `getMonitorList` interface
+ *  Encapsulate `getCategroy` interface
  *
  */
 export const getCategroy = params => {
@@ -517,7 +517,26 @@ export const getCategroy = params => {
     });
 };
 
-7
+/**首页实时热点话题的接口
+ *  Encapsulate `getReallist` interface
+ */
+export const getReallist = params => {
+    return Api.request({
+        url: `${rootURI}/hot/reallist`,
+        params
+    });
+};
+
+/**首页实时热点话题的接口
+ *  Encapsulate `getTodayList` interface
+ */
+export const getTodayList = params => {
+    return Api.request({
+        url: `${rootURI}/hot/todayList`,
+        params
+    });
+};
+
 
 
 

@@ -1,5 +1,6 @@
 <template>
     <div class="hot-panel">
+        <!--热点事件散点图-->
         <div class="row">
             <div class="col-md-12 hot-river">
                 <card-panel :title="words.hotsRiver">
@@ -7,6 +8,7 @@
                 </card-panel>
             </div>
         </div>
+        <!--热点事件排行，实时热点排行-->
         <div class="row">
             <div class="col-md-6 hot-today">
                 <card-panel :title="words.todayHotsRanking">
@@ -29,7 +31,7 @@
                 </card-panel>
             </div>
         </div>
-
+        <!--情绪比例，热词排行-->
         <div class="row">
             <div class="col-md-6 hot-sentiment">
                 <card-panel :title="words.sentiment | title">
@@ -43,7 +45,7 @@
             </div>
 
         </div>
-
+        <!--热点事件,散点图-->
         <div class="row">
             <div class="col-md-12 hot-river">
                 <card-panel :title="words.hotsRiver">
