@@ -115,6 +115,7 @@ export const zh_CN = {
         quickBtn: "快速模式",
         advancedBtn: "高级模式",
         exclude: "排除词",
+        warningSet:"预警设置",
         moodGroups:["满意","愤怒", "失望", "反感","害怕"],
         groups: ["人物", "机构", "产品", "项目", "事件", "其他"],
         create: "创建提交"
