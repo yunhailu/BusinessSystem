@@ -518,11 +518,11 @@ export const getCategroy = params => {
 };
 
 /**首页实时热点话题的接口
- *  Encapsulate `getReallist` interface
+ *  Encapsulate `getRealList` interface
  */
-export const getReallist = params => {
+export const getRealList = params => {
     return Api.request({
-        url: `${rootURI}/hot/reallist`,
+        url: `${rootURI}/hotspot/real`,
         params
     });
 };
@@ -532,7 +532,7 @@ export const getReallist = params => {
  */
 export const getTodayList = params => {
     return Api.request({
-        url: `${rootURI}/hot/todayList`,
+        url: `${rootURI}/hotspot/today`,
         params
     });
 };

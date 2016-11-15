@@ -15,7 +15,7 @@
                     <ul class="hot-today-list">
                         <li v-for="item in hotsTodayRanking"  class="hot-today-list-item" @click="showDetail(item);">
                             <span class="hot-today-list-item-index">{{ ($index + 1) }}</span>
-                            <span class="hot-today-list-item-text">{{item.name}}</span>
+                            <span class="hot-today-list-item-text">{{item.title}}</span>
                         </li>
                     </ul>
                 </card-panel>
@@ -25,7 +25,7 @@
                     <ul class="hot-ranking-list">
                         <li v-for="item in hotsRanking"  class="hot-ranking-list-item" @click="showDetail(item);">
                             <span class="hot-ranking-list-item-index">{{ ($index + 1) }}</span>
-                            <span class="hot-ranking-list-item-text">{{item.name}}</span>
+                            <span class="hot-ranking-list-item-text">{{item.title}}</span>
                         </li>
                     </ul>
                 </card-panel>
@@ -96,7 +96,7 @@
                         center: ['50%', '50%'],
                         roseType : 'radius',
                         data:[
-                            {value:43, name: common.happy}, {value: 78, name: common.anger}, {value: 123, name: common.sorrow}, {value: 234, name: common.disgust}, {value: 345, name: common.fear}
+//                            {value:43, name: common.happy}, {value: 78, name: common.anger}, {value: 123, name: common.sorrow}, {value: 234, name: common.disgust}, {value: 345, name: common.fear}
                         ]
                     })]
                 },
@@ -142,7 +142,7 @@
                 //今日热点排行
                 hotsTodayRanking: [],
 
-                // 热点事件散点图
+                // 热点事件散点图-------over
                 scatterOption: {
                     tooltip: { position: 'top', formatter(params, ticket, callback){
                         //console.log(params);
@@ -217,6 +217,7 @@
                     ]
                 },
                 graphChartLoading: false,
+                graphData:[]
 
 
             }
@@ -231,7 +232,7 @@
                         if(scatters.length > 1){
                             this.activeHot = { id: scatters[0].id, name: scatters[0].name };
                         }
-                        this.showDetail(this.activeHot);
+                        //this.showDetail(this.activeHot);
                         this.scatterOption.title = _.map(scatters, (scatter, index) => {
                             return ({
                                 textBaseline: 'middle',
@@ -274,42 +275,51 @@
                                 }
                             });
                         });
-                        this.hotsRanking = _.map(scatters, (scatter, index) => ({name: scatter.name, id: scatter.id}));
+                        //this.hotsRanking = _.map(scatters, (scatter, index) => ({name: scatter.name, id: scatter.id}));
                     }
                 });
             },
-            getHotToday(){
+           /* getHotToday(){
                 Api.getHotToday({}).then(resp => {
                     //console.log(resp.data);
                     if(resp.data.code == 0){
                         this.hotsTodayRanking = _.map(resp.data.data, value => value);
                     }
                 });
-            },
+            },*/
             showDetail(item){
-                const id = item.id;
-                Api.getHotDetail({id}).then(resp => {
+                console.log(item);
+                this.activeHot = item;
+                //console.log(item.mood[0],item.mood[1])
+                this.sentimentOption.series.data=[
+                    {value:item.mood[0],name : this.common.happy}, {value: item.mood[1], name: this.common.anger}, {value: item.mood[2], name: this.common.sorrow},{value: item.mood[3], name: this.common.disgust}, {value: item.mood[4], name: this.common.fear}
+                ];
+                this.hotWordsOption.series.data=[
+
+                ]
+               /* Api.getHotDetail({id}).then(resp => {
                     //.log(item, resp.data);
                     if(resp.data.code == 0){
                         this.hotWordsLoading = false;
                         this.hotWordsOption.series.data = resp.data.data.words;
-                        /*this.sentimentOption.series = _.map(this.sentimentOption.series, value => {
+                        cosnole.log('resp.data.data.words',resp.data.data.words)
+                        /!*this.sentimentOption.series = _.map(this.sentimentOption.series, value => {
                             value.data = _.chain(resp.data.data.sentiment)
                                     .map(item => {
                                         return {value:item.value, name: this.common[item.key]}
                                     }).
                                     sortBy('value').value();
                             return value;
-                        });*/
+                        });*!/
                         this.activeHot = { id: item.id, name: item.name };
                         console.log('查看shuju',this.sentimentOption.series);
                         console.log('Image url: ',this.img);
                     }
-                });
+                });*/
             },
             graphchart(){
                 this.graphChartOption.series[0].data=[
-                    {"id":"0","name":"妻子发现异样报警发现丈夫已遇害，当时订单运行40多小时无人问津。","itemStyle":null,"symbolSize":19.12381,"x":-266.82776,"y":299.6904,"attributes":{"modularity_class":0},"value":28.685715,"label":{"normal":{"show":true}},"category":5},
+                    {"id":"0","name":(this.hotsRanking)[0].title,"itemStyle":null,"symbolSize":19.12381,"x":-266.82776,"y":299.6904,"attributes":{"modularity_class":0},"value":28.685715,"label":{"normal":{"show":true}},"category":5},
                     {"id":"1","name":"Napoleon","itemStyle":null,"symbolSize":22.6666666666666665,"x":-418.08344,"y":446.8853,"attributes":{"modularity_class":0},"value":4,"label":{"normal":{"show":false}},"category":0},
                     {"id":"2","name":"MlleBaptistine","itemStyle":null,"symbolSize":26.323809333333333,"x":-212.76357,"y":245.29176,"attributes":{"modularity_class":1},"value":9.485714,"label":{"normal":{"show":false}},"category":0},
                     {"id":"3","name":"MmeMagloire","itemStyle":null,"symbolSize":26.323809333333333,"x":-242.82404,"y":235.26283,"attributes":{"modularity_class":1},"value":9.485714,"label":{"normal":{"show":false}},"category":0},
@@ -319,8 +329,8 @@
                     {"id":"7","name":"Cravatte","itemStyle":null,"symbolSize":22.6666666666666665,"x":-382.69568,"y":475.09113,"attributes":{"modularity_class":0},"value":4,"label":{"normal":{"show":false}},"category":2},
                     {"id":"8","name":"Count","itemStyle":null,"symbolSize":19.6666666666666665,"x":-320.384,"y":387.17325,"attributes":{"modularity_class":0},"value":4,"label":{"normal":{"show":false}},"category":2},
                     {"id":"9","name":"OldMan","itemStyle":null,"symbolSize":22.6666666666666665,"x":-344.39832,"y":451.16772,"attributes":{"modularity_class":0},"value":4,"label":{"normal":{"show":false}},"category":2},
-                    {"id":"10","name":"西安3凶犯劫持开凯迪拉克","itemStyle":null,"symbolSize":22.6666666666666665,"x":-89.34107,"y":234.56128,"attributes":{"modularity_class":1},"value":4,"label":{"normal":{"show":true}},"category":1},
-                    {"id":"11","name":"2016年9月中旬，西安3凶犯劫持开凯迪拉克的滴滴司机","itemStyle":null,"symbolSize":26.66666666666667,"x":-87.93029,"y":-6.8120565,"attributes":{"modularity_class":1},"value":100,"label":{"normal":{"show":true}},"category":1},
+                    {"id":"10","name":(this.hotsRanking)[1].title,"itemStyle":null,"symbolSize":22.6666666666666665,"x":-89.34107,"y":234.56128,"attributes":{"modularity_class":1},"value":4,"label":{"normal":{"show":true}},"category":1},
+                    {"id":"11","name":(this.hotsRanking)[2].title,"itemStyle":null,"symbolSize":26.66666666666667,"x":-87.93029,"y":-6.8120565,"attributes":{"modularity_class":1},"value":100,"label":{"normal":{"show":true}},"category":1},
                     {"id":"12","name":"Marguerite","itemStyle":null,"symbolSize":24.495239333333333,"x":-339.77908,"y":-184.69139,"attributes":{"modularity_class":1},"value":6.742859,"label":{"normal":{"show":false}},"category":1},
                     {"id":"13","name":"MmeDeR","itemStyle":null,"symbolSize":22.6666666666666665,"x":-194.31313,"y":178.55301,"attributes":{"modularity_class":1},"value":4,"label":{"normal":{"show":false}},"category":1},
                     {"id":"14","name":"Isabeau","itemStyle":null,"symbolSize":23.6666666666666665,"x":-158.05168,"y":201.99768,"attributes":{"modularity_class":1},"value":4,"label":{"normal":{"show":false}},"category":1},
@@ -330,7 +340,7 @@
                     {"id":"17","name":"Listolier","itemStyle":null,"symbolSize":19.638097333333334,"x":-516.55884,"y":-393.98975,"attributes":{"modularity_class":2},"value":20.457146,"label":{"normal":{"show":false}},"category":4},
                     {"id":"18","name":"Fameuil","itemStyle":null,"symbolSize":29.638097333333334,"x":-464.79382,"y":-493.57944,"attributes":{"modularity_class":2},"value":20.457146,"label":{"normal":{"show":false}},"category":4},
                     {"id":"19","name":"Blacheville","itemStyle":null,"symbolSize":23.638097333333334,"x":-515.1624,"y":-456.9891,"attributes":{"modularity_class":2},"value":20.457146,"label":{"normal":{"show":false}},"category":4},
-                    {"id":"20","name":"日前，滴滴公司回应称，此事正在调查期间，不便透露更多信息。","itemStyle":null,"symbolSize":23.638097333333334,"x":-408.12122,"y":-464.5048,"attributes":{"modularity_class":2},"value":20.457146,"label":{"normal":{"show":true}},"category":5},
+                    {"id":"20","name":(this.hotsRanking)[3].title,"itemStyle":null,"symbolSize":23.638097333333334,"x":-408.12122,"y":-464.5048,"attributes":{"modularity_class":2},"value":20.457146,"label":{"normal":{"show":true}},"category":5},
                     {"id":"21","name":"Favourite","itemStyle":null,"symbolSize":23.638097333333334,"x":-408.12122,"y":-464.5048,"attributes":{"modularity_class":2},"value":20.457146,"label":{"normal":{"show":false}},"category":4},
                     {"id":"22","name":"Favourite","itemStyle":null,"symbolSize":23.638097333333334,"x":-408.12122,"y":-464.5048,"attributes":{"modularity_class":2},"value":20.457146,"label":{"normal":{"show":false}},"category":7},
                     {"id":"23","name":"Favourite","itemStyle":null,"symbolSize":23.638097333333334,"x":-408.12122,"y":-464.5048,"attributes":{"modularity_class":2},"value":20.457146,"label":{"normal":{"show":false}},"category":7},
@@ -363,23 +373,48 @@
 
 
                 ];
+            },
 
+            //实时
+            getRealList(){
+                Api.getRealList({}).then(resp=>{
+                    console.log('resp',resp);
+                    if(resp.data.code ==0){
+                        //const details = resp.data.data;
+                         this.hotsRanking = resp.data.data;
+                        console.log('==',this.hotsRanking);
+                        this.graphchart();
+                    }
+                })
+            },
+            //当天
+            getTodayList(){
+                Api.getTodayList({}).then(resp =>{
+                    console.log('resp',resp);
+                    if(resp.data.code ==0){
+                        //const details = resp.data.data;
+                        this.hotsTodayRanking = resp.data.data.list_data;
+                        console.log('----',this.hotsTodayRanking)
+                    }
+                })
             }
-
-
-
-
         },
         filters: {
             title(title){
-                const hot = this.activeHot.name;
+                const hot = this.activeHot.title;
                 return `${title} ( ${hot} )`;
             }
         },
         created(){
+
             this.getHotRealtime();
-            this.getHotToday();
-            this.graphchart();
+            //this.getHotToday();
+            //this.graphchart();
+
+        },
+        ready(){
+            this.getRealList();
+            this.getTodayList();
         },
         components:{ CardPanel }
     }
