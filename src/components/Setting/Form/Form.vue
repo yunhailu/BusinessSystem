@@ -172,7 +172,8 @@
 
 //                this.topicText = topic.topic_name;
 //                this.radioVal = topic.topic_id
-
+                console.log('update: ', this.monitor, this.threshold);
+                return ;
                 if(!this.radioVal || !this.topicText ){
                     this.successTip = "";
                     this.errorTip = "请选择正确的阈值(整数)分组和填写新主题";
