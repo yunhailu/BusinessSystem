@@ -206,7 +206,6 @@
                     textStyle: Pie.textStyle,
                     toolbox: Pie.toolbox,
                     series: [
-
                         {
                             label:{
                                 normal:{

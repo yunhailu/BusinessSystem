@@ -335,19 +335,59 @@
                     this.commentBarOption.series[this.commentMap[key]].data = value;
                 });
 
-                if(idx == 0){
+                switch (idx){
+                    case 0:
+                        this.commentPieOption2.series[0].data =[
+                            {value:_.reduce(this.lineData.all.positive,(mome, val) => mome + val, 0), name:this.words.positive},
+                            {value:_.reduce(this.lineData.all.negative,(mome, val) => mome + val, 0), name:this.words.negative},
+                            {value:_.reduce(this.lineData.all.neutral,(mome, val) => mome + val, 0), name:this.words.neutral},]
+                        break;
+                    case 1:
+                        this.commentPieOption2.series[0].data =[
+                            {value:_.reduce(this.lineData.wechat.positive,(mome, val) => mome + val, 0), name:this.words.positive},
+                            {value:_.reduce(this.lineData.wechat.negative,(mome, val) => mome + val, 0), name:this.words.negative},
+                            {value:_.reduce(this.lineData.wechat.neutral,(mome, val) => mome + val, 0), name:this.words.neutral},]
+                        break;
+                    case 2:
+                        this.commentPieOption2.series[0].data =[
+                            {value:_.reduce(this.lineData.weibo.positive,(mome, val) => mome + val, 0), name:this.words.positive},
+                            {value:_.reduce(this.lineData.weibo.negative,(mome, val) => mome + val, 0), name:this.words.negative},
+                            {value:_.reduce(this.lineData.weibo.neutral,(mome, val) => mome + val, 0), name:this.words.neutral},]
+                        break;
+                    case 3:
+                        this.commentPieOption2.series[0].data =[
+                            {value:_.reduce(this.lineData.client.positive,(mome, val) => mome + val, 0), name:this.words.positive},
+                            {value:_.reduce(this.lineData.client.negative,(mome, val) => mome + val, 0), name:this.words.negative},
+                            {value:_.reduce(this.lineData.client.neutral,(mome, val) => mome + val, 0), name:this.words.neutral},]
+                        break;
+                    case 4:
+                        this.commentPieOption2.series[0].data =[
+                            {value:_.reduce(this.lineData.web.positive,(mome, val) => mome + val, 0), name:this.words.positive},
+                            {value:_.reduce(this.lineData.web.negative,(mome, val) => mome + val, 0), name:this.words.negative},
+                            {value:_.reduce(this.lineData.web.neutral,(mome, val) => mome + val, 0), name:this.words.neutral},]
+                        break;
+                    case 5:
+                        this.commentPieOption2.series[0].data =[
+                            {value:_.reduce(this.lineData.overseas.positive,(mome, val) => mome + val, 0), name:this.words.positive},
+                            {value:_.reduce(this.lineData.overseas.negative,(mome, val) => mome + val, 0), name:this.words.negative},
+                            {value:_.reduce(this.lineData.overseas.neutral,(mome, val) => mome + val, 0), name:this.words.neutral},]
+                        break;
+                    default:
+                        break;
+                }
+                /*if(idx == 0){
                     this.isShow = true;
                     this.commentPieOption2.series[0].data =[
                         {value:_.reduce(this.lineData.all.positive,(mome, val) => mome + val, 0), name:this.words.positive},
                         {value:_.reduce(this.lineData.all.negative,(mome, val) => mome + val, 0), name:this.words.negative},
                         {value:_.reduce(this.lineData.all.neutral,(mome, val) => mome + val, 0), name:this.words.neutral},]
                     return;
-                }
+                }*/
 
-                this.isShow = false;
+               /* this.isShow = false;
                 this.commentPieOption.series.data = _.map(this.lineData[map[idx]], (value, key) => {
                     return ({ value: _.reduce(value, (memo, val) => memo + val, 0),name: this.words[key] });
-                });
+                });*/
                 //this.getCommentList();
 
             },

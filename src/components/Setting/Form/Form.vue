@@ -172,7 +172,8 @@
             },
             updateSubmit(){
 
-                if(!this.radioVal || !this.topicText || (this.threshold!=0&&this.threshold%1!=0)){
+                if(!this.topicText || (this.threshold!=0&&this.threshold%1!=0)){
+                    this.successTip = "";
                     this.errorTip = "请选择正确的阈值(整数)分组和填写新主题";
                     this.successTip = "";
                     return ;
