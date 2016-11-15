@@ -21,15 +21,13 @@
                     <tbody>
                     <tr v-for="(index, report) in reports" :class="[index % 2 == 0 ? '' : '']">
                         <td>{{report.name}}</td>
-                        <td> 高兴</td>
-                        <td>123</td>
+                        <td>{{report.data[0].name}}</td>
+                        <td>{{report.data[0].value}}</td>
                         <td>{{report.date}}</td>
-                        <!--<td> / </td>-->
-                        <!--<td>{{report.lastSent}}</td>-->
                         <td>
-
                             <i class="fa fa-edit  actionBtn" @click="viewAction(report);"></i>
                             <i class="fa fa-envelope-o actionBtn" @click="emailAction(report);"></i>
+                            <!--<i class="fa fa-times  actionBtn" @click="viewAction(report);"></i>-->
                         </td>
                     </tr>
                     </tbody>
@@ -79,11 +77,11 @@
                 location.href = `mailto:${getCookie('business_email')}?CC=${getCookie('business_email')}&BCC=${getCookie('business_email')}&Subject=发送报告-${report.name}&Body=你好`;
             },
             getDashboardList(){
-                const user_id = getCookie('business_id');
-                Api.getDashboardList({ user_id }).then(resp => {
+                Api.getMonitorList().then(resp => {
                     //console.log(resp.data);
                     if(resp.data.code == 0){
                         this.reports = resp.data.data;
+                        //console.log(this.reports);
                     }
                 });
             },

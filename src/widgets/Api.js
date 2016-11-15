@@ -90,12 +90,12 @@ export const topicAdd = params => {
 };
 
 /**
- *  Encapsulate `topic add` interface
+ *  Encapsulate `topic update` interface
  *
  *  @param {String} name
  *  @param {String} topic_group_id
  *
- *  @return {Promise} With Topic add.
+ *  @return {Promise} With Topic update.
  */
 export const topicUp = params => {
     return Api.request({
@@ -492,5 +492,32 @@ export const getArticleForward = params => {
         params
     });
 };
+
+
+/**预警监测的列表接口
+ *  Encapsulate `getMonitorList` interface
+ *
+
+ */
+export const getMonitorList = params => {
+    return Api.request({
+        url: `${rootURI}/monitor/list`,
+        params
+    });
+};
+
+/**监测设置的情绪选择的接口
+ *  Encapsulate `getMonitorList` interface
+ *
+ */
+export const getCategroy = params => {
+    return Api.request({
+        url: `${rootURI}/monitor/category`,
+        params
+    });
+};
+
+7
+
 
 

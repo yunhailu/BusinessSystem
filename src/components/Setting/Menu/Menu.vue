@@ -96,7 +96,7 @@
             },
             topicAction(){
                 return (item, group_id) => {
-                    //console.log(item, group_id);
+                    console.log(item, group_id);
                     this.$router.go({name: 'settingEdit', params: {topic_id: item.topic_id, group_id}});
                 };
             },
