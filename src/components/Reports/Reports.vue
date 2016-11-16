@@ -18,11 +18,11 @@
                         <td><i class="fa fa-edit"></i> {{words.actions}}</td>
                     </tr>
                     </thead>
-                    <tbody>
-                    <tr v-for="(index, report) in reports" :class="[index % 2 == 0 ? '' : '']">
-                        <td>{{report.name}}</td>
-                        <td>{{report.data[0].name}}</td>
-                        <td>{{report.data[0].value}}</td>
+                    <tbody v-for="(index, report) in reports">
+                    <tr v-for="report0 in report.data" :class="[index % 2 == 0 ? '' : '']">
+                        <td>{{report.topic_name}}</td>
+                        <td>{{report0.name}}</td>
+                        <td>{{report0.value}}</td>
                         <td>{{report.date}}</td>
                         <td>
                             <i class="fa fa-edit  actionBtn" @click="viewAction(report);"></i>
@@ -30,6 +30,7 @@
                             <!--<i class="fa fa-times  actionBtn" @click="viewAction(report);"></i>-->
                         </td>
                     </tr>
+
                     </tbody>
                 </table>
             </div>
@@ -80,8 +81,35 @@
                 Api.getMonitorList().then(resp => {
                     //console.log(resp.data);
                     if(resp.data.code == 0){
-                        this.reports = resp.data.data;
-                        //console.log(this.reports);
+                        //this.reports = resp.data.data;
+                        this.reports=resp.data.data;
+                        console.log('12',this.reports);
+
+                        //console.log('newDateS',newDateS);  _.chain(resp.data.data).
+                        //const mystr= _.flatten(resp.data.data,)
+
+
+
+
+
+
+                        // const newDateS = _.map(resp.data.data, (item)=> {
+                        //     // item.name=item.id;
+                        //     item.category = item.level;
+                        //     item.symbolSize = 15;
+                        //     item.itemStyle = "null";
+                        //     item.attributes = nodestyle1;
+                        //     item.label = nodestyle0;
+                        //     //item.x = Math.random() * (-1) * Math.random() * 1000;
+                        //     //item.y = Math.random() * Math.random() * 1000;
+                        //     return item;
+                        // });
+
+
+
+
+
+
                     }
                 });
             },

@@ -517,7 +517,6 @@ export const getCategroy = params => {
     });
 };
 
-7
 
 
 

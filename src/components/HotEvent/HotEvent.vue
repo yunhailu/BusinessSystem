@@ -291,6 +291,9 @@
                     if(resp.data.code == 0){
                         this.hotWordsLoading = false;
                         this.hotWordsOption.series.data = resp.data.data.words;
+
+                        console.log('11111',this.hotWordsOption.series.data);
+
                         this.sentimentOption.series = _.map(this.sentimentOption.series, value => {
                             value.data = _.chain(resp.data.data.sentiment)
                                     .map(item => {
@@ -299,6 +302,9 @@
                                     sortBy('value').value();
                             return value;
                         });
+
+
+
                         this.activeHot = { id: item.id, name: item.name };
                         console.log('Image url: ',this.img);
                     }

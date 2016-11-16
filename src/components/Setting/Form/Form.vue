@@ -257,8 +257,8 @@
             updateInit(){
                 const group_id = this.$route.params.group_id;
                 const topic_id = this.$route.params.topic_id;
-                // const monitor = "anger";
-                const threshold = 1002;
+                const monitor = "anger";
+                const threshold = 100;
                 const group = _.chain(this.topicList)
                         .map(group => _.extend({}, group))
                         .filter(group => (group.group_id == group_id))
@@ -267,6 +267,28 @@
                         .filter(topic => (topic.topic_id == topic_id))
                         .first().value();
                 this.topicText = topic.topic_name;
+
+
+                Api.getMonitorList().then(resp => {
+                    //console.log(resp.data);
+                    if(resp.data.code == 0){
+                        //this.reports = resp.data.data;
+                        const hj=_.chain(resp.data.data)
+                                .filter(hj => (hj.topic_id == topic_id))
+                                .first().value();
+                       // console.log('11',hj);
+                        this.threshold=hj.data[0].value;
+                        this.monitor=hj.data[0].key;
+                       // console.log('12',this.reports);
+
+                    }
+                });
+
+
+
+
+
+
                  this.radioVal = group_id;
                  //this.monitor=monitor;
                  this.threshold=threshold;

@@ -142,17 +142,12 @@
                     //console.log("getCommentList", resp.data);
                     if (resp.data.code == 0) {
                         const newDates = _.map(resp.data.data, (item)=> {
-
                             item.context = item.content;
                             item.date =item.pDate;
                             return item;
+                            this.selectItem= item;
                         });
-
-
-
                         this.popList = newDates;
-                        this.selectItem = item;
-
 
                     }
                 });
@@ -286,6 +281,7 @@
                     yAxis: _.extend({}, Chart.yAxis, {
                         type: 'category',
                         data: ['sentiment'],
+
                         show: false
                     }),
                     color: _.extend([], Chart.color),

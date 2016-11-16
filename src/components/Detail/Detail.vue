@@ -332,9 +332,7 @@
                 this.getArticleCorrelation();
                 this.getArticleForward();
 
-
                 // this.DEEE();
-
 
             }
         },
