@@ -6,19 +6,19 @@
         <div class="panel-title-delete" @click="deleteItem();"><i class="fa fa-minus"></i></div>
     </div>
     <div class="charts">
-        <!--<div class="chart timeBar" v-echarts="sentimentBarOption" :img.sync="master" :loading="sentimentBarLoading" ></div>&lt;!&ndash;theme="infographic"&ndash;&gt;-->
-        <!--<div class="chart percentBar" v-echarts="sentimentChartOption"  :loading="sentimentChartLoading" ></div>-->
+        <div class="charts">
+            <div class="chart timeBar" :click="clickChartAction" v-echarts="sentimentBarOption" :loading="sentimentBarLoading" ></div><!--theme="infographic"-->
+            <!--<div class="chart percentBar" v-echarts="sentimentChartOption" :loading="sentimentChartLoading" ></div>-->
+            <div class="chart percentBar" v-echarts="sentimentPieOption" :loading="sentimentPieLoading"></div>
+        </div>
 
-        <div class="chart timeBar" :loading="sentimentBarLoading" >
+       <!-- <div class="chart timeBar" :loading="sentimentBarLoading" >
             <echarts :options="sentimentBarOption" :initOptions="sentimentBarOption" :img.sync="master"></echarts>
-        </div><!--theme="infographic"-->
+        </div>&lt;!&ndash;theme="infographic"&ndash;&gt;
         <div class="chart percentBar"   :loading="sentimentChartLoading" >
             <echarts :options="sentimentChartOption" :initOptions="sentimentChartOption" :img.sync="sub"></echarts>
-        </div>
+        </div>-->
     </div>
-    <!--<div class="charts"></div>-->
-
-    <!--<list-panel :list="list" :options="options" :select-title="selectTitle" :select-value.sync="sortVal"></list-panel>-->
 </template>
 <style lang="less" scoped>
     @import "Sentiment.less";
@@ -81,7 +81,7 @@
                         data:[common.happy,common.anger,common.sorrow,common.disgust,common.fear]
                     },
                     dataZoom: _.extend({}, Chart.dataZoom),
-                    color:_.extend( Chart.color, {}),
+                    //color:_.extend( Chart.color, {}),
                     grid: _.extend({}, Chart.grid, {
                         bottom: '40rem',
                     }),
@@ -97,41 +97,119 @@
                     }),
                     progressive: 4,
                     textStyle: Chart.textStyle,
+                    color:['#2FCC71','#E64D3D', '#F1C40F', '#3598DC', '#737373'],
                     series : [{
                         name:common.happy,
                         type:'line',
                         //areaStyle: {normal: {}},
-                        stack: 'Total',
+                        //stack: 'Total',
                         data: []
                     }, {
                         name:common.anger,
                         type:'line',
                         //areaStyle: {normal: {}},
-                        stack: 'Total',
+                        //stack: 'Total',
                         data: []
                     }, {
                         name:common.sorrow,
                         type:'line',
                         //areaStyle: {normal: {}},
-                        stack: 'Total',
+                        //stack: 'Total',
                         data: []
                     }, {
                         name:common.disgust,
                         type:'line',
                         //areaStyle: {normal: {}},
-                        stack: 'Total',
+                        //stack: 'Total',
                         data: []
                     }, {
                         name:common.fear,
                         type:'line',
                         //areaStyle: {normal: {}},
-                        stack: 'Total',
+                        //stack: 'Total',
                         data: []
                     }]
                 },
+                sentimentPieLoading:false,
+                sentimentPieOption:{
 
+                    tooltip: {
+                        show:true,
+                        trigger: 'item',
+                        formatter:"{b}:({d}%)"
+                    },
+                    /*legend: {
+                     orient: 'vertical',
+                     bottom:0,
+                     data:[common.happy,common.anger,common.sorrow,common.disgust,common.fear]
+                     },*/
+                    legend: _.extend({}, Pie.legend, {
+                        bottom: 0,
+                        data: [common.happy,common.anger,common.sorrow,common.disgust,common.fear]
+                    }),
 
-                sentimentChartLoading: true,
+                    color:['#2FCC71','#E64D3D', '#F1C40F', '#3598DC', '#737373'],
+                    textStyle: Pie.textStyle,
+                    toolbox: Pie.toolbox,
+                    series: [
+                        {
+                            label:{
+                                normal:{
+                                    show:true,
+                                    formatter:"{d}%"
+                                }
+                            },
+                            name:'',
+                            type:'pie',
+                            radius: '60%',
+                            center: ['50%', '50%'],
+                            data:[]
+                        }
+                    ]
+                    /*isActive: true,
+                     title: _.extend({}, Pie.title, { show: false}),
+                     tooltip : {
+                     trigger: 'item',
+                     formatter: "{a} <br/>{b} : {c} ({d}%)"
+                     },
+                     legend: _.extend({}, Pie.legend, {
+                     //orient: 'vertical',
+                     //x: 'bottom',
+                     bottom: 0,
+                     data: ["满意", "愤怒", "失望", "反感", "害怕"]
+                     }),
+                     textStyle: Pie.textStyle,
+                     toolbox: Pie.toolbox,
+                     series: [
+                     {
+                     name:'',
+                     type:'pie',
+                     radius: ['30%', '70%'],
+                     avoidLabelOverlap: false,
+                     label: {
+                     normal: {
+                     show: false,
+                     position: 'center'
+                     },
+                     emphasis: {
+                     show: true,
+                     textStyle: {
+                     fontSize: '30',
+                     fontWeight: 'bold'
+                     }
+                     }
+                     },
+                     labelLine: {
+                     normal: {
+                     show: false
+                     }
+                     },
+                     data:[]
+                     }
+                     ]*/
+                },
+
+                /*sentimentChartLoading: true,
                 sentimentChartOption: {
                     tooltip: _.extend({}, Chart.tooltip, {}),
                     legend: {
@@ -185,7 +263,7 @@
                             data: []
                         }
                     ]
-                }
+                }*/
             }
         },
         methods: {
@@ -213,9 +291,20 @@
                     default:
                         break;
                 }
+                this.sentimentPieOption.series[0].data =[
+                    {value:_.reduce(this.lineData[source].happy,(mome, val) => mome + val, 0), name:this.common.happy},
+                    {value:_.reduce(this.lineData[source].anger,(mome, val) => mome + val, 0), name:this.common.anger},
+                    {value:_.reduce(this.lineData[source].sorrow,(mome, val) => mome + val, 0), name:this.common.sorrow},
+                    {value:_.reduce(this.lineData[source].disgust,(mome, val) => mome + val, 0), name:this.common.disgust},
+                    {value:_.reduce(this.lineData[source].fear,(mome, val) => mome + val, 0), name:this.common.fear}
+                ];
                 _.each(this.lineData[source], (value, key) => {
                     this.sentimentBarOption.series[this.sentimentMap[key]].data = value;
+                    console.log('chakanshuju',value)
                 });
+                /*_.each(this.lineData[source], (value, key) => {
+                    this.sentimentBarOption.series[this.sentimentMap[key]].data = value;
+                });*/
             },
             getSentimentDetail(){
                 const subtopic = this.data.subtopic,
@@ -230,7 +319,9 @@
                 Api.getSentimentDetail({ subtopic, topic_id, source, time_dimension, start, end, topic }).then(resp => {
                     //console.log("getSentimentDetail", JSON.stringify(resp.data.data));
                     if(resp.data.code == 0){
+
                         const details = resp.data.data;
+                        console.log('查看是否进入报告内情绪数据请求',details);
                         this.x = _.map(details, detail => detail.date);
                         const _this = this;
                         //console.log("xxxx", this.x);
@@ -252,13 +343,16 @@
                         this.lineData.all = all;
                         //console.log(this.lineData);
 
-                        this.sentimentBarLoading = false;
+                        /*this.sentimentBarLoading = false;
                         this.sentimentChartLoading = false;
+                        this.sentimentBarOption.xAxis.data = this.x;*/
+                        this.sentimentBarLoading = false;
+                        this.sentimentPieLoading = false;
                         this.sentimentBarOption.xAxis.data = this.x;
 
                         this.actions("", 0);
 
-                        _.each(this.sentimentChartOption.series, function(value, index){
+                        /*_.each(this.sentimentChartOption.series, function(value, index){
                             _.each(this.lineData, function(val, key){
                                 if(key == "all") return;
                                 const summary = _.reduce(this.lineData[key][this.sentimentArr[index]], (memo, val) => {
@@ -266,7 +360,33 @@
                                 }, 0);
                                 this.sentimentChartOption.series[index].data.push(summary);
                             }.bind(this));
-                        }.bind(this));
+                        }.bind(this));*/
+                        const allNums=_.reduce(this.lineData.all.happy,(mome, val) => mome + val, 0)+_.reduce(this.lineData.all.anger,(mome, val) => mome + val, 0)
+                                +_.reduce(this.lineData.all.sorrow,(mome, val) => mome + val, 0)+_.reduce(this.lineData.all.disgust,(mome, val) => mome + val, 0)
+                                +_.reduce(this.lineData.all.fear,(mome, val) => mome + val, 0);
+                        const wechatNums=_.reduce(this.lineData.wechat.happy,(mome, val) => mome + val, 0)+_.reduce(this.lineData.wechat.anger,(mome, val) => mome + val, 0)
+                                +_.reduce(this.lineData.wechat.sorrow,(mome, val) => mome + val, 0)+_.reduce(this.lineData.wechat.disgust,(mome, val) => mome + val, 0)
+                                +_.reduce(this.lineData.wechat.fear,(mome, val) => mome + val, 0);
+                        const weiboNums=_.reduce(this.lineData.weibo.happy,(mome, val) => mome + val, 0)+_.reduce(this.lineData.weibo.anger,(mome, val) => mome + val, 0)
+                                +_.reduce(this.lineData.weibo.sorrow,(mome, val) => mome + val, 0)+_.reduce(this.lineData.weibo.disgust,(mome, val) => mome + val, 0)
+                                +_.reduce(this.lineData.weibo.fear,(mome, val) => mome + val, 0);
+                        const clientNums=_.reduce(this.lineData.client.happy,(mome, val) => mome + val, 0)+_.reduce(this.lineData.client.anger,(mome, val) => mome + val, 0)
+                                +_.reduce(this.lineData.client.sorrow,(mome, val) => mome + val, 0)+_.reduce(this.lineData.client.disgust,(mome, val) => mome + val, 0)
+                                +_.reduce(this.lineData.client.fear,(mome, val) => mome + val, 0);
+                        const webNums=_.reduce(this.lineData.web.happy,(mome, val) => mome + val, 0)+_.reduce(this.lineData.web.anger,(mome, val) => mome + val, 0)
+                                +_.reduce(this.lineData.web.sorrow,(mome, val) => mome + val, 0)+_.reduce(this.lineData.web.disgust,(mome, val) => mome + val, 0)
+                                +_.reduce(this.lineData.web.fear,(mome, val) => mome + val, 0);
+                        const overseasNums=_.reduce(this.lineData.overseas.happy,(mome, val) => mome + val, 0)+_.reduce(this.lineData.overseas.anger,(mome, val) => mome + val, 0)
+                                +_.reduce(this.lineData.overseas.sorrow,(mome, val) => mome + val, 0)+_.reduce(this.lineData.overseas.disgust,(mome, val) => mome + val, 0)
+                                +_.reduce(this.lineData.overseas.fear,(mome, val) => mome + val, 0);
+                        this.sentimentNums =[
+                            allNums,
+                            wechatNums,
+                            weiboNums,
+                            clientNums,
+                            webNums,
+                            overseasNums
+                        ];
                     }
 
                 });
@@ -275,11 +395,62 @@
                 const detail = this.data;
                 this.remove(detail, 'sentiment');
             },
+            initData(){
+                this.lineData = {
+                    all: {
+                        happy: [], anger: [], sorrow: [], disgust: [], fear: []
+                    },
+                    wechat: {
+                        happy: [], anger: [], sorrow: [], disgust: [], fear: []
+                    },
+                    weibo: {
+                        happy: [], anger: [], sorrow: [], disgust: [], fear: []
+                    },
+                    client: {
+                        happy: [], anger: [], sorrow: [], disgust: [], fear: []
+                    },
+                    web: {
+                        happy: [], anger: [], sorrow: [], disgust: [], fear: []
+                    },
+                    overseas: {
+                        happy: [], anger: [], sorrow: [], disgust: [], fear: []
+                    }
+                };
+                /*this.sentimentChartOption.series = [
+                 {
+                 name: this.common.happy,
+                 type: 'bar',
+                 stack: '总量',
+                 data: []
+                 }, {
+                 name: this.common.anger,
+                 type: 'bar',
+                 stack: '总量',
+                 data: []
+                 }, {
+                 name: this.common.sorrow,
+                 type: 'bar',
+                 stack: '总量',
+                 data: []
+                 }, {
+                 name: this.common.disgust,
+                 type: 'bar',
+                 stack: '总量',
+                 data: []
+                 }, {
+                 name: this.common.fear,
+                 type: 'bar',
+                 stack: '总量',
+                 data: []
+                 }
+                 ];*/
+            },
             init(){
+                this.initData();
                 this.getSentimentDetail();
             }
         },
-        watch: {
+        /*watch: {
             sortVal: {
                 handler(val, oldVal){
                     if(val != oldVal){
@@ -289,7 +460,7 @@
                     }
                 }
             }
-        },
+        },*/
         components:{
             Tabs, ListPanel, Echarts
         },

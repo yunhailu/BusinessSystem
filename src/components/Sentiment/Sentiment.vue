@@ -77,7 +77,7 @@
                         data:[common.happy,common.anger,common.sorrow,common.disgust,common.fear]
                     },
                     dataZoom: _.extend({}, Chart.dataZoom),
-                    color:_.extend( Chart.color, {}),
+                   // color:_.extend( Chart.color, {}),
                     grid: _.extend({}, Chart.grid, {
                         bottom: '40rem',
                     }),
