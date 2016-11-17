@@ -108,8 +108,8 @@
                     this.img = this.getDataURL({
                         pixelRatio: 1
                     });
-                    console.log(this.img);
-                }, 2000);
+                    //console.log(this.img);
+                }, 4000);
             }, { deep: true });
             chart.group = this.group
             this.$watch('group', (group) => {

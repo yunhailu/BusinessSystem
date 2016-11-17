@@ -26,17 +26,44 @@
 <script type="text/ecmascript-6">
     import _ from 'underscore';
     import moment from 'moment';
-    //import { list } from "../../../config/tmpData";
     import ListPanel from '../../Common/ListPanel/ListPanel.vue';
     import Echarts from '../../Common/Echarts/Echarts.vue';
     import Tabs from '../../Common/Tabs/Tabs.vue';
     import Local from "../../../local/local";
     import {Chart, Pie} from '../../../config/config';
     import * as Api from '../../../widgets/Api';
+    import { insertExportImages, removeExportImages } from "../../../vuex/actions";
+    import { exportImages } from '../../../vuex/getters'
 
 
     export default{
         props: ['title', 'data', 'remove', 'master', 'sub'],
+        vuex: {
+            actions: { insertExportImages, removeExportImages },
+            getters: { exportImages }
+        },
+        watch:{
+            master:{
+                handler(value){
+                    this.insertExportImages({
+                        topic: this.data.topic,
+                        topic_id: this.data.topic_id,
+                        key: "sentiment-master",
+                        value
+                    });
+                }
+            },
+            sub:{
+                handler(value){
+                    this.insertExportImages({
+                        topic: this.data.topic,
+                        topic_id: this.data.topic_id,
+                        key: "sentiment-sub",
+                        value
+                    });
+                }
+            }
+        },
         data(){
             const common = Local().common;
             return{

@@ -50,14 +50,44 @@
     import { Chart, Pie } from '../../../config/config';
     import { themeScatterData } from '../../../config/tmpData';
     import * as Api from '../../../widgets/Api';
+    import { insertExportImages, removeExportImages } from "../../../vuex/actions";
+    import { exportImages } from '../../../vuex/getters'
 
     export default{
         props: ['title', 'data', 'remove', 'wordcloud', 'bar', 'top'],
+        vuex: {
+            actions: { insertExportImages, removeExportImages },
+            getters: { exportImages }
+        },
         watch:{
             bar:{
-                handler(val){
-                    console.log('---------------- bar -------------------');
-                    console.log(val);
+                handler(value){
+                    this.insertExportImages({
+                        topic: this.data.topic,
+                        topic_id: this.data.topic_id,
+                        key: "theme-bar",
+                        value
+                    });
+                }
+            },
+            top:{
+                handler(value){
+                    this.insertExportImages({
+                        topic: this.data.topic,
+                        topic_id: this.data.topic_id,
+                        key: "theme-top",
+                        value
+                    });
+                }
+            },
+            wordcloud:{
+                handler(value){
+                    this.insertExportImages({
+                        topic: this.data.topic,
+                        topic_id: this.data.topic_id,
+                        key: "theme-wordcloud",
+                        value
+                    });
                 }
             }
         },

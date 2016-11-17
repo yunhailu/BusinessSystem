@@ -34,9 +34,37 @@
     import ListPanel from '../../Common/ListPanel/ListPanel.vue';
     import Tabs from '../../Common/Tabs/Tabs.vue';
     import Echarts from '../../Common/Echarts/Echarts.vue';
+    import { insertExportImages, removeExportImages } from "../../../vuex/actions";
+    import { exportImages } from '../../../vuex/getters'
 
     export default{
         props: ['title', 'data', 'remove', 'master', 'sub'],
+        vuex: {
+            actions: { insertExportImages, removeExportImages },
+            getters: { exportImages }
+        },
+        watch:{
+            master:{
+                handler(value){
+                    this.insertExportImages({
+                        topic: this.data.topic,
+                        topic_id: this.data.topic_id,
+                        key: "summary-master",
+                        value
+                    });
+                }
+            },
+            sub:{
+                handler(value){
+                    this.insertExportImages({
+                        topic: this.data.topic,
+                        topic_id: this.data.topic_id,
+                        key: "summary-sub",
+                        value
+                    });
+                }
+            }
+        },
         data(){
             return{
                 isShowTools: false,

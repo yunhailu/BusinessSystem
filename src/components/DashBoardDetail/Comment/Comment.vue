@@ -32,13 +32,40 @@
     import { Chart, Pie } from '../../../config/config';
     import Local from '../../../local/local';
     import * as Api from '../../../widgets/Api';
-    //import { list } from "../../../config/tmpData";
     import ListPanel from '../../Common/ListPanel/ListPanel.vue';
     import Tabs from '../../Common/Tabs/Tabs.vue';
     import Echarts from '../../Common/Echarts/Echarts.vue';
+    import { insertExportImages, removeExportImages } from "../../../vuex/actions";
+    import { exportImages } from '../../../vuex/getters'
 
     export default{
         props: ['title', 'data', 'remove', 'master', 'sub'],
+        vuex: {
+            actions: { insertExportImages, removeExportImages },
+            getters: { exportImages }
+        },
+        watch:{
+            master:{
+                handler(value){
+                    this.insertExportImages({
+                        topic: this.data.topic,
+                        topic_id: this.data.topic_id,
+                        key: "comment-master",
+                        value
+                    });
+                }
+            },
+            sub:{
+                handler(value){
+                    this.insertExportImages({
+                        topic: this.data.topic,
+                        topic_id: this.data.topic_id,
+                        key: "comment-sub",
+                        value
+                    });
+                }
+            }
+        },
         data(){
             const words = Local().comment, common = Local().common;
             return{
