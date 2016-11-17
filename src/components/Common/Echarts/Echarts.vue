@@ -97,26 +97,20 @@
                 this.chart.dispose()
             }
         },
-        watch:{
-            options:{
-                handler(value){
-                    this.chart.setOption(value);
-                    //console.log('new options: ', value);
-                    this.img = this.getDataURL({
-                        pixelRatio: 1,
-                        type: 'jpg'
-                    });
-                    //console.log(`image:  ${this.img} ...`);
-                }
-            }
-        },
         ready: function () {
             let chart = echarts.init(this.$el, this.theme, this.options)
             // use assign statements to tigger "options" and "group" setters
             chart.setOption(this.options)
-//            this.$watch('options', options => {
-//                chart.setOption(options, true);
-//            }, { deep: true })
+            this.$watch('options', options => {
+                chart.setOption(options, true);
+
+                setTimeout(() => {
+                    this.img = this.getDataURL({
+                        pixelRatio: 1
+                    });
+                    console.log(this.img);
+                }, 2000);
+            }, { deep: true });
             chart.group = this.group
             this.$watch('group', (group) => {
                 chart.group = group

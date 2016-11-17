@@ -70,6 +70,7 @@
                     legend: {
                         data:[words.positive, words.negative, words.neutral]
                     },
+                    animation:false,
                     dataZoom: _.extend({}, Chart.dataZoom),
                     color:_.extend( Chart.color, {}),
                     grid: _.extend({}, Chart.grid, { bottom: '40rem' }),
@@ -102,6 +103,7 @@
                     toolbox: _.extend({}, Chart.toolbox, {
                         feature: { saveAsImage: {} }
                     }),
+                    animation:false,
                     progressive: 4,
                     textStyle: Chart.textStyle,
                     xAxis: _.extend({}, Chart.xAxis, { type: 'value' }),
@@ -145,6 +147,7 @@
                         bottom: 0,
                         data: [words.positive, words.negative, words.neutral]
                     }),
+                    animation:false,
                     textStyle: Pie.textStyle,
                     toolbox: Pie.toolbox,
                     color: _.extend([], Chart.color),

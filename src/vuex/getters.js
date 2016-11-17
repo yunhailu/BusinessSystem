@@ -87,3 +87,10 @@ export const compareTimeRangeString = state => {
 export const compareSourceCount = state => {
 	return state.compare.compare_source_Count;
 };
+
+/**
+ * Export Images
+ * */
+export const exportImages = state => {
+	return state.exportImages.imgs;
+};

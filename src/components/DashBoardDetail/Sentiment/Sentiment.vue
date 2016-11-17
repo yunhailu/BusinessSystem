@@ -77,6 +77,7 @@
                             type : 'line',
                         }
                     }),
+                    animation:false,
                     legend: {
                         data:[common.happy,common.anger,common.sorrow,common.disgust,common.fear]
                     },
@@ -137,6 +138,7 @@
                     legend: {
                         data: [common.happy, common.anger, common.sorrow, common.disgust, common.fear]
                     },
+                    animation:false,
                     grid: _.extend({}, Chart.grid),
                     toolbox: _.extend({}, Chart.toolbox, {
                         feature: {

@@ -53,6 +53,14 @@
 
     export default{
         props: ['title', 'data', 'remove', 'wordcloud', 'bar', 'top'],
+        watch:{
+            bar:{
+                handler(val){
+                    console.log('---------------- bar -------------------');
+                    console.log(val);
+                }
+            }
+        },
         data(){
             const words = Local().theme;
             return{
@@ -63,6 +71,7 @@
                     series: {
                         //grid: {x:0, x2:0},
                         type: 'wordCloud',
+                        animation:false,
                         gridSize: 14,
                         sizeRange: [12, 50],
                         rotationRange: [-90, 90],
@@ -102,6 +111,7 @@
 //                            fontSize: 16
                         }
                     }),
+                    animation:false,
                     tooltip: _.extend({}, Chart.tooltip, {
                         trigger: 'axis',
                         axisPointer: {
@@ -259,6 +269,7 @@
 //                    legend: {
 //                        data: ['话题排行']
 //                    },
+                    animation:false,
                     grid: _.extend({}, Chart.grid),
                     textStyle: _.extend({}, Chart.textStyle),
                     xAxis: _.extend({}, Chart.xAxis, { type: 'value' }),

@@ -65,6 +65,7 @@
 //                    legend: {
 //                        data: ['All']
 //                    },
+                    animation:false,
                     grid: Chart.grid,
                     toolbox: Chart.toolbox,
                     xAxis: _.extend({}, Chart.xAxis, {
@@ -85,6 +86,7 @@
                     isActive: true,
                     title: _.extend({}, Pie.title, { show: false}),
                     tooltip: _.extend({}, Pie.tooltip),
+                    animation:false,
                     legend: _.extend({}, Pie.legend, {
                         //orient: 'vertical',
                         //x: 'bottom',
