@@ -365,8 +365,8 @@
             },
             activeAnalyticsTopic: {
                 handler(val){
-                    //this.resultChartLoading = true;
-                    //this.resultPieChartLoading = true;
+                    this.resultChartLoading = true;
+                    this.resultPieChartLoading = true;
                     this.init(val);
                 }
             },

@@ -90,6 +90,7 @@
                         top: 10,
                         data: [common.happy, common.anger, common.sorrow, common.disgust, common.fear]
                     }),
+                    color:['#2FCC71','#E64D3D', '#F1C40F', '#3598DC', '#737373'],
                     textStyle: Pie.textStyle,
                     toolbox: Pie.toolbox,
                     series:[

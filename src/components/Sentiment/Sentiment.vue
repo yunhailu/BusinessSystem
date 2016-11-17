@@ -519,9 +519,9 @@
             },
             activeAnalyticsTopic: {
                 handler(val){
-                    //this.sentimentBarLoading = true;
+                    this.sentimentBarLoading = true;
                     //this.sentimentChartLoading = true;
-                    //this.sentimentPieLoading = true;
+                    this.sentimentPieLoading = true;
                     this.init(val);
                 }
             },

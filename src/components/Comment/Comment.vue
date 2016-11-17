@@ -425,8 +425,8 @@
             },
             activeAnalyticsTopic: {
                 handler(val){
-                    //this.commentBarLoading = true;
-                    //this.commentChartLoading = true;
+                    this.commentBarLoading = true;
+                    this.commentChartLoading = true;
                     this.init(val);
                 }
             },
