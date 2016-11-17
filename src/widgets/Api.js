@@ -7,7 +7,7 @@ import VueResource from 'vue-resource';
 
 Vue.http.options.emulateJSON = true;
 Vue.http.options.emulateHTTP = true;
-Vue.http.options.xhr = { withCredentials: true };
+Vue.http.options.xhr = { withCredentials: true };//跨域问题
 
 Vue.use(VueResource);
 

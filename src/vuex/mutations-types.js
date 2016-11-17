@@ -28,6 +28,10 @@ export const UPDATE_DATE_CHANGE = 'UPDATE_DATE_CHANGE';
 export const UPDATE_START = 'UPDATE_START';
 
 export const UPDATE_END = 'UPDATE_END';
+
+export const UPDATE_REFRESH_TOPIC = 'UPDATE_REFRESH_TOPIC';
+
+export const UPDATE_RESET_SEARCH = 'UPDATE_RESET_SEARCH';
 /**
  * Compare
  **/

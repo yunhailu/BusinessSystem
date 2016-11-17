@@ -46,13 +46,13 @@
 
         </div>
         <!--热点事件,散点图-->
-        <div class="row">
+        <!--<div class="row">
             <div class="col-md-12 hot-river">
                 <card-panel :title="words.hotsRiver">
                     <div v-echarts="scatterOption" :loading="scatterLoading" class="hot-river-scatter" theme="" :img.sync="img"></div>
                 </card-panel>
             </div>
-        </div>
+        </div>-->
     </div>
 
 

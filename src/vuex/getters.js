@@ -53,6 +53,13 @@ export const analyticsEnd = state => {
 	return state.analytics.end;
 };
 
+export const analyticsRefreshTopic = state => {
+	return state.analytics.refreshTopic;
+};
+
+export const analyticsResetSearch = state => {
+	return state.analytics.resetSearch;
+};
 /**
  * Compare
  * */

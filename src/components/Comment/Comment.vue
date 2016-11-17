@@ -22,7 +22,7 @@
     import ListPanel from '../Common/ListPanel/ListPanel.vue';
     import Tabs from '../Common/Tabs/Tabs.vue';
     import Tips from '../Common/Tips/Tips.vue';
-    import { analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic, analyticsDateChange, analyticsStart, analyticsEnd, activeAnalyticsTopic } from '../../vuex/getters';
+    import { analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic, analyticsDateChange, analyticsStart, analyticsEnd, activeAnalyticsTopic, analyticsRefreshTopic } from '../../vuex/getters';
 
     export default{
         data(){
@@ -120,7 +120,7 @@
                             },
                             name:'',
                             type:'pie',
-                            radius: '60%',
+                            radius: '50%',
                             center: ['50%', '50%'],
                             data:[]
                         }
@@ -408,7 +408,7 @@
             }
         },
         vuex: {
-            getters: {analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic, analyticsDateChange, analyticsStart, analyticsEnd, activeAnalyticsTopic}
+            getters: {analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic, analyticsDateChange, analyticsStart, analyticsEnd, activeAnalyticsTopic, analyticsRefreshTopic}
         },
         ready(){
             if(this.activeAnalyticsTopic && this.activeAnalyticsTopic.topic_id){
@@ -416,10 +416,17 @@
             }
         },
         watch: {
+            analyticsRefreshTopic:{
+                handler(val){
+                    if(val !=0){
+                        this.init();
+                    }
+                }
+            },
             activeAnalyticsTopic: {
                 handler(val){
-                    this.commentBarLoading = true;
-                    this.commentChartLoading = true;
+                    //this.commentBarLoading = true;
+                    //this.commentChartLoading = true;
                     this.init(val);
                 }
             },
@@ -432,7 +439,9 @@
             analyticsSubTopic: {
                 handler(val){
                     //this.loadingParams.visiable = true;
-                    this.init();
+                    if(val !=''){
+                        this.init();
+                    }
                 }
             },
             analyticsSource: {

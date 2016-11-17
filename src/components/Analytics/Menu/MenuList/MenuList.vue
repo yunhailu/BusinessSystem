@@ -31,8 +31,8 @@
     import Local from "../../../../local/local";
     import Tips from "../../../Common/Tips/Tips.vue"
     import * as Api from "../../../../widgets/Api";
-    import { topicList, activeAnalyticsTopic } from '../../../../vuex/getters';
-    import { setTopicList, setActiveAnalyticsTopic } from "../../../../vuex/actions";
+    import { topicList, activeAnalyticsTopic, analyticsRefreshTopic, analyticsResetSearch } from '../../../../vuex/getters';
+    import { setTopicList, setActiveAnalyticsTopic, setAnalyticsRefreshTopic, setAnalyticsResetSearch } from "../../../../vuex/actions";
 
     export default{
         props: ['title', 'menus', 'groups', 'action'],
@@ -44,8 +44,8 @@
         },
         components:{ Tips },
         vuex: {
-            actions: { setTopicList, setActiveAnalyticsTopic },
-            getters: { topicList, activeAnalyticsTopic }
+            actions: { setTopicList, setActiveAnalyticsTopic, setAnalyticsRefreshTopic, setAnalyticsResetSearch },
+            getters: { topicList, activeAnalyticsTopic, analyticsRefreshTopic, analyticsResetSearch }
         },
         methods: {
             toggle(group){
@@ -62,9 +62,27 @@
                 this.setTopicList(groups);
             },
             selectTopic(topic){
-                //console.log(topic);
-                const active = topic;
-                this.setActiveAnalyticsTopic(active)
+                console.log('new',topic.topic_id);
+                console.log('old',(this.activeAnalyticsTopic).topic_id);
+                if((this.activeAnalyticsTopic).topic_id==topic.topic_id){
+                    this.setAnalyticsRefreshTopic(this.analyticsRefreshTopic+1)
+                    console.log('相同',this.analyticsRefreshTopic);
+                }else{
+                    if(this.analyticsResetSearch == false);{
+                        console.log('判断不为空');
+                        console.log('修改时间',(new Date()).getTime())
+                        this.setAnalyticsResetSearch(true);
+                    }
+                    setTimeout(function () {
+                        console.log('延迟')
+                        console.log('重置search完成')
+                        const active = topic;
+                        console.log('执行topic刷新')
+                        this.setActiveAnalyticsTopic(active);
+                        this.setAnalyticsRefreshTopic(0);
+                        console.log('不同',this.analyticsRefreshTopic);
+                    }.bind(this),50);
+                }
             },
             addTopicAction(){
                 this.$router.go({name: "settingAdd"});

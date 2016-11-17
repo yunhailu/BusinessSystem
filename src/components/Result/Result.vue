@@ -24,11 +24,13 @@
     import ListPanel from '../Common/ListPanel/ListPanel.vue';
     import Tabs from '../Common/Tabs/Tabs.vue';
     import Tips from '../Common/Tips/Tips.vue';
-    import { analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic, analyticsDateChange, analyticsStart, analyticsEnd, activeAnalyticsTopic } from '../../vuex/getters';
+    import { analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic, analyticsDateChange, analyticsStart, analyticsEnd, activeAnalyticsTopic, analyticsRefreshTopic } from '../../vuex/getters';
 
     export default{
         data(){
+            const common = Local().common;
             return{
+                common,
                 loadingParams: {
                     visiable: false,
                     type: 'loading',
@@ -89,7 +91,7 @@
                         //orient: 'vertical',
                         //x: 'bottom',
                         bottom: 0,
-                        data: ["微信", "微博", "客户端", "网页", "海外"]
+                        data: [common.wechat, common.weibo, common.client, common.web, common.overseas]
                     }),
                     textStyle: Pie.textStyle,
                     toolbox: Pie.toolbox,
@@ -246,7 +248,7 @@
             }
         },
         vuex: {
-            getters: {analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic, analyticsDateChange, analyticsStart, analyticsEnd, activeAnalyticsTopic}
+            getters: {analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic, analyticsDateChange, analyticsStart, analyticsEnd, activeAnalyticsTopic, analyticsRefreshTopic}
         },
         methods: {
             toggle(){
@@ -354,10 +356,17 @@
             }
         },
         watch: {
+            analyticsRefreshTopic:{
+                handler(val){
+                    if(val !=0){
+                        this.init();
+                    }
+                }
+            },
             activeAnalyticsTopic: {
                 handler(val){
-                    this.resultChartLoading = true;
-                    this.resultPieChartLoading = true;
+                    //this.resultChartLoading = true;
+                    //this.resultPieChartLoading = true;
                     this.init(val);
                 }
             },
@@ -376,7 +385,9 @@
             analyticsSubTopic: {
                 handler(val){
                     //this.loadingParams.visiable = true;
-                    this.init();
+                    if(val !=''){
+                        this.init();
+                    }
                 }
             },
             sortVal: {
