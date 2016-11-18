@@ -56,16 +56,16 @@
                             <label for="monitor" class="col-sm-2 control-label">{{words.warningSet}}</label>
                             <div class="col-sm-4">
                             <select v-model="monitor"  name="moodSelect" class="form-control moodwSet0" id="monitor" >
-
-                                <option v-for="moodgroup in moodGroups" :id="moodgroup.id" selected="selected"  :value="moodgroup.id">{{moodgroup.name}}</option>
+                                <option @click="setselect(moodgroup.id);" v-for="moodgroup in moodGroups" :id="moodgroup.id" :value="moodgroup.id" >{{moodgroup.name}}</option>
                             </select>
 
-                                <input type="text" v-model="threshold" class="form-control moodwSet1 " id="threshold" :placeholder="words.warningValue">
+                                <input type="text" v-model="threshold" class="form-control moodwSet1 " id="threshold" :placeholder="">
+
+
+                                <!--<input type="text"  v-model="threshold" class="form-control moodwSet1 "  :placeholder="words.warningValue">-->
                             </div>
                             <div class="col-sm-4 tip">{{words.optional}}</div>
                         </div>
-
-
                         <!-- ------------------------------------------------------------>
                         <div class="form-group">
                             <label for="excludeText" class="col-sm-2 control-label">{{words.exclude}}</label>
@@ -143,13 +143,19 @@
             getters: { topicList }
         },
         methods: {
-
+            setselect(moodgroup) {
+                console.log('213', moodgroup);
+                this.threshold=13224;
+                //this.$router.go({ name: 'dashboardDetail', params: { id: report.id } });
+            },
             getCategroy(){
                 Api.getCategroy().then(resp => {
                     //console.log(resp.data);
                     if(resp.data.code == 0){
                         this.moodGroups = resp.data.data;
-                        this.monitor='happy';
+                        console.log(resp.data.data);
+                        this.monitor="happy";
+
 
                     }
                 });
@@ -196,6 +202,7 @@
                         });
                         this.setTopicList(topicList);
                         this.radioVal = "";
+                        this.threshold="";
                     }
                 });
             },
@@ -227,6 +234,7 @@
                         });
                         this.setTopicList(topicList);
                         this.radioVal = "";
+                        this.threshold="";
                     }
                 });
                 //history.go(-1);
@@ -257,7 +265,8 @@
             updateInit(){
                 const group_id = this.$route.params.group_id;
                 const topic_id = this.$route.params.topic_id;
-                const monitor = "anger";
+                //const monitor = "anger";
+                const monitorss =[];
                 const threshold = 100;
                 const group = _.chain(this.topicList)
                         .map(group => _.extend({}, group))
@@ -267,8 +276,6 @@
                         .filter(topic => (topic.topic_id == topic_id))
                         .first().value();
                 this.topicText = topic.topic_name;
-
-
                 Api.getMonitorList().then(resp => {
                     //console.log(resp.data);
                     if(resp.data.code == 0){
@@ -276,10 +283,26 @@
                         const hj=_.chain(resp.data.data)
                                 .filter(hj => (hj.topic_id == topic_id))
                                 .first().value();
-                       // console.log('11',hj);
-                        this.threshold=hj.data[0].value;
-                        this.monitor=hj.data[0].key;
-                       // console.log('12',this.reports);
+
+                        console.log('11',hj);
+                        this.monitorss=hj.data;
+                        console.log('123',this.monitorss);
+                        console.log(this.monitor);
+
+                        this.monitor=this.monitorss[0].key;
+                        this.threshold=this.monitorss[0].value;
+
+                        // switch(monitorss){
+                        //     case monitorss[0].key:
+                        //         this.threshold==monitorss[0].value;
+                        //         break;
+                        //     case "settingEdit":
+                        //         this.updateSubmit();
+                        //         break;
+                        //     default:
+                        //         break;
+                        // }
+
 
                     }
                 });
@@ -288,12 +311,20 @@
 
 
 
+                 //this.threshold=0;
+
+                console.log('123',this.monitorss);
+
 
                  this.radioVal = group_id;
                  //this.monitor=monitor;
-                 this.threshold=threshold;
+                 //this.threshold=threshold;
                 //console.log('topic', this.topicText,this.threshold,this.monitor, this.radioVal);
             },
+
+
+
+
             init(){
                 //拉取情绪的列表。。
                 this.getCategroy();
@@ -309,7 +340,6 @@
                 if(this.$route.name == 'settingEdit'){
                     setTimeout(this.updateInit ,1000)
                 }
-
             }
         },
         filters: {

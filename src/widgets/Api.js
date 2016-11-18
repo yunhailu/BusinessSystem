@@ -469,14 +469,6 @@ export const getPageDetail = params => {
  *  @return {Promise} With Detail detail info.
  */
 
-export const getArticleCorrelation = params => {
-    return Api.request({
-        url: `${rootURI}/article/correlation`,
-        params
-    });
-};
-
-
 
 /** 关系气泡图的接口3
  *  Encapsulate `getArticleCorrelation` interface
@@ -505,6 +497,20 @@ export const getMonitorList = params => {
         params
     });
 };
+
+/**品牌印象的气泡接口
+ *  Encapsulate `getMonitorList` interface
+ *
+
+ */
+export const getBubblChart = params => {
+    return Api.request({
+        url: `${rootURI}/theme/bubble`,
+        params
+    });
+};
+
+
 
 /**监测设置的情绪选择的接口
  *  Encapsulate `getCategroy` interface
@@ -535,6 +541,8 @@ export const getTodayList = params => {
         params
     });
 };
+
+
 
 
 
