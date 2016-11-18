@@ -189,7 +189,7 @@
                             },
                             name:'',
                             type:'pie',
-                            radius: '60%',
+                            radius: '50%',
                             center: ['50%', '50%'],
                             data:[]
                         }

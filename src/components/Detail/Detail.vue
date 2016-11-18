@@ -247,15 +247,6 @@
 
                 });
             },
-            getArticleCorrelation(){
-                const id = this.$route.params.id;
-                Api.getArticleCorrelation({id}).then(resp => {
-                    console.log("getArticleCorrelation", resp.data);
-                    if (resp.data.code == 0) {
-                        //this.acticles = resp.data.data;
-                    }
-                });
-            },
             getArticleForward(){
                 const id = this.$route.params.id;
                 Api.getArticleForward({id}).then(resp => {
@@ -329,15 +320,10 @@
 
                     }
                 });
-
-
             },
-
-
             init(){
                 console.log(this.$route.params);
                 this.getPageDetail();
-                this.getArticleCorrelation();
                 this.getArticleForward();
 
                 // this.DEEE();
