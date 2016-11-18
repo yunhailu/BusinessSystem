@@ -56,6 +56,14 @@ export const setAnalyticsEnd = (store, end) => {
 	store.dispatch(types.UPDATE_END, end);
 };
 
+export const setAnalyticsRefreshTopic = (store, refreshTopic) => {
+	store.dispatch(types.UPDATE_REFRESH_TOPIC, refreshTopic);
+};
+
+export const setAnalyticsResetSearch = (store, resetSearch) => {
+	store.dispatch(types.UPDATE_RESET_SEARCH, resetSearch);
+};
+
 /**
  * Compare
  * */

@@ -7,9 +7,11 @@
     </div>
     <div class="theme-word">
         <!--<div class="theme-word-chart" v-echarts="themeWordOption" :loading="themeWordLoading"  theme="infographic" :click="clickAction"></div>-->
-        <div class="theme-word-chart">
+        <!--<div class="theme-word-chart">
             <echarts :options="themeWordOption" initOptions="themeWordOption" :img.sync="wordcloud" theme="infographic"></echarts>
-        </div>
+        </div>-->
+        <!--修改1行-->
+        <div class="theme-word-chart" v-echarts="themeWordOption" :loading="themeWordLoading"  theme="infographic">
         <div class="theme-word-ranking">
             <dl class="list up-list">
                 <dt class="list-title">排名变化</dt>
@@ -24,18 +26,18 @@
         </div>
     </div>
     <div class="theme-chart">
-        <!--<div class="chart"  v-echarts="themeScatterOption" :loading="themeScatterLoading"  theme="macarons"></div>-->
+        <div class="chart"  v-echarts="themeScatterOption" :loading="themeScatterLoading"  theme="macarons"></div>
 
-        <!--<div class="chart"  v-echarts="themeLineOption" :loading="themeLineLoading"  theme="macarons"></div>-->
-        <!--<div class="chart best"  v-echarts="themeBestOption" :loading="themeBestLoading"  theme="macarons"></div>-->
+        <div class="chart"  v-echarts="themeLineOption" :loading="themeLineLoading"  theme="macarons"></div>
+        <div class="chart best"  v-echarts="themeBestOption" :loading="themeBestLoading"  theme="macarons"></div>
 
 
-        <div class="chart"  v-echarts="themeLineOption" >
-            <echarts :options="themeLineOption" initOptions="themeLineOption" :img.sync="bar" theme="macarons"></echarts>
-        </div>
-        <div class="chart best"  v-echarts="themeBestOption" >
-            <echarts :options="themeBestOption" initOptions="themeBestOption" :img.sync="top" theme="macarons"></echarts>
-        </div>
+        <!--<div class="chart"  v-echarts="themeLineOption" >-->
+            <!--<echarts :options="themeLineOption" initOptions="themeLineOption" :img.sync="bar" theme="macarons"></echarts>-->
+        <!--</div>-->
+        <!--<div class="chart best"  v-echarts="themeBestOption" >-->
+            <!--<echarts :options="themeBestOption" initOptions="themeBestOption" :img.sync="top" theme="macarons"></echarts>-->
+        <!--</div>-->
     </div>
 </template>
 <style lang="less" scoped>
@@ -411,6 +413,7 @@
                         const details = resp.data.data;
                         this.themeLineLoading = false;
                         this.themeLineOption.xAxis.data = _.map(details, detail => detail.date);
+                    console.log('details',details);
                         this.themeLineOption.legend.data = _.map(details[0].values, item => item.name);
                         this.themeLineOption.series = _.map(this.themeLineOption.legend.data, legend => {
                             const data = _.chain(details)

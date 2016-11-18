@@ -7,7 +7,7 @@
                 <div class="row tools">
                     <div class="row-left">
                         <div class="search">
-                            <input class="search-input" placeholder="搜索" v-model="search" />
+                            <input class="search-input" placeholder="搜索" v-model="search" @keyup.enter="searchAction" />
                             <span class="search-btn" @click="searchAction"><i class="fa fa-search"></i></span>
                         </div>
                     </div>
@@ -44,8 +44,8 @@
     import Calendar from '../Common/Calendar/Calendar.vue';
     import OrderFooterComponent from '../OrderFooter/OrderFooter.vue';
     import Local from "../../local/local";
-    import { analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic, analyticsDateChange, analyticsStart, analyticsEnd } from '../../vuex/getters';
-    import { setAnalyticsType, setAnalyticsTimeRange, setAnalyticsSource, setAnalyticsSubTopic, setAnalyticsDateChange, setAnalyticsStart, setAnalyticsEnd  } from "../../vuex/actions";
+    import { analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic, analyticsDateChange, analyticsStart, analyticsEnd, analyticsResetSearch } from '../../vuex/getters';
+    import { setAnalyticsType, setAnalyticsTimeRange, setAnalyticsSource, setAnalyticsSubTopic, setAnalyticsDateChange, setAnalyticsStart, setAnalyticsEnd, setAnalyticsResetSearch  } from "../../vuex/actions";
 
     export default{
         data(){
@@ -68,8 +68,8 @@
             }
         },
         vuex: {
-            actions: { setAnalyticsType, setAnalyticsTimeRange, setAnalyticsSource, setAnalyticsSubTopic, setAnalyticsDateChange, setAnalyticsStart, setAnalyticsEnd },
-            getters: { analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic, analyticsDateChange, analyticsStart, analyticsEnd }
+            actions: { setAnalyticsType, setAnalyticsTimeRange, setAnalyticsSource, setAnalyticsSubTopic, setAnalyticsDateChange, setAnalyticsStart, setAnalyticsEnd, setAnalyticsResetSearch },
+            getters: { analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic, analyticsDateChange, analyticsStart, analyticsEnd, analyticsResetSearch }
         },
         components:{
             'header-component': HeaderComponent,
@@ -117,9 +117,31 @@
                 this.setAnalyticsStart(this.cal.begin);
                 this.setAnalyticsEnd(this.cal.end);
                 this.setAnalyticsTimeRange(days);
+            },
+            trim(str){
+                return str.replace(/(^\s*)|(\s*$)/g,'');
             }
         },
         watch: {
+            analyticsResetSearch:{
+                handler(val){
+                    if(val == true){
+                        this.search = '';
+                        console.log('修改search');
+                        this.setAnalyticsResetSearch(false);
+                        console.log('搜索不为空，重置为false')
+                        this.setAnalyticsSubTopic(this.search);
+                        console.log('结束时间',(new Date()).getTime());
+                    }
+                }
+            },
+            /*search:{
+                handler(val){
+                    if(val ==''){
+                        this.setAnalyticsSubTopic(this.search);
+                    }
+                }
+            },*/
             dateVal: {
                 handler(val){
                     //console.log('date',val);

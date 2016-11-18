@@ -990,6 +990,7 @@
                         //if(details.length) return ;
                         this.themeLineLoading = false;
                         this.themeLineOption.xAxis.data = _.map(details, detail => detail.date);
+                    console.log('details',details);
                         this.themeLineOption.legend.data = _.map(details[0].values, item => item.name);
                         this.themeLineOption.series = _.map(this.themeLineOption.legend.data, legend => {
                             const data = _.chain(details)

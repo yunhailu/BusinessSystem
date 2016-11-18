@@ -7,7 +7,7 @@
                 <div class="row tools">
                     <div class="row-left">
                         <div class="search">
-                            <input class="search-input" placeholder="搜索" v-model="search" />
+                            <input class="search-input" placeholder="搜索" v-model="search" @keyup.enter="searchAction"/>
                             <span class="search-btn" @click="searchAction"><i class="fa fa-search"></i></span>
                         </div>
                     </div>
@@ -128,9 +128,18 @@
                 this.setCompareStart(this.cal.begin);
                 this.setCompareEnd(this.cal.end);
                 this.setCompareTimeRange(days);
+            },
+            trim(str){
+                return str.replace(/(^\s*)|(\s*$)/g,'');
             }
         },
         watch: {
+            search:{
+                handler(val){
+                    if(this.trim(val) =='')
+                        this.setAnalyticsSubTopic(this.search);
+                }
+            },
             dateVal: {
                 handler(val){
                     //console.log('date',val);
