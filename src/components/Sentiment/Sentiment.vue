@@ -23,7 +23,7 @@
     import Local from "../../local/local";
     import {Chart, Pie} from '../../config/config';
     import * as Api from '../../widgets/Api';
-    import { analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic, analyticsDateChange, analyticsStart, analyticsEnd, activeAnalyticsTopic } from '../../vuex/getters';
+    import { analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic, analyticsDateChange, analyticsStart, analyticsEnd, activeAnalyticsTopic, analyticsRefreshTopic } from '../../vuex/getters';
 
 
     export default{
@@ -77,7 +77,7 @@
                         data:[common.happy,common.anger,common.sorrow,common.disgust,common.fear]
                     },
                     dataZoom: _.extend({}, Chart.dataZoom),
-                    color:_.extend( Chart.color, {}),
+                   // color:_.extend( Chart.color, {}),
                     grid: _.extend({}, Chart.grid, {
                         bottom: '40rem',
                     }),
@@ -215,7 +215,7 @@
                             },
                             name:'',
                             type:'pie',
-                            radius: '60%',
+                            radius: '50%',
                             center: ['50%', '50%'],
                             data:[]
                         }
@@ -266,7 +266,7 @@
             }
         },
         vuex: {
-            getters: { analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic, analyticsDateChange, analyticsStart, analyticsEnd, activeAnalyticsTopic }
+            getters: { analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic, analyticsDateChange, analyticsStart, analyticsEnd, activeAnalyticsTopic, analyticsRefreshTopic }
         },
         methods: {
             actions(val, idx){
@@ -509,11 +509,19 @@
             }
         },
         watch: {
+            //作为判断点击当前list更新页面
+            analyticsRefreshTopic:{
+                handler(val){
+                    if(val !=0){
+                        this.init();
+                    }
+                }
+            },
             activeAnalyticsTopic: {
                 handler(val){
-                    //this.sentimentBarLoading = true;
+                    this.sentimentBarLoading = true;
                     //this.sentimentChartLoading = true;
-                    //this.sentimentPieLoading = true;
+                    this.sentimentPieLoading = true;
                     this.init(val);
                 }
             },
@@ -526,7 +534,9 @@
             analyticsSubTopic: {
                 handler(val){
                     //this.loadingParams.visiable = true;
-                    this.init();
+                    if(val !=''){
+                        this.init();
+                    }
                 }
             },
             analyticsSource: {

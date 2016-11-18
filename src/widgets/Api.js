@@ -7,7 +7,7 @@ import VueResource from 'vue-resource';
 
 Vue.http.options.emulateJSON = true;
 Vue.http.options.emulateHTTP = true;
-Vue.http.options.xhr = { withCredentials: true };
+Vue.http.options.xhr = { withCredentials: true };//跨域问题
 
 Vue.use(VueResource);
 
@@ -90,12 +90,12 @@ export const topicAdd = params => {
 };
 
 /**
- *  Encapsulate `topic add` interface
+ *  Encapsulate `topic update` interface
  *
  *  @param {String} name
  *  @param {String} topic_group_id
  *
- *  @return {Promise} With Topic add.
+ *  @return {Promise} With Topic update.
  */
 export const topicUp = params => {
     return Api.request({
@@ -469,14 +469,6 @@ export const getPageDetail = params => {
  *  @return {Promise} With Detail detail info.
  */
 
-export const getArticleCorrelation = params => {
-    return Api.request({
-        url: `${rootURI}/article/correlation`,
-        params
-    });
-};
-
-
 
 /** 关系气泡图的接口3
  *  Encapsulate `getArticleCorrelation` interface
@@ -492,5 +484,66 @@ export const getArticleForward = params => {
         params
     });
 };
+
+
+/**预警监测的列表接口
+ *  Encapsulate `getMonitorList` interface
+ *
+
+ */
+export const getMonitorList = params => {
+    return Api.request({
+        url: `${rootURI}/monitor/list`,
+        params
+    });
+};
+
+/**品牌印象的气泡接口
+ *  Encapsulate `getMonitorList` interface
+ *
+
+ */
+export const getBubblChart = params => {
+    return Api.request({
+        url: `${rootURI}/theme/bubble`,
+        params
+    });
+};
+
+
+
+/**监测设置的情绪选择的接口
+ *  Encapsulate `getCategroy` interface
+ *
+ */
+export const getCategroy = params => {
+    return Api.request({
+        url: `${rootURI}/monitor/category`,
+        params
+    });
+};
+/**首页实时热点话题的接口
+ *  Encapsulate `getRealList` interface
+ */
+export const getRealList = params => {
+    return Api.request({
+        url: `${rootURI}/hotspot/real`,
+        params
+    });
+};
+
+/**首页实时热点话题的接口
+ *  Encapsulate `getTodayList` interface
+ */
+export const getTodayList = params => {
+    return Api.request({
+        url: `${rootURI}/hotspot/today`,
+        params
+    });
+};
+
+
+
+
 
 

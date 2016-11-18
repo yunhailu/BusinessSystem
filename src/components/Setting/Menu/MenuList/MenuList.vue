@@ -60,7 +60,9 @@
         },
         methods: {
             toggle(group){
+
                 console.log(group);
+                console.log('111---------------------7871111111-----1111111111');
                 const groups = _.map(this.groups, item => {
                     if(group.group_id != item.group_id){
                         item.isActive = false;
@@ -71,16 +73,25 @@
                 });
                 console.log('groups',groups);
                 this.setTopicList(groups);
+                console.log(this.setTopicList(groups));
                 //menu.isActive = !menu.isActive;
             },
             addTopicAction(){
                 this.$router.go({name: "settingAdd"});
             },
             editTopicAction(item,group_id){
-                //console.log('edit', item, group_id);
+                console.log('11111111------------------------111111');
+                console.log('edit', item, group_id);
+
+
                 this.action(item, group_id);
+               // console.log(action(item, group_id));
+
                 this.selectTopic(item);
+                //console.log(selectTopic(item));
             },
+
+
             selectTopic(topic){
                 this.setActiveSettingTopic(topic)
             },

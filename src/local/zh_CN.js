@@ -4,7 +4,7 @@
 export const zh_CN = {
     header: {
         title: "沃德品牌气象站",
-        home: "主页",
+        home: "热点事件",
         analytics: "数据分析",
         dashboard: "报告生成",
         compare: "数据对比",
@@ -115,9 +115,11 @@ export const zh_CN = {
         quickBtn: "快速模式",
         advancedBtn: "高级模式",
         exclude: "排除词",
+        warningSet:"预警设置",
         moodGroups:["满意","愤怒", "失望", "反感","害怕"],
         groups: ["人物", "机构", "产品", "项目", "事件", "其他"],
-        create: "创建提交"
+        create: "创建提交",
+        warningSet:"预警设置"
     },
     reportsWarning: {
         reportTitle: "预警标题",

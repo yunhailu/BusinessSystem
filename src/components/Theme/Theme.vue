@@ -2,7 +2,7 @@
     <tabs :datas="themeNums"></tabs>
     <!--<span>Theme</span>-->
     <div class="theme-word">
-        <div class="theme-word-chart" v-echarts="themeWordOption" :loading="themeWordLoading"  theme="infographic" :click="clickAction"></div>
+        <div class="theme-word-chart" v-echarts="themeWordOption" :loading="themeWordLoading"  theme="infographic"></div><!-- :click="clickAction"-->
         <div class="theme-word-ranking">
             <dl class="list up-list">
                 <dt class="list-title">排名变化</dt>
@@ -79,7 +79,6 @@
     export default{
         data(){
             const words = Local().theme;
-
             return{
                 words,
                 loadingParams: {
@@ -242,7 +241,8 @@
 
                 //pie option
                 themePieLoading: false,
-                themePieOption: { title : {
+                themePieOption: {
+                    title : {
                     text: '微博男女比例分布',
                     x:'center'
                 },
@@ -293,14 +293,14 @@
                 trendList: [],
 
                 themeScatterOption: {
-                    legend: _.extend({}, Chart.legend, {
+                    legend: {
                         y: 'top',
                         data: ['南海问题', '每日关注', '货币战争', '网易新闻', '阿里影业'],
                         textStyle: {
                             //color: '#fff',
 //                            fontSize: 16
                         }
-                    }),
+                    },
                     tooltip: _.extend({}, Chart.tooltip, {
                         trigger: 'axis',
                         axisPointer: {
@@ -311,9 +311,9 @@
                             return '<div style="border-bottom: 1px solid rgba(255,255,255,.3); font-size: 18px;padding-bottom: 7px;margin-bottom: 7px">'
                                     + obj.seriesName
                                     + '</div>'
-                                    + '转发数：' + value[1] + '<br>'
-                                    + '点赞数：' + value[2] + '<br>'
-                                    + '评论数：' + value[5] + '<br>';
+                                    + '转发数：' + value[2] + '<br>'
+                                    + '点赞数：' + value[3] + '<br>'
+                                    + '评论数：' + value[4] + '<br>';
                         }
                     }),
                     textStyle: _.extend({}, Chart.textStyle),
@@ -353,7 +353,7 @@
                     grid: _.extend({}, Chart.grid, {
                         right: '10%'
                     }),
-                    xAxis:  _.extend({}, Chart.xAxis, {
+                    xAxis:{
                         type : 'category',  //category
                         data : ["2016-08-21:12","2016-08-21:14","2016-08-21:15","2016-08-21:16","2016-08-21:17","2016-08-21:18","2016-08-21:20","2016-08-21:22","2016-08-22:00","2016-08-22:03","2016-08-22:05","2016-08-22:06","2016-08-22:08","2016-08-22:09","2016-08-22:10","2016-08-22:11","2016-08-22:12","2016-08-22:13","2016-08-22:14","2016-08-22:15","2016-08-22:16","2016-08-22:17","2016-08-22:18","2016-08-22:19","2016-08-22:20","2016-08-22:21","2016-08-22:22","2016-08-23:00","2016-08-23:03","2016-08-23:06","2016-08-23:08","2016-08-23:09","2016-08-23:10","2016-08-23:11","2016-08-23:12","2016-08-23:13","2016-08-23:14","2016-08-23:15","2016-08-23:16","2016-08-23:17","2016-08-23:18","2016-08-23:19","2016-08-23:20","2016-08-23:22","2016-08-23:23","2016-08-24:00","2016-08-24:01","2016-08-24:06","2016-08-24:07","2016-08-24:08","2016-08-24:09","2016-08-24:10","2016-08-24:11","2016-08-24:12","2016-08-24:14","2016-08-24:15","2016-08-24:16","2016-08-24:17","2016-08-24:18","2016-08-24:20","2016-08-24:21","2016-08-24:22","2016-08-25:00","2016-08-25:02","2016-08-25:03","2016-08-25:05","2016-08-25:06","2016-08-25:07","2016-08-25:08","2016-08-25:09","2016-08-25:10","2016-08-25:11","2016-08-25:12","2016-08-25:14","2016-08-25:15","2016-08-25:16","2016-08-25:17","2016-08-25:18","2016-08-25:19","2016-08-25:20","2016-08-25:21","2016-08-25:22","2016-08-25:23","2016-08-26:00","2016-08-26:01","2016-08-26:06","2016-08-26:07","2016-08-26:08","2016-08-26:09","2016-08-26:10","2016-08-26:11","2016-08-26:12","2016-08-26:13","2016-08-26:14","2016-08-26:15","2016-08-26:16","2016-08-26:17","2016-08-26:18","2016-08-26:22","2016-08-26:23","2016-08-27:00","2016-08-27:01","2016-08-27:02","2016-08-27:06","2016-08-27:08","2016-08-27:09","2016-08-27:10","2016-08-27:11","2016-08-27:12","2016-08-27:13","2016-08-27:14","2016-08-27:15","2016-08-27:16","2016-08-27:17","2016-08-27:18","2016-08-27:19","2016-08-27:20","2016-08-28:00","2016-08-28:01","2016-08-28:06","2016-08-28:08"],
                         //type: 'value',
@@ -371,7 +371,7 @@
 //                                color: '#eee'
 //                            }
 //                        }
-                    }),
+                    },
                     yAxis: _.extend({}, Chart.yAxis, {
                         type: 'value',
                         name: '文章数量',
@@ -565,7 +565,180 @@
             }
         },
         methods: {
+            getBubblChart(){
 
+
+
+                const topic_id = this.activeAnalyticsTopic.topic_id,
+                end='2016-11-15',
+                start='2016-11-11';
+                        //end = this.analyticsEnd,
+                        //start = this.analyticsStart;
+                Api.getBubblChart({topic_id,start,end}).then(resp => {
+                    //console.log('13',resp.data);
+                    if(resp.data.code == 0){
+                        console.log('12',resp.data.data);
+                        //console.log('12',resp.data.data[0]);
+                        const yuy =_.keys(resp.data.data);
+                        this.themeScatterOption.legend.data=yuy;
+                       // console.log('话题',yuy);
+                        //console.log('话题',yuy[0]);
+                        this.themeScatterOption.series[0].name=yuy[0];
+                        this.themeScatterOption.series[1].name=yuy[1];
+                        this.themeScatterOption.series[2].name=yuy[2];
+                        this.themeScatterOption.series[3].name=yuy[3];
+                        this.themeScatterOption.series[4].name=yuy[4];
+
+                        const yuy0 =_.values(resp.data.data);
+                        const datearr1 = _.pluck(yuy0[0],'date');
+                        const datearr2 = _.pluck(yuy0[1],'date');
+                        const datearr3 = _.pluck(yuy0[2],'date');
+                        const datearr4 = _.pluck(yuy0[3],'date');
+                        const datearr5 = _.pluck(yuy0[4],'date');
+                        
+                        const sizedate=[];
+                         sizedate.push(_.size(datearr1));
+                         sizedate.push(_.size(datearr2));
+                         sizedate.push(_.size(datearr3));
+                         sizedate.push(_.size(datearr4));
+                         sizedate.push(_.size(datearr5));
+                        
+                         const uye=_.max(sizedate);
+                         console.log('sizedate',sizedate);
+                         
+                        
+                        if(_.size(datearr1)==uye){
+                        	this.themeScatterOption.xAxis.data=datearr1;
+                        	
+                        }else if(_.size(datearr2)==uye)
+                       {
+                        	this.themeScatterOption.xAxis.data=datearr2;
+                        	
+                        }else if(_.size(datearr3)==uye){
+                        	this.themeScatterOption.xAxis.data=datearr3;
+                        	
+                        }else if(_.size(datearr4)==uye){
+                        	this.themeScatterOption.xAxis.data=datearr4;
+                        	
+                        }else if(_.size(datearr5)==uye)
+                        {
+                        	this.themeScatterOption.xAxis.data=datearr5;
+                        	
+                        }
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                      
+
+
+
+
+                        //console.log('数据',yuy0); //数据组的所有数据
+                        
+                        const dataOne=yuy0[0];
+                        const dataTwue=yuy0[1];
+                        const dataThree=yuy0[2];
+                        const dataFour=yuy0[3];
+                        const dataFire=yuy0[4];
+                        
+                        //console.log('dataOne:',dataOne);
+                        
+                        
+                        
+                 
+						
+							const result0 = [];
+							for(var i=0; i < dataOne.length; i++) {
+							      dataOne[i]=_.omit(dataOne[i],'date');
+							      dataOne[i]=_.pick(dataOne[i],'count','share','like','comment','view');
+							     
+							      dataOne[i][0]=i+1;
+							    
+							      
+							     result0.push(_.values(dataOne[i]));  
+							};
+							const result1 = [];
+							for(var i=0; i < dataTwue.length; i++) {
+							      dataTwue[i]=_.omit(dataTwue[i],'date');
+							      dataTwue[i]=_.pick(dataTwue[i],'count','share','like','comment','view');
+							      dataTwue[i][0]=i+1
+							     result1.push(_.values(dataTwue[i]));  
+							};
+							
+							const result2 = [];
+							for(var i=0; i < dataThree.length; i++) {
+							      dataThree[i]=_.omit(dataThree[i],'date');
+							      dataThree[i]=_.pick(dataThree[i],'count','share','like','comment','view');
+							      dataThree[i][0]=i+1
+							     result2.push(_.values(dataThree[i]));  
+							};
+					
+							const result3 = [];
+							for(var i=0; i < dataFour.length; i++) {
+							      dataFour[i]=_.omit(dataFour[i],'date');
+							      dataFour[i]=_.pick(dataFour[i],'count','share','like','comment','view');
+							      dataFour[i][0]=i+1
+							     result3.push(_.values(dataFour[i]));  
+							};
+							
+							const result4 = [];
+							for(var i=0; i < dataFire.length; i++) {
+							      dataFire[i]=_.omit(dataFire[i],'date');
+							      dataFire[i]=_.pick(dataFire[i],'count','share','like','comment','view');
+							      dataFire[i][0]=i+1
+							     result4.push(_.values(dataFire[i]));  
+							};
+					
+                      
+                        //   console.log('result1',result1);
+                          //  console.log('result2',result2);
+                            //console.log('result3',result3);
+                            //console.log('result4',result4);
+                        
+                        
+                      
+                        
+                        
+                        
+                        
+                        this.themeScatterOption.series[0].data=result0;
+                        this.themeScatterOption.series[1].data=result1;
+                        this.themeScatterOption.series[2].data=result2;
+                        this.themeScatterOption.series[3].data=result3;
+                        this.themeScatterOption.series[4].data=result4;
+
+
+
+
+
+
+
+                        const uiy=_.omit(yuy0[0],'date');
+                        console.log('数组0',uiy);
+                        console.log('数组1',yuy0[0]);
+                        console.log('数组2',yuy0[1]);
+                        console.log('数组3',yuy0[2]);
+                        console.log('数组4',yuy0[3]);
+                        console.log('数组5',yuy0[4]);
+
+                        // const gu=_.each(yuy0[0],value,list);
+                        // console.log('gu',gu);
+
+
+
+
+
+
+
+
+                    }
+                });
+            },
          convertData (data) {
              this.themeMapOption.series[0].data=[
                  {name: '海门', value: 9},
@@ -846,6 +1019,7 @@
                         //if(details.length) return ;
                         this.themeLineLoading = false;
                         this.themeLineOption.xAxis.data = _.map(details, detail => detail.date);
+                    console.log('details',details);
                         this.themeLineOption.legend.data = _.map(details[0].values, item => item.name);
                         this.themeLineOption.series = _.map(this.themeLineOption.legend.data, legend => {
                             const data = _.chain(details)
@@ -861,6 +1035,7 @@
                 });
             },
             init(){
+                this.getBubblChart();
                 this.getTrendList();
                 this.getWordCloud();
                 //this.getThemeBest();

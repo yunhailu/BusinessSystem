@@ -51,19 +51,21 @@
                             <div class="col-sm-4 tip">{{words.optional}}</div>
                         </div>
 
-                        <!-- ---------------mood select--------------------------------------------->
+                        <!-- ---------------moodselect--------------------------------------------->
                         <div class="form-group">
                             <label for="monitor" class="col-sm-2 control-label">{{words.warningSet}}</label>
                             <div class="col-sm-4">
                             <select v-model="monitor"  name="moodSelect" class="form-control moodwSet0" id="monitor" >
-
-                                <option v-for="moodgroup in moodGroups"  :selected="moodgroup.select"  :value="moodgroup.value" >{{moodgroup.name}}</option>
+                                <option @click="setselect(moodgroup.id);" v-for="moodgroup in moodGroups" :id="moodgroup.id" :value="moodgroup.id" >{{moodgroup.name}}</option>
                             </select>
-                                <input type="text" v-model="threshold" class="form-control moodwSet1 " id="threshold" :placeholder="words.warningValue">
+
+                                <input type="text" v-model="threshold" class="form-control moodwSet1 " id="threshold" :placeholder="">
+
+
+                                <!--<input type="text"  v-model="threshold" class="form-control moodwSet1 "  :placeholder="words.warningValue">-->
                             </div>
                             <div class="col-sm-4 tip">{{words.optional}}</div>
                         </div>
-
                         <!-- ------------------------------------------------------------>
                         <div class="form-group">
                             <label for="excludeText" class="col-sm-2 control-label">{{words.exclude}}</label>
@@ -120,18 +122,7 @@
                 excludeText: "",
                 errorTip: "",
                 successTip: "",
-
-                moodGroups: [{
-                    id: 1, value:"happy", select:'selected',name: words.moodGroups[0]
-                }, {
-                    id: 2, value:"anger", select:'', name: words.moodGroups[1]
-                }, {
-                    id: 3, value:"sorrow", select:'', name: words.moodGroups[2]
-                }, {
-                    id: 4, value:"disgust", select:'', name: words.moodGroups[3]
-                },{
-                    id: 5, value:"fear", select:'', name: words.moodGroups[4]
-                }],
+                moodGroups: [],
                 groups: [{
                     id: 1, value: 1, name: words.groups[0]
                 }, {
@@ -152,6 +143,24 @@
             getters: { topicList }
         },
         methods: {
+            setselect(moodgroup) {
+                console.log('213', moodgroup);
+                this.threshold=13224;
+                //this.$router.go({ name: 'dashboardDetail', params: { id: report.id } });
+            },
+            getCategroy(){
+                Api.getCategroy().then(resp => {
+                    //console.log(resp.data);
+                    if(resp.data.code == 0){
+                        this.moodGroups = resp.data.data;
+                        console.log(resp.data.data);
+                        this.monitor="happy";
+
+
+                    }
+                });
+
+            },
             setAdvanced(isAdvanced){
                 this.isAdvanced = isAdvanced;
             },
@@ -168,21 +177,14 @@
                 }
             },
             updateSubmit(){
-                //console.log('update submit', this.topicText, this.radioVal,this.threshold,this.monitor, this.$route.params.topic_id);
 
-//                this.topicText = topic.topic_name;
-//                this.radioVal = topic.topic_id
-                console.log('update: ', this.monitor, this.threshold);
-                return ;
-                if(!this.radioVal || !this.topicText ){
+                if(!this.topicText || (this.threshold!=0&&this.threshold%1!=0)){
                     this.successTip = "";
                     this.errorTip = "请选择正确的阈值(整数)分组和填写新主题";
+                    this.successTip = "";
                     return ;
                 };
                 this.topicUp().then( resp => {
-                    console.log('055555555555550');
-                    console.log('topicUp', resp);
-                    console.log('05555555555555555550');
                     if(resp.data.code == 0){
                         this.successTip = "修改成功！";
                         this.errorTip = "";
@@ -191,10 +193,6 @@
                         return Api.getTopicList({});
                     }
                 }).then(resp => {
-                      console.log(resp.data.code);
-                    // console.log('topicList',this.topicList);
-
-
                     if(resp.data.code == 0){
                         let topicList = resp.data.data;
                         _.each(topicList, group => {
@@ -204,22 +202,19 @@
                         });
                         this.setTopicList(topicList);
                         this.radioVal = "";
+                        this.threshold="";
                     }
                 });
-
             },
             createSubmit(){
                 //console.log(this.isAdvanced, this.radioVal, this.topicArr, this.related, this.topicText, this.excludeText);
-                if(!this.radioVal || !this.topicText ){
-                    this.successTip = "";
+                if(!this.radioVal || !this.topicText || (this.threshold!=0&&this.threshold%1!=0)){
                     this.errorTip = "请选择正确的阈值(整数)分组和填写新主题";
+                    this.successTip = "";
                     return ;
                 };
                 //console.log(this.threshold);
                 this.topicAdd().then( resp => {
-                    console.log('011111111111111111111110');
-                    console.log('topicAdd', resp);
-                    console.log('011111111111111111111110');
                     if(resp.data.code == 0){
                         this.successTip = "添加成功！";
                         this.errorTip = "";
@@ -239,6 +234,7 @@
                         });
                         this.setTopicList(topicList);
                         this.radioVal = "";
+                        this.threshold="";
                     }
                 });
                 //history.go(-1);
@@ -257,11 +253,7 @@
                     threshold:this.threshold
                 });
             },
-
             topicUp(){
-                console.log('44444444444444444444444444');
-                console.log(this.$route.params.topic_id);
-                console.log('44444444444444444444444444');
                 return Api.topicUp({
                     id:this.$route.params.topic_id,
                     group_id:this.radioVal,
@@ -270,16 +262,12 @@
                     threshold:this.threshold
                 });
             },
-
-
             updateInit(){
                 const group_id = this.$route.params.group_id;
                 const topic_id = this.$route.params.topic_id;
-                const monitor = this.monitor;
-                const threshold = this.threshold;
-                console.log('00000000000000000000000000000');
-                console.log(this.topicList);
-                console.log('00000000000000000000000000000');
+                //const monitor = "anger";
+                const monitorss =[];
+                const threshold = 100;
                 const group = _.chain(this.topicList)
                         .map(group => _.extend({}, group))
                         .filter(group => (group.group_id == group_id))
@@ -288,13 +276,58 @@
                         .filter(topic => (topic.topic_id == topic_id))
                         .first().value();
                 this.topicText = topic.topic_name;
+                Api.getMonitorList().then(resp => {
+                    //console.log(resp.data);
+                    if(resp.data.code == 0){
+                        //this.reports = resp.data.data;
+                        const hj=_.chain(resp.data.data)
+                                .filter(hj => (hj.topic_id == topic_id))
+                                .first().value();
 
-                this.radioVal = group_id;
-                 this.monitor=monitor;
-                 this.threshold=threshold;
-                console.log('topic', this.topicText,this.threshold,this.monitor, this.radioVal);
+                        console.log('11',hj);
+                        this.monitorss=hj.data;
+                        console.log('123',this.monitorss);
+                        console.log(this.monitor);
+
+                        this.monitor=this.monitorss[0].key;
+                        this.threshold=this.monitorss[0].value;
+
+                        // switch(monitorss){
+                        //     case monitorss[0].key:
+                        //         this.threshold==monitorss[0].value;
+                        //         break;
+                        //     case "settingEdit":
+                        //         this.updateSubmit();
+                        //         break;
+                        //     default:
+                        //         break;
+                        // }
+
+
+                    }
+                });
+
+
+
+
+
+                 //this.threshold=0;
+
+                console.log('123',this.monitorss);
+
+
+                 this.radioVal = group_id;
+                 //this.monitor=monitor;
+                 //this.threshold=threshold;
+                //console.log('topic', this.topicText,this.threshold,this.monitor, this.radioVal);
             },
+
+
+
+
             init(){
+                //拉取情绪的列表。。
+                this.getCategroy();
                 // 拉取 group 列表
                 this.getGroupList().then(resp => {
                     //console.log("group list", resp);
@@ -307,7 +340,6 @@
                 if(this.$route.name == 'settingEdit'){
                     setTimeout(this.updateInit ,1000)
                 }
-
             }
         },
         filters: {

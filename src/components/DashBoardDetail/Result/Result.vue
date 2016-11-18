@@ -19,7 +19,7 @@
             <echarts :options="resultPieChartOption" :initOptions="resultPieChartOption" :img.sync="sub" theme="macarons"></echarts>
         </div>
     </div>
-    <list-panel :list="list" :options="options" :select-title="selectTitle" :select-value.sync="sortVal" :tools="isShowTools"></list-panel>
+    <list-panel :list="list" :topic-name="topic_name" :options="options" :select-title="selectTitle" :select-value.sync="sortVal" :tools="isShowTools"></list-panel>
 </template>
 <style lang="less" scoped>
     @import "Result.less";
@@ -31,7 +31,8 @@
     import * as Api from "../../../widgets/Api";
     import { Chart, Pie } from '../../../config/config';
     import { list } from "../../../config/tmpData";
-    import ListPanel from '../../Common/ListPanel/ListPanel.vue';
+    //import ListPanel from '../../Common/ListPanel/ListPanel.vue';
+    import ListPanel from '../ListPanel/ListPanel.vue';
     import Tabs from '../../Common/Tabs/Tabs.vue';
     import Echarts from '../../Common/Echarts/Echarts.vue';
     import { insertExportImages, removeExportImages } from "../../../vuex/actions";
@@ -74,6 +75,7 @@
                 options: [{key: 'time', value: '按时间排序'}, {key: 'browser', value: '浏览数排序'}, {key: 'star', value: '点赞数排序'}],
                 sortVal: "",
                 x: [],
+                topic_name:'',
                 lineData: {
                     all: [],
                     wechat: [],
@@ -294,6 +296,7 @@
             Tabs, ListPanel, Echarts
         },
         ready(){
+            this.topic_name=this.data.topic;
             this.init();
         },
 //        route: {

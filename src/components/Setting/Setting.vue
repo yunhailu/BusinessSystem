@@ -10,7 +10,6 @@
                 </div>
                 <router-view></router-view>
                 <div class="setting-panel-wrap-add" v-show="activeItem">
-
                 </div>
                 <div class="setting-panel-wrap-edit" v-show="activeItem">
 
