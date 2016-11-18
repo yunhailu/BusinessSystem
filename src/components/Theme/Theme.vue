@@ -566,9 +566,6 @@
         },
         methods: {
             getBubblChart(){
-
-
-
                 const topic_id = this.activeAnalyticsTopic.topic_id,
                 end='2016-11-15',
                 start='2016-11-11';
