@@ -506,6 +506,20 @@ export const getMonitorList = params => {
     });
 };
 
+/**品牌印象的气泡接口
+ *  Encapsulate `getMonitorList` interface
+ *
+
+ */
+export const getBubblChart = params => {
+    return Api.request({
+        url: `${rootURI}/theme/bubble`,
+        params
+    });
+};
+
+
+
 /**监测设置的情绪选择的接口
  *  Encapsulate `getCategroy` interface
  *
@@ -535,6 +549,8 @@ export const getTodayList = params => {
         params
     });
 };
+
+
 
 
 

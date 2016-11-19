@@ -79,7 +79,6 @@
     export default{
         data(){
             const words = Local().theme;
-
             return{
                 words,
                 loadingParams: {
@@ -242,7 +241,8 @@
 
                 //pie option
                 themePieLoading: false,
-                themePieOption: { title : {
+                themePieOption: {
+                    title : {
                     text: '微博男女比例分布',
                     x:'center'
                 },
@@ -293,14 +293,14 @@
                 trendList: [],
 
                 themeScatterOption: {
-                    legend: _.extend({}, Chart.legend, {
+                    legend: {
                         y: 'top',
                         data: ['南海问题', '每日关注', '货币战争', '网易新闻', '阿里影业'],
                         textStyle: {
                             //color: '#fff',
 //                            fontSize: 16
                         }
-                    }),
+                    },
                     tooltip: _.extend({}, Chart.tooltip, {
                         trigger: 'axis',
                         axisPointer: {
@@ -353,7 +353,7 @@
                     grid: _.extend({}, Chart.grid, {
                         right: '10%'
                     }),
-                    xAxis:  _.extend({}, Chart.xAxis, {
+                    xAxis:{
                         type : 'category',  //category
                         data : ["2016-08-21:12","2016-08-21:14","2016-08-21:15","2016-08-21:16","2016-08-21:17","2016-08-21:18","2016-08-21:20","2016-08-21:22","2016-08-22:00","2016-08-22:03","2016-08-22:05","2016-08-22:06","2016-08-22:08","2016-08-22:09","2016-08-22:10","2016-08-22:11","2016-08-22:12","2016-08-22:13","2016-08-22:14","2016-08-22:15","2016-08-22:16","2016-08-22:17","2016-08-22:18","2016-08-22:19","2016-08-22:20","2016-08-22:21","2016-08-22:22","2016-08-23:00","2016-08-23:03","2016-08-23:06","2016-08-23:08","2016-08-23:09","2016-08-23:10","2016-08-23:11","2016-08-23:12","2016-08-23:13","2016-08-23:14","2016-08-23:15","2016-08-23:16","2016-08-23:17","2016-08-23:18","2016-08-23:19","2016-08-23:20","2016-08-23:22","2016-08-23:23","2016-08-24:00","2016-08-24:01","2016-08-24:06","2016-08-24:07","2016-08-24:08","2016-08-24:09","2016-08-24:10","2016-08-24:11","2016-08-24:12","2016-08-24:14","2016-08-24:15","2016-08-24:16","2016-08-24:17","2016-08-24:18","2016-08-24:20","2016-08-24:21","2016-08-24:22","2016-08-25:00","2016-08-25:02","2016-08-25:03","2016-08-25:05","2016-08-25:06","2016-08-25:07","2016-08-25:08","2016-08-25:09","2016-08-25:10","2016-08-25:11","2016-08-25:12","2016-08-25:14","2016-08-25:15","2016-08-25:16","2016-08-25:17","2016-08-25:18","2016-08-25:19","2016-08-25:20","2016-08-25:21","2016-08-25:22","2016-08-25:23","2016-08-26:00","2016-08-26:01","2016-08-26:06","2016-08-26:07","2016-08-26:08","2016-08-26:09","2016-08-26:10","2016-08-26:11","2016-08-26:12","2016-08-26:13","2016-08-26:14","2016-08-26:15","2016-08-26:16","2016-08-26:17","2016-08-26:18","2016-08-26:22","2016-08-26:23","2016-08-27:00","2016-08-27:01","2016-08-27:02","2016-08-27:06","2016-08-27:08","2016-08-27:09","2016-08-27:10","2016-08-27:11","2016-08-27:12","2016-08-27:13","2016-08-27:14","2016-08-27:15","2016-08-27:16","2016-08-27:17","2016-08-27:18","2016-08-27:19","2016-08-27:20","2016-08-28:00","2016-08-28:01","2016-08-28:06","2016-08-28:08"],
                         //type: 'value',
@@ -371,7 +371,7 @@
 //                                color: '#eee'
 //                            }
 //                        }
-                    }),
+                    },
                     yAxis: _.extend({}, Chart.yAxis, {
                         type: 'value',
                         name: '文章数量',
@@ -565,7 +565,69 @@
             }
         },
         methods: {
+            getBubblChart(){
 
+
+
+                const topic_id = this.activeAnalyticsTopic.topic_id,
+                        end = this.analyticsEnd,
+                        start = this.analyticsStart;
+                Api.getBubblChart({topic_id,start,end}).then(resp => {
+                    //console.log('13',resp.data);
+                    if(resp.data.code == 0){
+                        console.log('12',resp.data.data);
+                        //console.log('12',resp.data.data[0]);
+                        const yuy =_.keys(resp.data.data);
+                        this.themeScatterOption.legend.data=yuy;
+                        console.log('话题',yuy);
+                        console.log('话题',yuy[0]);
+                        this.themeScatterOption.series[0].name=yuy[0];
+                        this.themeScatterOption.series[1].name=yuy[1];
+                        this.themeScatterOption.series[2].name=yuy[2];
+                        this.themeScatterOption.series[3].name=yuy[3];
+                        this.themeScatterOption.series[4].name=yuy[4];
+
+                        const yuy0 =_.values(resp.data.data);
+                        const datearr = _.pluck(yuy0[0],'date');
+                        this.themeScatterOption.xAxis.data=datearr;
+
+
+
+
+                        console.log('数据',yuy0);  //数据组的所有数据
+                        // this.themeScatterOption.series[0].data=yuy0[0];
+                        // this.themeScatterOption.series[1].data=yuy0[1];
+                        // this.themeScatterOption.series[2].data=yuy0[2];
+                        // this.themeScatterOption.series[3].data=yuy0[3];
+                        // this.themeScatterOption.series[4].data=yuy0[4];
+
+
+
+
+
+
+
+                        const uiy=_.omit(yuy0[0],'date');
+                        console.log('数组0',uiy);
+                        console.log('数组1',yuy0[0]);
+                        console.log('数组2',yuy0[1]);
+                        console.log('数组3',yuy0[2]);
+                        console.log('数组4',yuy0[3]);
+                        console.log('数组5',yuy0[4]);
+
+                        // const gu=_.each(yuy0[0],value,list);
+                        // console.log('gu',gu);
+
+
+
+
+
+
+
+
+                    }
+                });
+            },
          convertData (data) {
              this.themeMapOption.series[0].data=[
                  {name: '海门', value: 9},
@@ -861,6 +923,7 @@
                 });
             },
             init(){
+                this.getBubblChart();
                 this.getTrendList();
                 this.getWordCloud();
                 //this.getThemeBest();

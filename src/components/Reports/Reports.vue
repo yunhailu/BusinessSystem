@@ -90,26 +90,6 @@
 
 
 
-
-
-
-                        // const newDateS = _.map(resp.data.data, (item)=> {
-                        //     // item.name=item.id;
-                        //     item.category = item.level;
-                        //     item.symbolSize = 15;
-                        //     item.itemStyle = "null";
-                        //     item.attributes = nodestyle1;
-                        //     item.label = nodestyle0;
-                        //     //item.x = Math.random() * (-1) * Math.random() * 1000;
-                        //     //item.y = Math.random() * Math.random() * 1000;
-                        //     return item;
-                        // });
-
-
-
-
-
-
                     }
                 });
             },
