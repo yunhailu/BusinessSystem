@@ -565,7 +565,177 @@
             }
         },
         methods: {
+            getBubblChart(){
+                const topic_id = this.activeAnalyticsTopic.topic_id,
+                end='2016-11-15',
+                start='2016-11-11';
+                        //end = this.analyticsEnd,
+                        //start = this.analyticsStart;
+                Api.getBubblChart({topic_id,start,end}).then(resp => {
+                    //console.log('13',resp.data);
+                    if(resp.data.code == 0){
+                        console.log('12',resp.data.data);
+                        //console.log('12',resp.data.data[0]);
+                        const yuy =_.keys(resp.data.data);
+                        this.themeScatterOption.legend.data=yuy;
+                       // console.log('话题',yuy);
+                        //console.log('话题',yuy[0]);
+                        this.themeScatterOption.series[0].name=yuy[0];
+                        this.themeScatterOption.series[1].name=yuy[1];
+                        this.themeScatterOption.series[2].name=yuy[2];
+                        this.themeScatterOption.series[3].name=yuy[3];
+                        this.themeScatterOption.series[4].name=yuy[4];
 
+                        const yuy0 =_.values(resp.data.data);
+                        const datearr1 = _.pluck(yuy0[0],'date');
+                        const datearr2 = _.pluck(yuy0[1],'date');
+                        const datearr3 = _.pluck(yuy0[2],'date');
+                        const datearr4 = _.pluck(yuy0[3],'date');
+                        const datearr5 = _.pluck(yuy0[4],'date');
+                        
+                        const sizedate=[];
+                         sizedate.push(_.size(datearr1));
+                         sizedate.push(_.size(datearr2));
+                         sizedate.push(_.size(datearr3));
+                         sizedate.push(_.size(datearr4));
+                         sizedate.push(_.size(datearr5));
+                        
+                         const uye=_.max(sizedate);
+                         console.log('sizedate',sizedate);
+                         
+                        
+                        if(_.size(datearr1)==uye){
+                        	this.themeScatterOption.xAxis.data=datearr1;
+                        	
+                        }else if(_.size(datearr2)==uye)
+                       {
+                        	this.themeScatterOption.xAxis.data=datearr2;
+                        	
+                        }else if(_.size(datearr3)==uye){
+                        	this.themeScatterOption.xAxis.data=datearr3;
+                        	
+                        }else if(_.size(datearr4)==uye){
+                        	this.themeScatterOption.xAxis.data=datearr4;
+                        	
+                        }else if(_.size(datearr5)==uye)
+                        {
+                        	this.themeScatterOption.xAxis.data=datearr5;
+                        	
+                        }
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                      
+
+
+
+
+                        //console.log('数据',yuy0); //数据组的所有数据
+                        
+                        const dataOne=yuy0[0];
+                        const dataTwue=yuy0[1];
+                        const dataThree=yuy0[2];
+                        const dataFour=yuy0[3];
+                        const dataFire=yuy0[4];
+                        
+                        //console.log('dataOne:',dataOne);
+                        
+                        
+                        
+                 
+						
+							const result0 = [];
+							for(var i=0; i < dataOne.length; i++) {
+							      dataOne[i]=_.omit(dataOne[i],'date');
+							      dataOne[i]=_.pick(dataOne[i],'count','share','like','comment','view');
+							     
+							      dataOne[i][0]=i+1;
+							    
+							      
+							     result0.push(_.values(dataOne[i]));  
+							};
+							const result1 = [];
+							for(var i=0; i < dataTwue.length; i++) {
+							      dataTwue[i]=_.omit(dataTwue[i],'date');
+							      dataTwue[i]=_.pick(dataTwue[i],'count','share','like','comment','view');
+							      dataTwue[i][0]=i+1
+							     result1.push(_.values(dataTwue[i]));  
+							};
+							
+							const result2 = [];
+							for(var i=0; i < dataThree.length; i++) {
+							      dataThree[i]=_.omit(dataThree[i],'date');
+							      dataThree[i]=_.pick(dataThree[i],'count','share','like','comment','view');
+							      dataThree[i][0]=i+1
+							     result2.push(_.values(dataThree[i]));  
+							};
+					
+							const result3 = [];
+							for(var i=0; i < dataFour.length; i++) {
+							      dataFour[i]=_.omit(dataFour[i],'date');
+							      dataFour[i]=_.pick(dataFour[i],'count','share','like','comment','view');
+							      dataFour[i][0]=i+1
+							     result3.push(_.values(dataFour[i]));  
+							};
+							
+							const result4 = [];
+							for(var i=0; i < dataFire.length; i++) {
+							      dataFire[i]=_.omit(dataFire[i],'date');
+							      dataFire[i]=_.pick(dataFire[i],'count','share','like','comment','view');
+							      dataFire[i][0]=i+1
+							     result4.push(_.values(dataFire[i]));  
+							};
+					
+                      
+                        //   console.log('result1',result1);
+                          //  console.log('result2',result2);
+                            //console.log('result3',result3);
+                            //console.log('result4',result4);
+                        
+                        
+                      
+                        
+                        
+                        
+                        
+                        this.themeScatterOption.series[0].data=result0;
+                        this.themeScatterOption.series[1].data=result1;
+                        this.themeScatterOption.series[2].data=result2;
+                        this.themeScatterOption.series[3].data=result3;
+                        this.themeScatterOption.series[4].data=result4;
+
+
+
+
+
+
+
+                        const uiy=_.omit(yuy0[0],'date');
+                        console.log('数组0',uiy);
+                        console.log('数组1',yuy0[0]);
+                        console.log('数组2',yuy0[1]);
+                        console.log('数组3',yuy0[2]);
+                        console.log('数组4',yuy0[3]);
+                        console.log('数组5',yuy0[4]);
+
+                        // const gu=_.each(yuy0[0],value,list);
+                        // console.log('gu',gu);
+
+
+
+
+
+
+
+
+                    }
+                });
+            },
          convertData (data) {
              this.themeMapOption.series[0].data=[
                  {name: '海门', value: 9},
@@ -862,7 +1032,7 @@
                 });
             },
             init(){
-
+                this.getBubblChart();
                 this.getTrendList();
                 this.getWordCloud();
                 //this.getThemeBest();
