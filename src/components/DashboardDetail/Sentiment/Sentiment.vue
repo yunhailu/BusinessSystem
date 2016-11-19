@@ -329,7 +329,7 @@
                 ];
                 _.each(this.lineData[source], (value, key) => {
                     this.sentimentBarOption.series[this.sentimentMap[key]].data = value;
-                    console.log('chakanshuju',value)
+                    //console.log('chakanshuju',value)
                 });
                 /*_.each(this.lineData[source], (value, key) => {
                     this.sentimentBarOption.series[this.sentimentMap[key]].data = value;
@@ -350,7 +350,7 @@
                     if(resp.data.code == 0){
 
                         const details = resp.data.data;
-                        console.log('查看是否进入报告内情绪数据请求',details);
+                        //console.log('查看是否进入报告内情绪数据请求',details);
                         this.x = _.map(details, detail => detail.date);
                         const _this = this;
                         //console.log("xxxx", this.x);

@@ -280,7 +280,7 @@
                         end = moment().format('YYYY-MM-DD'),
                         topic = this.data.topic;
                 Api.getCommentDetail({ subtopic, topic_id, source, time_dimension, start, end, topic }).then(resp => {
-                    console.log('getCommentDetail', resp);
+                    //console.log('getCommentDetail', resp);
                     if(resp.data.code == 0){
                         const details = resp.data.data;
                         this.x = _.map(details, detail => detail.date);
@@ -353,12 +353,6 @@
                         const overseasNums=_.reduce(this.lineData.overseas.negative,(mome, val) => mome + val, 0)+_.reduce(this.lineData.overseas.neutral,(mome, val) => mome + val, 0)
                         +_.reduce(this.lineData.overseas.positive,(mome, val) => mome + val, 0);
 
-                        console.log(allNums,
-                                wechatNums,
-                                weiboNums,
-                                clientNums,
-                                webNums,
-                                overseasNums);
                         this.commentNums =[
                             allNums,
                             wechatNums,
