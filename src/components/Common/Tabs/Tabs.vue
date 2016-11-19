@@ -29,7 +29,7 @@
 <script type="text/ecmascript-6">
     import _ from 'underscore';
     import Local from '../../../local/local';
-    import AddDashboard from '../../addDashboard/addDashboard.vue'
+    import AddDashboard from '../../AddDashboard/AddDashboard.vue'
     import { analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic } from '../../../vuex/getters';
     import { setAnalyticsType, setAnalyticsTimeRange, setAnalyticsSource, setAnalyticsSubTopic } from "../../../vuex/actions";
 
@@ -69,7 +69,8 @@
                     { name: words.source[2] },
                     { name: words.source[3] },
                     { name: words.source[4] },
-                    { name: words.source[5] }
+                    { name: words.source[5] },
+                    { name: words.source[6] }
                 ],
                 sourceActive: 0
 //                filters: [{
@@ -87,7 +88,7 @@
                 console.log(val, idx, this.$route);
                 this.sourceActive = idx;
                 this.actions && this.actions(val, idx);
-                const source = ["all", "wechat", "weibo", "client", "web", "overseas"];
+                const source = ["all", "wechat", "weibo", "client", "web", "overseas","search"];
                 if(this.$route.path.indexOf('analytics') > -1){
                     this.setAnalyticsSource(source[idx]);
                 }
@@ -103,7 +104,7 @@
         ready(){
             if(this.$route.path.indexOf('analytics') > -1){
                 this.setAnalyticsType(this.$route.name);
-                const source = ["all", "wechat", "weibo", "client", "web", "oversea"];
+                const source = ["all", "wechat", "weibo", "client", "web", "oversea","search"];
                 this.setAnalyticsSource(source[0]);
                 console.log('datas', this.datas);
             }

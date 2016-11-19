@@ -290,8 +290,14 @@
                     case 5:
                         source = 'overseas';
                         break;
+                    case 6:
+                        source = 'search';
+                        break;
                     default:
                         break;
+                }
+                if(source =='search'){
+                    return ;
                 }
                 //this.sentimentPieOption.series[0].name = source;
                 this.sentimentPieOption.series[0].data =[

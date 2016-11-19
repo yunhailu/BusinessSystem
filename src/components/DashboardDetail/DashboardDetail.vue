@@ -3,27 +3,29 @@
     <div class="dashboard-detail">
         <div class="container">
             <div class="dashboard-detail-wrap" v-for="detail in details">
-                <div class="dashboard-detail-wrap-title">
-                    <div class="saveBtn" @click="saveAction();"><i class="fa fa-save"></i> <span>{{words.save}}</span></div>
-                    <div class="title"><i class="fa fa-thumb-tack"></i> <span>{{name}}</span></div>
+                <div class="dashboard-detail-wrap-box" v-if="detail.summary || detail.sentiment || detail.comment || detail.influence || detail.theme">
+                    <div class="dashboard-detail-wrap-box-title">
+                        <div class="saveBtn" @click="saveAction();"><i class="fa fa-save"></i> <span>{{words.save}}</span></div>
+                        <div class="title"><i class="fa fa-thumb-tack"></i> <span>{{name}}</span></div>
+                    </div>
+                    <div class="relatedTopic">关键词:{{detail.topic}}</div>
+                    <div class="dashboard-detail-wrap-box-module" v-if="detail.summary">
+                        <result-component :title="words.result" :data.sync="detail" :remove="removeItem" :master.sync="detail.summarymaster" :sub.sync="detail.summarysub"></result-component>
+                    </div>
+                    <div class="dashboard-detail-wrap-box-module" v-if="detail.sentiment">
+                        <sentiment-component :title="words.sentiment" :data="detail" :remove="removeItem" :master.sync="detail.sentimentmaster" :sub.sync="detail.sentimentsub"></sentiment-component>
+                    </div>
+                    <div class="dashboard-detail-wrap-box-module" v-if="detail.comment">
+                        <comment-component :title="words.comment" :data="detail" :remove="removeItem" :master.sync="detail.commentmaster" :sub.sync="detail.commentsub"></comment-component>
+                    </div>
+                    <div class="dashboard-detail-wrap-box-module" v-if="detail.influence">
+                        <influence-component :title="words.influence" :data="detail" :remove="removeItem" ></influence-component>
+                    </div>
+                    <div class="dashboard-detail-wrap-box-module" v-if="detail.theme">
+                        <theme-component :title="words.theme" :data="detail" :remove="removeItem" :wordcloud.sync="detail.themewordcloud" :scatter.sync="detail.themescatter" :bar.sync="detail.themebar" :top.sync="detail.themetop"></theme-component>
+                    </div>
+                    <!--<div class="dashed"></div>-->
                 </div>
-                <div class="relatedTopic">关键词:{{detail.topic}}</div>
-                <div class="dashboard-detail-wrap-module" v-if="detail.summary">
-                    <result-component :title="words.result" :data.sync="detail" :remove="removeItem" :master.sync="detail.summarymaster" :sub.sync="detail.summarysub"></result-component>
-                </div>
-                <div class="dashboard-detail-wrap-module" v-if="detail.sentiment">
-                    <sentiment-component :title="words.sentiment" :data="detail" :remove="removeItem" :master.sync="detail.sentimentmaster" :sub.sync="detail.sentimentsub"></sentiment-component>
-                </div>
-                <div class="dashboard-detail-wrap-module" v-if="detail.comment">
-                    <comment-component :title="words.comment" :data="detail" :remove="removeItem" :master.sync="detail.commentmaster" :sub.sync="detail.commentsub"></comment-component>
-                </div>
-                <div class="dashboard-detail-wrap-module" v-if="detail.influence">
-                    <influence-component :title="words.influence" :data="detail" :remove="removeItem" ></influence-component>
-                </div>
-                <div class="dashboard-detail-wrap-module" v-if="detail.theme">
-                    <theme-component :title="words.theme" :data="detail" :remove="removeItem" :wordcloud.sync="detail.themewordcloud" :bar.sync="detail.themebar" :top.sync="detail.themetop"></theme-component>
-                </div>
-                <div class="dashed"></div>
             </div>
         </div>
     </div>
@@ -88,21 +90,22 @@
                         .map(value => {
                             const imgs = [];
                             if(value.summary){
-                                imgs.push({ topic: value.topic, topic_id: value.topic_id, key: "summary-master", value: value.summarymaster});
-                                imgs.push({ topic: value.topic, topic_id: value.topic_id, key: "summary-sub", value: value.summarysub});
+                                imgs.push({ topic: value.topic, topic_id: value.topic_id, key: "summary_master", value: value.summarymaster});
+                                imgs.push({ topic: value.topic, topic_id: value.topic_id, key: "summary_sub", value: value.summarysub});
                             }
                             if(value.sentiment){
-                                imgs.push({ topic: value.topic, topic_id: value.topic_id, key: "sentiment-master", value: value.sentimentmaster});
-                                imgs.push({ topic: value.topic, topic_id: value.topic_id, key: "sentiment-sub", value: value.sentimentsub});
+                                imgs.push({ topic: value.topic, topic_id: value.topic_id, key: "sentiment_master", value: value.sentimentmaster});
+                                imgs.push({ topic: value.topic, topic_id: value.topic_id, key: "sentiment_sub", value: value.sentimentsub});
                             }
                             if(value.comment){
-                                imgs.push({ topic: value.topic, topic_id: value.topic_id, key: "comment-master", value: value.commentmaster});
-                                imgs.push({ topic: value.topic, topic_id: value.topic_id, key: "comment-sub", value: value.commentsub});
+                                imgs.push({ topic: value.topic, topic_id: value.topic_id, key: "comment_master", value: value.commentmaster});
+                                imgs.push({ topic: value.topic, topic_id: value.topic_id, key: "comment_sub", value: value.commentsub});
                             }
                             if(value.theme){
-                                imgs.push({ topic: value.topic, topic_id: value.topic_id, key: "theme-wordcloud", value: value.themewordcloud});
-                                imgs.push({ topic: value.topic, topic_id: value.topic_id, key: "theme-bar", value: value.themebar});
-                                imgs.push({ topic: value.topic, topic_id: value.topic_id, key: "theme-top", value: value.themetop});
+                                imgs.push({ topic: value.topic, topic_id: value.topic_id, key: "theme_wordcloud", value: value.themewordcloud});
+                                imgs.push({ topic: value.topic, topic_id: value.topic_id, key: "theme_scatter", value: value.themescatter});
+                                imgs.push({ topic: value.topic, topic_id: value.topic_id, key: "theme_trend", value: value.themebar});
+                                imgs.push({ topic: value.topic, topic_id: value.topic_id, key: "theme_top", value: value.themetop});
                             }
                             return imgs;
                         })
