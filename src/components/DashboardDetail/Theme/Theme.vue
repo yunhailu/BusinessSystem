@@ -109,6 +109,7 @@
             const words = Local().theme;
             return{
                 words,
+                trendList: [],
                 themeWordLoading: true,
                 themeWordOption: {
                     tooltip: {},
@@ -529,6 +530,7 @@
                     //console.log('getTrendList', resp);
                     if(resp.data.code == 0){
                         this.trendList = _.filter(resp.data.data, (item, index) => (index < 10));
+                        console.log('this.trendList: -----------------------', this.trendList);
 //                        this.upList = resp.data.data.up;
 //                        this.downList = resp.data.data.down;
                     }
