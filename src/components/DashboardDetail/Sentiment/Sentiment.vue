@@ -48,7 +48,7 @@
                     this.insertExportImages({
                         topic: this.data.topic,
                         topic_id: this.data.topic_id,
-                        key: "sentiment-master",
+                        key: "sentiment_master",
                         value
                     });
                 }
@@ -58,7 +58,7 @@
                     this.insertExportImages({
                         topic: this.data.topic,
                         topic_id: this.data.topic_id,
-                        key: "sentiment-sub",
+                        key: "sentiment_slave",
                         value
                     });
                 }

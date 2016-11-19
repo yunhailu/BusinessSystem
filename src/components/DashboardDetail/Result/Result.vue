@@ -50,7 +50,7 @@
                     this.insertExportImages({
                         topic: this.data.topic,
                         topic_id: this.data.topic_id,
-                        key: "summary-master",
+                        key: "summary_master",
                         value
                     });
                 }
@@ -60,7 +60,7 @@
                     this.insertExportImages({
                         topic: this.data.topic,
                         topic_id: this.data.topic_id,
-                        key: "summary-sub",
+                        key: "summary_slave",
                         value
                     });
                 }

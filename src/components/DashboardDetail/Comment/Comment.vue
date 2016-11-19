@@ -49,7 +49,7 @@
                     this.insertExportImages({
                         topic: this.data.topic,
                         topic_id: this.data.topic_id,
-                        key: "comment-master",
+                        key: "comment_master",
                         value
                     });
                 }
@@ -59,7 +59,7 @@
                     this.insertExportImages({
                         topic: this.data.topic,
                         topic_id: this.data.topic_id,
-                        key: "comment-sub",
+                        key: "comment_slave",
                         value
                     });
                 }
