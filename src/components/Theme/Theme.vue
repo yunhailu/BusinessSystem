@@ -311,9 +311,9 @@
                             return '<div style="border-bottom: 1px solid rgba(255,255,255,.3); font-size: 18px;padding-bottom: 7px;margin-bottom: 7px">'
                                     + obj.seriesName
                                     + '</div>'
-                                    + '转发数：' + value[1] + '<br>'
-                                    + '点赞数：' + value[2] + '<br>'
-                                    + '评论数：' + value[5] + '<br>';
+                                    + '转发数：' + value[2] + '<br>'
+                                    + '点赞数：' + value[3] + '<br>'
+                                    + '评论数：' + value[4] + '<br>';
                         }
                     }),
                     textStyle: _.extend({}, Chart.textStyle),
@@ -565,69 +565,7 @@
             }
         },
         methods: {
-            getBubblChart(){
 
-
-
-                const topic_id = this.activeAnalyticsTopic.topic_id,
-                        end = this.analyticsEnd,
-                        start = this.analyticsStart;
-                Api.getBubblChart({topic_id,start,end}).then(resp => {
-                    //console.log('13',resp.data);
-                    if(resp.data.code == 0){
-                        console.log('12',resp.data.data);
-                        //console.log('12',resp.data.data[0]);
-                        const yuy =_.keys(resp.data.data);
-                        this.themeScatterOption.legend.data=yuy;
-                        console.log('话题',yuy);
-                        console.log('话题',yuy[0]);
-                        this.themeScatterOption.series[0].name=yuy[0];
-                        this.themeScatterOption.series[1].name=yuy[1];
-                        this.themeScatterOption.series[2].name=yuy[2];
-                        this.themeScatterOption.series[3].name=yuy[3];
-                        this.themeScatterOption.series[4].name=yuy[4];
-
-                        const yuy0 =_.values(resp.data.data);
-                        const datearr = _.pluck(yuy0[0],'date');
-                        this.themeScatterOption.xAxis.data=datearr;
-
-
-
-
-                        console.log('数据',yuy0);  //数据组的所有数据
-                        // this.themeScatterOption.series[0].data=yuy0[0];
-                        // this.themeScatterOption.series[1].data=yuy0[1];
-                        // this.themeScatterOption.series[2].data=yuy0[2];
-                        // this.themeScatterOption.series[3].data=yuy0[3];
-                        // this.themeScatterOption.series[4].data=yuy0[4];
-
-
-
-
-
-
-
-                        const uiy=_.omit(yuy0[0],'date');
-                        console.log('数组0',uiy);
-                        console.log('数组1',yuy0[0]);
-                        console.log('数组2',yuy0[1]);
-                        console.log('数组3',yuy0[2]);
-                        console.log('数组4',yuy0[3]);
-                        console.log('数组5',yuy0[4]);
-
-                        // const gu=_.each(yuy0[0],value,list);
-                        // console.log('gu',gu);
-
-
-
-
-
-
-
-
-                    }
-                });
-            },
          convertData (data) {
              this.themeMapOption.series[0].data=[
                  {name: '海门', value: 9},
@@ -908,6 +846,7 @@
                         //if(details.length) return ;
                         this.themeLineLoading = false;
                         this.themeLineOption.xAxis.data = _.map(details, detail => detail.date);
+                    console.log('details',details);
                         this.themeLineOption.legend.data = _.map(details[0].values, item => item.name);
                         this.themeLineOption.series = _.map(this.themeLineOption.legend.data, legend => {
                             const data = _.chain(details)
@@ -923,7 +862,7 @@
                 });
             },
             init(){
-                this.getBubblChart();
+               
                 this.getTrendList();
                 this.getWordCloud();
                 //this.getThemeBest();

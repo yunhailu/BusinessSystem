@@ -6,18 +6,18 @@
         <div class="panel-title-delete" @click="deleteItem();"><i class="fa fa-minus"></i></div>
     </div>
     <div class="charts">
-        <div class="charts">
-            <div class="chart timeBar" :click="clickChartAction" v-echarts="sentimentBarOption" :loading="sentimentBarLoading" ></div><!--theme="infographic"-->
-            <!--<div class="chart percentBar" v-echarts="sentimentChartOption" :loading="sentimentChartLoading" ></div>-->
-            <div class="chart percentBar" v-echarts="sentimentPieOption" :loading="sentimentPieLoading"></div>
-        </div>
+        <!--<div class="charts">-->
+            <!--<div class="chart timeBar" :click="clickChartAction" v-echarts="sentimentBarOption" :loading="sentimentBarLoading" ></div>-->
+            <!--<div class="chart percentBar" v-echarts="sentimentPieOption" :loading="sentimentPieLoading"></div>-->
+        <!--</div>-->
 
-       <!-- <div class="chart timeBar" :loading="sentimentBarLoading" >
+       <div class="chart timeBar" :loading="sentimentBarLoading" >
             <echarts :options="sentimentBarOption" :initOptions="sentimentBarOption" :img.sync="master"></echarts>
-        </div>&lt;!&ndash;theme="infographic"&ndash;&gt;
+        </div>
         <div class="chart percentBar"   :loading="sentimentChartLoading" >
-            <echarts :options="sentimentChartOption" :initOptions="sentimentChartOption" :img.sync="sub"></echarts>
-        </div>-->
+            <!--<echarts :options="sentimentChartOption" :initOptions="sentimentChartOption" :img.sync="sub"></echarts>-->
+            <echarts :options="sentimentPieOption" :initOptions="sentimentPieOption" :img.sync="sub"></echarts>
+        </div>
     </div>
 </template>
 <style lang="less" scoped>
@@ -26,17 +26,44 @@
 <script type="text/ecmascript-6">
     import _ from 'underscore';
     import moment from 'moment';
-    //import { list } from "../../../config/tmpData";
     import ListPanel from '../../Common/ListPanel/ListPanel.vue';
     import Echarts from '../../Common/Echarts/Echarts.vue';
     import Tabs from '../../Common/Tabs/Tabs.vue';
     import Local from "../../../local/local";
     import {Chart, Pie} from '../../../config/config';
     import * as Api from '../../../widgets/Api';
+    import { insertExportImages, removeExportImages } from "../../../vuex/actions";
+    import { exportImages } from '../../../vuex/getters'
 
 
     export default{
         props: ['title', 'data', 'remove', 'master', 'sub'],
+        vuex: {
+            actions: { insertExportImages, removeExportImages },
+            getters: { exportImages }
+        },
+        watch:{
+            master:{
+                handler(value){
+                    this.insertExportImages({
+                        topic: this.data.topic,
+                        topic_id: this.data.topic_id,
+                        key: "sentiment-master",
+                        value
+                    });
+                }
+            },
+            sub:{
+                handler(value){
+                    this.insertExportImages({
+                        topic: this.data.topic,
+                        topic_id: this.data.topic_id,
+                        key: "sentiment-sub",
+                        value
+                    });
+                }
+            }
+        },
         data(){
             const common = Local().common;
             return{
@@ -77,6 +104,7 @@
                             type : 'line',
                         }
                     }),
+                    animation:false,
                     legend: {
                         data:[common.happy,common.anger,common.sorrow,common.disgust,common.fear]
                     },
@@ -161,7 +189,7 @@
                             },
                             name:'',
                             type:'pie',
-                            radius: '60%',
+                            radius: '50%',
                             center: ['50%', '50%'],
                             data:[]
                         }
@@ -215,6 +243,7 @@
                     legend: {
                         data: [common.happy, common.anger, common.sorrow, common.disgust, common.fear]
                     },
+                    animation:false,
                     grid: _.extend({}, Chart.grid),
                     toolbox: _.extend({}, Chart.toolbox, {
                         feature: {
@@ -450,17 +479,6 @@
                 this.getSentimentDetail();
             }
         },
-        /*watch: {
-            sortVal: {
-                handler(val, oldVal){
-                    if(val != oldVal){
-                        // 展示不同的列表信息
-                        //console.log(val, oldVal);
-                        //this.list = list[val.key];
-                    }
-                }
-            }
-        },*/
         components:{
             Tabs, ListPanel, Echarts
         },

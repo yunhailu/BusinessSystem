@@ -56,6 +56,14 @@ export const setAnalyticsEnd = (store, end) => {
 	store.dispatch(types.UPDATE_END, end);
 };
 
+export const setAnalyticsRefreshTopic = (store, refreshTopic) => {
+	store.dispatch(types.UPDATE_REFRESH_TOPIC, refreshTopic);
+};
+
+export const setAnalyticsResetSearch = (store, resetSearch) => {
+	store.dispatch(types.UPDATE_RESET_SEARCH, resetSearch);
+};
+
 /**
  * Compare
  * */
@@ -88,4 +96,15 @@ export const setCompareTimeRangeString = (store, timeRangeString) => {
 
 export const setCompareSourceCount = (store, sourceCount) => {
 	store.dispatch(types.UPDATE_COMPARE_SOURCE_COUNT, sourceCount);
+};
+
+/**
+ * Export Images
+ * */
+export const insertExportImages = (store, image) => {
+	store.dispatch(types.INSERT_EXPORT_IMAGES, image);
+};
+
+export const removeExportImages = (store) => {
+	store.dispatch(types.REMOVE_EXPORT_IMAGES);
 };

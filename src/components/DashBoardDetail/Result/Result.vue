@@ -35,9 +35,37 @@
     import ListPanel from '../ListPanel/ListPanel.vue';
     import Tabs from '../../Common/Tabs/Tabs.vue';
     import Echarts from '../../Common/Echarts/Echarts.vue';
+    import { insertExportImages, removeExportImages } from "../../../vuex/actions";
+    import { exportImages } from '../../../vuex/getters'
 
     export default{
         props: ['title', 'data', 'remove', 'master', 'sub'],
+        vuex: {
+            actions: { insertExportImages, removeExportImages },
+            getters: { exportImages }
+        },
+        watch:{
+            master:{
+                handler(value){
+                    this.insertExportImages({
+                        topic: this.data.topic,
+                        topic_id: this.data.topic_id,
+                        key: "summary-master",
+                        value
+                    });
+                }
+            },
+            sub:{
+                handler(value){
+                    this.insertExportImages({
+                        topic: this.data.topic,
+                        topic_id: this.data.topic_id,
+                        key: "summary-sub",
+                        value
+                    });
+                }
+            }
+        },
         data(){
             return{
                 isShowTools: false,
@@ -67,6 +95,7 @@
 //                    legend: {
 //                        data: ['All']
 //                    },
+                    animation:false,
                     grid: Chart.grid,
                     toolbox: Chart.toolbox,
                     xAxis: _.extend({}, Chart.xAxis, {
@@ -87,6 +116,7 @@
                     isActive: true,
                     title: _.extend({}, Pie.title, { show: false}),
                     tooltip: _.extend({}, Pie.tooltip),
+                    animation:false,
                     legend: _.extend({}, Pie.legend, {
                         //orient: 'vertical',
                         //x: 'bottom',
@@ -250,18 +280,18 @@
                 this.getCommentList();
             }
         },
-        watch: {
-            sortVal: {
-                handler(val, oldVal){
-                    if(val != oldVal){
-                        // 展示不同的列表信息
-                        //console.log(val, oldVal);
-                        //this.list = list[val.key];
-                        this.getCommentList(val.key);
-                    }
-                }
-            }
-        },
+//        watch: {
+//            sortVal: {
+//                handler(val, oldVal){
+//                    if(val != oldVal){
+//                        // 展示不同的列表信息
+//                        //console.log(val, oldVal);
+//                        //this.list = list[val.key];
+//                        this.getCommentList(val.key);
+//                    }
+//                }
+//            }
+//        },
         components:{
             Tabs, ListPanel, Echarts
         },

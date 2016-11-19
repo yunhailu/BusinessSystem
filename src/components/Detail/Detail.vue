@@ -4,21 +4,22 @@
             <br>
             <div class="row">
                 <div class="col-md-9 detail-content">
-                    <card-panel :title="words.content" >
-                        <div class="detail-content-sub">
+                    <card-panel :title="words.content"  >
+                        <div class="detail-content-sub" v-show="isLive">
                             <span>{{words.source}}: {{article.source}}</span>
                             <span>{{words.publish}}: {{article.postDate}}</span>
-                            <span><a :href="article.link" target="_blank">{{words.view}}</a></span>
+                            <span><a :href="article.link" target="_blank" >{{words.view}}</a></span>
                         </div>
-                        <div class="detail-content-con">{{article.content}}</div>
+                        <div class="detail-content-con" v-show="isLive">{{article.content}}</div>
+                        <div class="detail-content-con" v-show="!isLive">对不起，您来晚了，该微博已被删除</div>
                     </card-panel>
                 </div>
                 <div class="col-md-3 detail-info">
                     <card-panel :title="words.userInfo" >
                         <img src="../../../images/avatar.png" class="detail-info-avatar"  />
-                        <div class="detail-info-detail">
+                        <div class="detail-info-detail"  v-show="isLive">
                             <div class="detail-info-detail-item">{{author.name}}</div>
-                            <div class="detail-info-detail-item">{{author.gender}} | <a :href="article.home" target="_blank">去主页看看</a></div>
+                            <div class="detail-info-detail-item">{{author.gender}} | <a :href="article.home" target="_blank" >去主页看看</a></div>
                             <div class="detail-info-detail-item">{{author.address}}</div>
                             <div class="detail-info-detail-intro">{{words.desc}} {{author.description}}</div>
                         </div>
@@ -71,6 +72,7 @@
             const words = Local().detail;
             return {
                 words,
+                isLive:true,
                 author: {
                     address: "",
                     description: "",
@@ -213,6 +215,9 @@
             }
         },
         methods: {
+           /* reward(){
+                window.history.back();
+            },*/
             //单击事件
 
             graphChartAction(params){
@@ -226,7 +231,12 @@
                 Api.getPageDetail({id}).then(resp => {
                     console.log("getPageDetail", resp.data);
                     if (resp.data.code == 0) {
-
+                        console.log('有数据返回',resp.data.data);
+                        if(resp.data.data.length == 0){
+                           this.isLive = false;
+                            return ;
+                        }
+                        this.isLive = true;
                         //接口的详情的数据的更新
                         const description =resp.data.data.author.description.substring(0,80)+'...';
                          this.author = resp.data.data.author;
@@ -234,18 +244,7 @@
                         this.author.description=description;
 
                     }
-                    else {
 
-                    }
-                });
-            },
-            getArticleCorrelation(){
-                const id = this.$route.params.id;
-                Api.getArticleCorrelation({id}).then(resp => {
-                    console.log("getArticleCorrelation", resp.data);
-                    if (resp.data.code == 0) {
-                        //this.acticles = resp.data.data;
-                    }
                 });
             },
             getArticleForward(){
@@ -321,15 +320,10 @@
 
                     }
                 });
-
-
             },
-
-
             init(){
                 console.log(this.$route.params);
                 this.getPageDetail();
-                this.getArticleCorrelation();
                 this.getArticleForward();
 
                 // this.DEEE();

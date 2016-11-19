@@ -10,15 +10,16 @@
         <div class="chart commentRightBar" v-echarts="commentPieOption2" :loading="commentPieLoading2" v-show="isShow" theme="macarons"></div>
         <div class="chart commentRightBar" v-echarts="commentPieOption" :loading="commentChartLoading" v-show="!isShow" theme="macarons"></div>
     </div>
-       <!-- <div class="chart commentLeftBar" theme="macarons">
+       <div class="chart commentLeftBar" theme="macarons">
             <echarts :options="commentBarOption" initOptions="commentBarOption" :img.sync="master" theme="macarons"></echarts>
-        </div>&lt;!&ndash;theme="infographic"&ndash;&gt;
-        <div class="chart commentRightBar"  v-show="isShow">
-            <echarts :options="commentChartOption" initOptions="commentChartOption" :img.sync="sub" theme="macarons"></echarts>
         </div>
-        <div class="chart commentRightBar" v-show="!isShow" >
-            <echarts :options="commentPieOption" initOptions="commentPieOption"  theme="macarons"></echarts>
-        </div>-->
+        <div class="chart commentRightBar"  v-show="isShow">
+            <!--<echarts :options="commentChartOption" initOptions="commentChartOption" :img.sync="sub" theme="macarons"></echarts>-->
+            <echarts :options="commentPieOption2" initOptions="commentPieOption2" :img.sync="sub" theme="macarons"></echarts>
+        </div>
+        <!--<div class="chart commentRightBar" v-show="!isShow" >-->
+            <!--<echarts :options="commentPieOption" initOptions="commentPieOption"  theme="macarons"></echarts>-->
+        <!--</div>-->
     <!--<list-panel :list="list" :options="options" :select-title="selectTitle" :select-value.sync="sortVal"></list-panel>-->
 </template>
 <style lang="less" scoped>
@@ -30,13 +31,40 @@
     import { Chart, Pie } from '../../../config/config';
     import Local from '../../../local/local';
     import * as Api from '../../../widgets/Api';
-    //import { list } from "../../../config/tmpData";
     import ListPanel from '../../Common/ListPanel/ListPanel.vue';
     import Tabs from '../../Common/Tabs/Tabs.vue';
     import Echarts from '../../Common/Echarts/Echarts.vue';
+    import { insertExportImages, removeExportImages } from "../../../vuex/actions";
+    import { exportImages } from '../../../vuex/getters'
 
     export default{
         props: ['title', 'data', 'remove', 'master', 'sub'],
+        vuex: {
+            actions: { insertExportImages, removeExportImages },
+            getters: { exportImages }
+        },
+        watch:{
+            master:{
+                handler(value){
+                    this.insertExportImages({
+                        topic: this.data.topic,
+                        topic_id: this.data.topic_id,
+                        key: "comment-master",
+                        value
+                    });
+                }
+            },
+            sub:{
+                handler(value){
+                    this.insertExportImages({
+                        topic: this.data.topic,
+                        topic_id: this.data.topic_id,
+                        key: "comment-sub",
+                        value
+                    });
+                }
+            }
+        },
         data(){
             const words = Local().comment, common = Local().common;
             return{
@@ -68,6 +96,7 @@
                     legend: {
                         data:[words.positive, words.negative, words.neutral]
                     },
+                    animation:false,
                     dataZoom: _.extend({}, Chart.dataZoom),
                     color:_.extend( Chart.color, {}),
                     grid: _.extend({}, Chart.grid, { bottom: '40rem' }),
@@ -128,7 +157,7 @@
                             },
                             name:'',
                             type:'pie',
-                            radius: '60%',
+                            radius: '50%',
                             center: ['50%', '50%'],
                             data:[]
                         }
@@ -174,7 +203,7 @@
                         center: ['50%', '45%'],
                         data:[]
                     })
-                }
+                },
                 /*commentChartLoading: true,
                 commentChartOption: {
                     tooltip: _.extend({}, Chart.tooltip, {}),
@@ -183,6 +212,7 @@
                     toolbox: _.extend({}, Chart.toolbox, {
                         feature: { saveAsImage: {} }
                     }),
+                    animation:false,
                     progressive: 4,
                     textStyle: Chart.textStyle,
                     xAxis: _.extend({}, Chart.xAxis, { type: 'value' }),
@@ -217,7 +247,25 @@
 //                    color: _.extend([], Chart.color),
 //                    series: []
 //                },
-
+                commentPieOption: {
+                    isActive: true,
+                    title: _.extend({}, Pie.title, { show: false }),
+                    tooltip: _.extend({}, Pie.tooltip),
+                    legend: _.extend({}, Pie.legend, {
+                        bottom: 0,
+                        data: [words.positive, words.negative, words.neutral]
+                    }),
+                    animation:false,
+                    textStyle: Pie.textStyle,
+                    toolbox: Pie.toolbox,
+                    color: _.extend([], Chart.color),
+                    series: _.extend({}, Pie.series, {
+                        radius: ['40%', '85%'],
+                        name: words.comment,
+                        center: ['50%', '45%'],
+                        data:[]
+                    })
+                }
             }
         },
         methods: {

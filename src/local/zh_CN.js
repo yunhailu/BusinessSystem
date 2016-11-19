@@ -4,7 +4,7 @@
 export const zh_CN = {
     header: {
         title: "沃德品牌气象站",
-        home: "主页",
+        home: "热点事件",
         analytics: "数据分析",
         dashboard: "报告生成",
         compare: "数据对比",

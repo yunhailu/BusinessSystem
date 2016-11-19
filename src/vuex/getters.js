@@ -53,6 +53,13 @@ export const analyticsEnd = state => {
 	return state.analytics.end;
 };
 
+export const analyticsRefreshTopic = state => {
+	return state.analytics.refreshTopic;
+};
+
+export const analyticsResetSearch = state => {
+	return state.analytics.resetSearch;
+};
 /**
  * Compare
  * */
@@ -86,4 +93,11 @@ export const compareTimeRangeString = state => {
 
 export const compareSourceCount = state => {
 	return state.compare.compare_source_Count;
+};
+
+/**
+ * Export Images
+ * */
+export const exportImages = state => {
+	return state.exportImages.imgs;
 };

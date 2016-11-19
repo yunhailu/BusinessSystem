@@ -7,7 +7,7 @@ import VueResource from 'vue-resource';
 
 Vue.http.options.emulateJSON = true;
 Vue.http.options.emulateHTTP = true;
-Vue.http.options.xhr = { withCredentials: true };
+Vue.http.options.xhr = { withCredentials: true };//跨域问题
 
 Vue.use(VueResource);
 
@@ -468,14 +468,6 @@ export const getPageDetail = params => {
  *
  *  @return {Promise} With Detail detail info.
  */
-
-export const getArticleCorrelation = params => {
-    return Api.request({
-        url: `${rootURI}/article/correlation`,
-        params
-    });
-};
-
 
 
 /** 关系气泡图的接口3
