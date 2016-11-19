@@ -86,9 +86,13 @@
             selectTime(num){
                 this.selectTimeTag = num;
                 if(num == 0){
+                    /*//禁掉
+                    alert('更多信息，请联系客服');
+                    return ;*/
                     this.isTimeDiy = true;
                     this.dateVal = this.analyticsStart + ' ~ ' + this.analyticsEnd;
                 } else if(num ==0.33){
+                    //this.selectTimeTag = num;
                     this.isTimeDiy = false;
                     this.setAnalyticsTimeRange(0.33);
                     this.setAnalyticsStart(moment().subtract(8,"hour").format("YYYY-MM-DD HH:mm:ss"));
@@ -98,6 +102,13 @@
                     this.setAnalyticsDateChange(this.analyticsDateChange + 1);
 
                 }else {
+                    //只显示1天和7天
+                    /*if(num == 30){
+                        alert('更多信息，请联系客服')
+                        return ;
+                    }*/
+                    //
+                    //this.selectTimeTag = num;
                     this.isTimeDiy = false;
                     this.setAnalyticsTimeRange(num);
                     this.setAnalyticsStart(moment().subtract(num, 'days').format('YYYY-MM-DD'));
