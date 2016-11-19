@@ -13,6 +13,7 @@
                     </div>
                     <div class="row-right">
                         <ul class="days-btn">
+                            <li @click="selectTime(0.33);" :class="[selectTimeTag == 0.33 ? 'active' : '']">8H</li>
                             <li @click="selectTime(1);" :class="[selectTimeTag == 1 ? 'active' : '']">1D</li>
                             <li @click="selectTime(7);" :class="[selectTimeTag == 7 ? 'active' : '']" class="active">7D</li>
                             <li @click="selectTime(30);" :class="[selectTimeTag == 30 ? 'active' : '']">30D</li>
@@ -87,11 +88,21 @@
                 if(num == 0){
                     this.isTimeDiy = true;
                     this.dateVal = this.analyticsStart + ' ~ ' + this.analyticsEnd;
-                } else {
+                } else if(num ==0.33){
+                    this.isTimeDiy = false;
+                    this.setAnalyticsTimeRange(0.33);
+                    this.setAnalyticsStart(moment().subtract(8,"hour").format("YYYY-MM-DD HH:mm:ss"));
+                    this.setAnalyticsEnd(moment().format("YYYY-MM-DD HH:mm:ss"));
+                    //可以精确到小时
+                    console.log('8H',moment().subtract(8,"hour").format("YYYY-MM-DD HH"),moment().format("YYYY-MM-DD HH"))
+                    this.setAnalyticsDateChange(this.analyticsDateChange + 1);
+
+                }else {
                     this.isTimeDiy = false;
                     this.setAnalyticsTimeRange(num);
                     this.setAnalyticsStart(moment().subtract(num, 'days').format('YYYY-MM-DD'));
                     this.setAnalyticsEnd(moment().format('YYYY-MM-DD'));
+                    console.log('1D',moment().subtract(num, 'days').format('YYYY-MM-DD'),moment().format('YYYY-MM-DD'))
                     this.setAnalyticsDateChange(this.analyticsDateChange + 1);
                 }
             },
