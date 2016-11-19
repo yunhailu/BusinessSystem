@@ -3,7 +3,7 @@
         <!--热点事件散点图-->
         <div class="row">
             <div class="col-md-12 hot-river">
-                <card-panel :title="words.hotsRiver">
+                <card-panel :title="words.hotsRiver" >
                     <div v-echarts="graphChartOption" :loading="graphChartLoading" class="hot-river-scatter" theme="" :img.sync="img"></div>
                 </card-panel>
             </div>
@@ -72,7 +72,8 @@
             const words = Local().hotEvent;
             const common = Local().common;
             return{
-                words, common,
+                words,
+                common,
                 img: "",
                 activeHot: {
                     name: "",
@@ -182,16 +183,21 @@
 
                 graphChartLoading: true,
                 graphChartOption: {
-                    // title: {
-                    //     text: '      转发数：',
-                    //     textStyle: {
-                    //         fontStyle: 'normal',
-                    //         fontWeight: 'border',
-                    //         fontSize: 16,
-                    //     },
-                    //     top:0,
-                    //     left: 'right'
-                    // },
+                    title: {
+
+                        text: '媒体展示',
+                        textStyle: {
+                            color:'#3C3F41',
+                            fontStyle: 'normal',
+                            fontWeight: 'border',
+                            fontSize: 16,
+                        },
+                        top:0,
+                        left: 'right',
+                        link:'/#!/media',
+                        target:'blank'
+
+                    },
                     tooltip: {
 
                         formatter: '{b}'

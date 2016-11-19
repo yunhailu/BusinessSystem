@@ -21,4 +21,5 @@
  settingAdd        |   /#!/setting/add                   |      null                            |         主界面 Setting 添加 Topic 页            
  settingEdit       |   /#!/setting/edit/:topic_id        |      topic_id: 主题id, group_id: 分组id |      主界面 Setting 修改 Topic 页            
  profile           |   /#!/profile                       |      null                            |         个人中心 & 添加新用户            
- test              |   /#!/test                          |      null                            |         test 页，放一些测试组件            
+ test              |   /#!/test                          |      null                            |         test 页，放一些测试组件
+ mediadiaplay      |   /#!/mediadiaplay                   |      null                            |        媒体展示的页面   

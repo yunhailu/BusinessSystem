@@ -862,7 +862,7 @@
                 });
             },
             init(){
-               
+
                 this.getTrendList();
                 this.getWordCloud();
                 //this.getThemeBest();

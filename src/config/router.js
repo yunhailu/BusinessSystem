@@ -76,6 +76,15 @@ module.exports = {
             require(['../components/Compare/Compare.vue'], resolve);
         }
     },
+
+    'media': {
+        name: 'media',
+        auth: true,
+        component (resolve) {
+            require(['../components/Media/Media.vue'], resolve);
+        }
+    },
+
     'dashboard': {
         name: 'dashboard',
         auth: true,
