@@ -400,7 +400,6 @@
                 Api.getBubblChart({topic_id,start,end}).then(resp => {
                     //console.log('13',resp.data);
                     if(resp.data.code == 0){
-                        console.log('12',resp.data.data);
                         //console.log('12',resp.data.data[0]);
                         const yuy =_.keys(resp.data.data);
                         this.themeScatterOption.legend.data=yuy;
@@ -427,7 +426,7 @@
                         sizedate.push(_.size(datearr5));
 
                         const uye=_.max(sizedate);
-                        console.log('sizedate',sizedate);
+                        //console.log('sizedate',sizedate);
 
 
                         if(_.size(datearr1)==uye){
@@ -500,12 +499,6 @@
                         this.themeScatterOption.series[3].data=result3;
                         this.themeScatterOption.series[4].data=result4;
                         const uiy=_.omit(yuy0[0],'date');
-                        console.log('数组0',uiy);
-                        console.log('数组1',yuy0[0]);
-                        console.log('数组2',yuy0[1]);
-                        console.log('数组3',yuy0[2]);
-                        console.log('数组4',yuy0[3]);
-                        console.log('数组5',yuy0[4]);
                         // const gu=_.each(yuy0[0],value,list);
                         // console.log('gu',gu);
                     }
@@ -530,9 +523,6 @@
                     //console.log('getTrendList', resp);
                     if(resp.data.code == 0){
                         this.trendList = _.filter(resp.data.data, (item, index) => (index < 10));
-                        console.log('this.trendList: -----------------------', this.trendList);
-//                        this.upList = resp.data.data.up;
-//                        this.downList = resp.data.data.down;
                     }
                 });
             },
@@ -590,7 +580,7 @@
                         const details = resp.data.data;
                         this.themeLineLoading = false;
                         this.themeLineOption.xAxis.data = _.map(details, detail => detail.date);
-                    console.log('details',details);
+                    //console.log('details',details);
                         this.themeLineOption.legend.data = _.map(details[0].values, item => item.name);
                         this.themeLineOption.series = _.map(this.themeLineOption.legend.data, legend => {
                             const data = _.chain(details)
