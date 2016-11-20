@@ -6,20 +6,21 @@
         <div class="panel-title-delete" @click="deleteItem();"><i class="fa fa-minus"></i></div>
     </div>
     <div class="charts">
-        <div class="chart commentLeftBar" v-echarts="commentBarOption" :click="clickChartAction" :loading="commentBarLoading" theme="macarons"></div><!--theme="infographic"-->
-        <div class="chart commentRightBar" v-echarts="commentPieOption2" :loading="commentPieLoading2" v-show="isShow" theme="macarons"></div>
-        <div class="chart commentRightBar" v-echarts="commentPieOption" :loading="commentChartLoading" v-show="!isShow" theme="macarons"></div>
-    </div>
-       <div class="chart commentLeftBar" theme="macarons">
+        <!--<div class="chart commentLeftBar" v-echarts="commentBarOption" :click="clickChartAction" :loading="commentBarLoading" theme="macarons"></div>&lt;!&ndash;theme="infographic"&ndash;&gt;-->
+        <!--<div class="chart commentRightBar" v-echarts="commentPieOption2" :loading="commentPieLoading2" v-show="isShow" theme="macarons"></div>-->
+        <!--<div class="chart commentRightBar" v-echarts="commentPieOption" :loading="commentChartLoading" v-show="!isShow" theme="macarons"></div>-->
+
+        <div class="chart commentLeftBar" theme="macarons">
             <echarts :options="commentBarOption" initOptions="commentBarOption" :img.sync="master" theme="macarons"></echarts>
         </div>
         <div class="chart commentRightBar"  v-show="isShow">
             <!--<echarts :options="commentChartOption" initOptions="commentChartOption" :img.sync="sub" theme="macarons"></echarts>-->
             <echarts :options="commentPieOption2" initOptions="commentPieOption2" :img.sync="sub" theme="macarons"></echarts>
         </div>
-        <!--<div class="chart commentRightBar" v-show="!isShow" >-->
-            <!--<echarts :options="commentPieOption" initOptions="commentPieOption"  theme="macarons"></echarts>-->
-        <!--</div>-->
+        <div class="chart commentRightBar" v-show="!isShow" >
+            <echarts :options="commentPieOption" initOptions="commentPieOption"  theme="macarons"></echarts>
+        </div>
+    </div>
     <!--<list-panel :list="list" :options="options" :select-title="selectTitle" :select-value.sync="sortVal"></list-panel>-->
 </template>
 <style lang="less" scoped>
