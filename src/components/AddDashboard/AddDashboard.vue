@@ -58,6 +58,7 @@
     import { activeAnalyticsTopic, analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic } from '../../vuex/getters';
     import { setAnalyticsType, setAnalyticsTimeRange, setAnalyticsSource, setAnalyticsSubTopic } from "../../vuex/actions";
 
+
     export default{
         props: ['visiable'],
         data(){
