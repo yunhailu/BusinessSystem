@@ -52,28 +52,36 @@
                         </div>
 
                         <!-- ---------------moodselect--------------------------------------------->
-                        <div class="form-group">
-                            <label for="monitor" class="col-sm-2 control-label">{{words.warningSet}}</label>
-                            <div class="col-sm-4">
-                            <select v-model="monitor"  name="moodSelect" class="form-control moodwSet0" id="monitor" >
-                                <option @click="setselect(moodgroup.id);" v-for="moodgroup in moodGroups" :id="moodgroup.id" :value="moodgroup.id" >{{moodgroup.name}}</option>
-                            </select>
-
-                                <input type="text" v-model="threshold" class="form-control moodwSet1 " id="threshold" :placeholder="">
-
-
-                                <!--<input type="text"  v-model="threshold" class="form-control moodwSet1 "  :placeholder="words.warningValue">-->
-                            </div>
-                            <div class="col-sm-4 tip">{{words.optional}}</div>
-                        </div>
+                       
                         <!-- ------------------------------------------------------------>
                         <div class="form-group">
+
+
+
                             <label for="excludeText" class="col-sm-2 control-label">{{words.exclude}}</label>
                             <div class="col-sm-4">
                                 <input type="text" v-model="excludeText" class="form-control" id="excludeText" :placeholder="words.exclude">
                             </div>
                             <div class="col-sm-4 tip">{{words.optional}}</div>
                         </div>
+                        
+                         <div class="form-group">
+                            <label for="monitor" class="col-sm-2 control-label">{{words.warningSet}}</label>
+                            <div class="col-sm-4">
+                            <select v-model="monitor" @click="geteachmood(monitor);"  name="moodSelect" class="form-control moodwSet0" id="monitor" >
+                                <option  v-for="moodgroup in moodGroups" :id="moodgroup.id" :value="moodgroup.id" >{{moodgroup.name}}</option>
+                            </select>
+
+                                <input v-model="threshold" type="text" class="form-control moodwSet1 " id="threshold" :placeholder="">
+
+
+                                <!--<input type="text"  v-model="threshold" class="form-control moodwSet1 "  :placeholder="words.warningValue">-->
+                            </div>
+                            <div class="col-sm-4 tip">{{words.optional}}</div>
+                        </div>
+                        
+                        
+                        
                         <div class="form-group" v-show="errorTip">
                             <div class="col-sm-offset-2 col-sm-10">
                                 <div class="error">* {{errorTip}}</div>
@@ -122,6 +130,13 @@
                 excludeText: "",
                 errorTip: "",
                 successTip: "",
+                moodVaule:[
+                  { key:'happy', value: 0},
+		          { key:'anger', value: 0},
+		          { key:'fear', value: 0},
+		          { key:'disgust', value: 0},
+		          { key:'sorrow', value: 0} 
+                ], 
                 moodGroups: [],
                 groups: [{
                     id: 1, value: 1, name: words.groups[0]
@@ -143,17 +158,21 @@
             getters: { topicList }
         },
         methods: {
-            setselect(moodgroup) {
-                console.log('213', moodgroup);
-                this.threshold=13224;
-                //this.$router.go({ name: 'dashboardDetail', params: { id: report.id } });
-            },
+        	
+        
+           
+            
+            
             getCategroy(){
                 Api.getCategroy().then(resp => {
                     //console.log(resp.data);
                     if(resp.data.code == 0){
                         this.moodGroups = resp.data.data;
-                        console.log(resp.data.data);
+                        const newD= _.map(resp.data.data, (item)=> {
+                            item.value=110;
+                            return item;
+                        });
+                        this.moodGroups=newD;
                         this.monitor="happy";
 
 
@@ -161,6 +180,18 @@
                 });
 
             },
+            
+            
+            geteachmood(mood){
+            	
+            	for(var i=0; i<this.moodVaule.length; i++)
+                {
+                   if(this.moodVaule[i].key==mood){
+                    this.threshold=this.moodVaule[i].value;
+                    				return ;}                    				                    
+                    		};
+            },
+            
             setAdvanced(isAdvanced){
                 this.isAdvanced = isAdvanced;
             },
@@ -283,51 +314,41 @@
                         const hj=_.chain(resp.data.data)
                                 .filter(hj => (hj.topic_id == topic_id))
                                 .first().value();
+                         if(_.size(hj.data)>0){
+                        this.monitor=hj.data[0].key;                  
+                        this.threshold=hj.data[0].value;
 
-                        console.log('11',hj);
-                        this.monitorss=hj.data;
-                        console.log('123',this.monitorss);
-                        console.log(this.monitor);
+                         	const sortbydatas=_.sortBy(hj.data, 'key');
+                         	const sdf=_.pluck(sortbydatas,'key');
+                         	const wed=_.difference(['happy','anger','disgust','sorrow','fear'],sdf);
+                         	for(var i=0; i<wed.length;i++){
+                         		var cdssa={'key':wed[i],'value':0};
+                         		sortbydatas.push(cdssa);
+                         	};
 
-                        this.monitor=this.monitorss[0].key;
-                        this.threshold=this.monitorss[0].value;
+                         	this.moodVaule=sortbydatas;   
 
-                        // switch(monitorss){
-                        //     case monitorss[0].key:
-                        //         this.threshold==monitorss[0].value;
-                        //         break;
-                        //     case "settingEdit":
-                        //         this.updateSubmit();
-                        //         break;
-                        //     default:
-                        //         break;
-                        // }
+                         }
+                         
 
 
                     }
                 });
 
-
-
-
-
-                 //this.threshold=0;
-
-                console.log('123',this.monitorss);
-
-
                  this.radioVal = group_id;
-                 //this.monitor=monitor;
-                 //this.threshold=threshold;
-                //console.log('topic', this.topicText,this.threshold,this.monitor, this.radioVal);
+
             },
 
 
 
 
             init(){
+            	
+            
                 //拉取情绪的列表。。
                 this.getCategroy();
+                
+                
                 // 拉取 group 列表
                 this.getGroupList().then(resp => {
                     //console.log("group list", resp);
