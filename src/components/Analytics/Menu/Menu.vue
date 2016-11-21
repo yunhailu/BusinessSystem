@@ -5,7 +5,8 @@
             <!-- Sidebar user panel -->
             <div class="user-panel">
                 <div class="pull-left image">
-                    <img src="images/avatar.png" class="img-circle" alt="User Image" />
+                    <!--去掉圆形边框class="img-circle"-->
+                    <img src="images/avatar.png"  alt="User Image" />
                 </div>
                 <div class="pull-left info">
                     <p>你好, {{nickName}}</p>
