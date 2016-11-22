@@ -8,8 +8,8 @@
             <ul>
                 <li><a href="javascript:void(0);">使用说明</a></li>
                 <li><a href="javascript:void(0);">品牌表现</a></li>
-                <li><a href="javascript:void(0);" @click="showLogin">登陆</a></li>
-                <li><a href="javascript:void(0);" @click="showApply">申请试用</a></li>
+                <li><a href="javascript:void(0);" @click="showLogin">登录</a></li>
+                <li  v-show="false"><a href="javascript:void(0);" @click="showApply">申请试用</a></li>
             </ul>
         </div>
         <!--<div class="container">
@@ -97,7 +97,7 @@
                 <div class="login-bg-content-model" @keyup.enter="login"  @keyup.8="isShowError">
                     <h3>
                         <span>{{loginStr.login}}</span>
-                        <a href="javascript:void(0);" @click="toApply">{{loginStr.toApply}}</a>
+                        <a href="javascript:void(0);" @click="toApply" v-show="false">{{loginStr.toApply}}</a>
                     </h3>
                     <div class="loginCon">
                         <div class="form-group">
@@ -115,7 +115,7 @@
                             <input class="remember" type="checkbox" id="remember">
                             <label for="remember">{{loginStr.remember}}</label>
                             <div class="pull-right">
-                                <a href="javascript:void(0);">{{loginStr.getBack}}</a>
+                                <a href="javascript:void(0);" v-show="false">{{loginStr.getBack}}</a>
                             </div>
                         </div>
                         <div class="form-group" v-show="errorShow">
@@ -140,6 +140,7 @@
 
     import Local from '../../local/local';
     import Cookie from "js-cookie";
+    import { getCookie } from '../../widgets/Cookie';
     import {redirect} from "../../widgets/Auth";
     import * as Api from "../../widgets/Api";
     import FooterComponent from "../Footer/Footer.vue"
@@ -156,6 +157,8 @@
                 errorTip: '',
                 userName: '',
                 password: '',
+//                userName:getCookie('login_userName'),
+//                password:getCookie('login_password'),
                 isApply:false,
                 isLogin:false,
                 errorShow:false
@@ -165,6 +168,9 @@
             FooterComponent
         },
         methods: {
+            submit(){
+
+            },
             toApply(){
                 this.isLogin=false;
                 this.isApply=true;
@@ -174,7 +180,7 @@
                 this.isLogin=true;
             },
             isShowError(){
-                if(this.errorShow=true){
+                if(this.errorShow == true){
                     this.errorShow = this.userName || this.password;
                 }
             },
@@ -203,7 +209,7 @@
 //                }
 //                Cookie.set('business_uid', 'admin');
 //                location.hash = '#!/home';
-
+console.log(this.userName,this.password)
 //登陆页面逻辑
                 Api.login({
                     username: this.userName,
@@ -217,6 +223,15 @@
                         Cookie.set('business_name', data.data.user_name);
                         Cookie.set('business_admin', data.data.isAdmin);
                         Cookie.set('business_email', data.data.email);
+                        if(this.$el.querySelector('.remember').checked==true){
+                            console.log(this.$el.querySelector('.remember').checked)
+                            Cookie.set('login_userName',this.userName);
+                            Cookie.set('login_password',this.password);
+                            Cookie.set('login_remember',true);
+                        }else{
+                            this.userName = '';
+                            this.password = '';
+                        }
                         //location.hash = '#!/home';
                         this.$router.go({name: 'home'});
                     } else {
@@ -225,6 +240,17 @@
                     }
                 });
             }
+        },
+       /* created(){
+            console.log('bbb',this.userName,this.password);
+            this.userName = getCookie('login_userName');
+            this.password = getCookie('login_password');
+        },*/
+        ready(){
+            console.log('aaa',this.userName,this.password);
+                this.userName = getCookie('login_userName');
+                this.password = getCookie('login_password');
+                this.$el.querySelector('.remember').checked = getCookie('login_remember');
         },
         route:{
             activate(transition){
