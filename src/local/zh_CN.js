@@ -2,6 +2,27 @@
  * Created by yunhailu on 2016/8/20.
  */
 export const zh_CN = {
+    apply:{
+        apply:"申请试用",
+        toLogin:"已有账号，请点此登陆",
+        username:"姓名",
+        telephone:"手机号",
+        company:"公司名称",
+        verification:"验证码",
+        getSms:"获取验证码",
+        require:"需求描述",
+        submit:"提 交",
+        service:"客服 : ***-********"
+    },
+    login:{
+        login:"登录",
+        toApply:"没有账号?点我申请",
+        username:"用户名",
+        password:"请输入密码",
+        remember:"记住密码",
+        getBack:"找回密码",
+        submit:"登 录"
+    },
     header: {
         title: "沃德品牌气象站",
         home: "热点事件",

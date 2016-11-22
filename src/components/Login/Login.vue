@@ -58,41 +58,73 @@
         </div>-->
         <footer-component></footer-component>
         <div class="apply-bg" v-show="isApply" @click="cancelApply">
-
+            <div class="apply-bg-content" @click.stop>
+                <div class="apply-bg-content-model" @keyup.enter="submit" >
+                    <h3>
+                        <span>申请试用</span>
+                        <a href="javascript:void(0);" @click="toLogin">已有账号，请点此登陆</a>
+                    </h3>
+                    <div class="applyCon">
+                        <div class="form-group">
+                            <input type="text" placeholder="姓名"  v-model="applyUserName"  />
+                            <em class="red">*</em>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" placeholder="公司名称"  v-model="applyFactory"  />
+                        </div>
+                        <div class="form-group">
+                            <input type="text" placeholder="手机号"  v-model="applyTelephone"  />
+                            <em class="red">*</em>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" placeholder="验证码"  v-model="applySms"  />
+                            <span class="getSms">获取验证码</span>
+                            <em class="red">*</em>
+                        </div>
+                        <div class="form-group">
+                            <textarea class="require" placeholder="需求描述"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <a class="apply-btn" href="javascript:void(0);"  @click="submit">提 交</a>
+                            <p>客服 : ***-********</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="login-bg" v-show="isLogin" @click="cancelLogin">
-            <div class="login-bg-content" @click.stop="">
-                <div class="login-bg-content-model" @keyup.enter="login">
+            <div class="login-bg-content" @click.stop>
+                <div class="login-bg-content-model" @keyup.enter="login"  @keyup.8="isShowError">
                     <h3>
-                        <span>登录</span>
-                        <a href="javascript:void(0);">没有账号?点我申请</a>
+                        <span>{{loginStr.login}}</span>
+                        <a href="javascript:void(0);" @click="toApply">{{loginStr.toApply}}</a>
                     </h3>
                     <div class="loginCon">
                         <div class="form-group">
                             <span class="logImg"><img src="images/user.png" alt=""></span>
-                            <input type="text" placeholder="用户名"  v-model="userName"  />
+                            <input type="text" placeholder="{{loginStr.username}}"  v-model="userName"  />
                         </div>
                         <div class="form-group">
                             <span class="logImg"><img src="images/key.png" alt=""></span>
-                            <input type="password" placeholder="请输入密码" v-model="password"  />
+                            <input type="password" placeholder="{{loginStr.password}}" v-model="password"  />
                         </div>
                         <div class="form-group">
                             <p style="font-size: 13px"></p>
                         </div>
                         <div class="form-group">
                             <input class="remember" type="checkbox" id="remember">
-                            <label for="remember">记住密码</label>
+                            <label for="remember">{{loginStr.remember}}</label>
                             <div class="pull-right">
-                                <a href="javascript:void(0);">找回密码</a>
+                                <a href="javascript:void(0);">{{loginStr.getBack}}</a>
                             </div>
                         </div>
-                        <div class="form-group" v-show="errorTip">
+                        <div class="form-group" v-show="errorShow">
                             <div class="errorTip">
                                 <label>{{errorTip}}</label>
                             </div>
                         </div>
                         <div class="form-group">
-                            <a class="login-btn" href="javascript:void(0);"  @click="login">登陆</a>
+                            <a class="login-btn" href="javascript:void(0);"  @click="login">{{loginStr.submit}}</a>
                         </div>
                     </div>
                 </div>
@@ -106,33 +138,53 @@
 </style>
 <script type="text/ecmascript-6">
 
+    import Local from '../../local/local';
     import Cookie from "js-cookie";
     import {redirect} from "../../widgets/Auth";
     import * as Api from "../../widgets/Api";
     import FooterComponent from "../Footer/Footer.vue"
 
     export default {
+
         name: 'login',
         data(){
+            const applyStr = Local().apply;
+            const loginStr =Local().login;
             return{
+                applyStr,
+                loginStr,
                 errorTip: '',
                 userName: '',
                 password: '',
                 isApply:false,
-                isLogin:false
+                isLogin:false,
+                errorShow:false
             };
         },
         components:{
             FooterComponent
         },
         methods: {
+            toApply(){
+                this.isLogin=false;
+                this.isApply=true;
+            },
+            toLogin(){
+                this.isApply=false;
+                this.isLogin=true;
+            },
+            isShowError(){
+                if(this.errorShow=true){
+                    this.errorShow = this.userName || this.password;
+                }
+            },
             cancelApply(){
                 this.isApply=false;
-                this.errorTip = false;
+                this.errorShow = false;
             },
             cancelLogin(){
                 this.isLogin=false;
-                this.errorTip = false;
+                this.errorShow = false;
             },
             showApply(){
                 this.isApply=true;
@@ -160,7 +212,7 @@
                     //console.log('Login', resp);
                     const data = resp.data;
                     if(data.code == 0){
-                        this.errorTip = false;
+                        this.errorShow = false;
                         Cookie.set('business_uid', data.data.user_id);
                         Cookie.set('business_name', data.data.user_name);
                         Cookie.set('business_admin', data.data.isAdmin);
@@ -168,6 +220,7 @@
                         //location.hash = '#!/home';
                         this.$router.go({name: 'home'});
                     } else {
+                        this.errorShow = true;
                         this.errorTip = data.message;
                     }
                 });

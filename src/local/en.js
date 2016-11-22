@@ -2,6 +2,27 @@
  * Created by yunhailu on 2016/8/20.
  */
 export const en = {
+    apply:{
+        apply:"Apply",
+        toLogin:"Have an account, please click here login",
+        username:"Username",
+        telephone:"Telephone",
+        company:"Company",
+        verification:"Verification Code",
+        getSms:"Get verification code",
+        require:"Description of Requirement",
+        submit:"Submit",
+        service:"Service : ***-********"
+    },
+    login:{
+        login:"Login",
+        toApply:"Have no account number and apply",
+        username:"Username",
+        password:"Password",
+        remember:"Remember",
+        getBack:"Get back",
+        submit:"Login"
+    },
     header: {
         title: "Warming Hi-Tech",
         home: "HotEvent",
