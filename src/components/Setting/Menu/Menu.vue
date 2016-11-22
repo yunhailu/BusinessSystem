@@ -11,7 +11,7 @@
                 <div class="pull-left info">
                     <p>你好, {{nickName}}</p>
 
-                    <a href="javascript:void(0);"><i class="fa fa-circle text-success"></i> 在线</a>
+                    <!--<a href="javascript:void(0);"><i class="fa fa-circle text-success"></i> 在线</a>-->
                 </div>
             </div>
 
