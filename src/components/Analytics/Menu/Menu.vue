@@ -9,7 +9,7 @@
                     <img src="images/avatar.png"  alt="User Image" />
                 </div>
                 <div class="pull-left info">
-                    <p>你好, {{nickName}}</p>
+                    <p>您好, {{nickName}}</p>
 
                     <!--<a href="javascript:void(0);"><i class="fa fa-circle text-success"></i> 在线</a>-->
                 </div>
@@ -47,7 +47,8 @@
                 AnalyticMenu,
                 ChannelMenu,
                 //topicList: [],
-                nickName: getCookie('business_name')
+                //nickName: getCookie('business_name')
+                nickName: "欢迎！"
             }
         },
         components:{
