@@ -291,6 +291,7 @@
                 downList: [],
 
                 trendList: [],
+                themeScatterLoading:true,
                 themeScatterOption: {
                     legend: {
                         y: 'top',
@@ -456,7 +457,7 @@
                         }
                     ]
                 },
-                themeScatterLoading: false,
+                //themeScatterLoading: false,
 
                 themeBestOption: {
                     title: _.extend({}, Chart.title, {text: words.topics, left: 10, top: 20}),
@@ -572,6 +573,7 @@
         },
         methods: {
             getBubblChart(){
+                this.themeScatterLoading=true;
                 const topic_id = this.activeAnalyticsTopic.topic_id,
                 end='2016-11-15',
                 start='2016-11-11';
@@ -580,6 +582,7 @@
                 Api.getBubblChart({topic_id,start,end}).then(resp => {
                     //console.log('13',resp.data);
                     if(resp.data.code == 0){
+                    this.themeScatterLoading = false;
                         console.log('12',resp.data.data);
                         //console.log('12',resp.data.data[0]);
                         const yuy =_.keys(resp.data.data);
