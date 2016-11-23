@@ -295,8 +295,8 @@
                 themeScatterOption: {
                     legend: {
                         y: 'top',
-//                        data: ['南海问题', '每日关注', '货币战争', '网易新闻', '阿里影业'],
-                        data:[],
+                        //data: ['南海问题', '每日关注', '货币战争', '网易新闻', '阿里影业'],
+                        data: [],
                         textStyle: {
                             //color: '#fff',
 //                            fontSize: 16
@@ -396,7 +396,23 @@
                                     shadowColor: 'rgba(0, 0, 0, 0.3)'
                                 }
                             },
-//                            data: themeScatterData.dataBJ
+                            //data: themeScatterData.dataBJ
+                            data: []
+                        }, {
+                            name: '',
+                            type: 'scatter',
+                            itemStyle: {
+                                normal: {
+                                    opacity: 0.8,
+                                    shadowBlur: 10,
+                                    shadowOffsetX: 0,
+                                    shadowOffsetY: 0,
+                                    shadowColor: 'rgba(0, 0, 0, 0.3)'
+                                }
+                            },
+
+                            //data: themeScatterData.dataSH
+
                             data:[]
                         }, {
                             name: '',
@@ -410,21 +426,7 @@
                                     shadowColor: 'rgba(0, 0, 0, 0.3)'
                                 }
                             },
-//                            data: themeScatterData.dataSH
-                            data:[]
-                        }, {
-                            name: '',
-                            type: 'scatter',
-                            itemStyle: {
-                                normal: {
-                                    opacity: 0.8,
-                                    shadowBlur: 10,
-                                    shadowOffsetX: 0,
-                                    shadowOffsetY: 0,
-                                    shadowColor: 'rgba(0, 0, 0, 0.3)'
-                                }
-                            },
-//                            data: themeScatterData.dataGZ
+                            //data: themeScatterData.dataGZ
                             data:[]
                         },{
                             name: '',
@@ -438,7 +440,7 @@
                                     shadowColor: 'rgba(0, 0, 0, 0.3)'
                                 }
                             },
-//                            data: themeScatterData.dataWeb
+                            //data: themeScatterData.dataWeb
                             data:[]
                         }, {
                             name: '',
@@ -452,7 +454,8 @@
                                     shadowColor: 'rgba(0, 0, 0, 0.3)'
                                 }
                             },
-//                            data: themeScatterData.dataClient
+                            //data: themeScatterData.dataClient
+
                             data:[]
                         }
                     ]

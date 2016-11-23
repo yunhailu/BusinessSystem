@@ -48,7 +48,7 @@
                 ChannelMenu,
                 //topicList: [],
                 //nickName: getCookie('business_name')
-                nickName:"您好！"
+                nickName: "欢迎！"
             }
         },
         components:{

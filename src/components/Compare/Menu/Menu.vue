@@ -45,7 +45,7 @@
         data(){
             return{
                 CompareMenu,
-                //nickName: getCookie('business_name')
+//                nickName: getCookie('business_name')
                 nickName: "欢迎！"
             }
         },

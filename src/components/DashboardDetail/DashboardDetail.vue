@@ -29,6 +29,7 @@
             </div>
         </div>
     </div>
+    <tips :visible.sync="loadingParams.visiable" :tipsparam.sync="loadingParams"></tips>
 </template>
 <style lang="less" scoped>
     @import "DashboardDetail.less";
@@ -62,6 +63,7 @@
     import CommentComponent from './Comment/Comment.vue';
     import SentimentComponent from './Sentiment/Sentiment.vue';
     import ThemeComponent from './Theme/Theme.vue';
+    import Tips from '../Common/Tips/Tips.vue';
 
 
     import Local from "../../local/local";
@@ -76,7 +78,12 @@
                 words,
                 name: "",
                 details: [],
-                imgs: []
+                imgs: [],
+                loadingParams: {
+                    visiable: false,
+                    type: 'loading',
+                    content: "请稍后......"
+                }
             }
         },
         vuex: {
@@ -155,6 +162,7 @@
             },
             exportReport(){
                 //console.log('exportReport',this.details);
+                this.loadingParams.visiable = true;
                 this.imgs = this.formatImgs(this.details);
                 console.log('exportReport',this.exportImages);
                 //console.log('exportReport',this.exportImages[0].value.join(''));
@@ -174,6 +182,7 @@
                 //window.open(`http://118.244.212.122:8008/export/report?id=${id}&imgs=${imgs}`);
                 Api.exportReport({ id, imgs }).then(resp => {
                     console.log(resp);
+                    this.loadingParams.visiable = false;
                     if(resp.data.code == 0){
                         window.open(`${resp.data.data.link}`);
                     }
@@ -194,7 +203,8 @@
             InfluenceComponent,
             CommentComponent,
             SentimentComponent,
-            ThemeComponent
+            ThemeComponent,
+            Tips
         },
         route: {
             data(){
