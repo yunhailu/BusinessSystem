@@ -112,7 +112,7 @@
                             <p style="font-size: 13px"></p>
                         </div>
                         <div class="form-group">
-                            <input class="remember" type="checkbox" id="remember">
+                            <input class="remember" v-el="remember" type="checkbox" id="remember">
                             <label for="remember">{{loginStr.remember}}</label>
                             <div class="pull-right">
                                 <a href="javascript:void(0);" v-show="false">{{loginStr.getBack}}</a>
@@ -130,8 +130,9 @@
                 </div>
             </div>
         </div>
-    </div>
 
+    </div>
+    <promotion></promotion>
 </template>
 <style lang="less">
     @import "Login.less";
@@ -144,6 +145,7 @@
     import {redirect} from "../../widgets/Auth";
     import * as Api from "../../widgets/Api";
     import FooterComponent from "../Footer/Footer.vue"
+    import Promotion from "./Promotion/Promotion.vue"
 
     export default {
 
@@ -165,7 +167,7 @@
             };
         },
         components:{
-            FooterComponent
+            FooterComponent,Promotion
         },
         methods: {
             submit(){
@@ -209,7 +211,7 @@
 //                }
 //                Cookie.set('business_uid', 'admin');
 //                location.hash = '#!/home';
-console.log(this.userName,this.password)
+console.log(this.userName,this.password);
 //登陆页面逻辑
                 Api.login({
                     username: this.userName,
@@ -223,15 +225,17 @@ console.log(this.userName,this.password)
                         Cookie.set('business_name', data.data.user_name);
                         Cookie.set('business_admin', data.data.isAdmin);
                         Cookie.set('business_email', data.data.email);
-                        if(this.$el.querySelector('.remember').checked==true){
-                            console.log(this.$el.querySelector('.remember').checked)
+                        this.userName = '';
+                        this.password = '';
+                        /*if(this.$els.remember.checked==true){
+                            console.log(this.$els.remember.checked)
                             Cookie.set('login_userName',this.userName);
                             Cookie.set('login_password',this.password);
                             Cookie.set('login_remember',true);
                         }else{
                             this.userName = '';
                             this.password = '';
-                        }
+                        }*/
                         //location.hash = '#!/home';
                         this.$router.go({name: 'home'});
                     } else {
@@ -250,14 +254,16 @@ console.log(this.userName,this.password)
             console.log('aaa',this.userName,this.password);
                 this.userName = getCookie('login_userName');
                 this.password = getCookie('login_password');
-                this.$el.querySelector('.remember').checked = getCookie('login_remember');
+            //console.log('this',this.$el.querySelector('.remember').checked);
+            //this.$els.remember.checked = getCookie('login_remember');
+
         },
-        route:{
+        /*route:{
             activate(transition){
                 redirect();
                 transition.next();
             }
-        }
+        }*/
     };
 
 </script>
