@@ -2,7 +2,7 @@
     <div class="wrapper">
         <div class="login-header">
             <div>
-                <img src="images/logo.jpg">
+                <img src="images/logo.png">
                 <span>商业互联网信息智能分析平台</span>
             </div>
             <ul>
