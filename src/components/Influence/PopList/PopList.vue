@@ -48,6 +48,7 @@
             },
             closeTip(){
                 this.visiable = false;
+                this.pops = [];
             }
         },
         components:{ Tips }

@@ -71,7 +71,7 @@
                 loadingParams: {
                     visiable: false,
                     type: 'loading',
-                    content: "请稍后......"
+                    content: "请稍侯......"
                 },
                 popularList: [],
                 influancerList: [],
@@ -134,12 +134,13 @@
                 const topic_id = this.activeAnalyticsTopic.topic_id;
                 const author = item.influencer;
                 const size = this.$route.params.size;
-
-                this.getArticles({topic_id,author,size});
+                const start = this.analyticsStart;
+                const end = this.analyticsEnd;
+                this.getArticles({topic_id,author,size,start,end});
             },
             getArticles(params){
                 Api.getCommentList(params).then(resp => {
-                    //console.log("getCommentList", resp.data);
+                    console.log("getCommentList", resp.data);
                     if (resp.data.code == 0) {
                         const newDates = _.map(resp.data.data, (item)=> {
                             item.context = item.content;

@@ -33,7 +33,7 @@
                 loadingParams: {
                     visiable: false,
                     type: 'loading',
-                    content: "请稍后......"
+                    content: "请稍侯......"
                 },
                 selectTitle: Local().common.sortBy,
                 //list: list.time,

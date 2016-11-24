@@ -91,6 +91,7 @@
 
                 graphChartLoading: true,
                 graphChartOption: {
+                    isToggle:true,
                     title: {
                        text: '      转发数：',
                         textStyle: {
@@ -102,21 +103,22 @@
                         left: 'right'
                     },
                     tooltip: {
-
                         formatter: '{b}'
                     },
                     legend: {
                         data: ["传播源点", "一层转发", "二层转发", "三层转发", "四层转发", "五层转发", "六层转发","六层以上"],
+
                         left: 10,
                         top:23,
                         width: 120
                     },
                     animationDuration: 1500,
-                    animationEasingUpdate: 'quinticInOut',
 
+                    animationEasingUpdate: 'quinticInOut',
                     series: [
                         {
                             name: '传播路径',
+                            color:["#000","#bc3c3c","#efbf09","#eae521","#3fea21","#21ead9","#214bea","#9521ea","#ea21d9"],
                             type: 'graph',
                             layout: 'force',
                             force: {

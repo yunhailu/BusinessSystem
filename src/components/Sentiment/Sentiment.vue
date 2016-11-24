@@ -35,7 +35,7 @@
                 loadingParams: {
                     visiable: false,
                     type: 'loading',
-                    content: "请稍后......"
+                    content: "请稍侯......"
                 },
                 options: [{key: 'time', value: '按时间排序'}, {key: 'browser', value: '浏览数排序'}, {key: 'star', value: '点赞数排序'}],
                 //list: list.time,

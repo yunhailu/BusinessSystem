@@ -119,7 +119,7 @@
                         splitNumber: 5,
                         name: {
                             textStyle: {
-                                color: 'rgb(238, 197, 102)'
+                                color: 'rgb(39, 114, 123)'
                             }
                         },
                         splitLine: {

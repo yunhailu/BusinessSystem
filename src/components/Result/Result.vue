@@ -34,7 +34,7 @@
                 loadingParams: {
                     visiable: false,
                     type: 'loading',
-                    content: "请稍后......"
+                    content: "请稍侯......"
                 },
                 sourceActive: 0,
                 //list: list.time,
