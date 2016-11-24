@@ -20,7 +20,10 @@ export const activeCompareTopic = state => {
 export const activeSettingTopic = state => {
 	return state.topic.active_setting_topic;
 };
-
+//登陆
+export const loginState = state => {
+	return state.topic.login_state;
+};
 
 /**
  * Analytics

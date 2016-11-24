@@ -132,7 +132,7 @@
         </div>
 
     </div>
-    <promotion></promotion>
+    <promotion :islogin="isLogin"></promotion>
 </template>
 <style lang="less">
     @import "Login.less";
@@ -146,9 +146,10 @@
     import * as Api from "../../widgets/Api";
     import FooterComponent from "../Footer/Footer.vue"
     import Promotion from "./Promotion/Promotion.vue"
+    import {loginState } from '../../vuex/getters';
+    import {setLoginState} from "../../vuex/actions";
 
     export default {
-
         name: 'login',
         data(){
             const applyStr = Local().apply;
@@ -168,6 +169,10 @@
         },
         components:{
             FooterComponent,Promotion
+        },
+        vuex:{
+            getters:{loginState},
+            actions:{setLoginState}
         },
         methods: {
             submit(){
@@ -258,6 +263,16 @@ console.log(this.userName,this.password);
             //this.$els.remember.checked = getCookie('login_remember');
 
         },
+        watch:{
+            loginState:{
+                handler(val){
+                    if(this.loginState==true){
+                        this.isLogin = true;
+                        this.setLoginState(false);
+                    }
+                }
+            }
+        }
         /*route:{
             activate(transition){
                 redirect();

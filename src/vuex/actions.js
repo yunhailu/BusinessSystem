@@ -108,3 +108,8 @@ export const insertExportImages = (store, image) => {
 export const removeExportImages = (store) => {
 	store.dispatch(types.REMOVE_EXPORT_IMAGES);
 };
+
+//login
+export const setLoginState = (store,state) => {
+	store.dispatch(types.LOGIN_STATE,state);
+};
