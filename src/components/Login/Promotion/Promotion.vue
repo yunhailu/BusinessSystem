@@ -5,7 +5,8 @@
                 <img src="../images/login-ball-1.png">
             </div>
             <div class="navigation">
-                <h2>情绪数据,为您导航</h2>
+                <!--<h2>情绪数据,为您导航</h2>-->
+                <h2>两情相悦，人心可测</h2>
             </div>
             <div class="login-btn">
                 <a href="javascript:void(0);" @click="login">

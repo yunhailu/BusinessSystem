@@ -3,7 +3,7 @@
         <div class="login-header">
             <div>
                 <img src="images/logo.png">
-                <span>商业互联网信息智能分析平台</span>
+                <span>互联网情报智能分析平台</span>
             </div>
             <ul>
                 <li><a href="javascript:void(0);">使用说明</a></li>
