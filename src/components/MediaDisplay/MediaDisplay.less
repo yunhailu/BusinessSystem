@@ -1,44 +1,58 @@
 @import "../common.less";
 
-@card-height: 260px;
+@card-height: 300px;
 
 .hot-panel{
   .w(100%);
-  .row{ .mg-top(20px); }
+  .row{
+
+    .mg-top(20px); }
 
   .hot-river{
-    .h(460px);
+    .h(360px);
     &-scatter{  .w(100%);  .h(400px);  }
   }
 
   .hot-sentiment{
-    .h(@card-height);
+    .pd-top(20px);
+    .h(320px);
+    &-pie{  .w(100%);  .h(100%);  }
+  }
+  .hot-sentiment1{
+    .h(410px);
     &-pie{  .w(100%);  .h(100%);  }
   }
 
   .hot-ranking{
-    .h(@card-height);
+    .sexmen1{
+      .f(16px);
+      .float-left();
+    }
+    .sexmen2{
+      .float-right();
+    }
+    .h(260px);
     &-list{
       &-item{
-        .lh(14px);  .pd(15px 0 0);  .pointer();
+        .lh(20px);  .pd(10px 0 0);  .pointer();
         &-index{ .vm();  .disIB();  .w(20px);  .h(20px);  .bgc(@body-theme);  .tc(); .lh(20px); .c(white);  .br(2px);  .ff("pingfang-bold"); }
-        &-text{ .vm();  .disIB(); .text-hidden();  .pd(0 5px);  .w(80%);  .f(12px); }
+        &-text{ .vm();  .disIB(); .text-hidden();  .pd(0 5px);  .w(80%);  .f(18px); }
       }
     }
   }
 
   .hot-words{
     .h(@card-height);
-    &-cloud{ .w(100%);  .h(210px);  }
+    &-cloud{ .w(100%);  .h(410px);  }
   }
 
   .hot-today{
     .h(@card-height);
     &-list{
       &-item{
-        .lh(14px);  .pd(15px 0 0);  .pointer();
-        &-index{ .vm();  .disIB();  .w(20px);  .h(20px);  .bgc(@body-theme);  .tc(); .lh(20px); .c(white);  .br(02px);  .ff("pingfang-bold"); }
-        &-text{ .vm();  .disIB(); .text-hidden();  .pd(0 5px);  .w(80%);  .f(12px); }
+        .lh(25px);  .pd(15px 0 0);  .pointer();
+        &-index{ .vm();  .disIB();  .w(20px);  .h(20px);  .bgc(@body-theme);  .tc(); .lh(25px); .c(white);  .br(02px);  .ff("pingfang-bold"); }
+        &-text{ .vm();  .disIB(); .text-hidden();  .pd(0 5px);  .w(80%);  .f(18px); }
       }
     }
   }

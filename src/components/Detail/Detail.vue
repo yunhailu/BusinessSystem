@@ -3,7 +3,7 @@
         <div class="container">
             <br>
             <div class="row">
-                <div class="col-md-9 detail-content">
+                <div class="col-md-8 detail-content">
                     <card-panel :title="words.content"  >
                         <div class="detail-content-sub" v-show="isLive">
                             <span>{{words.source}}: {{article.source}}</span>
@@ -14,7 +14,7 @@
                         <div class="detail-content-con" v-show="!isLive">对不起，您来晚了，该微博已被删除</div>
                     </card-panel>
                 </div>
-                <div class="col-md-3 detail-info">
+                <div class="col-md-4 detail-info">
                     <card-panel :title="words.userInfo" >
                         <img src="../../../images/avatar.png" class="detail-info-avatar"  />
                         <div class="detail-info-detail"  v-show="isLive">
@@ -28,12 +28,12 @@
             </div>
 <br>
             <div class="row">
-                <div class="col-md-9 detail-chart">
+                <div class="col-md-8 detail-chart">
                     <card-panel :title="words.shareChart" >
                         <div class="chart" v-echarts="graphChartOption" :click="graphChartAction"  :loading="graphChartLoading" theme="infographic"></div>
                     </card-panel>
                 </div>
-                <div class="col-md-3 detail-article">
+                <div class="col-md-4 detail-article">
                     <card-panel :title="words.article" >
                         <!--<ul class="detail-article-list">-->
                             <!--<li class="detail-article-list-item" v-for="acticle in acticles">-->
@@ -45,7 +45,7 @@
 
                     </card-panel>
                 </div>
-                <div class="col-md-3 detail-timeline">
+                <div class="col-md-4 detail-timeline">
                     <card-panel :title="words.timeline" >
                         <div class="detail-timeline-chart" v-echarts="timelineOption" :loading="timelineLoading" theme="macarons"></div>
                     </card-panel>
@@ -203,6 +203,7 @@
                     progressive: 4,
                     textStyle: Chart.textStyle,
                     series: [{
+                        barWidth:10,
                         name: "数量",
                         type: 'bar',
                         //areaStyle: {normal: {}},
