@@ -2,79 +2,112 @@
     <div class="hot-panel">
 
         <div class="row">
+            <card-panel :title="words.todayHotsRanking">
+                <br>
+                <br>
             <div class="col-md-6 hot-today">
-                <card-panel :title="words.todayHotsRanking">
+
                     <ul class="hot-today-list">
                         <li v-for="item in hotsTodayRankings"  class="hot-today-list-item" @click="showDetail(item,0);">
                             <span class="hot-today-list-item-index">{{ ($index + 1) }}</span>
                             <span class="hot-today-list-item-text">{{item.title}}</span>
                         </li>
                     </ul>
-                </card-panel>
             </div>
 
             <div class="col-md-6 hot-sentiment">
-                <card-panel :title="words.sentiment | title">
+
                     <div v-echarts="sentimentOption" :loading="sentimentLoading" class="hot-sentiment-pie" theme=""></div><!--infographic,macarons-->
-                </card-panel>
+
             </div>
+
+            </card-panel>
         </div>
         <!--情绪比例，热词排行-->
         <div class="row">
-
+            <card-panel :title="words.wordsRanking | title">
             <div class="col-md-6 hot-words">
-                <card-panel :title="words.wordsRanking | title">
+
                     <div v-echarts="hotWordsOption" :loading="hotWordsLoading" class="hot-words-cloud" ></div>
-                </card-panel>
+
             </div>
 
-            <div class="col-md-6 hot-sentiment">
-                <card-panel :title="sontitle">
+            <div class="col-md-6 hot-sentiment1">
+
                     <div v-echarts="sentimentSonOption" :loading="sentimentSonLoading" class="hot-sentiment-pie" theme=""></div><!--infographic,macarons-->
-                </card-panel>
+
             </div>
 
 
-
+            </card-panel>
         </div>
         <div class="row">
+            <card-panel :title="tit11">
             <div class="col-md-6 hot-sentiment">
-                <card-panel :title="tit11">
+
                     <div v-echarts="sexOption" :loading="sexLoading" class="hot-sentiment-pie" theme=""></div><!--infographic,macarons-->
-                </card-panel>
+
+
             </div>
 
             <div class="col-md-6 hot-sentiment">
-                <card-panel :title="tit12">
-                    <div v-echarts="ageOption" :loading="ageLoading" class="hot-sentiment-pie" theme=""></div><!--infographic,macarons-->
-                </card-panel>
+
+                <div v-echarts="sexPieOption" :loading="sexPieLoading" class="hot-sentiment-pie" theme=""></div><!--infographic,macarons-->
+
             </div>
+
+            </card-panel>
         </div>
+
         <div class="row">
+            <card-panel :title="tit12">
+            <div class="col-md-6 hot-sentiment">
+
+                    <div v-echarts="ageOption" :loading="ageLoading" class="hot-sentiment-pie" theme=""></div><!--infographic,macarons-->
+
+
+            </div>
+            <div class="col-md-6 hot-sentiment">
+
+                    <div v-echarts="agePieOption" :loading="agePieLoading" class="hot-sentiment-pie" theme=""></div><!--infographic,macarons-->
+
+                </div>
+            </card-panel>
+
+        </div>
+
+
+        <div class="row">
+            <card-panel :title="tit13">
+                <br>
+                <br>
+
 
             <div class="col-md-6 hot-ranking">
-            <card-panel :title="tit13">
+                <span class="sexmen1">男性关注</span>
+                <br>
             <ul class="hot-ranking-list">
             <li v-for="item in datatitle"  class="hot-ranking-list-item" >
             <span class="hot-ranking-list-item-index">{{ ($index + 1) }}</span>
             <span class="hot-ranking-list-item-text">{{item.title}}</span>
             </li>
             </ul>
-            </card-panel>
+
             </div>
 
             <div class="col-md-6 hot-ranking">
-                <card-panel :title="tit14">
+                <span class="sexmen1">女性关注</span>
+                <br>
                     <ul class="hot-ranking-list">
                         <li v-for="item in datatitle0"  class="hot-ranking-list-item" >
                             <span class="hot-ranking-list-item-index">{{ ($index + 1) }}</span>
                             <span class="hot-ranking-list-item-text">{{item.title}}</span>
                         </li>
                     </ul>
-                </card-panel>
+
             </div>
         </div>
-
+        </card-panel>
 
     </div>
 
@@ -125,18 +158,18 @@
                 hot:'',
                 tit11:"男女比例分布",
                 tit12:"年龄分布",
-                tit13:"男性关注话题",
+                tit13:"男，女性关注话题",
                 tit14:"女性关注话题",
 
                 // 热点情绪占比
                 sentimentOption: {
 
-                    title: _.extend({}, Pie.title, { show: false}),
-                    tooltip: _.extend({}, Pie.tooltip),
+                    title: _.extend({}, Pie.title, { top:0, text:'情绪表现',show: true}),
+                    // tooltip: _.extend({}, Pie.tooltip),
                     legend: _.extend({}, Pie.legend, {
                         orient: 'vertical',
-                        left: 10,
-                        top: 10,
+                        left: 5,
+                        top: 25,
                         data: [common.happy, common.anger, common.sorrow, common.disgust, common.fear]
                     }),
                     color:['#2FCC71','#E64D3D', '#F1C40F', '#3598DC', '#737373'],
@@ -144,19 +177,25 @@
                     toolbox: Pie.toolbox,
                     series:[
                         {
-                            name: words.sentiment,
-                            type:'pie',
-                            radius: ['25%', '80%'],
-                            center: ['50%', '50%'],
-                            roseType : 'radius',
                             label: {
                                 normal: {
-                                    show: false
-                                },
-                                emphasis: {
-                                    show: true
-                                }
-                            },
+                                    show:true,
+                                    formatter: " {b}:({d}%)"
+
+                                }},
+                            name: words.sentiment,
+                            type:'pie',
+                            radius: ['25%', '70%'],
+                            center: ['60%', '50%'],
+                            roseType : 'radius',
+                            // label: {
+                            //     normal: {
+                            //         show: false
+                            //     },
+                            //     emphasis: {
+                            //         show: true
+                            //     }
+                            // },
                             lableLine: {
                                 normal: {
                                     show: false
@@ -172,6 +211,7 @@
                 sentimentLoading: false,
 
                 sentimentSonOption: {
+                    title: _.extend({}, Pie.title, { top:10, left:'100',text:'热门子话题',show: true}),
                     tooltip: {
                         trigger: 'item',
                         formatter: "{a} <br/>{b}: {c} ({d}%)"
@@ -209,7 +249,13 @@
                             ]
                         },
                         {
-                            name:'访问来源',
+                            name:'热门子话题',
+                            label: {
+                                normal: {
+                                    show:true,
+                                    formatter: " {b}:({d}%)"
+
+                                }},
                             type:'pie',
                             radius: ['40%', '55%'],
 
@@ -233,7 +279,10 @@
                     // title: {
                     //     text:'性别分布'
                     // },
-                    tooltip: {},
+                    tooltip: {
+                        trigger: 'item',
+                        formatter: "{a} <br/>{b} : {c} ({d}%)"
+                    },
                     color:[ '#3598DC', '#737373'],
                     legend: {
                         data:['男','女']
@@ -243,10 +292,13 @@
                     },
                     yAxis: {},
                     series: [{
+                        barGap:'40%',
+                        barWidth:20,
                         name: '男',
                         type: 'bar',
                         data: [25]
                     }, {
+                        barWidth:20,
                             name: '女',
                             type: 'bar',
                             data: [15]
@@ -254,12 +306,51 @@
                 },
                 sexLoading:false,
 
+                sexPieOption:{
+                title : {
+
+                    subtext: '男女比例',
+                    x:'center'
+                },
+                tooltip : {
+
+                },
+
+                series : [
+                    {
+                        name: '男女比例',
+                        type: 'pie',
+                        radius : '55%',
+                        center: ['50%', '60%'],
+                        data:[
+                            {value:335, name:'男'},
+                            {value:310, name:'女'},
+                        ],
+                        label: {
+                            normal: {
+                                show:true,
+                                formatter: " {b}:({d}%)"
+
+                            }},
+                        itemStyle: {
+                            emphasis: {
+                                shadowBlur: 10,
+                                shadowOffsetX: 0,
+                                shadowColor: 'rgba(0, 0, 0, 0.5)'
+                            }
+                        }
+                    }
+                ]
+            },
+                sexPieLoading:false,
+
+
                 ageOption:{
                     // title: {
                     //     text:'性别分布'
                     // },
                     tooltip: {},
-                    color:[ '#F1C40F', '#3598DC', '#737373'],
+                    color:[  '#91C7AE', '#737373'],
                     legend: {
                         data:['年龄分布']
                     },
@@ -268,12 +359,61 @@
                     },
                     yAxis: {},
                     series: [{
+                        barWidth:20,
                         name: '年龄分布',
                         type: 'bar',
                         data: [54, 20, 36, 16, 18, 20]
                     }]
                 },
                 ageLoading:false,
+
+                agePieOption:{
+                    title : {
+                        // text: '年龄分布',
+                        subtext: '年龄分布',
+                        x:'center'
+                    },
+                    tooltip : {
+                        trigger: 'item',
+                        formatter: "{a} <br/>{b} : {c} ({d}%)"
+                    },
+                    legend: {
+
+                        left: 'left',
+                        data: ["10~20岁","20~30岁","30~40岁","40~50岁","50~60岁","60岁以上"]
+                    },
+                    series : [
+                        {
+                            label: {
+                                normal: {
+                                    show:true,
+                                    formatter: " {b}:({d}%)"
+
+                                }},
+                            name: '年龄分布',
+                            type: 'pie',
+                            radius : '55%',
+                            center: ['50%', '60%'],
+                            data:[
+                                {value:335, name:'10~20岁'},
+                                {value:310, name:'20~30岁'},
+                                {value:234, name:'30~40岁'},
+                                {value:135, name:'40~50岁'},
+                                {value:1548, name:'50~60岁'},
+                                {value:1548, name:'60岁以上'}
+
+                            ],
+                            itemStyle: {
+                                emphasis: {
+                                    shadowBlur: 10,
+                                    shadowOffsetX: 0,
+                                    shadowColor: 'rgba(0, 0, 0, 0.5)'
+                                }
+                            }
+                        }
+                    ]
+                },
+                agePieLoading:false,
 
 
                 //实时热点排行
@@ -409,16 +549,22 @@
 
                 //this.sexOption.xAxis.data=this.getw(activeWordCloud,0,6);
                 this.ageOption.series[0].data=_.shuffle(this.getw(activeWordCloud,1,6));
+
+                for(var i=0; i<this.ageOption.series[0].data.length;i++)
+                {
+                    this.agePieOption.series[0].data[i].value= this.ageOption.series[0].data[i];
+
+                }
                 const fir=_.first(this.getw(activeWordCloud,1,3));
                 const las=_.last(this.getw(activeWordCloud,1,3));
                 this.sexOption.series[0].data=[fir];
                 this.sexOption.series[1].data=[las];
+                this.sexPieOption.series[0].data[0].value=[fir];
+                this.sexPieOption.series[0].data[1].value=[las];
                 const wdq78=_.shuffle(2,234,56,36,23,123,465,21,344,44);
 
                 this.sentimentSonOption.series[1].data[0].value=Math.floor(Math.random()*100);
-
                 this.sentimentSonOption.series[1].data[1].value=Math.floor(Math.random()*100);
-
                 this.sentimentSonOption.series[1].data[2].value=Math.floor(Math.random()*100);
                 this.sentimentSonOption.series[1].data[3].value=Math.floor(Math.random()*100);
                 this.sentimentSonOption.series[1].data[4].value=Math.floor(Math.random()*100);
