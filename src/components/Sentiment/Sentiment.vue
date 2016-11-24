@@ -16,6 +16,7 @@
 </style>
 <script type="text/ecmascript-6">
     import _ from 'underscore';
+    import moment from 'moment';
     //import { list } from "../../config/tmpData";
     import ListPanel from '../Common/ListPanel/ListPanel.vue';
     import Tabs from '../Common/Tabs/Tabs.vue';
@@ -311,23 +312,32 @@
                     this.sentimentBarOption.series[this.sentimentMap[key]].data = value;
                     console.log('chakanshuju',value)
                 });
-                //this.getCommentList();
+                this.getCommentList();
 
             },
             clickChartAction(opts){
                 console.log('clickChartAction opts', opts);
-                //this.loadingParams.visiable = true;
+                this.loadingParams.visiable = true;
                 const topic_id = this.activeAnalyticsTopic.topic_id,
                         topic = this.activeAnalyticsTopic.topic_name,
                         subtopic = this.analyticsSubTopic,
                         source = this.analyticsSource,
                         time_dimension = 0,
-                        type = "time",
-                        end = opts.name.split(":")[0],
-                        start = opts.name.split(":")[0];
+                        type = "time";
+                let start =opts.name.split(":")[0],
+                        end = opts.name.split(":")[0];
+                        if(opts.name.split(" ")[1]){
+                            console.log(typeof opts.name.split(":")[0],opts.name.split(":")[0])
+                            end = opts.name.split(":")[0]
+                            end = end.split(" ")[0]+'T'+end.split(" ")[1];
+                            start = moment(opts.name.split(":")[0],"YYYY-MM-DD HH").subtract(8, 'hour').format("YYYY-MM-DD HH")
+                            start=start.split(" ")[0]+'T'+start.split(" ")[1];
+                            console.log('start',start,end);
+                        }
                 Api.getCommentList({type, topic_id, topic, subtopic, source, start, end, time_dimension}).then(resp => {
                     //console.log(resp.data);
-                    //this.loadingParams.visiable = false;
+                    this.loadingParams.visiable = false;
+                    console.log('resp',resp);
                     if(resp.data.code == 0){
                         this.list = resp.data.data;
                         console.log('查看list数据条数',this.list);
