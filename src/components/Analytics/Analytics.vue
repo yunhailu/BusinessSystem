@@ -95,8 +95,12 @@
                     //this.selectTimeTag = num;
                     this.isTimeDiy = false;
                     this.setAnalyticsTimeRange(0.33);
-                    this.setAnalyticsStart(moment().subtract(8,"hour").format("YYYY-MM-DD HH:mm:ss"));
-                    this.setAnalyticsEnd(moment().format("YYYY-MM-DD HH:mm:ss"));
+                    let start = moment().subtract(8,"hour").format("YYYY-MM-DD HH");
+                    let end = moment().format("YYYY-MM-DD HH");
+                    start = start.split(" ")[0] + "T" + start.split(" ")[1];
+                    end = end.split(" ")[0] + "T" + end.split(" ")[1];
+                    this.setAnalyticsStart(start);
+                    this.setAnalyticsEnd(end);
                     //可以精确到小时
                     console.log('8H',moment().subtract(8,"hour").format("YYYY-MM-DD HH"),moment().format("YYYY-MM-DD HH"))
                     this.setAnalyticsDateChange(this.analyticsDateChange + 1);

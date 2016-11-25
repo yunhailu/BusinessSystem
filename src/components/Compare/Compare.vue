@@ -96,15 +96,20 @@
                     //禁掉*/
                     this.isTimeDiy = true;
                     this.dateVal = this.compareStart + ' ~ ' + this.compareEnd;
-                } else if(num ==0.33){
+                } else if(num == 0.33){
                     //this.selectTimeTag = num;
                     this.isTimeDiy = false;
                     this.setCompareTimeRange(0.33);
-                    this.setCompareStart(moment().subtract(8,"hour").format("YYYY-MM-DD HH:mm:ss"));
-                    this.setCompareEnd(moment().format("YYYY-MM-DD HH:mm:ss"));
+                    let start = moment().subtract(8,"hour").format("YYYY-MM-DD HH");
+                    let end = moment().format("YYYY-MM-DD HH");
+                    start = start.split(" ")[0] + "T" + start.split(" ")[1];
+                    end = end.split(" ")[0] + "T" + end.split(" ")[1];
+                    this.setCompareStart(start);
+                    this.setCompareEnd(end);
+                    console.log(this.compareStart,this.compareEnd);
                     //可以精确到小时
-                    console.log('8H',moment().subtract(8,"hour").format("YYYY-MM-DD HH"),moment().format("YYYY-MM-DD HH"));
-                    this.dateVal = `${ moment().subtract(8, 'hour').format('YYYY-MM-DD HH')} ~ ${moment().format('YYYY-MM-DD HH')}`;
+                    //console.log('8H',moment().subtract(8,"hour").format("YYYY-MM-DD HH"),moment().format("YYYY-MM-DD HH"));
+                    this.dateVal = `${ start} ~ ${end}`;
                     this.setCompareTimeRangeString(this.dateVal);
                     //this.setAnalyticsDateChange(this.analyticsDateChange + 1);
                 }else{
