@@ -55,8 +55,12 @@
                 chartInstance: null,
                 resultChartLoading: true,
                 resultChartOption: {
+                    title : {
+                        text: '实时品牌关注',
+                        x:0
+                    },
                     isToggle: true,
-                    title: _.extend({}, Chart.title, { show: false}),
+                    //title: _.extend({}, Chart.title, { show: false}),
                     tooltip: Chart.tooltip,
 //                    legend: {
 //                        data: ['All']
@@ -85,7 +89,11 @@
                 resultPieChartLoading: true,
                 resultPieChartOption: {
                     isActive: true,
-                    title: _.extend({}, Pie.title, { show: false}),
+                    title : {
+                        text: '话题资源排行',
+                        x:0
+                    },
+                    //title: _.extend({}, Pie.title, { show: false}),
                     tooltip: _.extend({}, Pie.tooltip),
                     legend: _.extend({}, Pie.legend, {
                         //orient: 'vertical',

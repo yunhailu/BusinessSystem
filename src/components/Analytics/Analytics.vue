@@ -5,10 +5,13 @@
         <div class="analytics-panel">
             <div class="analytics-panel-wrap">
                 <div class="row tools">
-                    <div class="row-left">
-                        <div class="search">
-                            <input class="search-input" placeholder="搜索" v-model="search" @keyup.enter="searchAction" />
-                            <span class="search-btn" @click="searchAction"><i class="fa fa-search"></i></span>
+                    <div class="row-wrap">
+                        <div class="row-left"><p>{{topic.topic_name}}</p></div>
+                        <div class="row-middle">
+                            <div class="search">
+                                <input class="search-input" placeholder="搜索" v-model="search" @keyup.enter="searchAction" />
+                                <span class="search-btn" @click="searchAction"><i class="fa fa-search"></i></span>
+                            </div>
                         </div>
                     </div>
                     <div class="row-right">
@@ -45,8 +48,8 @@
     import Calendar from '../Common/Calendar/Calendar.vue';
     import OrderFooterComponent from '../OrderFooter/OrderFooter.vue';
     import Local from "../../local/local";
-    import { analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic, analyticsDateChange, analyticsStart, analyticsEnd, analyticsResetSearch } from '../../vuex/getters';
-    import { setAnalyticsType, setAnalyticsTimeRange, setAnalyticsSource, setAnalyticsSubTopic, setAnalyticsDateChange, setAnalyticsStart, setAnalyticsEnd, setAnalyticsResetSearch  } from "../../vuex/actions";
+    import {activeAnalyticsTopic, analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic, analyticsDateChange, analyticsStart, analyticsEnd, analyticsResetSearch } from '../../vuex/getters';
+    import {setActiveAnalyticsTopic, setAnalyticsType, setAnalyticsTimeRange, setAnalyticsSource, setAnalyticsSubTopic, setAnalyticsDateChange, setAnalyticsStart, setAnalyticsEnd, setAnalyticsResetSearch  } from "../../vuex/actions";
 
     export default{
         data(){
@@ -65,12 +68,13 @@
                 },
                 selectTimeTag: 7,
                 isTimeDiy: false,
-                tabActive: 'result'
+                tabActive: 'result',
+                topic:''
             }
         },
         vuex: {
-            actions: { setAnalyticsType, setAnalyticsTimeRange, setAnalyticsSource, setAnalyticsSubTopic, setAnalyticsDateChange, setAnalyticsStart, setAnalyticsEnd, setAnalyticsResetSearch },
-            getters: { analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic, analyticsDateChange, analyticsStart, analyticsEnd, analyticsResetSearch }
+            actions: {setActiveAnalyticsTopic, setAnalyticsType, setAnalyticsTimeRange, setAnalyticsSource, setAnalyticsSubTopic, setAnalyticsDateChange, setAnalyticsStart, setAnalyticsEnd, setAnalyticsResetSearch },
+            getters: {activeAnalyticsTopic, analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic, analyticsDateChange, analyticsStart, analyticsEnd, analyticsResetSearch }
         },
         components:{
             'header-component': HeaderComponent,
@@ -159,6 +163,11 @@
                         this.setAnalyticsSubTopic(this.search);
                         console.log('结束时间',(new Date()).getTime());
                     }
+                }
+            },
+            activeAnalyticsTopic:{
+                handler(val){
+                    this.topic = this.activeAnalyticsTopic;
                 }
             },
             /*search:{

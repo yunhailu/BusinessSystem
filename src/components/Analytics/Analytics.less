@@ -9,22 +9,29 @@
   .bgc(@bg-color);   .mg-left(180px);
   &-wrap{
     .tools{
-      .h(36px);  .pd(10px 0);  .mg(0);
+      .h(56px);  .pd(10px 0);  .mg(0);
       //display: flex;
       .disT();.w(100%);
+      .row-wrap{.w(45px);.h(100%);border-radius: 3px;border:1px solid #3e3e3e;.pd(20px);}
       .row-left{
+        .disTC();.w(25%);.bgc(#f9f9f9);.h(44px);
+        p{.h(44px);.mg(0);.lh(56px);.c(#3e3e3e);font-weight: 900;.f(20px);.pd-left(10px);overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
+      }
+      .row-middle{
         //flex:6;
-        .disTC();.w(45%);
+        .disTC();.w(20%);
         .search{
-          .w(100%);  .h(24px);.mg-left(20px);
+          .w(100%);.mg-left(20px);.f(20px);
           .bgc(#e6e6e6);  .br(2px);
-          &-input{  .w(80%);  .input-transparent();  .h(12px);  .c(#666);  .disIB();  .mg(5px 10px); }
-          &-btn{ .float-right();  .disIB();  .pointer(); .pd(3px 10px); }
+          &-input{  .w(60%);  .input-transparent();  .h(12px);  .c(#666);  .disIB();  .mg(5px 10px);.h(32px); }
+          &-btn{ .float-right();  .disIB();  .pointer(); .pd(3px 10px);
+            i{.lh(36px);}
+          }
         }
       }
 .row-right{
   //flex:4;
-  .disTC();.w(55%);vertical-align: middle;
+  .disTC();.w(55%);vertical-align: middle;.f(14px);
   .days-btn{
     .h(24px);  overflow: hidden;;  .float-left();  .w(200px);.mg-left(30px);
     li{
