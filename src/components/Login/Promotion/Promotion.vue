@@ -1,6 +1,7 @@
 <template>
     <swiper :options="swiperOption" class="swiper-box">
         <swiper-slide class="swiper-item item-1">
+            <img  class="sliderimg" src="../images/login-bg-1.jpg">
             <div  class="ball">
                 <img src="../images/login-ball-1.png">
             </div>
@@ -8,7 +9,7 @@
                 <!--<h2>情绪数据,为您导航</h2>-->
                 <h2>两情相悦，人心可测</h2>
             </div>
-            <div class="login-btn">
+            <div class="login-btn" v-show="false">
                 <a href="javascript:void(0);" @click="login">
                     <img src="../images/login-1.png">
                 </a>
@@ -20,7 +21,7 @@
             </div>
         </swiper-slide>
         <swiper-slide v-show="false" class="swiper-item "><img class="sliderimg" src="../images/2.jpg"></swiper-slide>
-        <swiper-slide v-show="false" class="swiper-item "><img class="sliderimg" src="../images/3.jpg"></swiper-slide>
+        <swiper-slide v-show="fasle" class="swiper-item "><img class="sliderimg" src="../images/3.jpg"></swiper-slide>
         <swiper-slide v-show="false" class="swiper-item "><img class="sliderimg" src="../images/4.png"></swiper-slide>
         <div v-show="false" class="swiper-pagination"  slot="pagination"></div>
     </swiper>
@@ -38,7 +39,6 @@
     import {setLoginState} from "../../../vuex/actions";
 
     export default {
-        props: ['islogin'],
         name: 'awesome',
         data() {
             return {
