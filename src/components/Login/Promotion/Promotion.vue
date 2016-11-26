@@ -1,6 +1,7 @@
 <template>
     <swiper :options="swiperOption" class="swiper-box">
         <swiper-slide class="swiper-item item-1">
+            <!--替换掉背景-->
             <img class="sliderimg" src="../images/login-bg-1.jpg">
             <div  class="ball">
                 <img src="../images/login-ball-1.png">
@@ -20,9 +21,20 @@
                 </div>
             </div>
         </swiper-slide>
-        <swiper-slide class="swiper-item "> <img class="sliderimg" src="../images/login-bg-2.jpg"></swiper-slide>
-        <swiper-slide class="swiper-item "> <img class="sliderimg" src="../images/login-bg-3.jpg"></swiper-slide>
-        <swiper-slide class="swiper-item "> <img class="sliderimg" src="../images/login-bg-4.jpg"></swiper-slide>
+        <swiper-slide class="swiper-item item-2">
+            <img class="sliderimg" src="../images/login-banner-2.jpg">
+            <!--<div class="source-title">
+                <span>六大信息来源</span>
+            </div>
+           <div><img src="../images/login-weibo.png"></div>
+           <div><img src="../images/login-weixin.png"></div>
+           <div><img src="../images/login-web.png"></div>
+           <div><img src="../images/login-app.png"></div>
+           <div><img src="../images/login-overseas.png"></div>
+           <div><img src="../images/login-search.png"></div>-->
+        </swiper-slide>
+        <swiper-slide class="swiper-item "><img class="sliderimg" src="../images/login-banner-3.jpg"></swiper-slide>
+        <swiper-slide class="swiper-item "><img class="sliderimg" src="../images/login-banner-4.jpg"></swiper-slide>
         <div v-show="false" class="swiper-pagination"  slot="pagination"></div>
     </swiper>
 </template>

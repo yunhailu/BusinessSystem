@@ -7,7 +7,7 @@
     </div>
     <ul class="row tabs">
         <li v-for="tab in tabs" class="tab" :class="[tab.link == $route.name ? 'active' : '']" >
-            <a v-link="{name: tab.link}" @click="changeTab(tab);">{{tab.name}}</a>
+            <a  v-link="{name: tab.link}" @click="changeTab(tab);">{{tab.name}}</a>
         </li>
     </ul>
     <!--<ul class="row items filters">-->

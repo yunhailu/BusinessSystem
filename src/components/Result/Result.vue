@@ -56,6 +56,10 @@
                 chartInstance: null,
                 resultChartLoading: true,
                 resultChartOption: {
+                   /* title : {
+                        text: '品牌关注走势图',
+                        x:0,
+                    },*/
                     isToggle: true,
                     title: _.extend({}, Chart.title, { show: false}),
                     tooltip: Chart.tooltip,
@@ -86,6 +90,10 @@
                 resultPieChartLoading: true,
                 resultPieChartOption: {
                     isActive: true,
+                   /* title : {
+                        text: '话题资源排行',
+                        x:0
+                    },*/
                     title: _.extend({}, Pie.title, { show: false}),
                     tooltip: _.extend({}, Pie.tooltip),
                     legend: _.extend({}, Pie.legend, {

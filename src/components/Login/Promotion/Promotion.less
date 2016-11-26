@@ -56,11 +56,18 @@ html,body {
       }
     }
   }
-  .item-1.swiper-slide-prev{.ball{.disN()} .navigation{.disN()} .introduce{.disN();} .login-btn{.disN()};}
+  .item-1.swiper-slide-prev{.ball{.disN();} .navigation{.disN()} .login-btn{.disN()}; .introduce{.disN()};}
+  .item-2.swiper-slide-active{
+    //background: url("../images/login-bg-2.jpg") no-repeat;.pr();
+    background-size: 100% 100%;
+    .source-title{
+      .pa();.top(150px);.left(50%);transform: translate(-50%);.h(60px);
+      span{.ff('Microsoft Yahei');.f(50px);.c(#fff);}
+    }
+  }
 }
 .sliderimg {.w(100%); .h(100%);}
 .swiper-item {
-
   .tc();
   .bgsize(100% 100%);
   .dasd();
