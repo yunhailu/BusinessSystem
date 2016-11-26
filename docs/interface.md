@@ -607,3 +607,27 @@
 ````
 { code: 0, data: {} }
 ````
+
+### 五、帐号/鉴权
+##### 1.注册用户
+- auth/register
+- 必传入参: username,password,email,avatar,phone
+- 说明：username、email、phone有唯一性校验
+```
+- 失败：
+{
+    "code": 100, 
+    "message": [
+        "This username has already been taken"
+    ]
+}
+
+- 成功：
+{
+    "code": 0, 
+    "message": "success", 
+    "data": {
+        "sucess": 1
+    }
+}
+```
