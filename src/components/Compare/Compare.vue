@@ -13,9 +13,9 @@
                     </div>
                     <div class="row-right">
                         <ul class="days-btn">
-                            <li @click="selectTime(0.33);" :class="[selectTimeTag == 0.33 ? 'active' : '']">8H</li>
+                            <li @click="selectTime(0.33);" :class="[selectTimeTag == 0.33 ? 'active' : '']" class="active">8H</li>
                             <li @click="selectTime(1);" :class="[selectTimeTag == 1 ? 'active' : '']">1D</li>
-                            <li @click="selectTime(7);" :class="[selectTimeTag == 7 ? 'active' : '']" class="active">7D</li>
+                            <li @click="selectTime(7);" :class="[selectTimeTag == 7 ? 'active' : '']">7D</li>
                             <li @click="selectTime(30);" :class="[selectTimeTag == 30 ? 'active' : '']">30D</li>
                             <li @click="selectTime(0);" :class="[selectTimeTag == 0 ? 'active' : '']">自定义</li>
                         </ul>
@@ -66,7 +66,7 @@
                     y: 0,
                     range:true//是否多选
                 },
-                selectTimeTag: 7,
+                selectTimeTag: 0.33,
                 isTimeDiy: false,
                 tabActive: 'result'
             }

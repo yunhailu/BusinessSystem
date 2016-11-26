@@ -48,7 +48,8 @@
                     weibo: [],
                     client: [],
                     web: [],
-                    overseas: []
+                    overseas: [],
+                    sengine:[]
                 },
                 words: Local().analytics,
                 selectTitle: Local().common.sortBy,
@@ -172,6 +173,8 @@
                         case 5:
                             data = lineData.overseas;
                             break;
+                        case 6:
+                            data = lineData.sengine;
                         default:
                             data = lineData.all;
                             break;

@@ -50,7 +50,8 @@
                     client: {positive: [], negative: [], neutral: []},
                     web: {positive: [], negative: [], neutral: []},
                     overseas: {positive: [], negative: [], neutral: []},
-                    all: {positive: [], negative: [], neutral: []}
+                    all: {positive: [], negative: [], neutral: []},
+                    sengine:{positive: [], negative: [], neutral: []}
                 },
 
                 commentBarLoading: true,
@@ -329,7 +330,7 @@
                 });
             },
             actions(val, idx){
-                const map = ['all', 'wechat', 'weibo', 'client', 'web', 'overseas'];
+                const map = ['all', 'wechat', 'weibo', 'client', 'web', 'overseas','sengine'];
 
                 _.each(this.lineData[map[idx]], (value, key) => {
                     this.commentBarOption.series[this.commentMap[key]].data = value;
@@ -398,7 +399,8 @@
                     client: {positive: [], negative: [], neutral: []},
                     web: {positive: [], negative: [], neutral: []},
                     overseas: {positive: [], negative: [], neutral: []},
-                    all: {positive: [], negative: [], neutral: []}
+                    all: {positive: [], negative: [], neutral: []},
+                    sengine:{positive: [], negative: [], neutral: []}
                 };
             },
             init(){

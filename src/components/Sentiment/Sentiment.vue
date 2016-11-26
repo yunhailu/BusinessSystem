@@ -62,6 +62,9 @@
                     },
                     overseas: {
                         happy: [], anger: [], sorrow: [], disgust: [], fear: []
+                    },
+                    sengine:{
+                        happy: [], anger: [], sorrow: [], disgust: [], fear: []
                     }
                 },
 
@@ -292,12 +295,12 @@
                         source = 'overseas';
                         break;
                     case 6:
-                        source = 'search';
+                        source = 'sengine';
                         break;
                     default:
                         break;
                 }
-                if(source =='search'){
+                if(source =='sengine'){
                     return ;
                 }
                 //this.sentimentPieOption.series[0].name = source;
@@ -480,6 +483,9 @@
                         happy: [], anger: [], sorrow: [], disgust: [], fear: []
                     },
                     overseas: {
+                        happy: [], anger: [], sorrow: [], disgust: [], fear: []
+                    },
+                    sengine:{
                         happy: [], anger: [], sorrow: [], disgust: [], fear: []
                     }
                 };
