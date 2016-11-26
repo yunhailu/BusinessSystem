@@ -25,9 +25,9 @@ html,body {
   .mgc(0 auto);
   overflow: hidden;
   cursor: auto !important;
-  .item-1{
-    background: url("../images/login-bg-1.jpg") no-repeat;.pr();
-    background-size: 100% 100%;
+  .item-1.swiper-slide-active{
+   // background: url("../images/login-bg-1.jpg") no-repeat;.pr();
+    //background-size: 100% 100%;
     .ball{
       .disB();.w(65%);.pa();.top(0);.left(50%);transform: translate(-50%);
       animation: ballframes 1.5s;
@@ -45,8 +45,8 @@ html,body {
       h2{.disB();.mgc(0);.f(46px);.c(#fff);.ff('Microsoft Yahei')}
     }
     .login-btn{
-      .pa();.top(50%);.h(60px);.left(50%);transform: translate(-50%);
-      img{.disB();.mgc(0);}
+      .pa();.top(80%);.h(60px);.left(50%);transform: translate(-50%);
+      img{.disB();.mgc(0);transform: scale(0.6);}
     }
     .introduce{
       .pa();.top(80%);.h(200px);.left(50%);transform: translate(-50%);
@@ -56,6 +56,7 @@ html,body {
       }
     }
   }
+  .item-1.swiper-slide-prev{.ball{.disN()} .navigation{.disN()} .introduce{.disN();} .login-btn{.disN()};}
 }
 .sliderimg {.w(100%); .h(100%);}
 .swiper-item {
