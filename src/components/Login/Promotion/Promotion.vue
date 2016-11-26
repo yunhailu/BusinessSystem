@@ -1,6 +1,8 @@
 <template>
     <swiper :options="swiperOption" class="swiper-box">
         <swiper-slide class="swiper-item item-1">
+            <!--替换掉背景-->
+            <img class="sliderimg" src="../images/login-bg-1.jpg">
             <div  class="ball">
                 <img src="../images/login-ball-1.png">
             </div>
@@ -8,20 +10,31 @@
                 <!--<h2>情绪数据,为您导航</h2>-->
                 <h2>两情相悦，人心可测</h2>
             </div>
-            <div class="login-btn" v-show="false">
+            <div class="login-btn">
                 <a href="javascript:void(0);" @click="login">
                     <img src="../images/login-1.png">
                 </a>
             </div>
-            <div class="introduce">
+            <div class="introduce" v-show="false">
                 <div class="conBox">
                     <p>沃德品牌气象站是公司利用情绪大数据模型开发的“品牌价值互联网监测评价系统”。企业品牌价值的核心在于用户满意度，公司通过对全互联网情绪数据的分析，精确和实时计算知名产品、知名品牌、知名企业的用户满意度和交易量，从而为企业决策提供最精准的参考意见。</p>
                 </div>
             </div>
         </swiper-slide>
-        <swiper-slide v-show="false" class="swiper-item "><img class="sliderimg" src="../images/2.jpg"></swiper-slide>
-        <swiper-slide v-show="false" class="swiper-item "><img class="sliderimg" src="../images/3.jpg"></swiper-slide>
-        <swiper-slide v-show="false" class="swiper-item "><img class="sliderimg" src="../images/4.png"></swiper-slide>
+        <swiper-slide class="swiper-item item-2">
+            <img class="sliderimg" src="../images/login-banner-2.jpg">
+            <!--<div class="source-title">
+                <span>六大信息来源</span>
+            </div>
+           <div><img src="../images/login-weibo.png"></div>
+           <div><img src="../images/login-weixin.png"></div>
+           <div><img src="../images/login-web.png"></div>
+           <div><img src="../images/login-app.png"></div>
+           <div><img src="../images/login-overseas.png"></div>
+           <div><img src="../images/login-search.png"></div>-->
+        </swiper-slide>
+        <swiper-slide class="swiper-item "><img class="sliderimg" src="../images/login-banner-3.jpg"></swiper-slide>
+        <swiper-slide class="swiper-item "><img class="sliderimg" src="../images/login-banner-4.jpg"></swiper-slide>
         <div v-show="false" class="swiper-pagination"  slot="pagination"></div>
     </swiper>
 </template>

@@ -6,10 +6,11 @@
             <div class="analytics-panel-wrap">
                 <div class="row tools">
                     <div class="row-wrap">
-                        <div class="row-left"><p>{{topic.topic_name}}</p></div>
+                        <div class="row-left" v-if="trim(search)==''"><p>{{topic.topic_name}}</p></div>
+                        <div class="row-left" v-if="trim(search)!=''"><p>{{topic.topic_name}}+{{search}}</p></div>
                         <div class="row-middle">
                             <div class="search">
-                                <input class="search-input" placeholder="搜索" v-model="search" @keyup.enter="searchAction" />
+                                <input class="search-input" placeholder="子话题搜索" v-model="search" @keyup.enter="searchAction" />
                                 <span class="search-btn" @click="searchAction"><i class="fa fa-search"></i></span>
                             </div>
                         </div>

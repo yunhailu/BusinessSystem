@@ -9,21 +9,21 @@
   .bgc(@bg-color);   .mg-left(180px);
   &-wrap{
     .tools{
-      .h(56px);  .pd(10px 0);  .mg(0);
+        .pd(10px 0);  .mg(0);.mg-left(20px);
       //display: flex;
       .disT();.w(100%);
-      .row-wrap{.w(45px);.h(100%);border-radius: 3px;border:1px solid #3e3e3e;.pd(20px);}
+      .row-wrap{.h(100%);.pd-right(20px);}
       .row-left{
-        .disTC();.w(25%);.bgc(#f9f9f9);.h(44px);
-        p{.h(44px);.mg(0);.lh(56px);.c(#3e3e3e);font-weight: 900;.f(20px);.pd-left(10px);overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
+        .disTC();.w(25%);.bgc(#f9f9f9);
+        p{.mg(0);.c(#3e3e3e);font-weight: 900;.f(20px);.pd-left(10px);overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
       }
       .row-middle{
         //flex:6;
         .disTC();.w(20%);
         .search{
-          .w(100%);.mg-left(20px);.f(20px);
+          .w(100%);.mg-left(20px);.f(20px);border:1px solid #bbb;
           .bgc(#e6e6e6);  .br(2px);
-          &-input{  .w(60%);  .input-transparent();  .h(12px);  .c(#666);  .disIB();  .mg(5px 10px);.h(32px); }
+          &-input{  .w(60%);  .input-transparent();  .h(12px);  .c(#666);  .disIB();  .mg(5px 10px);.h(32px);.f(16px); }
           &-btn{ .float-right();  .disIB();  .pointer(); .pd(3px 10px);
             i{.lh(36px);}
           }
@@ -40,7 +40,7 @@
     li.active{ .bgc(@body-theme);  .c(white);  }
   }
   .diyDate{
-    .mg-left(125px);
+    .mg-left(200px);
     .date{
       .icon{
         .float-left();  .lh(24px);  .pd(0 7px);
