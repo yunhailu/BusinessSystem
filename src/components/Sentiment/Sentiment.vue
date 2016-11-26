@@ -24,7 +24,7 @@
     import Local from "../../local/local";
     import {Chart, Pie} from '../../config/config';
     import * as Api from '../../widgets/Api';
-    import { analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic, analyticsDateChange, analyticsStart, analyticsEnd, activeAnalyticsTopic, analyticsRefreshTopic } from '../../vuex/getters';
+    import {analyticsSubTopicId, analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic, analyticsDateChange, analyticsStart, analyticsEnd, activeAnalyticsTopic, analyticsRefreshTopic } from '../../vuex/getters';
 
 
     export default{
@@ -270,7 +270,7 @@
             }
         },
         vuex: {
-            getters: { analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic, analyticsDateChange, analyticsStart, analyticsEnd, activeAnalyticsTopic, analyticsRefreshTopic }
+            getters: {analyticsSubTopicId, analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic, analyticsDateChange, analyticsStart, analyticsEnd, activeAnalyticsTopic, analyticsRefreshTopic }
         },
         methods: {
             actions(val, idx){
@@ -576,6 +576,13 @@
                         //this.list = list[val.key];
 
                         this.getCommentList(val.key);
+                    }
+                }
+            },
+            analyticsSubTopicId:{
+                handler(val){
+                    if(this.analyticsSubTopicId != 0){
+                        this.init();
                     }
                 }
             }

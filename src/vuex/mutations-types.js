@@ -32,6 +32,8 @@ export const UPDATE_END = 'UPDATE_END';
 export const UPDATE_REFRESH_TOPIC = 'UPDATE_REFRESH_TOPIC';
 
 export const UPDATE_RESET_SEARCH = 'UPDATE_RESET_SEARCH';
+
+export const UPDATE_SUBTOPIC_ID = 'UPDATE_SUBTOPIC_ID';
 /**
  * Compare
  **/
