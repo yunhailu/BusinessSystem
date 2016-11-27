@@ -542,6 +542,18 @@ export const getTodayList = params => {
     });
 };
 
+/**
+ *  Encapsulate `get upload token` interface
+ *
+ *  @return {Promise} With upload token.
+ */
+export const uploadToken = params => {
+    return Api.request({
+        url: `${rootURI}/upload/token`,
+        params
+    });
+};
+
 
 
 
