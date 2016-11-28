@@ -221,6 +221,8 @@
                                 },
                                 'FileUploaded': function(up, file, info) {
                                     console.log('FileUploaded',up, file, info);
+                                    console.log('FileUploaded getSource:', file.getSource());
+
                                     // 每个文件上传成功后,处理相关的事情
                                     // 其中 info 是文件上传成功后，服务端返回的json，形式如
                                     // {
