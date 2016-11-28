@@ -73,8 +73,31 @@
             }
         },
         vuex: {
-            actions: {setAnalyticsSubTopicId, setActiveAnalyticsTopic,setAnalyticsType, setAnalyticsTimeRange, setAnalyticsSource, setAnalyticsSubTopic, setAnalyticsDateChange, setAnalyticsStart, setAnalyticsEnd, setAnalyticsResetSearch },
-            getters: {analyticsSubTopicId, activeAnalyticsTopic,analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic, analyticsDateChange, analyticsStart, analyticsEnd, analyticsResetSearch }
+            actions: {
+                setAnalyticsSubTopicId,
+                setActiveAnalyticsTopic,
+                setAnalyticsType,
+                setAnalyticsTimeRange,
+                setAnalyticsSource,
+                setAnalyticsSubTopic,
+                setAnalyticsDateChange,
+                setAnalyticsStart,
+                setAnalyticsEnd,
+                setAnalyticsResetSearch
+            },
+            getters: {
+                analyticsSubTopicId,
+                activeAnalyticsTopic,
+                analyticsType,
+                analyticsTimeRange,
+                analyticsSource,
+                analyticsSubTopic,
+                analyticsDateChange,
+                analyticsStart,
+                analyticsEnd,
+                analyticsResetSearch
+            }
+        },
         components:{
             'header-component': HeaderComponent,
             'menu-component': MenuComponent,

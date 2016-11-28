@@ -9,7 +9,8 @@
   .bgc(@bg-color);   .mg-left(180px);
   &-wrap{
     .tools{
-        .pd(10px 0);  .mg(0);.mg-left(20px);
+      .h(36px);  .pd(10px 0);  .mg(0);
+      //  .pd(10px 0);  .mg(0);.mg-left(20px);
       //display: flex;
       .disT();.w(100%);
       .row-left{.disTC();.w(150px);.c(#666);font-weight: 900;.pd-left(20px);}
@@ -17,12 +18,18 @@
         //flex:6;
         .disTC();.w(500px);
         .search{
-          .w(100%);.mg-left(20px);.f(20px);border:1px solid #bbb;
+          .w(100%);  .h(24px);.mg-left(20px);
+          //.w(100%);.mg-left(20px);.f(20px);border:1px solid #bbb;
           .bgc(#e6e6e6);  .br(2px);
-          &-input{  .w(60%);  .input-transparent();  .h(12px);  .c(#666);  .disIB();  .mg(5px 10px);.h(32px);.f(16px); }
-          &-btn{ .float-right();  .disIB();  .pointer(); .pd(3px 10px);
-            i{.lh(36px);}
+          &-input{
+            .w(80%);  .input-transparent();  .h(12px);  .c(#666);  .disIB();  .mg(5px 10px);
+            //.w(60%);  .input-transparent();  .h(12px);  .c(#666);  .disIB();  .mg(5px 10px);.h(32px);.f(16px);
           }
+          &-btn{ .float-right();  .disIB();  .pointer(); .pd(3px 10px); }
+          /*&-btn{ .float-right();  .disIB();  .pointer(); .pd(3px 10px);
+
+            i{.lh(36px);}
+          }*/
         }
       }
       .row-null{.disTC();}
@@ -37,7 +44,8 @@
     li.active{ .bgc(@body-theme);  .c(white);  }
   }
   .diyDate{
-    .mg-left(200px);
+    //.mg-left(200px);
+    .mg-left(125px);
     .date{
       .icon{
         .float-left();  .lh(24px);  .pd(0 7px);

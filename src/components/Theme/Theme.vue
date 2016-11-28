@@ -84,7 +84,7 @@
                 loadingParams: {
                     visiable: false,
                     type: 'loading',
-                    content: "请稍后......"
+                    content: "请稍侯......"
                 },
                 themeWordLoading: true,
                 themeWordOption: {
