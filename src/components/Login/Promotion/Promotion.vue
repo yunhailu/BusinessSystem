@@ -22,8 +22,8 @@
             </div>
         </swiper-slide>
         <swiper-slide class="swiper-item item-2">
-            <img class="sliderimg" src="../images/login-bg-2.jpg">
-            <div class="source-title">
+            <img class="sliderimg" src="../images/login-banner-2.jpg">
+            <!--<div class="source-title">
                 <span>六大信息来源</span>
             </div>
            <div><img class="weibo" src="../images/login-weibo.png"></div>
@@ -31,11 +31,11 @@
            <div><img class="web" src="../images/login-web.png"></div>
            <div><img class="appImg" src="../images/login-app.png"></div>
            <div><img class="overseas" src="../images/login-overseas.png"></div>
-           <div><img class="sengine" src="../images/login-search.png"></div>
+           <div><img class="sengine" src="../images/login-search.png"></div>-->
         </swiper-slide>
         <swiper-slide class="swiper-item item-3">
-            <!--<img class="sliderimg" src="../images/login-banner-3.jpg">-->
-            <img class="sliderimg" src="../images/login-bg-3.jpg">
+            <img class="sliderimg" src="../images/login-banner-3.jpg">
+           <!-- <img class="sliderimg" src="../images/login-bg-3.jpg">
             <div class="source-title">
                 <span>六大数据分析功能</span>
                 <p>精确和实时计算知名产品、知名品牌、知名企业的用户满意度和交易量，从而为企业决策提供最精准的参考意见</p>
@@ -46,13 +46,13 @@
             <div><img class="login-3-4" src="../images/login-banner3-4.png"></div>
             <div><img class="login-3-5" src="../images/login-banner3-5.png"></div>
             <div><img class="login-3-6" src="../images/login-banner3-6.png"></div>
-            <div><img class="login-3-7" src="../images/login-banner3-7.png"></div>
+            <div><img class="login-3-7" src="../images/login-banner3-7.png"></div>-->
 
         </swiper-slide>
         <swiper-slide class="swiper-item item-4">
-            <!--<img class="sliderimg" src="../images/login-banner-4.jpg">-->
-            <img class="sliderimg" src="../images/login-bg-4.jpg">
-            <div><img src="../images/login-banner4-1.png"></div>
+            <img class="sliderimg" src="../images/login-banner-4.jpg">
+           <!-- <img class="sliderimg" src="../images/login-bg-4.jpg">
+            <div><img src="../images/login-banner4-1.png"></div>-->
         </swiper-slide>
         <div class="swiper-pagination"  slot="pagination"></div>
     </swiper>
