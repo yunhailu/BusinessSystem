@@ -578,10 +578,10 @@
             getBubblChart(){
                 this.themeScatterLoading=true;
                 const topic_id = this.activeAnalyticsTopic.topic_id,
-                end='2016-11-15',
-                start='2016-11-11';
-                        //end = this.analyticsEnd,
-                        //start = this.analyticsStart;
+                //end='2016-11-15',
+                //start='2016-11-11';
+                        end = this.analyticsEnd,
+                        start = this.analyticsStart;
                 Api.getBubblChart({topic_id,start,end}).then(resp => {
                     //console.log('13',resp.data);
                     if(resp.data.code == 0){
@@ -634,20 +634,7 @@
                         	this.themeScatterOption.xAxis.data=datearr5;
                         	
                         }
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                      
-
-
-
-
-                        //console.log('数据',yuy0); //数据组的所有数据
+                        console.log('数据',yuy0); //数据组的所有数据
                         
                         const dataOne=yuy0[0];
                         const dataTwue=yuy0[1];
@@ -655,12 +642,8 @@
                         const dataFour=yuy0[3];
                         const dataFire=yuy0[4];
                         
-                        //console.log('dataOne:',dataOne);
-                        
-                        
-                        
-                 
-						
+                        console.log('dataOne:',dataOne);
+
 							const result0 = [];
 							for(var i=0; i < dataOne.length; i++) {
 							      dataOne[i]=_.omit(dataOne[i],'date');

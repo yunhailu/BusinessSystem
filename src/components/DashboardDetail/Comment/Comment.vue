@@ -85,7 +85,8 @@
                     weibo: {positive: [], negative: [], neutral: []},
                     client: {positive: [], negative: [], neutral: []},
                     web: {positive: [], negative: [], neutral: []},
-                    overseas: {positive: [], negative: [], neutral: []}
+                    overseas: {positive: [], negative: [], neutral: []},
+                    sengine: {positive: [], negative: [], neutral: []}
                 },
 
                 commentBarLoading: true,
@@ -444,7 +445,8 @@
                     client: {positive: [], negative: [], neutral: []},
                     web: {positive: [], negative: [], neutral: []},
                     overseas: {positive: [], negative: [], neutral: []},
-                    all: {positive: [], negative: [], neutral: []}
+                    all: {positive: [], negative: [], neutral: []},
+                    sengine: {positive: [], negative: [], neutral: []}
                 };
             },
             deleteItem(){

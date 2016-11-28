@@ -2,10 +2,10 @@
     <tabs :actions="actions" :datas="commentNums"></tabs>
     <!--<div>Evaluation</div>-->
     <div class="charts">
-        <div class="chart commentLeftBar" v-echarts="commentBarOption" :click="clickChartAction" :loading="commentBarLoading" theme="macarons"></div><!--theme="infographic"-->
+        <div class="chart commentLeftBar"  v-echarts="commentBarOption" :click="clickChartAction" :loading="commentBarLoading" theme="macarons"></div><!--theme="infographic"-->
         <!--<div class="chart commentRightBar" v-echarts="commentChartOption" :loading="commentChartLoading" v-show="isShow" theme="macarons"></div>-->
         <div class="chart commentRightBar" v-echarts="commentPieOption2" :loading="commentPieLoading2" v-show="isShow" theme="macarons"></div>
-        <div class="chart commentRightBar" v-echarts="commentPieOption" :loading="commentChartLoading" v-show="!isShow" theme="macarons"></div>
+        <!--<div class="chart commentRightBar" v-echarts="commentPieOption" :loading="commentChartLoading" v-show="!isShow" theme="macarons"></div>-->
     </div>
     <list-panel :list="list" :options="options" :select-title="selectTitle" :select-value.sync="sortVal"></list-panel>
     <tips :visible.sync="loadingParams.visiable" :tipsparam.sync="loadingParams"></tips>
@@ -15,6 +15,7 @@
 </style>
 <script type="text/ecmascript-6">
     import _ from 'underscore';
+    import moment from 'moment';
     import { Chart, Pie } from '../../config/config';
     import Local from '../../local/local';
     import * as Api from '../../widgets/Api';
@@ -175,19 +176,28 @@
         methods: {
             clickChartAction(opts){
                 console.log('clickChartAction opts', opts);
-                //this.loadingParams.visiable = true;
+                this.loadingParams.visiable = true;
                 const topic_id = this.activeAnalyticsTopic.topic_id,
                         topic = this.activeAnalyticsTopic.topic_name,
                         subtopic = this.analyticsSubTopic,
                         source = this.analyticsSource,
                         time_dimension = 0,
-                        type = "time",
-                        end = opts.name.split(":")[0],
-                        start = opts.name.split(":")[0];
+                        type = "time";
+                let start =opts.name.split(":")[0],
+                        end = opts.name.split(":")[0];
+                if(opts.name.split(" ")[1]){
+                    console.log(typeof opts.name.split(":")[0],opts.name.split(":")[0])
+                    end = opts.name.split(":")[0]
+                    end = end.split(" ")[0]+'T'+end.split(" ")[1];
+                    start = moment(opts.name.split(":")[0],"YYYY-MM-DD HH").subtract(8, 'hour').format("YYYY-MM-DD HH")
+                    start=start.split(" ")[0]+'T'+start.split(" ")[1];
+                    console.log('start',start,end);
+                }
                 Api.getCommentList({type, topic_id, topic, subtopic, source, start, end, time_dimension}).then(resp => {
                     //console.log(resp.data);
                     //this.loadingParams.visiable = false;
                     if(resp.data.code == 0){
+                    this.loadingParams.visiable = false;
                         this.list = resp.data.data;
                     }
                 });

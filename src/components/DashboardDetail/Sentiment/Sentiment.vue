@@ -92,6 +92,9 @@
                     },
                     overseas: {
                         happy: [], anger: [], sorrow: [], disgust: [], fear: []
+                    },
+                    sengine: {
+                        happy: [], anger: [], sorrow: [], disgust: [], fear: []
                     }
                 },
 
@@ -350,7 +353,7 @@
                     if(resp.data.code == 0){
 
                         const details = resp.data.data;
-                        //console.log('查看是否进入报告内情绪数据请求',details);
+                        console.log('查看是否进入报告内情绪数据请求',details);
                         this.x = _.map(details, detail => detail.date);
                         const _this = this;
                         //console.log("xxxx", this.x);
@@ -442,6 +445,9 @@
                         happy: [], anger: [], sorrow: [], disgust: [], fear: []
                     },
                     overseas: {
+                        happy: [], anger: [], sorrow: [], disgust: [], fear: []
+                    },
+                    sengine: {
                         happy: [], anger: [], sorrow: [], disgust: [], fear: []
                     }
                 };
