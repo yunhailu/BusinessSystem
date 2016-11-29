@@ -46,7 +46,7 @@ module.exports = {
 				loader : 'json-loader'
 			},
 			{
-				test : /\.(png|jpg|gif|ttf|otf|eot|woff|svg)/,
+				test : /\.(png|jpg|gif|ttf|otf|eot|woff|svg|swf)/,
 				loader : 'url-loader',
 				query : {
 					limit : 10000,
