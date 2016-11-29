@@ -142,9 +142,7 @@
                         data: []
                     }
                 },
-
                 upList: [],
-
                 downList: [],
 
                 themeScatterOption: {
@@ -239,6 +237,20 @@
                             show: false
                         }
                     }),
+                    graphic:[
+                        {
+                            type: 'text',
+                            z: -10,
+                            left: 'center', // 相对父元素居中
+                            top: 'middle',  // 相对父元素居中
+                            rotation: Math.PI / 4,
+                            style: {
+                                fill: '#fff',
+                                text: '沃德股市气象站',
+                                font: 'bold 34px Microsoft YaHei'
+                            }
+                        }
+                    ],
                     series: [
                         {
                             name: '',
@@ -329,6 +341,20 @@
                         type: 'category',
                         data: []
                     }),
+                    graphic:[
+                        {
+                            type: 'text',
+                            z: -10,
+                            left: 'center', // 相对父元素居中
+                            top: 'middle',  // 相对父元素居中
+                            rotation: Math.PI / 4,
+                            style: {
+                                fill: '#fff',
+                                text: '沃德股市气象站',
+                                font: 'bold 34px Microsoft YaHei'
+                            }
+                        }
+                    ],
                     series: [
                         {
                             name: words.topics,
@@ -391,6 +417,20 @@
                     }),
                     progressive: 4,
                     textStyle: Chart.textStyle,
+                    graphic:[
+                        {
+                            type: 'text',
+                            z: -10,
+                            left: 'center', // 相对父元素居中
+                            top: 'middle',  // 相对父元素居中
+                            rotation: Math.PI / 4,
+                            style: {
+                                fill: '#fff',
+                                text: '沃德股市气象站',
+                                font: 'bold 34px Microsoft YaHei'
+                            }
+                        }
+                    ],
                     series : []
                 },
                 themeLineLoading: true
@@ -402,10 +442,20 @@
                 const topic_id = this.data.topic_id,
                         //end='2016-11-15',
                         //start='2016-11-11';
-                        time_interval = this.data.time_interval,
+                        time_interval = this.data.time_interval;
                         //time_dimension = this.data.time_dimension,
-                        start = moment().subtract(time_interval, 'days').format('YYYY-MM-DD'),
-                        end = moment().format('YYYY-MM-DD');
+//                        start = moment().subtract(time_interval, 'days').format('YYYY-MM-DD'),
+//                        end = moment().format('YYYY-MM-DD');
+                if(time_interval!=0){
+                    const start = moment().subtract(time_interval, 'days').format('YYYY-MM-DD'),
+                            end = moment().format('YYYY-MM-DD');
+                }else {
+                    let start = moment().subtract(8, 'hour').format('YYYY-MM-DD HH'),
+                            end = moment().format('YYYY-MM-DD HH');
+                    start = start.split(' ')[0] + 'T' + start.split(' ')[1];
+                    end = end.split(' ')[0] + 'T' + end.split(' ')[1];
+                    console.log('start', start, end);
+                }
                 Api.getBubblChart({topic_id,start,end}).then(resp => {
                     console.log('13',resp.data);
                     if(resp.data.code == 0){

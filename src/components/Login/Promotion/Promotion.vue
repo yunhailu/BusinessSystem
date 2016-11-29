@@ -23,6 +23,7 @@
         </swiper-slide>
         <swiper-slide class="swiper-item item-2">
             <img class="sliderimg" src="../images/login-banner-2.jpg">
+            <!--<img class="sliderimg" src="../images/login-banner-2.jpg">
             <!--<div class="source-title">
                 <span>六大信息来源</span>
             </div>

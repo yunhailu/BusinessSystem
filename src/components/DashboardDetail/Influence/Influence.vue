@@ -84,9 +84,19 @@
                         time_interval = this.data.time_interval,
                         //time_dimension = this.data.time_dimension,
                         time_dimension = time_interval > 7 ? 1 : 0,
-                        start = moment().subtract(time_interval, 'days').format('YYYY-MM-DD'),
-                        end = moment().format('YYYY-MM-DD'),
+//                        start = moment().subtract(time_interval, 'days').format('YYYY-MM-DD'),
+//                        end = moment().format('YYYY-MM-DD'),
                         topic = this.data.topic;
+                if(time_interval!=0){
+                    const start = moment().subtract(time_interval, 'days').format('YYYY-MM-DD'),
+                            end = moment().format('YYYY-MM-DD');
+                }else {
+                    let start = moment().subtract(8, 'hour').format('YYYY-MM-DD HH'),
+                            end = moment().format('YYYY-MM-DD HH');
+                    start = start.split(' ')[0] + 'T' + start.split(' ')[1];
+                    end = end.split(' ')[0] + 'T' + end.split(' ')[1];
+                    console.log('start', start, end);
+                }
                 Api.getInfluenceList({ subtopic, topic_id, source, time_dimension, start, end, topic }).then(resp => {
                     //const resp = {data: {code:0, data: [{id: "1234", influencer: "台湾", posts: 6, like: 123, resend: 32, sentiment: {happy: 5, anger: 15, sorrow: 10, disgust: 0, fear: 5}, rate: {key: "up", value: "24%"}},{"id": "1234", "influencer": "台湾1", "posts": 6, "like": 123, "resend": 32, "sentiment": {happy: 3, anger: 5, sorrow: 10, disgust: 3, fear: 5}, "rate": {"key": "up", "value": "24%"}}] }};
                     if(resp.data.code ==0){

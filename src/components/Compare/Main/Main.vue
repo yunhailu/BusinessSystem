@@ -76,6 +76,59 @@
                     }),
                     progressive: 4,
                     textStyle: Chart.textStyle,
+                    graphic:[
+                        {
+                            type: 'group',
+                            left: 0,
+                            top: 0,
+                            children: [
+                                {
+                                    type: 'rect',
+                                    z: 100,
+                                    left: 'center',
+                                    top: 'middle',
+                                    shape: {
+                                        width: 100,
+                                        height: 40
+                                    },
+                                    style: {
+                                        fill: '#fff',
+                                        stroke: '#bbb',
+                                        lineWidth: 2,
+                                        shadowBlur: 8,
+                                        shadowOffsetX: 3,
+                                        shadowOffsetY: 3,
+                                        shadowColor: 'rgba(0,0,0,0.3)'
+                                    }
+                                },
+                                {
+                                    type: 'text',
+                                    z: 100,
+                                    left: 'center',
+                                    top: 'middle',
+                                    style: {
+                                        fill: '#777',
+                                        text: [
+                                           '关键词可多选'
+                                        ].join('\n'),
+                                        font: '14px Microsoft YaHei'
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            type: 'text',
+                            z: -10,
+                            left: 'center', // 相对父元素居中
+                            top: 'middle',  // 相对父元素居中
+                            rotation: Math.PI / 4,
+                            style: {
+                                fill: '#fff',
+                                text: '沃德股市气象站',
+                                font: 'bold 34px Microsoft YaHei'
+                            }
+                        }
+                ],
                     series : []
                 },
 
@@ -90,6 +143,20 @@
                     textStyle: Pie.textStyle,
                     toolbox: Pie.toolbox,
                     color: _.extend([], Chart.color),
+                    graphic:[
+                        {
+                            type: 'text',
+                            z: -10,
+                            left: 'center', // 相对父元素居中
+                            top: 'middle',  // 相对父元素居中
+                            rotation: Math.PI / 4,
+                            style: {
+                                fill: '#fff',
+                                text: '沃德股市气象站',
+                                font: 'bold 34px Microsoft YaHei'
+                            }
+                        }
+                    ],
                     series: _.extend({}, Pie.series, {
                         name: 'Compare',
                         radius: ['25%', '60%'],
@@ -140,6 +207,20 @@
                             }
                         }
                     },
+                    graphic:[
+                        {
+                            type: 'text',
+                            z: -10,
+                            left: 'center', // 相对父元素居中
+                            top: 'middle',  // 相对父元素居中
+                            rotation: Math.PI / 4,
+                            style: {
+                                fill: '#fff',
+                                text: '沃德股市气象站',
+                                font: 'bold 34px Microsoft YaHei'
+                            }
+                        }
+                    ],
                     series: []
                 },
                 compareNums:[]
@@ -359,7 +440,7 @@
                 this.initData();
 
                 _.map(activeCompareTopics,item =>{
-                    const topicParams = {
+                    let topicParams = {
                         topic_id:item.topic_id,
                         topic:item.topic_name,
                         subtopic:this.compareSubTopic,
@@ -368,6 +449,12 @@
                         end:this.compareEnd,
                         time_dimension:this.compareTimeRange<=10 ? 0 :1
                     };
+                if(topicParams.start.includes(' ') && topicParams.end.includes(' ')){
+                    topicParams.start = topicParams.start.split(' ')[0]+'T'+topicParams.start.split(' ')[1];
+                    topicParams.end = topicParams.end.split(' ')[0]+'T'+topicParams.end.split(' ')[1];
+                    console.log('start',topicParams.start,topicParams.end);
+                }
+
                     this.dealAddSummaryData([item],topicParams);
                     this.dealAddSentimentData([item],topicParams);
 
@@ -556,7 +643,7 @@
                         //新值不为空---如果老值为空
                         this.compareNums=[];
                         const newTopic = val;
-                        const topicParams = {
+                        let topicParams = {
                             topic_id:_.isEmpty(newTopic) ? '' : newTopic[0].topic_id,
                             topic:_.isEmpty(newTopic) ? '' : newTopic[0].topic_name,
                             subtopic:this.compareSubTopic,
@@ -565,6 +652,11 @@
                             end:this.compareEnd,
                             time_dimension:this.compareTimeRange<=10 ? 0 :1
                         };
+                        if(topicParams.start.includes(' ') && topicParams.end.includes(' ')){
+                            topicParams.start = topicParams.start.split(' ')[0]+'T'+topicParams.start.split(' ')[1];
+                            topicParams.end = topicParams.end.split(' ')[0]+'T'+topicParams.end.split(' ')[1];
+                            console.log('start',topicParams.start,topicParams.end);
+                        }
                         this.dealAddOnlyOneSummaryData(newTopic,topicParams);
                         this.dealAddOnlyOneSentimentData(newTopic,topicParams);
                     }else{
@@ -577,7 +669,7 @@
                                 this.compareNums=[];
                                 const newTopic = _.difference(val, oldVal);
                                 console.log(newTopic);
-                                const topicParams = {
+                                let topicParams = {
                                     topic_id:_.isEmpty(newTopic) ? '' : newTopic[0].topic_id,
                                     topic:_.isEmpty(newTopic) ? '' : newTopic[0].topic_name,
                                     subtopic:this.compareSubTopic,
@@ -586,6 +678,11 @@
                                     end:this.compareEnd,
                                     time_dimension:this.compareTimeRange<=10 ? 0 :1
                                 };
+                                if(topicParams.start.includes(' ') && topicParams.end.includes(' ')){
+                                    topicParams.start = topicParams.start.split(' ')[0]+'T'+topicParams.start.split(' ')[1];
+                                    topicParams.end = topicParams.end.split(' ')[0]+'T'+topicParams.end.split(' ')[1];
+                                    console.log('start',topicParams.start,topicParams.end);
+                                }
                                 this.dealAddSummaryData(newTopic,topicParams);
                                 this.dealAddSentimentData(newTopic,topicParams);
                             } else {
@@ -625,7 +722,7 @@
                             console.log('这里对空数据做出判断');
                             this.compareNums=[];
                             const newTopic = val;
-                            const topicParams = {
+                            let topicParams = {
                                 topic_id:_.isEmpty(newTopic) ? '' : newTopic[0].topic_id,
                                 topic:_.isEmpty(newTopic) ? '' : newTopic[0].topic_name,
                                 subtopic:this.compareSubTopic,
@@ -634,6 +731,11 @@
                                 end:this.compareEnd,
                                 time_dimension:this.compareTimeRange<=10 ? 0 :1
                             };
+                            if(topicParams.start.includes(' ') && topicParams.end.includes(' ')){
+                                topicParams.start = topicParams.start.split(' ')[0]+'T'+topicParams.start.split(' ')[1];
+                                topicParams.end = topicParams.end.split(' ')[0]+'T'+topicParams.end.split(' ')[1];
+                                console.log('start',topicParams.start,topicParams.end);
+                            }
                             this.initData();
                             this.dealAddOnlyOneSummaryData(newTopic,topicParams);
                             this.dealAddOnlyOneSentimentData(newTopic,topicParams);

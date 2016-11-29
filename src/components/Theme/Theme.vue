@@ -89,6 +89,20 @@
                 themeWordLoading: true,
                 themeWordOption: {
                     tooltip: {},
+                    graphic:[
+                        {
+                            type: 'text',
+                            z: -10,
+                            left: 'center', // 相对父元素居中
+                            top: 'middle',  // 相对父元素居中
+                            rotation: Math.PI / 4,
+                            style: {
+                                fill: '#fff',
+                                text: '沃德股市气象站',
+                                font: 'bold 34px Microsoft YaHei'
+                            }
+                        }
+                    ],
                     series: {
                         //grid: {x:0, x2:0},
                         type: 'wordCloud',
@@ -160,6 +174,20 @@
                             'china': true
                         }
                     },
+                    graphic:[
+                        {
+                            type: 'text',
+                            z: -10,
+                            left: 'center', // 相对父元素居中
+                            top: 'middle',  // 相对父元素居中
+                            rotation: Math.PI / 4,
+                            style: {
+                                fill: '#fff',
+                                text: '沃德股市气象站',
+                                font: 'bold 34px Microsoft YaHei'
+                            }
+                        }
+                    ],
                     series : [
                         {
                             name: '热门微博用户',
@@ -256,6 +284,20 @@
                         left:'left',
                         data:['男生','女生']
                     },
+                    graphic:[
+                        {
+                            type: 'text',
+                            z: -10,
+                            left: 'center', // 相对父元素居中
+                            top: 'middle',  // 相对父元素居中
+                            rotation: Math.PI / 4,
+                            style: {
+                                fill: '#fff',
+                                text: '沃德股市气象站',
+                                font: 'bold 34px Microsoft YaHei'
+                            }
+                        }
+                    ],
                     series : [
                         {
                             name: '微博男女比例分布',
@@ -383,6 +425,20 @@
                             show: false
                         }
                     }),
+                    graphic:[
+                        {
+                            type: 'text',
+                            z: -10,
+                            left: 'center', // 相对父元素居中
+                            top: 'middle',  // 相对父元素居中
+                            rotation: Math.PI / 4,
+                            style: {
+                                fill: '#fff',
+                                text: '沃德股市气象站',
+                                font: 'bold 34px Microsoft YaHei'
+                            }
+                        }
+                    ],
                     series: [
                         {
                             name: '',
@@ -475,6 +531,20 @@
                         type: 'category',
                         data: []
                     }),
+                    graphic:[
+                        {
+                            type: 'text',
+                            z: -10,
+                            left: 'center', // 相对父元素居中
+                            top: 'middle',  // 相对父元素居中
+                            rotation: Math.PI / 4,
+                            style: {
+                                fill: '#fff',
+                                text: '沃德股市气象站',
+                                font: 'bold 34px Microsoft YaHei'
+                            }
+                        }
+                    ],
                     series: [
                         {
                             name: words.topics,
@@ -537,6 +607,20 @@
                     }),
                     progressive: 4,
                     textStyle: Chart.textStyle,
+                    graphic:[
+                        {
+                            type: 'text',
+                            z: -10,
+                            left: 'center', // 相对父元素居中
+                            top: 'middle',  // 相对父元素居中
+                            rotation: Math.PI / 4,
+                            style: {
+                                fill: '#fff',
+                                text: '沃德股市气象站',
+                                font: 'bold 34px Microsoft YaHei'
+                            }
+                        }
+                    ],
                     series : []
                 },
                 themeLineLoading: true,
@@ -937,9 +1021,16 @@
                     subtopic = this.analyticsSubTopic,
                     source = this.analyticsSource,
                     time_interval = this.analyticsTimeRange,
-                    time_dimension = time_interval > 7 ? 1 : 0,
-                    end = this.analyticsEnd,
+                    time_dimension = time_interval > 7 ? 1 : 0;
+                let end =this.analyticsEnd,
                     start = this.analyticsStart;
+                if(start.includes(' ') && end.includes(' ')){
+                    start = start.split(' ')[0]+'T'+start.split(' ')[1];
+                    end = end.split(' ')[0]+'T'+end.split(' ')[1];
+                    console.log('start',start,end);
+                }
+                    /*end = this.analyticsEnd,
+                    start = this.analyticsStart;*/
                 return Api.getTrendList({topic_id, topic, subtopic, source, start, end, time_dimension}).then(resp => {
                     //console.log('getTrendList', resp);
                     if(resp.data.code == 0){
@@ -955,9 +1046,16 @@
                         subtopic = this.analyticsSubTopic,
                         source = this.analyticsSource,
                         time_interval = this.analyticsTimeRange,
-                        time_dimension = time_interval > 7 ? 1 : 0,
-                        end = this.analyticsEnd,
+                        time_dimension = time_interval > 7 ? 1 : 0;
+                let end =this.analyticsEnd,
                         start = this.analyticsStart;
+                if(start.includes(' ') && end.includes(' ')){
+                    start = start.split(' ')[0]+'T'+start.split(' ')[1];
+                    end = end.split(' ')[0]+'T'+end.split(' ')[1];
+                    console.log('start',start,end);
+                }
+//                        end = this.analyticsEnd,
+//                        start = this.analyticsStart;
                 return Api.getWordCloud({topic_id, topic, subtopic, source, start, end, time_dimension}).then(resp => {
                     //console.log('getWordCloud',resp);
                     this.loadingParams.visiable = false;
@@ -1001,9 +1099,16 @@
                         subtopic = this.analyticsSubTopic,
                         source = this.analyticsSource,
                         time_interval = this.analyticsTimeRange,
-                        time_dimension = time_interval > 7 ? 1 : 0,
-                        end = this.analyticsEnd,
+                        time_dimension = time_interval > 7 ? 1 : 0;
+                let end =this.analyticsEnd,
                         start = this.analyticsStart;
+                if(start.includes(' ') && end.includes(' ')){
+                    start = start.split(' ')[0]+'T'+start.split(' ')[1];
+                    end = end.split(' ')[0]+'T'+end.split(' ')[1];
+                    console.log('start',start,end);
+                }
+//                        end = this.analyticsEnd,
+//                        start = this.analyticsStart;
                 Api.getThemeDetail({topic_id, topic, subtopic, source, start, end, time_dimension}).then(resp => {
                     //console.log('getThemeDetail', resp.data);
                     if(resp.data.code == 0){

@@ -55,12 +55,12 @@
         data(){
             return{
                 search: '',
-                dateVal: `${ moment().subtract(7, 'days').format('YYYY-MM-DD')} ~ ${moment().format('YYYY-MM-DD')}`,
+                dateVal: `${ moment().subtract(8, 'hour').format('YYYY-MM-DD HH')} ~ ${moment().format('YYYY-MM-DD HH')}`,
                 cal: {
                     show: false,
                     type: "date", //date datetime
-                    begin: moment().subtract(7, 'days').format('YYYY-MM-DD'),
-                    end: moment().format('YYYY-MM-DD'),
+                    begin: moment().subtract(8, 'hour').format('YYYY-MM-DD HH'),
+                    end: moment().format('YYYY-MM-DD HH'),
                     //value: `${ moment().subtract(7, 'days').format('YYYY-MM-DD')} ~ ${moment().format('YYYY-MM-DD')}`,
                     x: 0,
                     y: 0,

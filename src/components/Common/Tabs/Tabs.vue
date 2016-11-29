@@ -69,8 +69,7 @@
                     { name: words.source[2] },
                     { name: words.source[3] },
                     { name: words.source[4] },
-                    { name: words.source[5] },
-                    { name: words.source[6] }
+                    { name: words.source[5] }
                 ],
                 sourceActive: 0
 //                filters: [{
