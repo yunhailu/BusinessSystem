@@ -661,11 +661,16 @@
         methods: {
             getBubblChart(){
                 this.themeScatterLoading=true;
-                const topic_id = this.activeAnalyticsTopic.topic_id,
+                const topic_id = this.activeAnalyticsTopic.topic_id;
                 //end='2016-11-15',
                 //start='2016-11-11';
-                        end = this.analyticsEnd,
+                        let end =this.analyticsEnd,
                         start = this.analyticsStart;
+                if(start.includes(' ') && end.includes(' ')){
+                    start = start.split(' ')[0]+'T'+start.split(' ')[1];
+                    end = end.split(' ')[0]+'T'+end.split(' ')[1];
+                    console.log('start',start,end);
+                }
                 Api.getBubblChart({topic_id,start,end}).then(resp => {
                     //console.log('13',resp.data);
                     if(resp.data.code == 0){

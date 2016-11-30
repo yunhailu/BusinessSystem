@@ -321,11 +321,12 @@
                         //time_dimension = this.data.time_dimension,
                         time_dimension = time_interval > 7 ? 1 : 0,
                         topic = this.data.topic;
+                let start,end;
                 if(time_interval!=0){
-                    const start = moment().subtract(time_interval, 'days').format('YYYY-MM-DD'),
+                    start = moment().subtract(time_interval, 'days').format('YYYY-MM-DD'),
                             end = moment().format('YYYY-MM-DD');
                 }else{
-                    let start = moment().subtract(8, 'hour').format('YYYY-MM-DD HH'),
+                    start = moment().subtract(8, 'hour').format('YYYY-MM-DD HH'),
                             end = moment().format('YYYY-MM-DD HH');
                     start = start.split(' ')[0]+'T'+start.split(' ')[1];
                     end = end.split(' ')[0]+'T'+end.split(' ')[1];

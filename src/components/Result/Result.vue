@@ -409,6 +409,7 @@
                     overseas: []
                 };
             },
+
             init(topic){
                 //console.log('topic', topic);
                 this.initData();
@@ -417,6 +418,7 @@
             }
         },
         watch: {
+            //这里需要判断资源-------------------
             analyticsRefreshTopic:{
                 handler(val){
                     if(val !=0){
@@ -431,12 +433,14 @@
                     this.init(val);
                 }
             },
+            //这里需要判断资源-------------------
             analyticsDateChange: {
                 handler(val){
                     //this.loadingParams.visiable = true;
                     this.init();
                 }
             },
+            //这里需要判断资源-------------------
             analyticsSubTopicId:{
                 handler(val){
                     this.init();

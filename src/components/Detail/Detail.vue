@@ -118,7 +118,7 @@
                     series: [
                         {
                             name: '传播路径',
-                            color:["#000","#bc3c3c","#efbf09","#eae521","#3fea21","#21ead9","#214bea","#9521ea","#ea21d9"],
+                            color:["#bc3c3c","#efbf09","#eae521","#3fea21","#21ead9","#214bea","#9521ea","#ea21d9"],
                             type: 'graph',
                             layout: 'force',
                             force: {

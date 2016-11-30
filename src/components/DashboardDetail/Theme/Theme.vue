@@ -446,11 +446,14 @@
                         //time_dimension = this.data.time_dimension,
 //                        start = moment().subtract(time_interval, 'days').format('YYYY-MM-DD'),
 //                        end = moment().format('YYYY-MM-DD');
+                let start,end;
                 if(time_interval!=0){
-                    const start = moment().subtract(time_interval, 'days').format('YYYY-MM-DD'),
+                    console.log('这不是8h')
+                     start = moment().subtract(time_interval, 'days').format('YYYY-MM-DD'),
                             end = moment().format('YYYY-MM-DD');
                 }else {
-                    let start = moment().subtract(8, 'hour').format('YYYY-MM-DD HH'),
+                    console.log('这是8h')
+                     start = moment().subtract(8, 'hour').format('YYYY-MM-DD HH'),
                             end = moment().format('YYYY-MM-DD HH');
                     start = start.split(' ')[0] + 'T' + start.split(' ')[1];
                     end = end.split(' ')[0] + 'T' + end.split(' ')[1];
@@ -575,9 +578,22 @@
                     time_interval = this.data.time_interval,
                     //time_dimension = this.data.time_dimension,
                     time_dimension = time_interval > 7 ? 1 : 0,
-                    start = moment().subtract(time_interval, 'days').format('YYYY-MM-DD'),
-                    end = moment().format('YYYY-MM-DD'),
+//                    start = moment().subtract(time_interval, 'days').format('YYYY-MM-DD'),
+//                    end = moment().format('YYYY-MM-DD'),
                     topic = this.data.topic;
+                let start,end;
+                if(time_interval!=0){
+                    console.log('这不是8h')
+                    start = moment().subtract(time_interval, 'days').format('YYYY-MM-DD'),
+                            end = moment().format('YYYY-MM-DD');
+                }else {
+                    console.log('这是8h')
+                    start = moment().subtract(8, 'hour').format('YYYY-MM-DD HH'),
+                            end = moment().format('YYYY-MM-DD HH');
+                    start = start.split(' ')[0] + 'T' + start.split(' ')[1];
+                    end = end.split(' ')[0] + 'T' + end.split(' ')[1];
+                    console.log('start', start, end);
+                }
                 return Api.getTrendList({topic_id, topic, subtopic, source, start, end, time_dimension}).then(resp => {
                     console.log('getTrendList+查看数据', resp);
                     if(resp.data.code == 0){
@@ -592,9 +608,22 @@
                         time_interval = this.data.time_interval,
                         //time_dimension = this.data.time_dimension,
                         time_dimension = time_interval > 7 ? 1 : 0,
-                        start = moment().subtract(time_interval, 'days').format('YYYY-MM-DD'),
-                        end = moment().format('YYYY-MM-DD'),
+//                        start = moment().subtract(time_interval, 'days').format('YYYY-MM-DD'),
+//                        end = moment().format('YYYY-MM-DD'),
                         topic = this.data.topic;
+                let start,end;
+                if(time_interval!=0){
+                    console.log('这不是8h')
+                    start = moment().subtract(time_interval, 'days').format('YYYY-MM-DD'),
+                            end = moment().format('YYYY-MM-DD');
+                }else {
+                    console.log('这是8h')
+                    start = moment().subtract(8, 'hour').format('YYYY-MM-DD HH'),
+                            end = moment().format('YYYY-MM-DD HH');
+                    start = start.split(' ')[0] + 'T' + start.split(' ')[1];
+                    end = end.split(' ')[0] + 'T' + end.split(' ')[1];
+                    console.log('start', start, end);
+                }
                 return Api.getWordCloud({ topic_id, topic, subtopic, source, start, end, time_dimension }).then(resp => {
                     //console.log('getWordCloud',resp);
                     if(resp.data.code == 0){
@@ -630,9 +659,22 @@
                     time_interval = this.data.time_interval,
                     //time_dimension = this.data.time_dimension,
                     time_dimension = time_interval > 7 ? 1 : 0,
-                    start = moment().subtract(time_interval, 'days').format('YYYY-MM-DD'),
-                    end = moment().format('YYYY-MM-DD'),
+//                    start = moment().subtract(time_interval, 'days').format('YYYY-MM-DD'),
+//                    end = moment().format('YYYY-MM-DD'),
                     topic = this.data.topic;
+                let start,end;
+                if(time_interval!=0){
+                    console.log('这不是8h')
+                    start = moment().subtract(time_interval, 'days').format('YYYY-MM-DD'),
+                            end = moment().format('YYYY-MM-DD');
+                }else {
+                    console.log('这是8h')
+                    start = moment().subtract(8, 'hour').format('YYYY-MM-DD HH'),
+                            end = moment().format('YYYY-MM-DD HH');
+                    start = start.split(' ')[0] + 'T' + start.split(' ')[1];
+                    end = end.split(' ')[0] + 'T' + end.split(' ')[1];
+                    console.log('start', start, end);
+                }
                 Api.getThemeDetail({ topic_id, topic, subtopic, source, start, end, time_dimension }).then(resp => {
                     //console.log('getThemeDetail', resp.data);
                     if(resp.data.code == 0){

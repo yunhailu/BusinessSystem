@@ -30,15 +30,16 @@
     import _ from 'underscore';
     import Local from '../../../local/local';
     import AddDashboard from '../../AddDashboard/AddDashboard.vue'
-    import { analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic } from '../../../vuex/getters';
+    import {analyticsResetSearch,analyticsSubTopicId,analyticsRefreshTopic,analyticsDateChange, analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic } from '../../../vuex/getters';
     import { setAnalyticsType, setAnalyticsTimeRange, setAnalyticsSource, setAnalyticsSubTopic } from "../../../vuex/actions";
 
     export default{
         props: ['active', 'actions', 'sourceactive', 'datas'],
         vuex: {
             actions: { setAnalyticsType, setAnalyticsTimeRange, setAnalyticsSource, setAnalyticsSubTopic },
-            getters: { analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic }
+            getters: {analyticsSubTopicId,analyticsResetSearch,analyticsRefreshTopic,analyticsDateChange, analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic }
         },
+
         data(){
             const words = Local().analytics;
             return{
@@ -77,6 +78,34 @@
 //                    value: 1
 //                }]
             }
+        },
+        watch:{
+            analyticsSubTopicId:{
+                handler(val){
+                    if(val!=0){
+                       this.sourceActive=0;
+
+                    }
+                }
+            },
+            analyticsSubTopic:{
+                handler(val){
+                    this.sourceActive=0;
+                }
+            },
+            analyticsRefreshTopic:{
+                handler(val){
+                    if(val!=0){
+                        this.sourceActive=0;
+                    }
+                }
+            },
+            analyticsDateChange:{
+                handler(val){
+                    this.sourceActive=0;
+                }
+            },
+
         },
         methods: {
             filterAction(val, idx){
