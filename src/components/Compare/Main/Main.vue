@@ -42,7 +42,8 @@
                     weibo: {},
                     client: {},
                     web: {},
-                    overseas: {}
+                    overseas: {},
+                    sengine:{}
                 },
                 intervalTime:[],
                 radarData:[],
@@ -52,7 +53,8 @@
                     weibo: {},
                     client: {},
                     web: {},
-                    overseas: {}
+                    overseas: {},
+                    sengine:{}
                 },
 
                 compareChartLoading: false,
@@ -243,13 +245,15 @@
                 this.VariableChartData.weibo = {},
                 this.VariableChartData.client = {},
                 this.VariableChartData.web = {},
-                this.VariableChartData.overseas = {}
+                this.VariableChartData.overseas = {},
+                this.VariableChartData.sengine={},
                 this.VariableRadarData.all = {},
                 this.VariableRadarData.wechat = {},
                 this.VariableRadarData.weibo = {},
                 this.VariableRadarData.client = {},
                 this.VariableRadarData.web = {},
-                this.VariableRadarData.overseas = {}
+                this.VariableRadarData.overseas = {},
+                this.VariableRadarData.sengine = {}
             },
             mapData(data,intervalDate){
                 this.initChart();
@@ -313,6 +317,7 @@
                 const client =[];
                 const web =[];
                 const overseas =[];
+                const sengine = [];
                 const newChart =_.map(newTopicData,function(item) {
                     return _.reduce(_.values(item.values), function (memo, num) {
                         return memo + num;
@@ -325,6 +330,7 @@
                     client.push(item.values.client);
                     web.push(item.values.web);
                     overseas.push(item.values.overseas);
+                    sengine.push(item.values.sengine);
                 });
                 console.log(newTopic);
                 this.VariableChartData.all[newTopic[0].topic_name]=newChart;
@@ -332,7 +338,8 @@
                 this.VariableChartData.weibo[newTopic[0].topic_name]=weibo;
                 this.VariableChartData.client[newTopic[0].topic_name]=client;
                 this.VariableChartData.web[newTopic[0].topic_name]=web;
-                this.VariableChartData.overseas[newTopic[0 ].topic_name]=overseas;
+                this.VariableChartData.overseas[newTopic[0].topic_name]=overseas;
+                this.VariableChartData.sengine[newTopic[0].topic_name]=sengine;
                 console.log('VariableChartData',this.VariableChartData);
                 console.log('values',_.values(this.VariableChartData.all));
 
@@ -356,12 +363,14 @@
                 const client =[];
                 const web =[];
                 const overseas =[];
+                //const sengine=[];
                 _.each(details,(detail,index) =>{
                     client.push(detail.values.client);
                     weibo.push(detail.values.weibo);
                     web.push(detail.values.web);
                     overseas.push(detail.values.overseas);
                     wechat.push(detail.values.wechat);
+                   // sengine.push(detail.values.sengine);
                 });
                 //wechat
                 const newWechatlist = _.unzip(_.map(_.map(wechat,item =>{return _.values(item)}),item =>item));
@@ -566,6 +575,9 @@
                 const midOverseasCount = _.map(_.values(this.VariableChartData.overseas),item=>{
                     return _.reduce(item, function(memo, num){ return memo + num; }, 0);
                 });
+                const midSengineCount = _.map(_.values(this.VariableChartData.sengine),item=>{
+                    return _.reduce(item, function(memo, num){ return memo + num; }, 0);
+                });
                 console.log('midCount',midAllCount)
                 let compareSourceCount = this.compareSourceCount;
                 compareSourceCount.all = _.reduce(midAllCount, function(memo, num){ return memo + num; }, 0);
@@ -574,8 +586,13 @@
                 compareSourceCount.client = _.reduce(midClientCount, function(memo, num){ return memo + num; }, 0);
                 compareSourceCount.web = _.reduce(midWebCount, function(memo, num){ return memo + num; }, 0);
                 compareSourceCount.overseas = _.reduce(midOverseasCount, function(memo, num){ return memo + num; }, 0);
+                compareSourceCount.sengine = _.reduce(midSengineCount, function(memo, num){ return memo + num; }, 0);
+
                 console.log('___',compareSourceCount);
-                this.compareNums = _.values(compareSourceCount);
+                this.compareNums=[
+                    compareSourceCount.all,compareSourceCount.wechat,compareSourceCount.weibo,compareSourceCount.client+compareSourceCount.web,compareSourceCount.sengine,compareSourceCount.overseas
+                ];
+//                this.compareNums = _.values(compareSourceCount);
 //                this.setCompareSourceCount(_.values(compareSourceCount));
                 //console.log('....',this.compareSourceCount.all);
                 console.log('查看修改',this.compareNums);

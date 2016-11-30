@@ -448,13 +448,14 @@
                                 this.lineData[key].anger.push(detail.values[key].anger);
                                 this.lineData[key].sorrow.push(detail.values[key].sorrow);
                                 this.lineData[key].disgust.push(detail.values[key].disgust);
-                                this.lineData[key].fear.push(detail.values[key].fear);
+                                this.lineData[key].fear.push(detail.values[key].fear)
+
                             });
-                            all.happy.push(_this.lineData.wechat.happy[index] + _this.lineData.weibo.happy[index] + _this.lineData.client.happy[index] + _this.lineData.web.happy[index] + _this.lineData.overseas.happy[index]);
-                            all.anger.push(this.lineData.wechat.anger[index] + this.lineData.weibo.anger[index] + this.lineData.client.anger[index] + this.lineData.web.anger[index] + this.lineData.overseas.anger[index]);
-                            all.sorrow.push(this.lineData.wechat.sorrow[index] + this.lineData.weibo.sorrow[index] + this.lineData.client.sorrow[index] + this.lineData.web.sorrow[index] + this.lineData.overseas.sorrow[index]);
-                            all.disgust.push(this.lineData.wechat.disgust[index] + this.lineData.weibo.disgust[index] + this.lineData.client.disgust[index] + this.lineData.web.disgust[index] + this.lineData.overseas.disgust[index]);
-                            all.fear.push(this.lineData.wechat.fear[index] + this.lineData.weibo.fear[index] + this.lineData.client.fear[index] + this.lineData.web.fear[index] + this.lineData.overseas.fear[index]);
+                            all.happy.push(_this.lineData.wechat.happy[index] + _this.lineData.weibo.happy[index] + _this.lineData.client.happy[index] + _this.lineData.web.happy[index] + _this.lineData.overseas.happy[index]+_this.lineData.sengine.happy[index]);
+                            all.anger.push(this.lineData.wechat.anger[index] + this.lineData.weibo.anger[index] + this.lineData.client.anger[index] + this.lineData.web.anger[index] + this.lineData.overseas.anger[index] + this.lineData.sengine.anger[index]);
+                            all.sorrow.push(this.lineData.wechat.sorrow[index] + this.lineData.weibo.sorrow[index] + this.lineData.client.sorrow[index] + this.lineData.web.sorrow[index] + this.lineData.overseas.sorrow[index] + this.lineData.sengine.sorrow[index]);
+                            all.disgust.push(this.lineData.wechat.disgust[index] + this.lineData.weibo.disgust[index] + this.lineData.client.disgust[index] + this.lineData.web.disgust[index] + this.lineData.overseas.disgust[index]+ this.lineData.sengine.disgust[index]);
+                            all.fear.push(this.lineData.wechat.fear[index] + this.lineData.weibo.fear[index] + this.lineData.client.fear[index] + this.lineData.web.fear[index] + this.lineData.overseas.fear[index]+ this.lineData.sengine.fear[index]);
                         });
                         this.lineData.all = all;
                         //console.log(this.lineData);
@@ -504,12 +505,15 @@
                         const overseasNums=_.reduce(this.lineData.overseas.happy,(mome, val) => mome + val, 0)+_.reduce(this.lineData.overseas.anger,(mome, val) => mome + val, 0)
                                 +_.reduce(this.lineData.overseas.sorrow,(mome, val) => mome + val, 0)+_.reduce(this.lineData.overseas.disgust,(mome, val) => mome + val, 0)
                                 +_.reduce(this.lineData.overseas.fear,(mome, val) => mome + val, 0);
+                        const sengineNums=_.reduce(this.lineData.sengine.happy,(mome, val) => mome + val, 0)+_.reduce(this.lineData.sengine.anger,(mome, val) => mome + val, 0)
+                                +_.reduce(this.lineData.sengine.sorrow,(mome, val) => mome + val, 0)+_.reduce(this.lineData.sengine.disgust,(mome, val) => mome + val, 0)
+                                +_.reduce(this.lineData.sengine.fear,(mome, val) => mome + val, 0);
                         this.sentimentNums =[
                             allNums,
                             wechatNums,
                             weiboNums,
-                            clientNums,
-                            webNums,
+                            clientNums+webNums,
+                            sengineNums,
                             overseasNums
                         ];
                         console.log('这个',this.sentimentNums);

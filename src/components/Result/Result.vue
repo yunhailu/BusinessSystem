@@ -352,7 +352,8 @@
                             this.lineData.client.push(detail.values.client);
                             this.lineData.web.push(detail.values.web);
                             this.lineData.overseas.push(detail.values.overseas);
-                            const all = detail.values.wechat + detail.values.weibo + detail.values.client + detail.values.web + detail.values.overseas;
+                            this.lineData.sengine.push(detail.values.sengine);
+                            const all = detail.values.wechat + detail.values.weibo + detail.values.client + detail.values.web + detail.values.overseas+detail.values.sengine;
                             this.lineData.all.push(all);
                         });
                         this.resultChartLoading = false;
@@ -362,9 +363,10 @@
                                 _.reduce(this.lineData.all, (memo, value) => (memo + value), 0),
                                 _.reduce(this.lineData.wechat, (memo, value) => (memo + value), 0),
                                 _.reduce(this.lineData.weibo, (memo, value) => (memo + value), 0),
-                                _.reduce(this.lineData.client, (memo, value) => (memo + value), 0),
-                                _.reduce(this.lineData.web, (memo, value) => (memo + value), 0),
+                                _.reduce(this.lineData.client, (memo, value) => (memo + value), 0)+ _.reduce(this.lineData.web, (memo, value) => (memo + value), 0),
+                              _.reduce(this.lineData.sengine,(memo, value) => (memo + value), 0) ,
                                 _.reduce(this.lineData.overseas, (memo, value) => (memo + value), 0)
+
                         ];
                     }
                 });
@@ -406,7 +408,8 @@
                     weibo: [],
                     client: [],
                     web: [],
-                    overseas: []
+                    overseas: [],
+                    sengine:[]
                 };
             },
 

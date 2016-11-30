@@ -312,13 +312,13 @@
                             //all.neutral.push(_this.lineData.wechat.neutral[index] + _this.lineData.weibo.neutral[index] + _this.lineData.client.neutral[index] + _this.lineData.web.positive[index] + _this.lineData.overseas.positive[index]);
                         });
                         console.log('this.all',this.lineData);
-                        all.positive =_.map(_.zip(this.lineData.wechat.positive,this.lineData.weibo.positive,this.lineData.client.positive,this.lineData.web.positive,this.lineData.overseas.positive),item =>{
+                        all.positive =_.map(_.zip(this.lineData.wechat.positive,this.lineData.weibo.positive,this.lineData.client.positive,this.lineData.web.positive,this.lineData.overseas.positive,this.lineData.sengine.positive),item =>{
                             return _.reduce(item, function(memo, num){ return memo + num; }, 0);
                         });
-                        all.negative =_.map(_.zip(this.lineData.wechat.negative,this.lineData.weibo.negative,this.lineData.client.negative,this.lineData.web.negative,this.lineData.overseas.negative),item =>{
+                        all.negative =_.map(_.zip(this.lineData.wechat.negative,this.lineData.weibo.negative,this.lineData.client.negative,this.lineData.web.negative,this.lineData.overseas.negative,this.lineData.sengine.negative),item =>{
                             return _.reduce(item, function(memo, num){ return memo + num; }, 0);
                         });
-                        all.neutral =_.map(_.zip(this.lineData.wechat.neutral,this.lineData.weibo.neutral,this.lineData.client.neutral,this.lineData.web.neutral,this.lineData.overseas.neutral),item =>{
+                        all.neutral =_.map(_.zip(this.lineData.wechat.neutral,this.lineData.weibo.neutral,this.lineData.client.neutral,this.lineData.web.neutral,this.lineData.overseas.neutral,this.lineData.sengine.neutral),item =>{
                             return _.reduce(item, function(memo, num){ return memo + num; }, 0);
                         });
                         console.log('all',all);
@@ -378,6 +378,9 @@
                         const overseasNums=_.reduce(this.lineData.overseas.negative,(mome, val) => mome + val, 0)+_.reduce(this.lineData.overseas.neutral,(mome, val) => mome + val, 0)
                         +_.reduce(this.lineData.overseas.positive,(mome, val) => mome + val, 0);
 
+                        const sengineNums=_.reduce(this.lineData.sengine.negative,(mome, val) => mome + val, 0)+_.reduce(this.lineData.sengine.neutral,(mome, val) => mome + val, 0)
+                        +_.reduce(this.lineData.sengine.positive,(mome, val) => mome + val, 0);
+
                         console.log(allNums,
                                 wechatNums,
                                 weiboNums,
@@ -388,8 +391,8 @@
                             allNums,
                             wechatNums,
                             weiboNums,
-                            clientNums,
-                            webNums,
+                            clientNums+webNums,
+                            sengineNums,
                             overseasNums
                         ];
                     }
