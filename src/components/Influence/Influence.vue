@@ -299,8 +299,16 @@
             },
             barFormat(val){
                 const option = {
-                    tooltip: _.extend({}, Chart.tooltip, {}),
-                    grid: _.extend({}, Chart.grid),
+                    tooltip: _.extend({}, Chart.tooltip, {
+                        trigger:'axis'
+                    }),
+                    //grid设置属性显示不出来，但是默认是出数据的
+//                    grid: _.extend({}, Chart.grid,{
+//                        left:'auto',
+//                        right:'10%',
+//                        bottom:'60',
+//                        containLabel:false
+//                    }),
                     progressive: 4,
                     textStyle: Chart.textStyle,
                     xAxis: _.extend({}, Chart.xAxis, {
@@ -314,20 +322,6 @@
                         show: false
                     }),
                     color: _.extend([], Chart.color),
-                    graphic:[
-                        {
-                            type: 'text',
-                            z: -10,
-                            left: 'center', // 相对父元素居中
-                            top: 'middle',  // 相对父元素居中
-                            rotation: Math.PI / 4,
-                            style: {
-                                fill: '#fff',
-                                text: '沃德股市气象站',
-                                font: 'bold 34px Microsoft YaHei'
-                            }
-                        }
-                    ],
                     series: [
                         {
                             name: '满意',
@@ -335,7 +329,7 @@
                             stack: 'sentiment',
                             label: {
                                 normal: {
-                                    show: true,
+                                    show: false,
                                     position: 'insideRight'
                                 }
                             },
@@ -347,7 +341,7 @@
                             stack: 'sentiment',
                             label: {
                                 normal: {
-                                    show: true,
+                                    show: false,
                                     position: 'insideRight'
                                 }
                             },
@@ -359,7 +353,7 @@
                             stack: 'sentiment',
                             label: {
                                 normal: {
-                                    show: true,
+                                    show: false,
                                     position: 'insideRight'
                                 }
                             },
@@ -371,7 +365,7 @@
                             stack: 'sentiment',
                             label: {
                                 normal: {
-                                    show: true,
+                                    show: false,
                                     position: 'insideRight'
                                 }
                             },
@@ -383,7 +377,7 @@
                             stack: 'sentiment',
                             label: {
                                 normal: {
-                                    show: true,
+                                    show: false,
                                     position: 'insideRight'
                                 }
                             },
