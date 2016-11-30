@@ -15,7 +15,7 @@
                     </card-panel>
                 </div>
                 <div class="col-md-4 detail-info">
-                    <card-panel :title="words.userInfo" >
+                    <card-panel :title="words.userInfo">
                         <img src="../../../images/avatar.png" class="detail-info-avatar"  />
                         <div class="detail-info-detail"  v-show="isLive">
                             <div class="detail-info-detail-item">{{author.name}}</div>
@@ -30,6 +30,7 @@
             <div class="row">
                 <div class="col-md-8 detail-chart">
                     <card-panel :title="words.shareChart" >
+                        <a class="showinfo pull-right" href='Javascript: void(0)' v-on:click="showinfonode()">{{dispalayinfo}}</a>
                         <div class="chart" v-echarts="graphChartOption" :click="graphChartAction"  :loading="graphChartLoading" theme="infographic"></div>
                     </card-panel>
                 </div>
@@ -71,7 +72,10 @@
         data(){
             const words = Local().detail;
             return {
+
+                dispalayinfo:'显示用户信息',
                 words,
+                control:false,
                 isLive:true,
                 author: {
                     address: "",
@@ -91,7 +95,6 @@
 
                 graphChartLoading: true,
                 graphChartOption: {
-                    isToggle:true,
                     title: {
                        text: '      转发数：',
                         textStyle: {
@@ -103,41 +106,50 @@
                         left: 'right'
                     },
                     tooltip: {
+
                         formatter: '{b}'
                     },
                     legend: {
                         data: ["传播源点", "一层转发", "二层转发", "三层转发", "四层转发", "五层转发", "六层转发","六层以上"],
-
                         left: 10,
                         top:23,
                         width: 120
                     },
-                    animationDuration: 1500,
+                    animationDuration: 10,
+                    animationEasingUpdate: 'cubicOut',
+                    animationEasing: 'cubicOut',
 
-                    animationEasingUpdate: 'quinticInOut',
+
                     series: [
                         {
+                            color:["#bc3c3c","#efbf09","#eae521","#3fea21","#21ead9","#214bea","#9521ea","#ea21d9"],
                             name: '传播路径',
-                            color:["#000","#bc3c3c","#efbf09","#eae521","#3fea21","#21ead9","#214bea","#9521ea","#ea21d9"],
                             type: 'graph',
                             layout: 'force',
                             force: {
-                                initLayout:"circular",
-                                repulsion: 50,
-                                gravity: 0.1,
-                                layoutAnimation: true,
+                                repulsion: 30,
+                                gravity: 0.5,
+                                layoutAnimation:true,
                             },
                             draggable:true,
-                            data: [],
-                            links: [],
+                            data:[],
+                            links:[],
                             categories: [{"name": "传播源点"}, {"name": "一层转发"}, {"name": "二层转发"}, {"name": "三层转发"}, {"name": "四层转发"}, {"name": "五层转发"}, {"name": "六层转发"}, {"name": "六层以上"}],
                             roam: true,
                             label: {
                                 normal: {
-                                    position: 'right',
-                                    formatter: '{b}'
+                                    show:true,
+                                    position: 'inside',
+                                    textStyle:{
+                                        color: '#333',
+                                        fontSize: 9,
+                                    }
                                 }
-                            }
+
+                            },
+
+
+
                         }
                     ]
                 },
@@ -228,6 +240,18 @@
                 console.log(params);
 
             },
+            showinfonode(){
+
+                if(this.control==true){
+                    this.getArticleForward();
+                    this.control=false;
+                    this.dispalayinfo='显示用户信息'
+                }
+                    else { this.getArticleForward();
+                    this.control=true; this.dispalayinfo='隐藏用户信息' }
+
+
+            },
 
             getPageDetail(){
                 const id = this.$route.params.id;
@@ -250,6 +274,7 @@
 
                 });
             },
+
             getArticleForward(){
                 const id = this.$route.params.id;
                 Api.getArticleForward({id}).then(resp => {
@@ -258,11 +283,11 @@
 
 
                         const firstdata = resp.data.data.datas, firstlink = resp.data.data.links;
-                        const nodestyle0={normal:{show:false}}, nodestyle1={modularity_class:0};
+                        const nodestyle0={normal:{show:this.control}}, nodestyle1={modularity_class:0};
                         const newDateS = _.map(firstdata, (item)=> {
                            // item.name=item.id;
                             item.category = item.level;
-                            item.symbolSize = 15;
+                            item.symbolSize = 10;
                             item.itemStyle = "null";
                             item.attributes = nodestyle1;
                             item.label = nodestyle0;
@@ -273,13 +298,12 @@
 
                         const newDateScout=_.size(newDateS)-1,
                                 linstyle0={normal:{color:'#000',width:1,type:'solid'}},
-                                lablestyle0={normal:{show:false}},
+//                                lablestyle0={normal:{show:false}},
                                 newDateL = _.map(firstlink, (item)=> {
                             item.name="";
                             item.source = ''+item.src+'';
                             item.target = ''+item.dst+'';
                             item.lineStyle=linstyle0;
-                            item.label=lablestyle0;
                             // item.value =40;
 
                             return item;
