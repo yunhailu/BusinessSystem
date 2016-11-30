@@ -324,7 +324,7 @@
                             rotation: Math.PI / 4,
                             style: {
                                 fill: '#fff',
-                                text: '沃德股市气象站',
+                                text: '沃德品牌气象站',
                                 font: 'bold 34px Microsoft YaHei'
                             }
                         }
