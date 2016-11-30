@@ -86,7 +86,7 @@
                 this.activeId = id;
                 Api.deleteDashboard({ id }).then(resp => {
                     console.log(resp.data);
-                    if(resp.data.code == 0 && resp.data.data.data == 1){
+                    if(resp.data.code == 0 && resp.data.data.success == 1){
                         this.dashboardList = _.filter(this.dashboardList, dashboard => {
                             return dashboard.id != id;
                         });

@@ -64,6 +64,10 @@ export const setAnalyticsResetSearch = (store, resetSearch) => {
 	store.dispatch(types.UPDATE_RESET_SEARCH, resetSearch);
 };
 
+export const setAnalyticsSubTopicId = (store, subtopicId) => {
+	store.dispatch(types.UPDATE_SUBTOPIC_ID, subtopicId);
+};
+
 /**
  * Compare
  * */

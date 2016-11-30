@@ -29,7 +29,7 @@
         <ul class="list-panel-list" v-if="tableList.length">
             <li class="list-panel-list-item row" v-for="item in tableList">
                 <!--<a :href="item.url" target="_blank">-->
-                <a  @click="showDetail(item);" href="javascript:void(0);" target="_blank">
+                <a  @click="showDetail(item);" href="javascript:void(0);">
                     <div class="list-panel-list-item-left list-left">
                         <i class="fa fa-paperclip fa-2
                         x"></i>
@@ -124,11 +124,17 @@
                 console.log('route', this.$route);
                 const type = this.$route.name, id = item.id;
                 if(id){
-                    this.$router.go({
+                    console.log(window.location);
+                    console.log(window.location.href);
+                    console.log(id);
+                    window.open(window.location.origin+"/#!/"+this.$route.name+"/detail/"+id)
+                    //window.open(window.location.href+"/detail/"+id);
+                    /*this.$router.go({
                         name: 'detail',
                         params: { type, id }
-                    });
+                    });*/
                 } else {
+                    console.log('没有id');
                     location.href = `${item.url}`;
                 }
             }

@@ -5,17 +5,20 @@
         <div class="analytics-panel">
             <div class="analytics-panel-wrap">
                 <div class="row tools">
-                    <div class="row-left">
+                    <div class="row-left" v-if="trim(search) == ''">{{showName}}</div>
+                    <div class="row-left" v-if="trim(search) !=''">{{showName}}+{{search}}</div>
+                    <div class="row-middle">
                         <div class="search">
-                            <input class="search-input" placeholder="搜索" v-model="search" @keyup.enter="searchAction" />
+                            <input class="search-input" placeholder="子话题搜索" v-model="search" @keyup.enter="searchAction" />
                             <span class="search-btn" @click="searchAction"><i class="fa fa-search"></i></span>
                         </div>
                     </div>
+                    <div class="row-null"></div>
                     <div class="row-right">
                         <ul class="days-btn">
-                            <li @click="selectTime(0.33);" :class="[selectTimeTag == 0.33 ? 'active' : '']">8H</li>
+                            <li @click="selectTime(0.33);" :class="[selectTimeTag == 0.33 ? 'active' : '']" class="active">8H</li>
                             <li @click="selectTime(1);" :class="[selectTimeTag == 1 ? 'active' : '']">1D</li>
-                            <li @click="selectTime(7);" :class="[selectTimeTag == 7 ? 'active' : '']" class="active">7D</li>
+                            <li @click="selectTime(7);" :class="[selectTimeTag == 7 ? 'active' : '']">7D</li>
                             <li @click="selectTime(30);" :class="[selectTimeTag == 30 ? 'active' : '']">30D</li>
                             <li @click="selectTime(0);" :class="[selectTimeTag == 0 ? 'active' : '']">自定义</li>
                         </ul>
@@ -45,32 +48,55 @@
     import Calendar from '../Common/Calendar/Calendar.vue';
     import OrderFooterComponent from '../OrderFooter/OrderFooter.vue';
     import Local from "../../local/local";
-    import { analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic, analyticsDateChange, analyticsStart, analyticsEnd, analyticsResetSearch } from '../../vuex/getters';
-    import { setAnalyticsType, setAnalyticsTimeRange, setAnalyticsSource, setAnalyticsSubTopic, setAnalyticsDateChange, setAnalyticsStart, setAnalyticsEnd, setAnalyticsResetSearch  } from "../../vuex/actions";
+    import {analyticsSubTopicId, activeAnalyticsTopic,analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic, analyticsDateChange, analyticsStart, analyticsEnd, analyticsResetSearch } from '../../vuex/getters';
+    import {setAnalyticsSubTopicId,setActiveAnalyticsTopic,setAnalyticsType, setAnalyticsTimeRange, setAnalyticsSource, setAnalyticsSubTopic, setAnalyticsDateChange, setAnalyticsStart, setAnalyticsEnd, setAnalyticsResetSearch  } from "../../vuex/actions";
 
     export default{
         data(){
             return{
                 search: '',
-                dateVal: `${ moment().subtract(7, 'days').format('YYYY-MM-DD')} ~ ${moment().format('YYYY-MM-DD')}`,
+                dateVal: `${ moment().subtract(8, 'hour').format('YYYY-MM-DD HH')} ~ ${moment().format('YYYY-MM-DD HH')}`,
                 cal: {
                     show: false,
                     type: "date", //date datetime
-                    begin: moment().subtract(7, 'days').format('YYYY-MM-DD'),
-                    end: moment().format('YYYY-MM-DD'),
+                    begin: moment().subtract(8, 'hour').format('YYYY-MM-DD HH'),
+                    end: moment().format('YYYY-MM-DD HH'),
                     //value: `${ moment().subtract(7, 'days').format('YYYY-MM-DD')} ~ ${moment().format('YYYY-MM-DD')}`,
                     x: 0,
                     y: 0,
                     range:true//是否多选
                 },
-                selectTimeTag: 7,
+                selectTimeTag: 0.33,
                 isTimeDiy: false,
-                tabActive: 'result'
+                tabActive: 'result',
+                showName:''
             }
         },
         vuex: {
-            actions: { setAnalyticsType, setAnalyticsTimeRange, setAnalyticsSource, setAnalyticsSubTopic, setAnalyticsDateChange, setAnalyticsStart, setAnalyticsEnd, setAnalyticsResetSearch },
-            getters: { analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic, analyticsDateChange, analyticsStart, analyticsEnd, analyticsResetSearch }
+            actions: {
+                setAnalyticsSubTopicId,
+                setActiveAnalyticsTopic,
+                setAnalyticsType,
+                setAnalyticsTimeRange,
+                setAnalyticsSource,
+                setAnalyticsSubTopic,
+                setAnalyticsDateChange,
+                setAnalyticsStart,
+                setAnalyticsEnd,
+                setAnalyticsResetSearch
+            },
+            getters: {
+                analyticsSubTopicId,
+                activeAnalyticsTopic,
+                analyticsType,
+                analyticsTimeRange,
+                analyticsSource,
+                analyticsSubTopic,
+                analyticsDateChange,
+                analyticsStart,
+                analyticsEnd,
+                analyticsResetSearch
+            }
         },
         components:{
             'header-component': HeaderComponent,
@@ -80,8 +106,16 @@
         },
         methods: {
             searchAction(){
-                console.log(this.search);
-                this.setAnalyticsSubTopic(this.search);
+                if(this.analyticsSubTopic == this.search){
+                    this.setAnalyticsSubTopicId(this.analyticsSubTopicId + 1);
+                    console.log(this.analyticsSubTopicId);
+                }else{
+                    console.log(this.search);
+                    this.setAnalyticsSubTopic(this.search);
+                    this.setAnalyticsSubTopicId(0);
+                }
+
+
             },
             selectTime(num){
                 this.selectTimeTag = num;
@@ -159,6 +193,12 @@
                         this.setAnalyticsSubTopic(this.search);
                         console.log('结束时间',(new Date()).getTime());
                     }
+                }
+            },
+            activeAnalyticsTopic:{
+                handler(val){
+                    this.showName = (this.activeAnalyticsTopic).topic_name;
+
                 }
             },
             /*search:{

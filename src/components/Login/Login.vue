@@ -6,11 +6,11 @@
                 <span>互联网情报智能分析平台</span>
             </div>
             <ul>
-                <li><a href="javascript:void(0);" @click="toIntruction">使用说明</a></li>
+                <li v-if="false"><a href="javascript:void(0);" @click="toIntruction">使用说明</a></li>
                 <li><a href="javascript:void(0);">品牌表现</a></li>
                 <li><a href="javascript:void(0);" @click="showLogin">登录</a></li>
                 <li  v-show="false"><a href="javascript:void(0);" @click="showApply">申请试用</a></li>
-                <li><a href="javascript:void(0);" @click="toPromotion">首页</a></li>
+                <li  v-if="false"><a href="javascript:void(0);" @click="toPromotion">首页</a></li>
             </ul>
         </div>
         <!--<div class="container">
@@ -167,8 +167,8 @@
                 isApply:false,
                 isLogin:false,
                 errorShow:false,
-                isPromotion:false,
-                isInstruction:true,
+                isPromotion:true,
+                isInstruction:false,
             };
         },
         components:{
@@ -185,7 +185,7 @@
             },
             toPromotion(){
                 this.isPromotion=true;
-                thsi.isInstruction=false;
+                this.isInstruction=false;
             },
             submit(){
 

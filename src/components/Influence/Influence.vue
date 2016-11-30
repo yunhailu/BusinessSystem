@@ -134,8 +134,15 @@
                 const topic_id = this.activeAnalyticsTopic.topic_id;
                 const author = item.influencer;
                 const size = this.$route.params.size;
-                const start = this.analyticsStart;
-                const end = this.analyticsEnd;
+//                const start = this.analyticsStart;
+//                const end = this.analyticsEnd;
+                let end =this.analyticsEnd,
+                        start = this.analyticsStart;
+                if(start.includes(' ') && end.includes(' ')){
+                    start = start.split(' ')[0]+'T'+start.split(' ')[1];
+                    end = end.split(' ')[0]+'T'+end.split(' ')[1];
+                    console.log('start',start,end);
+                }
                 this.getArticles({topic_id,author,size,start,end});
             },
             getArticles(params){
@@ -159,9 +166,16 @@
                         subtopic = this.analyticsSubTopic,
                         source = this.analyticsSource,
                         time_interval = this.analyticsTimeRange,
-                        time_dimension = time_interval > 7 ? 1 : 0,
-                        end = this.analyticsEnd,
+                        time_dimension = time_interval > 7 ? 1 : 0;
+                let end =this.analyticsEnd,
                         start = this.analyticsStart;
+                if(start.includes(' ') && end.includes(' ')){
+                    start = start.split(' ')[0]+'T'+start.split(' ')[1];
+                    end = end.split(' ')[0]+'T'+end.split(' ')[1];
+                    console.log('start',start,end);
+                }
+//                        end = this.analyticsEnd,
+//                        start = this.analyticsStart;
                 Api.getInfluenceList({topic_id, topic, subtopic, source, start, end, time_dimension}).then(resp => {
                     this.loadingParams.visiable = false;
                     if(resp.data.code ==0){
@@ -218,9 +232,16 @@
                         subtopic = this.analyticsSubTopic,
                         source = this.analyticsSource,
                         time_interval = this.analyticsTimeRange,
-                        time_dimension = time_interval > 7 ? 1 : 0,
-                        end = this.analyticsEnd,
+                        time_dimension = time_interval > 7 ? 1 : 0;
+                let end =this.analyticsEnd,
                         start = this.analyticsStart;
+                if(start.includes(' ') && end.includes(' ')){
+                    start = start.split(' ')[0]+'T'+start.split(' ')[1];
+                    end = end.split(' ')[0]+'T'+end.split(' ')[1];
+                    console.log('start',start,end);
+                }
+//                        end = this.analyticsEnd,
+//                        start = this.analyticsStart;
                 Api.getPopularList({topic_id, topic, subtopic, source, start, end, time_dimension}).then(resp => {
                     this.loadingParams.visiable = false;
                     if(resp.data.code ==0){
@@ -238,9 +259,16 @@
                         subtopic = this.analyticsSubTopic,
                         source = this.analyticsSource,
                         time_interval = this.analyticsTimeRange,
-                        time_dimension = time_interval > 7 ? 1 : 0,
-                        end = this.analyticsEnd,
+                        time_dimension = time_interval > 7 ? 1 : 0;
+                let end =this.analyticsEnd,
                         start = this.analyticsStart;
+                if(start.includes(' ') && end.includes(' ')){
+                    start = start.split(' ')[0]+'T'+start.split(' ')[1];
+                    end = end.split(' ')[0]+'T'+end.split(' ')[1];
+                    console.log('start',start,end);
+                }
+//                        end = this.analyticsEnd,
+//                        start = this.analyticsStart;
                 Api.getInfluenceList({topic_id, topic, subtopic, source, start, end, time_dimension}).then(resp => {
                     this.loadingParams.visiable = false;
                     if(resp.data.code ==0){
@@ -286,6 +314,20 @@
                         show: false
                     }),
                     color: _.extend([], Chart.color),
+                    graphic:[
+                        {
+                            type: 'text',
+                            z: -10,
+                            left: 'center', // 相对父元素居中
+                            top: 'middle',  // 相对父元素居中
+                            rotation: Math.PI / 4,
+                            style: {
+                                fill: '#fff',
+                                text: '沃德股市气象站',
+                                font: 'bold 34px Microsoft YaHei'
+                            }
+                        }
+                    ],
                     series: [
                         {
                             name: '满意',
