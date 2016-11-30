@@ -231,7 +231,7 @@
                             top: 'middle',  // 相对父元素居中
                             rotation: Math.PI / 4,
                             style: {
-                                fill: '#fff',
+                                fill: '#eee',
                                 text: '沃德股市气象站',
                                 font: 'bold 34px Microsoft YaHei'
                             }
