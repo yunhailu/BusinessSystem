@@ -76,6 +76,10 @@
         },
         methods: {
             quit(){
+                if(getCookie('business_name')==""){
+                    Cookie.remove('business_uid');
+                    this.$router.go({name: "ccsi"});
+                }
                 Cookie.remove('business_uid');
                 this.$router.go({name: "login"});
             },
