@@ -24,7 +24,7 @@
     import Local from "../../local/local";
     import {Chart, Pie} from '../../config/config';
     import * as Api from '../../widgets/Api';
-    import { analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic, analyticsDateChange, analyticsStart, analyticsEnd, activeAnalyticsTopic, analyticsRefreshTopic } from '../../vuex/getters';
+    import {analyticsSubTopicId, analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic, analyticsDateChange, analyticsStart, analyticsEnd, activeAnalyticsTopic, analyticsRefreshTopic } from '../../vuex/getters';
 
 
     export default{
@@ -62,6 +62,9 @@
                     },
                     overseas: {
                         happy: [], anger: [], sorrow: [], disgust: [], fear: []
+                    },
+                    sengine:{
+                        happy: [], anger: [], sorrow: [], disgust: [], fear: []
                     }
                 },
 
@@ -95,6 +98,20 @@
                     progressive: 4,
                     textStyle: Chart.textStyle,
                     color:['#2FCC71','#E64D3D', '#F1C40F', '#3598DC', '#737373'],
+                    graphic:[
+                        {
+                            type: 'text',
+                            z: -10,
+                            left: 'center', // 相对父元素居中
+                            top: 'middle',  // 相对父元素居中
+                            rotation: Math.PI / 4,
+                            style: {
+                                fill: '#eee',
+                                text: '沃德品牌气象站',
+                                font: 'bold 34px Microsoft YaHei'
+                            }
+                        }
+                    ],
                     series : [{
                         name:common.happy,
 
@@ -206,6 +223,20 @@
                     color:['#2FCC71','#E64D3D', '#F1C40F', '#3598DC', '#737373'],
                     textStyle: Pie.textStyle,
                     toolbox: Pie.toolbox,
+                    graphic:[
+                        {
+                            type: 'text',
+                            z: -10,
+                            left: 'center', // 相对父元素居中
+                            top: 'middle',  // 相对父元素居中
+                            rotation: Math.PI / 4,
+                            style: {
+                                fill: '#eee',
+                                text: '沃德品牌气象站',
+                                font: 'bold 34px Microsoft YaHei'
+                            }
+                        }
+                    ],
                     series: [
                         {
                             label:{
@@ -267,7 +298,7 @@
             }
         },
         vuex: {
-            getters: { analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic, analyticsDateChange, analyticsStart, analyticsEnd, activeAnalyticsTopic, analyticsRefreshTopic }
+            getters: {analyticsSubTopicId, analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic, analyticsDateChange, analyticsStart, analyticsEnd, activeAnalyticsTopic, analyticsRefreshTopic }
         },
         methods: {
             actions(val, idx){
@@ -292,12 +323,12 @@
                         source = 'overseas';
                         break;
                     case 6:
-                        source = 'search';
+                        source = 'sengine';
                         break;
                     default:
                         break;
                 }
-                if(source =='search'){
+                if(source =='sengine'){
                     return ;
                 }
                 //this.sentimentPieOption.series[0].name = source;
@@ -355,9 +386,27 @@
                         subtopic = this.analyticsSubTopic,
                         source = this.analyticsSource,
                         time_interval = this.analyticsTimeRange,
-                        time_dimension = time_interval > 7 ? 1 : 0,
-                        end = this.analyticsEnd,
+                        time_dimension = time_interval > 7 ? 1 : 0;
+//                        end = this.analyticsEnd,
+//                        start = this.analyticsStart;
+                //获取时间 设置8H对应的时间格式
+                    let end =this.analyticsEnd,
                         start = this.analyticsStart;
+                    if(start.includes(' ') && end.includes(' ')){
+                        start = start.split(' ')[0]+'T'+start.split(' ')[1];
+                        end = end.split(' ')[0]+'T'+end.split(' ')[1];
+                        console.log('start',start,end);
+                    }
+                /*let start =opts.name.split(":")[0],
+                        end = opts.name.split(":")[0];
+                if(opts.name.split(" ")[1]){
+                    console.log(typeof opts.name.split(":")[0],opts.name.split(":")[0])
+                    end = opts.name.split(":")[0]
+                    end = end.split(" ")[0]+'T'+end.split(" ")[1];
+                    start = moment(opts.name.split(":")[0],"YYYY-MM-DD HH").subtract(8, 'hour').format("YYYY-MM-DD HH")
+                    start=start.split(" ")[0]+'T'+start.split(" ")[1];
+                    console.log('start',start,end);
+                }*/
                 Api.getCommentList({type, topic_id, topic, subtopic, source, start, end, time_dimension}).then(resp => {
                     //console.log(resp.data);
                     //this.loadingParams.visiable = false;
@@ -374,9 +423,16 @@
                         subtopic = this.analyticsSubTopic,
                         source = this.analyticsSource,
                         time_interval = this.analyticsTimeRange,
-                        time_dimension = time_interval > 7 ? 1 : 0,
-                        end = this.analyticsEnd,
+                        time_dimension = time_interval > 7 ? 1 : 0;
+//                        end = this.analyticsEnd,
+//                        start = this.analyticsStart;
+                let end =this.analyticsEnd,
                         start = this.analyticsStart;
+                if(start.includes(' ') && end.includes(' ')){
+                    start = start.split(' ')[0]+'T'+start.split(' ')[1];
+                    end = end.split(' ')[0]+'T'+end.split(' ')[1];
+                    console.log('start',start,end);
+                }
                 Api.getSentimentDetail({ topic_id, topic, subtopic, source, start, end, time_dimension }).then(resp => {
                     //console.log("getSentimentDetail", JSON.stringify(resp.data.data));
                     //this.loadingParams.visiable = false;
@@ -392,17 +448,35 @@
                                 this.lineData[key].anger.push(detail.values[key].anger);
                                 this.lineData[key].sorrow.push(detail.values[key].sorrow);
                                 this.lineData[key].disgust.push(detail.values[key].disgust);
-                                this.lineData[key].fear.push(detail.values[key].fear);
+                                this.lineData[key].fear.push(detail.values[key].fear)
+
                             });
-                            all.happy.push(_this.lineData.wechat.happy[index] + _this.lineData.weibo.happy[index] + _this.lineData.client.happy[index] + _this.lineData.web.happy[index] + _this.lineData.overseas.happy[index]);
-                            all.anger.push(this.lineData.wechat.anger[index] + this.lineData.weibo.anger[index] + this.lineData.client.anger[index] + this.lineData.web.anger[index] + this.lineData.overseas.anger[index]);
-                            all.sorrow.push(this.lineData.wechat.sorrow[index] + this.lineData.weibo.sorrow[index] + this.lineData.client.sorrow[index] + this.lineData.web.sorrow[index] + this.lineData.overseas.sorrow[index]);
-                            all.disgust.push(this.lineData.wechat.disgust[index] + this.lineData.weibo.disgust[index] + this.lineData.client.disgust[index] + this.lineData.web.disgust[index] + this.lineData.overseas.disgust[index]);
-                            all.fear.push(this.lineData.wechat.fear[index] + this.lineData.weibo.fear[index] + this.lineData.client.fear[index] + this.lineData.web.fear[index] + this.lineData.overseas.fear[index]);
+                            all.happy.push(_this.lineData.wechat.happy[index] + _this.lineData.weibo.happy[index] + _this.lineData.client.happy[index] + _this.lineData.web.happy[index] + _this.lineData.overseas.happy[index]+_this.lineData.sengine.happy[index]);
+                            all.anger.push(this.lineData.wechat.anger[index] + this.lineData.weibo.anger[index] + this.lineData.client.anger[index] + this.lineData.web.anger[index] + this.lineData.overseas.anger[index] + this.lineData.sengine.anger[index]);
+                            all.sorrow.push(this.lineData.wechat.sorrow[index] + this.lineData.weibo.sorrow[index] + this.lineData.client.sorrow[index] + this.lineData.web.sorrow[index] + this.lineData.overseas.sorrow[index] + this.lineData.sengine.sorrow[index]);
+                            all.disgust.push(this.lineData.wechat.disgust[index] + this.lineData.weibo.disgust[index] + this.lineData.client.disgust[index] + this.lineData.web.disgust[index] + this.lineData.overseas.disgust[index]+ this.lineData.sengine.disgust[index]);
+                            all.fear.push(this.lineData.wechat.fear[index] + this.lineData.weibo.fear[index] + this.lineData.client.fear[index] + this.lineData.web.fear[index] + this.lineData.overseas.fear[index]+ this.lineData.sengine.fear[index]);
                         });
                         this.lineData.all = all;
-                        //console.log(this.lineData);
-
+                        console.log(this.lineData);
+                    //修改资源来源数量
+                        this.lineData.web.happy = _.map(_.zip(this.lineData.web.happy,this.lineData.client.happy),item=>{
+                                                        return _.reduce(item, function(memo, num){ return memo + num; }, 0);
+                                                    });
+                        this.lineData.web.happy = _.map(_.zip(this.lineData.web.happy,this.lineData.client.happy),item=>{
+                                                        return _.reduce(item, function(memo, num){ return memo + num; }, 0);
+                                                     });
+                        this.lineData.web.happy = _.map(_.zip(this.lineData.web.happy,this.lineData.client.happy),item=>{
+                                                        return _.reduce(item, function(memo, num){ return memo + num; }, 0);
+                                                     });
+                        this.lineData.web.happy = _.map(_.zip(this.lineData.web.happy,this.lineData.client.happy),item=>{
+                                                        return _.reduce(item, function(memo, num){ return memo + num; }, 0);
+                                                        });
+                        this.lineData.web.happy = _.map(_.zip(this.lineData.web.happy,this.lineData.client.happy),item=>{
+                                                        return _.reduce(item, function(memo, num){ return memo + num; }, 0);
+                                                     });
+                    console.log('client+web',this.lineData.web);
+                    this.lineData.client = this.lineData.sengine;
                         this.sentimentBarLoading = false;
                         //this.sentimentChartLoading = false;
                         this.sentimentPieLoading = false;
@@ -448,6 +522,9 @@
                         const overseasNums=_.reduce(this.lineData.overseas.happy,(mome, val) => mome + val, 0)+_.reduce(this.lineData.overseas.anger,(mome, val) => mome + val, 0)
                                 +_.reduce(this.lineData.overseas.sorrow,(mome, val) => mome + val, 0)+_.reduce(this.lineData.overseas.disgust,(mome, val) => mome + val, 0)
                                 +_.reduce(this.lineData.overseas.fear,(mome, val) => mome + val, 0);
+                        const sengineNums=_.reduce(this.lineData.sengine.happy,(mome, val) => mome + val, 0)+_.reduce(this.lineData.sengine.anger,(mome, val) => mome + val, 0)
+                                +_.reduce(this.lineData.sengine.sorrow,(mome, val) => mome + val, 0)+_.reduce(this.lineData.sengine.disgust,(mome, val) => mome + val, 0)
+                                +_.reduce(this.lineData.sengine.fear,(mome, val) => mome + val, 0);
                         this.sentimentNums =[
                             allNums,
                             wechatNums,
@@ -480,6 +557,9 @@
                         happy: [], anger: [], sorrow: [], disgust: [], fear: []
                     },
                     overseas: {
+                        happy: [], anger: [], sorrow: [], disgust: [], fear: []
+                    },
+                    sengine:{
                         happy: [], anger: [], sorrow: [], disgust: [], fear: []
                     }
                 };
@@ -570,6 +650,13 @@
                         //this.list = list[val.key];
 
                         this.getCommentList(val.key);
+                    }
+                }
+            },
+            analyticsSubTopicId:{
+                handler(val){
+                    if(this.analyticsSubTopicId != 0){
+                        this.init();
                     }
                 }
             }

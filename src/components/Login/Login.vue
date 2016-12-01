@@ -6,10 +6,11 @@
                 <span>互联网情报智能分析平台</span>
             </div>
             <ul>
-                <li><a href="javascript:void(0);">使用说明</a></li>
+                <li v-if="false"><a href="javascript:void(0);" @click="toIntruction">使用说明</a></li>
                 <li><a href="javascript:void(0);">品牌表现</a></li>
                 <li><a href="javascript:void(0);" @click="showLogin">登录</a></li>
                 <li  v-show="false"><a href="javascript:void(0);" @click="showApply">申请试用</a></li>
+                <li  v-if="false"><a href="javascript:void(0);" @click="toPromotion">首页</a></li>
             </ul>
         </div>
         <!--<div class="container">
@@ -130,9 +131,9 @@
                 </div>
             </div>
         </div>
-
     </div>
-    <promotion :islogin="isLogin"></promotion>
+    <promotion v-if="isPromotion"></promotion>
+    <instruction v-if="isInstruction"></instruction>
 </template>
 <style lang="less">
     @import "Login.less";
@@ -146,6 +147,7 @@
     import * as Api from "../../widgets/Api";
     import FooterComponent from "../Footer/Footer.vue"
     import Promotion from "./Promotion/Promotion.vue"
+    import Instruction from "./InstructionsForUse/InstructionsForUse.vue"
     import {loginState } from '../../vuex/getters';
     import {setLoginState} from "../../vuex/actions";
 
@@ -164,17 +166,27 @@
 //                password:getCookie('login_password'),
                 isApply:false,
                 isLogin:false,
-                errorShow:false
+                errorShow:false,
+                isPromotion:true,
+                isInstruction:false,
             };
         },
         components:{
-            FooterComponent,Promotion
+            FooterComponent,Promotion,Instruction
         },
         vuex:{
             getters:{loginState},
             actions:{setLoginState}
         },
         methods: {
+            toIntruction(){
+                this.isInstruction=true;
+                this.isPromotion=false;
+            },
+            toPromotion(){
+                this.isPromotion=true;
+                this.isInstruction=false;
+            },
             submit(){
 
             },

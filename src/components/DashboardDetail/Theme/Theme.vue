@@ -55,13 +55,13 @@
     import { themeScatterData } from '../../../config/tmpData';
     import * as Api from '../../../widgets/Api';
     import { insertExportImages, removeExportImages } from "../../../vuex/actions";
-    import { exportImages } from '../../../vuex/getters'
+    import { exportImages,analyticsStart,analyticsEnd } from '../../../vuex/getters';
 
     export default{
         props: ['title', 'data', 'remove', 'wordcloud', 'bar', 'top'],
         vuex: {
             actions: { insertExportImages, removeExportImages },
-            getters: { exportImages }
+            getters: {analyticsEnd,analyticsStart, exportImages }
         },
         watch:{
             bar:{
@@ -113,6 +113,20 @@
                 themeWordLoading: true,
                 themeWordOption: {
                     tooltip: {},
+                    graphic:[
+                        {
+                            type: 'text',
+                            z: -10,
+                            left: 'center', // 相对父元素居中
+                            top: 'middle',  // 相对父元素居中
+                            rotation: Math.PI / 4,
+                            style: {
+                                fill: '#fff',
+                                text: '沃德品牌气象站',
+                                font: 'bold 34px Microsoft YaHei'
+                            }
+                        }
+                    ],
                     series: {
                         //grid: {x:0, x2:0},
                         type: 'wordCloud',
@@ -142,15 +156,14 @@
                         data: []
                     }
                 },
-
                 upList: [],
-
                 downList: [],
 
                 themeScatterOption: {
                     legend: _.extend({}, Chart.legend, {
                         y: 'top',
-                        data: ['南海问题', '每日关注', '货币战争', '网易新闻', '阿里影业'],
+//                        data: ['南海问题', '每日关注', '货币战争', '网易新闻', '阿里影业'],
+                        data:[],
                         textStyle: {
                             //color: '#fff',
 //                            fontSize: 16
@@ -211,8 +224,9 @@
                     }),
                     xAxis:  _.extend({}, Chart.xAxis, {
                         type : 'category',  //category
-                        data : ["2016-08-21:12","2016-08-21:14","2016-08-21:15","2016-08-21:16","2016-08-21:17","2016-08-21:18","2016-08-21:20","2016-08-21:22","2016-08-22:00","2016-08-22:03","2016-08-22:05","2016-08-22:06","2016-08-22:08","2016-08-22:09","2016-08-22:10","2016-08-22:11","2016-08-22:12","2016-08-22:13","2016-08-22:14","2016-08-22:15","2016-08-22:16","2016-08-22:17","2016-08-22:18","2016-08-22:19","2016-08-22:20","2016-08-22:21","2016-08-22:22","2016-08-23:00","2016-08-23:03","2016-08-23:06","2016-08-23:08","2016-08-23:09","2016-08-23:10","2016-08-23:11","2016-08-23:12","2016-08-23:13","2016-08-23:14","2016-08-23:15","2016-08-23:16","2016-08-23:17","2016-08-23:18","2016-08-23:19","2016-08-23:20","2016-08-23:22","2016-08-23:23","2016-08-24:00","2016-08-24:01","2016-08-24:06","2016-08-24:07","2016-08-24:08","2016-08-24:09","2016-08-24:10","2016-08-24:11","2016-08-24:12","2016-08-24:14","2016-08-24:15","2016-08-24:16","2016-08-24:17","2016-08-24:18","2016-08-24:20","2016-08-24:21","2016-08-24:22","2016-08-25:00","2016-08-25:02","2016-08-25:03","2016-08-25:05","2016-08-25:06","2016-08-25:07","2016-08-25:08","2016-08-25:09","2016-08-25:10","2016-08-25:11","2016-08-25:12","2016-08-25:14","2016-08-25:15","2016-08-25:16","2016-08-25:17","2016-08-25:18","2016-08-25:19","2016-08-25:20","2016-08-25:21","2016-08-25:22","2016-08-25:23","2016-08-26:00","2016-08-26:01","2016-08-26:06","2016-08-26:07","2016-08-26:08","2016-08-26:09","2016-08-26:10","2016-08-26:11","2016-08-26:12","2016-08-26:13","2016-08-26:14","2016-08-26:15","2016-08-26:16","2016-08-26:17","2016-08-26:18","2016-08-26:22","2016-08-26:23","2016-08-27:00","2016-08-27:01","2016-08-27:02","2016-08-27:06","2016-08-27:08","2016-08-27:09","2016-08-27:10","2016-08-27:11","2016-08-27:12","2016-08-27:13","2016-08-27:14","2016-08-27:15","2016-08-27:16","2016-08-27:17","2016-08-27:18","2016-08-27:19","2016-08-27:20","2016-08-28:00","2016-08-28:01","2016-08-28:06","2016-08-28:08"],
+//                        data : ["2016-08-21:12","2016-08-21:14","2016-08-21:15","2016-08-21:16","2016-08-21:17","2016-08-21:18","2016-08-21:20","2016-08-21:22","2016-08-22:00","2016-08-22:03","2016-08-22:05","2016-08-22:06","2016-08-22:08","2016-08-22:09","2016-08-22:10","2016-08-22:11","2016-08-22:12","2016-08-22:13","2016-08-22:14","2016-08-22:15","2016-08-22:16","2016-08-22:17","2016-08-22:18","2016-08-22:19","2016-08-22:20","2016-08-22:21","2016-08-22:22","2016-08-23:00","2016-08-23:03","2016-08-23:06","2016-08-23:08","2016-08-23:09","2016-08-23:10","2016-08-23:11","2016-08-23:12","2016-08-23:13","2016-08-23:14","2016-08-23:15","2016-08-23:16","2016-08-23:17","2016-08-23:18","2016-08-23:19","2016-08-23:20","2016-08-23:22","2016-08-23:23","2016-08-24:00","2016-08-24:01","2016-08-24:06","2016-08-24:07","2016-08-24:08","2016-08-24:09","2016-08-24:10","2016-08-24:11","2016-08-24:12","2016-08-24:14","2016-08-24:15","2016-08-24:16","2016-08-24:17","2016-08-24:18","2016-08-24:20","2016-08-24:21","2016-08-24:22","2016-08-25:00","2016-08-25:02","2016-08-25:03","2016-08-25:05","2016-08-25:06","2016-08-25:07","2016-08-25:08","2016-08-25:09","2016-08-25:10","2016-08-25:11","2016-08-25:12","2016-08-25:14","2016-08-25:15","2016-08-25:16","2016-08-25:17","2016-08-25:18","2016-08-25:19","2016-08-25:20","2016-08-25:21","2016-08-25:22","2016-08-25:23","2016-08-26:00","2016-08-26:01","2016-08-26:06","2016-08-26:07","2016-08-26:08","2016-08-26:09","2016-08-26:10","2016-08-26:11","2016-08-26:12","2016-08-26:13","2016-08-26:14","2016-08-26:15","2016-08-26:16","2016-08-26:17","2016-08-26:18","2016-08-26:22","2016-08-26:23","2016-08-27:00","2016-08-27:01","2016-08-27:02","2016-08-27:06","2016-08-27:08","2016-08-27:09","2016-08-27:10","2016-08-27:11","2016-08-27:12","2016-08-27:13","2016-08-27:14","2016-08-27:15","2016-08-27:16","2016-08-27:17","2016-08-27:18","2016-08-27:19","2016-08-27:20","2016-08-28:00","2016-08-28:01","2016-08-28:06","2016-08-28:08"],
                         //type: 'value',
+                        data:[],
                         name: '日期',
                         nameGap: 16,
                         nameTextStyle: {
@@ -237,9 +251,23 @@
                             show: false
                         }
                     }),
+                    graphic:[
+                        {
+                            type: 'text',
+                            z: -10,
+                            left: 'center', // 相对父元素居中
+                            top: 'middle',  // 相对父元素居中
+                            rotation: Math.PI / 4,
+                            style: {
+                                fill: '#fff',
+                                text: '沃德品牌气象站',
+                                font: 'bold 34px Microsoft YaHei'
+                            }
+                        }
+                    ],
                     series: [
                         {
-                            name: '南海问题',
+                            name: '',
                             type: 'scatter',
                             itemStyle: {
                                 normal: {
@@ -250,9 +278,10 @@
                                     shadowColor: 'rgba(0, 0, 0, 0.3)'
                                 }
                             },
-                            data: themeScatterData.dataBJ
+                            data:[]
+//                            data: themeScatterData.dataBJ
                         }, {
-                            name: '每日关注',
+                            name: '',
                             type: 'scatter',
                             itemStyle: {
                                 normal: {
@@ -263,9 +292,10 @@
                                     shadowColor: 'rgba(0, 0, 0, 0.3)'
                                 }
                             },
-                            data: themeScatterData.dataSH
+                            data:[]
+//                            data: themeScatterData.dataSH
                         }, {
-                            name: '货币战争',
+                            name: '',
                             type: 'scatter',
                             itemStyle: {
                                 normal: {
@@ -276,9 +306,10 @@
                                     shadowColor: 'rgba(0, 0, 0, 0.3)'
                                 }
                             },
-                            data: themeScatterData.dataGZ
+                            data:[]
+//                            data: themeScatterData.dataGZ
                         },{
-                            name: '网易新闻',
+                            name: '',
                             type: 'scatter',
                             itemStyle: {
                                 normal: {
@@ -289,9 +320,10 @@
                                     shadowColor: 'rgba(0, 0, 0, 0.3)'
                                 }
                             },
-                            data: themeScatterData.dataWeb
+                            data:[]
+//                            data: themeScatterData.dataWeb
                         }, {
-                            name: '阿里影业',
+                            name: '',
                             type: 'scatter',
                             itemStyle: {
                                 normal: {
@@ -302,7 +334,8 @@
                                     shadowColor: 'rgba(0, 0, 0, 0.3)'
                                 }
                             },
-                            data: themeScatterData.dataClient
+                            data:[]
+//                            data: themeScatterData.dataClient
                         }
                     ]
                 },
@@ -322,6 +355,20 @@
                         type: 'category',
                         data: []
                     }),
+                    graphic:[
+                        {
+                            type: 'text',
+                            z: -10,
+                            left: 'center', // 相对父元素居中
+                            top: 'middle',  // 相对父元素居中
+                            rotation: Math.PI / 4,
+                            style: {
+                                fill: '#fff',
+                                text: '沃德品牌气象站',
+                                font: 'bold 34px Microsoft YaHei'
+                            }
+                        }
+                    ],
                     series: [
                         {
                             name: words.topics,
@@ -384,6 +431,20 @@
                     }),
                     progressive: 4,
                     textStyle: Chart.textStyle,
+                    graphic:[
+                        {
+                            type: 'text',
+                            z: -10,
+                            left: 'center', // 相对父元素居中
+                            top: 'middle',  // 相对父元素居中
+                            rotation: Math.PI / 4,
+                            style: {
+                                fill: '#fff',
+                                text: '沃德品牌气象站',
+                                font: 'bold 34px Microsoft YaHei'
+                            }
+                        }
+                    ],
                     series : []
                 },
                 themeLineLoading: true
@@ -393,18 +454,33 @@
             //动态气泡图--->
             getBubblChart(){
                 const topic_id = this.data.topic_id,
-                        end='2016-11-15',
-                        start='2016-11-11';
-                //end = this.analyticsEnd,
-                //start = this.analyticsStart;
+                        //end='2016-11-15',
+                        //start='2016-11-11';
+                        time_interval = this.data.time_interval;
+                        //time_dimension = this.data.time_dimension,
+//                        start = moment().subtract(time_interval, 'days').format('YYYY-MM-DD'),
+//                        end = moment().format('YYYY-MM-DD');
+                let start,end;
+                if(time_interval!=0){
+                    console.log('这不是8h')
+                     start = moment().subtract(time_interval, 'days').format('YYYY-MM-DD'),
+                            end = moment().format('YYYY-MM-DD');
+                }else {
+                    console.log('这是8h')
+                     start = moment().subtract(8, 'hour').format('YYYY-MM-DD HH'),
+                            end = moment().format('YYYY-MM-DD HH');
+                    start = start.split(' ')[0] + 'T' + start.split(' ')[1];
+                    end = end.split(' ')[0] + 'T' + end.split(' ')[1];
+                    console.log('start', start, end);
+                }
                 Api.getBubblChart({topic_id,start,end}).then(resp => {
-                    //console.log('13',resp.data);
+                    console.log('13',resp.data);
                     if(resp.data.code == 0){
-                        //console.log('12',resp.data.data[0]);
+                        console.log('12',resp.data.data[0]);
                         const yuy =_.keys(resp.data.data);
                         this.themeScatterOption.legend.data=yuy;
-                        // console.log('话题',yuy);
-                        //console.log('话题',yuy[0]);
+                         console.log('话题',yuy);
+                        console.log('话题',yuy[0]);
                         this.themeScatterOption.series[0].name=yuy[0];
                         this.themeScatterOption.series[1].name=yuy[1];
                         this.themeScatterOption.series[2].name=yuy[2];
@@ -447,13 +523,13 @@
                             this.themeScatterOption.xAxis.data=datearr5;
 
                         }
-                        //console.log('数据',yuy0); //数据组的所有数据
+                        console.log('数据',yuy0); //数据组的所有数据
                         const dataOne=yuy0[0];
                         const dataTwue=yuy0[1];
                         const dataThree=yuy0[2];
                         const dataFour=yuy0[3];
                         const dataFire=yuy0[4];
-                        //console.log('dataOne:',dataOne);
+                        console.log('dataOne:',dataOne);
                         const result0 = [];
                         for(var i=0; i < dataOne.length; i++) {
                             dataOne[i]=_.omit(dataOne[i],'date');
@@ -516,11 +592,24 @@
                     time_interval = this.data.time_interval,
                     //time_dimension = this.data.time_dimension,
                     time_dimension = time_interval > 7 ? 1 : 0,
-                    start = moment().subtract(time_interval, 'days').format('YYYY-MM-DD'),
-                    end = moment().format('YYYY-MM-DD'),
+//                    start = moment().subtract(time_interval, 'days').format('YYYY-MM-DD'),
+//                    end = moment().format('YYYY-MM-DD'),
                     topic = this.data.topic;
+                let start,end;
+                if(time_interval!=0){
+                    console.log('这不是8h')
+                    start = moment().subtract(time_interval, 'days').format('YYYY-MM-DD'),
+                            end = moment().format('YYYY-MM-DD');
+                }else {
+                    console.log('这是8h')
+                    start = moment().subtract(8, 'hour').format('YYYY-MM-DD HH'),
+                            end = moment().format('YYYY-MM-DD HH');
+                    start = start.split(' ')[0] + 'T' + start.split(' ')[1];
+                    end = end.split(' ')[0] + 'T' + end.split(' ')[1];
+                    console.log('start', start, end);
+                }
                 return Api.getTrendList({topic_id, topic, subtopic, source, start, end, time_dimension}).then(resp => {
-                    //console.log('getTrendList', resp);
+                    console.log('getTrendList+查看数据', resp);
                     if(resp.data.code == 0){
                         this.trendList = _.filter(resp.data.data, (item, index) => (index < 10));
                     }
@@ -533,9 +622,22 @@
                         time_interval = this.data.time_interval,
                         //time_dimension = this.data.time_dimension,
                         time_dimension = time_interval > 7 ? 1 : 0,
-                        start = moment().subtract(time_interval, 'days').format('YYYY-MM-DD'),
-                        end = moment().format('YYYY-MM-DD'),
+//                        start = moment().subtract(time_interval, 'days').format('YYYY-MM-DD'),
+//                        end = moment().format('YYYY-MM-DD'),
                         topic = this.data.topic;
+                let start,end;
+                if(time_interval!=0){
+                    console.log('这不是8h')
+                    start = moment().subtract(time_interval, 'days').format('YYYY-MM-DD'),
+                            end = moment().format('YYYY-MM-DD');
+                }else {
+                    console.log('这是8h')
+                    start = moment().subtract(8, 'hour').format('YYYY-MM-DD HH'),
+                            end = moment().format('YYYY-MM-DD HH');
+                    start = start.split(' ')[0] + 'T' + start.split(' ')[1];
+                    end = end.split(' ')[0] + 'T' + end.split(' ')[1];
+                    console.log('start', start, end);
+                }
                 return Api.getWordCloud({ topic_id, topic, subtopic, source, start, end, time_dimension }).then(resp => {
                     //console.log('getWordCloud',resp);
                     if(resp.data.code == 0){
@@ -571,9 +673,22 @@
                     time_interval = this.data.time_interval,
                     //time_dimension = this.data.time_dimension,
                     time_dimension = time_interval > 7 ? 1 : 0,
-                    start = moment().subtract(time_interval, 'days').format('YYYY-MM-DD'),
-                    end = moment().format('YYYY-MM-DD'),
+//                    start = moment().subtract(time_interval, 'days').format('YYYY-MM-DD'),
+//                    end = moment().format('YYYY-MM-DD'),
                     topic = this.data.topic;
+                let start,end;
+                if(time_interval!=0){
+                    console.log('这不是8h')
+                    start = moment().subtract(time_interval, 'days').format('YYYY-MM-DD'),
+                            end = moment().format('YYYY-MM-DD');
+                }else {
+                    console.log('这是8h')
+                    start = moment().subtract(8, 'hour').format('YYYY-MM-DD HH'),
+                            end = moment().format('YYYY-MM-DD HH');
+                    start = start.split(' ')[0] + 'T' + start.split(' ')[1];
+                    end = end.split(' ')[0] + 'T' + end.split(' ')[1];
+                    console.log('start', start, end);
+                }
                 Api.getThemeDetail({ topic_id, topic, subtopic, source, start, end, time_dimension }).then(resp => {
                     //console.log('getThemeDetail', resp.data);
                     if(resp.data.code == 0){

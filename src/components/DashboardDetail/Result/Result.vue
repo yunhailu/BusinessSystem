@@ -109,6 +109,20 @@
                     }),
                     progressive: 4,
                     textStyle: Chart.textStyle,
+                    graphic:[
+                        {
+                            type: 'text',
+                            z: -10,
+                            left: 'center', // 相对父元素居中
+                            top: 'middle',  // 相对父元素居中
+                            rotation: Math.PI / 4,
+                            style: {
+                                fill: '#eee',
+                                text: '沃德品牌气象站',
+                                font: 'bold 34px Microsoft YaHei'
+                            }
+                        }
+                    ],
                     series : []
                 },
                 resultPieChartLoading: true,
@@ -125,6 +139,20 @@
                     }),
                     textStyle: Pie.textStyle,
                     toolbox: Pie.toolbox,
+                    graphic:[
+                        {
+                            type: 'text',
+                            z: -10,
+                            left: 'center', // 相对父元素居中
+                            top: 'middle',  // 相对父元素居中
+                            rotation: Math.PI / 4,
+                            style: {
+                                fill: '#eee',
+                                text: '沃德品牌气象站',
+                                font: 'bold 34px Microsoft YaHei'
+                            }
+                        }
+                    ],
                     series:[]
                 },
                 actions: function(val, idx){
@@ -219,9 +247,20 @@
                         time_interval = this.data.time_interval,
                         //time_dimension = this.data.time_dimension,
                         time_dimension = time_interval > 7 ? 1 : 0,
-                        start = moment().subtract(time_interval, 'days').format('YYYY-MM-DD'),
-                        end = moment().format('YYYY-MM-DD'),
+//                        start = moment().subtract(time_interval, 'days').format('YYYY-MM-DD'),
+//                        end = moment().format('YYYY-MM-DD'),
                         topic = this.data.topic;
+                let start,end;
+                if(time_interval!=0){
+                    start = moment().subtract(time_interval, 'days').format('YYYY-MM-DD'),
+                            end = moment().format('YYYY-MM-DD');
+                }else {
+                    start = moment().subtract(8, 'hour').format('YYYY-MM-DD HH'),
+                            end = moment().format('YYYY-MM-DD HH');
+                    start = start.split(' ')[0] + 'T' + start.split(' ')[1];
+                    end = end.split(' ')[0] + 'T' + end.split(' ')[1];
+                    console.log('start', start, end);
+                }
                 Api.getSummaryDetail({ subtopic, topic_id, source, time_dimension, start, end, topic }).then(resp => {
                     //console.log('getSummaryDetail', resp);
                     if(resp.data.code == 0){

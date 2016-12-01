@@ -7,7 +7,7 @@
     </div>
     <ul class="row tabs">
         <li v-for="tab in tabs" class="tab" :class="[tab.link == $route.name ? 'active' : '']" >
-            <a v-link="{name: tab.link}" @click="changeTab(tab);">{{tab.name}}</a>
+            <a  v-link="{name: tab.link}" @click="changeTab(tab);">{{tab.name}}</a>
         </li>
     </ul>
     <!--<ul class="row items filters">-->
@@ -30,15 +30,16 @@
     import _ from 'underscore';
     import Local from '../../../local/local';
     import AddDashboard from '../../AddDashboard/AddDashboard.vue'
-    import { analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic } from '../../../vuex/getters';
+    import {activeAnalyticsTopic,analyticsResetSearch,analyticsSubTopicId,analyticsRefreshTopic,analyticsDateChange, analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic } from '../../../vuex/getters';
     import { setAnalyticsType, setAnalyticsTimeRange, setAnalyticsSource, setAnalyticsSubTopic } from "../../../vuex/actions";
 
     export default{
         props: ['active', 'actions', 'sourceactive', 'datas'],
         vuex: {
             actions: { setAnalyticsType, setAnalyticsTimeRange, setAnalyticsSource, setAnalyticsSubTopic },
-            getters: { analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic }
+            getters: {activeAnalyticsTopic,analyticsSubTopicId,analyticsResetSearch,analyticsRefreshTopic,analyticsDateChange, analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic }
         },
+
         data(){
             const words = Local().analytics;
             return{
@@ -69,8 +70,7 @@
                     { name: words.source[2] },
                     { name: words.source[3] },
                     { name: words.source[4] },
-                    { name: words.source[5] },
-                    { name: words.source[6] }
+                    { name: words.source[5] }
                 ],
                 sourceActive: 0
 //                filters: [{
@@ -78,6 +78,43 @@
 //                    value: 1
 //                }]
             }
+        },
+        watch:{
+            activeAnalyticsTopic:{
+                handler(val){
+                    this.sourceActive=0;
+                    this.setAnalyticsSource('all');
+                }
+            },
+            analyticsSubTopicId:{
+                handler(val){
+                    if(val!=0){
+                        this.sourceActive=0;
+                        this.setAnalyticsSource('all');
+                    }
+                }
+            },
+            analyticsSubTopic:{
+                handler(val){
+                    this.sourceActive=0;
+                    this.setAnalyticsSource('all');
+                }
+            },
+            analyticsRefreshTopic:{
+                handler(val){
+                    if(val!=0){
+                        this.sourceActive=0;
+                        this.setAnalyticsSource('all');
+                    }
+                }
+            },
+            analyticsDateChange:{
+                handler(val){
+                    this.sourceActive=0;
+                    this.setAnalyticsSource('all');
+                }
+            },
+
         },
         methods: {
             filterAction(val, idx){
@@ -88,7 +125,7 @@
                 console.log(val, idx, this.$route);
                 this.sourceActive = idx;
                 this.actions && this.actions(val, idx);
-                const source = ["all", "wechat", "weibo", "client", "web", "overseas","search"];
+                const source = ["all", "wechat", "weibo", "client", "web", "overseas","sengine"];
                 if(this.$route.path.indexOf('analytics') > -1){
                     this.setAnalyticsSource(source[idx]);
                 }
@@ -104,7 +141,7 @@
         ready(){
             if(this.$route.path.indexOf('analytics') > -1){
                 this.setAnalyticsType(this.$route.name);
-                const source = ["all", "wechat", "weibo", "client", "web", "oversea","search"];
+                const source = ["all", "wechat", "weibo", "client", "web", "oversea","sengine"];
                 this.setAnalyticsSource(source[0]);
                 console.log('datas', this.datas);
             }

@@ -2,10 +2,10 @@
     <tabs :actions="actions" :datas="commentNums"></tabs>
     <!--<div>Evaluation</div>-->
     <div class="charts">
-        <div class="chart commentLeftBar" v-echarts="commentBarOption" :click="clickChartAction" :loading="commentBarLoading" theme="macarons"></div><!--theme="infographic"-->
+        <div class="chart commentLeftBar"  v-echarts="commentBarOption" :click="clickChartAction" :loading="commentBarLoading" theme="macarons"></div><!--theme="infographic"-->
         <!--<div class="chart commentRightBar" v-echarts="commentChartOption" :loading="commentChartLoading" v-show="isShow" theme="macarons"></div>-->
         <div class="chart commentRightBar" v-echarts="commentPieOption2" :loading="commentPieLoading2" v-show="isShow" theme="macarons"></div>
-        <div class="chart commentRightBar" v-echarts="commentPieOption" :loading="commentChartLoading" v-show="!isShow" theme="macarons"></div>
+        <!--<div class="chart commentRightBar" v-echarts="commentPieOption" :loading="commentChartLoading" v-show="!isShow" theme="macarons"></div>-->
     </div>
     <list-panel :list="list" :options="options" :select-title="selectTitle" :select-value.sync="sortVal"></list-panel>
     <tips :visible.sync="loadingParams.visiable" :tipsparam.sync="loadingParams"></tips>
@@ -15,6 +15,7 @@
 </style>
 <script type="text/ecmascript-6">
     import _ from 'underscore';
+    import moment from 'moment';
     import { Chart, Pie } from '../../config/config';
     import Local from '../../local/local';
     import * as Api from '../../widgets/Api';
@@ -22,7 +23,7 @@
     import ListPanel from '../Common/ListPanel/ListPanel.vue';
     import Tabs from '../Common/Tabs/Tabs.vue';
     import Tips from '../Common/Tips/Tips.vue';
-    import { analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic, analyticsDateChange, analyticsStart, analyticsEnd, activeAnalyticsTopic, analyticsRefreshTopic } from '../../vuex/getters';
+    import {analyticsSubTopicId, analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic, analyticsDateChange, analyticsStart, analyticsEnd, activeAnalyticsTopic, analyticsRefreshTopic } from '../../vuex/getters';
 
     export default{
         data(){
@@ -50,7 +51,8 @@
                     client: {positive: [], negative: [], neutral: []},
                     web: {positive: [], negative: [], neutral: []},
                     overseas: {positive: [], negative: [], neutral: []},
-                    all: {positive: [], negative: [], neutral: []}
+                    all: {positive: [], negative: [], neutral: []},
+                    sengine:{positive: [], negative: [], neutral: []}
                 },
 
                 commentBarLoading: true,
@@ -79,6 +81,20 @@
                     }),
                     progressive: 4,
                     textStyle: Chart.textStyle,
+                    graphic:[
+                        {
+                            type: 'text',
+                            z: -10,
+                            left: 'center', // 相对父元素居中
+                            top: 'middle',  // 相对父元素居中
+                            rotation: Math.PI / 4,
+                            style: {
+                                fill: '#eee',
+                                text: '沃德品牌气象站',
+                                font: 'bold 34px Microsoft YaHei'
+                            }
+                        }
+                    ],
                     series : [
                         { name: words.positive, type: 'line',
                             //areaStyle: {normal: {}},
@@ -109,6 +125,20 @@
                     color:['#2FCC71','#E64D3D', '#F1C40F', '#3598DC', '#737373'],
                     textStyle: Pie.textStyle,
                     toolbox: Pie.toolbox,
+                    graphic:[
+                        {
+                            type: 'text',
+                            z: -10,
+                            left: 'center', // 相对父元素居中
+                            top: 'middle',  // 相对父元素居中
+                            rotation: Math.PI / 4,
+                            style: {
+                                fill: '#eee',
+                                text: '沃德品牌气象站',
+                                font: 'bold 34px Microsoft YaHei'
+                            }
+                        }
+                    ],
                     series: [
 
                         {
@@ -160,6 +190,20 @@
                     textStyle: Pie.textStyle,
                     toolbox: Pie.toolbox,
                     color: ['#2FCC71','#E64D3D', '#F1C40F', '#3598DC', '#737373'],
+                    graphic:[
+                        {
+                            type: 'text',
+                            z: -10,
+                            left: 'center', // 相对父元素居中
+                            top: 'middle',  // 相对父元素居中
+                            rotation: Math.PI / 4,
+                            style: {
+                                fill: '#eee',
+                                text: '沃德品牌气象站',
+                                font: 'bold 34px Microsoft YaHei'
+                            }
+                        }
+                    ],
                     series: _.extend({}, Pie.series, {
                         radius: ['20%', '50%'],
                         name: words.comment,
@@ -174,19 +218,28 @@
         methods: {
             clickChartAction(opts){
                 console.log('clickChartAction opts', opts);
-                //this.loadingParams.visiable = true;
+                this.loadingParams.visiable = true;
                 const topic_id = this.activeAnalyticsTopic.topic_id,
                         topic = this.activeAnalyticsTopic.topic_name,
                         subtopic = this.analyticsSubTopic,
                         source = this.analyticsSource,
                         time_dimension = 0,
-                        type = "time",
-                        end = opts.name.split(":")[0],
-                        start = opts.name.split(":")[0];
+                        type = "time";
+                let start =opts.name.split(":")[0],
+                        end = opts.name.split(":")[0];
+                if(opts.name.split(" ")[1]){
+                    console.log(typeof opts.name.split(":")[0],opts.name.split(":")[0])
+                    end = opts.name.split(":")[0]
+                    end = end.split(" ")[0]+'T'+end.split(" ")[1];
+                    start = moment(opts.name.split(":")[0],"YYYY-MM-DD HH").subtract(8, 'hour').format("YYYY-MM-DD HH")
+                    start=start.split(" ")[0]+'T'+start.split(" ")[1];
+                    console.log('start',start,end);
+                }
                 Api.getCommentList({type, topic_id, topic, subtopic, source, start, end, time_dimension}).then(resp => {
                     //console.log(resp.data);
                     //this.loadingParams.visiable = false;
                     if(resp.data.code == 0){
+                    this.loadingParams.visiable = false;
                         this.list = resp.data.data;
                     }
                 });
@@ -202,9 +255,16 @@
                         subtopic = this.analyticsSubTopic,
                         source = this.analyticsSource,
                         time_interval = this.analyticsTimeRange,
-                        time_dimension = time_interval > 7 ? 1 : 0,
-                        end = this.analyticsEnd,
+                        time_dimension = time_interval > 7 ? 1 : 0;
+                let end =this.analyticsEnd,
                         start = this.analyticsStart;
+                if(start.includes(' ') && end.includes(' ')){
+                    start = start.split(' ')[0]+'T'+start.split(' ')[1];
+                    end = end.split(' ')[0]+'T'+end.split(' ')[1];
+                    console.log('start',start,end);
+                }
+                       /* end = this.analyticsEnd,
+                        start = this.analyticsStart;*/
                 Api.getCommentList({type, topic_id, topic, subtopic, source, start, end, time_dimension}).then(resp => {
                     //console.log(resp.data);
 
@@ -220,9 +280,16 @@
                     subtopic = this.analyticsSubTopic,
                     source = this.analyticsSource,
                     time_interval = this.analyticsTimeRange,
-                    time_dimension = time_interval > 7 ? 1 : 0,
-                    end = this.analyticsEnd,
-                    start = this.analyticsStart;
+                    time_dimension = time_interval > 7 ? 1 : 0;
+                let end =this.analyticsEnd,
+                        start = this.analyticsStart;
+                if(start.includes(' ') && end.includes(' ')){
+                    start = start.split(' ')[0]+'T'+start.split(' ')[1];
+                    end = end.split(' ')[0]+'T'+end.split(' ')[1];
+                    console.log('start',start,end);
+                }
+                   /* end = this.analyticsEnd,
+                    start = this.analyticsStart;*/
                 Api.getCommentDetail({ topic_id, topic, subtopic, source, start, end, time_dimension }).then(resp => {
                     //console.log('getCommentDetail', resp.data);
                     //this.loadingParams.visiable = false;
@@ -245,17 +312,28 @@
                             //all.neutral.push(_this.lineData.wechat.neutral[index] + _this.lineData.weibo.neutral[index] + _this.lineData.client.neutral[index] + _this.lineData.web.positive[index] + _this.lineData.overseas.positive[index]);
                         });
                         console.log('this.all',this.lineData);
-                        all.positive =_.map(_.zip(this.lineData.wechat.positive,this.lineData.weibo.positive,this.lineData.client.positive,this.lineData.web.positive,this.lineData.overseas.positive),item =>{
+                        all.positive =_.map(_.zip(this.lineData.wechat.positive,this.lineData.weibo.positive,this.lineData.client.positive,this.lineData.web.positive,this.lineData.overseas.positive,this.lineData.sengine.positive),item =>{
                             return _.reduce(item, function(memo, num){ return memo + num; }, 0);
                         });
-                        all.negative =_.map(_.zip(this.lineData.wechat.negative,this.lineData.weibo.negative,this.lineData.client.negative,this.lineData.web.negative,this.lineData.overseas.negative),item =>{
+                        all.negative =_.map(_.zip(this.lineData.wechat.negative,this.lineData.weibo.negative,this.lineData.client.negative,this.lineData.web.negative,this.lineData.overseas.negative,this.lineData.sengine.negative),item =>{
                             return _.reduce(item, function(memo, num){ return memo + num; }, 0);
                         });
-                        all.neutral =_.map(_.zip(this.lineData.wechat.neutral,this.lineData.weibo.neutral,this.lineData.client.neutral,this.lineData.web.neutral,this.lineData.overseas.neutral),item =>{
+                        all.neutral =_.map(_.zip(this.lineData.wechat.neutral,this.lineData.weibo.neutral,this.lineData.client.neutral,this.lineData.web.neutral,this.lineData.overseas.neutral,this.lineData.sengine.neutral),item =>{
                             return _.reduce(item, function(memo, num){ return memo + num; }, 0);
                         });
                         console.log('all',all);
                         this.lineData.all = all;
+                    //修改资源数据
+                    this.lineData.client.positive = _.map(_.zip(this.lineData.client.positive,this.lineData.web.positive),item=>{
+                                                    return _.reduce(item, function(memo, num){ return memo + num; }, 0);
+                                                     });
+                    this.lineData.client.negative = _.map(_.zip(this.lineData.client.negative,this.lineData.web.negative),item=>{
+                                                    return _.reduce(item, function(memo, num){ return memo + num; }, 0);
+                                                     });
+                    this.lineData.client.neutral = _.map(_.zip(this.lineData.client.neutral,this.lineData.web.neutral),item=>{
+                                                    return _.reduce(item, function(memo, num){ return memo + num; }, 0);
+                                                     });
+                    this.lineData.web = this.lineData.sengine;
 
                         this.commentBarLoading = false;
                         this.commentBarOption.xAxis.data = this.x;
@@ -311,12 +389,8 @@
                         const overseasNums=_.reduce(this.lineData.overseas.negative,(mome, val) => mome + val, 0)+_.reduce(this.lineData.overseas.neutral,(mome, val) => mome + val, 0)
                         +_.reduce(this.lineData.overseas.positive,(mome, val) => mome + val, 0);
 
-                        console.log(allNums,
-                                wechatNums,
-                                weiboNums,
-                                clientNums,
-                                webNums,
-                                overseasNums);
+                        const sengineNums=_.reduce(this.lineData.sengine.negative,(mome, val) => mome + val, 0)+_.reduce(this.lineData.sengine.neutral,(mome, val) => mome + val, 0)
+                        +_.reduce(this.lineData.sengine.positive,(mome, val) => mome + val, 0);
                         this.commentNums =[
                             allNums,
                             wechatNums,
@@ -329,7 +403,7 @@
                 });
             },
             actions(val, idx){
-                const map = ['all', 'wechat', 'weibo', 'client', 'web', 'overseas'];
+                const map = ['all', 'wechat', 'weibo', 'client', 'web', 'overseas','sengine'];
 
                 _.each(this.lineData[map[idx]], (value, key) => {
                     this.commentBarOption.series[this.commentMap[key]].data = value;
@@ -398,7 +472,8 @@
                     client: {positive: [], negative: [], neutral: []},
                     web: {positive: [], negative: [], neutral: []},
                     overseas: {positive: [], negative: [], neutral: []},
-                    all: {positive: [], negative: [], neutral: []}
+                    all: {positive: [], negative: [], neutral: []},
+                    sengine:{positive: [], negative: [], neutral: []}
                 };
             },
             init(){
@@ -408,7 +483,7 @@
             }
         },
         vuex: {
-            getters: {analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic, analyticsDateChange, analyticsStart, analyticsEnd, activeAnalyticsTopic, analyticsRefreshTopic}
+            getters: {analyticsSubTopicId,analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic, analyticsDateChange, analyticsStart, analyticsEnd, activeAnalyticsTopic, analyticsRefreshTopic}
         },
         ready(){
             if(this.activeAnalyticsTopic && this.activeAnalyticsTopic.topic_id){
@@ -442,6 +517,11 @@
                     if(val !=''){
                         this.init();
                     }
+                }
+            },
+            analyticsSubTopicId:{
+                handler(val){
+                    this.init();
                 }
             },
             analyticsSource: {

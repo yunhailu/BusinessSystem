@@ -42,7 +42,8 @@
                     weibo: {},
                     client: {},
                     web: {},
-                    overseas: {}
+                    overseas: {},
+                    sengine:{}
                 },
                 intervalTime:[],
                 radarData:[],
@@ -52,7 +53,8 @@
                     weibo: {},
                     client: {},
                     web: {},
-                    overseas: {}
+                    overseas: {},
+                    sengine:{}
                 },
 
                 compareChartLoading: false,
@@ -76,6 +78,59 @@
                     }),
                     progressive: 4,
                     textStyle: Chart.textStyle,
+                    graphic:[
+//                        {
+//                            type: 'group',
+//                            left: 0,
+//                            top: 0,
+//                            children: [
+//                                {
+//                                    type: 'rect',
+//                                    z: 100,
+//                                    left: 'center',
+//                                    top: 'middle',
+//                                    shape: {
+//                                        width: 100,
+//                                        height: 40
+//                                    },
+//                                    style: {
+//                                        fill: '#fff',
+//                                        stroke: '#bbb',
+//                                        lineWidth: 2,
+//                                        shadowBlur: 8,
+//                                        shadowOffsetX: 3,
+//                                        shadowOffsetY: 3,
+//                                        shadowColor: 'rgba(0,0,0,0.3)'
+//                                    }
+//                                },
+//                                {
+//                                    type: 'text',
+//                                    z: 100,
+//                                    left: 'center',
+//                                    top: 'middle',
+//                                    style: {
+//                                        fill: '#777',
+//                                        text: [
+//                                           '关键词可多选'
+//                                        ].join('\n'),
+//                                        font: '14px Microsoft YaHei'
+//                                    }
+//                                }
+//                            ]
+//                        },
+                        {
+                            type: 'text',
+                            z: -10,
+                            left: 'center', // 相对父元素居中
+                            top: 'middle',  // 相对父元素居中
+                            rotation: Math.PI / 4,
+                            style: {
+                                fill: '#fff',
+                                text: '沃德品牌气象站',
+                                font: 'bold 34px Microsoft YaHei'
+                            }
+                        }
+                ],
                     series : []
                 },
 
@@ -90,6 +145,20 @@
                     textStyle: Pie.textStyle,
                     toolbox: Pie.toolbox,
                     color: _.extend([], Chart.color),
+                    graphic:[
+                        {
+                            type: 'text',
+                            z: -10,
+                            left: 'center', // 相对父元素居中
+                            top: 'middle',  // 相对父元素居中
+                            rotation: Math.PI / 4,
+                            style: {
+                                fill: '#fff',
+                                text: '沃德品牌气象站',
+                                font: 'bold 34px Microsoft YaHei'
+                            }
+                        }
+                    ],
                     series: _.extend({}, Pie.series, {
                         name: 'Compare',
                         radius: ['25%', '60%'],
@@ -140,6 +209,20 @@
                             }
                         }
                     },
+                    graphic:[
+                        {
+                            type: 'text',
+                            z: -10,
+                            left: 'center', // 相对父元素居中
+                            top: 'middle',  // 相对父元素居中
+                            rotation: Math.PI / 4,
+                            style: {
+                                fill: '#fff',
+                                text: '沃德品牌气象站',
+                                font: 'bold 34px Microsoft YaHei'
+                            }
+                        }
+                    ],
                     series: []
                 },
                 compareNums:[]
@@ -162,13 +245,15 @@
                 this.VariableChartData.weibo = {},
                 this.VariableChartData.client = {},
                 this.VariableChartData.web = {},
-                this.VariableChartData.overseas = {}
+                this.VariableChartData.overseas = {},
+                this.VariableChartData.sengine={},
                 this.VariableRadarData.all = {},
                 this.VariableRadarData.wechat = {},
                 this.VariableRadarData.weibo = {},
                 this.VariableRadarData.client = {},
                 this.VariableRadarData.web = {},
-                this.VariableRadarData.overseas = {}
+                this.VariableRadarData.overseas = {},
+                this.VariableRadarData.sengine = {}
             },
             mapData(data,intervalDate){
                 this.initChart();
@@ -232,6 +317,7 @@
                 const client =[];
                 const web =[];
                 const overseas =[];
+                const sengine = [];
                 const newChart =_.map(newTopicData,function(item) {
                     return _.reduce(_.values(item.values), function (memo, num) {
                         return memo + num;
@@ -244,6 +330,7 @@
                     client.push(item.values.client);
                     web.push(item.values.web);
                     overseas.push(item.values.overseas);
+                    sengine.push(item.values.sengine);
                 });
                 console.log(newTopic);
                 this.VariableChartData.all[newTopic[0].topic_name]=newChart;
@@ -251,7 +338,8 @@
                 this.VariableChartData.weibo[newTopic[0].topic_name]=weibo;
                 this.VariableChartData.client[newTopic[0].topic_name]=client;
                 this.VariableChartData.web[newTopic[0].topic_name]=web;
-                this.VariableChartData.overseas[newTopic[0 ].topic_name]=overseas;
+                this.VariableChartData.overseas[newTopic[0].topic_name]=overseas;
+                this.VariableChartData.sengine[newTopic[0].topic_name]=sengine;
                 console.log('VariableChartData',this.VariableChartData);
                 console.log('values',_.values(this.VariableChartData.all));
 
@@ -275,12 +363,14 @@
                 const client =[];
                 const web =[];
                 const overseas =[];
+                //const sengine=[];
                 _.each(details,(detail,index) =>{
                     client.push(detail.values.client);
                     weibo.push(detail.values.weibo);
                     web.push(detail.values.web);
                     overseas.push(detail.values.overseas);
                     wechat.push(detail.values.wechat);
+                   // sengine.push(detail.values.sengine);
                 });
                 //wechat
                 const newWechatlist = _.unzip(_.map(_.map(wechat,item =>{return _.values(item)}),item =>item));
@@ -359,7 +449,7 @@
                 this.initData();
 
                 _.map(activeCompareTopics,item =>{
-                    const topicParams = {
+                    let topicParams = {
                         topic_id:item.topic_id,
                         topic:item.topic_name,
                         subtopic:this.compareSubTopic,
@@ -368,6 +458,12 @@
                         end:this.compareEnd,
                         time_dimension:this.compareTimeRange<=10 ? 0 :1
                     };
+                if(topicParams.start.includes(' ') && topicParams.end.includes(' ')){
+                    topicParams.start = topicParams.start.split(' ')[0]+'T'+topicParams.start.split(' ')[1];
+                    topicParams.end = topicParams.end.split(' ')[0]+'T'+topicParams.end.split(' ')[1];
+                    console.log('start',topicParams.start,topicParams.end);
+                }
+
                     this.dealAddSummaryData([item],topicParams);
                     this.dealAddSentimentData([item],topicParams);
 
@@ -479,6 +575,9 @@
                 const midOverseasCount = _.map(_.values(this.VariableChartData.overseas),item=>{
                     return _.reduce(item, function(memo, num){ return memo + num; }, 0);
                 });
+                const midSengineCount = _.map(_.values(this.VariableChartData.sengine),item=>{
+                    return _.reduce(item, function(memo, num){ return memo + num; }, 0);
+                });
                 console.log('midCount',midAllCount)
                 let compareSourceCount = this.compareSourceCount;
                 compareSourceCount.all = _.reduce(midAllCount, function(memo, num){ return memo + num; }, 0);
@@ -487,8 +586,13 @@
                 compareSourceCount.client = _.reduce(midClientCount, function(memo, num){ return memo + num; }, 0);
                 compareSourceCount.web = _.reduce(midWebCount, function(memo, num){ return memo + num; }, 0);
                 compareSourceCount.overseas = _.reduce(midOverseasCount, function(memo, num){ return memo + num; }, 0);
+                compareSourceCount.sengine = _.reduce(midSengineCount, function(memo, num){ return memo + num; }, 0);
+
                 console.log('___',compareSourceCount);
-                this.compareNums = _.values(compareSourceCount);
+                this.compareNums=[
+                    compareSourceCount.all,compareSourceCount.wechat,compareSourceCount.weibo,compareSourceCount.client+compareSourceCount.web,compareSourceCount.sengine,compareSourceCount.overseas
+                ];
+//                this.compareNums = _.values(compareSourceCount);
 //                this.setCompareSourceCount(_.values(compareSourceCount));
                 //console.log('....',this.compareSourceCount.all);
                 console.log('查看修改',this.compareNums);
@@ -556,7 +660,7 @@
                         //新值不为空---如果老值为空
                         this.compareNums=[];
                         const newTopic = val;
-                        const topicParams = {
+                        let topicParams = {
                             topic_id:_.isEmpty(newTopic) ? '' : newTopic[0].topic_id,
                             topic:_.isEmpty(newTopic) ? '' : newTopic[0].topic_name,
                             subtopic:this.compareSubTopic,
@@ -565,6 +669,11 @@
                             end:this.compareEnd,
                             time_dimension:this.compareTimeRange<=10 ? 0 :1
                         };
+                        if(topicParams.start.includes(' ') && topicParams.end.includes(' ')){
+                            topicParams.start = topicParams.start.split(' ')[0]+'T'+topicParams.start.split(' ')[1];
+                            topicParams.end = topicParams.end.split(' ')[0]+'T'+topicParams.end.split(' ')[1];
+                            console.log('start',topicParams.start,topicParams.end);
+                        }
                         this.dealAddOnlyOneSummaryData(newTopic,topicParams);
                         this.dealAddOnlyOneSentimentData(newTopic,topicParams);
                     }else{
@@ -577,7 +686,7 @@
                                 this.compareNums=[];
                                 const newTopic = _.difference(val, oldVal);
                                 console.log(newTopic);
-                                const topicParams = {
+                                let topicParams = {
                                     topic_id:_.isEmpty(newTopic) ? '' : newTopic[0].topic_id,
                                     topic:_.isEmpty(newTopic) ? '' : newTopic[0].topic_name,
                                     subtopic:this.compareSubTopic,
@@ -586,6 +695,11 @@
                                     end:this.compareEnd,
                                     time_dimension:this.compareTimeRange<=10 ? 0 :1
                                 };
+                                if(topicParams.start.includes(' ') && topicParams.end.includes(' ')){
+                                    topicParams.start = topicParams.start.split(' ')[0]+'T'+topicParams.start.split(' ')[1];
+                                    topicParams.end = topicParams.end.split(' ')[0]+'T'+topicParams.end.split(' ')[1];
+                                    console.log('start',topicParams.start,topicParams.end);
+                                }
                                 this.dealAddSummaryData(newTopic,topicParams);
                                 this.dealAddSentimentData(newTopic,topicParams);
                             } else {
@@ -625,7 +739,7 @@
                             console.log('这里对空数据做出判断');
                             this.compareNums=[];
                             const newTopic = val;
-                            const topicParams = {
+                            let topicParams = {
                                 topic_id:_.isEmpty(newTopic) ? '' : newTopic[0].topic_id,
                                 topic:_.isEmpty(newTopic) ? '' : newTopic[0].topic_name,
                                 subtopic:this.compareSubTopic,
@@ -634,6 +748,11 @@
                                 end:this.compareEnd,
                                 time_dimension:this.compareTimeRange<=10 ? 0 :1
                             };
+                            if(topicParams.start.includes(' ') && topicParams.end.includes(' ')){
+                                topicParams.start = topicParams.start.split(' ')[0]+'T'+topicParams.start.split(' ')[1];
+                                topicParams.end = topicParams.end.split(' ')[0]+'T'+topicParams.end.split(' ')[1];
+                                console.log('start',topicParams.start,topicParams.end);
+                            }
                             this.initData();
                             this.dealAddOnlyOneSummaryData(newTopic,topicParams);
                             this.dealAddOnlyOneSentimentData(newTopic,topicParams);

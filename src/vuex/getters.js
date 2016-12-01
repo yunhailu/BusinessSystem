@@ -63,6 +63,10 @@ export const analyticsRefreshTopic = state => {
 export const analyticsResetSearch = state => {
 	return state.analytics.resetSearch;
 };
+
+export const analyticsSubTopicId = state => {
+	return state.analytics.subtopicId;
+};
 /**
  * Compare
  * */

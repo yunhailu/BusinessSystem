@@ -24,7 +24,7 @@
     import ListPanel from '../Common/ListPanel/ListPanel.vue';
     import Tabs from '../Common/Tabs/Tabs.vue';
     import Tips from '../Common/Tips/Tips.vue';
-    import { analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic, analyticsDateChange, analyticsStart, analyticsEnd, activeAnalyticsTopic, analyticsRefreshTopic } from '../../vuex/getters';
+    import {analyticsSubTopicId, analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic, analyticsDateChange, analyticsStart, analyticsEnd, activeAnalyticsTopic, analyticsRefreshTopic } from '../../vuex/getters';
 
     export default{
         data(){
@@ -48,13 +48,18 @@
                     weibo: [],
                     client: [],
                     web: [],
-                    overseas: []
+                    overseas: [],
+                    sengine:[]
                 },
                 words: Local().analytics,
                 selectTitle: Local().common.sortBy,
                 chartInstance: null,
                 resultChartLoading: true,
                 resultChartOption: {
+                   /* title : {
+                        text: '品牌关注走势图',
+                        x:0,
+                    },*/
                     isToggle: true,
                     title: _.extend({}, Chart.title, { show: false}),
                     tooltip: Chart.tooltip,
@@ -74,6 +79,20 @@
                     }),
                     progressive: 4,
                     textStyle: Chart.textStyle,
+                    graphic:[
+                        {
+                            type: 'text',
+                            z: -10,
+                            left: 'center', // 相对父元素居中
+                            top: 'middle',  // 相对父元素居中
+                            rotation: Math.PI / 4,
+                            style: {
+                                fill: '#eee',
+                                text: '沃德品牌气象站',
+                                font: 'bold 34px Microsoft YaHei'
+                            }
+                        }
+                    ],
                     series : [{
                         name:"总数",
                         type:'line',
@@ -85,6 +104,10 @@
                 resultPieChartLoading: true,
                 resultPieChartOption: {
                     isActive: true,
+                   /* title : {
+                        text: '话题资源排行',
+                        x:0
+                    },*/
                     title: _.extend({}, Pie.title, { show: false}),
                     tooltip: _.extend({}, Pie.tooltip),
                     legend: _.extend({}, Pie.legend, {
@@ -95,6 +118,20 @@
                     }),
                     textStyle: Pie.textStyle,
                     toolbox: Pie.toolbox,
+                    graphic:[
+                        {
+                            type: 'text',
+                            z: -10,
+                            left: 'center', // 相对父元素居中
+                            top: 'middle',  // 相对父元素居中
+                            rotation: Math.PI / 4,
+                            style: {
+                                fill: '#eee',
+                                text: '沃德品牌气象站',
+                                font: 'bold 34px Microsoft YaHei'
+                            }
+                        }
+                    ],
                     series:[]
                     /*series: [_.extend({}, Pie.series, {
                         lable:{
@@ -172,6 +209,8 @@
                         case 5:
                             data = lineData.overseas;
                             break;
+                        case 6:
+                            data = lineData.sengine;
                         default:
                             data = lineData.all;
                             break;
@@ -248,7 +287,7 @@
             }
         },
         vuex: {
-            getters: {analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic, analyticsDateChange, analyticsStart, analyticsEnd, activeAnalyticsTopic, analyticsRefreshTopic}
+            getters: {analyticsSubTopicId,analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic, analyticsDateChange, analyticsStart, analyticsEnd, activeAnalyticsTopic, analyticsRefreshTopic}
         },
         methods: {
             toggle(){
@@ -289,9 +328,16 @@
                         subtopic = this.analyticsSubTopic,
                         source = this.analyticsSource,
                         time_interval = this.analyticsTimeRange,
-                        time_dimension = time_interval > 7 ? 1 : 0,
-                        end = this.analyticsEnd,
+                        time_dimension = time_interval > 7 ? 1 : 0;
+                let end =this.analyticsEnd,
                         start = this.analyticsStart;
+                if(start.includes(' ') && end.includes(' ')){
+                    start = start.split(' ')[0]+'T'+start.split(' ')[1];
+                    end = end.split(' ')[0]+'T'+end.split(' ')[1];
+                    console.log('start',start,end);
+                }
+                        /*end = this.analyticsEnd,
+                        start = this.analyticsStart;*/
                 //console.log(start, end);
                 Api.getSummaryDetail({topic_id, topic, subtopic, source, start, end, time_dimension}).then(resp => {
                     //console.log('getSummaryDetail', resp.data);
@@ -306,9 +352,17 @@
                             this.lineData.client.push(detail.values.client);
                             this.lineData.web.push(detail.values.web);
                             this.lineData.overseas.push(detail.values.overseas);
-                            const all = detail.values.wechat + detail.values.weibo + detail.values.client + detail.values.web + detail.values.overseas;
+                            this.lineData.sengine.push(detail.values.sengine);
+                            const all = detail.values.wechat + detail.values.weibo + detail.values.client + detail.values.web + detail.values.overseas+detail.values.sengine;
                             this.lineData.all.push(all);
+
                         });
+                    //修改资源来源于数量显示
+                        this.lineData.client = _.map(_.zip(this.lineData.client,this.lineData.web),item=>{
+                                    return _.reduce(item, function(memo, num){ return memo + num; }, 0);
+                        });
+                        this.lineData.web = this.lineData.sengine;
+                        console.log('client+web',this.lineData.client);
                         this.resultChartLoading = false;
                         this.resultPieChartLoading = false;
                         this.actions("全部", 0);
@@ -317,8 +371,9 @@
                                 _.reduce(this.lineData.wechat, (memo, value) => (memo + value), 0),
                                 _.reduce(this.lineData.weibo, (memo, value) => (memo + value), 0),
                                 _.reduce(this.lineData.client, (memo, value) => (memo + value), 0),
-                                _.reduce(this.lineData.web, (memo, value) => (memo + value), 0),
+                                _.reduce(this.lineData.web,(memo, value) => (memo + value), 0) ,
                                 _.reduce(this.lineData.overseas, (memo, value) => (memo + value), 0)
+
                         ];
                     }
                 });
@@ -334,9 +389,16 @@
                         subtopic = this.analyticsSubTopic,
                         source = this.analyticsSource,
                         time_interval = this.analyticsTimeRange,
-                        time_dimension = time_interval > 7 ? 1 : 0,
-                        end = this.analyticsEnd,
+                        time_dimension = time_interval > 7 ? 1 : 0;
+                let end =this.analyticsEnd,
                         start = this.analyticsStart;
+                if(start.includes(' ') && end.includes(' ')){
+                    start = start.split(' ')[0]+'T'+start.split(' ')[1];
+                    end = end.split(' ')[0]+'T'+end.split(' ')[1];
+                    console.log('start',start,end);
+                }
+                        /*end = this.analyticsEnd,
+                        start = this.analyticsStart;*/
                 Api.getCommentList({type, topic_id, topic, subtopic, source, start, end, time_dimension}).then(resp => {
                     //console.log(resp.data);
                     //this.loadingParams.visiable = false;
@@ -353,9 +415,11 @@
                     weibo: [],
                     client: [],
                     web: [],
-                    overseas: []
+                    overseas: [],
+                    sengine:[]
                 };
             },
+
             init(topic){
                 //console.log('topic', topic);
                 this.initData();
@@ -364,6 +428,7 @@
             }
         },
         watch: {
+            //这里需要判断资源-------------------
             analyticsRefreshTopic:{
                 handler(val){
                     if(val !=0){
@@ -378,9 +443,16 @@
                     this.init(val);
                 }
             },
+            //这里需要判断资源-------------------
             analyticsDateChange: {
                 handler(val){
                     //this.loadingParams.visiable = true;
+                    this.init();
+                }
+            },
+            //这里需要判断资源-------------------
+            analyticsSubTopicId:{
+                handler(val){
                     this.init();
                 }
             },

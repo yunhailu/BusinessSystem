@@ -25,9 +25,9 @@ html,body {
   .mgc(0 auto);
   overflow: hidden;
   cursor: auto !important;
-  .item-1{
-    background: url("../images/login-bg-1.jpg") no-repeat;.pr();
-    background-size: 100% 100%;
+  .item-1.swiper-slide-active{
+   // background: url("../images/login-bg-1.jpg") no-repeat;.pr();
+    //background-size: 100% 100%;
     .ball{
       .disB();.w(65%);.pa();.top(0);.left(50%);transform: translate(-50%);
       animation: ballframes 1.5s;
@@ -41,30 +41,123 @@ html,body {
       }
     }
     .navigation{
-       .pa();.top(35%);.h(60px);.left(50%);transform: translate(-50%);
+       .pa();.top(50%);.h(60px);.left(50%);transform: translate(-50%);
       h2{.disB();.mgc(0);.f(46px);.c(#fff);.ff('Microsoft Yahei')}
     }
     .login-btn{
-      .pa();.top(50%);.h(60px);.left(50%);transform: translate(-50%);
-      img{.disB();.mgc(0);}
+      .pa();.top(80%);.h(60px);.left(50%);transform: translate(-50%);
+      img{.disB();.mgc(0);transform: scale(0.6);}
     }
     .introduce{
-      .pa();.top(80%);.h(200px);.left(50%);transform: translate(-50%);
+      .pa();.top(80%);.h(200px);.left(50%);transform: translate(-50%);animation: 1.5s introduceframes;
+      animation-timing-function: linear;
       .conBox{
         .w(775px);.h(100%);text-align:left;
         p{ .f(16px);.ff('Microsoft Yahei');.c(#fff);}
       }
     }
   }
+  .item-1.swiper-slide-prev{.ball{.disN();} .navigation{.disN()} .login-btn{.disN()}; .introduce{.disN()};}
+  .item-2.swiper-slide-active{
+    //background: url("../images/login-bg-2.jpg") no-repeat;.pr();
+    //background-size: 100% 100%;
+    .pr();
+    .source-title{
+      .pa();.top(125px);.left(50%);transform: translate(-50%);.h(60px);
+      span{.ff('Microsoft Yahei');.f(50px);.c(#fff);}
+    }
+    div{
+      img{
+        .disB();.pa();.w(18%);
+      }
+      //.left(50%);transform: translate(-50%);
+      .weibo{ .left(21%); .top(30%); animation:0.35s weiboframes;}
+      .weibo:hover{transform: scale(1.1)}
+      .weixin{ .left(41%); .top(30%);  animation: 0.45s weixinframes;}
+      .weixin:hover{transform: scale(1.1)}
+      .web{ .left(61%); .top(30%);  animation: 0.55s webframes;}
+      .web:hover{transform: scale(1.1)}
+      .appImg{ .left(21%); .top(60%); animation:0.7s appImgframes;}
+      .appImg:hover{transform: scale(1.1)}
+      .overseas{ .left(41%); .top(60%); animation:0.8s overseasframes;}
+      .overseas:hover{transform: scale(1.1)}
+      .sengine{ .left(61%); .top(60%); animation:0.9s sengineframes;}
+      .sengine:hover{transform: scale(1.1)}
+    }
+  }
+  .item-2.swiper-slide-prev{div img{.disN(); .top(100%);} div .source-title{.disN()}}
+  .item-2.swiper-slide-next{div img{.disN(); .top(100%);} div .source-title{.disN()}}
+  .item-3.swiper-slide-active{
+    .pr();
+    .source-title{
+      .pa();.top(125px);.left(50%);transform: translate(-50%);.h(60px);
+      span{.ff('Microsoft Yahei');.f(50px);.c(#fff);}
+      p{.c(#fff);.f(16px);}
+    }
+    div{
+      img{ .disB();.pa();
+        .left(50%);transform: translate(-50%);.w(20%);
+      }
+      .login-3-1{.top(54%);.w(10%);animation:1s login_3_1frames;}
+      .login-3-2{.left(40%);.top(38%); animation:1s login_3_2frames;}
+      //.login-3-2:hover{transform: scale(1.2)}
+      .login-3-3{.top(28%); animation:1s login_3_3frames;}
+      //.login-3-3:hover{transform: scale(1.2)}
+      .login-3-4{.left(62%);.top(37%); animation:1s login_3_4frames;}
+      //.login-3-4:hover{transform: scale(1.2)}
+      .login-3-5{.left(40%);.top(56.5%); animation:1s login_3_5frames;}
+      //.login-3-5:hover{transform: scale(1.2)}
+      .login-3-6{.top(65%); animation:1s login_3_6frames;}
+      //.login-3-6:hover{transform: scale(1.2)}
+      .login-3-7{.left(60%);.top(57%); animation:1s login_3_7frames;}
+      //.login-3-7:hover{transform: scale(1.2)}
+    }
+  }
+  .item-3.swiper-slide-next{
+    div{
+      img{.disN(); }
+    }
+  }
+  .item-3.swiper-slide-prev{
+    div{
+      img{.disN(); }
+    }
+  }
+  .item-4.swiper-slide-active{
+    .pr();
+  div{
+    img{
+      .disB();.pa();.top(30%);.left(50%);transform: translate(-50%);
+      .w(60%);animation: 1.5s loginbanner_4;
+    }
+  }
+  }
+  .item-4.swiper-slide-next{
+    div{img{.disN();}}
+  }
 }
 .sliderimg {.w(100%); .h(100%);}
 .swiper-item {
-
   .tc();
   .bgsize(100% 100%);
   .dasd();
 }
+.swiper-pagination{
+  right:15px !important;
+  .swiper-pagination-bullet{.w(18px);.h(18px);background: rgb(253,252,252);
+    margin:10px 0 !important;}
+  .swiper-pagination-bullet-active{.bgc(#00ffe9)}
+}
+
 //第一张图动画
+@keyframes introduceframes {
+  from{.left(100%);}
+  to{.left(50%);}
+}
+@keyframes navigationframes {
+  from{display: none;.left(0);}
+  to{display: block;.left(50%);}
+}
 @keyframes ballimgframes {
   0% {transform:rotate(0deg);  }
   50% {transform:rotate(180deg); }
@@ -74,3 +167,84 @@ html,body {
   0% {.w(30%);}
   100% {.w(65%);}
 }
+//2-banner
+@keyframes weiboframes {
+  0% { .top(100%);}
+  100%{.top(30%);}
+}
+@keyframes weixinframes {
+  0% { .top(120%);}
+  100%{.top(30%);}
+}
+@keyframes webframes {
+  0% { .top(140%);}
+  100%{.top(30%);}
+}
+@keyframes appImgframes {
+  0% { .top(170%);}
+  100%{.top(60%);}
+}
+@keyframes overseasframes {
+  0% { .top(190%);}
+  100%{.top(60%);}
+}
+@keyframes sengineframes {
+  0% { .top(210%);}
+  100%{.top(60%);}
+}
+
+//3-banner
+@keyframes login_3_1frames {
+  0% {.top(50%); .left(50%);transform: translate(-50%);.w(20%);}
+  100% {.top(54%);.w(10%);}
+}
+@keyframes login_3_2frames {
+  0% {.top(50%); .left(50%);transform: translate(-50%);.w(20%);}
+  100% {.left(40%);.top(38%);}
+}
+@keyframes login_3_3frames {
+  0% {.top(50%); .left(50%);transform: translate(-50%);.w(20%);}
+  100% {.top(28%);}
+}
+@keyframes login_3_4frames {
+  0% {.top(50%); .left(50%);transform: translate(-50%);.w(20%);}
+  100% {.left(62%);.top(37%);}
+}
+@keyframes login_3_5frames {
+  0% {.top(50%); .left(50%);transform: translate(-50%);.w(20%);}
+  100% {.left(40%);.top(56.5%);}
+}
+@keyframes login_3_6frames {
+  0% {.top(50%); .left(50%);transform: translate(-50%);.w(20%);}
+  100% {.top(65%);}
+}
+@keyframes login_3_7frames {
+  0% {.top(50%); .left(50%);transform: translate(-50%);.w(20%);}
+  100% {.left(60%);.top(57%);}
+}
+@keyframes loginbanner_4 {
+  0% {.w(80%)}
+100% {.w(60%)}
+}
+/*
+@keyframes threeframes {
+  from {
+   div{
+     img{ .disB();.pa();.top(50%);
+       .left(50%);transform: translate(-50%);.w(20%);
+     }
+     .login-3-1{.w(10%);}
+   }
+  }
+  to {
+    div{
+      .login-3-1{.top(54%);.w(10%);}
+      .login-3-2{.left(40%);.top(38%);}
+      .login-3-3{.top(28%);}
+      .login-3-4{.left(62%);.top(37%);}
+      .login-3-5{.left(40%);.top(56%);}
+      .login-3-6{.top(65%);}
+      .login-3-7{.left(60%);.top(57%);}
+    }
+  }
+}*/
