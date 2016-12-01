@@ -9,6 +9,7 @@
             <li v-for="group in groups" :class="[group.list.length ? 'treeview' : '', group.isActive ? 'active' : '']">
                 <a href="javascript:void(0);" @click="toggle(group);" v-show="group.list.length">
                     <i class="fa" :class="group.icon || 'fa-bar-chart' "></i> <span>{{group.group_name}}</span>
+
                     <i class="fa pull-right" :class="[group.isActive ? 'fa-angle-down' : 'fa-angle-left']"></i>
                 </a>
                 <ul class="treeview-menu" v-show="group.isActive" transition="expand">

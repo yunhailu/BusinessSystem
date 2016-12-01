@@ -458,8 +458,25 @@
                             all.fear.push(this.lineData.wechat.fear[index] + this.lineData.weibo.fear[index] + this.lineData.client.fear[index] + this.lineData.web.fear[index] + this.lineData.overseas.fear[index]+ this.lineData.sengine.fear[index]);
                         });
                         this.lineData.all = all;
-                        //console.log(this.lineData);
-
+                        console.log(this.lineData);
+                    //修改资源来源数量
+                        this.lineData.web.happy = _.map(_.zip(this.lineData.web.happy,this.lineData.client.happy),item=>{
+                                                        return _.reduce(item, function(memo, num){ return memo + num; }, 0);
+                                                    });
+                        this.lineData.web.happy = _.map(_.zip(this.lineData.web.happy,this.lineData.client.happy),item=>{
+                                                        return _.reduce(item, function(memo, num){ return memo + num; }, 0);
+                                                     });
+                        this.lineData.web.happy = _.map(_.zip(this.lineData.web.happy,this.lineData.client.happy),item=>{
+                                                        return _.reduce(item, function(memo, num){ return memo + num; }, 0);
+                                                     });
+                        this.lineData.web.happy = _.map(_.zip(this.lineData.web.happy,this.lineData.client.happy),item=>{
+                                                        return _.reduce(item, function(memo, num){ return memo + num; }, 0);
+                                                        });
+                        this.lineData.web.happy = _.map(_.zip(this.lineData.web.happy,this.lineData.client.happy),item=>{
+                                                        return _.reduce(item, function(memo, num){ return memo + num; }, 0);
+                                                     });
+                    console.log('client+web',this.lineData.web);
+                    this.lineData.client = this.lineData.sengine;
                         this.sentimentBarLoading = false;
                         //this.sentimentChartLoading = false;
                         this.sentimentPieLoading = false;
@@ -512,8 +529,8 @@
                             allNums,
                             wechatNums,
                             weiboNums,
-                            clientNums+webNums,
-                            sengineNums,
+                            clientNums,
+                            webNums,
                             overseasNums
                         ];
                         console.log('这个',this.sentimentNums);

@@ -79,45 +79,45 @@
                     progressive: 4,
                     textStyle: Chart.textStyle,
                     graphic:[
-                        {
-                            type: 'group',
-                            left: 0,
-                            top: 0,
-                            children: [
-                                {
-                                    type: 'rect',
-                                    z: 100,
-                                    left: 'center',
-                                    top: 'middle',
-                                    shape: {
-                                        width: 100,
-                                        height: 40
-                                    },
-                                    style: {
-                                        fill: '#fff',
-                                        stroke: '#bbb',
-                                        lineWidth: 2,
-                                        shadowBlur: 8,
-                                        shadowOffsetX: 3,
-                                        shadowOffsetY: 3,
-                                        shadowColor: 'rgba(0,0,0,0.3)'
-                                    }
-                                },
-                                {
-                                    type: 'text',
-                                    z: 100,
-                                    left: 'center',
-                                    top: 'middle',
-                                    style: {
-                                        fill: '#777',
-                                        text: [
-                                           '关键词可多选'
-                                        ].join('\n'),
-                                        font: '14px Microsoft YaHei'
-                                    }
-                                }
-                            ]
-                        },
+//                        {
+//                            type: 'group',
+//                            left: 0,
+//                            top: 0,
+//                            children: [
+//                                {
+//                                    type: 'rect',
+//                                    z: 100,
+//                                    left: 'center',
+//                                    top: 'middle',
+//                                    shape: {
+//                                        width: 100,
+//                                        height: 40
+//                                    },
+//                                    style: {
+//                                        fill: '#fff',
+//                                        stroke: '#bbb',
+//                                        lineWidth: 2,
+//                                        shadowBlur: 8,
+//                                        shadowOffsetX: 3,
+//                                        shadowOffsetY: 3,
+//                                        shadowColor: 'rgba(0,0,0,0.3)'
+//                                    }
+//                                },
+//                                {
+//                                    type: 'text',
+//                                    z: 100,
+//                                    left: 'center',
+//                                    top: 'middle',
+//                                    style: {
+//                                        fill: '#777',
+//                                        text: [
+//                                           '关键词可多选'
+//                                        ].join('\n'),
+//                                        font: '14px Microsoft YaHei'
+//                                    }
+//                                }
+//                            ]
+//                        },
                         {
                             type: 'text',
                             z: -10,

@@ -3,7 +3,15 @@
         <div class="title">
             <i class="fa fa-laptop"></i>
             <span>{{title}}</span>
+            <div>
+                <i class="fa fa-question-circle-o" aria-hidden="true"></i>
+                <div class="tips">
+                    <!--<i class="fa fa-times" aria-hidden="true"></i>-->
+                    <p>关键词可多选</p>
+                </div>
+            </div>
             <i class="fa fa-plus plus" @click="addTopicAction"></i>
+
         </div>
         <ul class="sidebar-menu">
             <li v-for="group in groups" :class="[group.list.length ? 'treeview' : '', group.isActive ? 'active' : '']">

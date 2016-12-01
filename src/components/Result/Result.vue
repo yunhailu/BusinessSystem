@@ -355,7 +355,14 @@
                             this.lineData.sengine.push(detail.values.sengine);
                             const all = detail.values.wechat + detail.values.weibo + detail.values.client + detail.values.web + detail.values.overseas+detail.values.sengine;
                             this.lineData.all.push(all);
+
                         });
+                    //修改资源来源于数量显示
+                        this.lineData.client = _.map(_.zip(this.lineData.client,this.lineData.web),item=>{
+                                    return _.reduce(item, function(memo, num){ return memo + num; }, 0);
+                        });
+                        this.lineData.web = this.lineData.sengine;
+                        console.log('client+web',this.lineData.client);
                         this.resultChartLoading = false;
                         this.resultPieChartLoading = false;
                         this.actions("全部", 0);
@@ -363,8 +370,8 @@
                                 _.reduce(this.lineData.all, (memo, value) => (memo + value), 0),
                                 _.reduce(this.lineData.wechat, (memo, value) => (memo + value), 0),
                                 _.reduce(this.lineData.weibo, (memo, value) => (memo + value), 0),
-                                _.reduce(this.lineData.client, (memo, value) => (memo + value), 0)+ _.reduce(this.lineData.web, (memo, value) => (memo + value), 0),
-                              _.reduce(this.lineData.sengine,(memo, value) => (memo + value), 0) ,
+                                _.reduce(this.lineData.client, (memo, value) => (memo + value), 0),
+                                _.reduce(this.lineData.web,(memo, value) => (memo + value), 0) ,
                                 _.reduce(this.lineData.overseas, (memo, value) => (memo + value), 0)
 
                         ];

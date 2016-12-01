@@ -323,6 +323,17 @@
                         });
                         console.log('all',all);
                         this.lineData.all = all;
+                    //修改资源数据
+                    this.lineData.client.positive = _.map(_.zip(this.lineData.client.positive,this.lineData.web.positive),item=>{
+                                                    return _.reduce(item, function(memo, num){ return memo + num; }, 0);
+                                                     });
+                    this.lineData.client.negative = _.map(_.zip(this.lineData.client.negative,this.lineData.web.negative),item=>{
+                                                    return _.reduce(item, function(memo, num){ return memo + num; }, 0);
+                                                     });
+                    this.lineData.client.neutral = _.map(_.zip(this.lineData.client.neutral,this.lineData.web.neutral),item=>{
+                                                    return _.reduce(item, function(memo, num){ return memo + num; }, 0);
+                                                     });
+                    this.lineData.web = this.lineData.sengine;
 
                         this.commentBarLoading = false;
                         this.commentBarOption.xAxis.data = this.x;
@@ -380,19 +391,12 @@
 
                         const sengineNums=_.reduce(this.lineData.sengine.negative,(mome, val) => mome + val, 0)+_.reduce(this.lineData.sengine.neutral,(mome, val) => mome + val, 0)
                         +_.reduce(this.lineData.sengine.positive,(mome, val) => mome + val, 0);
-
-                        console.log(allNums,
-                                wechatNums,
-                                weiboNums,
-                                clientNums,
-                                webNums,
-                                overseasNums);
                         this.commentNums =[
                             allNums,
                             wechatNums,
                             weiboNums,
-                            clientNums+webNums,
-                            sengineNums,
+                            clientNums,
+                            webNums,
                             overseasNums
                         ];
                     }
