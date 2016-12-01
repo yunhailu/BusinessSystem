@@ -30,14 +30,14 @@
     import _ from 'underscore';
     import Local from '../../../local/local';
     import AddDashboard from '../../AddDashboard/AddDashboard.vue'
-    import {analyticsResetSearch,analyticsSubTopicId,analyticsRefreshTopic,analyticsDateChange, analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic } from '../../../vuex/getters';
+    import {activeAnalyticsTopic,analyticsResetSearch,analyticsSubTopicId,analyticsRefreshTopic,analyticsDateChange, analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic } from '../../../vuex/getters';
     import { setAnalyticsType, setAnalyticsTimeRange, setAnalyticsSource, setAnalyticsSubTopic } from "../../../vuex/actions";
 
     export default{
         props: ['active', 'actions', 'sourceactive', 'datas'],
         vuex: {
             actions: { setAnalyticsType, setAnalyticsTimeRange, setAnalyticsSource, setAnalyticsSubTopic },
-            getters: {analyticsSubTopicId,analyticsResetSearch,analyticsRefreshTopic,analyticsDateChange, analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic }
+            getters: {activeAnalyticsTopic,analyticsSubTopicId,analyticsResetSearch,analyticsRefreshTopic,analyticsDateChange, analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic }
         },
 
         data(){
@@ -80,29 +80,38 @@
             }
         },
         watch:{
+            activeAnalyticsTopic:{
+                handler(val){
+                    this.sourceActive=0;
+                    this.setAnalyticsSource('all');
+                }
+            },
             analyticsSubTopicId:{
                 handler(val){
                     if(val!=0){
-                       this.sourceActive=0;
-
+                        this.sourceActive=0;
+                        this.setAnalyticsSource('all');
                     }
                 }
             },
             analyticsSubTopic:{
                 handler(val){
                     this.sourceActive=0;
+                    this.setAnalyticsSource('all');
                 }
             },
             analyticsRefreshTopic:{
                 handler(val){
                     if(val!=0){
                         this.sourceActive=0;
+                        this.setAnalyticsSource('all');
                     }
                 }
             },
             analyticsDateChange:{
                 handler(val){
                     this.sourceActive=0;
+                    this.setAnalyticsSource('all');
                 }
             },
 
