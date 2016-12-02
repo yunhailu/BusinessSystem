@@ -79,6 +79,12 @@
                     }),
                     progressive: 4,
                     textStyle: Chart.textStyle,
+                    legend: _.extend({}, Pie.legend, {
+                        //orient: 'vertical',
+                        //x: 'bottom',
+                        bottom: 0,
+                        data: [common.wechat, common.weibo, common.client, common.web, common.overseas]
+                    }),
                     graphic:[
                         {
                             type: 'text',
@@ -93,13 +99,47 @@
                             }
                         }
                     ],
-                    series : [{
-                        name:"总数",
-                        type:'line',
-                        areaStyle: {normal: {}},
-                        //stack: 'Total',
-                        data: []
-                    }]
+                    series:[
+                        {
+                            name:common.wechat,
+
+                            type:'line',
+                            //areaStyle: {normal: {}},
+                            //stack: 'Total',
+                            data: []
+                        }, {
+                            name:common.weibo,
+                            type:'line',
+                            //areaStyle: {normal: {}},
+                            //stack: 'Total',
+                            data: []
+                        }, {
+                            name:common.client,
+                            type:'line',
+                            //areaStyle: {normal: {}},
+                            //stack: 'Total',
+                            data: []
+                        }, {
+                            name:common.web,
+                            type:'line',
+                            //areaStyle: {normal: {}},
+                            //stack: 'Total',
+                            data: []
+                        }, {
+                            name:common.overseas,
+                            type:'line',
+                            //areaStyle: {normal: {}},
+                            //stack: 'Total',
+                            data: []
+                        }
+                    ]
+//                    series : [{
+//                        name:"总数",
+//                        type:'line',
+//                        areaStyle: {normal: {}},
+//                        //stack: 'Total',
+//                        data: []
+//                    }]
                 },
                 resultPieChartLoading: true,
                 resultPieChartOption: {
@@ -230,6 +270,45 @@
                         }]
                     });
                     if(idx == 0){
+                        this.resultChartOption = _.extend({}, this.resultChartOption, {
+                            xAxis: _.extend({}, this.resultChartOption.xAxis, {
+                                type : 'category',  //category
+                                data: x,
+                                boundaryGap : false
+                            }),
+                            series: [ {
+                                name:common.wechat,
+
+                                type:'line',
+                                //areaStyle: {normal: {}},
+                                //stack: 'Total',
+                                data:this.data.weichat
+                            }, {
+                                name:common.weibo,
+                                type:'line',
+                                //areaStyle: {normal: {}},
+                                //stack: 'Total',
+                                data: this.data.weibo
+                            }, {
+                                name:common.client,
+                                type:'line',
+                                //areaStyle: {normal: {}},
+                                //stack: 'Total',
+                                data: this.data.client
+                            }, {
+                                name:common.web,
+                                type:'line',
+                                //areaStyle: {normal: {}},
+                                //stack: 'Total',
+                                data: this.data.web
+                            }, {
+                                name:common.overseas,
+                                type:'line',
+                                //areaStyle: {normal: {}},
+                                //stack: 'Total',
+                                data: this.data.overseas
+                            }]
+                        });
                         this.resultPieChartOption = _.extend({}, this.resultPieChartOption, {
                             series:[
                                 {
@@ -353,8 +432,8 @@
                             this.lineData.web.push(detail.values.web);
                             this.lineData.overseas.push(detail.values.overseas);
                             this.lineData.sengine.push(detail.values.sengine);
-                            const all = detail.values.wechat + detail.values.weibo + detail.values.client + detail.values.web + detail.values.overseas+detail.values.sengine;
-                            this.lineData.all.push(all);
+                            //const all = detail.values.wechat + detail.values.weibo + detail.values.client + detail.values.web + detail.values.overseas+detail.values.sengine;
+                            //this.lineData.all.push(all);
 
                         });
                     //修改资源来源于数量显示
@@ -363,17 +442,23 @@
                         });
                         this.lineData.web = this.lineData.sengine;
                         console.log('client+web',this.lineData.client);
+                        this.lineData.all = [this.lineData.wechat,this.lineData.weibo,this.lineData.client,this.lineData.web,this.lineData.overseas,this.lineData.sengine];
+
                         this.resultChartLoading = false;
                         this.resultPieChartLoading = false;
                         this.actions("全部", 0);
+                        const wechatNums =  _.reduce(this.lineData.wechat, (memo, value) => (memo + value), 0);
+                        const weiboNums =  _.reduce(this.lineData.weibo, (memo, value) => (memo + value), 0);
+                        const clientNums =  _.reduce(this.lineData.client, (memo, value) => (memo + value), 0);
+                        const webNums =  _.reduce(this.lineData.web, (memo, value) => (memo + value), 0);
+                        const overseasNums =  _.reduce(this.lineData.overseas, (memo, value) => (memo + value), 0);
                         this.summaryNums = [
-                                _.reduce(this.lineData.all, (memo, value) => (memo + value), 0),
-                                _.reduce(this.lineData.wechat, (memo, value) => (memo + value), 0),
-                                _.reduce(this.lineData.weibo, (memo, value) => (memo + value), 0),
-                                _.reduce(this.lineData.client, (memo, value) => (memo + value), 0),
-                                _.reduce(this.lineData.web,(memo, value) => (memo + value), 0) ,
-                                _.reduce(this.lineData.overseas, (memo, value) => (memo + value), 0)
-
+                            wechatNums+ weiboNums+clientNums+webNums+overseasNums,
+                            wechatNums,
+                            weiboNums,
+                            clientNums,
+                            webNums,
+                            overseasNums
                         ];
                     }
                 });

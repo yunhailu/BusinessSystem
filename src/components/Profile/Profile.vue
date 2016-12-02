@@ -40,7 +40,7 @@
             <div class="profile-add" v-if="!isMine">
                 <div id="uploadBtnWrap" class="profile-add-avatar">
                     <div class="profile-add-avatar-wrap">
-                        <img src="" class="profile-add-avatar-wrap-image" />
+                        <img :src="user_avatar" class="profile-add-avatar-wrap-image" />
                     </div>
                     <div class="profile-add-avatar-btn">
                         <div type="button" id="uploadBtn" class="btn btn-default" >Upload</div>
@@ -126,6 +126,7 @@
                 isMine: true,
                 isAdmin: 0,
                 isGetToken: false,
+                user_avatar: '',
                 mine:{
                     userName: "",
                     password: "",
@@ -186,13 +187,14 @@
                     console.log(resp.data.data.token);
                     if(resp.data.code == 0){
                         const uptoken = resp.data.data.token || "";
+                        const _this = this;
                         const uploader = Qiniu.uploader({
                             runtimes: 'html5,flash,html4',    //上传模式,依次退化
                             browse_button: 'uploadBtn',       //上传选择的点选按钮，**必需**
                             //uptoken_url: 'http://118.244.212.122:8008/upload/token?callback=_jsonpv78th89spplw7xmw9sv1dzpvi',            //Ajax请求upToken的Url，**强烈建议设置**（服务端提供）
                             uptoken : uptoken, //若未指定uptoken_url,则必须指定 uptoken ,uptoken由其他程序生成
-                            // unique_names: true, // 默认 false，key为文件名。若开启该选项，SDK为自动生成上传成功后的key（文件名）。
-                            // save_key: true,   // 默认 false。若在服务端生成uptoken的上传策略中指定了 `sava_key`，则开启，SDK会忽略对key的处理
+                            //unique_names: true, // 默认 false，key为文件名。若开启该选项，SDK为自动生成上传成功后的key（文件名）。
+                            //save_key: true,   // 默认 false。若在服务端生成uptoken的上传策略中指定了 `sava_key`，则开启，SDK会忽略对key的处理
                             //domain: 'http://qiniu-plupload.qiniudn.com/',   //bucket 域名，下载资源时用到，**必需**
                             domain: 'http://of4d1rz63.bkt.clouddn.com/',   //bucket 域名，下载资源时用到，**必需**
                             get_new_uptoken: false,  //设置上传文件的时候是否每次都重新获取新的token
@@ -221,6 +223,8 @@
                                 },
                                 'FileUploaded': function(up, file, info) {
                                     console.log('FileUploaded',up, file, info);
+                                    console.log('FileUploaded getSource:', file.getSource());
+
                                     // 每个文件上传成功后,处理相关的事情
                                     // 其中 info 是文件上传成功后，服务端返回的json，形式如
                                     // {
@@ -229,9 +233,11 @@
                                     //  }
                                     // 参考http://developer.qiniu.com/docs/v6/api/overview/up/response/simple-response.html
 
-                                    // var domain = up.getOption('domain');
-                                    // var res = parseJSON(info);
-                                    // var sourceLink = domain + res.key; 获取上传成功后的文件的Url
+                                     var domain = up.getOption('domain');
+                                     var res = JSON.parse(info);
+                                     var sourceLink = domain + res.key; //获取上传成功后的文件的Url
+                                    console.log(sourceLink);
+                                    _this.user_avatar = sourceLink;
                                 },
                                 'Error': function(up, err, errTip) {
                                     //上传出错时,处理相关的事情
