@@ -24,7 +24,7 @@ export const zh_CN = {
         submit:"登 录"
     },
     header: {
-        title: "沃德品牌气象站",
+        title: "品牌气象站",
         home: "热点事件",
         analytics: "数据分析",
         dashboard: "报告生成",
