@@ -15,7 +15,7 @@
                     </card-panel>
                 </div>
                 <div class="col-md-4 detail-info">
-                    <card-panel :title="words.userInfo" >
+                    <card-panel :title="words.userInfo">
                         <img src="../../../images/avatar.png" class="detail-info-avatar"  />
                         <div class="detail-info-detail"  v-show="isLive">
                             <div class="detail-info-detail-item">{{author.name}}</div>
@@ -28,12 +28,13 @@
             </div>
 <br>
             <div class="row">
-                <div class="col-md-8 detail-chart">
+                <div class="col-md-12 detail-chart">
                     <card-panel :title="words.shareChart" >
+                        <a class="showinfo pull-right" href='Javascript: void(0)' v-on:click="showinfonode()">{{dispalayinfo}}</a>
                         <div class="chart" v-echarts="graphChartOption" :click="graphChartAction"  :loading="graphChartLoading" theme="infographic"></div>
                     </card-panel>
                 </div>
-                <div class="col-md-4 detail-article">
+                <div class="col-md-6 detail-article">
                     <card-panel :title="words.article" >
                         <!--<ul class="detail-article-list">-->
                             <!--<li class="detail-article-list-item" v-for="acticle in acticles">-->
@@ -45,7 +46,7 @@
 
                     </card-panel>
                 </div>
-                <div class="col-md-4 detail-timeline">
+                <div class="col-md-6 detail-timeline">
                     <card-panel :title="words.timeline" >
                         <div class="detail-timeline-chart" v-echarts="timelineOption" :loading="timelineLoading" theme="macarons"></div>
                     </card-panel>
@@ -71,7 +72,10 @@
         data(){
             const words = Local().detail;
             return {
+
+                dispalayinfo:'显示用户信息',
                 words,
+                control:false,
                 isLive:true,
                 author: {
                     address: "",
@@ -91,7 +95,6 @@
 
                 graphChartLoading: true,
                 graphChartOption: {
-                    isToggle:true,
                     title: {
                        text: '      转发数：',
                         textStyle: {
@@ -103,41 +106,63 @@
                         left: 'right'
                     },
                     tooltip: {
+
                         formatter: '{b}'
                     },
                     legend: {
                         data: ["传播源点", "一层转发", "二层转发", "三层转发", "四层转发", "五层转发", "六层转发","六层以上"],
-
                         left: 10,
                         top:23,
                         width: 120
                     },
-                    animationDuration: 1500,
+                    animationDuration: 10,
+                    animationEasingUpdate: 'cubicOut',
+                    animationEasing: 'cubicOut',
 
-                    animationEasingUpdate: 'quinticInOut',
+                    graphic:[
+                        {
+                            type: 'text',
+                            z: -10,
+                            left: 'center', // 相对父元素居中
+                            top: 'middle',  // 相对父元素居中
+                            rotation: Math.PI / 4,
+                            style: {
+                                fill: 'rgba(20,20,20,0.05)',
+                                text: '品牌气象站',
+                                font: ' 100px Microsoft YaHei'
+                            }
+                        }
+                    ],
                     series: [
                         {
-                            name: '传播路径',
                             color:["#bc3c3c","#efbf09","#eae521","#3fea21","#21ead9","#214bea","#9521ea","#ea21d9"],
+                            name: '传播路径',
                             type: 'graph',
                             layout: 'force',
                             force: {
-                                initLayout:"circular",
-                                repulsion: 50,
-                                gravity: 0.1,
-                                layoutAnimation: true,
+                                repulsion: 150,
+                                gravity: 0.2,
+                                layoutAnimation:true,
                             },
                             draggable:true,
-                            data: [],
-                            links: [],
+                            data:[],
+                            links:[],
                             categories: [{"name": "传播源点"}, {"name": "一层转发"}, {"name": "二层转发"}, {"name": "三层转发"}, {"name": "四层转发"}, {"name": "五层转发"}, {"name": "六层转发"}, {"name": "六层以上"}],
                             roam: true,
                             label: {
                                 normal: {
-                                    position: 'right',
-                                    formatter: '{b}'
+                                    show:true,
+                                    position: 'inside',
+                                    textStyle:{
+                                        color: '#333',
+                                        fontSize: 9,
+                                    }
                                 }
-                            }
+
+                            },
+
+
+
                         }
                     ]
                 },
@@ -169,6 +194,20 @@
                     }),
                     progressive: 4,
                     textStyle: Chart.textStyle,
+                    graphic:[
+                        {
+                            type: 'text',
+                            z: -10,
+                            left: 'center', // 相对父元素居中
+                            top: 'middle',  // 相对父元素居中
+                            rotation: Math.PI / 4,
+                            style: {
+                                fill: 'rgba(20,20,20,0.05)',
+                                text: '品牌气象站',
+                                font: ' 40px Microsoft YaHei'
+                            }
+                        }
+                    ],
                     series: [{
                         name: "数量",
                         type: 'line',
@@ -204,8 +243,22 @@
                     }),
                     progressive: 4,
                     textStyle: Chart.textStyle,
+                    graphic:[
+                        {
+                            type: 'text',
+                            z: -10,
+                            left: 'center', // 相对父元素居中
+                            top: 'middle',  // 相对父元素居中
+                            rotation: Math.PI / 4,
+                            style: {
+                                fill: 'rgba(20,20,20,0.05)',
+                                text: '品牌气象站',
+                                font: ' 40px Microsoft YaHei'
+                            }
+                        }
+                    ],
                     series: [{
-                        barWidth:10,
+                        barWidth:25,
                         name: "数量",
                         type: 'bar',
                         //areaStyle: {normal: {}},
@@ -226,6 +279,18 @@
             graphChartAction(params){
                window.open(params.data.link);
                 console.log(params);
+
+            },
+            showinfonode(){
+
+                if(this.control==true){
+                    this.getArticleForward();
+                    this.control=false;
+                    this.dispalayinfo='显示用户信息'
+                }
+                    else { this.getArticleForward();
+                    this.control=true; this.dispalayinfo='隐藏用户信息' }
+
 
             },
 
@@ -250,6 +315,7 @@
 
                 });
             },
+
             getArticleForward(){
                 const id = this.$route.params.id;
                 Api.getArticleForward({id}).then(resp => {
@@ -258,11 +324,11 @@
 
 
                         const firstdata = resp.data.data.datas, firstlink = resp.data.data.links;
-                        const nodestyle0={normal:{show:false}}, nodestyle1={modularity_class:0};
+                        const nodestyle0={normal:{show:this.control}}, nodestyle1={modularity_class:0};
                         const newDateS = _.map(firstdata, (item)=> {
                            // item.name=item.id;
                             item.category = item.level;
-                            item.symbolSize = 15;
+                            item.symbolSize = 25;
                             item.itemStyle = "null";
                             item.attributes = nodestyle1;
                             item.label = nodestyle0;
@@ -271,15 +337,17 @@
                             return item;
                         });
 
-                        const newDateScout=_.size(newDateS)-1,
-                                linstyle0={normal:{color:'#000',width:1,type:'solid'}},
-                                lablestyle0={normal:{show:false}},
+
+
+                        const newDateScout=_.size(newDateS)==0?0:(_.size(newDateS)-1);
+
+                        const  linstyle0={normal:{color:'#000',width:1,type:'solid'}},
+//                                lablestyle0={normal:{show:false}},
                                 newDateL = _.map(firstlink, (item)=> {
                             item.name="";
                             item.source = ''+item.src+'';
                             item.target = ''+item.dst+'';
                             item.lineStyle=linstyle0;
-                            item.label=lablestyle0;
                             // item.value =40;
 
                             return item;
@@ -298,6 +366,8 @@
                         // console.log(filterCountx);
                         // console.log(newDateS);
                         // console.log(newDateL);
+
+
                         this.graphChartOption.series[0].data = newDateS;
                         this.graphChartOption.series[0].links = newDateL;
                         this.graphChartOption.title.text="转发次数："+newDateScout+"次";
@@ -316,8 +386,7 @@
                         this.timeclevelOption.series[0].data = filterCountx;
                         this.timelineOption.xAxis.data = newDate1;
 
-                        console.log(newDate2);
-
+                        console.log('maytyyyyyyyyyyy--',resp.data.data.forward);
                         //this.acticles = resp.data.data;
 
 

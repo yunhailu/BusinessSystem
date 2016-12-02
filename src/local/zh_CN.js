@@ -24,7 +24,7 @@ export const zh_CN = {
         submit:"登 录"
     },
     header: {
-        title: "沃德品牌气象站",
+        title: "品牌气象站",
         home: "热点事件",
         analytics: "数据分析",
         dashboard: "报告生成",
@@ -84,7 +84,7 @@ export const zh_CN = {
         userInfo: "用户信息",
         content: "正文",
         source: "来源",
-        shareChart: "转发示意图",
+        shareChart: "传播路径",
         timeline: "转发时间曲线",
         publish: "发布时间",
         view: "查看原文",

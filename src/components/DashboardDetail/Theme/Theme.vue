@@ -113,6 +113,20 @@
                 themeWordLoading: true,
                 themeWordOption: {
                     tooltip: {},
+                    graphic:[
+                        {
+                            type: 'text',
+                            z: -10,
+                            left: 'center', // 相对父元素居中
+                            top: 'middle',  // 相对父元素居中
+                            rotation: Math.PI / 4,
+                            style: {
+                                fill: '#fff',
+                                text: '品牌气象站',
+                                font: 'bold 34px Microsoft YaHei'
+                            }
+                        }
+                    ],
                     series: {
                         //grid: {x:0, x2:0},
                         type: 'wordCloud',
@@ -246,7 +260,7 @@
                             rotation: Math.PI / 4,
                             style: {
                                 fill: '#fff',
-                                text: '沃德股市气象站',
+                                text: '品牌气象站',
                                 font: 'bold 34px Microsoft YaHei'
                             }
                         }
@@ -350,7 +364,7 @@
                             rotation: Math.PI / 4,
                             style: {
                                 fill: '#fff',
-                                text: '沃德股市气象站',
+                                text: '品牌气象站',
                                 font: 'bold 34px Microsoft YaHei'
                             }
                         }
@@ -426,7 +440,7 @@
                             rotation: Math.PI / 4,
                             style: {
                                 fill: '#fff',
-                                text: '沃德股市气象站',
+                                text: '品牌气象站',
                                 font: 'bold 34px Microsoft YaHei'
                             }
                         }

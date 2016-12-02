@@ -8,8 +8,8 @@
                         <div class="con">
                             <div class="title">{{pop.title}}</div>
                             <div class="context">{{pop.context}}</div>
-                            <span class="date">{{pop.date}}</span>
-                            <span class="influencer">{{item.influencer}}</span>
+                            <span class="date"> 时间: {{pop.date}}</span>
+                            <span class="date"> 来源: {{pop.from}}</span>
                         </div>
                     </div>
                 </div>
@@ -44,7 +44,14 @@
         methods: {
             showDetail(pop){
                // this.$router.go({ name: 'detail', params: { type: 'influence', id: pop.id } });
-                window.open(pop.url);
+
+                console.log('pop-data:',pop);
+                if(pop.id!=null){ window.open(window.location.origin+"/"+this.$route.name+"/detail/"+pop.id);}
+                else{ window.open(pop.url); }
+
+
+               // window.open(window.location.origin+"/#!/"+this.$route.name+"/detail/"+id)
+
             },
             closeTip(){
                 this.visiable = false;

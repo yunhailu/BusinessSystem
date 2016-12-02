@@ -3,7 +3,7 @@
     <!--<span>Influence</span>-->
     <div class="popular">
         <ul class="popular-list">
-            <li class="popular-list-item" v-for="item in popularList" @click="showNewList(item)">
+            <li class="popular-list-item"  v-show="coltrol" v-for="item in popularList" @click="showNewList(item)">
                 <i class="fa" :class="[item.icon ? 'fa-'+item.icon : 'fa-cog']"></i>
                 <span class="popular-list-item-title">{{item.title}}</span>
                 <div class="popular-list-item-con">
@@ -46,7 +46,9 @@
         <!--</div>-->
         <div v-if="!influancerTable.length" class="noTableTips">{{noTableTips}}</div>
     </div>
-    <pop-list :item="selectItem" :pops="popList" :visiable.sync="popVisiable"></pop-list>
+    <pop-list :item="selectItem" :pops="popList" :visiable.sync="popVisiable">
+
+    </pop-list>
     <tips :visible.sync="loadingParams.visiable" :tipsparam.sync="loadingParams"></tips>
 </template>
 <style lang="less" scoped>
@@ -73,6 +75,7 @@
                     type: 'loading',
                     content: "请稍侯......"
                 },
+                coltrol:true,
                 popularList: [],
                 influancerList: [],
                 influancerTable: [],
@@ -109,6 +112,12 @@
             analyticsSource: {
                 handler(val){
                     console.log('analyticsSource', val);
+                    this.init();
+
+//                    if(val == 'wechat' || val == 'weibo' ){
+//
+//                    }
+
                     if(val == 'all'){
                         this.influancerTable = _.filter(this.influancerList, (info, index) => {
                             return (index < 20);
@@ -119,6 +128,7 @@
                         return (info.source == val && index < 20);
                     });
                 }
+
             }
         },
         ready(){
@@ -128,9 +138,8 @@
         },
         methods: {
             showPopList(item){
-                console.log(item);
+                //console.log('11111111111111111111111------------------:',item);
                 this.popVisiable = true;
-
                 const topic_id = this.activeAnalyticsTopic.topic_id;
                 const author = item.influencer;
                 const size = this.$route.params.size;
@@ -148,7 +157,8 @@
             getArticles(params){
                 Api.getCommentList(params).then(resp => {
                     console.log("getCommentList", resp.data);
-                    if (resp.data.code == 0) {
+                    if (resp.data.code ==0&&resp.data.data!=null) {
+                        console.log('wanglipeng:',resp.data.data);
                         const newDates = _.map(resp.data.data, (item)=> {
                             item.context = item.content;
                             item.date =item.pDate;
@@ -158,31 +168,40 @@
                         this.popList = newDates;
 
                     }
+                    else {
+                        this.popList =[{title:'暂无数据！',date:'无',from:'无',context:'无'}];
+                    }
+
                 });
             },
             showNewList(item){
-                const topic_id = this.activeAnalyticsTopic.topic_id,
+                const  topic_id = this.activeAnalyticsTopic.topic_id,
                         topic = this.activeAnalyticsTopic.topic_name,
                         subtopic = this.analyticsSubTopic,
                         source = this.analyticsSource,
                         time_interval = this.analyticsTimeRange,
                         time_dimension = time_interval > 7 ? 1 : 0;
-                let end =this.analyticsEnd,
+                        let end =this.analyticsEnd,
                         start = this.analyticsStart;
+                //console.log('001:',this.analyticsSource);
+
+
                 if(start.includes(' ') && end.includes(' ')){
                     start = start.split(' ')[0]+'T'+start.split(' ')[1];
                     end = end.split(' ')[0]+'T'+end.split(' ')[1];
-                    console.log('start',start,end);
+                    //console.log('start',start,end);
                 }
 //                        end = this.analyticsEnd,
 //                        start = this.analyticsStart;
+
+                if (item.icon=='edge' || item.icon=='chrome' ){ this.source='web'; this.controll=false; };
+//                console.log('wq1:',topic_id, topic, subtopic, source, start, end, time_dimension);
+
                 Api.getInfluenceList({topic_id, topic, subtopic, source, start, end, time_dimension}).then(resp => {
                     this.loadingParams.visiable = false;
                     if(resp.data.code ==0){
-
-                       // console.log(item.icon);
+                       console.log('12131----------------3',item.icon);
                         const influanceInfo = resp.data.data;
-
                         if(item.icon=='user'){
                             var influanceInfos =_.sortBy(influanceInfo, function(item){
                                 return -item.post;
@@ -191,20 +210,20 @@
                         else if (item.icon=='user-plus'){
 
                             var influanceInfos =_.sortBy(influanceInfo, function(item){
-                                return -item.comments;
 
+                                return -item.rate.value.replace('%',0);
                             });
                         }
                         else if (item.icon=='edge'){
                             var influanceInfos =_.sortBy(influanceInfo, function(item){
-                                return -item.shareCount;
+                                return -(item.comments+item.shareCount+item.likeCount);
 
                             });
                         }
                         else if (item.icon=='chrome'){
                             var influanceInfos =_.sortBy(influanceInfo, function(item){
 
-                                return -item.rate.value.replace('%',0);
+                                return -item.comments;
 
                             });
                         }
@@ -213,9 +232,10 @@
                             return -item.post;
                         });}
 
-                      //  console.log(icood);
+                           console.log('influanceInfos:',influanceInfos);
 
-                       // this.influancerList = _.map(influanceInfos, info => info);
+
+                        this.influancerList = _.map(influanceInfos, info => info);
                         this.influancerTable = _.filter(influanceInfos, (info, index) => {
                             return (index < 20);
                         });
@@ -226,35 +246,117 @@
 
 
             getPopularList(){
-                const icons = ["user", "user-plus", "edge", "chrome"];
-                const topic_id = this.activeAnalyticsTopic.topic_id,
+                const   topic_id = this.activeAnalyticsTopic.topic_id,
                         topic = this.activeAnalyticsTopic.topic_name,
                         subtopic = this.analyticsSubTopic,
                         source = this.analyticsSource,
                         time_interval = this.analyticsTimeRange,
                         time_dimension = time_interval > 7 ? 1 : 0;
-                let end =this.analyticsEnd,
+                        let end =this.analyticsEnd,
                         start = this.analyticsStart;
                 if(start.includes(' ') && end.includes(' ')){
                     start = start.split(' ')[0]+'T'+start.split(' ')[1];
                     end = end.split(' ')[0]+'T'+end.split(' ')[1];
                     console.log('start',start,end);
-                }
-//                        end = this.analyticsEnd,
-//                        start = this.analyticsStart;
-                Api.getPopularList({topic_id, topic, subtopic, source, start, end, time_dimension}).then(resp => {
+                };
+
+                const icons = ['user','user-plus','edge','chrome'];
+                const iconsName = ["最活跃的作者", "最具影响力的作者","最活跃的站点", "最具影响力的站点"];
+                Api.getInfluenceList({topic_id, topic, subtopic, source, start, end, time_dimension}).then(resp => {
                     this.loadingParams.visiable = false;
-                    if(resp.data.code ==0){
-                        const popularList = resp.data.data;
-                        this.popularList = _.map(popularList, (item, index) => {
+                    if(resp.data.code ==0&& resp.data.data.length>0){   //success--load-data
+                        this.coltrol=true;
+                        const sdasda1=this.getOrderbyTitle(resp.data.data ,'post');
+                        const sdasda2 =_.first(_.sortBy(resp.data.data, function(item){
+                            return -item.rate.value.replace('%',0);
+                        }));
+                        const sdasda3 =_.first(_.sortBy(resp.data.data, function(item){
+                            return -(item.comments+item.shareCount+item.likeCount);
+                        }));
+                        const sdasda4 =_.first(_.sortBy(resp.data.data, function(item){
+                            return -item.comments;
+                        }));
+                        console.log('sdasda4:',sdasda4);
+                        var firstTitle=[];
+                        firstTitle.push(sdasda1);
+                        firstTitle.push(sdasda2);
+                        firstTitle.push(sdasda3);
+                        firstTitle.push(sdasda4);
+                        const sdaaa1 =_.map(firstTitle, (itemd) => {
+                            itemd=_.pick(itemd,'influencer','post','source');
+                            return itemd;
+                        });
+                        const sexData=_.map(sdaaa1,(item,index)=>{
                             item.icon = icons[index];
+                            item.title = iconsName[index];
+                            item.value = item.influencer;
                             return item;
                         });
+                        const sdaaa2 =_.map(sexData, (itemd) => {
+                            itemd=_.pick(itemd,'icon','value','title','post','source');
+                            return itemd;
+                        });
+                        console.log('sdaaa2::',sdaaa2);
+                        this.popularList=sdaaa2;
+
                     }
+
+                    else{
+
+
+//                        this.popularList=[
+//                            {icon:'user',post:'0',source:'',title:'最活跃的作者',value:'暂无数据'},
+//                            {icon:'user-plus',post:'0',source:'',title:'最具影响力的作者',value:'暂无数据'},
+//                            {icon:'edge',post:'0',source:'',title:'最活跃的站点',value:'暂无数据'},
+//                            {icon:'chrome',post:'0',source:'',title:'最具影响力的站点',value:'暂无数据'}];
+
+                        this.coltrol=false;
+                    }
+//                    else{
+//
+//
+////                        this.popularList=[
+////                            {icon:'user',post:'0',source:'',title:'最活跃的作者',value:'无'},
+////                            {icon:'user-plus',post:'0',source:'',title:'最具影响力的作者',value:'无'},
+////                            {icon:'edge',post:'0',source:'',title:'最活跃的站点',value:'无'},
+////                            {icon:'chrome',post:'0',source:'',title:'最具影响力的站点',value:'无'}];
+//
+//                    }
                 });
+
+                //this is my function api  --end
+
+
+//                Api.getPopularList({topic_id, topic, subtopic, source, start, end, time_dimension}).then(resp => {
+//                    this.loadingParams.visiable = false;
+//                    if(resp.data.code ==0){
+//                        const popularList = resp.data.data;
+//                        console.log('wq12122}}q:',resp.data.data);
+//                        this.popularList= _.map(popularList, (item, index) => {
+//                            item.icon = icons[index];
+//                            return item;
+//                        });
+//
+//                        console.log('wq23q:',this.popularList);
+//
+//                    }
+//                });
+
             },
+
+
+
+            //order by function
+
+            getOrderbyTitle(a,bi){
+                const orderResult =_.first(_.sortBy(a, function(item){
+                    return -item+'.'+bi;
+                }));
+                return  orderResult;
+            },
+
             getInfluenceList(){
-                const topic_id = this.activeAnalyticsTopic.topic_id,
+                const   topic_id = this.activeAnalyticsTopic.topic_id,
                         topic = this.activeAnalyticsTopic.topic_name,
                         subtopic = this.analyticsSubTopic,
                         source = this.analyticsSource,
@@ -271,15 +373,18 @@
 //                        start = this.analyticsStart;
                 Api.getInfluenceList({topic_id, topic, subtopic, source, start, end, time_dimension}).then(resp => {
                     this.loadingParams.visiable = false;
-                    if(resp.data.code ==0){
+                    if(resp.data.code ==0&& resp.data.data!=null ){
                         const influanceInfos = resp.data.data;
 
-                        //console.log('00000');
                         console.log(resp.data.data);
                         this.influancerList = _.map(influanceInfos, info => info);
                         this.influancerTable = _.filter(this.influancerList, (info, index) => {
                             return (index < 20);
                         });
+                    }
+
+                    else{
+                        this.coltrol=false;
                     }
                 });
             },
@@ -299,16 +404,9 @@
             },
             barFormat(val){
                 const option = {
-                    tooltip: _.extend({}, Chart.tooltip, {
-                        trigger:'axis'
-                    }),
-                    //grid设置属性显示不出来，但是默认是出数据的
-//                    grid: _.extend({}, Chart.grid,{
-//                        left:'auto',
-//                        right:'10%',
-//                        bottom:'60',
-//                        containLabel:false
-//                    }),
+                    tooltip: _.extend({}, Chart.tooltip, {}),
+                    //添加grid图标不显示
+                    //grid: _.extend({}, Chart.grid),
                     progressive: 4,
                     textStyle: Chart.textStyle,
                     xAxis: _.extend({}, Chart.xAxis, {
@@ -322,6 +420,20 @@
                         show: false
                     }),
                     color: _.extend([], Chart.color),
+                    graphic:[
+                        {
+                            type: 'text',
+                            z: -10,
+                            left: 'center', // 相对父元素居中
+                            top: 'middle',  // 相对父元素居中
+                            rotation: Math.PI / 4,
+                            style: {
+                                fill: '#fff',
+                                text: '品牌气象站',
+                                font: 'bold 34px Microsoft YaHei'
+                            }
+                        }
+                    ],
                     series: [
                         {
                             name: '满意',

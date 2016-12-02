@@ -1,7 +1,7 @@
 /**
  * Created by yunhailu on 2016/10/19.
  */
-import { UPDATE_TOPIC_LIST, UPDATE_TOPIC_ACTIVE_GROUP_ID, UPDATE_ACTIVE_ANALYTICS_TOPIC, UPDATE_ACTIVE_COMPARE_TOPIC, UPDATE_ACTIVE_SETTING_TOPIC,LOGIN_STATE } from '../mutations-types'
+import { UPDATE_TOPIC_LIST, UPDATE_TOPIC_ACTIVE_GROUP_ID, UPDATE_ACTIVE_ANALYTICS_TOPIC, UPDATE_ACTIVE_COMPARE_TOPIC, UPDATE_ACTIVE_SETTING_TOPIC,LOGIN_STATE,LOGIN_TIME } from '../mutations-types'
 
 const state = {
     list: [],
@@ -9,7 +9,8 @@ const state = {
     active_analytics_topic: {},
     active_compare_topic: [],    //数组支持多选，单选数组只有一项
     active_setting_topic: {},
-    login_state:false
+    login_state:false,
+    login_time:0
 }
 
 const mutations = {
@@ -30,6 +31,9 @@ const mutations = {
     },
     [LOGIN_STATE](state, istrue){
         state.login_state = istrue;
+    },
+    [LOGIN_TIME](state,time){
+        state.login_time=time;
     }
 }
 

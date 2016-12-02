@@ -138,7 +138,7 @@
                             rotation: Math.PI / 4,
                             style: {
                                 fill: '#eee',
-                                text: '沃德股市气象站',
+                                text: '品牌气象站',
                                 font: 'bold 34px Microsoft YaHei'
                             }
                         }
@@ -204,8 +204,8 @@
                             top: 'middle',  // 相对父元素居中
                             rotation: Math.PI / 4,
                             style: {
-                                fill: '#fff',
-                                text: '沃德股市气象站',
+                                fill: '#eee',
+                                text: '品牌气象站',
                                 font: 'bold 34px Microsoft YaHei'
                             }
                         }

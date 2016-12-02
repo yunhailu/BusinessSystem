@@ -123,10 +123,10 @@
         ready(){
             this.init();
         },
-//        route: {
-//            data(){
-//                this.init();
-//            }
-//        }
+        /*route: {
+            data(){
+                this.init();
+            }
+        }*/
     }
 </script>

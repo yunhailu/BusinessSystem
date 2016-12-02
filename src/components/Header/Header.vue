@@ -14,8 +14,8 @@
         </ul>
         <ul class="navbar-right">
             <li class="tab-item">
-                <!--<a href="javascript:void(0);" v-link="{name: 'profile'}" class="dropdown-toggle" >-->
-                <a href="javascript:void(0);" >
+                <a href="javascript:void(0);" v-link="{name: 'profile'}" class="dropdown-toggle" >
+                <!--<a href="javascript:void(0);" >-->
                     <i class="glyphicon glyphicon-user"></i>
                     <span class="header-font">{{nickName}} <i class="caret"></i></span>
                 </a>
@@ -33,6 +33,8 @@
     import Cookie from "js-cookie";
     import Local from "../../local/local";
     import { getCookie } from '../../widgets/Cookie';
+    import {loginTime} from '../../vuex/getters';
+    import {setLoginTime} from '../../vuex/actions';
 
     export default{
         props: ["active"],
@@ -74,16 +76,36 @@
                 }]
             }
         },
+        vuex:{
+            getters:{loginTime},
+            actions:{setLoginTime}
+        },
         methods: {
             quit(){
-                Cookie.remove('business_uid');
-                this.$router.go({name: "login"});
+                if(getCookie('business_name')=="demo03"){
+                    Cookie.remove('business_uid');
+                    Cookie.remove('bussiness_name');
+                    this.$router.go({name: "ccsi"});
+                }else{
+                    Cookie.remove('business_uid');
+                    Cookie.remove('bussiness_name');
+                    this.$router.go({name: "login"});
+                }
             },
             initData(){
                 this.nickName = getCookie('business_name');
             },
             init(){
                 this.initData();
+            }
+        },
+        watch:{
+            loginTime:{
+                handler(val){
+                    if(val !=0){
+                        this.initData();
+                    }
+                }
             }
         }
     }

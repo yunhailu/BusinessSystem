@@ -131,7 +131,7 @@
             barFormat(val){
                 const option = {
                     tooltip: _.extend({}, Chart.tooltip, {}),
-                    grid: _.extend({}, Chart.grid),
+                    //grid: _.extend({}, Chart.grid),
                     progressive: 4,
                     textStyle: Chart.textStyle,
                     xAxis: _.extend({}, Chart.xAxis, {
@@ -151,7 +151,7 @@
                             stack: 'sentiment',
                             label: {
                                 normal: {
-                                    show: true,
+                                    show: false,
                                     position: 'insideRight'
                                 }
                             },
@@ -163,7 +163,7 @@
                             stack: 'sentiment',
                             label: {
                                 normal: {
-                                    show: true,
+                                    show: false,
                                     position: 'insideRight'
                                 }
                             },
@@ -175,7 +175,7 @@
                             stack: 'sentiment',
                             label: {
                                 normal: {
-                                    show: true,
+                                    show: false,
                                     position: 'insideRight'
                                 }
                             },
@@ -187,7 +187,7 @@
                             stack: 'sentiment',
                             label: {
                                 normal: {
-                                    show: true,
+                                    show: false,
                                     position: 'insideRight'
                                 }
                             },
@@ -199,7 +199,7 @@
                             stack: 'sentiment',
                             label: {
                                 normal: {
-                                    show: true,
+                                    show: false,
                                     position: 'insideRight'
                                 }
                             },

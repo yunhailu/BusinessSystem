@@ -88,18 +88,52 @@
                             rotation: Math.PI / 4,
                             style: {
                                 fill: '#eee',
-                                text: '沃德股市气象站',
+                                text: '品牌气象站',
                                 font: 'bold 34px Microsoft YaHei'
                             }
                         }
                     ],
-                    series : [{
-                        name:"总数",
-                        type:'line',
-                        areaStyle: {normal: {}},
-                        //stack: 'Total',
-                        data: []
-                    }]
+                    series:[
+                        /*{
+                            name:common.wechat,
+
+                            type:'line',
+                            //areaStyle: {normal: {}},
+                            //stack: 'Total',
+                            data: []
+                        }, {
+                            name:common.weibo,
+                            type:'line',
+                            //areaStyle: {normal: {}},
+                            //stack: 'Total',
+                            data: []
+                        }, {
+                            name:common.client,
+                            type:'line',
+                            //areaStyle: {normal: {}},
+                            //stack: 'Total',
+                            data: []
+                        }, {
+                            name:common.web,
+                            type:'line',
+                            //areaStyle: {normal: {}},
+                            //stack: 'Total',
+                            data: []
+                        }, {
+                            name:common.overseas,
+                            type:'line',
+                            //areaStyle: {normal: {}},
+                            //stack: 'Total',
+                            data: []
+                        }*/
+                    ]
+//                    series : [{
+//                        name:"总数",
+//                        type:'line',
+//                        areaStyle: {normal: {}},
+//                        //stack: 'Total',
+//                        data: []
+//                    }]
                 },
                 resultPieChartLoading: true,
                 resultPieChartOption: {
@@ -127,7 +161,7 @@
                             rotation: Math.PI / 4,
                             style: {
                                 fill: '#eee',
-                                text: '沃德股市气象站',
+                                text: '品牌气象站',
                                 font: 'bold 34px Microsoft YaHei'
                             }
                         }
@@ -215,7 +249,7 @@
                             data = lineData.all;
                             break;
                     }
-                    this.resultChartOption = _.extend({}, this.resultChartOption, {
+                    /*this.resultChartOption = _.extend({}, this.resultChartOption, {
                         xAxis: _.extend({}, this.resultChartOption.xAxis, {
                             type : 'category',  //category
                             data: x,
@@ -228,8 +262,54 @@
                             //stack: 'Total',
                             data: data
                         }]
-                    });
+                    });*/
+                    console.log('data',data);
                     if(idx == 0){
+                        this.resultChartOption = _.extend({}, this.resultChartOption, {
+                            xAxis: _.extend({}, this.resultChartOption.xAxis, {
+                                type : 'category',  //category
+                                data: x,
+                                boundaryGap : false
+                            }),
+                            legend: _.extend({}, Pie.legend, {
+                                //orient: 'vertical',
+                                //x: 'bottom',
+                                top: 0,
+                                data: [common.wechat, common.weibo, common.client, common.web, common.overseas]
+                            }),
+                            series: [ {
+                                name:common.wechat,
+
+                                type:'line',
+                                //areaStyle: {normal: {}},
+                                //stack: 'Total',
+                                data:data[0]
+                            }, {
+                                name:common.weibo,
+                                type:'line',
+                                //areaStyle: {normal: {}},
+                                //stack: 'Total',
+                                data: data[1]
+                            }, {
+                                name:common.client,
+                                type:'line',
+                                //areaStyle: {normal: {}},
+                                //stack: 'Total',
+                                data:data[2]
+                            }, {
+                                name:common.web,
+                                type:'line',
+                                //areaStyle: {normal: {}},
+                                //stack: 'Total',
+                                data: data[3]
+                            }, {
+                                name:common.overseas,
+                                type:'line',
+                                //areaStyle: {normal: {}},
+                                //stack: 'Total',
+                                data: data[4]
+                            }]
+                        });
                         this.resultPieChartOption = _.extend({}, this.resultPieChartOption, {
                             series:[
                                 {
@@ -275,6 +355,21 @@
                     } else {
                         this.resultChartOption.isToggle = false;
                         this.resultPieChartOption.isActive = false;
+                        //非all
+                        this.resultChartOption = _.extend({}, this.resultChartOption, {
+                         xAxis: _.extend({}, this.resultChartOption.xAxis, {
+                         type : 'category',  //category
+                         data: x,
+                         boundaryGap : false
+                         }),
+                         series: [{
+                         name:"总数",
+                         type:'line',
+                         areaStyle: {normal: {}},
+                         //stack: 'Total',
+                         data: data
+                         }]
+                         });
                     }
                     //console.log(val, idx);
                     //this.getCommentList();
@@ -352,19 +447,34 @@
                             this.lineData.client.push(detail.values.client);
                             this.lineData.web.push(detail.values.web);
                             this.lineData.overseas.push(detail.values.overseas);
-                            const all = detail.values.wechat + detail.values.weibo + detail.values.client + detail.values.web + detail.values.overseas;
-                            this.lineData.all.push(all);
+                            this.lineData.sengine.push(detail.values.sengine);
+                            //const all = detail.values.wechat + detail.values.weibo + detail.values.client + detail.values.web + detail.values.overseas+detail.values.sengine;
+                            //this.lineData.all.push(all);
+
                         });
+                    //修改资源来源于数量显示
+                        this.lineData.client = _.map(_.zip(this.lineData.client,this.lineData.web),item=>{
+                                    return _.reduce(item, function(memo, num){ return memo + num; }, 0);
+                        });
+                        this.lineData.web = this.lineData.sengine;
+                        console.log('client+web',this.lineData.client);
+                        this.lineData.all = [this.lineData.wechat,this.lineData.weibo,this.lineData.client,this.lineData.web,this.lineData.overseas];
+
                         this.resultChartLoading = false;
                         this.resultPieChartLoading = false;
                         this.actions("全部", 0);
+                        const wechatNums =  _.reduce(this.lineData.wechat, (memo, value) => (memo + value), 0);
+                        const weiboNums =  _.reduce(this.lineData.weibo, (memo, value) => (memo + value), 0);
+                        const clientNums =  _.reduce(this.lineData.client, (memo, value) => (memo + value), 0);
+                        const webNums =  _.reduce(this.lineData.web, (memo, value) => (memo + value), 0);
+                        const overseasNums =  _.reduce(this.lineData.overseas, (memo, value) => (memo + value), 0);
                         this.summaryNums = [
-                                _.reduce(this.lineData.all, (memo, value) => (memo + value), 0),
-                                _.reduce(this.lineData.wechat, (memo, value) => (memo + value), 0),
-                                _.reduce(this.lineData.weibo, (memo, value) => (memo + value), 0),
-                                _.reduce(this.lineData.client, (memo, value) => (memo + value), 0),
-                                _.reduce(this.lineData.web, (memo, value) => (memo + value), 0),
-                                _.reduce(this.lineData.overseas, (memo, value) => (memo + value), 0)
+                            wechatNums+ weiboNums+clientNums+webNums+overseasNums,
+                            wechatNums,
+                            weiboNums,
+                            clientNums,
+                            webNums,
+                            overseasNums
                         ];
                     }
                 });
@@ -406,7 +516,8 @@
                     weibo: [],
                     client: [],
                     web: [],
-                    overseas: []
+                    overseas: [],
+                    sengine:[]
                 };
             },
 

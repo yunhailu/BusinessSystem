@@ -1,53 +1,89 @@
 <template>
     <div class="hot-panel">
+        <div class="row">
+
+            <label for="sourchWord" class="col-sm-2 control-label"></label>
+            <div class="col-sm-4 " id="sourchWordbox">
+                <input type="text" v-model="sourchWord" class="form-control" id="sourchWord" :placeholder="words.topic">
+            </div>
+            <button type="submit" id="sourchWordSumit"  value="sou" class="btn btn-primary" v-on:click="getSourchData(sourchWord)" >搜索:{{sourchWord}}</button>
+
+            <div class="col-sm-4 tip">
+
+            </div>
+        </div>
 
         <div class="row">
-            <card-panel :title="words.todayHotsRanking">
+            <card-panel :title="displayTitle">
                 <br>
                 <br>
-            <div class="col-md-6 hot-today">
-
+                <div class="col-md-12 hot-today">
                     <ul class="hot-today-list">
-                        <li v-for="item in hotsTodayRankings"  class="hot-today-list-item" @click="showDetail(item,0);">
+                        <!--<li v-for="item in Titles"  class="hot-today-list-item" @click="showDetail(item.title,$index);">-->
+                        <li v-for="item in Titles"  class="hot-today-list-item" @click="getRefreshData(item.title,$index);">
                             <span class="hot-today-list-item-index">{{ ($index + 1) }}</span>
                             <span class="hot-today-list-item-text">{{item.title}}</span>
+                            <div class="progress">
+                                <div class="progress-bar" role="progressbar" aria-valuenow="60" v-bind:style="{width:item.value+'%'} " aria-valuemin="0"  aria-valuemax="100">
+                                </div>
+                            </div>
                         </li>
                     </ul>
+                </div>
+            </card-panel>
+        </div> <!--财经热点的列表-->
+
+        <div class="row">
+            <card-panel :title="'情绪表现:'+sonTitle">
+
+            <div class="col-md-7 hot-today">
+
+                <div v-echarts="sentimentLineOption" :loading="sentimentLineLoading" class="hot-sentiment-pie"  theme=""></div><!--sentimentLineOption,macarons-->
+
             </div>
 
-            <div class="col-md-6 hot-sentiment">
+            <div class="col-md-5 hot-sentiment">
 
-                    <div v-echarts="sentimentOption" :loading="sentimentLoading" class="hot-sentiment-pie" theme=""></div><!--infographic,macarons-->
+                    <div v-echarts="sentimentPieOption" :loading="sentimentPieLoading" class="hot-sentiment-pie" theme=""></div><!--sentimentPieOption,macarons-->
 
             </div>
 
             </card-panel>
-        </div>
+        </div> <!--情绪趋势line+pie-->
+
         <!--情绪比例，热词排行-->
         <div class="row">
-            <card-panel :title="words.wordsRanking | title">
+            <card-panel :title="'词云分布'+sonTitle">
             <div class="col-md-6 hot-words">
 
                     <div v-echarts="hotWordsOption" :loading="hotWordsLoading" class="hot-words-cloud" ></div>
 
             </div>
 
-            <div class="col-md-6 hot-sentiment1">
 
-                    <div v-echarts="sentimentSonOption" :loading="sentimentSonLoading" class="hot-sentiment-pie" theme=""></div><!--infographic,macarons-->
 
-            </div>
+                <div class="col-md-6 titleSon">
 
+                    <br>
+                    <span class="sexmen">相关子话题</span>
+
+                    <ul class="titleSon-list">
+                        <li v-for="subtopic in subtopics"  class="titleSon-list-item" >
+                            <span class="titleSon-list-item-index">{{ ($index + 1) }}</span>
+                            <span class="titleSon-list-item-text">{{subtopic.title}}</span>
+                        </li>
+                    </ul>
+
+                </div>
 
             </card-panel>
         </div>
+
         <div class="row">
-            <card-panel :title="tit11">
+            <card-panel :title="'性别比例:'+sonTitle">
             <div class="col-md-6 hot-sentiment">
 
                     <div v-echarts="sexOption" :loading="sexLoading" class="hot-sentiment-pie" theme=""></div><!--infographic,macarons-->
-
-
             </div>
 
             <div class="col-md-6 hot-sentiment">
@@ -60,7 +96,7 @@
         </div>
 
         <div class="row">
-            <card-panel :title="tit12">
+            <card-panel :title="'年龄比例:'+sonTitle">
             <div class="col-md-6 hot-sentiment">
 
                     <div v-echarts="ageOption" :loading="ageLoading" class="hot-sentiment-pie" theme=""></div><!--infographic,macarons-->
@@ -76,18 +112,15 @@
 
         </div>
 
-
         <div class="row">
-            <card-panel :title="tit13">
+            <card-panel :title="'性别关注:'+sonTitle">
                 <br>
                 <br>
-
-
             <div class="col-md-6 hot-ranking">
                 <span class="sexmen1">男性关注</span>
                 <br>
             <ul class="hot-ranking-list">
-            <li v-for="item in datatitle"  class="hot-ranking-list-item" >
+            <li v-for="item in follow0"  class="hot-ranking-list-item" >
             <span class="hot-ranking-list-item-index">{{ ($index + 1) }}</span>
             <span class="hot-ranking-list-item-text">{{item.title}}</span>
             </li>
@@ -99,15 +132,17 @@
                 <span class="sexmen1">女性关注</span>
                 <br>
                     <ul class="hot-ranking-list">
-                        <li v-for="item in datatitle0"  class="hot-ranking-list-item" >
+                        <li v-for="item in follow1"  class="hot-ranking-list-item" >
                             <span class="hot-ranking-list-item-index">{{ ($index + 1) }}</span>
                             <span class="hot-ranking-list-item-text">{{item.title}}</span>
                         </li>
                     </ul>
 
             </div>
+            </card-panel>
         </div>
-        </card-panel>
+
+        <!--sourch-for-->
 
     </div>
 
@@ -124,6 +159,7 @@
     import CardPanel from '../Common/CardPanel/CardPanel.vue';
 
     export default{
+        props: ['sourchWord'],
         data(){
             const words = Local().hotEvent;
             const common = Local().common;
@@ -131,9 +167,37 @@
 
                 words,
                 common,
+                Titles:[
+                    {title:'#金马奖# 金马53荣耀时刻最佳女主角访谈影音曝光',value:42},
+                    {title:'@范冰冰 表示如果没有电影的故事和画面',value:53},
+                    {title:'可能构不成一个很完整的她',value:23},
+                    {title:'周冬雨 透露和@马思纯 有不一样的沟通方式',value:33},
+                    {title:'生活，吴可熙称喜爱的所有元素都在电影里',value:43}
+
+                ],
+                displayTitle:'财经热点排行榜',
+                sonTitle:'(#金马奖# 金马53荣耀时刻最佳女主角)',
+                subtopics:[{title:'#金马奖# 金马53荣耀时刻最佳女主角访谈影音曝光',value:42},
+                    {title:'@范冰冰 表示如果没有电影的故事和画面',value:53},
+                    {title:'可能构不成一个很完整的她',value:23},
+                    {title:'周冬雨 透露和@马思纯 有不一样的沟通方式',value:33},
+                    {title:'生活，吴可熙称喜爱的所有元素都在电影里',value:43}],
+
+
                 sontitle:'子话题的表现',
                 img: "",
-                datatitle:[
+
+
+                follow0:[
+                    {title:'#金马奖# 金马53荣耀时刻最佳女主角访谈影音曝光'},
+                    {title:'@范冰冰 表示如果没有电影的故事和画面'},
+                    {title:'可能构不成一个很完整的她'},
+                    {title:'周冬雨 透露和@马思纯 有不一样的沟通方式'},
+                    {title:'生活，吴可熙称喜爱的所有元素都在电影里'}
+
+                ],
+
+                follow1:[
                     {title:'#金马奖# 金马53荣耀时刻最佳女主角访谈影音曝光'},
                     {title:' @范冰冰 表示如果没有电影的故事和画面'},
                     {title:'可能构不成一个很完整的她'},
@@ -141,139 +205,361 @@
                     {title:'生活，吴可熙称喜爱的所有元素都在电影里'}
 
                 ],
-                datatitle0:[
-                    {title:'#金马奖# 金马53荣耀时刻最佳女主角访谈影音曝光'},
-                    {title:' @范冰冰 表示如果没有电影的故事和画面'},
-                    {title:'可能构不成一个很完整的她'},
-                    {title:'周冬雨 透露和@马思纯 有不一样的沟通方式'},
-                    {title:'生活，吴可熙称喜爱的所有元素都在电影里'}
 
-                ],
 
+
+                allData: {
+                    '女孩儿瞧下代理们的报喜速度1': {
+                        hotValue: 78,
+                        sentiment: [
+                            {name: '满意', data: [120, 12, 11, 134, 90, 230, 210]},
+                            {name: '愤怒', data: [120, 12, 11, 134, 90, 230, 210]},
+                            {name: '反感', data: [120, 12, 11, 134, 90, 230, 210]},
+                            {name: '失望', data: [120, 12, 11, 134, 90, 230, 210]},
+                            {name: '害怕', data: [120, 12, 11, 134, 90, 230, 210]}],
+                        word_cloud: {
+                            速度: 390, 爆炸: 390, 代理: 390, 瞧下: 390, 涵曦: 390, 纤体: 390, 好么: 390,
+                            支付宝: 390, 报喜: 390, 每天: 390, 鲜花: 33, doge: 32, 兔子: 31, 黑线: 28, 可爱: 25,
+                            理想: 24, 月亮: 24, 沙尘暴: 23, 哼哼: 23, 读书: 23, 话筒: 22, 天下: 21, 草泥马: 21, good: 21,
+                            关注: 19, 感冒: 19, 不知: 18, 天才: 18, 光阴: 17, 吃惊: 17, 打脸: 17, 忘危: 16,
+                            存而: 16, 治而: 16, 女孩儿: 16, 易经: 16, 浮云: 16, 安而: 16, 忘亡: 16, 忘私: 16,
+                            挤眼: 15, 不想: 15, 鄙视: 15, 韩愈: 15, 三国志: 15, 萨迪: 14, 奥特曼: 14, 阴险: 14, 劝学: 14, NO: 14
+                        },
+                        subtopic: [
+                            {title: '周冬雨 透露和@马思纯 有不一样的沟是星尘～好圣洁的合作呀1', link: ''},
+                            {title: '时光啊…青春呐…一切都是星尘～好圣洁的合作呀2', link: ''},
+                            {title: 'k kjk ～好圣洁的合作呀3', link: ''},
+                            {title: 'jhaskj据哈市解决…青春呐…一切都是星尘～好圣洁的合作呀4', link: ''},
+                            {title: '时光啊…青春呐…一切都是星尘～好圣洁的合作呀5', link: ''}
+                        ],
+                        sex: [{value: 635, name: '男'}, {value: 10, name: '女'}],
+                        age: [{value: 125, name: '0~20'},
+                            {value: 120, name: '20~30'},
+                            {value: 24,name: '30~40'},
+                            {value: 135, name: '40~50'},
+                            {value: 79, name: '50~60'},
+                            {value: 1555, name: '60+'}],
+                        follow: {
+                            男: [{title: '周冬雨 透露和@马思纯 有不一样的沟通方式1', link: ''},
+                                {title: '周冬雨 透露和@马思纯 有不一样的沟通方式2', link: ''},
+                                {title: '周冬雨 透露和@马思纯 有不一样的沟通方式3', link: ''},
+                                {title: '周冬雨 透露和@马思纯 有不一样的沟通方式4', link: ''},
+                                {title: '周冬雨 透露和@马思纯 有不一样的沟通方式5', link: ''}],
+                            女: [{title: '生活，吴可熙称喜爱的所有元素都在电影里1', link: ''},
+                                {title: '生活，吴可熙称喜爱的所有元素都在电影里2', link: ''},
+                                {title: '生活，吴可熙称喜爱的所有元素都在电影里3', link: ''},
+                                {title: '生活，吴可熙称喜爱的所有元素都在电影里4', link: ''},
+                                {title: '生活，吴可熙称喜爱的所有元素都在电影里5', link: ''}]
+
+                        }
+
+
+                    },
+                    '女孩儿瞧下代理们的报喜速度2': {
+                        hotValue: 99,
+                        sentiment: [
+                            {name: '满意', data: [120, 1232, 151, 134, 70, 30, 210]},
+                            {name: '愤怒', data: [120, 12, 11, 134, 90, 20, 210]},
+                            {name: '反感', data: [120, 12, 11, 14, 90, 230, 210]},
+                            {name: '失望', data: [120, 12, 111, 134, 90, 20, 210]},
+                            {name: '害怕', data: [120, 12, 191, 34, 90, 230, 210]}
+                        ],
+                        word_cloud: {
+                            阿斯顿: 390, 哈根斯: 390, 代理: 390, 瞧下: 390, 涵曦: 390, 纤体: 390, 好么: 390,
+                            支付宝: 390, 报喜: 390, 每天: 390, 鲜花: 33, doge: 32, 兔子: 31, 黑线: 28, 可爱: 25,
+                            但是: 24, 颠三倒四: 24, 沙尘暴: 23, 哼哼: 23, 读书: 23, 话筒: 22, 天下: 21, 草泥马: 21, good: 21,
+                            关注: 19, 感冒: 19, 不知: 18, 天才: 18, 同意: 17, 和: 17, 是: 17, 方式: 16,
+                            存而: 16, 治而: 16, 女孩儿: 16, 易经: 16, 浮云: 16, 规划: 16, 忘亡: 16, 根本: 16,
+                            挤眼: 75, 这些: 15, 鄙视: 15, 韩愈: 15, 韩国: 15, 萨迪: 14, 奥特曼: 14, 阴险: 14, 突然: 14, NO: 14
+                        },
+                        subtopic: [
+                            {title: '时光啊…青春呐…一切都是星尘～好圣洁的合作呀11', link: ''},
+                            {title: '时光啊…青春呐…一切都是星尘～好圣洁的合作呀12', link: ''},
+                            {title: '时光啊…青春呐…一切都是星尘～好圣洁的合作呀13', link: ''},
+                            {title: '时光啊…青春呐…一切都是星尘～好圣洁的合作呀14', link: ''},
+                            {title: '时光啊…青春呐…一切都是星尘～好圣洁的合作呀15', link: ''}
+                        ],
+                        sex: [{value: 12, name: '男'}, {value: 50, name: '女'}],
+                        age: [{value: 35, name: '0~20'}, {value: 310, name: '20~30'}, {
+                            value: 264,
+                            name: '30~40'
+                        }, {value: 35, name: '40~50'}, {value: 1548, name: '50~60'}, {value: 1548, name: '60+'}],
+                        follow: {
+                            男: [{title: ' 透露和@马思纯 有不一样的沟通方式11', link: ''},
+                                {title: '周冬雨 透露和@马思纯 有不一样的沟通方式12', link: ''},
+                                {title: '周冬雨 透露和@马思纯 有不一样的沟通方式13', link: ''},
+                                {title: '周冬雨 透露和@马思纯 有不一样的沟通方式14', link: ''},
+                                {title: ' 透露和@马思纯 有不一样的沟通方式15', link: ''}],
+                            女: [{title: '，吴可熙称喜爱的所有元素都在电影里11', link: ''},
+                                {title: '生活，吴可熙称喜爱的所有元素都在电影里21', link: ''},
+                                {title: '生活，吴可熙称喜爱的所有元素都在电影里31', link: ''},
+                                {title: '生活，吴可熙称喜爱的所有元素都在电影里41', link: ''},
+                                {title: '生活，吴可熙称喜爱的所有元素都在电影里51', link: ''}]
+
+                        }
+
+
+                    },
+                    '女孩儿瞧下代理们的报喜速度3': {
+                        hotValue: 313,
+                        sentiment: [
+                            {name: '满意', data: [120, 2, 151, 134, 70, 0, 210]},
+                            {name: '愤怒', data: [120, 12, 11, 134, 90, 20, 210]},
+                            {name: '反感', data: [120, 312, 11, 14, 90, 230, 210]},
+                            {name: '失望', data: [120, 126, 111, 134, 90, 20, 210]},
+                            {name: '害怕', data: [120, 712, 191, 34, 90, 230, 210]}
+                        ],
+                        word_cloud: {
+                            速度: 390, 爆炸: 390, 代理: 390, 瞧下: 390, 涵曦: 390, 纤体: 390, 好么: 390,
+                            支付宝: 390, 报喜: 390, 每天: 390, 鲜花: 33, doge: 32, 兔子: 31, 黑线: 28, 可爱: 25,
+                            理想: 24, 月亮: 24, 沙尘暴: 23, 哼哼: 23, 读书: 23, 话筒: 22, 天下: 21, 草泥马: 21, good: 21,
+                            关注: 19, 感冒: 19, 不知: 18, 天才: 18, 光阴: 17, 吃惊: 17, 打脸: 17, 忘危: 16,
+                            存而: 16, 治而: 16, 女孩儿: 16, 易经: 16, 浮云: 16, 安而: 16, 忘亡: 16, 忘私: 16,
+                            挤眼: 15, 不想: 15, 鄙视: 15, 韩愈: 15, 三国志: 15, 萨迪: 14, 奥特曼: 14, 阴险: 14, 劝学: 14, NO: 14
+                        },
+                        subtopic: [
+                            {title: '时光啊…青春呐…一切都是星尘～好圣洁的合作呀1', link: ''},
+                            {title: '时光啊…青春呐…一切都是星尘～好圣洁的合作呀2', link: ''},
+                            {title: '时光啊…青春呐…一切都是星尘～好圣洁的合作呀3', link: ''},
+                            {title: '时光啊…青春呐…一切都是星尘～好圣洁的合作呀4', link: ''},
+                            {title: '时光啊…青春呐…一切都是星尘～好圣洁的合作呀5', link: ''}
+                        ],
+                        sex: [{value: 935, name: '男'}, {value: 610, name: '女'}],
+                        age: [{value: 335, name: '0~20'}, {value: 310, name: '20~30'}, {
+                            value: 234,
+                            name: '30~40'
+                        }, {value: 135, name: '40~50'}, {value: 1548, name: '50~60'}, {value: 1548, name: '60+'}],
+                        follow: {
+                            男: [{title: '1周冬雨 透露和@马思纯 有不一样的沟通方式1', link: ''},
+                                {title: '1周冬雨 透露和@马思纯 有不一样的沟通方式2', link: ''},
+                                {title: '2周冬雨 透露和@马思纯 有不一样的沟通方式3', link: ''},
+                                {title: '32周冬雨 透露和@马思纯 有不一样的沟通方式4', link: ''},
+                                {title: '34周冬雨 透露和@马思纯 有不一样的沟通方式5', link: ''}],
+                            女: [{title: '生活，吴可熙称喜爱的所有元素都在电影里1', link: ''},
+                                {title: '生活，吴可熙称喜爱的所有元素都在电影里2', link: ''},
+                                {title: '生活，吴可熙称喜爱的所有元素都在电影里3', link: ''},
+                                {title: '生活，吴可熙称喜爱的所有元素都在电影里4', link: ''},
+                                {title: '生活，吴可熙称喜爱的所有元素都在电影里5', link: ''}]
+
+                        }
+
+
+                    },
+                    '女孩儿瞧下代理们的报喜速度4': {
+                        hotValue: 223,
+                        sentiment: [
+                            {name: '满意', data: [20, 1232, 151, 134, 70, 30, 210]},
+                            {name: '愤怒', data: [620, 12, 11, 134, 90, 20, 210]},
+                            {name: '反感', data: [1620, 12, 11, 14, 90, 230, 210]},
+                            {name: '失望', data: [320, 12, 111, 134, 90, 20, 210]},
+                            {name: '害怕', data: [2120, 12, 191, 34, 90, 230, 210]}
+                        ],
+                        word_cloud: {
+                            速度: 390, 爆炸: 390, 代理: 390, 瞧下: 390, 涵曦: 390, 纤体: 390, 好么: 390,
+                            支付宝: 390, 报喜: 390, 每天: 390, 鲜花: 33, doge: 32, 兔子: 31, 黑线: 28, 可爱: 25,
+                            理想: 24, 月亮: 24, 沙尘暴: 23, 哼哼: 23, 读书: 23, 话筒: 22, 天下: 21, 草泥马: 21, good: 21,
+                            关注: 19, 感冒: 19, 不知: 18, 天才: 18, 光阴: 17, 吃惊: 17, 打脸: 17, 忘危: 16,
+                            存而: 16, 治而: 16, 女孩儿: 16, 易经: 16, 浮云: 16, 安而: 16, 忘亡: 16, 忘私: 16,
+                            挤眼: 15, 不想: 15, 鄙视: 15, 韩愈: 15, 三国志: 15, 萨迪: 14, 奥特曼: 14, 阴险: 14, 劝学: 14, NO: 14
+                        },
+                        subtopic: [
+                            {title: '时光啊…青春呐…一切都是星尘～好圣洁的合作呀1', link: ''},
+                            {title: '时光啊…青春呐…一切都是星尘～好圣洁的合作呀2', link: ''},
+                            {title: '时光啊…青春呐…一切都是星尘～好圣洁的合作呀3', link: ''},
+                            {title: '时光啊…青春呐…一切都是星尘～好圣洁的合作呀4', link: ''},
+                            {title: '时光啊…青春呐…一切都是星尘～好圣洁的合作呀5', link: ''}
+                        ],
+                        sex: [{value: 365, name: '男'}, {value: 50, name: '女'}],
+                        age: [{value: 335, name: '0~20'}, {value: 310, name: '20~30'}, {
+                            value: 234,
+                            name: '30~40'
+                        }, {value: 135, name: '40~50'}, {value: 1548, name: '50~60'}, {value: 1548, name: '60+'}],
+                        follow: {
+                            男: [{title: '周冬雨 透露和@马思纯 有不一样的沟通方式1', link: ''},
+                                {title: '周冬雨 透露和@马思纯 有不一样的沟通方式2', link: ''},
+                                {title: '周冬雨 透露和@马思纯 有不一样的沟通方式3', link: ''},
+                                {title: '周冬雨 透露和@马思纯 有不一样的沟通方式4', link: ''},
+                                {title: '周冬雨 透露和@马思纯 有不一样的沟通方式5', link: ''}],
+                            女: [{title: '生活，吴可熙称喜爱的所有元素都在电影里1', link: ''},
+                                {title: '生活，吴可熙称喜爱的所有元素都在电影里2', link: ''},
+                                {title: '生活，吴可熙称喜爱的所有元素都在电影里3', link: ''},
+                                {title: '生活，吴可熙称喜爱的所有元素都在电影里4', link: ''},
+                                {title: '生活，吴可熙称喜爱的所有元素都在电影里5', link: ''}]
+
+                        }
+
+
+                    },
+                    '女孩儿瞧下代理们的报喜速度5': {
+                        hotValue: 193,
+                        sentiment: [
+                            {name: '满意', data: [190, 1232, 151, 134, 70, 30, 210]},
+                            {name: '愤怒', data: [820, 12, 11, 14, 90, 20, 210]},
+                            {name: '反感', data: [2120, 12, 11, 4, 60, 230, 210]},
+                            {name: '失望', data: [250, 12, 11, 14, 90, 20, 210]},
+                            {name: '害怕', data: [140, 12, 191, 34, 90, 230, 210]}
+                        ],
+                        word_cloud: {
+                            速度: 390, 爆炸: 390, 代理5: 490, 瞧下: 390, 涵曦: 390, 纤体: 390, 好么: 390,
+                            支付宝: 390, 报喜: 390, 每天: 390, 鲜花: 33, doge: 32, 兔子: 31, 黑线: 28, 可爱: 25,
+                            理想: 24, 月亮: 24, 沙尘暴: 23, 哼哼: 23, 读书: 23, 话筒: 22, 天下: 21, 草泥马: 21, good: 21,
+                            关注: 19, 感冒: 19, 不知: 18, 天才: 18, 光阴: 17, 吃惊: 17, 打脸: 17, 忘危: 16,
+                            存而: 16, 治而: 16, 女孩儿: 16, 易经: 16, 浮云: 16, 安而: 16, 忘亡: 16, 忘私: 16,
+                            挤眼: 15, 不想: 15, 鄙视: 15, 韩愈: 15, 三国志: 15, 萨迪: 14, 奥特曼: 14, 阴险: 14, 劝学: 14, NO: 14
+                        },
+                        subtopic: [
+                            {title: '时光啊…青春呐…一切都是星尘～好圣洁的合作呀1', link: ''},
+                            {title: '时光啊…青春呐…一切都是星尘～好圣洁的合作呀2', link: ''},
+                            {title: '时光啊…青春呐…一切都是星尘～好圣洁的合作呀3', link: ''},
+                            {title: '时光啊…青春呐…一切都是星尘～好圣洁的合作呀4', link: ''},
+                            {title: '时光啊…青春呐…一切都是星尘～好圣洁的合作呀5', link: ''}
+                        ],
+                        sex: [{value: 45, name: '男'}, {value: 344, name: '女'}],
+                        age: [{value: 335, name: '0~20'}, {value: 310, name: '20~30'}, {
+                            value: 234,
+                            name: '30~40'
+                        }, {value: 135, name: '40~50'}, {value: 1548, name: '50~60'}, {value: 1548, name: '60+'}],
+                        follow: {
+                            男: [{title: '周冬雨 透露和@马思纯 有不一样的沟通方式1', link: ''},
+                                {title: '周冬雨 透露和@马思纯 有不一样的沟通方式2', link: ''},
+                                {title: '周冬雨 透露和@马思纯 有不一样的沟通方式3', link: ''},
+                                {title: '周冬雨 透露和@马思纯 有不一样的沟通方式4', link: ''},
+                                {title: '周冬雨 透露和@马思纯 有不一样的沟通方式5', link: ''}],
+                            女: [{title: '生活，吴可熙称喜爱的所有元素都在电影里1', link: ''},
+                                {title: '生活，吴可熙称喜爱的所有元素都在电影里2', link: ''},
+                                {title: '生活，吴可熙称喜爱的所有元素都在电影里3', link: ''},
+                                {title: '生活，吴可熙称喜爱的所有元素都在电影里4', link: ''},
+                                {title: '生活，吴可熙称喜爱的所有元素都在电影里5', link: ''}]
+
+                        }
+
+
+                    }
+                },
                 activeHot: {
                     name: "",
                     value: ""
                 },
-                source:"",
-                hot:'',
-                tit11:"男女比例分布",
-                tit12:"年龄分布",
-                tit13:"男，女性关注话题",
-                tit14:"女性关注话题",
+
 
                 // 热点情绪占比
-                sentimentOption: {
 
-                    title: _.extend({}, Pie.title, { top:0, text:'情绪表现',show: true}),
-                    // tooltip: _.extend({}, Pie.tooltip),
-                    legend: _.extend({}, Pie.legend, {
-                        orient: 'vertical',
-                        left: 5,
-                        top: 25,
-                        data: [common.happy, common.anger, common.sorrow, common.disgust, common.fear]
-                    }),
+                sentimentLineOption:{
+                    title: {
+                        text: '热点情绪占比',
+                        show:false
+                    },
                     color:['#2FCC71','#E64D3D', '#F1C40F', '#3598DC', '#737373'],
-                    textStyle: Pie.textStyle,
-                    toolbox: Pie.toolbox,
+                    tooltip: {
+                        trigger: 'axis'
+                    },
+                    grid:{
+                        left:0,
+                        right:'4%',
+                        bottom:'3%',
+                        containLabel: true
+                    },
+                    toolbox: {
+                        feature: {
+                            saveAsImage: {}
+                        }
+                    },
+                    xAxis: {
+                        type: 'category',
+                        boundaryGap: false,
+                        data: ['周一','周二','周三','周四','周五','周六','周日']
+                    },
+                    yAxis: {
+                        type: 'value'
+                    },
                     series:[
                         {
-                            label: {
-                                normal: {
-                                    show:true,
-                                    formatter: " {b}:({d}%)"
-
-                                }},
-                            name: words.sentiment,
-                            type:'pie',
-                            radius: ['25%', '70%'],
-                            center: ['60%', '50%'],
-                            roseType : 'radius',
-                            // label: {
-                            //     normal: {
-                            //         show: false
-                            //     },
-                            //     emphasis: {
-                            //         show: true
-                            //     }
-                            // },
-                            lableLine: {
-                                normal: {
-                                    show: false
-                                },
-                                emphasis: {
-                                    show: true
-                                }
-                            },
-                            data:[]
-                        },
-                    ],
-                },
-                sentimentLoading: false,
-
-                sentimentSonOption: {
-                    title: _.extend({}, Pie.title, { top:10, left:'100',text:'热门子话题',show: true}),
-                    tooltip: {
-                        trigger: 'item',
-                        formatter: "{a} <br/>{b}: {c} ({d}%)"
-                    },
-                    toolbox: Pie.toolbox,
-                    legend: {
-                        orient: 'vertical',
-                        x: 'left',
-                        data:[]
-                    },
-
-                    series: [
-                        {
-                            name:'热门子话题',
-                            type:'pie',
-                            selectedMode: 'single',
-                            radius: [0, '30%'],
-
-                            label: {
-                                normal: {
-                                    position: 'inner'
-                                }
-                            },
-                            labelLine: {
-                                normal: {
-                                    show: false
-                                }
-                            },
-                            data:[
-                                {value:35, name:'123'},
-                                {value:679, name:'223'},
-                                {value:335, name:'增强w'},
-                                {value:679, name:'营销广告w'},
-                                {value:88, name:'搜索引擎'}
-                            ]
+                            name:'满意',
+                            type:'line',
+                            stack: '总量',
+                            data:[120, 12, 11, 134, 90, 230, 210]
                         },
                         {
-                            name:'热门子话题',
-                            label: {
-                                normal: {
-                                    show:true,
-                                    formatter: " {b}:({d}%)"
-
-                                }},
-                            type:'pie',
-                            radius: ['40%', '55%'],
-
-                            data:[
-                                {value:335, name:'保护意识'},
-                                {value:310, name:'男演员'},
-                                {value:234, name:'剩余'},
-                                {value:135, name:'深圳'},
-                                {value:1048, name:'气象台'},
-                                {value:251, name:'预警'},
-                                {value:147, name:'创业板'},
-                                {value:102, name:'电影'}
-                            ]
+                            name:'愤怒',
+                            type:'line',
+                            stack: '总量',
+                            data:[220, 182, 11, 234, 290, 330, 310]
+                        },
+                        {
+                            name:'失望',
+                            type:'line',
+                            stack: '总量',
+                            data:[150, 232, 201, 14, 190, 330, 410]
+                        },
+                        {
+                            name:'反感',
+                            type:'line',
+                            stack: '总量',
+                            data:[320, 332, 301, 334, 390, 330, 320]
+                        },
+                        {
+                            name:'害怕',
+                            type:'line',
+                            stack: '总量',
+                            data:[20, 32, 1, 94, 190, 330, 130]
                         }
                     ]
                 },
-                sentimentSonLoading: false,
+                sentimentLineLoading:false,
 
+                sentimentPieOption:{
+                    title : {
+                        // text: '年龄分布',
+                        subtext: '情绪分布',
+                        x:'center'
+                    },
+                    toolbox: {
+                        feature: {
+                            saveAsImage: {}
+                        }
+                    },
+                    color:['#2FCC71','#E64D3D', '#F1C40F', '#3598DC', '#737373'],
+                    tooltip : {
+                        trigger: 'item',
+                        formatter: "{a} <br/>{b} : {c} ({d}%)"
+                    },
+                    legend: {
+
+                        left: 'left',
+                        data: ["满意","愤怒","失望","反感","害怕"]
+                    },
+                    series : [
+                        {
+                            label: {
+                                normal: {
+                                    show:true,
+                                    formatter: " {b}:({d}%)"
+
+                                }},
+                            name: '情绪分布',
+                            type: 'pie',
+                            radius: ['45%', '65%'],
+                            center: ['50%', '60%'],
+                            data:[
+                                {value:335, name:'满意'},
+                                {value:310, name:'愤怒'},
+                                {value:234, name:'失望'},
+                                {value:135, name:'反感'},
+                                {value:1548,name:'害怕'}
+
+
+                            ],
+                            itemStyle: {
+                                emphasis: {
+                                    shadowBlur: 10,
+                                    shadowOffsetX: 0,
+                                    shadowColor: 'rgba(0, 0, 0, 0.5)'
+                                }
+                            }
+                        }
+                    ]
+                },
+                sentimentPieLoading:false,
 
                 sexOption: {
                     // title: {
@@ -281,28 +567,29 @@
                     // },
                     tooltip: {
                         trigger: 'item',
-                        formatter: "{a} <br/>{b} : {c} ({d}%)"
+
                     },
                     color:[ '#3598DC', '#737373'],
                     legend: {
-                        data:['男','女']
+                        data:'性别'
                     },
                     xAxis: {
-                        data: ['性别']
+                        data: ['男','女']
                     },
                     yAxis: {},
                     series: [{
                         barGap:'40%',
-                        barWidth:20,
-                        name: '男',
+                        barWidth:25,
+                        name: '性别',
                         type: 'bar',
-                        data: [25]
-                    }, {
-                        barWidth:20,
-                            name: '女',
-                            type: 'bar',
-                            data: [15]
-                        }]
+                        data: [15,24],
+                        label: {
+                            normal: {
+                                show:true,
+                                formatter: " {c}"
+
+                            }}
+                    }]
                 },
                 sexLoading:false,
 
@@ -355,7 +642,7 @@
                         data:['年龄分布']
                     },
                     xAxis: {
-                        data: ["10~20岁","20~30岁","30~40岁","40~50岁","50~60岁","60岁以上"]
+                        data: ["0~20岁","20~30岁","30~40岁","40~50岁","50~60岁","60岁以上"]
                     },
                     yAxis: {},
                     series: [{
@@ -380,9 +667,9 @@
                     legend: {
 
                         left: 'left',
-                        data: ["10~20岁","20~30岁","30~40岁","40~50岁","50~60岁","60岁以上"]
+                        data: ["0~20岁","20~30岁","30~40岁","40~50岁","50~60岁","60岁以上"]
                     },
-                    series : [
+                    series: [
                         {
                             label: {
                                 normal: {
@@ -395,7 +682,7 @@
                             radius : '55%',
                             center: ['50%', '60%'],
                             data:[
-                                {value:335, name:'10~20岁'},
+                                {value:335, name:'0~20岁'},
                                 {value:310, name:'20~30岁'},
                                 {value:234, name:'30~40岁'},
                                 {value:135, name:'40~50岁'},
@@ -415,6 +702,11 @@
                 },
                 agePieLoading:false,
 
+                //我的数据整理
+                allTitle:[],
+                sentimentLineData:[],
+
+                //我的数据整理
 
                 //实时热点排行
                 hotsRanking: [],
@@ -451,7 +743,9 @@
                             }
                         },
                         //data: [{"name":"brush","value":1.7320508075688772}],数据结构
-                        data: []
+                         data: [{"name":"brush1","value":1.7320508075688772},
+                                {"name":"brush2","value":2.7320508075688772},
+                                {"name":"brush3","value":6.7320508075688772}]
                     }
                 },
 
@@ -460,6 +754,7 @@
                 hotsTodayRankings: {},
                 activeEvent:{},
                 // 热点事件散点图-------over
+
                 scatterOption: {
                     tooltip: { position: 'top', formatter(params, ticket, callback){
                         //console.log(params);
@@ -468,7 +763,7 @@
                     textStyle: _.extend({}, Chart.textStyle),
                     title: [],
                     singleAxis: [],
-                    series: []
+                    series:[]
                 },
                 scatterLoading: true,
                 //气泡图热点事件
@@ -477,253 +772,93 @@
             }
         },
         methods: {
-            getHotRealtime(){
-                return Api.getHotRealtime({}).then(resp => {
-                    console.log('getHotRealtime', resp.data);
-                    if(resp.data.code == 0){
-                        this.scatterLoading = false;
-                        const scatters = resp.data.data;
-                        this.scatterOption.title = _.map(scatters, (scatter, index) => {
-                            return ({
-                                textBaseline: 'middle',
-                                textStyle: {fontSize: 16},
-                                top: `${index * 20 + 10}%`,
-                                text: scatter.name
-                            });
-                        });
-                        this.scatterOption.singleAxis = _.map(scatters, (scatter, index) => {
-                            return ({
-                                left: 180,
-                                type: 'category',
-                                boundaryGap: false,
-                                data: _.map(scatter.data, item => item.date),
-                                top: `${4 + index * 20}%`,
-                                height: '10%',
-                                axisLine: {
-                                    lineStyle: {color: '#aaa'}
-                                },
-                                splitLine: {
-                                    lineStyle: {type: 'dashed'}
-                                },
-                                axisLabel: {
-                                    interval: 2
-                                }
-                            });
-                        });
-                        this.scatterOption.series = _.map(scatters, (scatter, index) => {
-                            const max = _.chain(scatter.data)
-                                        .map(value => value.value)
-                                        .max(value => value).value(),
-                                    step = Math.ceil(max / 50);
-                            return ({
-                                singleAxisIndex: index,
-                                coordinateSystem: 'singleAxis',
-                                type: 'scatter',
-                                data: _.map(scatter.data, (item, index) => [index, item.value]),
-                                symbolSize(dataItem) {
-                                    return dataItem[1] / step;
-                                }
-                            });
-                        });
-                    }
+
+
+
+            //my functions
+            getSourchData(a){
+                //sourch-function
+
+                console.log(a);
+
+
+            },
+
+            getRefreshData(title,idx){
+                //接受参数title数值
+                this.sonTitle=title;
+                //const bidx=idx;
+                //情绪数据的处理
+
+             const newData=this.allData;
+             console.log('yyy',title);
+             console.log('yyy',newData);
+             const contents1= _.values(this.allData);
+             console.log('contents1',contents1[idx].sentiment);
+             const newDateLa = _.map(contents1[idx].sentiment, (item)=> {
+                    item.type='line';
+                    item.stack='总量';
+                    item.value=_.reduce(item.data, function(memo, num){ return memo + num; }, 0);
+                    return item;
                 });
-            },
-            showDetail(item,idx){
-                if(idx ==0){
-                    this.source = '';
-                };
-                if(idx ==1){
-                    this.source ='';
-                }
-                this.activeHot = {name:item.title,value:item};
-                console.log('aaa',this.activeHot);
-                this.showChart(this.activeHot);
-            },
-            showChart(activeHot){
-                const activeSentiment = activeHot.value.sentiment;
-                const activeWordCloud = activeHot.value.word_cloud;
-                const ouu=this.getw(activeWordCloud,0,6);
-                console.log('ouu',ouu);
+                this.sentimentLineOption.series=newDateLa; // chartlines
+                this.sentimentPieOption.series[0].data=_.map(newDateLa, (item)=> {
+                    item=_.pick(item,'name','value');
+                    return item;
+                });
+
+                //key-value的转化
+                this.hotWordsOption.series.data=_.map(contents1[idx].word_cloud,(value,key)=>{
+                    return {"name":key,"value":value}
+                });
+                this.subtopics=contents1[idx].subtopic;
+
+                const sexData=_.map(contents1[idx].sex,(item)=>{
+                    item=_.values(_.pick(item,'value'));
+                    return item;
+                });
+                this.sexOption.series[0].data=_.flatten(sexData);
+                this.sexPieOption.series[0].data=contents1[idx].sex;
+
+                const ageData=_.map(contents1[idx].age,(item)=>{
+                    item=_.values(_.pick(item,'value'));
+                    return item;
+                });
+
+                console.log('ageData',ageData);
+                this.ageOption.series[0].data=_.flatten(ageData);
+                this.agePieOption.series[0].data=contents1[idx].age;
+                this.follow0=_.values(contents1[idx].follow)[0];
+                this.follow1=_.values(contents1[idx].follow)[1];
 
 
 
-                //this.sexOption.xAxis.data=this.getw(activeWordCloud,0,6);
-                this.ageOption.series[0].data=_.shuffle(this.getw(activeWordCloud,1,6));
-
-                for(var i=0; i<this.ageOption.series[0].data.length;i++)
-                {
-                    this.agePieOption.series[0].data[i].value= this.ageOption.series[0].data[i];
-
-                }
-                const fir=_.first(this.getw(activeWordCloud,1,3));
-                const las=_.last(this.getw(activeWordCloud,1,3));
-                this.sexOption.series[0].data=[fir];
-                this.sexOption.series[1].data=[las];
-                this.sexPieOption.series[0].data[0].value=[fir];
-                this.sexPieOption.series[0].data[1].value=[las];
-                const wdq78=_.shuffle(2,234,56,36,23,123,465,21,344,44);
-
-                this.sentimentSonOption.series[1].data[0].value=Math.floor(Math.random()*100);
-                this.sentimentSonOption.series[1].data[1].value=Math.floor(Math.random()*100);
-                this.sentimentSonOption.series[1].data[2].value=Math.floor(Math.random()*100);
-                this.sentimentSonOption.series[1].data[3].value=Math.floor(Math.random()*100);
-                this.sentimentSonOption.series[1].data[4].value=Math.floor(Math.random()*100);
-                this.sentimentSonOption.series[1].data[5].value=Math.floor(Math.random()*100);
-                this.sentimentSonOption.series[1].data[6].value=Math.floor(Math.random()*100);
-                this.sentimentSonOption.series[1].data[7].value=Math.floor(Math.random()*100);
-
-                const wer= _.shuffle([
-                    {title:'#金马奖# 金马53荣耀时刻最佳女主角访谈影音曝光'},
-                    {title:' @范冰冰 表示如果没有电影的故事和画面'},
-                    {title:'可能构不成一个很完整的她'},
-                    {title:'周冬雨 透露和@马思纯 有不一样的沟通方式'},
-                    {title:'生活，吴可熙称喜爱的所有元素都在电影里'}
-
-                ]);
-                const wer0= _.shuffle([
-                    {title:'#金马奖# 金马53荣耀时刻最佳女主角访谈影音曝光'},
-                    {title:'周冬雨 透露和@马思纯 有不一样的沟通方式'},
-                    {title:' @范冰冰 表示如果没有电影的故事和画面'},
-                    {title:'可能构不成一个很完整的她'},
-                    {title:'生活，吴可熙称喜爱的所有元素都在电影里'}
-
-                ]);
-                this.datatitle0=wer0;
-
-                this.datatitle=wer;
-
-
-
-
-
-
-
-
-
-
-
-
-                //console.log(_.first(_.range(0, 40, 5)));
-
-
-
-
-
-
-                console.log('activeWordCloud00000',activeWordCloud);
-                console.log('activeSentiment1211',activeSentiment.happy,activeSentiment.anger,this.common.disgust);
-                this.sentimentOption.series[0].data=[
-                 {value:activeSentiment.happy,name : this.common.happy}, {value: activeSentiment.anger, name: this.common.anger}, {value: activeSentiment.sorrow, name: this.common.sorrow},{value: activeSentiment.disgust, name: this.common.disgust}, {value: activeSentiment.fear, name: this.common.fear}
-                 ];
-
-                 this.hotWordsOption.series.data=_.map(activeWordCloud,(value,key)=>{
-                     return {"name":key,"value":value}
-                 })
-                console.log('this.hotWordsOption.series.data',this.hotWordsOption.series.data)
             },
 
+            chartData(){
 
-            getw(item,idc,idh){
-                const sexdatak=_.keys(item);
-                const sexdatav=_.values(item);
-                const a =[];
-                const b =[];
-                for(var i=0; i<idh; i++){
-                    a.push(_.keys(item)[i]);
-                    b.push(_.values(item)[i]);
-                };
-                if(idc==0){ return a;};
-                if(idc==1){ return b;};
+                const newsData=this.allData;
+                const titles= _.keys(newsData);
+                const contents= _.values(newsData);
+                console.log('titles:',titles);
+                console.log('contents:',contents);
+                const hotvalues=_.pluck(contents,'hotValue');
+                console.log('hotvalues:',hotvalues);
+                const maxHot=_.max(hotvalues);
+                console.log('maxHot:',maxHot);
+                const percentage=_.map(hotvalues,function(num){ return num*99/_.max(hotvalues);});
+                console.log('percentage:',percentage);
+                const titleObj=_.object(titles,percentage);
+                console.log('titleObj:',titleObj);
+
 
             },
 
 
 
 
-            //当天
-            getTodayList(){
-                Api.getTodayList({}).then(resp => {
-                    console.log('resp', resp);
-                    if (resp.data.code == 0) {
-
-                        console.log('今日数据结构',resp.data.data);
-                        this.hotsTodayRanking = _.keys(resp.data.data);
-                        this.hotsTodayRankings = _.each(_.toArray(_.object(_.pairs(resp.data.data))), (value, key)=> {
-                            return value.title = (this.hotsTodayRanking)[key];
-                        });
-                        const sexName=_.map(this.hotsTodayRanking,function(name){ return name.substring(0,4);});
-                        this.hotsRankings=this.hotsTodayRankings;
-                       // this.sexOption.xAxis.data=this.hotsTodayRanking;   //男女分布
-                        //this.sexOption.xAxis.data=sexName;   //男女分布
-
-                        console.log('hotsTodayRanking',this.hotsTodayRanking);
-                        console.log('hotsTodayRankings',this.hotsTodayRankings);
-
-                        //const sexdatak=_.keys(this.hotsTodayRankings[0].word_cloud);
 
 
-
-                        this.sentimentSonOption.series[0].data[0].name=this.getw(this.hotsTodayRankings[0].word_cloud,0,1);
-                        this.sentimentSonOption.series[0].data[1].name=this.getw(this.hotsTodayRankings[1].word_cloud,0,1);
-                        this.sentimentSonOption.series[0].data[2].name=this.getw(this.hotsTodayRankings[2].word_cloud,0,1);
-                        this.sentimentSonOption.series[0].data[3].name=this.getw(this.hotsTodayRankings[3].word_cloud,0,1);
-                        this.sentimentSonOption.series[0].data[4].name=this.getw(this.hotsTodayRankings[4].word_cloud,0,1);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        const uiuys=this.hotsTodayRanking;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        //console.log('sexdatak',sexdatak);
-                        //console.log('sexdatav',sexdatav);
-
-
-
-
-
-
-                        if (this.activeHot.name == '') {
-                            this.activeHot = {name: (this.hotsTodayRanking)[0], value: (this.hotsTodayRankings)[0]};
-
-                            console.log('初始化this.activeHot', this.activeHot);
-                            this.showChart(this.activeHot);
-                    }
-                }
-            }
-                )
-                }
         },
         filters: {
             title(title){
@@ -737,9 +872,7 @@
             }
         },
         created(){
-            this.getTodayList();
-            this.getHotRealtime();
-
+            this.chartData();
 
         },
         components:{ CardPanel }

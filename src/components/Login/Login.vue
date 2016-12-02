@@ -6,10 +6,11 @@
                 <span>互联网情报智能分析平台</span>
             </div>
             <ul>
-                <li><a href="javascript:void(0);">使用说明</a></li>
+                <li v-if="false"><a href="javascript:void(0);" @click="toIntruction">使用说明</a></li>
                 <li><a href="javascript:void(0);">品牌表现</a></li>
                 <li><a href="javascript:void(0);" @click="showLogin">登录</a></li>
                 <li  v-show="false"><a href="javascript:void(0);" @click="showApply">申请试用</a></li>
+                <li  v-if="false"><a href="javascript:void(0);" @click="toPromotion">首页</a></li>
             </ul>
         </div>
         <!--<div class="container">
@@ -19,7 +20,7 @@
                     <fieldset>
                         <legend>
                             <img class="logo-icon" src="images/logo.jpg" />
-                            <span>沃德品牌气象站</span>
+                            <span>品牌气象站</span>
                         </legend>
                         <div class="form-group">
                             <label for="inputEmail3" class="col-sm-2 control-label login-font">用户名</label>
@@ -130,9 +131,9 @@
                 </div>
             </div>
         </div>
-
     </div>
-    <promotion :islogin="isLogin"></promotion>
+    <promotion v-if="isPromotion"></promotion>
+    <instruction v-if="isInstruction"></instruction>
 </template>
 <style lang="less">
     @import "Login.less";
@@ -146,8 +147,9 @@
     import * as Api from "../../widgets/Api";
     import FooterComponent from "../Footer/Footer.vue"
     import Promotion from "./Promotion/Promotion.vue"
-    import {loginState } from '../../vuex/getters';
-    import {setLoginState} from "../../vuex/actions";
+    import Instruction from "./InstructionsForUse/InstructionsForUse.vue"
+    import {loginState ,loginTime } from '../../vuex/getters';
+    import {setLoginState, setLoginTime} from "../../vuex/actions";
 
     export default {
         name: 'login',
@@ -164,17 +166,27 @@
 //                password:getCookie('login_password'),
                 isApply:false,
                 isLogin:false,
-                errorShow:false
+                errorShow:false,
+                isPromotion:true,
+                isInstruction:false,
             };
         },
         components:{
-            FooterComponent,Promotion
+            FooterComponent,Promotion,Instruction
         },
         vuex:{
-            getters:{loginState},
-            actions:{setLoginState}
+            getters:{loginState, loginTime},
+            actions:{setLoginState, setLoginTime}
         },
         methods: {
+            toIntruction(){
+                this.isInstruction=true;
+                this.isPromotion=false;
+            },
+            toPromotion(){
+                this.isPromotion=true;
+                this.isInstruction=false;
+            },
             submit(){
 
             },
@@ -216,7 +228,7 @@
 //                }
 //                Cookie.set('business_uid', 'admin');
 //                location.hash = '#!/home';
-console.log(this.userName,this.password);
+                console.log(this.userName,this.password);
 //登陆页面逻辑
                 Api.login({
                     username: this.userName,
@@ -230,6 +242,7 @@ console.log(this.userName,this.password);
                         Cookie.set('business_name', data.data.user_name);
                         Cookie.set('business_admin', data.data.isAdmin);
                         Cookie.set('business_email', data.data.email);
+                        this.setLoginTime(this.loginTime + 1);
                         this.userName = '';
                         this.password = '';
                         /*if(this.$els.remember.checked==true){
