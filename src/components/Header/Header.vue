@@ -77,7 +77,7 @@
         methods: {
             quit(){
                 Cookie.remove('business_uid');
-                this.$router.go({name: "login"});
+                this.$router.go({name: "ccsi"});
             },
             initData(){
                 this.nickName = getCookie('business_name');

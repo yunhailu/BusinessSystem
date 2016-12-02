@@ -151,6 +151,12 @@ module.exports = {
             require(['../components/Login/Login.vue'], resolve);
         }
     },
+    '/ccsi': {
+    name: 'ccsi',
+        component (resolve) {
+        require(['../components/Login/Login.vue'], resolve);
+    }
+},
 
     
     
