@@ -23,7 +23,7 @@ const login = {
 			location.href = '/' + hash;
 			return true;
 		}
-		location.href = '/ccsi';
+		location.href = '/login';
 		return false;
 	}
 }
