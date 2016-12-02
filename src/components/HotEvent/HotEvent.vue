@@ -236,7 +236,7 @@
                         },
                         top:0,
                         left: 'right',
-                        link:'/#!/media',
+                        link:'/media',
                         target:'blank'
 
                     },
