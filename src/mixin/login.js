@@ -20,10 +20,10 @@ const login = {
 	auth(to, callback) {
 		const user = Cookie.get('business_uid');
 		if(user){
-			location.hash = '#!/' + hash;
+			location.href = '/' + hash;
 			return true;
 		}
-		location.hash = '#!/login';
+		location.href = '/ccsi';
 		return false;
 	}
 }
