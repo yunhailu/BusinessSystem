@@ -14,9 +14,9 @@ const auth = function(){
 
 const redirect = function(hash = ""){
     if(auth()){
-        location.hash = '#!/' + hash;
+        location.href = '/' + hash;
     } else {
-        location.hash = '#!/login';
+        location.href = '/login';
     }
 };
 

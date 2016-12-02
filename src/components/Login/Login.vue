@@ -228,7 +228,7 @@
 //                }
 //                Cookie.set('business_uid', 'admin');
 //                location.hash = '#!/home';
-console.log(this.userName,this.password);
+                console.log(this.userName,this.password);
 //登陆页面逻辑
                 Api.login({
                     username: this.userName,

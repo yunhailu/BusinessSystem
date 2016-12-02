@@ -127,7 +127,8 @@
                     console.log(window.location);
                     console.log(window.location.href);
                     console.log(id);
-                    window.open(window.location.origin+"/#!/"+this.$route.name+"/detail/"+id)
+                    //window.open(window.location.origin+"/#!/"+this.$route.name+"/detail/"+id)
+                    window.open(window.location.origin+"/"+this.$route.name+"/detail/"+id)
                     //window.open(window.location.href+"/detail/"+id);
                     /*this.$router.go({
                         name: 'detail',
