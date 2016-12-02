@@ -2,12 +2,12 @@
     <div class="wrapper">
         <div class="login-header">
             <div>
-                <img src="images/logo.png">
-                <span>互联网情报智能分析平台</span>
+                   <span class="zh">中国消费者情绪指数</span>
+                   <span class="en">CCSI    China Consumer Sentiment Index</span>
             </div>
             <ul>
                 <li v-if="false"><a href="javascript:void(0);" @click="toIntruction">使用说明</a></li>
-                <li><a href="javascript:void(0);">品牌表现</a></li>
+                <li v-if="false"><a href="javascript:void(0);">品牌表现</a></li>
                 <li><a href="javascript:void(0);" @click="showLogin">登录</a></li>
                 <li  v-show="false"><a href="javascript:void(0);" @click="showApply">申请试用</a></li>
                 <li  v-if="false"><a href="javascript:void(0);" @click="toPromotion">首页</a></li>
@@ -132,8 +132,8 @@
             </div>
         </div>
     </div>
-    <promotion v-if="isPromotion"></promotion>
-    <instruction v-if="isInstruction"></instruction>
+    <ccsi-promotion v-if="isPromotion"></ccsi-promotion>
+    <!--<instruction v-if="isInstruction"></instruction>-->
 </template>
 <style lang="less">
     @import "CcsiLogin.less";
@@ -146,7 +146,7 @@
     import {redirect} from "../../widgets/Auth";
     import * as Api from "../../widgets/Api";
     import FooterComponent from "../Footer/Footer.vue"
-    import Promotion from "./CcsiPromotion/CcsiPromotion.vue"
+    import CcsiPromotion from "./CcsiPromotion/CcsiPromotion.vue"
 //    import Instruction from "./InstructionsForUse/InstructionsForUse.vue"
     import {loginState } from '../../vuex/getters';
     import {setLoginState} from "../../vuex/actions";
@@ -172,7 +172,8 @@
             };
         },
         components:{
-            FooterComponent,Promotion,Instruction
+            FooterComponent,CcsiPromotion
+            //,Instruction
         },
         vuex:{
             getters:{loginState},

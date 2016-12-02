@@ -8,7 +8,7 @@
             </div>
             <div class="navigation">
                 <!--<h2>情绪数据,为您导航</h2>-->
-                <h2>两情相悦，人心可测</h2>
+                <h2>为了更好的消费</h2>
             </div>
             <div class="login-btn" v-show="false">
                 <a href="javascript:void(0);" @click="login">

@@ -37,8 +37,8 @@
     import MenuList from "./MenuList/MenuList.vue";
     import * as Api from "../../../widgets/Api";
     import { getCookie } from '../../../widgets/Cookie';
-    import { topicList, activeAnalyticsTopic } from '../../../vuex/getters';
-    import { setTopicList, setActiveAnalyticsTopic } from "../../../vuex/actions";
+    import { topicList, activeAnalyticsTopic, loginTime } from '../../../vuex/getters';
+    import { setTopicList, setActiveAnalyticsTopic, setLoginTime } from "../../../vuex/actions";
 
     export default{
         props: [],
@@ -55,8 +55,8 @@
             'menu-list': MenuList
         },
         vuex: {
-            actions: { setTopicList, setActiveAnalyticsTopic },
-            getters: { topicList, activeAnalyticsTopic }
+            actions: { setTopicList, setActiveAnalyticsTopic,setLoginTime },
+            getters: { topicList, activeAnalyticsTopic,loginTime }
         },
         computed: {
             list(){
@@ -118,6 +118,16 @@
             },
             init(){
                 this.getTopics();
+            }
+        },
+        watch:{
+            loginTime:{
+                handler(val){
+                    if(val !=0){
+                        console.log('查看是否新家',val)
+                        this.getTopics();
+                    }
+                }
             }
         },
         ready(){

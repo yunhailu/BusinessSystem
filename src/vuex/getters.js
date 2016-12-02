@@ -24,6 +24,9 @@ export const activeSettingTopic = state => {
 export const loginState = state => {
 	return state.topic.login_state;
 };
+export const loginTime = state => {
+	return state.topic.login_time;
+}
 
 /**
  * Analytics

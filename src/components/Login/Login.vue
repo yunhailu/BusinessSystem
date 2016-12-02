@@ -148,8 +148,8 @@
     import FooterComponent from "../Footer/Footer.vue"
     import Promotion from "./Promotion/Promotion.vue"
     import Instruction from "./InstructionsForUse/InstructionsForUse.vue"
-    import {loginState } from '../../vuex/getters';
-    import {setLoginState} from "../../vuex/actions";
+    import {loginState ,loginTime } from '../../vuex/getters';
+    import {setLoginState, setLoginTime} from "../../vuex/actions";
 
     export default {
         name: 'login',
@@ -175,8 +175,8 @@
             FooterComponent,Promotion,Instruction
         },
         vuex:{
-            getters:{loginState},
-            actions:{setLoginState}
+            getters:{loginState, loginTime},
+            actions:{setLoginState, setLoginTime}
         },
         methods: {
             toIntruction(){
@@ -242,6 +242,7 @@ console.log(this.userName,this.password);
                         Cookie.set('business_name', data.data.user_name);
                         Cookie.set('business_admin', data.data.isAdmin);
                         Cookie.set('business_email', data.data.email);
+                        this.setLoginTime(this.loginTime + 1);
                         this.userName = '';
                         this.password = '';
                         /*if(this.$els.remember.checked==true){

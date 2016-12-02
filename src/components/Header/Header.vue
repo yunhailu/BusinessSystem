@@ -33,6 +33,8 @@
     import Cookie from "js-cookie";
     import Local from "../../local/local";
     import { getCookie } from '../../widgets/Cookie';
+    import {loginTime} from '../../vuex/getters';
+    import {setLoginTime} from '../../vuex/actions';
 
     export default{
         props: ["active"],
@@ -74,14 +76,21 @@
                 }]
             }
         },
+        vuex:{
+            getters:{loginTime},
+            actions:{setLoginTime}
+        },
         methods: {
             quit(){
-                if(getCookie('business_name')==""){
+                if(getCookie('business_name')=="demo03"){
                     Cookie.remove('business_uid');
+                    Cookie.remove('bussiness_name');
                     this.$router.go({name: "ccsi"});
+                }else{
+                    Cookie.remove('business_uid');
+                    Cookie.remove('bussiness_name');
+                    this.$router.go({name: "login"});
                 }
-                Cookie.remove('business_uid');
-                this.$router.go({name: "login"});
             },
             initData(){
                 this.nickName = getCookie('business_name');
@@ -89,6 +98,15 @@
             init(){
                 this.initData();
             }
-        }
+        },
+        watch:{
+            loginTime:{
+                handler(val){
+                    if(val !=0){
+                        this.initData();
+                    }
+                }
+            }
+        },
     }
 </script>

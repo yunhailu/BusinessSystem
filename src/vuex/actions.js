@@ -117,3 +117,6 @@ export const removeExportImages = (store) => {
 export const setLoginState = (store,state) => {
 	store.dispatch(types.LOGIN_STATE,state);
 };
+export const setLoginTime = (store,time) => {
+	store.dispatch(types.LOGIN_TIME,time)
+}
