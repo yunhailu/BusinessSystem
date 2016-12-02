@@ -120,13 +120,13 @@
                 this.getTopics();
             }
         },
-        /*ready(){
+        ready(){
             this.init();
-        },*/
-        route: {
+        },
+        /*route: {
             data(){
                 this.init();
             }
-        }
+        }*/
     }
 </script>
