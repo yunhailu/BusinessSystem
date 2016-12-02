@@ -84,7 +84,7 @@ export const zh_CN = {
         userInfo: "用户信息",
         content: "正文",
         source: "来源",
-        shareChart: "转发示意图",
+        shareChart: "传播路径",
         timeline: "转发时间曲线",
         publish: "发布时间",
         view: "查看原文",
