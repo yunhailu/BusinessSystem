@@ -28,8 +28,8 @@ var plugin = {
 	runRouter() {
 		var routeMap = this.createRouteMap();
 		var router = this.router = new Router({
-			//hashbang : false,
-			//history : true,
+			hashbang : false,
+			history : true,
 			root : '/'
 		});
 
