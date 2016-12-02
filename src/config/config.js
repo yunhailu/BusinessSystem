@@ -2,6 +2,13 @@
  * Created by yunhailu on 2016/8/9.
  */
 
+export const WhiteList = [{
+    link: 'ccsi',
+    name: 'ccsi',
+    domain: 'http://vipccsi.ccn.com.cn'
+}];
+
+
 // 统计图表基础配置(饼图、环形图)
 export const Pie = {
     title: {
