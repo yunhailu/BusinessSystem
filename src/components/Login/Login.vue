@@ -6,11 +6,11 @@
                 <span>互联网情报智能分析平台</span>
             </div>
             <ul>
-                <li v-if="false"><a href="javascript:void(0);" @click="toIntruction">使用说明</a></li>
-                <li><a href="javascript:void(0);">品牌表现</a></li>
+                <!--<li v-if="false"><a href="javascript:void(0);" @click="toIntruction">使用说明</a></li>-->
+                <li><a href="javascript:void(0);" @click="toHotEvent">热点事件</a></li>
                 <li><a href="javascript:void(0);" @click="showLogin">登录</a></li>
-                <li  v-show="false"><a href="javascript:void(0);" @click="showApply">申请试用</a></li>
-                <li  v-if="false"><a href="javascript:void(0);" @click="toPromotion">首页</a></li>
+                <!--<li  v-show="false"><a href="javascript:void(0);" @click="showApply">申请试用</a></li>-->
+                <li><a href="javascript:void(0);" @click="toPromotion">首页</a></li>
             </ul>
         </div>
         <!--<div class="container">
@@ -58,7 +58,7 @@
             </div>
         </div>-->
         <footer-component></footer-component>
-        <div class="apply-bg" v-show="isApply" @click="cancelApply">
+        <!--<div class="apply-bg" v-show="isApply" @click="cancelApply">
             <div class="apply-bg-content" @click.stop>
                 <div class="apply-bg-content-model" @keyup.enter="submit" >
                     <h3>
@@ -92,13 +92,13 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div>-->
         <div class="login-bg" v-show="isLogin" @click="cancelLogin">
             <div class="login-bg-content" @click.stop>
                 <div class="login-bg-content-model" @keyup.enter="login"  @keyup.8="isShowError">
                     <h3>
                         <span>{{loginStr.login}}</span>
-                        <a href="javascript:void(0);" @click="toApply" v-show="false">{{loginStr.toApply}}</a>
+                        <!--<a href="javascript:void(0);" @click="toApply" v-show="false">{{loginStr.toApply}}</a>-->
                     </h3>
                     <div class="loginCon">
                         <div class="form-group">
@@ -134,6 +134,7 @@
     </div>
     <promotion v-if="isPromotion"></promotion>
     <instruction v-if="isInstruction"></instruction>
+    <hot-event class="hotevent" v-if="isHotEvent"></hot-event>
 </template>
 <style lang="less">
     @import "Login.less";
@@ -148,6 +149,7 @@
     import FooterComponent from "../Footer/Footer.vue"
     import Promotion from "./Promotion/Promotion.vue"
     import Instruction from "./InstructionsForUse/InstructionsForUse.vue"
+    import HotEvent from "../AllNetHotEvent/AllNetHotEvent.vue"
     import {loginState ,loginTime } from '../../vuex/getters';
     import {setLoginState, setLoginTime} from "../../vuex/actions";
 
@@ -169,44 +171,51 @@
                 errorShow:false,
                 isPromotion:true,
                 isInstruction:false,
+                isHotEvent:false,
             };
         },
         components:{
-            FooterComponent,Promotion,Instruction
+            FooterComponent,Promotion,Instruction,HotEvent
         },
         vuex:{
             getters:{loginState, loginTime},
             actions:{setLoginState, setLoginTime}
         },
         methods: {
-            toIntruction(){
-                this.isInstruction=true;
+            toHotEvent(){
+                this.isHotEvent = true;
                 this.isPromotion=false;
             },
+           /* 注册
+           toIntruction(){
+                this.isInstruction=true;
+                this.isPromotion=false;
+            },*/
             toPromotion(){
                 this.isPromotion=true;
                 this.isInstruction=false;
+                this.isHotEvent = false;
             },
-            submit(){
-
-            },
+            /*去申请登使用
             toApply(){
                 this.isLogin=false;
                 this.isApply=true;
-            },
+            },*/
+            /*去申请登陆
             toLogin(){
                 this.isApply=false;
                 this.isLogin=true;
-            },
+            },*/
             isShowError(){
                 if(this.errorShow == true){
                     this.errorShow = this.userName || this.password;
                 }
             },
+            /*点击遮罩取消
             cancelApply(){
                 this.isApply=false;
                 this.errorShow = false;
-            },
+            },*/
             cancelLogin(){
                 this.isLogin=false;
                 this.errorShow = false;

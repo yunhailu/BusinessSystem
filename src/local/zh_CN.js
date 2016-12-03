@@ -46,11 +46,12 @@ export const zh_CN = {
         settingDec: "设置您所需要的监测信息"
     },
     hotEvent: {
-        hotsRiver: "热点事件散点图",
+        hotsRiver: "品牌热点事件散点图",
         sentiment: "情绪比例",
         hotsRanking: "实时热点排行",
         todayHotsRanking: "今日热点排行",
-        wordsRanking: "热词排行"
+        wordsRanking: "热词排行",
+        allNetHotsRiver:"全网热点事件散点图"
     },
     analytics: {
         tabs: ["品牌关注", "品牌情绪", "品牌评价", "品牌影响力", "品牌印象"],

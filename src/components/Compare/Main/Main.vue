@@ -20,8 +20,8 @@
     import  Tips from '../../Common/Tips/Tips.vue';
     import {Chart, Pie} from '../../../config/config';
     import * as Api from "../../../widgets/Api";
-    import { topicList, activeCompareTopic, topicGroupActiveId, compareSource, compareSubTopic, compareStart, compareEnd, compareTimeRange, compareTimeRangeString, compareSourceCount } from '../../../vuex/getters';
-    import { setTopicList, setActiveCompareTopic, setTopicGroupActiveId, setCompareSource, setCompareSubTopic, setCompareStart, setCompareEnd, setCompareTimeRange, setCompareTimeRangeString, setCompareSourceCount  } from "../../../vuex/actions";
+    import {compareDataChange, topicList, activeCompareTopic, topicGroupActiveId, compareSource, compareSubTopic, compareStart, compareEnd, compareTimeRange, compareTimeRangeString, compareSourceCount } from '../../../vuex/getters';
+    import {setCompareDataChange, setTopicList, setActiveCompareTopic, setTopicGroupActiveId, setCompareSource, setCompareSubTopic, setCompareStart, setCompareEnd, setCompareTimeRange, setCompareTimeRangeString, setCompareSourceCount  } from "../../../vuex/actions";
 
     export default{
         props: [],
@@ -635,8 +635,8 @@
 
         },
         vuex:{
-            actions:{setTopicList ,setActiveCompareTopic ,setTopicGroupActiveId, setCompareSource, setCompareSubTopic, setCompareStart, setCompareEnd, setCompareTimeRange, setCompareTimeRangeString, setCompareSourceCount},
-            getters:{topicList ,activeCompareTopic , topicGroupActiveId, compareSource, compareSubTopic, compareStart, compareEnd, compareTimeRange, compareTimeRangeString, compareSourceCount  }
+            actions:{setCompareDataChange,setTopicList ,setActiveCompareTopic ,setTopicGroupActiveId, setCompareSource, setCompareSubTopic, setCompareStart, setCompareEnd, setCompareTimeRange, setCompareTimeRangeString, setCompareSourceCount},
+            getters:{compareDataChange,topicList ,activeCompareTopic , topicGroupActiveId, compareSource, compareSubTopic, compareStart, compareEnd, compareTimeRange, compareTimeRangeString, compareSourceCount  }
         },
         watch:{
             activeCompareTopic: {
@@ -802,12 +802,18 @@ console.log(this.data);
                     console.log('查看radar是不是首席变化');
                 }
             },
-            compareTimeRangeString:{
+            compareDataChange:{
                 handler(){
                     console.log('查看时间',this.compareTimeRangeString);
                     this.selectCalendar();
                 }
             }
+            /*compareTimeRangeString:{
+                handler(){
+                    console.log('查看时间',this.compareTimeRangeString);
+                    this.selectCalendar();
+                }
+            }*/
             /*compareStart: {
                 handler(){
                     if(_.isEmpty(this.activeCompareTopic)){

@@ -136,7 +136,9 @@
                     });*/
                 } else {
                     console.log('没有id');
-                    location.href = `${item.url}`;
+                    console.log('url',item.url);
+                    //location.href = `${item.url}`;
+                    window.open(item.url);
                 }
             }
         },
