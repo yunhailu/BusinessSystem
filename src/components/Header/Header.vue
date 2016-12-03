@@ -93,6 +93,7 @@
                     name = whiteName[0].link;
                 }
                 this.$router.go({ name });
+                location.reload();
             },
             initData(){
                 this.nickName = getCookie('business_name');
