@@ -126,7 +126,7 @@
                 isMine: true,
                 isAdmin: 0,
                 isGetToken: false,
-                user_avatar: '',
+                user_avatar: 'http://of4d1rz63.bkt.clouddn.com/logo.png',
                 mine:{
                     userName: "",
                     password: "",
@@ -193,7 +193,7 @@
                             browse_button: 'uploadBtn',       //上传选择的点选按钮，**必需**
                             //uptoken_url: 'http://118.244.212.122:8008/upload/token?callback=_jsonpv78th89spplw7xmw9sv1dzpvi',            //Ajax请求upToken的Url，**强烈建议设置**（服务端提供）
                             uptoken : uptoken, //若未指定uptoken_url,则必须指定 uptoken ,uptoken由其他程序生成
-                            //unique_names: true, // 默认 false，key为文件名。若开启该选项，SDK为自动生成上传成功后的key（文件名）。
+                            unique_names: true, // 默认 false，key为文件名。若开启该选项，SDK为自动生成上传成功后的key（文件名）。
                             //save_key: true,   // 默认 false。若在服务端生成uptoken的上传策略中指定了 `sava_key`，则开启，SDK会忽略对key的处理
                             //domain: 'http://qiniu-plupload.qiniudn.com/',   //bucket 域名，下载资源时用到，**必需**
                             domain: 'http://of4d1rz63.bkt.clouddn.com/',   //bucket 域名，下载资源时用到，**必需**
