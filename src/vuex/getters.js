@@ -105,6 +105,10 @@ export const compareSourceCount = state => {
 	return state.compare.compare_source_Count;
 };
 
+export const compareDataChange = state => {
+	return state.compare.compare_data_change;
+};
+
 /**
  * Export Images
  * */

@@ -1,9 +1,9 @@
 <template>
     <div class="hot-panel">
         <!--热点事件散点图-->
-        <div class="row">
+        <div class="row row-hot-river">
             <div class="col-md-12 hot-river">
-                <card-panel :title="words.hotsRiver" >
+                <card-panel :title="words.allNetHotsRiver" >
                     <div v-echarts="graphChartOption" :loading="graphChartLoading" class="hot-river-scatter" theme="" :img.sync="img"></div>
                 </card-panel>
             </div>
@@ -58,7 +58,7 @@
 
 </template>
 <style lang="less" scoped>
-    @import "HotEvent.less";
+    @import "AllNetHotEvent.less";
 </style>
 <script type="text/ecmascript-6">
     import _ from 'underscore';
@@ -186,7 +186,7 @@
 
                 graphChartLoading: true,
                 graphChartOption: {
-                    title: {
+                    /*title: {
 
                         text: '媒体展示',
                         textStyle: {
@@ -200,7 +200,7 @@
                         link:'/media',
                         target:'blank'
 
-                    },
+                    },*/
                     tooltip: {
 
                         formatter: '{b}'

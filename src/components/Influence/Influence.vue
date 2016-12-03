@@ -138,7 +138,6 @@
         },
         methods: {
             showPopList(item){
-                //console.log('11111111111111111111111------------------:',item);
                 this.popVisiable = true;
                 const topic_id = this.activeAnalyticsTopic.topic_id;
                 const author = item.influencer;
@@ -211,7 +210,7 @@
 
                             var influanceInfos =_.sortBy(influanceInfo, function(item){
 
-                                return -item.rate.value.replace('%',0);
+                                return -item.rate.value.replace('%','');
                             });
                         }
                         else if (item.icon=='edge'){
@@ -223,7 +222,7 @@
                         else if (item.icon=='chrome'){
                             var influanceInfos =_.sortBy(influanceInfo, function(item){
 
-                                return -item.comments;
+                                return -(item.comments+item.post+item.shareCount+item.likeCount);
 
                             });
                         }
@@ -232,7 +231,7 @@
                             return -item.post;
                         });}
 
-                           console.log('influanceInfos:',influanceInfos);
+                           //console.log('influanceInfos:',influanceInfos);
 
 
                         this.influancerList = _.map(influanceInfos, info => info);
@@ -266,17 +265,21 @@
                     this.loadingParams.visiable = false;
                     if(resp.data.code ==0&& resp.data.data.length>0){   //success--load-data
                         this.coltrol=true;
+
                         const sdasda1=this.getOrderbyTitle(resp.data.data ,'post');
                         const sdasda2 =_.first(_.sortBy(resp.data.data, function(item){
-                            return -item.rate.value.replace('%',0);
+                            return -item.rate.value.replace('%','');
                         }));
                         const sdasda3 =_.first(_.sortBy(resp.data.data, function(item){
                             return -(item.comments+item.shareCount+item.likeCount);
                         }));
                         const sdasda4 =_.first(_.sortBy(resp.data.data, function(item){
-                            return -item.comments;
+                            return -(item.comments+item.post+item.shareCount+item.likeCount);
                         }));
-                        console.log('sdasda4:',sdasda4);
+
+
+//                        console.log('wlp2103:',sdasda2);
+//                        console.log('sdasda4:',resp.data.data);
                         var firstTitle=[];
                         firstTitle.push(sdasda1);
                         firstTitle.push(sdasda2);
@@ -298,6 +301,8 @@
                         });
                         console.log('sdaaa2::',sdaaa2);
                         this.popularList=sdaaa2;
+
+                       // console.log('sdaaa2:wanglipeng:',sdaaa2);
 
                     }
 
@@ -420,20 +425,7 @@
                         show: false
                     }),
                     color: _.extend([], Chart.color),
-                    graphic:[
-                        {
-                            type: 'text',
-                            z: -10,
-                            left: 'center', // 相对父元素居中
-                            top: 'middle',  // 相对父元素居中
-                            rotation: Math.PI / 4,
-                            style: {
-                                fill: '#fff',
-                                text: '沃德品牌气象站',
-                                font: 'bold 34px Microsoft YaHei'
-                            }
-                        }
-                    ],
+                    graphic:Chart.graphic,
                     series: [
                         {
                             name: '满意',

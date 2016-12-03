@@ -46,11 +46,12 @@ export const zh_CN = {
         settingDec: "设置您所需要的监测信息"
     },
     hotEvent: {
-        hotsRiver: "热点事件散点图",
+        hotsRiver: "品牌热点事件散点图",
         sentiment: "情绪比例",
         hotsRanking: "实时热点排行",
         todayHotsRanking: "今日热点排行",
-        wordsRanking: "热词排行"
+        wordsRanking: "热词排行",
+        allNetHotsRiver:"全网热点事件散点图"
     },
     analytics: {
         tabs: ["品牌关注", "品牌情绪", "品牌评价", "品牌影响力", "品牌印象"],
@@ -77,7 +78,8 @@ export const zh_CN = {
         close: "关闭"
     },
     theme: {
-        topics: "话题排行"
+        topics: "话题排行",
+        ranking:"排名变化"
     },
     detail: {
         article: "层级转发关系",
@@ -180,12 +182,14 @@ export const zh_CN = {
         web: "网页",
         overseas: "海外",
         happy: "满意",
+        source:"沃德品牌气象站",
         anger: "愤怒",
         sorrow: "失望",
         disgust: "反感",
         fear: "害怕",
         nullTip: "数据为空",
-        loadingTip: "等待加载..."
+        loadingTip: "等待加载...",
+        waitWords:"请稍侯......"
     },
     upload: {
         upload: "上传",

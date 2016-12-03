@@ -1,0 +1,47 @@
+@import "../common.less";
+
+@card-height: 260px;
+
+.hot-panel{
+  .w(80%);margin: 0 auto;
+//.row-hot-river{min-height: 100%};
+  .row{ .mg-top(20px); }
+
+  .hot-river{
+    .h(460px);
+    //.h(100%);
+    &-scatter{  .w(100%);  .h(400px);  }
+  }
+
+  .hot-sentiment{
+    .h(@card-height);
+    &-pie{  .w(100%);  .h(100%);  }
+  }
+
+  .hot-ranking{
+    .h(@card-height);
+    &-list{
+      &-item{
+        .lh(14px);  .pd(15px 0 0);  .pointer();
+        &-index{ .vm();  .disIB();  .w(20px);  .h(20px);  .bgc(@body-theme);  .tc(); .lh(20px); .c(white);  .br(2px);  .ff("pingfang-bold"); }
+        &-text{ .vm();  .disIB(); .text-hidden();  .pd(0 5px);  .w(80%);  .f(12px); }
+      }
+    }
+  }
+
+  .hot-words{
+    .h(@card-height);
+    &-cloud{ .w(100%);  .h(210px);  }
+  }
+
+  .hot-today{
+    .h(@card-height);
+    &-list{
+      &-item{
+        .lh(14px);  .pd(15px 0 0);  .pointer();
+        &-index{ .vm();  .disIB();  .w(20px);  .h(20px);  .bgc(@body-theme);  .tc(); .lh(20px); .c(white);  .br(02px);  .ff("pingfang-bold"); }
+        &-text{ .vm();  .disIB(); .text-hidden();  .pd(0 5px);  .w(80%);  .f(12px); }
+      }
+    }
+  }
+}

@@ -102,6 +102,10 @@ export const setCompareSourceCount = (store, sourceCount) => {
 	store.dispatch(types.UPDATE_COMPARE_SOURCE_COUNT, sourceCount);
 };
 
+export const setCompareDataChange = (store, datachange) => {
+	store.dispatch(types.UPDATE_COMPARE_DATA_CHANGE, datachange);
+};
+
 /**
  * Export Images
  * */
