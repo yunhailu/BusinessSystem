@@ -83,12 +83,12 @@
                         
                         
                         <div class="form-group" v-show="errorTip">
-                            <div class="col-sm-offset-2 col-sm-10">
+                            <div class="col-sm-offset-3 col-sm-10">
                                 <div class="error">* {{errorTip}}</div>
                             </div>
                         </div>
                         <div class="form-group" v-show="successTip">
-                            <div class="col-sm-offset-2 col-sm-10">
+                            <div class="col-sm-offset-3 col-sm-10">
                                 <div class="success">{{successTip}}</div>
                             </div>
                         </div>
