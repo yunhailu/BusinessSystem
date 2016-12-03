@@ -183,5 +183,12 @@ export const en = {
         fear: "Fear",
         nullTip: "Null",
         loadingTip: "Loading"
+    },
+    upload: {
+        upload: "Upload",
+        success: "Success",
+        fail: "Failed",
+        onlyOne: "Please Select Only One",
+        noPic: "No Picture"
     }
 };

@@ -43,15 +43,25 @@
                         <img :src="user_avatar" class="profile-add-avatar-wrap-image" />
                     </div>
                     <div class="profile-add-avatar-btn">
-                        <div type="button" id="uploadBtn" class="btn btn-default" >Upload</div>
+                        <div type="button" id="uploadBtn" class="btn btn-default" >{{file.btn}}</div>
+                        <div class="profile-add-avatar-btn-success tip" v-show="file.isSuccess">
+                            <i class="fa fa-check"></i><span> {{file.success}}</span>
+                        </div>
+                        <div class="profile-add-avatar-btn-error tip" v-show="file.isFailed">
+                            <i class="fa fa-warning"></i><span> {{file.failed}}</span>
+                        </div>
                         <!--<input type="file" id="uploadBtn1"  />-->
+                    </div>
+                    <div class="profile-add-avatar-right">
+                        <div class="profile-add-avatar-right-item">{{file.name}}</div>
+                        <div class="profile-add-avatar-right-item">{{file.size | formatSize}}</div>
                     </div>
                 </div>
                 <form class="form-horizontal" role="form" v-on:submit.prevent.stop="createSubmit();">
                     <div class="form-group">
                         <label for="newUserName" class="col-sm-3 control-label">{{words.userName}}</label>
                         <div class="col-sm-5">
-                            <input type="text" v-model="addUser.userName" class="form-control" id="newUserName" :placeholder="words.userName">
+                            <input type="text" v-model="addUser.username" class="form-control" id="newUserName" :placeholder="words.userName">
                         </div>
                     </div>
                     <!--<div class="form-group">-->
@@ -84,7 +94,7 @@
                     <div class="form-group">
                         <label for="addTel" class="col-sm-3 control-label">{{words.tel}}</label>
                         <div class="col-sm-5">
-                            <input type="text" v-model="addUser.tel" class="form-control" id="addTel" :placeholder="words.tel">
+                            <input type="text" v-model="addUser.phone" class="form-control" id="addTel" :placeholder="words.tel">
                         </div>
                     </div>
                     <div class="form-group">
@@ -115,18 +125,32 @@
     import HeaderComponent from '../Header/Header.vue';
     import Local from '../../local/local';
     import { getCookie } from '../../widgets/Cookie';
+    import { formatSize } from '../../widgets/Util';
     import * as Api from '../../widgets/Api';
     import * as Upload from '../../widgets/Upload';
 
     export default{
         data(){
             const words = Local().profile;
+            const upload = Local().upload;
             return{
                 words,
                 isMine: true,
                 isAdmin: 0,
                 isGetToken: false,
                 user_avatar: 'http://of4d1rz63.bkt.clouddn.com/logo.png',
+                file: {
+                    btn: upload.upload,
+                    success: upload.success,
+                    failed: upload.fail,
+                    isSuccess: false,
+                    isFailed: false,
+                    onlyOne: upload.onlyOne,
+                    noPic: upload.noPic,
+                    key: "",
+                    size: "",
+                    name: ""
+                },
                 mine:{
                     userName: "",
                     password: "",
@@ -134,12 +158,13 @@
                     tip: ""
                 },
                 addUser: {
-                    userName: "",
-                    gender: 1,
+                    username: "",
+                    //gender: 1,
                     password: "",
                     rePassword: "",
-                    tel: "",
+                    phone: "",
                     email: "",
+                    avatar: "",
                     tip: ""
                 }
             }
@@ -161,7 +186,8 @@
                 console.log('modifySubmit', this.mine);
             },
             createSubmit(){
-                console.log('createSubmit', this.addUser);
+                console.log('createSubmit', this.addUser, this.file.key);
+
             },
             resetMine(){
                 this.mine = {
@@ -190,15 +216,37 @@
                         const _this = this;
                         Upload.up(uptoken, {
                             init: {
+                                FilesAdded(up, files){
+                                    console.log('FilesAdded', up, files);
+                                    if(files.length != 1){
+                                        _this.file.isSuccess = false;
+                                        _this.file.isFailed = true;
+                                        _this.file.failed = _this.file.onlyOne;
+                                        return false;
+                                    }
+                                    const file = files[0];
+                                    if(file.type.indexOf('image') < 0){
+                                        _this.file.isSuccess = false;
+                                        _this.file.isFailed = true;
+                                        _this.file.failed = _this.file.noPic;
+                                        return false;
+                                    }
+                                    _this.file.name = file.name;
+                                    _this.file.size = file.size;
+
+                                },
                                 FileUploaded(up, file, info){
                                     const domain = up.getOption('domain');
                                     const res = JSON.parse(info);
                                     const sourceLink = domain + res.key; //获取上传成功后的文件的Url
                                     console.log(sourceLink);
                                     _this.user_avatar = sourceLink;
+                                    _this.key = res.key;
+                                    _this.file.isSuccess = true;
+                                    _this.file.isFailed = false;
                                 },
                                 UploadProgress(up, file){
-                                    console.log(up, file);
+                                    console.log('UploadProgress', up, file);
                                 }
                             }
                         });
@@ -211,6 +259,7 @@
                 //this.upload();
             }
         },
+        filters: { formatSize },
         created(){
             //this.init();
         },

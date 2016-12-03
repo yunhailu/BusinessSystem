@@ -217,6 +217,12 @@ export const zh_CN = {
         match:"匹配",
         target:"指标",
         sub_source:"来自"
-
+    },
+    upload: {
+        upload: "上传",
+        success: "上传成功",
+        fail: "上传失败",
+        onlyOne: "请只选择一张图片",
+        noPic: "您选择的不是图片"
     }
 };
