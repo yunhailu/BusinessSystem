@@ -7,9 +7,17 @@ import Local from "../local/local";
  * link: 本网站的路由地址, name: 路由渲染组件名, domain: 第三方网站
  * */
 export const WhiteList = [{
-    link: 'ccsi',
+    id: '',
     name: 'demo03',
+    local: '',
+    link: 'ccsi',
     domain: 'http://vipccsi.ccn.com.cn'
+}, {
+    id: '',
+    name: 'demo06',
+    local: 'zh_CN_society',
+    link: 'login',
+    domain: 'http://v2.wordemotion.com'
 }];
 
 
