@@ -186,5 +186,12 @@ export const zh_CN = {
         fear: "害怕",
         nullTip: "数据为空",
         loadingTip: "等待加载..."
+    },
+    upload: {
+        upload: "上传",
+        success: "上传成功",
+        fail: "上传失败",
+        onlyOne: "请只选择一张图片",
+        noPic: "您选择的不是图片"
     }
 };
