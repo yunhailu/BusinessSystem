@@ -72,7 +72,7 @@
                                 <option  v-for="moodgroup in moodGroups" :id="moodgroup.id" :value="moodgroup.id" >{{moodgroup.name}}</option>
                             </select>
 
-                                <input v-model="threshold" type="number" min="0" max="100" class="form-control moodwSet1 " id="threshold" :placeholder=""><span class="percent">(%)</span>
+                                <input v-model="threshold" type="number" class="form-control moodwSet1 " id="threshold" :placeholder=""><span class="percent">(%)</span>
 
 
                                 <!--<input type="text"  v-model="threshold" class="form-control moodwSet1 "  :placeholder="words.warningValue">-->
@@ -196,6 +196,13 @@
                 this.isAdvanced = isAdvanced;
             },
             create(){
+                this.errorTip = false;
+                this.successTip = false;
+                if(parseInt(this.threshold)<0 || parseInt(this.threshold)>100){
+                    this.errorTip = true;
+                    this.errorTip='只能输入0-100的整数';
+                    return false;
+                }
                 switch(this.$route.name){
                     case "settingAdd":
                         this.createSubmit();
@@ -206,6 +213,7 @@
                     default:
                         break;
                 }
+
             },
             updateSubmit(){
 
@@ -360,12 +368,6 @@
                 });
                 if(this.$route.name == 'settingEdit'){
                     setTimeout(this.updateInit ,1000)
-                }
-            },
-            numberFilter(){
-                if(parseInt(this.threshold))
-                if(event.keyCode<48 ||event.keyCode>57){
-                    event.returnValue=false;
                 }
             }
         },
