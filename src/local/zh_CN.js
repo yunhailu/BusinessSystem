@@ -181,6 +181,7 @@ export const zh_CN = {
         web: "网页",
         overseas: "海外",
         happy: "满意",
+        source:"沃德品牌气象站",
         anger: "愤怒",
         sorrow: "失望",
         disgust: "反感",

@@ -38,6 +38,7 @@
                             <div class="detail">{{{item.content}}}</div>
                             <div class="time">发布于 {{item.pDate}}</div>
                             <div class="source">来源 {{item.from}} </div>
+                            <div class="waterPage">数据来源：{{common.source}}</div>
                         </div>
                     </div>
                     <div class="list-panel-list-item-right list-right">
