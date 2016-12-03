@@ -1,7 +1,7 @@
 <template>
     <footer class="footer">
-        <p>{{coppy}}<span>{{phone}}</span> </p><br>
-        <p>沃民高新科技（北京）股份有限公司、工信部电子科技情报所网络舆情研究中心、中国消费者报联合开发</p>
+        <p>{{footer.coppy}}<span>{{footer.phone}}</span> </p><br>
+        <p>{{footer.cooperation}}</p>
     </footer>
 </template>
 <style lang="less">
@@ -11,10 +11,11 @@
     import Local from "../../local/local";
     export default{
         data(){
-
+            const footer=Local().footer;
             return{
-                coppy:'京ICP备14046778号-5 沃民高新科技（北京）股份有限公司提供技术支持  ',
-                phone:'联系电话：010-88315473 '
+                footer
+                /*coppy:'京ICP备14046778号-5 沃民高新科技（北京）股份有限公司提供技术支持  ',
+                phone:'联系电话：010-88315473 '*/
             }
         }
     }

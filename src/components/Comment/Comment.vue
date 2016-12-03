@@ -34,7 +34,7 @@
                 loadingParams: {
                     visiable: false,
                     type: 'loading',
-                    content: "请稍侯......"
+                    content: common.waitWords
                 },
                 selectTitle: Local().common.sortBy,
                 //list: list.time,

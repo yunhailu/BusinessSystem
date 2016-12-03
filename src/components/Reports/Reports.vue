@@ -12,7 +12,7 @@
                     <tr>
                         <td><i class="fa fa-fire"></i> <span>{{words.reportTitle}}</span></td>
                         <td><i class="fa fa-smile-o"></i> {{words.sentiment}}</td>
-                        <td><i class="fa fa-bell-o"></i> <span>{{words.trigger}}</span></td>
+                        <td><i class="fa fa-bell-o"></i> <span>{{words.trigger}}(%)</span></td>
                         <td><i class="fa fa-exchange"></i> <span>{{words.lastChange}}</span></td>
                         <!--<td><i class="fa fa-tags"></i> {{words.lastSent}}</td>-->
                         <td><i class="fa fa-edit"></i> {{words.actions}}</td>

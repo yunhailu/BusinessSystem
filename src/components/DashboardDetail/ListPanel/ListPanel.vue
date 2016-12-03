@@ -36,20 +36,22 @@
                         <div class="list-panel-list-item-left-con">
                             <div class="title">{{{item.title}}}</div>
                             <div class="detail">{{{item.content}}}</div>
-                            <div class="time">发布于 {{item.pDate}}</div>
-                            <div class="source">来源 {{item.from}} </div>
+                            <div class="time">{{common.publish}} {{item.pDate}}</div>
+                            <div class="source">{{common.sourceFrom}} {{item.from}} </div>
+                            <div class="sub-source">{{common.sub_source}} {{item.sub_source}}</div>
+                            <div class="waterPage">{{common.dataFrom}}：{{common.source}}</div>
                         </div>
                     </div>
                     <div class="list-panel-list-item-right list-right">
                         <i class="fa fa-flag icon" :class="item.sentiment | sentiment"></i>
                         <div class="item-data">
                             <div class="row">
-                                <div class="title">匹配</div>
+                                <div class="title">{{common.match}}</div>
                                 <!--<div class="time">{{activeAnalyticsTopic.topic_name}}</div>-->
                                 <div class="time">{{topicName}}</div>
                             </div>
                             <div class="row">
-                                <div class="title">指标</div>
+                                <div class="title">{{common.target}}</div>
                                 <div class="time">
                                     <div class="item" v-if="item.likeCount" ><i class="fa fa-thumbs-up"></i> <span>{{item.likeCount}}</span></div>
                                     <div class="item" v-if="item.fansCount"><i class="fa fa-user"></i> <span>{{item.fansCount}}</span></div>
