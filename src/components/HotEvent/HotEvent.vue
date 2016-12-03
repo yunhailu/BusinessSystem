@@ -1,9 +1,12 @@
 <template>
-    <div class="hot-panel">
+
+    <div v-show="showRow" class="container">
+    <div  class="hot-panel">
         <!--热点事件散点图-->
         <div class="row">
             <div class="col-md-12 hot-river">
                 <card-panel :title="words.hotsRiver" >
+                    <a class="fullpage pull-right" href='Javascript: void(0)' v-on:click="getFull(false)"><i class="fa fa-expand"></i> 全屏</a>
                     <div v-echarts="graphChartOption" :loading="graphChartLoading" class="hot-river-scatter" theme="" :img.sync="img"></div>
                 </card-panel>
             </div>
@@ -45,15 +48,17 @@
             </div>
 
         </div>
-        <!--热点事件,散点图-->
-        <!--<div class="row">
-            <div class="col-md-12 hot-river">
-                <card-panel :title="words.hotsRiver">
-                    <div v-echarts="scatterOption" :loading="scatterLoading" class="hot-river-scatter" theme="" :img.sync="img"></div>
-                </card-panel>
-            </div>
-        </div>-->
     </div>
+    </div>
+
+        <div v-show="!showRow" v-bind:style="{height:sheight +'px'}" class="bg">
+            <card-panel :title="words.hotsRiver" >
+                <a class="fullpage pull-right" href='Javascript: void(0)' v-on:click="getFull(true)"><i class="fa fa-compress"></i>返回</a>
+                <div  v-bind:style="{height:sheightin +'px'}" v-echarts="graphChartOption" :loading="graphChartLoading" class="hot-river-scatter" theme="" :img.sync="img"></div>
+            </card-panel>
+        </div>
+
+
 
 
 </template>
@@ -81,7 +86,10 @@
                 },
                 source:"实时",
                 hot:'',
+                sheight:800,
+                sheightin:700,
                 // 热点情绪占比
+                showRow:true,
                 sentimentOption: {
                     title: _.extend({}, Pie.title, { show: false}),
                     tooltip: _.extend({}, Pie.tooltip),
@@ -256,6 +264,18 @@
             }
         },
         methods: {
+            getFull(boot){
+                this.sheight= 0.8*window.screen.availHeight;
+                this.sheightin= 0.75*window.screen.availHeight;
+                this.showRow=boot;
+                this.getRealList();
+                this.getTodayList();
+                this.getHotRealtime();
+                this.graphchart();
+                console.log('fullpages');
+
+
+            },
             getHotRealtime(){
                 return Api.getHotRealtime({}).then(resp => {
                     console.log('getHotRealtime', resp.data);
@@ -410,6 +430,7 @@
                     console.log('resp',resp);
                     if(resp.data.code ==0){
                         this.hotsRanking =_.keys(resp.data.data);
+
                         this.popHotsRanking =_.map(this.hotsRanking,val =>{
                             if(val.length>30){
                                 val =val.substring(0,30)+'...';

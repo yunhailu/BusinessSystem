@@ -1,13 +1,17 @@
 <template>
+
+    <div v-show="showRow" class="container">
     <div class="hot-panel">
         <!--热点事件散点图-->
         <div class="row row-hot-river">
             <div class="col-md-12 hot-river">
                 <card-panel :title="words.allNetHotsRiver" >
+                    <a class="fullpage0 pull-right" href='Javascript: void(0)' v-on:click="getFull(false)"><i class="fa fa-expand"></i> 全屏</a>
                     <div v-echarts="graphChartOption" :loading="graphChartLoading" class="hot-river-scatter" theme="" :img.sync="img"></div>
                 </card-panel>
             </div>
         </div>
+
         <!--热点事件排行，实时热点排行-->
         <div class="row">
             <div class="col-md-6 hot-today">
@@ -54,6 +58,14 @@
             </div>
         </div>-->
     </div>
+    </div>
+
+    <div v-show="!showRow" v-bind:style="{height:sheight +'px'}" class="bg1">
+
+            <a class="fullpage1 pull-right" href='Javascript: void(0)' v-on:click="getFull(true)"><i class="fa fa-compress"></i>返回</a>
+            <div  v-bind:style="{height:sheightin +'px'}" v-echarts="graphChartOption" :loading="graphChartLoading" class="hot-river-scatter" theme="" :img.sync="img"></div>
+
+    </div>
 
 
 </template>
@@ -80,6 +92,9 @@
                     value: ""
                 },
                 source:"实时",
+                sheight:800,
+                sheightin:700,
+                showRow:true,
                 hot:'',
                 // 热点情绪占比
                 sentimentOption: {
@@ -256,6 +271,18 @@
             }
         },
         methods: {
+            getFull(boot){
+                this.sheight= window.screen.availHeight*0.8;
+                this.sheightin= window.screen.availHeight*0.8;
+                this.showRow=boot;
+                this.getRealList();
+                this.getTodayList();
+                this.getHotRealtime();
+                this.graphchart();
+                console.log('fullpages');
+
+
+            },
             getHotRealtime(){
                 return Api.getHotRealtime({}).then(resp => {
                     console.log('getHotRealtime', resp.data);
@@ -415,10 +442,18 @@
                                 val =val.substring(0,30)+'...';
                             }
                             return val;
-                        })
-                        this.hotsRankings =_.each(_.toArray( _.object(_.pairs(resp.data.data))),(value,key)=>{
+                        });
+
+                        const wwwwj =_.each(_.toArray( _.object(_.pairs(resp.data.data))),(value,key)=>{
                             return value.title = (this.hotsRanking)[key];
                         });
+                        this.hotsRankings=wwwwj;
+//
+//                            const uj=_.filter(wwwwj,function(index){ return index<5});
+//
+//                            console.log('sdaswanglipeng :',wwwwj);
+//                            console.log('sdaswanglipeng :',uj);
+
                         console.log('this.hotsRankings',this.hotsRankings);
                         console.log('this.hotsRanking',this.hotsRanking);
                         this.graphchart();
@@ -455,6 +490,7 @@
                 return `${title} (${source}:${hot} )`;
 
             }
+
         },
         created(){
             this.getRealList();
