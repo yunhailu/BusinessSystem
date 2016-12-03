@@ -30,8 +30,10 @@
     @import "Header.less";
 </style>
 <script type="text/ecmascript-6">
+    import _ from 'underscore';
     import Cookie from "js-cookie";
     import Local from "../../local/local";
+    import { WhiteList } from "../../config/config";
     import { getCookie } from '../../widgets/Cookie';
     import {loginTime} from '../../vuex/getters';
     import {setLoginTime} from '../../vuex/actions';
@@ -82,15 +84,16 @@
         },
         methods: {
             quit(){
-                if(getCookie('business_name')=="demo03"){
-                    Cookie.remove('business_uid');
-                    Cookie.remove('bussiness_name');
-                    this.$router.go({name: "ccsi"});
-                }else{
-                    Cookie.remove('business_uid');
-                    Cookie.remove('bussiness_name');
-                    this.$router.go({name: "login"});
+                const business_name = getCookie('business_name');
+                Cookie.remove('business_uid');
+                Cookie.remove('bussiness_name');
+                const whiteName = _.filter(WhiteList, item => (item.name == business_name));
+                let name = 'login';
+                if(whiteName.length){
+                    name = whiteName[0].link;
                 }
+                this.$router.go({ name });
+                location.reload();
             },
             initData(){
                 this.nickName = getCookie('business_name');

@@ -82,7 +82,7 @@
                 loadingParams: {
                     visiable: false,
                     type: 'loading',
-                    content: "请稍后......"
+                    content: "请稍候......"
                 }
             }
         },

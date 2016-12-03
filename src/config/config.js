@@ -2,9 +2,13 @@
  * Created by yunhailu on 2016/8/9.
  */
 
+/**
+ * 白名单列表
+ * link: 本网站的路由地址, name: 路由渲染组件名, domain: 第三方网站
+ * */
 export const WhiteList = [{
     link: 'ccsi',
-    name: 'ccsi',
+    name: 'demo03',
     domain: 'http://vipccsi.ccn.com.cn'
 }];
 
