@@ -164,6 +164,7 @@
                     rePassword: "",
                     phone: "",
                     email: "",
+                    key: "",
                     avatar: "",
                     tip: ""
                 }
@@ -186,8 +187,9 @@
                 console.log('modifySubmit', this.mine);
             },
             createSubmit(){
-                console.log('createSubmit', this.addUser, this.file.key);
-
+                console.log('createSubmit', this.addUser);
+                const params = _.pick(this.addUser, 'username', 'password', 'phone', 'key', 'email');
+                console.log('params' , params);
             },
             resetMine(){
                 this.mine = {
@@ -241,7 +243,8 @@
                                     const sourceLink = domain + res.key; //获取上传成功后的文件的Url
                                     console.log(sourceLink);
                                     _this.user_avatar = sourceLink;
-                                    _this.key = res.key;
+                                    _this.file.key = res.key;
+                                    _this.addUser.key = res.key;
                                     _this.file.isSuccess = true;
                                     _this.file.isFailed = false;
                                 },
