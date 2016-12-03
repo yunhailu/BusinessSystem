@@ -20,7 +20,7 @@
                     <fieldset>
                         <legend>
                             <img class="logo-icon" src="images/logo.jpg" />
-                            <span>品牌气象站</span>
+                            <span>沃德品牌气象站</span>
                         </legend>
                         <div class="form-group">
                             <label for="inputEmail3" class="col-sm-2 control-label login-font">用户名</label>

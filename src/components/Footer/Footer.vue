@@ -1,5 +1,8 @@
 <template>
-    <footer class="footer"> <p>{{coppy}}<span>{{phone}}</span> </p></footer>
+    <footer class="footer">
+        <p>{{coppy}}<span>{{phone}}</span> </p><br>
+        <p>沃民高新科技（北京）股份有限公司、工信部电子科技情报所网络舆情研究中心、中国消费者报联合开发</p>
+    </footer>
 </template>
 <style lang="less">
     @import "Footer.less";

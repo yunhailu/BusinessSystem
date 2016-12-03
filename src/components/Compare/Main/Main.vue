@@ -33,7 +33,7 @@
                 loadingParams:{
                     visiable:false,
                     type:'loading',
-                    content:'请稍后'
+                    content:'请稍侯'
                 },
                 data:[],
                 VariableChartData:{
@@ -126,7 +126,7 @@
                             rotation: Math.PI / 4,
                             style: {
                                 fill: '#fff',
-                                text: '品牌气象站',
+                                text: '沃德品牌气象站',
                                 font: 'bold 34px Microsoft YaHei'
                             }
                         }
@@ -154,7 +154,7 @@
                             rotation: Math.PI / 4,
                             style: {
                                 fill: '#fff',
-                                text: '品牌气象站',
+                                text: '沃德品牌气象站',
                                 font: 'bold 34px Microsoft YaHei'
                             }
                         }
@@ -218,7 +218,7 @@
                             rotation: Math.PI / 4,
                             style: {
                                 fill: '#fff',
-                                text: '品牌气象站',
+                                text: '沃德品牌气象站',
                                 font: 'bold 34px Microsoft YaHei'
                             }
                         }

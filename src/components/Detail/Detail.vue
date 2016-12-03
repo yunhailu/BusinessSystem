@@ -128,7 +128,7 @@
                             rotation: Math.PI / 4,
                             style: {
                                 fill: 'rgba(20,20,20,0.05)',
-                                text: '品牌气象站',
+                                text: '沃德品牌气象站',
                                 font: ' 100px Microsoft YaHei'
                             }
                         }
@@ -203,7 +203,7 @@
                             rotation: Math.PI / 4,
                             style: {
                                 fill: 'rgba(20,20,20,0.05)',
-                                text: '品牌气象站',
+                                text: '沃德品牌气象站',
                                 font: ' 40px Microsoft YaHei'
                             }
                         }
@@ -252,7 +252,7 @@
                             rotation: Math.PI / 4,
                             style: {
                                 fill: 'rgba(20,20,20,0.05)',
-                                text: '品牌气象站',
+                                text: '沃德品牌气象站',
                                 font: ' 40px Microsoft YaHei'
                             }
                         }
