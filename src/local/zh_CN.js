@@ -78,7 +78,8 @@ export const zh_CN = {
         close: "关闭"
     },
     theme: {
-        topics: "话题排行"
+        topics: "话题排行",
+        ranking:"排名变化"
     },
     detail: {
         article: "层级转发关系",
@@ -187,6 +188,7 @@ export const zh_CN = {
         disgust: "反感",
         fear: "害怕",
         nullTip: "数据为空",
-        loadingTip: "等待加载..."
+        loadingTip: "等待加载...",
+        waitWords:"请稍侯......"
     }
 };

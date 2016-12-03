@@ -119,20 +119,7 @@
                     animationEasingUpdate: 'cubicOut',
                     animationEasing: 'cubicOut',
 
-                    graphic:[
-                        {
-                            type: 'text',
-                            z: -10,
-                            left: 'center', // 相对父元素居中
-                            top: 'middle',  // 相对父元素居中
-                            rotation: Math.PI / 4,
-                            style: {
-                                fill: 'rgba(20,20,20,0.05)',
-                                text: '沃德品牌气象站',
-                                font: ' 100px Microsoft YaHei'
-                            }
-                        }
-                    ],
+                    graphic:Chart.graphic,
                     series: [
                         {
                             color:["#bc3c3c","#efbf09","#eae521","#3fea21","#21ead9","#214bea","#9521ea","#ea21d9"],
@@ -194,20 +181,7 @@
                     }),
                     progressive: 4,
                     textStyle: Chart.textStyle,
-                    graphic:[
-                        {
-                            type: 'text',
-                            z: -10,
-                            left: 'center', // 相对父元素居中
-                            top: 'middle',  // 相对父元素居中
-                            rotation: Math.PI / 4,
-                            style: {
-                                fill: 'rgba(20,20,20,0.05)',
-                                text: '沃德品牌气象站',
-                                font: ' 40px Microsoft YaHei'
-                            }
-                        }
-                    ],
+                    graphic:Chart.graphic,
                     series: [{
                         name: "数量",
                         type: 'line',
@@ -243,20 +217,7 @@
                     }),
                     progressive: 4,
                     textStyle: Chart.textStyle,
-                    graphic:[
-                        {
-                            type: 'text',
-                            z: -10,
-                            left: 'center', // 相对父元素居中
-                            top: 'middle',  // 相对父元素居中
-                            rotation: Math.PI / 4,
-                            style: {
-                                fill: 'rgba(20,20,20,0.05)',
-                                text: '沃德品牌气象站',
-                                font: ' 40px Microsoft YaHei'
-                            }
-                        }
-                    ],
+                    graphic:Chart.graphic,
                     series: [{
                         barWidth:25,
                         name: "数量",

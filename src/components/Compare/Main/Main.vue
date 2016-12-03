@@ -78,59 +78,7 @@
                     }),
                     progressive: 4,
                     textStyle: Chart.textStyle,
-                    graphic:[
-//                        {
-//                            type: 'group',
-//                            left: 0,
-//                            top: 0,
-//                            children: [
-//                                {
-//                                    type: 'rect',
-//                                    z: 100,
-//                                    left: 'center',
-//                                    top: 'middle',
-//                                    shape: {
-//                                        width: 100,
-//                                        height: 40
-//                                    },
-//                                    style: {
-//                                        fill: '#fff',
-//                                        stroke: '#bbb',
-//                                        lineWidth: 2,
-//                                        shadowBlur: 8,
-//                                        shadowOffsetX: 3,
-//                                        shadowOffsetY: 3,
-//                                        shadowColor: 'rgba(0,0,0,0.3)'
-//                                    }
-//                                },
-//                                {
-//                                    type: 'text',
-//                                    z: 100,
-//                                    left: 'center',
-//                                    top: 'middle',
-//                                    style: {
-//                                        fill: '#777',
-//                                        text: [
-//                                           '关键词可多选'
-//                                        ].join('\n'),
-//                                        font: '14px Microsoft YaHei'
-//                                    }
-//                                }
-//                            ]
-//                        },
-                        {
-                            type: 'text',
-                            z: -10,
-                            left: 'center', // 相对父元素居中
-                            top: 'middle',  // 相对父元素居中
-                            rotation: Math.PI / 4,
-                            style: {
-                                fill: '#fff',
-                                text: '沃德品牌气象站',
-                                font: 'bold 34px Microsoft YaHei'
-                            }
-                        }
-                ],
+                    graphic:Chart.graphic,
                     series : []
                 },
 
@@ -145,20 +93,7 @@
                     textStyle: Pie.textStyle,
                     toolbox: Pie.toolbox,
                     color: _.extend([], Chart.color),
-                    graphic:[
-                        {
-                            type: 'text',
-                            z: -10,
-                            left: 'center', // 相对父元素居中
-                            top: 'middle',  // 相对父元素居中
-                            rotation: Math.PI / 4,
-                            style: {
-                                fill: '#fff',
-                                text: '沃德品牌气象站',
-                                font: 'bold 34px Microsoft YaHei'
-                            }
-                        }
-                    ],
+                    graphic:Pie.graphic,
                     series: _.extend({}, Pie.series, {
                         name: 'Compare',
                         radius: ['25%', '60%'],
@@ -209,20 +144,7 @@
                             }
                         }
                     },
-                    graphic:[
-                        {
-                            type: 'text',
-                            z: -10,
-                            left: 'center', // 相对父元素居中
-                            top: 'middle',  // 相对父元素居中
-                            rotation: Math.PI / 4,
-                            style: {
-                                fill: '#fff',
-                                text: '沃德品牌气象站',
-                                font: 'bold 34px Microsoft YaHei'
-                            }
-                        }
-                    ],
+                    graphic:Chart.graphic,
                     series: []
                 },
                 compareNums:[]

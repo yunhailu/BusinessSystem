@@ -13,50 +13,6 @@
                 <li  v-if="false"><a href="javascript:void(0);" @click="toPromotion">首页</a></li>
             </ul>
         </div>
-        <!--<div class="container">
-
-            <div class="login-page">
-                <form class="form-horizontal" v-on:submit.prevent>
-                    <fieldset>
-                        <legend>
-                            <img class="logo-icon" src="images/logo.jpg" />
-                            <span>沃德品牌气象站</span>
-                        </legend>
-                        <div class="form-group">
-                            <label for="inputEmail3" class="col-sm-2 control-label login-font">用户名</label>
-                            <div class="col-sm-4">
-                                <input type="text" v-model="userName" class="form-control" id="inputEmail3" placeholder="UserName">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="inputPassword3" class="col-sm-2 control-label login-font">密码</label>
-                            <div class="col-sm-4">
-                                <input type="password" v-model="password" class="form-control" id="inputPassword3" placeholder="Password">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-sm-offset-2 col-sm-10 login-font">
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox"> 记住密码
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group" v-show="errorTip">
-                            <div class="col-sm-offset-2 col-sm-10 errorTip">
-                                <label>{{errorTip}}</label>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-sm-offset-2 col-sm-10">
-                                <button type="submit" class="btn btn-primary" @click="login">登录系统</button>
-                            </div>
-                        </div>
-                    </fieldset>
-                </form>
-            </div>
-        </div>-->
         <footer-component></footer-component>
         <div class="apply-bg" v-show="isApply" @click="cancelApply">
             <div class="apply-bg-content" @click.stop>

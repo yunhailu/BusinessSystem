@@ -1,7 +1,7 @@
 /**
  * Created by yunhailu on 2016/8/9.
  */
-
+import Local from "../local/local";
 /**
  * 白名单列表
  * link: 本网站的路由地址, name: 路由渲染组件名, domain: 第三方网站
@@ -35,6 +35,20 @@ export const Pie = {
     textStyle: {
         fontFamily: 'pingfang'
     },
+    graphic:[
+        {
+            type: 'text',
+            z: -10,
+            left: 'center', // 相对父元素居中
+            top: 'middle',  // 相对父元素居中
+            rotation: Math.PI / 4,
+            style: {
+                fill: '#eee',
+                text: Local().common.source,
+                font: 'bold 34px Microsoft YaHei'
+            }
+        }
+    ],
     series: {
         name:'pie',
         type:'pie',
@@ -93,6 +107,20 @@ export const Chart = {
             }
         }
     },
+    graphic:[
+        {
+            type: 'text',
+            z: -10,
+            left: 'center', // 相对父元素居中
+            top: 'middle',  // 相对父元素居中
+            rotation: Math.PI / 4,
+            style: {
+                fill: '#eee',
+                text:Local().common.source,
+                font: 'bold 34px Microsoft YaHei'
+            }
+        }
+    ],
     yAxis: {
         axisLine: {
             lineStyle: {

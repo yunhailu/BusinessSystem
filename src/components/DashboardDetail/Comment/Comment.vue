@@ -116,20 +116,7 @@
                     }),
                     progressive: 4,
                     textStyle: Chart.textStyle,
-                    graphic:[
-                        {
-                            type: 'text',
-                            z: -10,
-                            left: 'center', // 相对父元素居中
-                            top: 'middle',  // 相对父元素居中
-                            rotation: Math.PI / 4,
-                            style: {
-                                fill: '#eee',
-                                text: '沃德品牌气象站',
-                                font: 'bold 34px Microsoft YaHei'
-                            }
-                        }
-                    ],
+                    graphic:Chart.graphic,
                     series : [
                         { name: words.positive,
                             type: 'line',
@@ -162,20 +149,7 @@
                     color:['#2FCC71','#E64D3D', '#F1C40F', '#3598DC', '#737373'],
                     textStyle: Pie.textStyle,
                     toolbox: Pie.toolbox,
-			        graphic:[
-                        {
-                            type: 'text',
-                            z: -10,
-                            left: 'center', // 相对父元素居中
-                            top: 'middle',  // 相对父元素居中
-                            rotation: Math.PI / 4,
-                            style: {
-                                fill: '#eee',
-                                text: '沃德品牌气象站',
-                                font: 'bold 34px Microsoft YaHei'
-                            }
-                        }
-                    ],
+			        graphic:Pie.graphic,
                     series: [
 
                         {
@@ -227,20 +201,7 @@
                     textStyle: Pie.textStyle,
                     toolbox: Pie.toolbox,
                     color: ['#2FCC71','#E64D3D', '#F1C40F', '#3598DC', '#737373'],
-                    graphic:[
-                        {
-                            type: 'text',
-                            z: -10,
-                            left: 'center', // 相对父元素居中
-                            top: 'middle',  // 相对父元素居中
-                            rotation: Math.PI / 4,
-                            style: {
-                                fill: '#eee',
-                                text: '沃德品牌气象站',
-                                font: 'bold 34px Microsoft YaHei'
-                            }
-                        }
-                    ],
+                    graphic:Pie.graphic,
                     series: _.extend({}, Pie.series, {
                         radius: ['20%', '50%'],
                         name: words.comment,
@@ -303,20 +264,7 @@
                     textStyle: Pie.textStyle,
                     toolbox: Pie.toolbox,
                     color: _.extend([], Chart.color),
-                    graphic:[
-                        {
-                            type: 'text',
-                            z: -10,
-                            left: 'center', // 相对父元素居中
-                            top: 'middle',  // 相对父元素居中
-                            rotation: Math.PI / 4,
-                            style: {
-                                fill: '#eee',
-                                text: '沃德品牌气象站',
-                                font: 'bold 34px Microsoft YaHei'
-                            }
-                        }
-                    ],
+                    graphic:Chart.graphic,
                     series: _.extend({}, Pie.series, {
                         radius: ['40%', '85%'],
                         name: words.comment,
