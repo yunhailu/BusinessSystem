@@ -1,6 +1,6 @@
 <template>
-    <header-component active="analytics"></header-component>
-        <div class="container">
+    <header-component  v-show="showRow" active="analytics"></header-component>
+        <div v-show="showRow"  class="container animated bouncelnDown">
             <br>
             <div class="row">
                 <div class="col-md-8 detail-content">
@@ -27,14 +27,15 @@
                 </div>
             </div>
 <br>
-            <div class="row">
-                <div class="col-md-12 detail-chart">
+            <div  class="row">
+                <div  class="col-md-12 detail-chart">
                     <card-panel :title="words.shareChart" >
+                        <a class="fullpage pull-right" href='Javascript: void(0)' v-on:click="getFull(false)"><i class="fa fa-expand"></i>全屏</a>
                         <a class="showinfo pull-right" href='Javascript: void(0)' v-on:click="showinfonode()">{{dispalayinfo}}</a>
-                        <div class="chart" v-echarts="graphChartOption" :click="graphChartAction"  :loading="graphChartLoading" theme="infographic"></div>
+                        <div   class="chart" v-echarts="graphChartOption" :click="graphChartAction"  :loading="graphChartLoading" theme="infographic"></div>
                     </card-panel>
                 </div>
-                <div class="col-md-6 detail-article">
+                <div  class="col-md-6 detail-article">
                     <card-panel :title="words.article" >
                         <!--<ul class="detail-article-list">-->
                             <!--<li class="detail-article-list-item" v-for="acticle in acticles">-->
@@ -54,6 +55,21 @@
             </div>
 
         </div>
+
+
+    <!--//全屏的-->
+
+    <div v-show="!showRow" class="row animated bounceInLeft bg">
+        <div  class="col-md-12 detail-chart">
+            <card-panel :title="words.shareChart" >
+                <a class="fullpage pull-right" href='Javascript: void(0)' v-on:click="getFull(true)"><i class="fa fa-compress"></i>返回</a>
+                <a class="showinfo pull-right" href='Javascript: void(0)' v-on:click="showinfonode()">{{dispalayinfo}}</a>
+                <div   class="chart" v-echarts="graphChartOption" :click="graphChartAction"  :loading="graphChartLoading" theme="infographic"></div>
+            </card-panel>
+        </div>
+
+
+
     </div>
 </template>
 <style lang="less" scoped>
@@ -73,6 +89,8 @@
             const words = Local().detail;
             return {
 
+                showRow:true,
+                fullpage:'',
                 dispalayinfo:'显示用户信息',
                 words,
                 control:false,
@@ -92,7 +110,6 @@
                     home:""
                 },
 
-
                 graphChartLoading: true,
                 graphChartOption: {
                     title: {
@@ -105,6 +122,7 @@
                         top:0,
                         left: 'right'
                     },
+
                     tooltip: {
 
                         formatter: '{b}'
@@ -115,7 +133,8 @@
                         top:23,
                         width: 120
                     },
-                    animationDuration: 10,
+
+                    animationDuration: 1000,
                     animationEasingUpdate: 'cubicOut',
                     animationEasing: 'cubicOut',
 
@@ -135,12 +154,13 @@
                     ],
                     series: [
                         {
+                            animationDelay:2000,
                             color:["#bc3c3c","#efbf09","#eae521","#3fea21","#21ead9","#214bea","#9521ea","#ea21d9"],
                             name: '传播路径',
                             type: 'graph',
                             layout: 'force',
                             force: {
-                                repulsion: 150,
+                                repulsion: 100,
                                 gravity: 0.2,
                                 layoutAnimation:true,
                             },
@@ -276,6 +296,15 @@
             },*/
             //单击事件
 
+            getFull(boot){
+
+                this.showRow=boot;
+                this.getArticleForward();
+                console.log('fullpages');
+
+
+            },
+
             graphChartAction(params){
                window.open(params.data.link);
                 console.log(params);
@@ -328,7 +357,7 @@
                         const newDateS = _.map(firstdata, (item)=> {
                            // item.name=item.id;
                             item.category = item.level;
-                            item.symbolSize = 25;
+                            item.symbolSize = 20;
                             item.itemStyle = "null";
                             item.attributes = nodestyle1;
                             item.label = nodestyle0;
@@ -386,7 +415,6 @@
                         this.timeclevelOption.series[0].data = filterCountx;
                         this.timelineOption.xAxis.data = newDate1;
 
-                        console.log('maytyyyyyyyyyyy--',resp.data.data.forward);
                         //this.acticles = resp.data.data;
 
 

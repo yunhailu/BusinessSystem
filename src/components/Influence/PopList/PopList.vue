@@ -46,7 +46,7 @@
                // this.$router.go({ name: 'detail', params: { type: 'influence', id: pop.id } });
 
                 console.log('pop-data:',pop);
-                if(pop.id!=null){ window.open(window.location.origin+"/#!/"+this.$route.name+"/detail/"+pop.id);}
+                if(pop.id!=null){ window.open(window.location.origin+"/"+this.$route.name+"/detail/"+pop.id);}
                 else{ window.open(pop.url); }
 
 
