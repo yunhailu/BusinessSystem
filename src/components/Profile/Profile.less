@@ -10,6 +10,7 @@
     .pd(20px 10px);
     .selectEl{ .h(28px); }
     &-avatar{
+      .pa();  .right(0);
       .float-right();
       .w(30%);  .h(auto);
       &-wrap{
@@ -21,7 +22,10 @@
           .b(1px solid #dedede);
         }
       }
-      &-btn{ .pd(10px 0); }
+      &-btn{
+        .pd(10px 0);
+        #uploadBtn{ .mg(0 14px); }
+      }
     }
   }
   .tips{
