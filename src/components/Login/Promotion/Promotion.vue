@@ -74,7 +74,7 @@
     export default {
         name: 'awesome',
         data() {
-            const login = Local().local;
+            const login = Local().login;
             return {
                 login,
                 swiperOption: {
