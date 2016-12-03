@@ -2,24 +2,24 @@
     <div class="wrapper">
         <div class="login-header">
             <div>
-                   <span class="zh">中国消费者情绪指数</span>
-                   <span class="en">CCSI    China Consumer Sentiment Index</span>
+                   <span class="zh">{{loginStr.forCcsiTitle}}</span>
+                   <span class="en">{{loginStr.forCcsiTitleE}}</span>
             </div>
             <ul>
-                <li v-if="false"><a href="javascript:void(0);" @click="toIntruction">使用说明</a></li>
-                <li v-if="false"><a href="javascript:void(0);">品牌表现</a></li>
-                <li><a href="javascript:void(0);" @click="showLogin">登录</a></li>
-                <li  v-show="false"><a href="javascript:void(0);" @click="showApply">申请试用</a></li>
-                <li  v-if="false"><a href="javascript:void(0);" @click="toPromotion">首页</a></li>
+                <li v-if="false"><a href="javascript:void(0);" @click="toIntruction">{{loginStr.instructionForUse}}</a></li>
+                <li v-if="false"><a href="javascript:void(0);">{{loginStr.showBrand}}</a></li>
+                <li><a href="javascript:void(0);" @click="showLogin">{{loginStr.forLogin}}</a></li>
+                <li  v-show="false"><a href="javascript:void(0);" @click="showApply">{{loginStr.applyForUse}}</a></li>
+                <li  v-if="false"><a href="javascript:void(0);" @click="toPromotion">{{loginStr.forFirstPage}}</a></li>
             </ul>
         </div>
         <footer-component></footer-component>
-        <div class="apply-bg" v-show="isApply" @click="cancelApply">
+        <!--<div class="apply-bg" v-show="isApply" @click="cancelApply">
             <div class="apply-bg-content" @click.stop>
                 <div class="apply-bg-content-model" @keyup.enter="submit" >
                     <h3>
-                        <span>申请试用</span>
-                        <a href="javascript:void(0);" @click="toLogin">已有账号，请点此登陆</a>
+                        <span>{{loginStr.applyForUse}}</span>
+                        <a href="javascript:void(0);" @click="toLogin">{{applyStr.toLogin}}</a>
                     </h3>
                     <div class="applyCon">
                         <div class="form-group">
@@ -48,7 +48,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div>-->
         <div class="login-bg" v-show="isLogin" @click="cancelLogin">
             <div class="login-bg-content" @click.stop>
                 <div class="login-bg-content-model" @keyup.enter="login"  @keyup.8="isShowError">

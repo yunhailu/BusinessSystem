@@ -72,7 +72,7 @@
                                 <option  v-for="moodgroup in moodGroups" :id="moodgroup.id" :value="moodgroup.id" >{{moodgroup.name}}</option>
                             </select>
 
-                                <input v-model="threshold" type="text" class="form-control moodwSet1 " id="threshold" :placeholder="">
+                                <input v-model="threshold" type="number" min="0" max="100" class="form-control moodwSet1 " id="threshold" :placeholder=""><span class="percent">(%)</span>
 
 
                                 <!--<input type="text"  v-model="threshold" class="form-control moodwSet1 "  :placeholder="words.warningValue">-->
@@ -93,7 +93,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <div class="col-sm-offset-2 col-sm-10">
+                            <div class="col-sm-offset-3 col-sm-10">
                                 <button type="submit" class="btn btn-primary" @click.stop.prevent="create" >{{words.create}}</button>
                             </div>
                         </div>
@@ -360,6 +360,12 @@
                 });
                 if(this.$route.name == 'settingEdit'){
                     setTimeout(this.updateInit ,1000)
+                }
+            },
+            numberFilter(){
+                if(parseInt(this.threshold))
+                if(event.keyCode<48 ||event.keyCode>57){
+                    event.returnValue=false;
                 }
             }
         },

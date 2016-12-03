@@ -33,7 +33,7 @@
                 loadingParams:{
                     visiable:false,
                     type:'loading',
-                    content:'请稍侯'
+                    content:common.waitWords
                 },
                 data:[],
                 VariableChartData:{

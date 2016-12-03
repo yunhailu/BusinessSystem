@@ -67,12 +67,14 @@
             }
         },
         data(){
+            const common = Local().common;
             return{
+                common,
                 isShowTools: false,
                 sourceActive: 0,
                 //list: list.time,
                 list: [],
-                options: [{key: 'time', value: '按时间排序'}, {key: 'browser', value: '浏览数排序'}, {key: 'star', value: '点赞数排序'}],
+                options: [{key: 'time', value:common.timeRanking}, {key: 'browser', value:common.countRanking}, {key: 'star', value:common.greetRanking}],
                 sortVal: "",
                 x: [],
                 topic_name:'',
@@ -85,7 +87,7 @@
                     overseas: []
                 },
                 words: Local().analytics,
-                selectTitle: Local().common.sortBy,
+                selectTitle: common.sortBy,
                 chartInstance: null,
                 resultChartLoading: true,
                 resultChartOption: {
@@ -122,7 +124,7 @@
                         //orient: 'vertical',
                         //x: 'bottom',
                         bottom: 0,
-                        data: ["微信", "微博", "客户端", "网页", "海外"]
+                        data: [common.wechat, common.weibo, common.client, common.web, common.overseas]
                     }),
                     textStyle: Pie.textStyle,
                     toolbox: Pie.toolbox,
@@ -186,11 +188,11 @@
                                     radius: '50%',
                                     center: ['50%', '50%'],
                                     data:[
-                                        {value: _.reduce(lineData.wechat, (mome, val) => mome + val, 0), name: "微信"},
-                                        {value: _.reduce(lineData.weibo, (mome, val) => mome + val, 0), name:"微博"},
-                                        {value: _.reduce(lineData.client, (mome, val) => mome + val, 0), name:"客户端"},
-                                        {value: _.reduce(lineData.web, (mome, val) => mome + val, 0), name:"网页"},
-                                        {value: _.reduce(lineData.overseas, (mome, val) => mome + val, 0), name:"海外"}
+                                        {value: _.reduce(lineData.wechat, (mome, val) => mome + val, 0), name:common.wechat},
+                                        {value: _.reduce(lineData.weibo, (mome, val) => mome + val, 0), name:common.weibo},
+                                        {value: _.reduce(lineData.client, (mome, val) => mome + val, 0), name:common.client},
+                                        {value: _.reduce(lineData.web, (mome, val) => mome + val, 0), name:common.web},
+                                        {value: _.reduce(lineData.overseas, (mome, val) => mome + val, 0), name:common.overseas}
                                     ]
                                 }
                             ]

@@ -3,14 +3,14 @@
         <div class="login-header">
             <div>
                 <img src="images/logo.png">
-                <span>互联网情报智能分析平台</span>
+                <span>{{loginStr.forWodeTitle}}</span>
             </div>
             <ul>
                 <!--<li v-if="false"><a href="javascript:void(0);" @click="toIntruction">使用说明</a></li>-->
-                <li><a href="javascript:void(0);" @click="toHotEvent">热点事件</a></li>
-                <li><a href="javascript:void(0);" @click="showLogin">登录</a></li>
+                <li><a href="javascript:void(0);" @click="toHotEvent">{{loginStr.hotEvent}}</a></li>
+                <li><a href="javascript:void(0);" @click="showLogin">{{loginStr.forLogin}}</a></li>
                 <!--<li  v-show="false"><a href="javascript:void(0);" @click="showApply">申请试用</a></li>-->
-                <li><a href="javascript:void(0);" @click="toPromotion">首页</a></li>
+                <li><a href="javascript:void(0);" @click="toPromotion">{{loginStr.forFirstPage}}</a></li>
             </ul>
         </div>
         <!--<div class="container">
