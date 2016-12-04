@@ -7,7 +7,7 @@
                 <img src="../images/login-ball-1.png">
             </div>
             <div class="navigation">
-                <h2>{{login.foConsume}}</h2>
+                <h2>{{login.forConsume}}</h2>
             </div>
             <div class="login-btn" v-show="false">
                 <a href="javascript:void(0);" @click="login">
