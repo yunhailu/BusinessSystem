@@ -1,9 +1,12 @@
 @import "../common.less";
 
 @card-height: 260px;
+@card-height2: 420px;
 
 .hot-panel{
-  .w(80%);margin: 0 auto;
+  .w(100%);margin: 0px auto;
+  .pd(80px 0px);
+
 //.row-hot-river{min-height: 100%};
   .row{ .mg-top(20px); }
 
@@ -15,11 +18,11 @@
 
   .hot-sentiment{
     .h(@card-height);
-    &-pie{  .w(100%);  .h(100%);  }
+    &-pie{.w(100%);  .h(100%);  }
   }
 
   .hot-ranking{
-    .h(@card-height);
+    .h(@card-height2);
     &-list{
       &-item{
         .lh(14px);  .pd(15px 0 0);  .pointer();
@@ -35,7 +38,7 @@
   }
 
   .hot-today{
-    .h(@card-height);
+    .h(@card-height2);
     &-list{
       &-item{
         .lh(14px);  .pd(15px 0 0);  .pointer();
@@ -45,3 +48,20 @@
     }
   }
 }
+
+.fullpage0{
+  i{.f(12px); }
+  .mg-top(-27px); .float-right(); .disB();}
+.fullpage1{
+  .pa();
+  .z(100000);
+  .right(10px);
+  i{.f(12px); }
+  .mg-top(5px);.mg-right(5px); .float-right(); .disB();}
+
+.bg{
+  .mg(0px);
+  .h(100%); .w(100%);}
+.bg1{
+  .pd-top(80px);
+  .h(100%); .w(100%);  }

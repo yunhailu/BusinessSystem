@@ -1,6 +1,6 @@
 <template>
     <footer class="footer1">
-        <p>{{footer.coppy}}<span>{{footer.phone}}</span> </p><br>
+        <p>{{footer.coppy}}</p><br>
         <p>{{footer.cooperation}}</p>
     </footer>
 </template>

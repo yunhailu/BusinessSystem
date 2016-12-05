@@ -72,9 +72,9 @@
     import Local from "../../../local/local";
 
     export default {
-        name: 'awesome',
+
         data() {
-            const login = Local().local;
+            const login = Local().login;
             return {
                 login,
                 swiperOption: {
@@ -113,13 +113,17 @@
         },
         methods:{
             login(){
-               this.setLoginState(true);
+
+                this.setLoginState(true);
+
             }
         },
+
         mounted() {
             // you can use current swiper object to do something(swiper methods)
             console.log(this.islogin);
-            console.log('this is current swiper object', this.swiper)
+            console.log('this is current swiper object', this.swiper);
+
             this.swiper.slideTo(0, 1500, false)
         },
         components: {

@@ -1,17 +1,37 @@
 <template>
     <div class="wrapper">
-        <div class="login-header">
-            <div>
+        <div class="login-header container ">
+            <div class="row">
+                <div class="col-md-6 col-lg-6  pull-left">
                 <img src="images/logo.png">
                 <span>{{loginStr.forWodeTitle}}</span>
+                </div>
+                <div class="col-md-6 col-lg-6 pull-right">
+                    <ul  class=" navbar-nav pull-right ">
+                        <li><a href="javascript:void(0);" @click="toPromotion">{{loginStr.forFirstPage}}</a></li>
+                        <li><a href="javascript:void(0);" @click="showLogin">{{loginStr.forLogin}}</a></li>
+                        <li><a href="javascript:void(0);" @click="toHotEvent">{{loginStr.hotEvent}}</a></li>
+                    </ul>
+                </div>
+
             </div>
-            <ul>
-                <!--<li v-if="false"><a href="javascript:void(0);" @click="toIntruction">使用说明</a></li>-->
-                <li><a href="javascript:void(0);" @click="toHotEvent">{{loginStr.hotEvent}}</a></li>
-                <li><a href="javascript:void(0);" @click="showLogin">{{loginStr.forLogin}}</a></li>
-                <!--<li  v-show="false"><a href="javascript:void(0);" @click="showApply">申请试用</a></li>-->
-                <li><a href="javascript:void(0);" @click="toPromotion">{{loginStr.forFirstPage}}</a></li>
-            </ul>
+
+
+
+            <!-- -&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;-->
+
+
+            <!--<div>-->
+                <!--<img src="images/logo.png">-->
+                <!--<span>{{loginStr.forWodeTitle}}</span>-->
+            <!--</div>-->
+            <!--<ul>-->
+                <!--<li class="col-sm-4"><a href="javascript:void(0);" @click="toHotEvent">{{loginStr.hotEvent}}</a></li>-->
+                <!--<li class="col-sm-4"><a href="javascript:void(0);" @click="showLogin">{{loginStr.forLogin}}</a></li>-->
+                <!--<li class="col-sm-4"><a href="javascript:void(0);" @click="toPromotion">{{loginStr.forFirstPage}}</a></li>-->
+            <!--</ul>-->
+
+            <!--v-bind:style="{height:sliderH + 'px' ,width: sliderW + 'px' }"-->
         </div>
         <!--<div class="container">
 
@@ -131,8 +151,13 @@
                 </div>
             </div>
         </div>
+
     </div>
-    <promotion v-if="isPromotion"></promotion>
+    <div v-if="isPromotion"  class="loginSlider">
+        <promotion ></promotion>
+
+    </div>
+
     <instruction v-if="isInstruction"></instruction>
     <hot-event class="hotevent" v-if="isHotEvent"></hot-event>
 </template>
@@ -159,6 +184,7 @@
             const applyStr = Local().apply;
             const loginStr =Local().login;
             return{
+
                 applyStr,
                 loginStr,
                 errorTip: '',
@@ -278,9 +304,11 @@
             this.password = getCookie('login_password');
         },*/
         ready(){
+
             console.log('aaa',this.userName,this.password);
                 this.userName = getCookie('login_userName');
                 this.password = getCookie('login_password');
+
             //console.log('this',this.$el.querySelector('.remember').checked);
             //this.$els.remember.checked = getCookie('login_remember');
 

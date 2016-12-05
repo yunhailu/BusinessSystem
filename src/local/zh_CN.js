@@ -27,7 +27,7 @@ export const zh_CN = {
         forParams1:"沃德品牌气象站是公司利用情绪大数据模型开发的“品牌价值互联网监测评价系统”。企业品牌价值的核心在于用户满意度，公司通过对全互联网情绪数据的分析，精确和实时计算知名产品、知名品牌、知名企业的用户满意度和交易量，从而为企业决策提供最精准的参考意见。",
         forCcsiTitle:"中国消费者情绪指数",
         forCcsiTitleE:"CCSI    China Consumer Sentiment Index",
-        forWodeTitle:"互联网情报智能分析平台",
+        forWodeTitle:" 网络情报智能分析大数据平台",
         instructionForUse:"使用说明",
         forLogin:"登录",
         forFirstPage:"首页",
@@ -36,9 +36,9 @@ export const zh_CN = {
         hotEvent:"热点事件"
     },
     footer:{
-        coppy:"京ICP备14046778号-5 沃民高新科技（北京）股份有限公司提供技术支持 ",
-        phone:"联系电话：010-88315473 ",
-        cooperation:"沃民高新科技（北京）股份有限公司、工信部电子科技情报所网络舆情研究中心、中国消费者报联合开发"
+        coppy:"京ICP备14046778号-5 联系电话：010-88315479 版权所有:沃民高新科技（北京）股份有限公司 ",
+        phone:"联系电话：010-88315479 ",
+        cooperation:"沃民高新科技（北京）股份有限公司、工信部电子科技情报所网络舆情研究中心"
     },
     header: {
         title: "沃德品牌气象站",
@@ -71,7 +71,7 @@ export const zh_CN = {
         allNetHotsRiver:"全网热点事件散点图"
     },
     analytics: {
-        tabs: ["品牌关注", "品牌情绪", "品牌评价", "品牌影响力", "品牌印象"],
+        tabs: ["关注分析", "情绪分析", "评价分析", "影响力分析", "印象分析"],
         filters: ["全部", "情绪指数", "地域分布", "性别分布", "语言分布"],
         source: ["全部", "微信", "微博", "客户端", "网页", "海外"],
         addDashboard: "添加快捷报告"
@@ -159,7 +159,6 @@ export const zh_CN = {
         moodGroups:["满意","愤怒", "失望", "反感","害怕"],
         groups: ["人物", "机构", "产品", "项目", "事件", "其他"],
         create: "提交",
-        warningSet:"预警设置"
     },
     reportsWarning: {
         reportTitle: "预警标题",
@@ -209,11 +208,12 @@ export const zh_CN = {
         waitWords:"请稍侯......",
         hi:"您好",
         timeRanking:"按时间排序",
-        countRanking:"浏览数排序",
-        greetRanking:"点赞数排序",
+        countRanking:"按浏览数排序",
+        greetRanking:"按点赞数排序",
+        shareRanking:"按转发数排序",
         publish:"发布于",
         sourceFrom:"来源",
-        dataFrom:"数据来源",
+        dataFrom:"数据分析平台",
         match:"匹配",
         target:"指标",
         sub_source:"来自"

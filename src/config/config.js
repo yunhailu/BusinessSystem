@@ -9,12 +9,49 @@ import Local from "../local/local";
 export const WhiteList = [{
     id: '',
     name: 'demo03',
-    local: '',
+    title: "中国消费者情绪指数CCSI",
+    local: 'zh_CN_CCSI',
     link: 'ccsi',
     domain: 'http://vipccsi.ccn.com.cn'
 }, {
     id: '',
+    name: 'demo11',
+    title: "中国消费者情绪指数CCSI",
+    local: 'zh_CN_CCSI',
+    link: 'ccsi',
+    domain: 'http://vipccsi.ccn.com.cn'
+},{
+    id: '',
+    name: 'demo12',
+    title: "中国消费者情绪指数CCSI",
+    local: 'zh_CN_CCSI',
+    link: 'ccsi',
+    domain: 'http://vipccsi.ccn.com.cn'
+},{
+    id: '',
+    name: 'demo03',
+    title: "中国消费者情绪指数CCSI",
+    local: 'zh_CN_CCSI',
+    link: 'ccsi',
+    domain: 'http://vipccsi.ccn.com.cn'
+},{
+    id: '',
+    name: 'demo14',
+    title: "中国消费者情绪指数CCSI",
+    local: 'zh_CN_CCSI',
+    link: 'ccsi',
+    domain: 'http://vipccsi.ccn.com.cn'
+},{
+    id: '',
+    name: 'demo15',
+    title: "中国消费者情绪指数CCSI",
+    local: 'zh_CN_CCSI',
+    link: 'ccsi',
+    domain: 'http://vipccsi.ccn.com.cn'
+},{
+    id: '',
     name: 'demo06',
+    title: "沃德社会气象台",
     local: 'zh_CN_society',
     link: 'login',
     domain: 'http://v2.wordemotion.com'

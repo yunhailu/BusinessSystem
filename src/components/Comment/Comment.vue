@@ -39,7 +39,7 @@
                 selectTitle: Local().common.sortBy,
                 //list: list.time,
                 list: [],
-                options: [{key: 'time', value: '按时间排序'}, {key: 'browser', value: '浏览数排序'}, {key: 'star', value: '点赞数排序'}],
+                options: [{key: 'time', value:common.timeRanking}, {key: 'browser', value:common.countRanking}, {key: 'star', value:common.greetRanking},{key:'share',value:common.shareRanking}],
                 sortVal: "",
                 x: [],
                 isShow: true,
