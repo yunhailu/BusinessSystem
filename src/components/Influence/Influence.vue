@@ -31,7 +31,7 @@
             </thead>
             <tbody v-if="influancerTable.length">
                 <tr id="item.id" v-for="(index, item) in influancerTable" :class="[index % 2 == 0 ? '' : '']" @click="showPopList(item)" >
-                    <td>{{item.influencer}}</td>
+                    <td>{{item.author}}</td>
                     <td>{{item.post}}</td>
                     <td class="barTd"><div class="sentimentBar" v-echarts="item.sentiment | barFormat"></div></td>
                     <td>{{item.likeCount}}</td>
@@ -199,7 +199,7 @@
                 Api.getInfluenceList({topic_id, topic, subtopic, source, start, end, time_dimension}).then(resp => {
                     this.loadingParams.visiable = false;
                     if(resp.data.code ==0){
-                       console.log('12131----------------3',item.icon);
+                       console.log('1----------------3',resp.data.data);
                         const influanceInfo = resp.data.data;
                         if(item.icon=='user'){
                             var influanceInfos =_.sortBy(influanceInfo, function(item){
@@ -286,13 +286,13 @@
                         firstTitle.push(sdasda3);
                         firstTitle.push(sdasda4);
                         const sdaaa1 =_.map(firstTitle, (itemd) => {
-                            itemd=_.pick(itemd,'influencer','post','source');
+                            itemd=_.pick(itemd,'author','post','source');
                             return itemd;
                         });
                         const sexData=_.map(sdaaa1,(item,index)=>{
                             item.icon = icons[index];
                             item.title = iconsName[index];
-                            item.value = item.influencer;
+                            item.value = item.author;
                             return item;
                         });
                         const sdaaa2 =_.map(sexData, (itemd) => {
@@ -310,10 +310,10 @@
 
 
 //                        this.popularList=[
-//                            {icon:'user',post:'0',source:'',title:'最活跃的作者',value:'暂无数据'},
-//                            {icon:'user-plus',post:'0',source:'',title:'最具影响力的作者',value:'暂无数据'},
-//                            {icon:'edge',post:'0',source:'',title:'最活跃的站点',value:'暂无数据'},
-//                            {icon:'chrome',post:'0',source:'',title:'最具影响力的站点',value:'暂无数据'}];
+//                            {icon:'user',post:'0',source:'',title:'最活跃的作者',author:'暂无数据'},
+//                            {icon:'user-plus',post:'0',source:'',title:'最具影响力的作者',author:'暂无数据'},
+//                            {icon:'edge',post:'0',source:'',title:'最活跃的站点',author:'暂无数据'},
+//                            {icon:'chrome',post:'0',source:'',title:'最具影响力的站点',author:'暂无数据'}];
 
                         this.coltrol=false;
                     }
