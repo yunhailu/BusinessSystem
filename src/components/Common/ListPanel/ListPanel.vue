@@ -34,12 +34,11 @@
                         <i class="fa fa-paperclip fa-2
                         x"></i>
                         <div class="list-panel-list-item-left-con">
-                            <div class="title">{{{item.title}}}</div>
+                            <div class="title">{{{item.title | title}}}</div> <div class="waterPage">{{common.dataFrom}}：{{common.source}}</div>
                             <div class="detail">{{{item.content}}}</div>
                             <div class="time">{{common.publish}} {{item.pDate}}</div>
                             <div class="source">{{common.sourceFrom}} {{item.from}} </div>
                             <div class="sub-source">{{common.sub_source}} {{item.sub_source}}</div>
-                            <div class="waterPage">{{common.dataFrom}}：{{common.source}}</div>
                         </div>
                     </div>
                     <div class="list-panel-list-item-right list-right">
@@ -182,6 +181,16 @@
             this.setCount(this.filterActive);
             this.setSentiment('all');
 
+        },
+        filters: {
+            title(title){
+                //let title = title;
+                if(title.length>=30){
+                    title = title.substring(0,15)+'...';
+                };
+                return title;
+
+            }
         },
         components:{
             SelectEl, Page

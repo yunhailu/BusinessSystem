@@ -37,7 +37,7 @@
                     type: 'loading',
                     content: common.waitWords
                 },
-                options: [{key: 'time', value:common.timeRanking}, {key: 'browser', value:common.countRanking}, {key: 'star', value:common.greetRanking}],
+                options: [{key: 'time', value:common.timeRanking}, {key: 'browser', value:common.countRanking}, {key: 'star', value:common.greetRanking},{key:'share',value:common.shareRanking}],
                 //list: list.time,
                 list: [],
                 sortVal: "",

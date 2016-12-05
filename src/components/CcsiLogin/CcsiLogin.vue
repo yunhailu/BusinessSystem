@@ -1,7 +1,35 @@
 <template>
     <div class="wrapper">
         <div class="login-header">
-            <div>
+           <!-- <header class="navbar navbar-inverse" >
+                <div class="navbar-header">
+                    &lt;!&ndash; 自适应隐藏导航展开按钮 &ndash;&gt;
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" @click="toggle">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    &lt;!&ndash; 导航条LOGO &ndash;&gt;
+                    <a class="navbar-brand" href="#"></a>
+                </div>
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav navbar-right">
+
+                        <li><a href="javascript:void(0);" @click="toIntruction">热点事件</a></li>
+                        <li v-if="false"><a href="javascript:void(0);">{{loginStr.showBrand}}</a></li>
+                        <li><a href="javascript:void(0);" @click="showLogin">登陆</a></li>
+                        <li  v-show="false"><a href="javascript:void(0);" @click="showApply">{{loginStr.applyForUse}}</a></li>
+                        <li><a href="javascript:void(0);" @click="toPromotion">首页</a></li>
+                    </ul>
+                </div>
+                <ul v-if="showList" class="showList">
+                    <li><a href="javascript:void(0);" @click="toPromotion">首页</a></li>
+                    <li><a href="javascript:void(0);" @click="showLogin">登陆</a></li>
+                    &lt;!&ndash;<li><a href="javascript:void(0);" @click="toIntruction">热点事件</a></li>&ndash;&gt;
+                </ul>
+            </header>-->
+            <div class="header-login">
                    <span class="zh">{{loginStr.forCcsiTitle}}</span>
                    <span class="en">{{loginStr.forCcsiTitleE}}</span>
             </div>
@@ -125,6 +153,7 @@
                 errorShow:false,
                 isPromotion:true,
                 isInstruction:false,
+                showList:false
             };
         },
         components:{
@@ -136,6 +165,9 @@
             actions:{setLoginState}
         },
         methods: {
+            toggle(){
+                this.showList = !this.showList;
+            },
             toIntruction(){
                 this.isInstruction=true;
                 this.isPromotion=false;
@@ -143,6 +175,7 @@
             toPromotion(){
                 this.isPromotion=true;
                 this.isInstruction=false;
+                this.showList = !this.showList;
             },
             submit(){
 
@@ -173,6 +206,7 @@
             },
             showLogin(){
                 this.isLogin = true;
+                this.showList = !this.showList;
             },
             login(){
 //                if(!this.userName && !this.password){

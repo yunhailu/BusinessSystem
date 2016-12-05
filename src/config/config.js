@@ -10,10 +10,45 @@ export const WhiteList = [{
     id: '',
     name: 'demo03',
     title: "中国消费者情绪指数CCSI",
-    local: '',
+    local: 'zh_CN_CCSI',
     link: 'ccsi',
     domain: 'http://vipccsi.ccn.com.cn'
 }, {
+    id: '',
+    name: 'demo11',
+    title: "中国消费者情绪指数CCSI",
+    local: 'zh_CN_CCSI',
+    link: 'ccsi',
+    domain: 'http://vipccsi.ccn.com.cn'
+},{
+    id: '',
+    name: 'demo12',
+    title: "中国消费者情绪指数CCSI",
+    local: 'zh_CN_CCSI',
+    link: 'ccsi',
+    domain: 'http://vipccsi.ccn.com.cn'
+},{
+    id: '',
+    name: 'demo03',
+    title: "中国消费者情绪指数CCSI",
+    local: 'zh_CN_CCSI',
+    link: 'ccsi',
+    domain: 'http://vipccsi.ccn.com.cn'
+},{
+    id: '',
+    name: 'demo14',
+    title: "中国消费者情绪指数CCSI",
+    local: 'zh_CN_CCSI',
+    link: 'ccsi',
+    domain: 'http://vipccsi.ccn.com.cn'
+},{
+    id: '',
+    name: 'demo15',
+    title: "中国消费者情绪指数CCSI",
+    local: 'zh_CN_CCSI',
+    link: 'ccsi',
+    domain: 'http://vipccsi.ccn.com.cn'
+},{
     id: '',
     name: 'demo06',
     title: "沃德社会气象台",
