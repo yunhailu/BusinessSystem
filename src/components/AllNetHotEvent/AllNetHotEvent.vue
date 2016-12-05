@@ -96,6 +96,8 @@
                 sheightin:700,
                 showRow:true,
                 hot:'',
+                hotColor:["rgba(253,0,0,1)","rgba(216,0,253,1)","rgba(0,0,253,1)","rgba(0,253,253,1)","rgba(0,253,0,1)","rgba(253,253,0,1)","rgba(253,150,0,1)","rgba(150,64,65,1)","rgba(60,118,61,1)","rgba(60,61,130,1)"],
+                hotOpacityColor:["rgba(253,0,0,0.6)","rgba(216,0,253,0.6)","rgba(0,0,253,0.6)","rgba(0,253,253,0.6)","rgba(0,253,0,0.6)","rgba(253,253,0,0.6)","rgba(253,150,0,0.6)","rgba(150,64,65,0.6)","rgba(60,118,61,0.6)","rgba(60,61,130,0.6)"],
                 // 热点情绪占比
                 sentimentOption: {
                     title: _.extend({}, Pie.title, { show: false}),
@@ -363,16 +365,16 @@
                 const chartData=[];
                 const chartList=[];
                 _.each(this.popHotsRanking,(item,index)=>{
-                    chartData.push({"id":10*index+0+'',"name":item,"itemStyle":null,"symbolSize":39.12381,"attributes":{"modularity_class":0},"x":-266.82776,"y":29.6904,"value":28.685715,"label":{"normal":{"show":true},opacity:1},"category":index});
-                    chartData.push({"id":10*index+1+'',"name":"Napoleon","itemStyle":null,"symbolSize":22.6666666666666665,"attributes":{"modularity_class":0},"x":-418.08344,"y":446.8853,"value":4,"label":{"normal":{"show":false},opacity:0.2},"category":index});
-                    chartData.push({"id":10*index+2+'',"name":"MlleBaptistine","itemStyle":null,"symbolSize":26.323809333333333,"attributes":{"modularity_class":0},"x":-212.76357,"y":245.29176,"value":9.485714,"label":{"normal":{"show":false},opacity:0.2},"category":index});
-                    chartData.push({"id":10*index+3+'',"name":"MmeMagloire","itemStyle":null,"symbolSize":26.323809333333333,"attributes":{"modularity_class":0},"x":-242.82404,"y":235.26283,"value":9.485714,"label":{"normal":{"show":false},opacity:0.2},"category":index});
-                    chartData.push({"id":10*index+4+'',"name":"CountessDeLo","itemStyle":null,"symbolSize":26.6666666666666665,"attributes":{"modularity_class":0},"x":-379.30386,"y":429.06424,"value":4,"label":{"normal":{"show":false},opacity:0.2},"category":index});
-                    chartData.push({"id":10*index+5+'',"name":"Geborand","itemStyle":null,"symbolSize":22.6666666666666665,"attributes":{"modularity_class":0},"x":-417.26337,"y":406.03506,"value":4,"label":{"normal":{"show":false},opacity:0.2},"category":index});
-                    chartData.push({"id":10*index+6+'',"name":"Geborand","itemStyle":null,"symbolSize":22.6666666666666665,"attributes":{"modularity_class":0},"x":-417.26337,"y":406.03506,"value":4,"label":{"normal":{"show":false},opacity:0.2},"category":index});
-                    chartData.push({"id":10*index+7+'',"name":"Geborand","itemStyle":null,"symbolSize":22.6666666666666665,"attributes":{"modularity_class":0},"x":-417.26337,"y":406.03506,"value":4,"label":{"normal":{"show":false},opacity:0.2},"category":index});
-                    chartData.push({"id":10*index+8+'',"name":"Geborand","itemStyle":null,"symbolSize":22.6666666666666665,"attributes":{"modularity_class":0},"x":-417.26337,"y":406.03506,"value":4,"label":{"normal":{"show":false},opacity:0.2},"category":index});
-                    chartData.push({"id":10*index+9+'',"name":"Geborand","itemStyle":null,"symbolSize":22.6666666666666665,"attributes":{"modularity_class":0},"x":-417.26337,"y":406.03506,"value":4,"label":{"normal":{"show":false},opacity:0.2},"category":index});
+                    chartData.push({"id":10*index+0+'',"name":item,"symbolSize":39.12381,"attributes":{"modularity_class":0},"x":-266.82776,"y":29.6904,"value":28.685715,"itemStyle":{"normal":{"color":(this.hotColor)[index]}},"label":{"normal":{"show":true}},"category":index});
+                    chartData.push({"id":10*index+1+'',"name":"Napoleon","symbolSize":22.6666666666666665,"attributes":{"modularity_class":0},"x":-418.08344,"y":446.8853,"value":4,"itemStyle":{"normal":{"color":(this.hotOpacityColor)[index]}},"label":{"normal":{"show":false}},"category":index});
+                    chartData.push({"id":10*index+2+'',"name":"MlleBaptistine","symbolSize":26.323809333333333,"attributes":{"modularity_class":0},"x":-212.76357,"y":245.29176,"value":9.485714,"itemStyle":{"normal":{"color":(this.hotOpacityColor)[index]}},"label":{"normal":{"show":false}},"category":index});
+                    chartData.push({"id":10*index+3+'',"name":"MmeMagloire","symbolSize":26.323809333333333,"attributes":{"modularity_class":0},"x":-242.82404,"y":235.26283,"value":9.485714,"itemStyle":{"normal":{"color":(this.hotOpacityColor)[index]}},"label":{"normal":{"show":false}},"category":index});
+                    chartData.push({"id":10*index+4+'',"name":"CountessDeLo","symbolSize":26.6666666666666665,"attributes":{"modularity_class":0},"x":-379.30386,"y":429.06424,"value":4,"itemStyle":{"normal":{"color":(this.hotOpacityColor)[index]}},"label":{"normal":{"show":false}},"category":index});
+                    chartData.push({"id":10*index+5+'',"name":"Geborand","symbolSize":22.6666666666666665,"attributes":{"modularity_class":0},"x":-417.26337,"y":406.03506,"value":4,"itemStyle":{"normal":{"color":(this.hotOpacityColor)[index]}},"label":{"normal":{"show":false}},"category":index});
+                    chartData.push({"id":10*index+6+'',"name":"Geborand","symbolSize":22.6666666666666665,"attributes":{"modularity_class":0},"x":-417.26337,"y":406.03506,"value":4,"itemStyle":{"normal":{"color":(this.hotOpacityColor)[index]}},"label":{"normal":{"show":false}},"category":index});
+                    chartData.push({"id":10*index+7+'',"name":"Geborand","symbolSize":22.6666666666666665,"attributes":{"modularity_class":0},"x":-417.26337,"y":406.03506,"value":4,"itemStyle":{"normal":{"color":(this.hotOpacityColor)[index]}},"label":{"normal":{"show":false}},"category":index});
+                    chartData.push({"id":10*index+8+'',"name":"Geborand","symbolSize":22.6666666666666665,"attributes":{"modularity_class":0},"x":-417.26337,"y":406.03506,"value":4,"itemStyle":{"normal":{"color":(this.hotOpacityColor)[index]}},"label":{"normal":{"show":false}},"category":index});
+                    chartData.push({"id":10*index+9+'',"name":"Geborand","symbolSize":22.6666666666666665,"attributes":{"modularity_class":0},"x":-417.26337,"y":406.03506,"value":4,"itemStyle":{"normal":{"color":(this.hotOpacityColor)[index]}},"label":{"normal":{"show":false}},"category":index});
                     //this.graphChartOption.series[0].links.push({"id":10*index+0,"name":null,"source":10*index+0,"target":10*index+0,"lineStyle":{"normal":{width:2}}});
                     chartList.push({"id":10*index+1+'',"name":null,"source":10*index+1+'',"target":10*index+0+'',"lineStyle":{"normal":{width:0}}});
                     chartList.push({"id":10*index+2+'',"name":null,"source":10*index+2+'',"target":10*index+0+'',"lineStyle":{"normal":{width:0}}});
@@ -388,78 +390,6 @@
                 this.graphChartOption.series[0].links = chartList;
                 console.log(this.graphChartOption.series[0].data,this.graphChartOption.series[0].links)
             },
-            /*graphchart(){
-                this.graphChartOption.series[0].data=[
-                    {"id":"0","name":(this.popHotsRanking)[0],"itemStyle":null,"symbolSize":19.12381,"x":-266.82776,"y":299.6904,"attributes":{"modularity_class":0},"value":28.685715,"label":{"normal":{"show":true}},"category":5},
-                    {"id":"1","name":"Napoleon","itemStyle":null,"symbolSize":22.6666666666666665,"x":-418.08344,"y":446.8853,"attributes":{"modularity_class":0},"value":4,"label":{"normal":{"show":false}},"category":0},
-                    {"id":"2","name":"MlleBaptistine","itemStyle":null,"symbolSize":26.323809333333333,"x":-212.76357,"y":245.29176,"attributes":{"modularity_class":1},"value":9.485714,"label":{"normal":{"show":false}},"category":0},
-                    {"id":"3","name":"MmeMagloire","itemStyle":null,"symbolSize":26.323809333333333,"x":-242.82404,"y":235.26283,"attributes":{"modularity_class":0},"value":9.485714,"label":{"normal":{"show":false}},"category":0},
-                    {"id":"4","name":"CountessDeLo","itemStyle":null,"symbolSize":16.6666666666666665,"x":-379.30386,"y":429.06424,"attributes":{"modularity_class":0},"value":4,"label":{"normal":{"show":false}},"category":0},
-                    {"id":"5","name":"Geborand","itemStyle":null,"symbolSize":22.6666666666666665,"x":-417.26337,"y":406.03506,"attributes":{"modularity_class":0},"value":4,"label":{"normal":{"show":false}},"category":0},
-
-                    {"id":"6","name":"Champtercier","itemStyle":null,"symbolSize":19.6666666666666665,"x":-332.6012,"y":485.16974,"attributes":{"modularity_class":0},"value":4,"label":{"normal":{"show":false}},"category":2},
-                    {"id":"7","name":"Cravatte","itemStyle":null,"symbolSize":22.6666666666666665,"x":-382.69568,"y":475.09113,"attributes":{"modularity_class":0},"value":4,"label":{"normal":{"show":false}},"category":2},
-                    {"id":"8","name":"Count","itemStyle":null,"symbolSize":19.6666666666666665,"x":-320.384,"y":387.17325,"attributes":{"modularity_class":0},"value":4,"label":{"normal":{"show":false}},"category":2},
-                    {"id":"9","name":"OldMan","itemStyle":null,"symbolSize":22.6666666666666665,"x":-344.39832,"y":451.16772,"attributes":{"modularity_class":0},"value":4,"label":{"normal":{"show":false}},"category":2},
-                    {"id":"10","name":(this.popHotsRanking)[1],"itemStyle":null,"symbolSize":22.6666666666666665,"x":-89.34107,"y":234.56128,"attributes":{"modularity_class":1},"value":4,"label":{"normal":{"show":true}},"category":1},
-
-                    {"id":"11","name":(this.popHotsRanking)[2],"itemStyle":null,"symbolSize":26.66666666666667,"x":-87.93029,"y":-6.8120565,"attributes":{"modularity_class":0},"value":100,"label":{"normal":{"show":true}},"category":4},
-                    {"id":"12","name":"Marguerite","itemStyle":null,"symbolSize":24.495239333333333,"x":-339.77908,"y":-184.69139,"attributes":{"modularity_class":1},"value":6.742859,"label":{"normal":{"show":false}},"category":1},
-                    {"id":"13","name":"MmeDeR","itemStyle":null,"symbolSize":22.6666666666666665,"x":-194.31313,"y":178.55301,"attributes":{"modularity_class":1},"value":4,"label":{"normal":{"show":false}},"category":1},
-                    {"id":"14","name":"Isabeau","itemStyle":null,"symbolSize":23.6666666666666665,"x":-158.05168,"y":201.99768,"attributes":{"modularity_class":1},"value":4,"label":{"normal":{"show":false}},"category":1},
-                    {"id":"15","name":"Gervais","itemStyle":null,"symbolSize":23.6666666666666665,"x":-127.701546,"y":242.55057,"attributes":{"modularity_class":1},"value":4,"label":{"normal":{"show":false}},"category":1},
-
-                    {"id":"16","name":"Tholomyes","itemStyle":null,"symbolSize":27.295237333333333,"x":-385.2226,"y":-393.5572,"attributes":{"modularity_class":2},"value":25.942856,"label":{"normal":{"show":false}},"category":1},
-                    {"id":"17","name":"Listolier","itemStyle":null,"symbolSize":19.638097333333334,"x":-516.55884,"y":-393.98975,"attributes":{"modularity_class":2},"value":20.457146,"label":{"normal":{"show":false}},"category":4},
-                    {"id":"18","name":"Fameuil","itemStyle":null,"symbolSize":29.638097333333334,"x":-464.79382,"y":-493.57944,"attributes":{"modularity_class":2},"value":20.457146,"label":{"normal":{"show":false}},"category":4},
-                    {"id":"19","name":"Blacheville","itemStyle":null,"symbolSize":23.638097333333334,"x":-515.1624,"y":-456.9891,"attributes":{"modularity_class":2},"value":20.457146,"label":{"normal":{"show":false}},"category":4},
-                    {"id":"20","name":"Favourite","itemStyle":null,"symbolSize":23.638097333333334,"x":-408.12122,"y":-464.5048,"attributes":{"modularity_class":2},"value":20.457146,"label":{"normal":{"show":false}},"category":5},
-                    {"id":"21","name":(this.popHotsRanking)[3],"itemStyle":null,"symbolSize":23.638097333333334,"x":-408.12122,"y":-464.5048,"attributes":{"modularity_class":3},"value":20.457146,"label":{"normal":{"show":true}},"category":4},
-
-                    {"id":"22","name":(this.popHotsRanking)[4],"itemStyle":null,"symbolSize":23.638097333333334,"x":-208.12122,"y":-234.5048,"attributes":{"modularity_class":1},"value":5.457146,"label":{"normal":{"show":true}},"category":3},
-                    {"id":"23","name":"Favourite","itemStyle":null,"symbolSize":25.638097333333334,"x":-308.12122,"y":-454.5048,"attributes":{"modularity_class":2},"value":6.457146,"label":{"normal":{"show":false}},"category":7},
-                    {"id":"24","name":"Favourite","itemStyle":null,"symbolSize":24.338097333333334,"x":-508.12122,"y":-424.5048,"attributes":{"modularity_class":2},"value":8.457146,"label":{"normal":{"show":false}},"category":7},
-                    {"id":"25","name":"Favourite","itemStyle":null,"symbolSize":22.638097333333334,"x":-228.12122,"y":-254.5048,"attributes":{"modularity_class":2},"value":4.457146,"label":{"normal":{"show":false}},"category":7},
-                    {"id":"26","name":"Favourite","itemStyle":null,"symbolSize":24.568097333333334,"x":-438.12122,"y":-334.5048,"attributes":{"modularity_class":2},"value":7.457146,"label":{"normal":{"show":false}},"category":7},
-
-                ];
-                this.graphChartOption.series[0].links=[
-
-                    {"id":"0","name":null,"source":"1","target":"0","lineStyle":{"normal":{width:0}}},
-                    {"id":"1","name":null,"source":"2","target":"0","lineStyle":{"normal":{width:0}}},
-                    {"id":"2","name":null,"source":"3","target":"0","lineStyle":{"normal":{width:0}}},
-                    {"id":"3","name":null,"source":"3","target":"0","lineStyle":{"normal":{width:0}}},
-                    {"id":"4","name":null,"source":"4","target":"0","lineStyle":{"normal":{width:0}}},
-                    {"id":"5","name":null,"source":"5","target":"0","lineStyle":{"normal":{width:0}}},
-
-                    {"id":"6","name":null,"source":"6","target":"10","lineStyle":{"normal":{width:0}}},
-                    {"id":"7","name":null,"source":"7","target":"10","lineStyle":{"normal":{width:0}}},
-                    {"id":"8","name":null,"source":"8","target":"10","lineStyle":{"normal":{width:0}}},
-                    {"id":"9","name":null,"source":"9","target":"10","lineStyle":{"normal":{width:0}}},
-                    {"id":"10","name":null,"source":"10","target":"10","lineStyle":{"normal":{width:0}}},
-
-                    {"id":"11","name":null,"source":"11","target":"11","lineStyle":{"normal":{width:0}}},
-                    {"id":'12',"name":null,"source":"12","target":"11","lineStyle":{"normal":{width:0}}},
-                    {"id":"13","name":null,"source":"13","target":"11","lineStyle":{"normal":{width:0}}},
-                    {"id":"14","name":null,"source":"14","target":"11","lineStyle":{"normal":{width:0}}},
-                    {"id":"15","name":null,"source":"15","target":"11","lineStyle":{"normal":{width:0}}},
-                    {"id":"16","name":null,"source":"16","target":"11","lineStyle":{"normal":{width:0}}},
-
-                    {"id":"17","name":null,"source":"17","target":"21","lineStyle":{"normal":{width:0}}},
-                    {"id":"18","name":null,"source":"18","target":"21","lineStyle":{"normal":{width:0}}},
-                    {"id":"19","name":null,"source":"19","target":"21","lineStyle":{"normal":{width:0}}},
-                    {"id":"20","name":null,"source":"20","target":"21","lineStyle":{"normal":{width:0}}},
-                    {"id":"21","name":null,"source":"21","target":"21","lineStyle":{"normal":{width:0}}},
-
-                    {"id":"22","name":null,"source":"22","target":"22","lineStyle":{"normal":{width:0}}},
-                    {"id":"23","name":null,"source":"23","target":"22","lineStyle":{"normal":{width:0}}},
-                    {"id":"24","name":null,"source":"24","target":"22","lineStyle":{"normal":{width:0}}},
-                    {"id":"25","name":null,"source":"25","target":"22","lineStyle":{"normal":{width:0}}},
-                    {"id":"26","name":null,"source":"26","target":"22","lineStyle":{"normal":{width:0}}},
-
-
-                ];
-            },*/
 
             //实时
             getRealList(){
