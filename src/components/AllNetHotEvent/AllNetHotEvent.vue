@@ -239,7 +239,7 @@
                             force: {
                                 initLayout:"",
                                 repulsion: 30,
-                                gravity: 0.01,
+                                gravity: 0.06,
                                 edgeLength: 100,
                                 layoutAnimation: true,
                             },

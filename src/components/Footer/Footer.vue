@@ -1,6 +1,12 @@
 <template>
+    <!--<nav class="navbar navbar-default navbar-fixed-bottom" role="navigation">
+        <div class="container">
+            <p>{{footer.coppy}}</p><br>
+            <p>{{footer.cooperation}}</p>
+        </div>
+    </nav>-->
     <footer class="footer">
-        <p>{{footer.coppy}}</p><br>
+        <p>{{footer.coppy}}</p>
         <p>{{footer.cooperation}}</p>
     </footer>
 </template>

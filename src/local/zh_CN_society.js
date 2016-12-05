@@ -74,7 +74,7 @@ export const zh_CN_society = _.extend({}, zh_CN, {
         allNetHotsRiver:"全网热点事件散点图"
     },
     analytics: {
-        tabs: ["关注度分析", "情绪分析", "评价分析", "影响力分析", "子话题分析"],
+        tabs: ["关注分析", "情绪分析", "评价分析", "影响力分析", "印象分析"],
         filters: ["全部", "情绪指数", "地域分布", "性别分布", "语言分布"],
         source: ["全部", "微信", "微博", "客户端", "网页", "海外"],
         addDashboard: "添加快捷报告"
@@ -162,7 +162,6 @@ export const zh_CN_society = _.extend({}, zh_CN, {
         moodGroups:["满意","愤怒", "失望", "反感","害怕"],
         groups: ["人物", "机构", "产品", "项目", "事件", "其他"],
         create: "提交",
-        warningSet:"预警设置"
     },
     reportsWarning: {
         reportTitle: "预警标题",

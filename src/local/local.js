@@ -5,10 +5,11 @@ import _ from 'underscore';
 import { zh_CN } from './zh_CN';
 import { zh_CN_society } from './zh_CN_society';
 import { en } from './en';
+import { zh_CN_CCSI } from './zh_CN_CCSI';
 import { WhiteList } from '../config/config';
 
 export default function(){
-    const Local = { zh_CN, zh_CN_society, en };
+    const Local = { zh_CN, zh_CN_society, en, zh_CN_CCSI };
     let lang;
 
     switch (window.navigator.language){
