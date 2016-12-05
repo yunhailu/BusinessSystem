@@ -466,13 +466,13 @@
                             return val;
                         });
 
-                        const wwwwj =_.each(_.toArray( _.object(_.pairs(resp.data.data))),(value,key)=>{
+                        this.hotsRankings =_.each(_.toArray( _.object(_.pairs(resp.data.data))),(value,key)=>{
                             return value.title = (this.hotsRanking)[key];
                         });
                         
-						this.hotsRankings=_.filter(wwwwj, (info, index) => {
-                        return (index < 5);
-                    });
+//						this.hotsRankings=_.filter(wwwwj, (info, index) => {
+//                        return (index < 5);
+//                    });
 
                         console.log('this.hotsRankings',this.hotsRankings);
                         console.log('this.hotsRanking',this.hotsRanking);
@@ -486,12 +486,13 @@
                     console.log('resp', resp);
                     if (resp.data.code == 0) {
                         this.hotsTodayRanking = _.keys(resp.data.data);
-                         const gy1 = _.each(_.toArray(_.object(_.pairs(resp.data.data))), (value, key)=> {
+                        this.hotsTodayRankings = _.each(_.toArray(_.object(_.pairs(resp.data.data))), (value, key)=> {
                             return value.title = (this.hotsTodayRanking)[key];
                         });
-						this.hotsTodayRankings=_.filter(gy1, (info, index) => {
-                        return (index < 5);
-                    });
+
+//						this.hotsTodayRankings=_.filter(gy1, (info, index) => {
+//                        return (index < 5);
+//                    });
 						
 						
 						
