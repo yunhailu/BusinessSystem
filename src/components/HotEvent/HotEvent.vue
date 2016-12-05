@@ -215,7 +215,7 @@
                     },
                     legend: {
                         show:false,
-                        data: ["传播源点", "一层转发", "二层转发", "三层转发", "四层转发", "五层转发", "六层转发","六层以上"],
+                        data: ["传播源点", "一层转发", "二层转发", "三层转发", "四层转发", "五层转发", "六层转发","七层转发", "八层转发", "九层转发","十层转发"],
                         left: 10,
                         top:23,
                         width: 120
@@ -231,7 +231,7 @@
                             layout: 'force',
                             force: {
                                 initLayout:"",
-                                repulsion: 150,
+                                repulsion: 30,
                                 gravity: 0.01,
                                 edgeLength: 100,
                                 layoutAnimation: true,
@@ -239,7 +239,7 @@
                             draggable:true,
                             data: [],
                             links: [],
-                            categories: [{"name": "传播源点"}, {"name": "一层转发"}, {"name": "二层转发"}, {"name": "三层转发"}, {"name": "四层转发"}, {"name": "五层转发"}, {"name": "六层转发"}, {"name": "六层以上"}],
+                            categories: [{"name": "传播源点"}, {"name": "一层转发"}, {"name": "二层转发"}, {"name": "三层转发"}, {"name": "四层转发"}, {"name": "五层转发"}, {"name": "六层转发"}, {"name": "七层转发"}, {"name": "八层转发"}, {"name": "九层转发"}, {"name": "十层转发"}],
                             roam: true,
                             label: {
                                 normal: {
@@ -271,7 +271,7 @@
                 this.getRealList();
                 this.getTodayList();
                 this.getHotRealtime();
-                this.graphchart();
+                //this.graphchart();
                 console.log('fullpages');
 
 
@@ -352,6 +352,28 @@
                 console.log('this.hotWordsOption.series.data',this.hotWordsOption.series.data)
             },
             graphchart(){
+                console.log('this.popHostRanking',this.popHotsRanking);
+                const chartData=[];
+                const chartList=[];
+                _.each(this.popHotsRanking,(item,index)=>{
+                    chartData.push({"id":10*index+0+'',"name":item,"itemStyle":null,"symbolSize":39.12381,"attributes":{"modularity_class":0},"x":-266.82776,"y":29.6904,"value":28.685715,"label":{"normal":{"show":true}},"category":index+1});
+                    chartData.push({"id":10*index+1+'',"name":"Napoleon","itemStyle":null,"symbolSize":22.6666666666666665,"attributes":{"modularity_class":0},"x":-418.08344,"y":446.8853,"value":4,"label":{"normal":{"show":false}},"category":index});
+                    chartData.push({"id":10*index+2+'',"name":"MlleBaptistine","itemStyle":null,"symbolSize":26.323809333333333,"attributes":{"modularity_class":0},"x":-212.76357,"y":245.29176,"value":9.485714,"label":{"normal":{"show":false}},"category":index});
+                    chartData.push({"id":10*index+3+'',"name":"MmeMagloire","itemStyle":null,"symbolSize":26.323809333333333,"attributes":{"modularity_class":0},"x":-242.82404,"y":235.26283,"value":9.485714,"label":{"normal":{"show":false}},"category":index});
+                    chartData.push({"id":10*index+4+'',"name":"CountessDeLo","itemStyle":null,"symbolSize":26.6666666666666665,"attributes":{"modularity_class":0},"x":-379.30386,"y":429.06424,"value":4,"label":{"normal":{"show":false}},"category":index});
+                    chartData.push({"id":10*index+5+'',"name":"Geborand","itemStyle":null,"symbolSize":22.6666666666666665,"attributes":{"modularity_class":0},"x":-417.26337,"y":406.03506,"value":4,"label":{"normal":{"show":false}},"category":index});
+                    //this.graphChartOption.series[0].links.push({"id":10*index+0,"name":null,"source":10*index+0,"target":10*index+0,"lineStyle":{"normal":{width:2}}});
+                    chartList.push({"id":10*index+1+'',"name":null,"source":10*index+1+'',"target":10*index+0+'',"lineStyle":{"normal":{width:0}}});
+                    chartList.push({"id":10*index+2+'',"name":null,"source":10*index+2+'',"target":10*index+0+'',"lineStyle":{"normal":{width:0}}});
+                    chartList.push({"id":10*index+3+'',"name":null,"source":10*index+3+'',"target":10*index+0+'',"lineStyle":{"normal":{width:0}}});
+                    chartList.push({"id":10*index+4+'',"name":null,"source":10*index+4+'',"target":10*index+0+'',"lineStyle":{"normal":{width:0}}});
+                    chartList.push({"id":10*index+5+'',"name":null,"source":10*index+5+'',"target":10*index+0+'',"lineStyle":{"normal":{width:0}}});
+                });
+                this.graphChartOption.series[0].data = chartData;
+                this.graphChartOption.series[0].links = chartList;
+                console.log(this.graphChartOption.series[0].data,this.graphChartOption.series[0].links)
+            },
+           /* graphchart(){
                 this.graphChartOption.series[0].data=[
                     {"id":"0","name":(this.popHotsRanking)[0],"itemStyle":null,"symbolSize":19.12381,"x":-266.82776,"y":299.6904,"attributes":{"modularity_class":0},"value":28.685715,"label":{"normal":{"show":true}},"category":5},
                     {"id":"1","name":"Napoleon","itemStyle":null,"symbolSize":22.6666666666666665,"x":-418.08344,"y":446.8853,"attributes":{"modularity_class":0},"value":4,"label":{"normal":{"show":false}},"category":0},
@@ -422,7 +444,7 @@
 
 
                 ];
-            },
+            },*/
 
             //实时
             getRealList(){
@@ -436,10 +458,19 @@
                                 val =val.substring(0,30)+'...';
                             }
                             return val;
+
                         })
-                        this.hotsRankings =_.each(_.toArray( _.object(_.pairs(resp.data.data))),(value,key)=>{
+                        const hgffd1 =_.each(_.toArray( _.object(_.pairs(resp.data.data))),(value,key)=>{
                             return value.title = (this.hotsRanking)[key];
                         });
+						
+						this.hotsRankings=_.filter(hgffd1, (info, index) => {
+                        return (index < 5);
+                    });
+						
+						
+						
+						
                         console.log('this.hotsRankings',this.hotsRankings);
                         console.log('this.hotsRanking',this.hotsRanking);
                         this.graphchart();
@@ -452,9 +483,16 @@
                     console.log('resp', resp);
                     if (resp.data.code == 0) {
                         this.hotsTodayRanking = _.keys(resp.data.data);
-                        this.hotsTodayRankings = _.each(_.toArray(_.object(_.pairs(resp.data.data))), (value, key)=> {
+                        const gy1  = _.each(_.toArray(_.object(_.pairs(resp.data.data))), (value, key)=> {
                             return value.title = (this.hotsTodayRanking)[key];
                         });
+						
+						this.hotsTodayRankings=_.filter(gy1, (info, index) => {
+                        return (index < 5);
+                    });
+						
+						
+						
                         if (this.activeHot.name == '') {
                             this.activeHot = {name: (this.hotsTodayRanking)[0], value: (this.hotsTodayRankings)[0]};
 
@@ -481,7 +519,7 @@
             this.getRealList();
             this.getTodayList();
             this.getHotRealtime();
-            this.graphchart();
+            //this.graphchart();
 
         },
         components:{ CardPanel }
