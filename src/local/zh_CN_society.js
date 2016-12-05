@@ -44,7 +44,7 @@ export const zh_CN_society = _.extend({}, zh_CN, {
         cooperation:"沃民高新科技（北京）股份有限公司、工信部电子科技情报所网络舆情研究中心、中国消费者报联合开发"
     },
     header: {
-        title: "社会气象台",
+        title: "沃德社会气象台",
         home: "热点事件",
         analytics: "数据分析",
         dashboard: "报告生成",
@@ -66,7 +66,7 @@ export const zh_CN_society = _.extend({}, zh_CN, {
         settingDec: "设置您所需要的监测信息"
     },
     hotEvent: {
-        hotsRiver: "品牌热点事件散点图",
+        hotsRiver: "社会热点事件散点图",
         sentiment: "情绪比例",
         hotsRanking: "实时热点排行",
         todayHotsRanking: "今日热点排行",
@@ -202,7 +202,7 @@ export const zh_CN_society = _.extend({}, zh_CN, {
         web: "网页",
         overseas: "海外",
         happy: "满意",
-        source:"社会气象台",
+        source:"沃德社会气象台",
         anger: "愤怒",
         sorrow: "失望",
         disgust: "反感",

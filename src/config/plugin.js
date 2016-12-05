@@ -1,5 +1,6 @@
 
 import Vue from 'vue'
+import _ from 'underscore'
 import Resource from 'vue-resource'
 import VueTouch from 'vue-touch'
 import Router from 'vue-router'
@@ -7,6 +8,7 @@ import Vuex from 'vuex'
 import App from '../App.vue'
 import router from './router'
 import Echarts from '../widgets/echarts';
+import {WhiteList} from  './config';
 
 var plugin = {
 	init(){
@@ -56,7 +58,14 @@ var plugin = {
 		}
 	},
 	afterEach( transition ) {
-		document.body.scrollTop = 0
+		document.body.scrollTop = 0;
+		const whiteList =_.filter(WhiteList,item=>{return item.domain == location.origin})
+		console.log('whiteList',whiteList);
+		if(!whiteList.length){
+			document.title='沃德品牌气象站';
+			return false;
+		}
+		document.title = whiteList[0].title;
 	}
 }
 
