@@ -113,20 +113,7 @@
                 themeWordLoading: true,
                 themeWordOption: {
                     tooltip: {},
-                    graphic:[
-                        {
-                            type: 'text',
-                            z: -10,
-                            left: 'center', // 相对父元素居中
-                            top: 'middle',  // 相对父元素居中
-                            rotation: Math.PI / 4,
-                            style: {
-                                fill: '#fff',
-                                text: '品牌气象站',
-                                font: 'bold 34px Microsoft YaHei'
-                            }
-                        }
-                    ],
+                    graphic:Pie.graphic,
                     series: {
                         //grid: {x:0, x2:0},
                         type: 'wordCloud',
@@ -251,20 +238,7 @@
                             show: false
                         }
                     }),
-                    graphic:[
-                        {
-                            type: 'text',
-                            z: -10,
-                            left: 'center', // 相对父元素居中
-                            top: 'middle',  // 相对父元素居中
-                            rotation: Math.PI / 4,
-                            style: {
-                                fill: '#fff',
-                                text: '品牌气象站',
-                                font: 'bold 34px Microsoft YaHei'
-                            }
-                        }
-                    ],
+                    graphic:Chart.graphic,
                     series: [
                         {
                             name: '',
@@ -355,20 +329,7 @@
                         type: 'category',
                         data: []
                     }),
-                    graphic:[
-                        {
-                            type: 'text',
-                            z: -10,
-                            left: 'center', // 相对父元素居中
-                            top: 'middle',  // 相对父元素居中
-                            rotation: Math.PI / 4,
-                            style: {
-                                fill: '#fff',
-                                text: '品牌气象站',
-                                font: 'bold 34px Microsoft YaHei'
-                            }
-                        }
-                    ],
+                    graphic:Chart.graphic,
                     series: [
                         {
                             name: words.topics,
@@ -431,20 +392,7 @@
                     }),
                     progressive: 4,
                     textStyle: Chart.textStyle,
-                    graphic:[
-                        {
-                            type: 'text',
-                            z: -10,
-                            left: 'center', // 相对父元素居中
-                            top: 'middle',  // 相对父元素居中
-                            rotation: Math.PI / 4,
-                            style: {
-                                fill: '#fff',
-                                text: '品牌气象站',
-                                font: 'bold 34px Microsoft YaHei'
-                            }
-                        }
-                    ],
+                    graphic:Chart.graphic,
                     series : []
                 },
                 themeLineLoading: true

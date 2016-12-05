@@ -9,7 +9,7 @@
                     <img src="images/avatar.png"  alt="User Image" />
                 </div>
                 <div class="pull-left info">
-                    <p>您好, {{nickName}}</p>
+                    <p>{{common.hi}}, {{nickName}}</p>
 
                     <!--<a href="javascript:void(0);"><i class="fa fa-circle text-success"></i> 在线</a>-->
                 </div>
@@ -36,6 +36,7 @@
     import {AnalyticMenu, ChannelMenu} from "../../../config/config";
     import MenuList from "./MenuList/MenuList.vue";
     import * as Api from "../../../widgets/Api";
+    import Local from "../../../local/local";
     import { getCookie } from '../../../widgets/Cookie';
     import { topicList, activeAnalyticsTopic } from '../../../vuex/getters';
     import { setTopicList, setActiveAnalyticsTopic } from "../../../vuex/actions";
@@ -43,7 +44,9 @@
     export default{
         props: [],
         data(){
+            const common = Local().common;
             return{
+                common,
                 AnalyticMenu,
                 ChannelMenu,
                 //topicList: [],

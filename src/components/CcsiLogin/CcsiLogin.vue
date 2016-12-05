@@ -1,69 +1,53 @@
 <template>
     <div class="wrapper">
         <div class="login-header">
-            <div>
-                   <span class="zh">中国消费者情绪指数</span>
-                   <span class="en">CCSI    China Consumer Sentiment Index</span>
+           <!-- <header class="navbar navbar-inverse" >
+                <div class="navbar-header">
+                    &lt;!&ndash; 自适应隐藏导航展开按钮 &ndash;&gt;
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" @click="toggle">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    &lt;!&ndash; 导航条LOGO &ndash;&gt;
+                    <a class="navbar-brand" href="#"></a>
+                </div>
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav navbar-right">
+
+                        <li><a href="javascript:void(0);" @click="toIntruction">热点事件</a></li>
+                        <li v-if="false"><a href="javascript:void(0);">{{loginStr.showBrand}}</a></li>
+                        <li><a href="javascript:void(0);" @click="showLogin">登陆</a></li>
+                        <li  v-show="false"><a href="javascript:void(0);" @click="showApply">{{loginStr.applyForUse}}</a></li>
+                        <li><a href="javascript:void(0);" @click="toPromotion">首页</a></li>
+                    </ul>
+                </div>
+                <ul v-if="showList" class="showList">
+                    <li><a href="javascript:void(0);" @click="toPromotion">首页</a></li>
+                    <li><a href="javascript:void(0);" @click="showLogin">登陆</a></li>
+                    &lt;!&ndash;<li><a href="javascript:void(0);" @click="toIntruction">热点事件</a></li>&ndash;&gt;
+                </ul>
+            </header>-->
+            <div class="header-login">
+                   <span class="zh">{{loginStr.forCcsiTitle}}</span>
+                   <span class="en">{{loginStr.forCcsiTitleE}}</span>
             </div>
             <ul>
-                <li v-if="false"><a href="javascript:void(0);" @click="toIntruction">使用说明</a></li>
-                <li v-if="false"><a href="javascript:void(0);">品牌表现</a></li>
-                <li><a href="javascript:void(0);" @click="showLogin">登录</a></li>
-                <li  v-show="false"><a href="javascript:void(0);" @click="showApply">申请试用</a></li>
-                <li  v-if="false"><a href="javascript:void(0);" @click="toPromotion">首页</a></li>
+                <li v-if="false"><a href="javascript:void(0);" @click="toIntruction">{{loginStr.instructionForUse}}</a></li>
+                <li v-if="false"><a href="javascript:void(0);">{{loginStr.showBrand}}</a></li>
+                <li><a href="javascript:void(0);" @click="showLogin">{{loginStr.forLogin}}</a></li>
+                <li  v-show="false"><a href="javascript:void(0);" @click="showApply">{{loginStr.applyForUse}}</a></li>
+                <li  v-if="false"><a href="javascript:void(0);" @click="toPromotion">{{loginStr.forFirstPage}}</a></li>
             </ul>
         </div>
-        <!--<div class="container">
-
-            <div class="login-page">
-                <form class="form-horizontal" v-on:submit.prevent>
-                    <fieldset>
-                        <legend>
-                            <img class="logo-icon" src="images/logo.jpg" />
-                            <span>品牌气象站</span>
-                        </legend>
-                        <div class="form-group">
-                            <label for="inputEmail3" class="col-sm-2 control-label login-font">用户名</label>
-                            <div class="col-sm-4">
-                                <input type="text" v-model="userName" class="form-control" id="inputEmail3" placeholder="UserName">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="inputPassword3" class="col-sm-2 control-label login-font">密码</label>
-                            <div class="col-sm-4">
-                                <input type="password" v-model="password" class="form-control" id="inputPassword3" placeholder="Password">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-sm-offset-2 col-sm-10 login-font">
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox"> 记住密码
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group" v-show="errorTip">
-                            <div class="col-sm-offset-2 col-sm-10 errorTip">
-                                <label>{{errorTip}}</label>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-sm-offset-2 col-sm-10">
-                                <button type="submit" class="btn btn-primary" @click="login">登录系统</button>
-                            </div>
-                        </div>
-                    </fieldset>
-                </form>
-            </div>
-        </div>-->
         <footer-component></footer-component>
-        <div class="apply-bg" v-show="isApply" @click="cancelApply">
+        <!--<div class="apply-bg" v-show="isApply" @click="cancelApply">
             <div class="apply-bg-content" @click.stop>
                 <div class="apply-bg-content-model" @keyup.enter="submit" >
                     <h3>
-                        <span>申请试用</span>
-                        <a href="javascript:void(0);" @click="toLogin">已有账号，请点此登陆</a>
+                        <span>{{loginStr.applyForUse}}</span>
+                        <a href="javascript:void(0);" @click="toLogin">{{applyStr.toLogin}}</a>
                     </h3>
                     <div class="applyCon">
                         <div class="form-group">
@@ -92,7 +76,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div>-->
         <div class="login-bg" v-show="isLogin" @click="cancelLogin">
             <div class="login-bg-content" @click.stop>
                 <div class="login-bg-content-model" @keyup.enter="login"  @keyup.8="isShowError">
@@ -169,6 +153,7 @@
                 errorShow:false,
                 isPromotion:true,
                 isInstruction:false,
+                showList:false
             };
         },
         components:{
@@ -180,6 +165,9 @@
             actions:{setLoginState}
         },
         methods: {
+            toggle(){
+                this.showList = !this.showList;
+            },
             toIntruction(){
                 this.isInstruction=true;
                 this.isPromotion=false;
@@ -187,6 +175,7 @@
             toPromotion(){
                 this.isPromotion=true;
                 this.isInstruction=false;
+                this.showList = !this.showList;
             },
             submit(){
 
@@ -217,6 +206,7 @@
             },
             showLogin(){
                 this.isLogin = true;
+                this.showList = !this.showList;
             },
             login(){
 //                if(!this.userName && !this.password){

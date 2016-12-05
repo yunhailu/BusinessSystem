@@ -2,7 +2,7 @@
 	<header-component active="home"></header-component>
 	<div class="home-panel">
 		<div class="home-panel-wrap">
-			<div class="container">
+
 				<!--<ul class="home-panel-wrap-list row">-->
 					<!--<li class="home-panel-wrap-list-item col-md-3"  v-for="item in items">-->
 						<!--<div class="home-panel-wrap-list-item-container">-->
@@ -33,7 +33,9 @@
 					<!--</div>-->
 				<!--</div>-->
 				<hot-event></hot-event>
-			</div>
+
+
+
 			<order-footer-component></order-footer-component>
 		</div>
 

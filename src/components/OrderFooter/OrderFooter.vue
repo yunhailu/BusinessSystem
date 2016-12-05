@@ -1,5 +1,8 @@
 <template>
-    <footer class="footer1"> <p>{{coppy}}<span>{{phone}}</span> </p></footer>
+    <footer class="footer1">
+        <p>{{footer.coppy}}</p><br>
+        <p>{{footer.cooperation}}</p>
+    </footer>
 </template>
 <style lang="less">
     @import "OrderFooter.less";
@@ -8,10 +11,11 @@
     import Local from "../../local/local";
     export default{
         data(){
-
+            const footer = Local().footer;
             return{
-                coppy:'京ICP备14046778号-5 沃民高新科技（北京）股份有限公司提供技术支持  ',
-                phone:'联系电话：010-88315479 '
+                footer,
+               /* coppy:'京ICP备14046778号-5 沃民高新科技（北京）股份有限公司提供技术支持  ',
+                phone:'联系电话：010-88315479 '*/
             }
         }
     }

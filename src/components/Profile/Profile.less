@@ -7,21 +7,35 @@
     .pd(20px 10px);
   }
   &-add{
-    .pd(20px 10px);
+    .pr();  .pd(20px 10px);
     .selectEl{ .h(28px); }
     &-avatar{
+      .pa();  .right(0);
       .float-right();
       .w(30%);  .h(auto);
       &-wrap{
         border: 1px solid #dedede;
-        .w(100px);  .h(100px);
+        .w(120px);  .h(120px);
         .pd(5px);
         &-image{
           .w(100%);  .h(100%);
           .b(1px solid #dedede);
         }
       }
-      &-btn{ .pd(10px 0); }
+      &-btn{
+        .pd(10px 0);
+        #uploadBtn{ .mg(0 10px);  .w(100px); }
+        .tip{  .w(120px);  .tc();  .pd(5px 0);  .lh(24px);  }
+        &-success{ .c(@flag-green);  }
+        &-error{ .c(@flag-red); }
+      }
+      &-right{
+        .pa(); .top(125px);  .left(150px);
+        .w(50%);  .h(auto);
+        &-item{
+          .lh(24px);
+        }
+      }
     }
   }
   .tips{

@@ -1,7 +1,10 @@
 /**
  * Created by yunhailu on 2016/8/20.
  */
-export const zh_CN = {
+import _ from 'underscore';
+import { zh_CN } from './zh_CN';
+
+export const zh_CN_CCSI = _.extend({}, zh_CN,{
     apply:{
         apply:"申请试用",
         toLogin:"已有账号，请点此登陆",
@@ -36,12 +39,12 @@ export const zh_CN = {
         hotEvent:"热点事件"
     },
     footer:{
-        coppy:"京ICP备14046778号-5 联系电话：010-88315479 版权所有:沃民高新科技（北京）股份有限公司 ",
-        phone:"联系电话：010-88315479 ",
-        cooperation:"沃民高新科技（北京）股份有限公司、工信部电子科技情报所网络舆情研究中心"
+        coppy:"京ICP备14046778号-5 联系电话：010-88315473 版权所有:沃民高新科技（北京）股份有限公司 ",
+        phone:"联系电话：010-88315473 ",
+        cooperation:"沃民高新科技（北京）股份有限公司、工信部电子科技情报所网络舆情研究中心、中国消费者报联合开发"
     },
     header: {
-        title: "沃德品牌气象站",
+        title: "消费者情绪指数",
         home: "热点事件",
         analytics: "数据分析",
         dashboard: "报告生成",
@@ -63,7 +66,7 @@ export const zh_CN = {
         settingDec: "设置您所需要的监测信息"
     },
     hotEvent: {
-        hotsRiver: "品牌热点事件散点图",
+        hotsRiver: "热点事件散点图",
         sentiment: "情绪比例",
         hotsRanking: "实时热点排行",
         todayHotsRanking: "今日热点排行",
@@ -198,7 +201,7 @@ export const zh_CN = {
         web: "网页",
         overseas: "海外",
         happy: "满意",
-        source:"沃德品牌气象站",
+        source:"消费者情绪指数",
         anger: "愤怒",
         sorrow: "失望",
         disgust: "反感",
@@ -225,4 +228,4 @@ export const zh_CN = {
         onlyOne: "请只选择一张图片",
         noPic: "您选择的不是图片"
     }
-};
+})

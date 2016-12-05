@@ -48,8 +48,8 @@
     import Main from './Main/Main.vue';
     import Local from "../../local/local";
     import FooterComponent from '../OrderFooter/OrderFooter.vue';
-    import { compareType, compareTimeRange, compareSource, compareSubTopic, compareStart, compareEnd, compareTimeRangeString } from '../../vuex/getters';
-    import { setCompareType, setCompareTimeRange, setCompareSource, setCompareSubTopic, setCompareStart, setCompareEnd , setCompareTimeRangeString } from "../../vuex/actions";
+    import {compareDataChange, compareType, compareTimeRange, compareSource, compareSubTopic, compareStart, compareEnd, compareTimeRangeString } from '../../vuex/getters';
+    import {setCompareDataChange, setCompareType, setCompareTimeRange, setCompareSource, setCompareSubTopic, setCompareStart, setCompareEnd , setCompareTimeRangeString } from "../../vuex/actions";
 
     export default{
         data(){
@@ -72,8 +72,8 @@
             }
         },
         vuex:{
-            getters:{ compareType, compareTimeRange, compareSource, compareSubTopic, compareStart, compareEnd , compareTimeRangeString},
-            actions:{ setCompareType, setCompareTimeRange, setCompareSource, setCompareSubTopic, setCompareStart, setCompareEnd , setCompareTimeRangeString }
+            getters:{compareDataChange, compareType, compareTimeRange, compareSource, compareSubTopic, compareStart, compareEnd , compareTimeRangeString},
+            actions:{setCompareDataChange, setCompareType, setCompareTimeRange, setCompareSource, setCompareSubTopic, setCompareStart, setCompareEnd , setCompareTimeRangeString }
         },
         components:{
             'header-component': HeaderComponent,
@@ -96,6 +96,7 @@
                     //禁掉*/
                     this.isTimeDiy = true;
                     this.dateVal = this.compareStart + ' ~ ' + this.compareEnd;
+                    this.setCompareDataChange(this.compareDataChange + 1);
                 } else if(num == 0.33){
                     //this.selectTimeTag = num;
                     this.isTimeDiy = false;
@@ -110,8 +111,8 @@
                     //可以精确到小时
                     //console.log('8H',moment().subtract(8,"hour").format("YYYY-MM-DD HH"),moment().format("YYYY-MM-DD HH"));
                     this.dateVal = `${ start} ~ ${end}`;
-                    this.setCompareTimeRangeString(this.dateVal);
-                    //this.setAnalyticsDateChange(this.analyticsDateChange + 1);
+                    //this.setCompareTimeRangeString(this.dateVal);
+                    this.setCompareDataChange(this.compareDataChange + 1);
                 }else{
                     //只显示1天和7天
                    /* if(num == 30){
@@ -125,7 +126,8 @@
                     this.setCompareStart(moment().subtract(num, 'days').format('YYYY-MM-DD'));
                     this.setCompareEnd(moment().format('YYYY-MM-DD'));
                     this.dateVal = `${ moment().subtract(num, 'days').format('YYYY-MM-DD')} ~ ${moment().format('YYYY-MM-DD')}`;
-                    this.setCompareTimeRangeString(this.dateVal);
+                    //this.setCompareTimeRangeString(this.dateVal);
+                    this.setCompareDataChange(this.compareDataChange + 1);
                     //console.log('这是想要的数据0',this.compareTimeRangeString);
                 }
 
@@ -188,7 +190,8 @@
                     this.setCompareTimeRange(days);
                     console.log(this.compareStart,this.compareEnd,this.compareTimeRange);
                     console.log(val.split(' ~ ')[0], val.split(' ~ ')[1], days);
-                    this.setCompareTimeRangeString(this.dateVal);
+                    //this.setCompareTimeRangeString(this.dateVal);
+                    this.setCompareDataChange(this.compareDataChange + 1);
                     //console.log('这是日历改变后的数据',this.compareTimeRangeString);
                 }
             },

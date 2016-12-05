@@ -1,17 +1,37 @@
 <template>
     <div class="wrapper">
-        <div class="login-header">
-            <div>
+        <div class="login-header container ">
+            <div class="row">
+                <div class="col-md-6 col-lg-6  pull-left">
                 <img src="images/logo.png">
-                <span>互联网情报智能分析平台</span>
+                <span>{{loginStr.forWodeTitle}}</span>
+                </div>
+                <div class="col-md-6 col-lg-6 pull-right">
+                    <ul  class=" navbar-nav pull-right ">
+                        <li><a href="javascript:void(0);" @click="toPromotion">{{loginStr.forFirstPage}}</a></li>
+                        <li><a href="javascript:void(0);" @click="showLogin">{{loginStr.forLogin}}</a></li>
+                        <li><a href="javascript:void(0);" @click="toHotEvent">{{loginStr.hotEvent}}</a></li>
+                    </ul>
+                </div>
+
             </div>
-            <ul>
-                <li v-if="false"><a href="javascript:void(0);" @click="toIntruction">使用说明</a></li>
-                <li><a href="javascript:void(0);">品牌表现</a></li>
-                <li><a href="javascript:void(0);" @click="showLogin">登录</a></li>
-                <li  v-show="false"><a href="javascript:void(0);" @click="showApply">申请试用</a></li>
-                <li  v-if="false"><a href="javascript:void(0);" @click="toPromotion">首页</a></li>
-            </ul>
+
+
+
+            <!-- -&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;-->
+
+
+            <!--<div>-->
+                <!--<img src="images/logo.png">-->
+                <!--<span>{{loginStr.forWodeTitle}}</span>-->
+            <!--</div>-->
+            <!--<ul>-->
+                <!--<li class="col-sm-4"><a href="javascript:void(0);" @click="toHotEvent">{{loginStr.hotEvent}}</a></li>-->
+                <!--<li class="col-sm-4"><a href="javascript:void(0);" @click="showLogin">{{loginStr.forLogin}}</a></li>-->
+                <!--<li class="col-sm-4"><a href="javascript:void(0);" @click="toPromotion">{{loginStr.forFirstPage}}</a></li>-->
+            <!--</ul>-->
+
+            <!--v-bind:style="{height:sliderH + 'px' ,width: sliderW + 'px' }"-->
         </div>
         <!--<div class="container">
 
@@ -20,7 +40,7 @@
                     <fieldset>
                         <legend>
                             <img class="logo-icon" src="images/logo.jpg" />
-                            <span>品牌气象站</span>
+                            <span>沃德品牌气象站</span>
                         </legend>
                         <div class="form-group">
                             <label for="inputEmail3" class="col-sm-2 control-label login-font">用户名</label>
@@ -58,7 +78,7 @@
             </div>
         </div>-->
         <footer-component></footer-component>
-        <div class="apply-bg" v-show="isApply" @click="cancelApply">
+        <!--<div class="apply-bg" v-show="isApply" @click="cancelApply">
             <div class="apply-bg-content" @click.stop>
                 <div class="apply-bg-content-model" @keyup.enter="submit" >
                     <h3>
@@ -92,13 +112,13 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div>-->
         <div class="login-bg" v-show="isLogin" @click="cancelLogin">
             <div class="login-bg-content" @click.stop>
                 <div class="login-bg-content-model" @keyup.enter="login"  @keyup.8="isShowError">
                     <h3>
                         <span>{{loginStr.login}}</span>
-                        <a href="javascript:void(0);" @click="toApply" v-show="false">{{loginStr.toApply}}</a>
+                        <!--<a href="javascript:void(0);" @click="toApply" v-show="false">{{loginStr.toApply}}</a>-->
                     </h3>
                     <div class="loginCon">
                         <div class="form-group">
@@ -131,9 +151,15 @@
                 </div>
             </div>
         </div>
+
     </div>
-    <promotion v-if="isPromotion"></promotion>
+    <div v-if="isPromotion"  class="loginSlider">
+        <promotion ></promotion>
+
+    </div>
+
     <instruction v-if="isInstruction"></instruction>
+    <hot-event class="hotevent" v-if="isHotEvent"></hot-event>
 </template>
 <style lang="less">
     @import "Login.less";
@@ -148,6 +174,7 @@
     import FooterComponent from "../Footer/Footer.vue"
     import Promotion from "./Promotion/Promotion.vue"
     import Instruction from "./InstructionsForUse/InstructionsForUse.vue"
+    import HotEvent from "../AllNetHotEvent/AllNetHotEvent.vue"
     import {loginState ,loginTime } from '../../vuex/getters';
     import {setLoginState, setLoginTime} from "../../vuex/actions";
 
@@ -157,6 +184,7 @@
             const applyStr = Local().apply;
             const loginStr =Local().login;
             return{
+
                 applyStr,
                 loginStr,
                 errorTip: '',
@@ -169,44 +197,51 @@
                 errorShow:false,
                 isPromotion:true,
                 isInstruction:false,
+                isHotEvent:false,
             };
         },
         components:{
-            FooterComponent,Promotion,Instruction
+            FooterComponent,Promotion,Instruction,HotEvent
         },
         vuex:{
             getters:{loginState, loginTime},
             actions:{setLoginState, setLoginTime}
         },
         methods: {
-            toIntruction(){
-                this.isInstruction=true;
+            toHotEvent(){
+                this.isHotEvent = true;
                 this.isPromotion=false;
             },
+           /* 注册
+           toIntruction(){
+                this.isInstruction=true;
+                this.isPromotion=false;
+            },*/
             toPromotion(){
                 this.isPromotion=true;
                 this.isInstruction=false;
+                this.isHotEvent = false;
             },
-            submit(){
-
-            },
+            /*去申请登使用
             toApply(){
                 this.isLogin=false;
                 this.isApply=true;
-            },
+            },*/
+            /*去申请登陆
             toLogin(){
                 this.isApply=false;
                 this.isLogin=true;
-            },
+            },*/
             isShowError(){
                 if(this.errorShow == true){
                     this.errorShow = this.userName || this.password;
                 }
             },
+            /*点击遮罩取消
             cancelApply(){
                 this.isApply=false;
                 this.errorShow = false;
-            },
+            },*/
             cancelLogin(){
                 this.isLogin=false;
                 this.errorShow = false;
@@ -269,9 +304,11 @@
             this.password = getCookie('login_password');
         },*/
         ready(){
+
             console.log('aaa',this.userName,this.password);
                 this.userName = getCookie('login_userName');
                 this.password = getCookie('login_password');
+
             //console.log('this',this.$el.querySelector('.remember').checked);
             //this.$els.remember.checked = getCookie('login_remember');
 

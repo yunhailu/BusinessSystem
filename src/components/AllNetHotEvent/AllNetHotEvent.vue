@@ -1,16 +1,17 @@
 <template>
 
     <div v-show="showRow" class="container">
-    <div  class="hot-panel">
+    <div class="hot-panel">
         <!--热点事件散点图-->
-        <div class="row">
+        <div class="row row-hot-river">
             <div class="col-md-12 hot-river">
-                <card-panel :title="words.hotsRiver" >
-                    <a class="fullpage pull-right" href='Javascript: void(0)' v-on:click="getFull(false)"><i class="fa fa-expand"></i> 全屏</a>
+                <card-panel :title="words.allNetHotsRiver" >
+                    <a class="fullpage0 pull-right" href='Javascript: void(0)' v-on:click="getFull(false)"><i class="fa fa-expand"></i> 全屏</a>
                     <div v-echarts="graphChartOption" :loading="graphChartLoading" class="hot-river-scatter" theme="" :img.sync="img"></div>
                 </card-panel>
             </div>
         </div>
+
         <!--热点事件排行，实时热点排行-->
         <div class="row">
             <div class="col-md-6 hot-today">
@@ -48,22 +49,28 @@
             </div>
 
         </div>
+        <!--热点事件,散点图-->
+        <!--<div class="row">
+            <div class="col-md-12 hot-river">
+                <card-panel :title="words.hotsRiver">
+                    <div v-echarts="scatterOption" :loading="scatterLoading" class="hot-river-scatter" theme="" :img.sync="img"></div>
+                </card-panel>
+            </div>
+        </div>-->
     </div>
     </div>
 
-        <div v-show="!showRow" v-bind:style="{height:sheight +'px'}" class="bg">
-            <card-panel :title="words.hotsRiver" >
-                <a class="fullpage pull-right" href='Javascript: void(0)' v-on:click="getFull(true)"><i class="fa fa-compress"></i>返回</a>
-                <div  v-bind:style="{height:sheightin +'px'}" v-echarts="graphChartOption" :loading="graphChartLoading" class="hot-river-scatter" theme="" :img.sync="img"></div>
-            </card-panel>
-        </div>
+    <div v-show="!showRow" v-bind:style="{height:sheight +'px'}" class="bg1">
 
+            <a class="fullpage1 pull-right" href='Javascript: void(0)' v-on:click="getFull(true)"><i class="fa fa-compress"></i>返回</a>
+            <div  v-bind:style="{height:sheightin +'px'}" v-echarts="graphChartOption" :loading="graphChartLoading" class="hot-river-scatter" theme="" :img.sync="img"></div>
 
+    </div>
 
 
 </template>
 <style lang="less" scoped>
-    @import "HotEvent.less";
+    @import "AllNetHotEvent.less";
 </style>
 <script type="text/ecmascript-6">
     import _ from 'underscore';
@@ -85,11 +92,11 @@
                     value: ""
                 },
                 source:"实时",
-                hot:'',
                 sheight:800,
                 sheightin:700,
-                // 热点情绪占比
                 showRow:true,
+                hot:'',
+                // 热点情绪占比
                 sentimentOption: {
                     title: _.extend({}, Pie.title, { show: false}),
                     tooltip: _.extend({}, Pie.tooltip),
@@ -194,7 +201,7 @@
 
                 graphChartLoading: true,
                 graphChartOption: {
-                    title: {
+                    /*title: {
 
                         text: '媒体展示',
                         textStyle: {
@@ -208,7 +215,7 @@
                         link:'/media',
                         target:'blank'
 
-                    },
+                    },*/
                     tooltip: {
 
                         formatter: '{b}'
@@ -265,13 +272,13 @@
         },
         methods: {
             getFull(boot){
-                this.sheight= 0.8*window.screen.availHeight;
-                this.sheightin= 0.75*window.screen.availHeight;
+                this.sheight= window.screen.availHeight*0.8;
+                this.sheightin= window.screen.availHeight*0.8;
                 this.showRow=boot;
                 this.getRealList();
                 this.getTodayList();
                 this.getHotRealtime();
-                //this.graphchart();
+                this.graphchart();
                 console.log('fullpages');
 
 
@@ -356,24 +363,32 @@
                 const chartData=[];
                 const chartList=[];
                 _.each(this.popHotsRanking,(item,index)=>{
-                    chartData.push({"id":10*index+0+'',"name":item,"itemStyle":null,"symbolSize":39.12381,"attributes":{"modularity_class":0},"x":-266.82776,"y":29.6904,"value":28.685715,"label":{"normal":{"show":true}},"category":index+1});
-                    chartData.push({"id":10*index+1+'',"name":"Napoleon","itemStyle":null,"symbolSize":22.6666666666666665,"attributes":{"modularity_class":0},"x":-418.08344,"y":446.8853,"value":4,"label":{"normal":{"show":false}},"category":index});
-                    chartData.push({"id":10*index+2+'',"name":"MlleBaptistine","itemStyle":null,"symbolSize":26.323809333333333,"attributes":{"modularity_class":0},"x":-212.76357,"y":245.29176,"value":9.485714,"label":{"normal":{"show":false}},"category":index});
-                    chartData.push({"id":10*index+3+'',"name":"MmeMagloire","itemStyle":null,"symbolSize":26.323809333333333,"attributes":{"modularity_class":0},"x":-242.82404,"y":235.26283,"value":9.485714,"label":{"normal":{"show":false}},"category":index});
-                    chartData.push({"id":10*index+4+'',"name":"CountessDeLo","itemStyle":null,"symbolSize":26.6666666666666665,"attributes":{"modularity_class":0},"x":-379.30386,"y":429.06424,"value":4,"label":{"normal":{"show":false}},"category":index});
-                    chartData.push({"id":10*index+5+'',"name":"Geborand","itemStyle":null,"symbolSize":22.6666666666666665,"attributes":{"modularity_class":0},"x":-417.26337,"y":406.03506,"value":4,"label":{"normal":{"show":false}},"category":index});
+                    chartData.push({"id":10*index+0+'',"name":item,"itemStyle":null,"symbolSize":39.12381,"attributes":{"modularity_class":0},"x":-266.82776,"y":29.6904,"value":28.685715,"label":{"normal":{"show":true},opacity:1},"category":index});
+                    chartData.push({"id":10*index+1+'',"name":"Napoleon","itemStyle":null,"symbolSize":22.6666666666666665,"attributes":{"modularity_class":0},"x":-418.08344,"y":446.8853,"value":4,"label":{"normal":{"show":false},opacity:0.2},"category":index});
+                    chartData.push({"id":10*index+2+'',"name":"MlleBaptistine","itemStyle":null,"symbolSize":26.323809333333333,"attributes":{"modularity_class":0},"x":-212.76357,"y":245.29176,"value":9.485714,"label":{"normal":{"show":false},opacity:0.2},"category":index});
+                    chartData.push({"id":10*index+3+'',"name":"MmeMagloire","itemStyle":null,"symbolSize":26.323809333333333,"attributes":{"modularity_class":0},"x":-242.82404,"y":235.26283,"value":9.485714,"label":{"normal":{"show":false},opacity:0.2},"category":index});
+                    chartData.push({"id":10*index+4+'',"name":"CountessDeLo","itemStyle":null,"symbolSize":26.6666666666666665,"attributes":{"modularity_class":0},"x":-379.30386,"y":429.06424,"value":4,"label":{"normal":{"show":false},opacity:0.2},"category":index});
+                    chartData.push({"id":10*index+5+'',"name":"Geborand","itemStyle":null,"symbolSize":22.6666666666666665,"attributes":{"modularity_class":0},"x":-417.26337,"y":406.03506,"value":4,"label":{"normal":{"show":false},opacity:0.2},"category":index});
+                    chartData.push({"id":10*index+6+'',"name":"Geborand","itemStyle":null,"symbolSize":22.6666666666666665,"attributes":{"modularity_class":0},"x":-417.26337,"y":406.03506,"value":4,"label":{"normal":{"show":false},opacity:0.2},"category":index});
+                    chartData.push({"id":10*index+7+'',"name":"Geborand","itemStyle":null,"symbolSize":22.6666666666666665,"attributes":{"modularity_class":0},"x":-417.26337,"y":406.03506,"value":4,"label":{"normal":{"show":false},opacity:0.2},"category":index});
+                    chartData.push({"id":10*index+8+'',"name":"Geborand","itemStyle":null,"symbolSize":22.6666666666666665,"attributes":{"modularity_class":0},"x":-417.26337,"y":406.03506,"value":4,"label":{"normal":{"show":false},opacity:0.2},"category":index});
+                    chartData.push({"id":10*index+9+'',"name":"Geborand","itemStyle":null,"symbolSize":22.6666666666666665,"attributes":{"modularity_class":0},"x":-417.26337,"y":406.03506,"value":4,"label":{"normal":{"show":false},opacity:0.2},"category":index});
                     //this.graphChartOption.series[0].links.push({"id":10*index+0,"name":null,"source":10*index+0,"target":10*index+0,"lineStyle":{"normal":{width:2}}});
                     chartList.push({"id":10*index+1+'',"name":null,"source":10*index+1+'',"target":10*index+0+'',"lineStyle":{"normal":{width:0}}});
                     chartList.push({"id":10*index+2+'',"name":null,"source":10*index+2+'',"target":10*index+0+'',"lineStyle":{"normal":{width:0}}});
                     chartList.push({"id":10*index+3+'',"name":null,"source":10*index+3+'',"target":10*index+0+'',"lineStyle":{"normal":{width:0}}});
                     chartList.push({"id":10*index+4+'',"name":null,"source":10*index+4+'',"target":10*index+0+'',"lineStyle":{"normal":{width:0}}});
                     chartList.push({"id":10*index+5+'',"name":null,"source":10*index+5+'',"target":10*index+0+'',"lineStyle":{"normal":{width:0}}});
+                    chartList.push({"id":10*index+6+'',"name":null,"source":10*index+6+'',"target":10*index+0+'',"lineStyle":{"normal":{width:0}}});
+                    chartList.push({"id":10*index+7+'',"name":null,"source":10*index+7+'',"target":10*index+0+'',"lineStyle":{"normal":{width:0}}});
+                    chartList.push({"id":10*index+8+'',"name":null,"source":10*index+8+'',"target":10*index+0+'',"lineStyle":{"normal":{width:0}}});
+                    chartList.push({"id":10*index+9+'',"name":null,"source":10*index+9+'',"target":10*index+0+'',"lineStyle":{"normal":{width:0}}});
                 });
                 this.graphChartOption.series[0].data = chartData;
                 this.graphChartOption.series[0].links = chartList;
                 console.log(this.graphChartOption.series[0].data,this.graphChartOption.series[0].links)
             },
-           /* graphchart(){
+            /*graphchart(){
                 this.graphChartOption.series[0].data=[
                     {"id":"0","name":(this.popHotsRanking)[0],"itemStyle":null,"symbolSize":19.12381,"x":-266.82776,"y":299.6904,"attributes":{"modularity_class":0},"value":28.685715,"label":{"normal":{"show":true}},"category":5},
                     {"id":"1","name":"Napoleon","itemStyle":null,"symbolSize":22.6666666666666665,"x":-418.08344,"y":446.8853,"attributes":{"modularity_class":0},"value":4,"label":{"normal":{"show":false}},"category":0},
@@ -452,25 +467,21 @@
                     console.log('resp',resp);
                     if(resp.data.code ==0){
                         this.hotsRanking =_.keys(resp.data.data);
-
                         this.popHotsRanking =_.map(this.hotsRanking,val =>{
                             if(val.length>30){
                                 val =val.substring(0,30)+'...';
                             }
                             return val;
+                        });
 
-                        })
                         this.hotsRankings =_.each(_.toArray( _.object(_.pairs(resp.data.data))),(value,key)=>{
                             return value.title = (this.hotsRanking)[key];
                         });
-						
-//						this.hotsRankings=_.filter(hgffd1, (info, index) => {
+                        
+//						this.hotsRankings=_.filter(wwwwj, (info, index) => {
 //                        return (index < 5);
 //                    });
-						
-						
-						
-						
+
                         console.log('this.hotsRankings',this.hotsRankings);
                         console.log('this.hotsRanking',this.hotsRanking);
                         this.graphchart();
@@ -486,7 +497,7 @@
                         this.hotsTodayRankings = _.each(_.toArray(_.object(_.pairs(resp.data.data))), (value, key)=> {
                             return value.title = (this.hotsTodayRanking)[key];
                         });
-						
+
 //						this.hotsTodayRankings=_.filter(gy1, (info, index) => {
 //                        return (index < 5);
 //                    });
@@ -514,12 +525,13 @@
                 return `${title} (${source}:${hot} )`;
 
             }
+
         },
         created(){
             this.getRealList();
             this.getTodayList();
             this.getHotRealtime();
-            //this.graphchart();
+            this.graphchart();
 
         },
         components:{ CardPanel }

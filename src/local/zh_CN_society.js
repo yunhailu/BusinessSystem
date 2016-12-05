@@ -1,7 +1,10 @@
 /**
- * Created by yunhailu on 2016/8/20.
+ * Created by yunhailu on 2016/12/3.
  */
-export const zh_CN = {
+import _ from 'underscore';
+import { zh_CN } from './zh_CN';
+
+export const zh_CN_society = _.extend({}, zh_CN, {
     apply:{
         apply:"申请试用",
         toLogin:"已有账号，请点此登陆",
@@ -27,7 +30,7 @@ export const zh_CN = {
         forParams1:"沃德品牌气象站是公司利用情绪大数据模型开发的“品牌价值互联网监测评价系统”。企业品牌价值的核心在于用户满意度，公司通过对全互联网情绪数据的分析，精确和实时计算知名产品、知名品牌、知名企业的用户满意度和交易量，从而为企业决策提供最精准的参考意见。",
         forCcsiTitle:"中国消费者情绪指数",
         forCcsiTitleE:"CCSI    China Consumer Sentiment Index",
-        forWodeTitle:" 网络情报智能分析大数据平台",
+        forWodeTitle:" 网络舆情实时监测与智能分析大数据平台",
         instructionForUse:"使用说明",
         forLogin:"登录",
         forFirstPage:"首页",
@@ -36,12 +39,12 @@ export const zh_CN = {
         hotEvent:"热点事件"
     },
     footer:{
-        coppy:"京ICP备14046778号-5 联系电话：010-88315479 版权所有:沃民高新科技（北京）股份有限公司 ",
+        coppy:"京ICP备14046778号-5 联系电话：010-88315479 沃民高新科技（北京）股份有限公司提供技术支持 ",
         phone:"联系电话：010-88315479 ",
         cooperation:"沃民高新科技（北京）股份有限公司、工信部电子科技情报所网络舆情研究中心"
     },
     header: {
-        title: "沃德品牌气象站",
+        title: "沃德社会气象台",
         home: "热点事件",
         analytics: "数据分析",
         dashboard: "报告生成",
@@ -63,7 +66,7 @@ export const zh_CN = {
         settingDec: "设置您所需要的监测信息"
     },
     hotEvent: {
-        hotsRiver: "品牌热点事件散点图",
+        hotsRiver: "社会热点事件散点图",
         sentiment: "情绪比例",
         hotsRanking: "实时热点排行",
         todayHotsRanking: "今日热点排行",
@@ -110,7 +113,7 @@ export const zh_CN = {
         desc: "描述："
     },
     compare: {
-        tabs: ["品牌关注", "品牌情绪","品牌评价", "品牌影响力", "品牌印象"],
+        tabs: ["关注度分析", "情绪分析","评价分析", "影响力分析", "子话题分析"],
         filters: ["全部", "情绪指数", "地域分布", "性别分布", "语言分布"],
         source: ["全部", "微信", "微博", "客户端", "网页", "海外"]
     },
@@ -129,11 +132,11 @@ export const zh_CN = {
     dashboard: {
         dashboard: "快捷报告",
         dashboardDec: "用你的 KPI 数据构建客户快捷报告",
-        result: "品牌关注",
-        sentiment: "品牌情绪",
-        comment: "品牌评价",
-        influence: "品牌影响力",
-        theme: "品牌印象",
+        result: "关注度分析",
+        sentiment: "情绪分析",
+        comment: "评价分析",
+        influence: "影响力分析",
+        theme: "子话题分析",
         save: "打印或保存"
     },
     setting: {
@@ -198,7 +201,7 @@ export const zh_CN = {
         web: "网页",
         overseas: "海外",
         happy: "满意",
-        source:"沃德品牌气象站",
+        source:"沃德社会气象台",
         anger: "愤怒",
         sorrow: "失望",
         disgust: "反感",
@@ -225,4 +228,4 @@ export const zh_CN = {
         onlyOne: "请只选择一张图片",
         noPic: "您选择的不是图片"
     }
-};
+});

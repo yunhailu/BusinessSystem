@@ -20,8 +20,8 @@
     import  Tips from '../../Common/Tips/Tips.vue';
     import {Chart, Pie} from '../../../config/config';
     import * as Api from "../../../widgets/Api";
-    import { topicList, activeCompareTopic, topicGroupActiveId, compareSource, compareSubTopic, compareStart, compareEnd, compareTimeRange, compareTimeRangeString, compareSourceCount } from '../../../vuex/getters';
-    import { setTopicList, setActiveCompareTopic, setTopicGroupActiveId, setCompareSource, setCompareSubTopic, setCompareStart, setCompareEnd, setCompareTimeRange, setCompareTimeRangeString, setCompareSourceCount  } from "../../../vuex/actions";
+    import {compareDataChange, topicList, activeCompareTopic, topicGroupActiveId, compareSource, compareSubTopic, compareStart, compareEnd, compareTimeRange, compareTimeRangeString, compareSourceCount } from '../../../vuex/getters';
+    import {setCompareDataChange, setTopicList, setActiveCompareTopic, setTopicGroupActiveId, setCompareSource, setCompareSubTopic, setCompareStart, setCompareEnd, setCompareTimeRange, setCompareTimeRangeString, setCompareSourceCount  } from "../../../vuex/actions";
 
     export default{
         props: [],
@@ -33,7 +33,7 @@
                 loadingParams:{
                     visiable:false,
                     type:'loading',
-                    content:'请稍后'
+                    content:common.waitWords
                 },
                 data:[],
                 VariableChartData:{
@@ -78,59 +78,7 @@
                     }),
                     progressive: 4,
                     textStyle: Chart.textStyle,
-                    graphic:[
-//                        {
-//                            type: 'group',
-//                            left: 0,
-//                            top: 0,
-//                            children: [
-//                                {
-//                                    type: 'rect',
-//                                    z: 100,
-//                                    left: 'center',
-//                                    top: 'middle',
-//                                    shape: {
-//                                        width: 100,
-//                                        height: 40
-//                                    },
-//                                    style: {
-//                                        fill: '#fff',
-//                                        stroke: '#bbb',
-//                                        lineWidth: 2,
-//                                        shadowBlur: 8,
-//                                        shadowOffsetX: 3,
-//                                        shadowOffsetY: 3,
-//                                        shadowColor: 'rgba(0,0,0,0.3)'
-//                                    }
-//                                },
-//                                {
-//                                    type: 'text',
-//                                    z: 100,
-//                                    left: 'center',
-//                                    top: 'middle',
-//                                    style: {
-//                                        fill: '#777',
-//                                        text: [
-//                                           '关键词可多选'
-//                                        ].join('\n'),
-//                                        font: '14px Microsoft YaHei'
-//                                    }
-//                                }
-//                            ]
-//                        },
-                        {
-                            type: 'text',
-                            z: -10,
-                            left: 'center', // 相对父元素居中
-                            top: 'middle',  // 相对父元素居中
-                            rotation: Math.PI / 4,
-                            style: {
-                                fill: '#fff',
-                                text: '品牌气象站',
-                                font: 'bold 34px Microsoft YaHei'
-                            }
-                        }
-                ],
+                    graphic:Chart.graphic,
                     series : []
                 },
 
@@ -145,20 +93,7 @@
                     textStyle: Pie.textStyle,
                     toolbox: Pie.toolbox,
                     color: _.extend([], Chart.color),
-                    graphic:[
-                        {
-                            type: 'text',
-                            z: -10,
-                            left: 'center', // 相对父元素居中
-                            top: 'middle',  // 相对父元素居中
-                            rotation: Math.PI / 4,
-                            style: {
-                                fill: '#fff',
-                                text: '品牌气象站',
-                                font: 'bold 34px Microsoft YaHei'
-                            }
-                        }
-                    ],
+                    graphic:Pie.graphic,
                     series: _.extend({}, Pie.series, {
                         name: 'Compare',
                         radius: ['25%', '60%'],
@@ -209,20 +144,7 @@
                             }
                         }
                     },
-                    graphic:[
-                        {
-                            type: 'text',
-                            z: -10,
-                            left: 'center', // 相对父元素居中
-                            top: 'middle',  // 相对父元素居中
-                            rotation: Math.PI / 4,
-                            style: {
-                                fill: '#fff',
-                                text: '品牌气象站',
-                                font: 'bold 34px Microsoft YaHei'
-                            }
-                        }
-                    ],
+                    graphic:Chart.graphic,
                     series: []
                 },
                 compareNums:[]
@@ -635,8 +557,8 @@
 
         },
         vuex:{
-            actions:{setTopicList ,setActiveCompareTopic ,setTopicGroupActiveId, setCompareSource, setCompareSubTopic, setCompareStart, setCompareEnd, setCompareTimeRange, setCompareTimeRangeString, setCompareSourceCount},
-            getters:{topicList ,activeCompareTopic , topicGroupActiveId, compareSource, compareSubTopic, compareStart, compareEnd, compareTimeRange, compareTimeRangeString, compareSourceCount  }
+            actions:{setCompareDataChange,setTopicList ,setActiveCompareTopic ,setTopicGroupActiveId, setCompareSource, setCompareSubTopic, setCompareStart, setCompareEnd, setCompareTimeRange, setCompareTimeRangeString, setCompareSourceCount},
+            getters:{compareDataChange,topicList ,activeCompareTopic , topicGroupActiveId, compareSource, compareSubTopic, compareStart, compareEnd, compareTimeRange, compareTimeRangeString, compareSourceCount  }
         },
         watch:{
             activeCompareTopic: {
@@ -802,12 +724,18 @@ console.log(this.data);
                     console.log('查看radar是不是首席变化');
                 }
             },
-            compareTimeRangeString:{
+            compareDataChange:{
                 handler(){
                     console.log('查看时间',this.compareTimeRangeString);
                     this.selectCalendar();
                 }
             }
+            /*compareTimeRangeString:{
+                handler(){
+                    console.log('查看时间',this.compareTimeRangeString);
+                    this.selectCalendar();
+                }
+            }*/
             /*compareStart: {
                 handler(){
                     if(_.isEmpty(this.activeCompareTopic)){

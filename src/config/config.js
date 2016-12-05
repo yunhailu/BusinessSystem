@@ -1,11 +1,60 @@
 /**
  * Created by yunhailu on 2016/8/9.
  */
-
+import Local from "../local/local";
+/**
+ * 白名单列表
+ * link: 本网站的路由地址, name: 路由渲染组件名, domain: 第三方网站
+ * */
 export const WhiteList = [{
+    id: '',
+    name: 'demo03',
+    title: "中国消费者情绪指数CCSI",
+    local: 'zh_CN_CCSI',
     link: 'ccsi',
-    name: 'ccsi',
     domain: 'http://vipccsi.ccn.com.cn'
+}, {
+    id: '',
+    name: 'demo11',
+    title: "中国消费者情绪指数CCSI",
+    local: 'zh_CN_CCSI',
+    link: 'ccsi',
+    domain: 'http://vipccsi.ccn.com.cn'
+},{
+    id: '',
+    name: 'demo12',
+    title: "中国消费者情绪指数CCSI",
+    local: 'zh_CN_CCSI',
+    link: 'ccsi',
+    domain: 'http://vipccsi.ccn.com.cn'
+},{
+    id: '',
+    name: 'demo03',
+    title: "中国消费者情绪指数CCSI",
+    local: 'zh_CN_CCSI',
+    link: 'ccsi',
+    domain: 'http://vipccsi.ccn.com.cn'
+},{
+    id: '',
+    name: 'demo14',
+    title: "中国消费者情绪指数CCSI",
+    local: 'zh_CN_CCSI',
+    link: 'ccsi',
+    domain: 'http://vipccsi.ccn.com.cn'
+},{
+    id: '',
+    name: 'demo15',
+    title: "中国消费者情绪指数CCSI",
+    local: 'zh_CN_CCSI',
+    link: 'ccsi',
+    domain: 'http://vipccsi.ccn.com.cn'
+},{
+    id: '',
+    name: 'demo06',
+    title: "沃德社会气象台",
+    local: 'zh_CN_society',
+    link: 'login',
+    domain: 'http://v2.wordemotion.com'
 }];
 
 
@@ -31,6 +80,20 @@ export const Pie = {
     textStyle: {
         fontFamily: 'pingfang'
     },
+    graphic:[
+        {
+            type: 'text',
+            z: -10,
+            left: 'center', // 相对父元素居中
+            top: 'middle',  // 相对父元素居中
+            rotation: Math.PI / 4,
+            style: {
+                fill: '#eee',
+                text: Local().common.source,
+                font: 'bold 34px Microsoft YaHei'
+            }
+        }
+    ],
     series: {
         name:'pie',
         type:'pie',
@@ -89,6 +152,20 @@ export const Chart = {
             }
         }
     },
+    graphic:[
+        {
+            type: 'text',
+            z: -10,
+            left: 'center', // 相对父元素居中
+            top: 'middle',  // 相对父元素居中
+            rotation: Math.PI / 4,
+            style: {
+                fill: '#eee',
+                text:Local().common.source,
+                font: 'bold 34px Microsoft YaHei'
+            }
+        }
+    ],
     yAxis: {
         axisLine: {
             lineStyle: {

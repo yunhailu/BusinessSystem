@@ -5,7 +5,7 @@
         <div class="theme-word-chart" v-echarts="themeWordOption" :loading="themeWordLoading"  theme="infographic"></div><!-- :click="clickAction"-->
         <div class="theme-word-ranking">
             <dl class="list up-list">
-                <dt class="list-title">排名变化</dt>
+                <dt class="list-title">{{words.ranking}}</dt>
                 <dd v-for="item in trendList" class="list-item up-list-item">
                     <div :id="item.id">
                         <i class="fa fa-level-up" v-if="item.trend == 'up'"></i>
@@ -79,30 +79,18 @@
     export default{
         data(){
             const words = Local().theme;
+            const common = Local().common;
             return{
                 words,
                 loadingParams: {
                     visiable: false,
                     type: 'loading',
-                    content: "请稍侯......"
+                    content:common.waitWords
                 },
                 themeWordLoading: true,
                 themeWordOption: {
                     tooltip: {},
-                    graphic:[
-                        {
-                            type: 'text',
-                            z: -10,
-                            left: 'center', // 相对父元素居中
-                            top: 'middle',  // 相对父元素居中
-                            rotation: Math.PI / 4,
-                            style: {
-                                fill: '#fff',
-                                text: '品牌气象站',
-                                font: 'bold 34px Microsoft YaHei'
-                            }
-                        }
-                    ],
+                    graphic:Chart.graphic,
                     series: {
                         //grid: {x:0, x2:0},
                         type: 'wordCloud',
@@ -174,20 +162,7 @@
                             'china': true
                         }
                     },
-                    graphic:[
-                        {
-                            type: 'text',
-                            z: -10,
-                            left: 'center', // 相对父元素居中
-                            top: 'middle',  // 相对父元素居中
-                            rotation: Math.PI / 4,
-                            style: {
-                                fill: '#fff',
-                                text: '品牌气象站',
-                                font: 'bold 34px Microsoft YaHei'
-                            }
-                        }
-                    ],
+                    graphic:Chart.graphic,
                     series : [
                         {
                             name: '热门微博用户',
@@ -284,20 +259,7 @@
                         left:'left',
                         data:['男生','女生']
                     },
-                    graphic:[
-                        {
-                            type: 'text',
-                            z: -10,
-                            left: 'center', // 相对父元素居中
-                            top: 'middle',  // 相对父元素居中
-                            rotation: Math.PI / 4,
-                            style: {
-                                fill: '#fff',
-                                text: '品牌气象站',
-                                font: 'bold 34px Microsoft YaHei'
-                            }
-                        }
-                    ],
+                    graphic:Pie.graphic,
                     series : [
                         {
                             name: '微博男女比例分布',
@@ -425,20 +387,7 @@
                             show: false
                         }
                     }),
-                    graphic:[
-                        {
-                            type: 'text',
-                            z: -10,
-                            left: 'center', // 相对父元素居中
-                            top: 'middle',  // 相对父元素居中
-                            rotation: Math.PI / 4,
-                            style: {
-                                fill: '#fff',
-                                text: '品牌气象站',
-                                font: 'bold 34px Microsoft YaHei'
-                            }
-                        }
-                    ],
+                    graphic:Chart.graphic,
                     series: [
                         {
                             name: '',
@@ -531,20 +480,7 @@
                         type: 'category',
                         data: []
                     }),
-                    graphic:[
-                        {
-                            type: 'text',
-                            z: -10,
-                            left: 'center', // 相对父元素居中
-                            top: 'middle',  // 相对父元素居中
-                            rotation: Math.PI / 4,
-                            style: {
-                                fill: '#fff',
-                                text: '品牌气象站',
-                                font: 'bold 34px Microsoft YaHei'
-                            }
-                        }
-                    ],
+                    graphic:Chart.graphic,
                     series: [
                         {
                             name: words.topics,
@@ -607,20 +543,7 @@
                     }),
                     progressive: 4,
                     textStyle: Chart.textStyle,
-                    graphic:[
-                        {
-                            type: 'text',
-                            z: -10,
-                            left: 'center', // 相对父元素居中
-                            top: 'middle',  // 相对父元素居中
-                            rotation: Math.PI / 4,
-                            style: {
-                                fill: '#fff',
-                                text: '品牌气象站',
-                                font: 'bold 34px Microsoft YaHei'
-                            }
-                        }
-                    ],
+                    graphic:Chart.graphic,
                     series : []
                 },
                 themeLineLoading: true,

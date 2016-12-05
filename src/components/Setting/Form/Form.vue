@@ -72,7 +72,7 @@
                                 <option  v-for="moodgroup in moodGroups" :id="moodgroup.id" :value="moodgroup.id" >{{moodgroup.name}}</option>
                             </select>
 
-                                <input v-model="threshold" type="text" class="form-control moodwSet1 " id="threshold" :placeholder="">
+                                <input v-model="threshold" type="number" class="form-control moodwSet1 " id="threshold" :placeholder=""><span class="percent">(%)</span>
 
 
                                 <!--<input type="text"  v-model="threshold" class="form-control moodwSet1 "  :placeholder="words.warningValue">-->
@@ -83,17 +83,17 @@
                         
                         
                         <div class="form-group" v-show="errorTip">
-                            <div class="col-sm-offset-2 col-sm-10">
+                            <div class="col-sm-offset-3 col-sm-10">
                                 <div class="error">* {{errorTip}}</div>
                             </div>
                         </div>
                         <div class="form-group" v-show="successTip">
-                            <div class="col-sm-offset-2 col-sm-10">
+                            <div class="col-sm-offset-3 col-sm-10">
                                 <div class="success">{{successTip}}</div>
                             </div>
                         </div>
                         <div class="form-group">
-                            <div class="col-sm-offset-2 col-sm-10">
+                            <div class="col-sm-offset-3 col-sm-10">
                                 <button type="submit" class="btn btn-primary" @click.stop.prevent="create" >{{words.create}}</button>
                             </div>
                         </div>
@@ -196,6 +196,13 @@
                 this.isAdvanced = isAdvanced;
             },
             create(){
+                this.errorTip = false;
+                this.successTip = false;
+                if(parseInt(this.threshold)<0 || parseInt(this.threshold)>100){
+                    this.errorTip = true;
+                    this.errorTip='只能输入0-100的整数';
+                    return false;
+                }
                 switch(this.$route.name){
                     case "settingAdd":
                         this.createSubmit();
@@ -206,6 +213,7 @@
                     default:
                         break;
                 }
+
             },
             updateSubmit(){
 

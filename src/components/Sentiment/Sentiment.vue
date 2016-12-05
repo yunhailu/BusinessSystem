@@ -35,9 +35,9 @@
                 loadingParams: {
                     visiable: false,
                     type: 'loading',
-                    content: "请稍侯......"
+                    content: common.waitWords
                 },
-                options: [{key: 'time', value: '按时间排序'}, {key: 'browser', value: '浏览数排序'}, {key: 'star', value: '点赞数排序'}],
+                options: [{key: 'time', value:common.timeRanking}, {key: 'browser', value:common.countRanking}, {key: 'star', value:common.greetRanking},{key:'share',value:common.shareRanking}],
                 //list: list.time,
                 list: [],
                 sortVal: "",
@@ -98,20 +98,7 @@
                     progressive: 4,
                     textStyle: Chart.textStyle,
                     color:['#2FCC71','#E64D3D', '#F1C40F', '#3598DC', '#737373'],
-                    graphic:[
-                        {
-                            type: 'text',
-                            z: -10,
-                            left: 'center', // 相对父元素居中
-                            top: 'middle',  // 相对父元素居中
-                            rotation: Math.PI / 4,
-                            style: {
-                                fill: '#eee',
-                                text: '品牌气象站',
-                                font: 'bold 34px Microsoft YaHei'
-                            }
-                        }
-                    ],
+                    graphic:Chart.graphic,
                     series : [{
                         name:common.happy,
 
@@ -223,20 +210,7 @@
                     color:['#2FCC71','#E64D3D', '#F1C40F', '#3598DC', '#737373'],
                     textStyle: Pie.textStyle,
                     toolbox: Pie.toolbox,
-                    graphic:[
-                        {
-                            type: 'text',
-                            z: -10,
-                            left: 'center', // 相对父元素居中
-                            top: 'middle',  // 相对父元素居中
-                            rotation: Math.PI / 4,
-                            style: {
-                                fill: '#eee',
-                                text: '品牌气象站',
-                                font: 'bold 34px Microsoft YaHei'
-                            }
-                        }
-                    ],
+                    graphic:Pie.graphic,
                     series: [
                         {
                             label:{

@@ -24,6 +24,22 @@ export const removeEvent = (elem, type, handler) => {
     }
 };
 
+// 格式化文件大小
+export const formatSize = (s) =>  {
+    if(!s) return ;
+    const size = parseInt(s, 10);
+    if(size / 1024 < 1){
+        return size.toFixed(2) + ' B';
+    }
+    if(size / 1024 / 1024 < 1){
+        return (size / 1024).toFixed(2) + ' KB';
+    }
+    if(size / 1024 / 1024 / 1024 < 1){
+        return (size / 1024 / 1024).toFixed(2) + ' M';
+    }
+    return (size / 1024 / 1024 / 1024 ).toFixed(2) + ' G';
+};
+
 // 判断是否为父子节点
 export const isFatherDom = (p, c2) =>  {
     var c = c2;
@@ -33,4 +49,4 @@ export const isFatherDom = (p, c2) =>  {
             return true;
     }
     return false;
-}
+};
