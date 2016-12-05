@@ -91,6 +91,10 @@
                         _.first(topicList).isActive = true;
                         this.setTopicList(topicList);
                         this.initActiveTopic();
+
+                        if(!resp.data.data.length){
+                            this.$router.go({ name: 'settingAdd' });
+                        }
                     }
                 });
             },
