@@ -257,7 +257,7 @@
                 let regx = new RegExp('demo((2[6-9])|([3-9][0-9]))','g');
                 const user = getCookie('business_name');
                 if(regx.test(user)){
-                    if(_.indexOf(WhiteNameList,this.topicText) != -1){
+                    if(_.indexOf(WhiteNameList,this.trim(this.topicText)) != -1){
                         this.errorTip = "您没有权限查看该主题";
                         return ;
                     }else{
