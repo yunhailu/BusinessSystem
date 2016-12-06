@@ -63,6 +63,30 @@ export const logout = params => {
 };
 
 /**
+ *  Encapsulate `register` interface
+ *
+ *  @return {Promise} With Register.
+ */
+export const register = params => {
+    return Api.request({
+        url: `${rootURI}/auth/register`,
+        params
+    });
+};
+
+/**
+ *  Encapsulate `nodify` interface
+ *
+ *  @return {Promise} With Register.
+ */
+export const nodifyUser = params => {
+    return Api.request({
+        url: `${rootURI}/auth/setting`,
+        params
+    });
+};
+
+/**
  *  Encapsulate `get group list` interface
  *
  *  @return {Promise} With Group List.

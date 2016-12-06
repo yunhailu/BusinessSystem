@@ -136,7 +136,7 @@
             return{
                 words,
                 isMine: true,
-                isAdmin: 0,
+                //isAdmin: 0,
                 isGetToken: false,
                 user_avatar: 'http://of4d1rz63.bkt.clouddn.com/logo.png',
                 file: {
@@ -172,7 +172,7 @@
         },
         computed: {
             isAdmin(){
-                return getCookie('business_admin');
+                return this.getCookie('business_admin');
             }
         },
         methods: {
@@ -190,6 +190,18 @@
                 console.log('createSubmit', this.addUser);
                 const params = _.pick(this.addUser, 'username', 'password', 'phone', 'key', 'email');
                 console.log('params' , params);
+                if(this.addUser.password != this.addUser.rePassword){
+                    alert("两次密码不一致");
+                }
+                Api.register( params ).then(resp => {
+                    if(resp.data.code == 0 && resp.data.data.success == 1){
+                        alert("添加成功");
+                    }
+                    if(resp.data.code == 101){
+                        alert(resp.data.data.message);
+                    }
+                    this.resetAdd();
+                });
             },
             resetMine(){
                 this.mine = {
