@@ -3,6 +3,7 @@
         <div class="logo">
             <!--<img src="../../../images/logo.jpg" />-->
             <span>{{words.title}}</span>
+            <sup> &reg;</sup>
         </div>
         <ul class="navbar-center">
             <li class="tab-item" v-for="tab in tabs">

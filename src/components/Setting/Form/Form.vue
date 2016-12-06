@@ -112,6 +112,9 @@
     import * as Api from "../../../widgets/Api";
     import { setTopicList } from "../../../vuex/actions";
     import { topicList } from '../../../vuex/getters';
+    import { WhiteNameList } from "../../../config/config";
+    import Cookie from "js-cookie";
+    import { getCookie } from '../../../widgets/Cookie';
     export default{
         data(){
             const words = Local().setting;
@@ -158,11 +161,9 @@
             getters: { topicList }
         },
         methods: {
-        	
-        
-           
-            
-            
+            trim(str){
+                return str.replace(/(^\s*)|(\s*$)/g,'');
+            },
             getCategroy(){
                 Api.getCategroy().then(resp => {
                     //console.log(resp.data);
@@ -246,12 +247,23 @@
                 });
             },
             createSubmit(){
+
                 //console.log(this.isAdvanced, this.radioVal, this.topicArr, this.related, this.topicText, this.excludeText);
                 if(!this.radioVal || !this.topicText || (this.threshold!=0&&this.threshold%1!=0)){
-                    this.errorTip = "请选择正确的阈值(整数)分组和填写新主题";
+                    this.errorTip = "请填写必填选项和话题分组";
                     this.successTip = "";
                     return ;
                 };
+                let regx = new RegExp('demo((2[6-9])|([3-9][0-9]))','g');
+                const user = getCookie('business_name');
+                if(regx.test(user)){
+                    if(_.indexOf(WhiteNameList,this.topicText) != -1){
+                        this.errorTip = "您没有权限查看该主题";
+                        return ;
+                    }else{
+                        console.log('没找到')
+                    }
+                }
                 //console.log(this.threshold);
                 this.topicAdd().then( resp => {
                     if(resp.data.code == 0){
@@ -287,7 +299,7 @@
             topicAdd(){
                 return Api.topicAdd({
                     group_id: this.radioVal,
-                    name: this.topicText,
+                    name: this.trim(this.topicText),
                     monitor:this.monitor,
                     threshold:this.threshold
                 });
@@ -296,7 +308,7 @@
                 return Api.topicUp({
                     id:this.$route.params.topic_id,
                     group_id:this.radioVal,
-                    name: this.topicText,
+                    name: this.trim(this.topicText),
                     monitor:this.monitor,
                     threshold:this.threshold
                 });
