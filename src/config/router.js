@@ -157,6 +157,12 @@ module.exports = {
             require(['../components/CcsiLogin/CcsiLogin.vue'], resolve);
         }
     },
+    '/society': {
+        name: 'society',
+        component (resolve) {
+            require(['../components/SocietyLogin/SocietyLogin.vue'], resolve);
+        }
+    },
 
 
     

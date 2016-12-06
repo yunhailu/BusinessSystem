@@ -87,7 +87,7 @@ export const zh_CN_CCSI = _.extend({}, zh_CN,{
         all: "全部"
     },
     influence: {
-        noTableTips: "暂时没有数据",
+        noTableTips: "数据处理中",
         influencer: "影响者",
         numberOfPosts: "发布量",
         sentiment: "情绪指数",

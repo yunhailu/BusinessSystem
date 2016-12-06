@@ -53,7 +53,7 @@ export const WhiteList = [{
     name: 'demo06',
     title: "沃德社会气象台",
     local: 'zh_CN_society',
-    link: 'login',
+    link: 'society',
     domain: 'http://v2.wordemotion.com'
 }];
 
