@@ -1045,7 +1045,8 @@
                         this.themeLineLoading = false;
                         this.themeLineOption.xAxis.data = _.map(details, detail => detail.date);
                     console.log('details',details);
-                        this.themeLineOption.legend.data = _.map(details[0].values, item => item.name);
+                        this.themeLineOption.legend.data = _.map(details[0].values, item => item.name+'');
+                    console.log('this.themeLineOption.legend.data',this.themeLineOption.legend.data);
                         this.themeLineOption.series = _.map(this.themeLineOption.legend.data, legend => {
                             const data = _.chain(details)
                                     .map(detail => (_.filter(detail.values, value => (value.name == legend))[0]))

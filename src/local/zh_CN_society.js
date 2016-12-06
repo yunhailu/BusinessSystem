@@ -66,12 +66,12 @@ export const zh_CN_society = _.extend({}, zh_CN, {
         settingDec: "设置您所需要的监测信息"
     },
     hotEvent: {
-        hotsRiver: "社会热点事件散点图",
+        hotsRiver: "实时热点事件散点图",
         sentiment: "情绪比例",
         hotsRanking: "实时热点排行",
         todayHotsRanking: "今日热点排行",
         wordsRanking: "热词排行",
-        allNetHotsRiver:"全网热点事件散点图"
+        allNetHotsRiver:"实时热点事件散点图"
     },
     analytics: {
         tabs: ["关注分析", "情绪分析", "评价分析", "影响力分析", "印象分析"],
@@ -87,7 +87,7 @@ export const zh_CN_society = _.extend({}, zh_CN, {
         all: "全部"
     },
     influence: {
-        noTableTips: "暂时没有数据",
+        noTableTips: "数据处理中",
         influencer: "影响者",
         numberOfPosts: "发布量",
         sentiment: "情绪指数",

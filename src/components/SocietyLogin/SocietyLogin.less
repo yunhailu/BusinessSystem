@@ -1,0 +1,106 @@
+@import '../common.less';
+
+.wrapper{
+  .pr();.left(0);.top(0);.mw(550px);
+}
+.loginSlider{ .w(100%);.h(100%); .mg(0px auto); }
+
+.login-header{
+  .h(71px);.pf();.top(0);.pd(10px);box-sizing: border-box;.bgc(#fff);.w(100%);.z(1030);.disT();box-shadow: 0 1px 10px #999;
+
+    img{.w(205px);.h(56px);.disIB();.mg-left(65px);.pd-right(2px);}
+    span{ .tc(); .mg-left(15px);.f(20px);.ff('Microsoft Yahei');vertical-align: -4px;.c(#2f2f2f);.disIB();.mg-bottom(6px); }
+
+  ul{
+    .ls();.disTC();.vm();
+    .mg-top(10px); .mg-right(20px);
+    li{
+      .float-left();.mg-right(10px);.b(1px solid #288cd2);border-radius:5px;.w(90px);.tc();
+      a{.disIB();.c(#288cd2);.w(100%);.f(14px);.ff('Microsoft Yahei');outline: none;.pd-bottom(8px);.pd-top(7px);}
+    }
+  }
+}
+.apply-bg{
+  .pf();.z(2000);.w(100%);.h(100%);.top(0);.left(0);.bg(rgba(0,0,0,.5));
+  &-content{
+    .pa();.w(400px);.left(0);.right(0);.bottom(0);.top(0);.mg(auto auto);.bgc(#fff);.h(500px);.pd-top(20px);.pd-left(40px);
+    &-model{
+      .mg-top(3px);.h(500px);.float-left();.w(300px);
+      h3{
+        .mg-bottom(22px);.c(#2c74ab);.f(18px);.fw(900);
+        a{.f(12px);.mg-top(7px);.float-right();text-decoration: underline;}
+      }
+      .applyCon{
+        .form-group{
+          .pr();.mg-top(15px);
+          input{box-sizing: border-box;.w(100%);.h(40px);.c(#777);.f(14px);.b(1px solid #dedede);.pd-left(15px);.pd-right(15px);outline: none;}
+          input:focus{
+            //-webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6) ;
+            //-moz-box-shadow:  inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6);
+            box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6);
+          }
+          .red{.pa();.top(12px);.right(-16px);.c(#ff1700);}
+          .getSms{.pa();.top(6px);.lh(29px);.right(6px);.disIB();.h(29px);.pd(0 10px);.c(#fff);.f(14px);.bgc(#47a0e4);cursor: pointer;.b(medium none);}
+          .require{.h(76px);.pd(5px 15px); box-sizing: border-box;.w(100%);.c(#777);.f(14px);.b(1px solid #dedede);outline: none;}
+          .require:focus{
+            //-webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6) ;
+            //-moz-box-shadow:  inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6);
+            box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6);
+          }
+          .apply-btn{.w(100%);.h(40px);.mg(10px 0);.c(#fff);.bgc(#47a0e4);.f(14px);.b(none);.disB();.lh(40px);.tc();}
+          p{.c(#2c74ab);.f(15px);.tc();}
+        }
+      }
+    }
+  }
+}
+.login-bg{
+  .pf();.z(2000);.w(100%);.h(100%);.top(0);.left(0);.bg(rgba(0,0,0,.5));
+  &-content{
+    .pa();.w(400px);.left(0);.right(0);.bottom(0);.top(0);.mg(auto auto);.bgc(#fff);.h(340px);.pd-top(35px);.pd-left(30px);
+    &-model{
+      .mg-top(3px);.w(320px);.float-left();
+      h3{
+        .mg-bottom(22px);.c(#2c74ab);.f(18px);.fw(900);
+        a{.f(12px);.mg-top(7px);.float-right();text-decoration: underline;}
+      }
+      .loginCon{
+        .form-group{
+          .pr();.mg-top(15px);
+          .logImg{
+            .pa();.top(8px);.left(10px);.disIB();.h(18px);
+            img{.h(100%);.w(auto);}
+          }
+          input{
+            .pd-left(34px);box-sizing: border-box;.w(100%);.h(40px);.c(#777);.f(14px);.b(1px solid #dedede);outline: none;
+          }
+          input:focus{
+            box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6);
+          }
+          .remember{.w(20px);.h(20px);.vm();.mg-top(-1px);}
+          label{.mg-left(5px);}
+          .pull-right{.f(14px);.float-right();}
+          .login-btn{
+            .w(100%);.h(40px);.disB();.tc();.lh(40px);.bgc(#47a0e4);.c(#fff);.mg-top(20px);.f(14px);.mg-bottom(40px);
+          }
+          .errorTip{ .c(red); }
+        }
+      }
+    }
+  }
+}
+.hotevent{.pd-top(77px);.pd-bottom(77px);}
+/*.login-page{
+  .pd(20px);
+  .login-font{.f(14px)}
+  legend{
+    .f(20px); .pd(10px 0px);
+    .logo-icon{
+      .w(50px);  .h(50px);  .disIB();  .vm();
+    }
+    span{  .vm();  }
+  }
+
+  .errorTip{ .c(red); }
+}*/
+
