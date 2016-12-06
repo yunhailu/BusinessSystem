@@ -9,8 +9,10 @@
                 <div class="col-md-6 col-lg-6 pull-right">
                     <ul  class=" navbar-nav pull-right ">
                         <li><a href="javascript:void(0);" @click="toPromotion">{{loginStr.forFirstPage}}</a></li>
-                        <li><a href="javascript:void(0);" @click="showLogin">{{loginStr.forLogin}}</a></li>
                         <li><a href="javascript:void(0);" @click="toHotEvent">{{loginStr.hotEvent}}</a></li>
+                        <li><a href="javascript:void(0);" @click="showLogin">{{loginStr.forLogin}}</a></li>
+                        <!--<li><a href="javascript:void(0);" @click="showApply">账号注册</a></li>-->
+
                     </ul>
                 </div>
 
@@ -78,41 +80,48 @@
             </div>
         </div>-->
         <footer-component></footer-component>
-        <!--<div class="apply-bg" v-show="isApply" @click="cancelApply">
-            <div class="apply-bg-content" @click.stop>
-                <div class="apply-bg-content-model" @keyup.enter="submit" >
-                    <h3>
-                        <span>申请试用</span>
-                        <a href="javascript:void(0);" @click="toLogin">已有账号，请点此登陆</a>
-                    </h3>
-                    <div class="applyCon">
-                        <div class="form-group">
-                            <input type="text" placeholder="姓名"  v-model="applyUserName"  />
-                            <em class="red">*</em>
-                        </div>
-                        <div class="form-group">
-                            <input type="text" placeholder="公司名称"  v-model="applyFactory"  />
-                        </div>
-                        <div class="form-group">
-                            <input type="text" placeholder="手机号"  v-model="applyTelephone"  />
-                            <em class="red">*</em>
-                        </div>
-                        <div class="form-group">
-                            <input type="text" placeholder="验证码"  v-model="applySms"  />
-                            <span class="getSms">获取验证码</span>
-                            <em class="red">*</em>
-                        </div>
-                        <div class="form-group">
-                            <textarea class="require" placeholder="需求描述"></textarea>
-                        </div>
-                        <div class="form-group">
-                            <a class="apply-btn" href="javascript:void(0);"  @click="submit">提 交</a>
-                            <p>客服 : ***-********</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>-->
+
+        <!--账号申请注册------start -->
+        <!--<div class="apply-bg" v-show="isApply" @click="cancelApply">-->
+            <!--<div class="apply-bg-content" @click.stop>-->
+                <!--<div class="apply-bg-content-model" @keyup.enter="submit" >-->
+                    <!--<h3>-->
+                        <!--<span>账号注册</span>-->
+                        <!--<a href="javascript:void(0);" @click="toLogin">已有账号，请点此登陆</a>-->
+                    <!--</h3>-->
+                    <!--<div class="applyCon">-->
+                        <!--<div class="form-group">-->
+                            <!--<input type="text" placeholder="姓名"  v-model="applyUserName"  />-->
+                            <!--<em class="red">*</em>-->
+                        <!--</div>-->
+                        <!--<div class="form-group">-->
+                            <!--<input type="text" placeholder="公司名称"  v-model="applyFactory"  />-->
+                        <!--</div>-->
+                        <!--<div class="form-group">-->
+                            <!--<input type="text" placeholder="手机号"  v-model="applyTelephone"  />-->
+                            <!--<em class="red">*</em>-->
+                        <!--</div>-->
+                        <!--<div class="form-group">-->
+                            <!--<input type="text" placeholder="验证码"  v-model="applySms"  />-->
+                            <!--<span class="getSms">获取验证码</span>-->
+                            <!--<em class="red">*</em>-->
+                        <!--</div>-->
+                        <!--<div class="form-group">-->
+                            <!--<textarea class="require" placeholder="需求描述"></textarea>-->
+                        <!--</div>-->
+                        <!--<div class="form-group">-->
+                            <!--<a class="apply-btn" href="javascript:void(0);"  @click="submit">提 交</a>-->
+                            <!--<p>客服 : ***-********</p>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+        <!--账号申请注册-------end -->
+
+
+
+
         <div class="login-bg" v-show="isLogin" @click="cancelLogin">
             <div class="login-bg-content" @click.stop>
                 <div class="login-bg-content-model" @keyup.enter="login"  @keyup.8="isShowError">
@@ -227,21 +236,21 @@
                 this.isLogin=false;
                 this.isApply=true;
             },*/
-            /*去申请登陆
+//            /*去申请登陆
             toLogin(){
                 this.isApply=false;
                 this.isLogin=true;
-            },*/
+            },
             isShowError(){
                 if(this.errorShow == true){
                     this.errorShow = this.userName || this.password;
                 }
             },
-            /*点击遮罩取消
+//            /*点击遮罩取消
             cancelApply(){
                 this.isApply=false;
                 this.errorShow = false;
-            },*/
+            },
             cancelLogin(){
                 this.isLogin=false;
                 this.errorShow = false;
