@@ -31,7 +31,7 @@
             </thead>
             <tbody v-if="influancerTable.length">
                 <tr id="item.id" v-for="(index, item) in influancerTable" :class="[index % 2 == 0 ? '' : '']" @click="showPopList(item)" >
-                    <td>{{item.author}}</td>
+                    <td>{{item.influencer}}</td>
                     <td>{{item.post}}</td>
                     <td class="barTd"><div class="sentimentBar" v-echarts="item.sentiment | barFormat"></div></td>
                     <td>{{item.likeCount}}</td>
@@ -140,7 +140,7 @@
             showPopList(item){
                 this.popVisiable = true;
                 const topic_id = this.activeAnalyticsTopic.topic_id;
-                const author = item.influencer;
+                const author = item.author;
                 const size = this.$route.params.size;
 //                const start = this.analyticsStart;
 //                const end = this.analyticsEnd;
@@ -286,13 +286,13 @@
                         firstTitle.push(sdasda3);
                         firstTitle.push(sdasda4);
                         const sdaaa1 =_.map(firstTitle, (itemd) => {
-                            itemd=_.pick(itemd,'author','post','source');
+                            itemd=_.pick(itemd,'influencer','post','source');
                             return itemd;
                         });
                         const sexData=_.map(sdaaa1,(item,index)=>{
                             item.icon = icons[index];
                             item.title = iconsName[index];
-                            item.value = item.author;
+                            item.value = item.influencer;
                             return item;
                         });
                         const sdaaa2 =_.map(sexData, (itemd) => {
