@@ -87,7 +87,7 @@
                 const business_name = getCookie('business_name');
                 Cookie.remove('business_uid');
                 Cookie.remove('bussiness_name');
-                const whiteName = _.filter(WhiteList, item => (item.name == business_name));
+                const whiteName = _.filter(WhiteList, item => (item.domain == location.origin));
                 let name = 'login';
                 if(whiteName.length){
                     name = whiteName[0].link;
