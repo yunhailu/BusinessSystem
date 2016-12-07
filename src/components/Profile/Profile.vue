@@ -11,7 +11,13 @@
                     <div class="form-group">
                         <label for="userName" class="col-sm-3 control-label">{{words.userName}}</label>
                         <div class="col-sm-5">
-                            <input type="text" v-model="mine.userName" class="form-control" id="userName" :placeholder="words.userName">
+                            <input type="text" v-model="mine.userName" class="form-control" id="userName" readonly :placeholder="words.userName">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="oldPassword" class="col-sm-3 control-label">{{words.oldPassword}}</label>
+                        <div class="col-sm-5">
+                            <input type="password" v-model="mine.oldPassword" class="form-control" id="oldPassword" :placeholder="words.oldPassword">
                         </div>
                     </div>
                     <div class="form-group">
@@ -152,7 +158,9 @@
                     name: ""
                 },
                 mine:{
-                    userName: "",
+                    id: "",
+                    userName: getCookie('business_name'),
+                    oldPassword: "",
                     password: "",
                     rePassword: "",
                     tip: ""
@@ -172,7 +180,7 @@
         },
         computed: {
             isAdmin(){
-                return this.getCookie('business_admin');
+                return getCookie('business_admin') == 1 ? true : false;
             }
         },
         methods: {
@@ -185,27 +193,67 @@
             },
             modifySubmit(){
                 console.log('modifySubmit', this.mine);
+                this.mine.id = getCookie('business_uid');
+                if(this.mine.password != this.mine.rePassword){
+                    //alert(this.words.passDiff);
+                    this.mine.tip = this.words.passDiff;
+                    return ;
+                }
+                if(! /^[0-9A-Za-z]{6,}$/.test(this.mine.password)){
+                    //alert(this.words.passwordCondition);
+                    this.mine.tip = this.words.passwordCondition;
+                    return ;
+                }
+                const params = {
+                    new_password: this.mine.password,
+                    current_password: this.mine.oldPassword
+                };
+                Api.nodifyUser( params ).then(resp => {
+                    if(resp.data.code == 0 && resp.data.data.success == 1){
+                        this.resetMine();
+                        alert(this.words.nodifySuccess);
+                    }
+                });
             },
             createSubmit(){
                 console.log('createSubmit', this.addUser);
                 const params = _.pick(this.addUser, 'username', 'password', 'phone', 'key', 'email');
                 console.log('params' , params);
                 if(this.addUser.password != this.addUser.rePassword){
-                    alert("两次密码不一致");
+                    //alert(this.words.passDiff);
+                    this.addUser.tip = this.words.passDiff;
+                    return ;
+                }
+                if(! /^[0-9A-Za-z]{6,}$/.test(this.addUser.password)){
+                    //alert(this.words.passwordCondition);
+                    this.addUser.tip = this.words.passwordCondition;
+                    return ;
+                }
+                if(! /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1}))+\d{8})$/.test(this.addUser.phone)){
+                    //alert(this.words.phoneCondition);
+                    this.addUser.tip = this.words.phoneCondition;
+                    return ;
+                }
+                if(! /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/.test(this.addUser.email)){
+                    //alert(this.words.emailCondition);
+                    this.addUser.tip = this.words.emailCondition;
+                    return ;
                 }
                 Api.register( params ).then(resp => {
                     if(resp.data.code == 0 && resp.data.data.success == 1){
-                        alert("添加成功");
+                        alert(this.words.addSuccess);
                     }
                     if(resp.data.code == 101){
-                        alert(resp.data.data.message);
+                        //alert(resp.data.data.message);
+                        this.addUser.tip = resp.data.data.message;
                     }
                     this.resetAdd();
                 });
             },
             resetMine(){
                 this.mine = {
-                    userName: "",
+                    userName: getCookie('business_name'),
+                    oldPassword: "",
                     password: "",
                     rePassword: "",
                     tip: ""
