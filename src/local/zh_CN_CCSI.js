@@ -77,7 +77,8 @@ export const zh_CN_CCSI = _.extend({}, zh_CN,{
         tabs: ["关注分析", "情绪分析", "评价分析", "影响力分析", "印象分析"],
         filters: ["全部", "情绪指数", "地域分布", "性别分布", "语言分布"],
         source: ["全部", "微信", "微博", "客户端", "网页", "海外"],
-        addDashboard: "添加快捷报告"
+        addDashboard: "添加快捷报告",
+        monitor:"监测词"
     },
     comment: {
         comment: "评价指数",

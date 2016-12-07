@@ -287,12 +287,6 @@
                         Cookie.set('business_admin', data.data.isAdmin);
                         Cookie.set('business_email', data.data.email);
                         this.setLoginTime(this.loginTime + 1);
-                        var date=new Date();
-                        date.setTime(date.getTime()+24*60*60*1000); //设置date为当前时间+30分
-                        document.cookie = "business_uid =" + data.data.user_id + ";expires=" + date.toGMTString();
-                        document.cookie = "business_name =" + data.data.user_name + ";expires=" + date.toGMTString();
-                        document.cookie = "business_admin =" + data.data.isAdmin + ";expires=" + date.toGMTString();
-                        document.cookie = "business_email =" + data.data.email + ";expires=" + date.toGMTString();
                         this.userName = '';
                         this.password = '';
                         /*if(this.$els.remember.checked==true){
