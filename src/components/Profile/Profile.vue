@@ -220,22 +220,18 @@
                 const params = _.pick(this.addUser, 'username', 'password', 'phone', 'key', 'email');
                 console.log('params' , params);
                 if(this.addUser.password != this.addUser.rePassword){
-                    //alert(this.words.passDiff);
                     this.addUser.tip = this.words.passDiff;
                     return ;
                 }
                 if(! /^[0-9A-Za-z]{6,}$/.test(this.addUser.password)){
-                    //alert(this.words.passwordCondition);
                     this.addUser.tip = this.words.passwordCondition;
                     return ;
                 }
                 if(! /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1}))+\d{8})$/.test(this.addUser.phone)){
-                    //alert(this.words.phoneCondition);
                     this.addUser.tip = this.words.phoneCondition;
                     return ;
                 }
                 if(! /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/.test(this.addUser.email)){
-                    //alert(this.words.emailCondition);
                     this.addUser.tip = this.words.emailCondition;
                     return ;
                 }
@@ -244,7 +240,6 @@
                         alert(this.words.addSuccess);
                     }
                     if(resp.data.code == 101){
-                        //alert(resp.data.data.message);
                         this.addUser.tip = resp.data.data.message;
                     }
                     this.resetAdd();

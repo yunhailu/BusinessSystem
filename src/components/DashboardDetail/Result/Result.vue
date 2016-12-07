@@ -1,17 +1,9 @@
 <template>
-    <!--<tabs :actions="actions" ></tabs>-->
-    <!--<span>Result</span>-->
     <div class="panel-title">
         <span class="panel-title-text">{{title}}</span>
         <div class="panel-title-delete" @click="deleteItem();"><i class="fa fa-minus"></i></div>
     </div>
     <div class="charts">
-        <!--<div class="arrow animated rubberBand" @click="toggle">-->
-            <!--<i class="fa fa-angle-left fa-3x" transition="rotate" :class="[resultPieChartOption.isActive ? 'fa-rotate-180' : '']"></i>-->
-        <!--</div>-->
-        <!--<div class="chart" v-echarts="resultChartOption" :loading="resultChartLoading" :img.sync="master" :class="[data.source=='all' ? 'active' : '']" :resize="resultChartOption.isToggle" theme="macarons"></div>-->
-        <!--<div class="pie" v-echarts="resultPieChartOption" :loading="resultPieChartLoading" :img.sync="sub" :class="[data.source=='all' ? 'active' : '']" translate="show-pie"  theme="macarons"></div>-->
-
         <div class="chart" :class="[data.source=='all' ? 'active' : '']" :resize="resultChartOption.isToggle" theme="macarons">
             <echarts :options="resultChartOption" :initOptions="resultChartOption" :img.sync="master" theme="macarons"></echarts>
         </div>
@@ -31,7 +23,6 @@
     import * as Api from "../../../widgets/Api";
     import { Chart, Pie } from '../../../config/config';
     import { list } from "../../../config/tmpData";
-    //import ListPanel from '../../Common/ListPanel/ListPanel.vue';
     import ListPanel from '../ListPanel/ListPanel.vue';
     import Tabs from '../../Common/Tabs/Tabs.vue';
     import Echarts from '../../Common/Echarts/Echarts.vue';
@@ -72,7 +63,6 @@
                 common,
                 isShowTools: false,
                 sourceActive: 0,
-                //list: list.time,
                 list: [],
                 options: [{key: 'time', value:common.timeRanking}, {key: 'browser', value:common.countRanking}, {key: 'star', value:common.greetRanking}],
                 sortVal: "",
@@ -94,14 +84,11 @@
                     isToggle: true,
                     title: _.extend({}, Chart.title, { show: false}),
                     tooltip: Chart.tooltip,
-//                    legend: {
-//                        data: ['All']
-//                    },
                     animation:false,
                     grid: Chart.grid,
                     toolbox: Chart.toolbox,
                     xAxis: _.extend({}, Chart.xAxis, {
-                        type : 'category',  //category
+                        type : 'category',
                         data: [],
                         boundaryGap : false
                     }),
@@ -121,8 +108,6 @@
                     tooltip: _.extend({}, Pie.tooltip),
                     animation:false,
                     legend: _.extend({}, Pie.legend, {
-                        //orient: 'vertical',
-                        //x: 'bottom',
                         bottom: 0,
                         data: [common.wechat, common.weibo, common.client, common.web, common.overseas]
                     }),
@@ -132,7 +117,6 @@
                     series:[]
                 },
                 actions: function(val, idx){
-                    //this.resultChartOption = {};
                     const lineData = this.lineData;
                     const x = this.x;
                     let data;
@@ -169,7 +153,6 @@
                             name:"总数",
                             type:'line',
                             areaStyle: {normal: {}},
-                            //stack: 'Total',
                             data: data
                         }]
                     });
@@ -211,8 +194,6 @@
         },
         methods: {
             toggle(){
-//                this.isChartScale = !this.isChartScale;
-//                this.isActivePie = !this.isActivePie;
                 this.resultChartOption.isToggle = !this.resultChartOption.isToggle;
                 this.resultPieChartOption.isActive = !this.resultPieChartOption.isActive;
             },
@@ -221,10 +202,7 @@
                         topic_id = this.data.topic_id,
                         source = this.data.source,
                         time_interval = this.data.time_interval,
-                        //time_dimension = this.data.time_dimension,
                         time_dimension = time_interval > 7 ? 1 : 0,
-//                        start = moment().subtract(time_interval, 'days').format('YYYY-MM-DD'),
-//                        end = moment().format('YYYY-MM-DD'),
                         topic = this.data.topic;
                 let start,end;
                 if(time_interval!=0){
@@ -238,11 +216,9 @@
                     console.log('start', start, end);
                 }
                 Api.getSummaryDetail({ subtopic, topic_id, source, time_dimension, start, end, topic }).then(resp => {
-                    //console.log('getSummaryDetail', resp);
                     if(resp.data.code == 0){
                         const details = resp.data.data;
                         this.x = _.map(details, detail => detail.date);
-                        //console.log("xxxx", this.x);
                         _.each(details, detail => {
                             this.lineData.wechat.push(detail.values.wechat);
                             this.lineData.weibo.push(detail.values.weibo);
@@ -263,13 +239,11 @@
                     topic_id = this.data.topic_id,
                     source = this.data.source,
                     time_interval = this.data.time_interval,
-                    //time_dimension = this.data.time_dimension,
                     time_dimension = time_interval > 7 ? 1 : 0,
                     start = moment().subtract(time_interval, 'days').format('YYYY-MM-DD'),
                     end = moment().format('YYYY-MM-DD'),
                     topic = this.data.topic;
                 Api.getCommentList({ type, subtopic, topic_id, source, time_dimension, start, end, topic }).then(resp => {
-                    //console.log(resp.data);
                     if(resp.data.code == 0){
                         this.list = _.filter(resp.data.data, (item, index) => { return index < 20; });
                     }
@@ -295,18 +269,6 @@
                 this.getCommentList();
             }
         },
-//        watch: {
-//            sortVal: {
-//                handler(val, oldVal){
-//                    if(val != oldVal){
-//                        // 展示不同的列表信息
-//                        //console.log(val, oldVal);
-//                        //this.list = list[val.key];
-//                        this.getCommentList(val.key);
-//                    }
-//                }
-//            }
-//        },
         components:{
             Tabs, ListPanel, Echarts
         },
@@ -314,10 +276,6 @@
             this.topic_name=this.data.topic;
             this.init();
         },
-//        route: {
-//            data(){
-//                this.init();
-//            }
-//        }
+
     }
 </script>

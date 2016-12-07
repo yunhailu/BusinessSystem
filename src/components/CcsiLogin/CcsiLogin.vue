@@ -1,34 +1,6 @@
 <template>
     <div class="wrapper">
         <div class="login-header">
-           <!-- <header class="navbar navbar-inverse" >
-                <div class="navbar-header">
-                    &lt;!&ndash; 自适应隐藏导航展开按钮 &ndash;&gt;
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" @click="toggle">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    &lt;!&ndash; 导航条LOGO &ndash;&gt;
-                    <a class="navbar-brand" href="#"></a>
-                </div>
-                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                    <ul class="nav navbar-nav navbar-right">
-
-                        <li><a href="javascript:void(0);" @click="toIntruction">热点事件</a></li>
-                        <li v-if="false"><a href="javascript:void(0);">{{loginStr.showBrand}}</a></li>
-                        <li><a href="javascript:void(0);" @click="showLogin">登陆</a></li>
-                        <li  v-show="false"><a href="javascript:void(0);" @click="showApply">{{loginStr.applyForUse}}</a></li>
-                        <li><a href="javascript:void(0);" @click="toPromotion">首页</a></li>
-                    </ul>
-                </div>
-                <ul v-if="showList" class="showList">
-                    <li><a href="javascript:void(0);" @click="toPromotion">首页</a></li>
-                    <li><a href="javascript:void(0);" @click="showLogin">登陆</a></li>
-                    &lt;!&ndash;<li><a href="javascript:void(0);" @click="toIntruction">热点事件</a></li>&ndash;&gt;
-                </ul>
-            </header>-->
             <div class="header-login">
                    <span class="zh">{{loginStr.forCcsiTitle}}</span>
                    <span class="en">{{loginStr.forCcsiTitleE}}</span>
@@ -225,7 +197,6 @@ console.log(this.userName,this.password);
                     username: this.userName,
                     password: this.password
                 }).then(resp => {
-                    //console.log('Login', resp);
                     const data = resp.data;
                     if(data.code == 0){
                         this.errorShow = false;
@@ -235,16 +206,6 @@ console.log(this.userName,this.password);
                         Cookie.set('business_email', data.data.email);
                         this.userName = '';
                         this.password = '';
-                        /*if(this.$els.remember.checked==true){
-                            console.log(this.$els.remember.checked)
-                            Cookie.set('login_userName',this.userName);
-                            Cookie.set('login_password',this.password);
-                            Cookie.set('login_remember',true);
-                        }else{
-                            this.userName = '';
-                            this.password = '';
-                        }*/
-                        //location.hash = '#!/home';
                         this.$router.go({name: 'home'});
                     } else {
                         this.errorShow = true;
@@ -253,17 +214,10 @@ console.log(this.userName,this.password);
                 });
             }
         },
-       /* created(){
-            console.log('bbb',this.userName,this.password);
-            this.userName = getCookie('login_userName');
-            this.password = getCookie('login_password');
-        },*/
         ready(){
             console.log('aaa',this.userName,this.password);
                 this.userName = getCookie('login_userName');
                 this.password = getCookie('login_password');
-            //console.log('this',this.$el.querySelector('.remember').checked);
-            //this.$els.remember.checked = getCookie('login_remember');
 
         },
         watch:{

@@ -29,14 +29,11 @@
 
                     </div>
                 </div>
-                <!--<tabs ></tabs>-->
-
                 <router-view></router-view>
             </div>
         </div>
     </div>
     <order-footer></order-footer>
-    <!--<order-footer></order-footer>-->
 </template>
 <style lang="less">
     @import "Analytics.less";
@@ -63,7 +60,6 @@
                     type: "date", //date datetime
                     begin: moment().subtract(8, 'hour').format('YYYY-MM-DD HH'),
                     end: moment().format('YYYY-MM-DD HH'),
-                    //value: `${ moment().subtract(7, 'days').format('YYYY-MM-DD')} ~ ${moment().format('YYYY-MM-DD')}`,
                     x: 0,
                     y: 0,
                     range:true//是否多选
@@ -116,19 +112,13 @@
                     this.setAnalyticsSubTopic(this.search);
                     this.setAnalyticsSubTopicId(0);
                 }
-
-
             },
             selectTime(num){
                 this.selectTimeTag = num;
                 if(num == 0){
-                    /*//禁掉
-                    alert('更多信息，请联系客服');
-                    return ;*/
                     this.isTimeDiy = true;
                     this.dateVal = this.analyticsStart + ' ~ ' + this.analyticsEnd;
                 } else if(num ==0.33){
-                    //this.selectTimeTag = num;
                     this.isTimeDiy = false;
                     this.setAnalyticsTimeRange(0.33);
                     let start = moment().subtract(8,"hour").format("YYYY-MM-DD HH");
@@ -138,22 +128,13 @@
                     this.setAnalyticsStart(start);
                     this.setAnalyticsEnd(end);
                     //可以精确到小时
-                    console.log('8H',moment().subtract(8,"hour").format("YYYY-MM-DD HH"),moment().format("YYYY-MM-DD HH"))
                     this.setAnalyticsDateChange(this.analyticsDateChange + 1);
 
                 }else {
-                    //只显示1天和7天
-                    /*if(num == 30){
-                        alert('更多信息，请联系客服')
-                        return ;
-                    }*/
-                    //
-                    //this.selectTimeTag = num;
                     this.isTimeDiy = false;
                     this.setAnalyticsTimeRange(num);
                     this.setAnalyticsStart(moment().subtract(num, 'days').format('YYYY-MM-DD'));
                     this.setAnalyticsEnd(moment().format('YYYY-MM-DD'));
-                    console.log('1D',moment().subtract(num, 'days').format('YYYY-MM-DD'),moment().format('YYYY-MM-DD'))
                     this.setAnalyticsDateChange(this.analyticsDateChange + 1);
                 }
             },
@@ -189,11 +170,8 @@
                 handler(val){
                     if(val == true){
                         this.search = '';
-                        console.log('修改search');
                         this.setAnalyticsResetSearch(false);
-                        console.log('搜索不为空，重置为false')
                         this.setAnalyticsSubTopic(this.search);
-                        console.log('结束时间',(new Date()).getTime());
                     }
                 }
             },
@@ -203,20 +181,11 @@
 
                 }
             },
-            /*search:{
-                handler(val){
-                    if(val ==''){
-                        this.setAnalyticsSubTopic(this.search);
-                    }
-                }
-            },*/
             dateVal: {
                 handler(val){
-                    //console.log('date',val);
                     const start = moment(val.split(' ~ ')[0], "YYYY-MM-DD");
                     const end = moment(val.split(' ~ ')[1], "YYYY-MM-DD");
                     const currentData = moment().format('YYYY-MM-DD');
-                    console.log(currentData,this.compareEnd);
                     if(moment(end)>moment(currentData)){
                         alert('请求区间错误,返回最近7天对比数据');
                         this.dateVal =  `${ moment().subtract(7, 'days').format('YYYY-MM-DD')} ~ ${moment().format('YYYY-MM-DD')}`;
@@ -227,7 +196,6 @@
                     this.setAnalyticsStart(val.split(' ~ ')[0]);
                     this.setAnalyticsEnd(val.split(' ~ ')[1]);
                     this.setAnalyticsTimeRange(days);
-                    //console.log(val.split(' ~ ')[0], val.split(' ~ ')[1], days);
                     this.setAnalyticsDateChange(this.analyticsDateChange + 1);
                 }
             }

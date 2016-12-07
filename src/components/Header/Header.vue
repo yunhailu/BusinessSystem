@@ -1,7 +1,6 @@
 ﻿<template>
     <header class="header">
         <div class="logo">
-            <!--<img src="../../../images/logo.jpg" />-->
             <span>{{words.title}}</span>
             <sup> &reg;</sup>
         </div>

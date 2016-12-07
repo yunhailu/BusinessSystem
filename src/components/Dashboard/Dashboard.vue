@@ -59,19 +59,8 @@
         methods: {
             getDashboardList(){
                 Api.getDashboardList({}).then(resp => {
-                    console.log('getDashboardList', resp.data);
                     if(resp.data.code == 0){
                         const list = resp.data.data;
-                        console.log('这个是报告生成测试',resp);
-                        /**
-                         *   {
-                         *       name: "阿里影业",
-                         *       link: {
-                         *           name: "dashboardDetail",
-                         *           params:{ id: "123" }
-                         *       }
-                         *   }
-                         * */
                         this.dashboardList = _.map(list, item => {
                             item.link = {name: 'dashboardDetail', params: {id: item.id}};
                             return item;
@@ -80,12 +69,10 @@
                 });
             },
             deleteDashboard(item){
-                console.log(item);
                 if(this.activeId == item.id) return ;
                 const id = item.id || "";
                 this.activeId = id;
                 Api.deleteDashboard({ id }).then(resp => {
-                    console.log(resp.data);
                     if(resp.data.code == 0 && resp.data.data.success == 1){
                         this.dashboardList = _.filter(this.dashboardList, dashboard => {
                             return dashboard.id != id;

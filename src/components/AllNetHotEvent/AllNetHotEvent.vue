@@ -203,21 +203,6 @@
 
                 graphChartLoading: true,
                 graphChartOption: {
-                    /*title: {
-
-                        text: '媒体展示',
-                        textStyle: {
-                            color:'#3C3F41',
-                            fontStyle: 'normal',
-                            fontWeight: 'border',
-                            fontSize: 16,
-                        },
-                        top:0,
-                        left: 'right',
-                        link:'/media',
-                        target:'blank'
-
-                    },*/
                     tooltip: {
 
                         formatter: '{b}'

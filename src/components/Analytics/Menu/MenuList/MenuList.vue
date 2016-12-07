@@ -15,7 +15,6 @@
                     <li v-for="topic in group.list" :id="topic.topic_id" @click="selectTopic(topic);" :class="topic | isActive" >
                         <a href="javascript:void(0);">
                             <i class="fa fa-angle-double-right"></i> {{topic.topic_name}}
-                            <!--<i class="fa fa-remove delete" @click.stop.prevent="deleteTopicAction(topic,group.group_id);"></i>-->
                         </a>
                     </li>
                 </ul>
