@@ -82,7 +82,8 @@
                     return;
                 }
                 Api.getTopicList({}).then(resp => {
-                    //console.log('getTopicList', resp);
+                    console.log('getTopicList', resp);
+                    console.log('getTopicList', resp.data);
                     if(resp.data.code == 0){
                         let topicList = _.map(resp.data.data, topic => {
                             topic.isActive = false;
@@ -96,6 +97,9 @@
                             this.$router.go({ name: 'settingAdd' });
                         }
                     }
+                    /*if(resp.data.code==8){
+                        this.$router.go({ name: 'settingAdd' });
+                    }*/
                 });
             },
             initActiveTopic(){
