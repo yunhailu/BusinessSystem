@@ -14,8 +14,8 @@
         </ul>
         <ul class="navbar-right">
             <li class="tab-item">
-                <!--<a href="javascript:void(0);" v-link="{name: 'profile'}" class="dropdown-toggle" >-->
-                <a href="javascript:void(0);" >
+                <a href="javascript:void(0);" v-link="{name: 'profile'}" class="dropdown-toggle" >
+                <!--<a href="javascript:void(0);" >-->
                     <i class="glyphicon glyphicon-user"></i>
                     <span class="header-font">{{nickName}} <i class="caret"></i></span>
                 </a>
