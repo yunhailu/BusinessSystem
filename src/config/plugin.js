@@ -12,6 +12,9 @@ import {WhiteList} from  './config';
 
 var plugin = {
 	init(){
+		var date=new Date();
+		date.setTime(date.getTime()+30*60*1000); //设置date为当前时间+30分
+		document.cookie="key=value; expires="+date.toGMTString(); //将date赋值给expires
 		this.initVuePlugins();
 		//this.resourceGlobalSetting();
 		this.runRouter();

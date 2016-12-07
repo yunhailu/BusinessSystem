@@ -5,8 +5,8 @@
         <div class="analytics-panel">
             <div class="analytics-panel-wrap">
                 <div class="row tools">
-                    <div class="row-left" v-if="trim(search) == ''">{{showName}}</div>
-                    <div class="row-left" v-if="trim(search) !=''">{{showName}}+{{search}}</div>
+                    <div class="row-left" v-if="trim(search) == ''">检测词:{{showName}}</div>
+                    <div class="row-left" v-if="trim(search) !=''">检测词:{{showName}}+{{search}}</div>
                     <div class="row-middle">
                         <div class="search">
                             <input class="search-input" placeholder="子话题搜索" v-model="search" @keyup.enter="searchAction" />
