@@ -65,6 +65,12 @@ export const logout = params => {
 /**
  *  Encapsulate `register` interface
  *
+ *  @params {String} username
+ *  @params {String} password
+ *  @params {String} phone
+ *  @params {String} key
+ *  @params {String} email
+ *
  *  @return {Promise} With Register.
  */
 export const register = params => {
@@ -77,11 +83,18 @@ export const register = params => {
 /**
  *  Encapsulate `nodify` interface
  *
+ *  @params {String} username
+ *  @params {String} new_password
+ *  @params {String} current_password
+ *  @params {String} phone
+ *  @params {String} key
+ *  @params {String} email
+ *
  *  @return {Promise} With Register.
  */
 export const nodifyUser = params => {
     return Api.request({
-        url: `${rootURI}/auth/setting`,
+        url: `${rootURI}/auth/settings`,
         params
     });
 };

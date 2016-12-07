@@ -158,10 +158,17 @@ export const en = {
         tel: "Telephone",
         email: "E-mail",
         password: "Password",
+        oldPassword: "Old Password",
         rePassword: "Confirm Password",
         createBtn: "Create Submit",
         modifyBtn: "Modify Submit",
-        resetBtn: "Reset"
+        resetBtn: "Reset",
+        passDiff: "Two different passwords",
+        addSuccess: "Add Success!",
+        nodifySuccess: "Nodify Success!",
+        passwordCondition: "Passwords need to be greater than 6 and need to contain numbers and letters",
+        phoneCondition: "Telephone Incorrect!",
+        emailCondition: "E-mail Incorrect!"
     },
     common: {
         weeks: ['Sun', 'Mon', 'Tues', 'Wed', 'Thur', 'Fri', 'Sat'],

@@ -182,10 +182,17 @@ export const zh_CN_CCSI = _.extend({}, zh_CN,{
         tel: "手机号码",
         email: "电子邮箱",
         password: "密码",
+        oldPassword: "旧密码",
         rePassword: "确认密码",
         createBtn: "提交创建",
         modifyBtn: "提交修改",
-        resetBtn: "重置"
+        resetBtn: "重置",
+        passDiff: "两次密码不一致",
+        addSuccess: "添加成功",
+        nodifySuccess: "修改成功",
+        passwordCondition: "密码需要大于6位，且需要包含数字和字母",
+        phoneCondition: "手机号码不正确",
+        emailCondition: "邮箱不正确"
     },
     common: {
         weeks: ['日', '一', '二', '三', '四', '五', '六'],
