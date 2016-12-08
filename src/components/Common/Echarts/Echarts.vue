@@ -107,7 +107,6 @@
                     this.img = this.getDataURL({
                         pixelRatio: 1
                     });
-                    console.log('base64后',this.img);
                 }, 4000);
             }, { deep: true });
             chart.group = this.group
@@ -117,6 +116,7 @@
             // expose ECharts events as custom events
             ACTION_EVENTS.forEach(event => {
                 chart.on(event, params => {
+                    //dispatch:调度
                     this.$dispatch(event, params)
                  })
             })

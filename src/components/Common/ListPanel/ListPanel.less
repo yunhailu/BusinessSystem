@@ -44,8 +44,10 @@
         .fa{ .mg(10px 0);  .float-left();  .c(@word); };
         &-con{
           .mg(0 0 0 26px);
-          .title{ .c(@body-theme);  .h(24px);  .lh(24px);  .f(14px);  .ff("pingfang-bold");  .text-hidden(); }
-          .detail{ /*.text-num-hidden(2);*/ .ff("pingfang-bold"); .text-hidden();   }
+          .title{ .c(@body-theme);  .h(24px);  .lh(24px);  .f(14px); // .ff("pingfang-bold");
+            .text-hidden(); }
+          .detail{ /*.text-num-hidden(2);*/// .ff("pingfang-bold");
+            .text-hidden();   }
           //.data{
           //  .disIB();  .vm();  .pd(0 0 0 20px);
           //  .item{
@@ -81,7 +83,8 @@
           }
           .row{
             .mg(5px 0 0);  .f(14px);.disT();.w(100%);
-            .title{ .ff(pingfang-bold);  .fw(600);.disTC();.w(25%); }
+            .title{// .ff(pingfang-bold);
+              .fw(600);.disTC();.w(25%); }
             .time{
               .f(12px);.disTC();.w(75%);
               .item{ .disIB();  .w(30%); .lh(20px); }

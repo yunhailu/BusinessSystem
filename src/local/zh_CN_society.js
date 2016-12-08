@@ -41,7 +41,7 @@ export const zh_CN_society = _.extend({}, zh_CN, {
     footer:{
         coppy:"京ICP备14046778号-5 联系电话：010-88315479 沃民高新科技（北京）股份有限公司提供技术支持 ",
         phone:"联系电话：010-88315479 ",
-        cooperation:"沃民高新科技（北京）股份有限公司、工信部电子科技情报所网络舆情研究中心"
+        cooperation:"沃民高新科技（北京）股份有限公司、工信部电子科技情报所网络舆情研究中心联合开发"
     },
     header: {
         title: "沃德社会气象台",
@@ -79,6 +79,13 @@ export const zh_CN_society = _.extend({}, zh_CN, {
         source: ["全部", "微信", "微博", "客户端", "网页", "海外"],
         addDashboard: "添加快捷报告",
         monitor:"监测词"
+    },
+    sentiment:{
+        happy: "高兴",
+        anger: "愤怒",
+        sorrow: "悲伤",
+        disgust: "厌恶",
+        fear: "恐惧",
     },
     comment: {
         comment: "评价指数",
@@ -209,8 +216,8 @@ export const zh_CN_society = _.extend({}, zh_CN, {
         client: "客户端",
         web: "网页",
         overseas: "海外",
-        happy: "满意",
         source:"沃德社会气象台",
+        happy: "满意",
         anger: "愤怒",
         sorrow: "失望",
         disgust: "反感",

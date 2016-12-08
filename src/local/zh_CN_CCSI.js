@@ -80,6 +80,13 @@ export const zh_CN_CCSI = _.extend({}, zh_CN,{
         addDashboard: "添加快捷报告",
         monitor:"监测词"
     },
+    sentiment:{
+        happy: "满意",
+        anger: "愤怒",
+        sorrow: "失望",
+        disgust: "反感",
+        fear: "害怕",
+    },
     comment: {
         comment: "评价指数",
         positive: "积极",

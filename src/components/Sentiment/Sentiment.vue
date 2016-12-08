@@ -30,8 +30,10 @@
     export default{
         data(){
             const common = Local().common;
+            const sentiment = Local().sentiment;
             return{
                 common,
+                sentiment,
                 loadingParams: {
                     visiable: false,
                     type: 'loading',
@@ -78,7 +80,7 @@
                         }
                     }),
                     legend: {
-                        data:[common.happy,common.anger,common.sorrow,common.disgust,common.fear]
+                        data:[sentiment.happy,sentiment.anger,sentiment.sorrow,sentiment.disgust,sentiment.fear]
                     },
                     dataZoom: _.extend({}, Chart.dataZoom),
                    // color:_.extend( Chart.color, {}),
@@ -100,23 +102,23 @@
                     color:['#2FCC71','#E64D3D', '#F1C40F', '#3598DC', '#737373'],
                     graphic:Chart.graphic,
                     series : [{
-                        name:common.happy,
+                        name:sentiment.happy,
                         type:'line',
                         data: []
                     }, {
-                        name:common.anger,
+                        name:sentiment.anger,
                         type:'line',
                         data: []
                     }, {
-                        name:common.sorrow,
+                        name:sentiment.sorrow,
                         type:'line',
                         data: []
                     }, {
-                        name:common.disgust,
+                        name:sentiment.disgust,
                         type:'line',
                         data: []
                     }, {
-                        name:common.fear,
+                        name:sentiment.fear,
                         type:'line',
                         data: []
                     }]
@@ -131,7 +133,7 @@
                     },
                     legend: _.extend({}, Pie.legend, {
                     bottom: 0,
-                    data: [common.happy,common.anger,common.sorrow,common.disgust,common.fear]
+                    data: [sentiment.happy,sentiment.anger,sentiment.sorrow,sentiment.disgust,sentiment.fear]
                 }),
 
                     color:['#2FCC71','#E64D3D', '#F1C40F', '#3598DC', '#737373'],
@@ -193,11 +195,11 @@
                 }
                 //this.sentimentPieOption.series[0].name = source;
                 this.sentimentPieOption.series[0].data =[
-                    {value:_.reduce(this.lineData[source].happy,(mome, val) => mome + val, 0), name:this.common.happy},
-                    {value:_.reduce(this.lineData[source].anger,(mome, val) => mome + val, 0), name:this.common.anger},
-                    {value:_.reduce(this.lineData[source].sorrow,(mome, val) => mome + val, 0), name:this.common.sorrow},
-                    {value:_.reduce(this.lineData[source].disgust,(mome, val) => mome + val, 0), name:this.common.disgust},
-                    {value:_.reduce(this.lineData[source].fear,(mome, val) => mome + val, 0), name:this.common.fear}
+                    {value:_.reduce(this.lineData[source].happy,(mome, val) => mome + val, 0), name:this.sentiment.happy},
+                    {value:_.reduce(this.lineData[source].anger,(mome, val) => mome + val, 0), name:this.sentiment.anger},
+                    {value:_.reduce(this.lineData[source].sorrow,(mome, val) => mome + val, 0), name:this.sentiment.sorrow},
+                    {value:_.reduce(this.lineData[source].disgust,(mome, val) => mome + val, 0), name:this.sentiment.disgust},
+                    {value:_.reduce(this.lineData[source].fear,(mome, val) => mome + val, 0), name:this.sentiment.fear}
                 ];
                 _.each(this.lineData[source], (value, key) => {
                     this.sentimentBarOption.series[this.sentimentMap[key]].data = value;
