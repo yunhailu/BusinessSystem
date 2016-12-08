@@ -124,6 +124,7 @@
                         const detail = resp.data.data;
                         this.name = detail.name;
                         this.details = detail.data;
+                        console.log('details',this.details);
                         this.details = _.map(this.details, value => {
                             value.summarymaster = "";
                             value.summarysub = "";
@@ -136,6 +137,7 @@
                             value.themetop = "";
                             return value;
                         });
+                        console.log('this.details',this.details);
                     }
                 });
             },

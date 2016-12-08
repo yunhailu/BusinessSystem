@@ -131,11 +131,11 @@
                     </h3>
                     <div class="loginCon">
                         <div class="form-group">
-                            <span class="logImg"><img src="images/user.png" alt=""></span>
+                            <span class="logImg"><img src="../../../images/user.png" alt=""></span>
                             <input type="text" placeholder="{{loginStr.username}}"  v-model="userName"  />
                         </div>
                         <div class="form-group">
-                            <span class="logImg"><img src="images/key.png" alt=""></span>
+                            <span class="logImg"><img src="../../../images/key.png" alt=""></span>
                             <input type="password" placeholder="{{loginStr.password}}" v-model="password"  />
                         </div>
                         <div class="form-group">
