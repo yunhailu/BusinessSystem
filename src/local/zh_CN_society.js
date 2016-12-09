@@ -78,7 +78,8 @@ export const zh_CN_society = _.extend({}, zh_CN, {
         filters: ["全部", "情绪指数", "地域分布", "性别分布", "语言分布"],
         source: ["全部", "微信", "微博", "客户端", "网页", "海外"],
         addDashboard: "添加快捷报告",
-        monitor:"监测词"
+        monitor:"监测词",
+        tips:"更多信息，请联系：010-88315479"
     },
     sentiment:{
         happy: "高兴",
@@ -123,7 +124,8 @@ export const zh_CN_society = _.extend({}, zh_CN, {
     compare: {
         tabs: ["关注度分析", "情绪分析","评价分析", "影响力分析", "子话题分析"],
         filters: ["全部", "情绪指数", "地域分布", "性别分布", "语言分布"],
-        source: ["全部", "微信", "微博", "客户端", "网页", "海外"]
+        source: ["全部", "微信", "微博", "客户端", "网页", "海外"],
+        tips:"更多信息，请联系：010-88315479"
     },
     addDashboard:{
         addTitle: "添加新的报表",

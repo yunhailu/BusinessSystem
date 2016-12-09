@@ -18,10 +18,12 @@
                             <li @click="selectTime(0.33);" :class="[selectTimeTag == 0.33 ? 'active' : '']" class="active">8H</li>
                             <li @click="selectTime(1);" :class="[selectTimeTag == 1 ? 'active' : '']">1D</li>
                             <li @click="selectTime(7);" :class="[selectTimeTag == 7 ? 'active' : '']">7D</li>
-                            <li @click="selectTime(30);" :class="[selectTimeTag == 30 ? 'active' : '']">30D
-                                <!--<smalltip :title = '' class="smalltip"></smalltip>-->
+                            <li @click="selectTime(30);" :class="[selectTimeTag == 30 ? 'active' : '']"> 30D
+                                <smalltip :title = 'analytics.tips' class="smalltip"></smalltip>
                             </li>
-                            <li @click="selectTime(0);" :class="[selectTimeTag == 0 ? 'active' : '']">自定义</li>
+                            <li @click="selectTime(0);" :class="[selectTimeTag == 0 ? 'active' : '']">自定义
+                                <smalltip :title = 'analytics.tips' class="smalltip"></smalltip>
+                            </li>
                         </ul>
                         <div class="diyDate" v-show="isTimeDiy">
                             <span class="date" @click="showCalendar"><i class="fa fa-calendar  icon"></i> {{dateVal}}</span>
@@ -41,7 +43,7 @@
 </style>
 <script  type="text/ecmascript-6">
     import moment from 'moment';
-//    import SmallTip from '../Common/SmallTip/SmallTip.vue';
+    import SmallTip from '../Common/SmallTip/SmallTip.vue';
     import HeaderComponent from '../Header/Header.vue';
     import MenuComponent from './Menu/Menu.vue';
     import Calendar from '../Common/Calendar/Calendar.vue';
@@ -102,8 +104,8 @@
             'header-component': HeaderComponent,
             'menu-component': MenuComponent,
             'calendar': Calendar,
-            'order-footer':OrderFooterComponent
-           // 'smalltip':SmallTip
+            'order-footer':OrderFooterComponent,
+            'smalltip':SmallTip
         },
         methods: {
             searchAction(){

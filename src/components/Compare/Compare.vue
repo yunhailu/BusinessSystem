@@ -16,8 +16,12 @@
                             <li @click="selectTime(0.33);" :class="[selectTimeTag == 0.33 ? 'active' : '']" class="active">8H</li>
                             <li @click="selectTime(1);" :class="[selectTimeTag == 1 ? 'active' : '']">1D</li>
                             <li @click="selectTime(7);" :class="[selectTimeTag == 7 ? 'active' : '']">7D</li>
-                            <li @click="selectTime(30);" :class="[selectTimeTag == 30 ? 'active' : '']">30D</li>
-                            <li @click="selectTime(0);" :class="[selectTimeTag == 0 ? 'active' : '']">自定义</li>
+                            <li @click="selectTime(30);" :class="[selectTimeTag == 30 ? 'active' : '']">30D
+                                <smalltip :title = 'compare.tips' class="smalltip"></smalltip>
+                            </li>
+                            <li @click="selectTime(0);" :class="[selectTimeTag == 0 ? 'active' : '']">自定义
+                                <smalltip :title = 'compare.tips' class="smalltip"></smalltip>
+                            </li>
                         </ul>
                         <div class="diyDate" v-show="isTimeDiy">
                             <span class="date" @click="showCalendar"><i class="fa fa-calendar icon"></i> {{dateVal}}</span>
@@ -42,6 +46,7 @@
     import MenuComponent from './Menu/Menu.vue';
     import Calendar from '../Common/Calendar/Calendar.vue';
     import Tabs from './Tabs/Tabs.vue';
+    import SmallTip from '../Common/SmallTip/SmallTip.vue';
     import Main from './Main/Main.vue';
     import Local from "../../local/local";
     import FooterComponent from '../OrderFooter/OrderFooter.vue';
@@ -50,7 +55,9 @@
 
     export default{
         data(){
+            const compare = Local().compare;
             return{
+                compare,
                 search: '',
                 dateVal: `${ moment().subtract(8, 'hour').format('YYYY-MM-DD HH')} ~ ${moment().format('YYYY-MM-DD HH')}`,
                 cal: {
@@ -77,7 +84,8 @@
             'menu-component': MenuComponent,
             'calendar': Calendar,
             'footer-component': FooterComponent,
-            'main': Main
+            'main': Main,
+            'smalltip':SmallTip
         },
         methods: {
             searchAction(){
