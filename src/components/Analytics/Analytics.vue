@@ -102,8 +102,8 @@
             'header-component': HeaderComponent,
             'menu-component': MenuComponent,
             'calendar': Calendar,
-            'order-footer':OrderFooterComponent,
-            'smalltip':SmallTip
+            'order-footer':OrderFooterComponent
+           // 'smalltip':SmallTip
         },
         methods: {
             searchAction(){
