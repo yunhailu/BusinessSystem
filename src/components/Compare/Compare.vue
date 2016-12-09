@@ -84,12 +84,14 @@
                 this.setCompareSubTopic(this.search);
             },
             selectTime(num){
-                this.selectTimeTag = num;
+                //this.selectTimeTag = num;
                 if(num == 0){
+                    return ;
                     this.isTimeDiy = true;
                     this.dateVal = this.compareStart + ' ~ ' + this.compareEnd;
                     this.setCompareDataChange(this.compareDataChange + 1);
                 } else if(num == 0.33){
+                    this.selectTimeTag = num;
                     this.isTimeDiy = false;
                     this.setCompareTimeRange(0.33);
                     let start = moment().subtract(8,"hour").format("YYYY-MM-DD HH");
@@ -100,7 +102,10 @@
                     this.setCompareEnd(end);
                     this.dateVal = `${ start} ~ ${end}`;
                     this.setCompareDataChange(this.compareDataChange + 1);
+                }else if(num == 30){
+                    return ;
                 }else{
+                    this.selectTimeTag = num;
                     this.isTimeDiy = false;
                     this.setCompareTimeRange(num);
                     this.setCompareStart(moment().subtract(num, 'days').format('YYYY-MM-DD'));

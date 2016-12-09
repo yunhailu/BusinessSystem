@@ -104,7 +104,7 @@ export const zh_CN = {
     },
     theme: {
         topics: "话题排行",
-        ranking:"排名变化"
+        ranking:"排名变化(8小时环比)"
     },
     detail: {
         article: "层级转发关系",

@@ -13,20 +13,21 @@
                             <span class="search-btn" @click="searchAction"><i class="fa fa-search"></i></span>
                         </div>
                     </div>
-                    <div class="row-null"></div>
                     <div class="row-right">
                         <ul class="days-btn">
                             <li @click="selectTime(0.33);" :class="[selectTimeTag == 0.33 ? 'active' : '']" class="active">8H</li>
                             <li @click="selectTime(1);" :class="[selectTimeTag == 1 ? 'active' : '']">1D</li>
                             <li @click="selectTime(7);" :class="[selectTimeTag == 7 ? 'active' : '']">7D</li>
-                            <li @click="selectTime(30);" :class="[selectTimeTag == 30 ? 'active' : '']">30D</li>
+                            <li @click="selectTime(30);" :class="[selectTimeTag == 30 ? 'active' : '']">30D
+                                <!--<smalltip :title = '' class="smalltip"></smalltip>-->
+                            </li>
                             <li @click="selectTime(0);" :class="[selectTimeTag == 0 ? 'active' : '']">自定义</li>
                         </ul>
                         <div class="diyDate" v-show="isTimeDiy">
                             <span class="date" @click="showCalendar"><i class="fa fa-calendar  icon"></i> {{dateVal}}</span>
                             <calendar :show.sync="cal.show" :value.sync="dateVal" :x="cal.x" :y="cal.y" :begin.sync="cal.begin" :end.sync="cal.end" :type="cal.type" :range="cal.range"></calendar>
                         </div>
-
+                        <div class="row-null"></div>
                     </div>
                 </div>
                 <router-view></router-view>
@@ -40,6 +41,7 @@
 </style>
 <script  type="text/ecmascript-6">
     import moment from 'moment';
+//    import SmallTip from '../Common/SmallTip/SmallTip.vue';
     import HeaderComponent from '../Header/Header.vue';
     import MenuComponent from './Menu/Menu.vue';
     import Calendar from '../Common/Calendar/Calendar.vue';
@@ -100,7 +102,8 @@
             'header-component': HeaderComponent,
             'menu-component': MenuComponent,
             'calendar': Calendar,
-            'order-footer':OrderFooterComponent
+            'order-footer':OrderFooterComponent,
+            'smalltip':SmallTip
         },
         methods: {
             searchAction(){
@@ -114,11 +117,14 @@
                 }
             },
             selectTime(num){
-                this.selectTimeTag = num;
+                //this.selectTimeTag = num;
                 if(num == 0){
+                    return ;
+                    //this.selectTimeTag = num;
                     this.isTimeDiy = true;
                     this.dateVal = this.analyticsStart + ' ~ ' + this.analyticsEnd;
                 } else if(num ==0.33){
+                    this.selectTimeTag = num;
                     this.isTimeDiy = false;
                     this.setAnalyticsTimeRange(0.33);
                     let start = moment().subtract(8,"hour").format("YYYY-MM-DD HH");
@@ -129,13 +135,17 @@
                     this.setAnalyticsEnd(end);
                     //可以精确到小时
                     this.setAnalyticsDateChange(this.analyticsDateChange + 1);
-
-                }else {
+                }else if(num == 30){
+                    return ;
+                }else{
+                    this.selectTimeTag = num;
                     this.isTimeDiy = false;
                     this.setAnalyticsTimeRange(num);
                     this.setAnalyticsStart(moment().subtract(num, 'days').format('YYYY-MM-DD'));
                     this.setAnalyticsEnd(moment().format('YYYY-MM-DD'));
                     this.setAnalyticsDateChange(this.analyticsDateChange + 1);
+
+
                 }
             },
             showCalendar:function(e){
