@@ -294,43 +294,26 @@
                             all.fear.push(this.lineData.wechat.fear[index] + this.lineData.weibo.fear[index] + this.lineData.client.fear[index] + this.lineData.web.fear[index] + this.lineData.overseas.fear[index]+ this.lineData.sengine.fear[index]);
                         });
                         this.lineData.all = all;
+                        console.log(this.lineData);
                     //修改资源来源数量
-                        /*console.log('--',this.lineData.web,this.lineData.client);
                         _.map(_.zip(_.values(this.lineData.web),_.values(this.lineData.client)),(item,index)=>{
-                            this.lineData.web[index] = _.reduce(_.unzip(item),function(memo, num){ return memo + num; }, 0);
+                            (this.lineData.client)[(_.keys(this.lineData.web))[index]] =_.map(_.unzip(item),value=>{return _.reduce(value,function(memo,num){return memo +num;},0)})
                         })
-                        console.log(this.lineData.web);*/
-
-                        this.lineData.web.happy = _.map(_.zip(this.lineData.web.happy,this.lineData.client.happy),item=>{
-                                                        return _.reduce(item, function(memo, num){ return memo + num; }, 0);
-                                                    });
-                        this.lineData.web.anger = _.map(_.zip(this.lineData.web.anger,this.lineData.client.anger),item=>{
-                                                        return _.reduce(item, function(memo, num){ return memo + num; }, 0);
-                                                     });
-                        this.lineData.web.sorrow = _.map(_.zip(this.lineData.web.sorrow,this.lineData.client.sorrow),item=>{
-                                                        return _.reduce(item, function(memo, num){ return memo + num; }, 0);
-                                                     });
-                        this.lineData.web.disgust = _.map(_.zip(this.lineData.web.disgust,this.lineData.client.disgust),item=>{
-                                                        return _.reduce(item, function(memo, num){ return memo + num; }, 0);
-                                                        });
-                        this.lineData.web.fear = _.map(_.zip(this.lineData.web.fear,this.lineData.client.fear),item=>{
-                                                        return _.reduce(item, function(memo, num){ return memo + num; }, 0);
-                                                     });
-//                        console.log(this.lineData.web);
-
-                    this.lineData.client = this.lineData.sengine;
+                    this.lineData.web = this.lineData.sengine;
                         this.sentimentBarLoading = false;
                         //this.sentimentChartLoading = false;
                         this.sentimentPieLoading = false;
                         this.sentimentBarOption.xAxis.data = this.x;
                         this.actions("", 0);
 
-                      /*  _.each(this.lineData,(value,index) =>{
+                        /*_.each(this.lineData,(value,index) =>{
+                            console.log(this.lineData[index]);
                                 this.sentimentNums[index] = _.map(value,item=>{
-                                    return _.reduce(_.reduceRight(_.values(item),function (a,b) {return a.concat(b);},[]),function (memo,num) {return memo+num;},0)
+                                    console.log(_.reduce(_.reduce(_.values(item),function (a,b) {return a.concat(b);},[]),function (memo,num) {return memo+num;},0))
+                                    return _.reduce(_.reduce(_.values(item),function (a,b) {return a.concat(b);},[]),function (memo,num) {return memo+num;},0)
                                 })
-                        });
-                        console.log('this.sentimentNums--1',this.sentimentNums);*/
+                        });*/
+                        console.log('this.sentimentNums--1',this.sentimentNums);
                         const allNums=_.reduce(this.lineData.all.happy,(mome, val) => mome + val, 0)+_.reduce(this.lineData.all.anger,(mome, val) => mome + val, 0)
                                 +_.reduce(this.lineData.all.sorrow,(mome, val) => mome + val, 0)+_.reduce(this.lineData.all.disgust,(mome, val) => mome + val, 0)
                                 +_.reduce(this.lineData.all.fear,(mome, val) => mome + val, 0);
