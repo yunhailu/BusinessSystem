@@ -20,12 +20,11 @@
                 <br>
                 <div class="col-md-12 hot-today">
                     <ul class="hot-today-list">
-                        <!--<li v-for="item in Titles"  class="hot-today-list-item" @click="showDetail(item.title,$index);">-->
                         <li v-for="item in Titles"  class="hot-today-list-item" @click="getRefreshData(item.title,$index);">
                             <span class="hot-today-list-item-index">{{ ($index + 1) }}</span>
                             <span class="hot-today-list-item-text">{{item.title}}</span>
                             <div class="progress">
-                                <div class="progress-bar" role="progressbar" aria-valuenow="60" v-bind:style="{width:item.value+'%'} " aria-valuemin="0"  aria-valuemax="100">
+                                <div class="progress-bar" role="progressbar" aria-valuenow="60" v-bind:style="{width:item.value/maxHot+'%'} " aria-valuemin="0"  aria-valuemax="100">
                                 </div>
                             </div>
                         </li>
@@ -172,6 +171,7 @@
 
                 sontitle:'子话题的表现',
                 img: "",
+                maxHot:123,
 
 
                 follow0:[
@@ -811,11 +811,33 @@
             const end='2016-12-11';
             const topic='罗一笑';
             const subtopic='罗尔';
+            const maxHot =this.maxHot;
+
+            Api.getMediaHotspot({topic, subtopic, start, end}).then(resp => {
+                    if(resp.data.code ==0){
+                        //const HotspotData = resp.data.data;
+
+                       
+
+                        this.Titles= _.sortBy(resp.data.data, function(item){
+                                return -item.value;
+                            });
+
+                         
+
+                         const swer=_.values(_.pick(_.first(this.Titles),'value'));
+                         this.maxHot=_.flatten(swer,true)[0]/109;
+                    
+
+ 
+                    }
+                });
+
+
 
             Api.getMediaWordcloud({topic, subtopic, start, end}).then(resp => {
                     if(resp.data.code ==0){
                         const mediaData = resp.data.data;
-                        console.log('wewew:',mediaData);
                         this.subtopics=mediaData.subtopics;
                         this.hotWordsOption.series.data=mediaData.wordcloud;
 
@@ -828,9 +850,7 @@
                 if(resp.data.code ==0){
                     const mediaData0 = resp.data.data;
                     const conte0=mediaData0.focus;
-                    console.log('1wewew:',conte0);
-                 
-
+                
                 this.sexOption.series[0].data=_.values(mediaData0.gender);
                 this.sexPieOption.series[0].data=_.map(mediaData0.gender,(value,key)=>{
                     if (key=='m'){key="男"};
@@ -845,8 +865,7 @@
                 Api.getMediaMood({topic, subtopic, start, end}).then(resp => {
                 if(resp.data.code ==0){
                     const mediaMood = resp.data.data;
-                    console.log('wewew:',mediaMood);
-
+                
                   const sdf=_.map(mediaMood,(item)=>{
                     item=_.values(_.pick(item,'date'));
                     return item;
@@ -915,7 +934,7 @@
                     return item;
                 });
 
-                console.log('lineserie:',this.sexPieOption.series[0].data);
+            
 
 
 
@@ -934,7 +953,7 @@
 
 
 
-                console.log('sdf:',fear);
+            
                     
 
 
@@ -1051,24 +1070,7 @@
 
             },
 
-            chartData(){
-
-                const newsData=this.allData;
-                const titles= _.keys(newsData);
-                const contents= _.values(newsData);
-                console.log('titles:',titles);
-                console.log('contents:',contents);
-                const hotvalues=_.pluck(contents,'hotValue');
-                console.log('hotvalues:',hotvalues);
-                const maxHot=_.max(hotvalues);
-                console.log('maxHot:',maxHot);
-                const percentage=_.map(hotvalues,function(num){ return num*99/_.max(hotvalues);});
-                console.log('percentage:',percentage);
-                const titleObj=_.object(titles,percentage);
-                console.log('titleObj:',titleObj);
-
-
-            },
+           
 
 
 
