@@ -294,27 +294,32 @@
                             all.fear.push(this.lineData.wechat.fear[index] + this.lineData.weibo.fear[index] + this.lineData.client.fear[index] + this.lineData.web.fear[index] + this.lineData.overseas.fear[index]+ this.lineData.sengine.fear[index]);
                         });
                         this.lineData.all = all;
-                        console.log(this.lineData);
+
                     //修改资源来源数量
                         _.map(_.zip(_.values(this.lineData.web),_.values(this.lineData.client)),(item,index)=>{
                             (this.lineData.client)[(_.keys(this.lineData.web))[index]] =_.map(_.unzip(item),value=>{return _.reduce(value,function(memo,num){return memo +num;},0)})
                         })
                     this.lineData.web = this.lineData.sengine;
+                        console.log(this.lineData);
                         this.sentimentBarLoading = false;
                         //this.sentimentChartLoading = false;
                         this.sentimentPieLoading = false;
                         this.sentimentBarOption.xAxis.data = this.x;
                         this.actions("", 0);
 
-                        /*_.each(this.lineData,(value,index) =>{
+                        _.each(_.pairs(this.lineData),(value,index) =>{
                             console.log(this.lineData[index]);
-                                this.sentimentNums[index] = _.map(value,item=>{
-                                    console.log(_.reduce(_.reduce(_.values(item),function (a,b) {return a.concat(b);},[]),function (memo,num) {return memo+num;},0))
-                                    return _.reduce(_.reduce(_.values(item),function (a,b) {return a.concat(b);},[]),function (memo,num) {return memo+num;},0)
-                                })
-                        });*/
-                        console.log('this.sentimentNums--1',this.sentimentNums);
-                        const allNums=_.reduce(this.lineData.all.happy,(mome, val) => mome + val, 0)+_.reduce(this.lineData.all.anger,(mome, val) => mome + val, 0)
+                            console.log(_.pairs(value));
+                            this.sentimentNums[index]=_.reduce( _.reduce(_.map(_.pairs(value[1]),arr=>{
+                                        return arr[1]
+                                    }),function(a,b){return a.concat(b);},[])
+                                    ,function (memo,num) {
+                                return memo+num;
+                            },0)
+                        });
+                        this.sentimentNums.pop();
+                        console.log(this.sentimentNums)
+                       /* const allNums=_.reduce(this.lineData.all.happy,(mome, val) => mome + val, 0)+_.reduce(this.lineData.all.anger,(mome, val) => mome + val, 0)
                                 +_.reduce(this.lineData.all.sorrow,(mome, val) => mome + val, 0)+_.reduce(this.lineData.all.disgust,(mome, val) => mome + val, 0)
                                 +_.reduce(this.lineData.all.fear,(mome, val) => mome + val, 0);
                         const wechatNums=_.reduce(this.lineData.wechat.happy,(mome, val) => mome + val, 0)+_.reduce(this.lineData.wechat.anger,(mome, val) => mome + val, 0)
@@ -335,7 +340,6 @@
                         const sengineNums=_.reduce(this.lineData.sengine.happy,(mome, val) => mome + val, 0)+_.reduce(this.lineData.sengine.anger,(mome, val) => mome + val, 0)
                                 +_.reduce(this.lineData.sengine.sorrow,(mome, val) => mome + val, 0)+_.reduce(this.lineData.sengine.disgust,(mome, val) => mome + val, 0)
                                 +_.reduce(this.lineData.sengine.fear,(mome, val) => mome + val, 0);
-//                        console.log('this.sentimentNums--2',this.sentimentNums);
                         this.sentimentNums =[
                             allNums,
                             wechatNums,
@@ -344,6 +348,7 @@
                             webNums,
                             overseasNums
                         ];
+                        console.log(this.sentimentNums)*/
                     }
                 });
             },

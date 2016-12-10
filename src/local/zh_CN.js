@@ -100,7 +100,7 @@ export const zh_CN = {
         like: "点赞数",
         resend: "转发数",
         comments: "评论数",
-        rate: "浮动比率",
+        rate: "影响力指数",
         close: "关闭"
     },
     theme: {

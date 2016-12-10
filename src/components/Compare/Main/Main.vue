@@ -58,7 +58,10 @@
 
                 compareChartLoading: false,
                 compareChartOption: {
-                    title: _.extend({}, Chart.title, { show: false}),
+                    title: _.extend({}, Chart.title, {
+                        text:'关注趋势图：',
+                        show: true
+                    }),
                     tooltip: Chart.tooltip,
                     legend: {
                         data:[]
@@ -83,7 +86,10 @@
 
                 comparePieLoading: false,
                 comparePieOption: {
-                    title: _.extend({}, Pie.title, { show: false}),
+                    title: _.extend({}, Pie.title, {
+                        text:'关注占比图：',
+                        show: true
+                    }),
                     tooltip: _.extend({}, Pie.tooltip),
                     legend: _.extend({}, Pie.legend, {
                         bottom: 0,
@@ -103,13 +109,16 @@
                 compareRadarLoading: false,
                 compareRadarOption: {
                     backgroundColor: '-webkit-radial-gradient(#e9e9e9 5%, #f9f9f9 60%);',
-                    title: {
-                    },
+                    title: _.extend({}, Pie.title, {
+                        text:'情绪趋势图：',
+                        show: true
+                    }),
                     legend: {
                         bottom: 1,
-                        data: [],
+                        data: []
                     },
-                    color: _.extend([], Chart.color),
+                    //color: _.extend([], Chart.color),
+                    color:["#1C7C76","#FA943E","#88051C","#2E44E1","#F58974","#F574EA","#81F574","#051527","#C9E120","#F4D171"],
                     radar: {
                         indicator: [
                             {name: common.happy, max: 100},
@@ -144,7 +153,21 @@
                         }
                     },
                     graphic:Chart.graphic,
-                    series: []
+                    series: [{
+                        type: 'radar',
+                        symbol: 'none',
+                        itemStyle: {
+                            normal: {
+                                lineStyle: {
+                                    width:1
+                                }
+                            },
+                            emphasis : {
+                                areaStyle: {color:'rgba(0,250,0,0.3)'}
+                            }
+                        },
+                        data:[]
+                    }]
                 },
                 compareNums:[]
             }
@@ -158,7 +181,7 @@
             },
             initRadar(){
                 this.compareRadarOption.legend.data=[];
-                this.compareRadarOption.series=[];
+                this.compareRadarOption.series[0].data=[];
             },
             initData(){
                 this.VariableChartData.all = {},
@@ -202,26 +225,15 @@
                 this.initRadar();
                 //渲染radar
                 _.each(radarData,(item,key) => {
+                    console.log(item,key);
                     this.compareRadarOption.legend.data.push(key);
-                    this.compareRadarOption.series.push(
-                        {
-                            name: key,
-                            type: 'radar',
-                            lineStyle: {
-                                normal: {
-                                    width: 1.5,
-                                    opacity: 0.5
-                                }
-                            },
-                            data: item,
-                            symbol: 'none',
-                            areaStyle: {
-                                normal: {
-                                    opacity: 0.1
-                                }
+                    this.compareRadarOption.series[0].data.push(
+                            {
+                                value:item[0],
+                                name:key
                             }
-                        }
                     )
+                console.log(this.compareRadarOption.series)
                 });
             },
             //chart数据处理
@@ -520,7 +532,7 @@
                         this.comparePieOption.legend.data=[];
                         this.comparePieOption.series.data=[];
                         this.compareRadarOption.legend.data=[];
-                        this.compareRadarOption.series=[];
+                        this.compareRadarOption.series[0].data=[];
                         this.initData();
                         this.compareNums = [0,0,0,0,0,0];
                         return ;
@@ -610,9 +622,7 @@
                             this.dealAddOnlyOneSummaryData(newTopic,topicParams);
                             this.dealAddOnlyOneSentimentData(newTopic,topicParams);
                         }
-
                     }
-
                 }
             },
             compareSource:{
