@@ -13,6 +13,7 @@
                     </div>
                     <div class="row-right">
                         <ul class="days-btn">
+                            <li>监测区间: </li>
                             <li @click="selectTime(0.33);" :class="[selectTimeTag == 0.33 ? 'active' : '']" class="active">8H</li>
                             <li @click="selectTime(1);" :class="[selectTimeTag == 1 ? 'active' : '']">1D</li>
                             <li @click="selectTime(7);" :class="[selectTimeTag == 7 ? 'active' : '']">7D</li>
@@ -102,7 +103,6 @@
                     this.selectTimeTag = num;
                     this.isTimeDiy = false;
                     this.setCompareTimeRange(0.33);
-                    this.setCompareTimePopUp(0.33);
                     let start = moment().subtract(8,"hour").format("YYYY-MM-DD HH");
                     let end = moment().format("YYYY-MM-DD HH");
                     start = start.split(" ")[0] + "T" + start.split(" ")[1];
@@ -117,7 +117,6 @@
                     this.selectTimeTag = num;
                     this.isTimeDiy = false;
                     this.setCompareTimeRange(num);
-                    this.setCompareTimeRange(setCompareTimePopUp);
                     this.setCompareStart(moment().subtract(num, 'days').format('YYYY-MM-DD'));
                     this.setCompareEnd(moment().format('YYYY-MM-DD'));
                     this.dateVal = `${ moment().subtract(num, 'days').format('YYYY-MM-DD')} ~ ${moment().format('YYYY-MM-DD')}`;
@@ -152,11 +151,6 @@
             }
         },
         watch: {
-            compareTimePopUp:{
-                handler(val){
-                    this.selectTime(val);
-                }
-            },
             search:{
                 handler(val){
                     if(this.trim(val) =='')
