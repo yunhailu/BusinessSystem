@@ -70,6 +70,10 @@ export const analyticsResetSearch = state => {
 export const analyticsSubTopicId = state => {
 	return state.analytics.subtopicId;
 };
+
+export const analyticsTimePopUp = state => {
+	return state.analytics.timePopUp;
+};
 /**
  * Compare
  * */

@@ -20,7 +20,8 @@
     import ListPanel from '../Common/ListPanel/ListPanel.vue';
     import Tabs from '../Common/Tabs/Tabs.vue';
     import Tips from '../Common/Tips/Tips.vue';
-    import {analyticsSubTopicId, analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic, analyticsDateChange, analyticsStart, analyticsEnd, activeAnalyticsTopic, analyticsRefreshTopic } from '../../vuex/getters';
+    import {analyticsTimePopUp,analyticsSubTopicId, analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic, analyticsDateChange, analyticsStart, analyticsEnd, activeAnalyticsTopic, analyticsRefreshTopic } from '../../vuex/getters';
+    import {setAnalyticsTimePopUp} from '../../vuex/actions';
 
     export default{
         data(){
@@ -189,6 +190,8 @@
                 }
                 Api.getCommentDetail({ topic_id, topic, subtopic, source, start, end, time_dimension }).then(resp => {
                     if(resp.data.code == 0){
+                        this.commentBarLoading = false;
+                        this.commentPieLoading2= false;
                         const details = resp.data.data;
                         this.x = _.map(details, detail => detail.date);
                         const _this = this;
@@ -223,13 +226,13 @@
                                                      });
                     this.lineData.web = this.lineData.sengine;
 
-                        this.commentBarLoading = false;
+
                         this.commentBarOption.xAxis.data = this.x;
                         this.commentBarOption.series = _.map(this.commentBarOption.series, (value, index) => {
                             value.data = all[this.commentArr[index]]
                             return value;
                         });
-                        this.commentPieLoading2= false;
+
                         this.commentPieOption2.series[0].data =[
                             {value:_.reduce(this.lineData.all.positive,(mome, val) => mome + val, 0), name:this.words.positive},
                             {value:_.reduce(this.lineData.all.negative,(mome, val) => mome + val, 0), name:this.words.negative},
@@ -262,6 +265,37 @@
                             webNums,
                             overseasNums
                         ];
+                    }else if(resp.data.code == 1004){
+                        const selTime = this.analyticsTimePopUp;
+                        switch (selTime){
+                            case 0.33:
+                                this.commentBarLoading = false;
+                                this.commentPieLoading2= false;
+                                this.loadingParams.visiable = false;
+                                this.setAnalyticsTimePopUp(1);
+                                break;
+                            case 1:
+                                this.commentBarLoading = false;
+                                this.commentPieLoading2= false;
+                                this.loadingParams.visiable = false;
+                                this.setAnalyticsTimePopUp(7);
+                                break;
+                            default:
+                                this.commentBarOption.series = [
+                                    { name: this.words.positive, type: 'line',
+                                        data: [] },
+                                    { name: this.words.negative, type:'line',
+                                        data: [] },
+                                    { name: this.words.neutral, type:'line',
+                                        data: [] }
+                                ];
+                                 this.commentPieOption2.series.data=[];
+                                this.commentBarLoading = false;
+                                this.commentPieLoading2= false;
+                                this.loadingParams.visiable = false;
+                                break;
+
+                        }
                     }
                 });
             },
@@ -331,7 +365,8 @@
             }
         },
         vuex: {
-            getters: {analyticsSubTopicId,analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic, analyticsDateChange, analyticsStart, analyticsEnd, activeAnalyticsTopic, analyticsRefreshTopic}
+            getters: {analyticsTimePopUp,analyticsSubTopicId,analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic, analyticsDateChange, analyticsStart, analyticsEnd, activeAnalyticsTopic, analyticsRefreshTopic},
+            actions:{setAnalyticsTimePopUp}
         },
         ready(){
             if(this.activeAnalyticsTopic && this.activeAnalyticsTopic.topic_id){

@@ -15,6 +15,7 @@
                     </div>
                     <div class="row-right">
                         <ul class="days-btn">
+                            <li>监测区间: </li>
                             <li @click="selectTime(0.33);" :class="[selectTimeTag == 0.33 ? 'active' : '']" class="active">8H</li>
                             <li @click="selectTime(1);" :class="[selectTimeTag == 1 ? 'active' : '']">1D</li>
                             <li @click="selectTime(7);" :class="[selectTimeTag == 7 ? 'active' : '']">7D</li>
@@ -49,8 +50,8 @@
     import Calendar from '../Common/Calendar/Calendar.vue';
     import OrderFooterComponent from '../OrderFooter/OrderFooter.vue';
     import Local from "../../local/local";
-    import {analyticsSubTopicId, activeAnalyticsTopic,analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic, analyticsDateChange, analyticsStart, analyticsEnd, analyticsResetSearch } from '../../vuex/getters';
-    import {setAnalyticsSubTopicId,setActiveAnalyticsTopic,setAnalyticsType, setAnalyticsTimeRange, setAnalyticsSource, setAnalyticsSubTopic, setAnalyticsDateChange, setAnalyticsStart, setAnalyticsEnd, setAnalyticsResetSearch  } from "../../vuex/actions";
+    import {analyticsTimePopUp,analyticsSubTopicId, activeAnalyticsTopic,analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic, analyticsDateChange, analyticsStart, analyticsEnd, analyticsResetSearch } from '../../vuex/getters';
+    import {setAnalyticsTimePopUp,setAnalyticsSubTopicId,setActiveAnalyticsTopic,setAnalyticsType, setAnalyticsTimeRange, setAnalyticsSource, setAnalyticsSubTopic, setAnalyticsDateChange, setAnalyticsStart, setAnalyticsEnd, setAnalyticsResetSearch  } from "../../vuex/actions";
 
     export default{
         data(){
@@ -85,7 +86,8 @@
                 setAnalyticsDateChange,
                 setAnalyticsStart,
                 setAnalyticsEnd,
-                setAnalyticsResetSearch
+                setAnalyticsResetSearch,
+                setAnalyticsTimePopUp
             },
             getters: {
                 analyticsSubTopicId,
@@ -97,7 +99,8 @@
                 analyticsDateChange,
                 analyticsStart,
                 analyticsEnd,
-                analyticsResetSearch
+                analyticsResetSearch,
+                analyticsTimePopUp
             }
         },
         components:{
@@ -129,6 +132,7 @@
                     this.selectTimeTag = num;
                     this.isTimeDiy = false;
                     this.setAnalyticsTimeRange(0.33);
+                    this.setAnalyticsTimePopUp(0.33);
                     let start = moment().subtract(8,"hour").format("YYYY-MM-DD HH");
                     let end = moment().format("YYYY-MM-DD HH");
                     start = start.split(" ")[0] + "T" + start.split(" ")[1];
@@ -143,6 +147,7 @@
                     this.selectTimeTag = num;
                     this.isTimeDiy = false;
                     this.setAnalyticsTimeRange(num);
+                    this.setAnalyticsTimePopUp(num);
                     this.setAnalyticsStart(moment().subtract(num, 'days').format('YYYY-MM-DD'));
                     this.setAnalyticsEnd(moment().format('YYYY-MM-DD'));
                     this.setAnalyticsDateChange(this.analyticsDateChange + 1);
@@ -178,6 +183,11 @@
             }
         },
         watch: {
+            analyticsTimePopUp:{
+                handler(val){
+                    this.selectTime(val);
+                }
+            },
             analyticsResetSearch:{
                 handler(val){
                     if(val == true){

@@ -24,7 +24,8 @@
     import Local from "../../local/local";
     import {Chart, Pie} from '../../config/config';
     import * as Api from '../../widgets/Api';
-    import {analyticsSubTopicId, analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic, analyticsDateChange, analyticsStart, analyticsEnd, activeAnalyticsTopic, analyticsRefreshTopic } from '../../vuex/getters';
+    import {analyticsTimePopUp,analyticsSubTopicId, analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic, analyticsDateChange, analyticsStart, analyticsEnd, activeAnalyticsTopic, analyticsRefreshTopic } from '../../vuex/getters';
+    import {setAnalyticsTimePopUp} from '../../vuex/actions';
 
 
     export default{
@@ -159,7 +160,8 @@
             }
         },
         vuex: {
-            getters: {analyticsSubTopicId, analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic, analyticsDateChange, analyticsStart, analyticsEnd, activeAnalyticsTopic, analyticsRefreshTopic }
+            getters: {analyticsTimePopUp,analyticsSubTopicId, analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic, analyticsDateChange, analyticsStart, analyticsEnd, activeAnalyticsTopic, analyticsRefreshTopic },
+            actions:{setAnalyticsTimePopUp}
         },
         methods: {
             actions(val, idx){
@@ -349,6 +351,50 @@
                             overseasNums
                         ];
                         console.log(this.sentimentNums)*/
+                    }else if(resp.data.code == 1004){
+                        const selTime = this.analyticsTimePopUp;
+                        switch (selTime){
+                            case 0.33:
+                                this.sentimentBarLoading = false;
+                                this.sentimentPieLoading = false;
+                                this.loadingParams.visiable = false;
+                                this.setAnalyticsTimePopUp(1);
+                                break;
+                            case 1:
+                                this.sentimentBarLoading = false;
+                                this.sentimentPieLoading = false;
+                                this.loadingParams.visiable = false;
+                                this.setAnalyticsTimePopUp(7);
+                                break;
+                            default:
+                               this.sentimentBarOption.series=[{
+                                                                name:this.sentiment.happy,
+                                                                type:'line',
+                                                                data: []
+                                                            }, {
+                                                                name:this.sentiment.anger,
+                                                                type:'line',
+                                                                data: []
+                                                            }, {
+                                                                name:this.sentiment.sorrow,
+                                                                type:'line',
+                                                                data: []
+                                                            }, {
+                                                                name:this.sentiment.disgust,
+                                                                type:'line',
+                                                                data: []
+                                                            }, {
+                                                                name:this.sentiment.fear,
+                                                                type:'line',
+                                                                data: []
+                                                            }]
+                                this.sentimentPieOption.series.data=[];
+                                this.sentimentBarLoading = false;
+                                this.sentimentPieLoading = false;
+                                this.loadingParams.visiable = false;
+                                break;
+
+                        }
                     }
                 });
             },

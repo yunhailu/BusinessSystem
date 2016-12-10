@@ -68,6 +68,10 @@ export const setAnalyticsSubTopicId = (store, subtopicId) => {
 	store.dispatch(types.UPDATE_SUBTOPIC_ID, subtopicId);
 };
 
+export const setAnalyticsTimePopUp = (store, newtime) => {
+	store.dispatch(types.UPDATE_TIME_POP_UP, newtime);
+};
+
 /**
  * Compare
  * */

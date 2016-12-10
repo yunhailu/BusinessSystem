@@ -24,7 +24,8 @@
     import ListPanel from '../Common/ListPanel/ListPanel.vue';
     import Tabs from '../Common/Tabs/Tabs.vue';
     import Tips from '../Common/Tips/Tips.vue';
-    import {analyticsSubTopicId, analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic, analyticsDateChange, analyticsStart, analyticsEnd, activeAnalyticsTopic, analyticsRefreshTopic } from '../../vuex/getters';
+    import {analyticsTimePopUp, analyticsSubTopicId, analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic, analyticsDateChange, analyticsStart, analyticsEnd, activeAnalyticsTopic, analyticsRefreshTopic } from '../../vuex/getters';
+    import {setAnalyticsTimePopUp } from '../../vuex/actions';
 
     export default{
         data(){
@@ -205,7 +206,8 @@
             }
         },
         vuex: {
-            getters: {analyticsSubTopicId,analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic, analyticsDateChange, analyticsStart, analyticsEnd, activeAnalyticsTopic, analyticsRefreshTopic}
+            getters: {analyticsTimePopUp, analyticsSubTopicId,analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic, analyticsDateChange, analyticsStart, analyticsEnd, activeAnalyticsTopic, analyticsRefreshTopic},
+            actions:{setAnalyticsTimePopUp}
         },
         methods: {
             toggle(){
@@ -252,6 +254,8 @@
                 }
                 Api.getSummaryDetail({topic_id, topic, subtopic, source, start, end, time_dimension}).then(resp => {
                     if(resp.data.code == 0){
+                        this.resultChartLoading = false;
+                        this.resultPieChartLoading = false;
                         const details = resp.data.data;
                         this.x = _.map(details, detail => detail.date);
                         _.each(details, detail => {
@@ -269,9 +273,6 @@
                         this.lineData.web = this.lineData.sengine;
                         console.log('client+web',this.lineData.client);
                         this.lineData.all = [this.lineData.wechat,this.lineData.weibo,this.lineData.client,this.lineData.web,this.lineData.overseas];
-
-                        this.resultChartLoading = false;
-                        this.resultPieChartLoading = false;
                         this.actions("全部", 0);
                         const wechatNums =  _.reduce(this.lineData.wechat, (memo, value) => (memo + value), 0);
                         const weiboNums =  _.reduce(this.lineData.weibo, (memo, value) => (memo + value), 0);
@@ -286,6 +287,31 @@
                             webNums,
                             overseasNums
                         ];
+                    } else if(resp.data.code == 1004){
+                        const selTime = this.analyticsTimePopUp;
+                        switch (selTime){
+                            case 0.33:
+                                this.resultChartLoading = false;
+                                this.resultPieChartLoading = false;
+                                this.loadingParams.visiable = false;
+                                this.setAnalyticsTimePopUp(1);
+                                break;
+                            case 1:
+                                this.resultChartLoading = false;
+                                this.resultPieChartLoading = false;
+                                this.loadingParams.visiable = false;
+                                this.setAnalyticsTimePopUp(7);
+                                break;
+                            default:
+                                this.resultChartOption.series=[];
+                                    this.resultPieChartOption.series=[];
+                                this.resultChartLoading = false;
+                                this.resultPieChartLoading = false;
+                                this.loadingParams.visiable = false;
+                                //alert('暂无数据');
+                                break;
+
+                        }
                     }
                 });
             },
@@ -313,6 +339,7 @@
                         this.loadingParams.visiable = false;
                         this.list = resp.data.data;
                     }
+
                 });
             },
             initData(){

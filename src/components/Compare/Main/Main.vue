@@ -60,6 +60,9 @@
                 compareChartOption: {
                     title: _.extend({}, Chart.title, {
                         text:'关注趋势图：',
+                        textStyle:{
+                            color:'#408CD7'
+                        },
                         show: true
                     }),
                     tooltip: Chart.tooltip,
@@ -88,6 +91,9 @@
                 comparePieOption: {
                     title: _.extend({}, Pie.title, {
                         text:'关注占比图：',
+                        textStyle:{
+                            color:'#408CD7'
+                        },
                         show: true
                     }),
                     tooltip: _.extend({}, Pie.tooltip),
@@ -111,6 +117,9 @@
                     backgroundColor: '-webkit-radial-gradient(#e9e9e9 5%, #f9f9f9 60%);',
                     title: _.extend({}, Pie.title, {
                         text:'情绪趋势图：',
+                        textStyle:{
+                            color:'#408CD7'
+                        },
                         show: true
                     }),
                     legend: {
