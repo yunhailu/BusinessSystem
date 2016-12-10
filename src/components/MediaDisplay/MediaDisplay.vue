@@ -493,6 +493,7 @@
                     yAxis: {
                         type: 'value'
                     },
+                    graphic:Chart.graphic,
                     series:[
                         {
                             name:'满意',
@@ -549,6 +550,7 @@
                         left: 'left',
                         data: ["满意","愤怒","失望","反感","害怕"]
                     },
+                    graphic:Chart.graphic,
                     series : [
                         {
                             label: {
@@ -598,6 +600,7 @@
                         data: ['男','女']
                     },
                     yAxis: {},
+                    graphic:Chart.graphic,
                     series: [{
                         barGap:'40%',
                         barWidth:25,
@@ -623,6 +626,7 @@
                 tooltip : {
 
                 },
+                graphic:Chart.graphic,
 
                 series : [
                     {
@@ -738,6 +742,7 @@
                 hotWordsLoading: false,
                 hotWordsOption: {
                     tooltip: {},
+                    graphic:Chart.graphic,
                     series: {
                         //grid: {x:0, x2:0},
                         type: 'wordCloud',
@@ -806,12 +811,18 @@
             },
             getRefreshData(title){
             this.sonTitle=title;
+            const maxHot =this.maxHot;
             const myss=this.lineseries;
+
+
+            
             const start='2016-12-05';
             const end='2016-12-11';
             const topic='罗一笑';
             const subtopic='罗尔';
-            const maxHot =this.maxHot;
+
+
+            
 
             Api.getMediaHotspot({topic, subtopic, start, end}).then(resp => {
                     if(resp.data.code ==0){
