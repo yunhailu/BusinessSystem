@@ -45,6 +45,8 @@
 </style>
 <script  type="text/ecmascript-6">
     import moment from 'moment';
+    import Cookie from "js-cookie";
+    import { getCookie } from '../../widgets/Cookie';
     import HeaderComponent from '../Header/Header.vue';
     import MenuComponent from './Menu/Menu.vue';
     import Calendar from '../Common/Calendar/Calendar.vue';
