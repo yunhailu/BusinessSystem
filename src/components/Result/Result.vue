@@ -1,14 +1,17 @@
 <template>
     <tabs :actions="actions" :datas="summaryNums"></tabs>
     <!--<span>Result</span>-->
-    <div class="charts">
-        <!--<div class="arrow animated rubberBand" @click="toggle">-->
+    <div class="result-overflow">
+        <div class="charts">
+            <!--<div class="arrow animated rubberBand" @click="toggle">-->
             <!--<i class="fa fa-angle-left fa-3x" transition="rotate" :class="[resultPieChartOption.isActive ? 'fa-rotate-180' : '']"></i>-->
-        <!--</div>-->
-        <div class="chart" v-echarts="resultChartOption" :click="clickChartAction" :loading="resultChartLoading" :class="[resultChartOption.isToggle ? 'active' : '']" :resize="resultChartOption.isToggle" theme="macarons"></div>
-        <div class="pie" v-echarts="resultPieChartOption" :loading="resultPieChartLoading" :class="[resultPieChartOption.isActive ? 'active' : '']" translate="show-pie"  theme="macarons"></div>
+            <!--</div>-->
+            <div class="chart" v-echarts="resultChartOption" :click="clickChartAction" :loading="resultChartLoading" :class="[resultChartOption.isToggle ? 'active' : '']" :resize="resultChartOption.isToggle" theme="macarons"></div>
+            <div class="pie" v-echarts="resultPieChartOption" :loading="resultPieChartLoading" :class="[resultPieChartOption.isActive ? 'active' : '']" translate="show-pie"  theme="macarons"></div>
+        </div>
+        <list-panel :list="list" :options="options" :select-title="selectTitle" :select-value.sync="sortVal"></list-panel>
     </div>
-    <list-panel :list="list" :options="options" :select-title="selectTitle" :select-value.sync="sortVal"></list-panel>
+
     <tips :visible.sync="loadingParams.visiable" :tipsparam.sync="loadingParams"></tips>
 </template>
 <style lang="less" scoped>

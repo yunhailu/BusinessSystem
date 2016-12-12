@@ -1,14 +1,17 @@
 <template>
     <tabs :actions="actions" :datas="sentimentNums"></tabs>
     <!--<span>Sentiment</span>-->
-    <div class="charts">
-        <div class="chart timeBar" :click="clickChartAction" v-echarts="sentimentBarOption" :loading="sentimentBarLoading" ></div><!--theme="infographic"-->
-        <!--<div class="chart percentBar" v-echarts="sentimentChartOption" :loading="sentimentChartLoading" ></div>-->
-        <div class="chart percentBar" v-echarts="sentimentPieOption" :loading="sentimentPieLoading"></div>
-    </div>
-    <!--<div class="charts"></div>-->
+    <div class="sentiment-overflow">
+        <div class="charts">
+            <div class="chart timeBar" :click="clickChartAction" v-echarts="sentimentBarOption" :loading="sentimentBarLoading" ></div><!--theme="infographic"-->
+            <!--<div class="chart percentBar" v-echarts="sentimentChartOption" :loading="sentimentChartLoading" ></div>-->
+            <div class="chart percentBar" v-echarts="sentimentPieOption" :loading="sentimentPieLoading"></div>
+        </div>
+        <!--<div class="charts"></div>-->
 
-    <list-panel :list="list" :options="options" :select-title="selectTitle" :select-value.sync="sortVal"></list-panel>
+        <list-panel :list="list" :options="options" :select-title="selectTitle" :select-value.sync="sortVal"></list-panel>
+    </div>
+
     <tips :visible.sync="loadingParams.visiable" :tipsparam.sync="loadingParams"></tips>
 </template>
 <style lang="less" scoped>

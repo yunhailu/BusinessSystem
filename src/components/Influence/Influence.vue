@@ -1,6 +1,52 @@
 ﻿<template>
     <tabs :datas="influancerNums"></tabs>
     <!--<span>Influence</span>-->
+    <div class="influence-overflow">
+        <div class="popular">
+            <ul class="popular-list">
+                <li class="popular-list-item"  v-show="coltrol" v-for="item in popularList" @click="showNewList(item)">
+                    <i class="fa" :class="[item.icon ? 'fa-'+item.icon : 'fa-cog']"></i>
+                    <span class="popular-list-item-title">{{item.title}}</span>
+                    <div class="popular-list-item-con">
+                        <div class="popular-list-item-con-source">{{item.source}} - {{item.value}}</div>
+                        <div class="popular-list-item-con-link">
+                            <a :href="item.link"  target="_blank">{{item.link}}</a>
+                        </div>
+                        <div>{{item.post | addLabel "Post"}}</div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="influenceTable">
+            <table class="table table-hover  table-striped">
+                <thead>
+                <tr>
+                    <td><i class="fa fa-user"></i> <span>{{words.influencer}}</span></td>
+                    <td><i class="fa fa-comments"></i> <span>{{words.numberOfPosts}}</span></td>
+                    <td><i class="fa fa-bar-chart"></i> <span>{{words.sentiment}}</span></td>
+                    <td><i class="fa fa-thumbs-up"></i> {{words.like}}</td>
+                    <td><i class="fa fa-share-alt"></i> {{words.resend}}</td>
+                    <td><i class="fa fa-comment"></i> {{words.comments}}</td>
+                    <td><i class="fa fa-share"></i> {{words.rate}}</td>
+                </tr>
+                </thead>
+                <tbody v-if="influancerTable.length">
+                <tr id="item.id" v-for="(index, item) in influancerTable" :class="[index % 2 == 0 ? '' : '']" @click="showPopList(item)" >
+                    <td>{{item.influencer}}</td>
+                    <td>{{item.post}}</td>
+                    <td class="barTd"><div class="sentimentBar" v-echarts="item.sentiment | barFormat"></div></td>
+                    <td>{{item.likeCount}}</td>
+                    <td>{{item.shareCount}}</td>
+                    <td>{{item.comments}}</td>
+                    <td class="rate"><i class="fa" :class="[item.rate.key == 'up' ? 'fa-arrow-up' : 'fa-arrow-down']"></i> {{item.rate | rateFormat}}</td>
+                </tr>
+                </tbody>
+            </table>
+            <div v-if="!influancerTable.length" class="noTableTips">{{noTableTips}}</div>
+        </div>
+        <pop-list :item="selectItem" :pops="popList" :visiable.sync="popVisiable">
+        </pop-list>
+    </div>
     <div class="popular">
         <ul class="popular-list">
             <li class="popular-list-item"  v-show="coltrol" v-for="item in popularList" @click="showNewList(item)">
@@ -44,7 +90,6 @@
         <div v-if="!influancerTable.length" class="noTableTips">{{noTableTips}}</div>
     </div>
     <pop-list :item="selectItem" :pops="popList" :visiable.sync="popVisiable">
-
     </pop-list>
     <tips :visible.sync="loadingParams.visiable" :tipsparam.sync="loadingParams"></tips>
 </template>
