@@ -237,6 +237,7 @@
                             {value:_.reduce(this.lineData.all.positive,(mome, val) => mome + val, 0), name:this.words.positive},
                             {value:_.reduce(this.lineData.all.negative,(mome, val) => mome + val, 0), name:this.words.negative},
                             {value:_.reduce(this.lineData.all.neutral,(mome, val) => mome + val, 0), name:this.words.neutral}];
+                    console.log('chankan',this.lineData);
                         const allNums=_.reduce(this.lineData.all.negative,(mome, val) => mome + val, 0)+_.reduce(this.lineData.all.neutral,(mome, val) => mome + val, 0)
                         +_.reduce(this.lineData.all.positive,(mome, val) => mome + val, 0);
 

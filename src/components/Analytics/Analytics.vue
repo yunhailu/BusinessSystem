@@ -200,7 +200,14 @@
             activeAnalyticsTopic:{
                 handler(val){
                     this.showName = (this.activeAnalyticsTopic).topic_name;
-
+                    this.selectTimeTag = 0.33;
+                    let start = moment().subtract(8,"hour").format("YYYY-MM-DD HH");
+                    let end = moment().format("YYYY-MM-DD HH");
+                    start = start.split(" ")[0] + "T" + start.split(" ")[1];
+                    end = end.split(" ")[0] + "T" + end.split(" ")[1];
+                    this.setAnalyticsStart(start);
+                    this.setAnalyticsEnd(end);
+                    this.setAnalyticsTimePopUp(0.33);
                 }
             },
             dateVal: {
