@@ -17,12 +17,14 @@
                             <li @click="selectTime(0.33);" :class="[selectTimeTag == 0.33 ? 'active' : '']" class="active">8H</li>
                             <li @click="selectTime(1);" :class="[selectTimeTag == 1 ? 'active' : '']">1D</li>
                             <li @click="selectTime(7);" :class="[selectTimeTag == 7 ? 'active' : '']">7D</li>
-                            <li @click="selectTime(30);" :class="[selectTimeTag == 30 ? 'active' : '']">30D
+                            <li @click="selectTime(30);" v-if="timePay ===0"  :class="[selectTimeTag == 30 ? 'active' : '']">30D
                                 <smalltip :title = 'compare.tips' class="smalltip"></smalltip>
                             </li>
-                            <li @click="selectTime(0);" :class="[selectTimeTag == 0 ? 'active' : '']">自定义
+                            <li @click="selectTime(30);" v-if="timePay !== 0"  :class="[selectTimeTag == 30 ? 'active' : '']"> 30D</li>
+                            <li @click="selectTime(0);"  v-if="timePay !== 2"   :class="[selectTimeTag == 0 ? 'active' : '']">自定义
                                 <smalltip :title = 'compare.tips' class="smalltip"></smalltip>
                             </li>
+                            <li @click="selectTime(0);"  v-if="timePay ===2"  :class="[selectTimeTag == 0 ? 'active' : '']">自定义</li>
                         </ul>
                         <div class="diyDate" v-show="isTimeDiy">
                             <span class="date" @click="showCalendar"><i class="fa fa-calendar icon"></i> {{dateVal}}</span>
@@ -58,6 +60,7 @@
         data(){
             const compare = Local().compare;
             return{
+                timePay:getCookie('timePay') || 0,
                 compare,
                 search: '',
                 dateVal: `${ moment().subtract(8, 'hour').format('YYYY-MM-DD HH')} ~ ${moment().format('YYYY-MM-DD HH')}`,
@@ -95,10 +98,13 @@
             selectTime(num){
                 //this.selectTimeTag = num;
                 if(num == 0){
-                    return ;
-                    this.isTimeDiy = true;
-                    this.dateVal = this.compareStart + ' ~ ' + this.compareEnd;
-                    this.setCompareDataChange(this.compareDataChange + 1);
+                    if(this.timePay !==2){
+                        return ;
+                    }else {
+                        this.isTimeDiy = true;
+                        this.dateVal = this.compareStart + ' ~ ' + this.compareEnd;
+                        this.setCompareDataChange(this.compareDataChange + 1);
+                    }
                 } else if(num == 0.33){
                     this.selectTimeTag = num;
                     this.isTimeDiy = false;
@@ -112,7 +118,17 @@
                     this.dateVal = `${ start} ~ ${end}`;
                     this.setCompareDataChange(this.compareDataChange + 1);
                 }else if(num == 30){
-                    return ;
+                    if(this.timePay === 0){
+                        return ;
+                    }else {
+                        this.selectTimeTag = num;
+                        this.isTimeDiy = false;
+                        this.setCompareTimeRange(num);
+                        this.setCompareStart(moment().subtract(num, 'days').format('YYYY-MM-DD'));
+                        this.setCompareEnd(moment().format('YYYY-MM-DD'));
+                        this.dateVal = `${ moment().subtract(num, 'days').format('YYYY-MM-DD')} ~ ${moment().format('YYYY-MM-DD')}`;
+                        this.setCompareDataChange(this.compareDataChange + 1);
+                    }
                 }else{
                     this.selectTimeTag = num;
                     this.isTimeDiy = false;

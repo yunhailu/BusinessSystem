@@ -81,6 +81,9 @@
                     name: 'currentSwiper',
                     // 所有配置均为可选（同Swiper配置）
                     //autoplay: 2000,
+                    autoplay: 6000,
+                    loop : true,
+                    loopAdditionalSlides : 2,
                     direction : 'vertical',
                     grabCursor : true,
                     setWrapperSize :true,
@@ -89,6 +92,7 @@
                     paginationClickable :true,
                     mousewheelControl : true,
                     observeParents:true,
+                    autoplayDisableOnInteraction: false,
                     // if you need use plugins in the swiper, you can config in here like this
                     debugger: true,
                     // swiper callbacks

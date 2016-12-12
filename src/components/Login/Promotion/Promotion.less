@@ -19,6 +19,13 @@ html,body {
   .pr();
   .h(100%);
 }
+.sliderimg {.w(100%); .h(101%);}
+.swiper-item {
+  .tc();
+  .bgsize(100% 100%);
+  .dasd();
+}
+
 .swiper-box {
   .w(100%);
   height:100% !important;
@@ -128,7 +135,7 @@ html,body {
     .pr();
   div{
     img{
-      .disB();.pa();.top(30%);.left(50%);transform: translate(-50%);
+      .disB();.pa();.top(30%);.left(50%);transform: translate(-50%);height: 101% !important;
       .w(60%);animation: 1.5s loginbanner_4;
     }
   }
@@ -136,13 +143,13 @@ html,body {
   .item-4.swiper-slide-next{
     div{img{.disN();}}
   }
+  .item-3.swiper-slide-prev{
+    div{
+      div{img{.disN();}}
+    }
+  }
 }
-.sliderimg {.w(100%); .h(100%);}
-.swiper-item {
-  .tc();
-  .bgsize(100% 100%);
-  .dasd();
-}
+
 .swiper-pagination{
   right:15px !important;
   .swiper-pagination-bullet{.w(18px);.h(18px);background: rgb(253,252,252);
