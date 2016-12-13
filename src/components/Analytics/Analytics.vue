@@ -61,7 +61,7 @@
         data(){
             const analytics = Local().analytics;
             return{
-                timePay:getCookie('timePay') || 0,
+                timePay:parseInt(getCookie('business_level')) || 0,
                 analytics,
                 search: '',
                 dateVal: `${ moment().subtract(8, 'hour').format('YYYY-MM-DD HH')} ~ ${moment().format('YYYY-MM-DD HH')}`,
@@ -164,7 +164,7 @@
                     }
 
                 }else{
-
+                    this.selectTimeTag = num;
                     this.isTimeDiy = false;
                     this.setAnalyticsTimeRange(num);
                     this.setAnalyticsTimePopUp(num);

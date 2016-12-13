@@ -1,4 +1,4 @@
-<template>
+﻿<template>
     <tabs :actions="actions" :datas="commentNums"></tabs>
     <div class="overflowAuto">
         <div class="charts">
@@ -23,7 +23,7 @@
     import Tabs from '../Common/Tabs/Tabs.vue';
     import Tips from '../Common/Tips/Tips.vue';
     import {analyticsTimePopUp,analyticsSubTopicId, analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic, analyticsDateChange, analyticsStart, analyticsEnd, activeAnalyticsTopic, analyticsRefreshTopic } from '../../vuex/getters';
-    import {setAnalyticsTimePopUp} from '../../vuex/actions';
+    import {setAnalyticsTimePopUp,setAnalyticsEnd,setAnalyticsStart} from '../../vuex/actions';
 
     export default{
         data(){
@@ -31,6 +31,7 @@
             return{
                 words,
                 common,
+                nowTime:null,
                 loadingParams: {
                     visiable: false,
                     type: 'loading',
@@ -195,8 +196,10 @@
                         this.commentBarLoading = false;
                         this.commentPieLoading2= false;
                         const details = resp.data.data;
+                        this.x=[];
                         this.x = _.map(details, detail => detail.date);
                         const _this = this;
+                        this.initData();
                         let all = {positive: [], negative:[], neutral:[]};
                         _.each(details, (detail, index) => {
                             _.each(detail.values, (value, key) => {
@@ -369,14 +372,38 @@
         },
         vuex: {
             getters: {analyticsTimePopUp,analyticsSubTopicId,analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic, analyticsDateChange, analyticsStart, analyticsEnd, activeAnalyticsTopic, analyticsRefreshTopic},
-            actions:{setAnalyticsTimePopUp}
+            actions:{setAnalyticsTimePopUp,setAnalyticsEnd,setAnalyticsStart}
         },
         ready(){
+            this.nowTime = moment();
             if(this.activeAnalyticsTopic && this.activeAnalyticsTopic.topic_id){
                 this.init();
             }
         },
         watch: {
+            /*nowTime:{
+                handler(val,oldVal){
+                    const afterTime = moment().add(1,"hour").format("YYYY-MM-DD HH");
+                    const space = moment(afterTime).diff(moment(val));
+                    if(this.analyticsTimeRange>7){
+                        const interval = this.analyticsTimeRange;
+                        setTimeout(function () {
+                            const nowDay = moment().format("YYYY-MM-DD")
+                            this.setAnalyticsEnd(nowDay);
+                            this.setAnalyticsStart(moment(nowDay).subtract(interval,"day").format("YYYY-MM-DD"));
+                            this.init();
+                            this.nowTime = afterTime;
+                        }.bind(this),space)
+                    }else {
+                        setTimeout(function () {
+                            this.setAnalyticsEnd(moment(this.analyticsEnd).add(1,"hour").format("YYYY-MM-DD HH")),
+                                    this.setAnalyticsStart(moment(this.analyticsStart).add(1,"hour").format("YYYY-MM-DD HH"));
+                            this.init();
+                            this.nowTime = afterTime;
+                        }.bind(this),space)
+                    }
+                }
+                    },*/
             analyticsRefreshTopic:{
                 handler(val){
                     if(val !=0){

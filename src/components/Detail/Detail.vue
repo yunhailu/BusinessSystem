@@ -1,5 +1,6 @@
 <template>
     <header-component  v-show="showRow" active="analytics"></header-component>
+    <div class="box">
         <div v-show="showRow"  class="container animated bouncelnDown">
             <br>
             <div class="row">
@@ -26,7 +27,7 @@
                     </card-panel>
                 </div>
             </div>
-<br>
+            <br>
             <div  class="row">
                 <div  class="col-md-12 detail-chart">
                     <card-panel :title="words.shareChart" >
@@ -52,20 +53,22 @@
         </div>
 
 
-    <!--//全屏的-->
+        <!--//全屏的-->
 
-    <div v-show="!showRow" class="row animated bounceInLeft bg">
-        <div  class="col-md-12 detail-chart">
-            <card-panel :title="words.shareChart" >
-                <a class="fullpage pull-right" href='Javascript: void(0)' v-on:click="getFull(true)"><i class="fa fa-compress"></i>返回</a>
-                <a class="showinfo pull-right" href='Javascript: void(0)' v-on:click="showinfonode()">{{dispalayinfo}}</a>
-                <div   class="chart" v-echarts="graphChartOption" :click="graphChartAction"  :loading="graphChartLoading" theme="infographic"></div>
-            </card-panel>
+        <div v-show="!showRow" class="row animated bounceInLeft bg">
+            <div  class="col-md-12 detail-chart">
+                <card-panel :title="words.shareChart" >
+                    <a class="fullpage pull-right" href='Javascript: void(0)' v-on:click="getFull(true)"><i class="fa fa-compress"></i>返回</a>
+                    <a class="showinfo pull-right" href='Javascript: void(0)' v-on:click="showinfonode()">{{dispalayinfo}}</a>
+                    <div   class="chart" v-echarts="graphChartOption" :click="graphChartAction"  :loading="graphChartLoading" theme="infographic"></div>
+                </card-panel>
+            </div>
+
+
+
         </div>
-
-
-
     </div>
+
 </template>
 <style lang="less" scoped>
     @import "Detail.less";

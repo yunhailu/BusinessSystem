@@ -119,3 +119,9 @@ export const compareDataChange = state => {
 export const exportImages = state => {
 	return state.exportImages.imgs;
 };
+/**
+ * Exprot level
+ */
+export const userLevel = state=>{
+	return state.loginMsg.userLevel;
+}

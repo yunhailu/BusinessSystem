@@ -70,6 +70,7 @@
 </style>
 <script type="text/ecmascript-6">
     import _ from 'underscore';
+    import moment from 'moment';
     import Tabs from '../Common/Tabs/Tabs.vue';
     import Tips from '../Common/Tips/Tips.vue';
     import Local from "../../local/local";
@@ -78,6 +79,7 @@
     import China from 'echarts/map/js/china';
     import * as Api from '../../widgets/Api';
     import { analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic, analyticsDateChange, analyticsStart, analyticsEnd, activeAnalyticsTopic } from '../../vuex/getters';
+    import {setAnalyticsEnd,setAnalyticsStart} from '../../vuex/actions';
 
     export default{
         data(){
@@ -85,6 +87,7 @@
             const common = Local().common;
             return{
                 words,
+                nowTime:null,
                 loadingParams: {
                     visiable: false,
                     type: 'loading',
@@ -555,9 +558,33 @@
             }
         },
         vuex: {
-            getters: {analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic, analyticsDateChange, analyticsStart, analyticsEnd, activeAnalyticsTopic}
+            getters: {analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic, analyticsDateChange, analyticsStart, analyticsEnd, activeAnalyticsTopic},
+            actions: {setAnalyticsEnd,setAnalyticsStart}
         },
         watch: {
+           /* nowTime:{
+                handler(val,oldVal){
+                    const afterTime = moment().add(1,"hour").format("YYYY-MM-DD HH");
+                    const space = moment(afterTime).diff(moment(val));
+                    if(this.analyticsTimeRange>7){
+                        const interval = this.analyticsTimeRange;
+                        setTimeout(function () {
+                            const nowDay = moment().format("YYYY-MM-DD")
+                            this.setAnalyticsEnd(nowDay);
+                            this.setAnalyticsStart(moment(nowDay).subtract(interval,"day").format("YYYY-MM-DD"));
+                            this.init();
+                            this.nowTime = afterTime;
+                        }.bind(this),space)
+                    }else {
+                        setTimeout(function () {
+                            this.setAnalyticsEnd(moment(this.analyticsEnd).add(1,"hour").format("YYYY-MM-DD HH")),
+                                    this.setAnalyticsStart(moment(this.analyticsStart).add(1,"hour").format("YYYY-MM-DD HH"));
+                            this.init();
+                            this.nowTime = afterTime;
+                        }.bind(this),space)
+                    }
+                }
+            },*/
             activeAnalyticsTopic: {
                 handler(val){
                     this.themeBestLoading = true;
@@ -580,6 +607,7 @@
             }
         },
         ready(){
+            this.nowTime = moment();
             if(this.activeAnalyticsTopic && this.activeAnalyticsTopic.topic_id){
                 this.init();
             }

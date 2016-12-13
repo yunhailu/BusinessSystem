@@ -28,13 +28,14 @@
     import Tabs from '../Common/Tabs/Tabs.vue';
     import Tips from '../Common/Tips/Tips.vue';
     import {analyticsTimePopUp, analyticsSubTopicId, analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic, analyticsDateChange, analyticsStart, analyticsEnd, activeAnalyticsTopic, analyticsRefreshTopic } from '../../vuex/getters';
-    import {setAnalyticsTimePopUp } from '../../vuex/actions';
+    import {setAnalyticsTimePopUp,setAnalyticsEnd,setAnalyticsStart } from '../../vuex/actions';
 
     export default{
         data(){
             const common = Local().common;
             return{
                 common,
+                nowTime:null,
                 loadingParams: {
                     visiable: false,
                     type: 'loading',
@@ -96,6 +97,7 @@
                 actions: function(val, idx){
                     const lineData = this.lineData;
                     const x = this.x;
+                    console.log('x',x);
                     let data;
                     switch (idx){
                         case 0:
@@ -210,7 +212,7 @@
         },
         vuex: {
             getters: {analyticsTimePopUp, analyticsSubTopicId,analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic, analyticsDateChange, analyticsStart, analyticsEnd, activeAnalyticsTopic, analyticsRefreshTopic},
-            actions:{setAnalyticsTimePopUp}
+            actions:{setAnalyticsTimePopUp,setAnalyticsEnd,setAnalyticsStart}
         },
         methods: {
             toggle(){
@@ -260,6 +262,8 @@
                         this.resultChartLoading = false;
                         this.resultPieChartLoading = false;
                         const details = resp.data.data;
+                        this.x =[];
+                        this.initData();
                         this.x = _.map(details, detail => detail.date);
                         _.each(details, detail => {
                             this.lineData.wechat.push(detail.values.wechat);
@@ -269,6 +273,7 @@
                             this.lineData.overseas.push(detail.values.overseas);
                             this.lineData.sengine.push(detail.values.sengine);
                         });
+                        console.log('this.linedata',this.lineData);
                     //修改资源来源于数量显示
                         this.lineData.client = _.map(_.zip(this.lineData.client,this.lineData.web),item=>{
                                     return _.reduce(item, function(memo, num){ return memo + num; }, 0);
@@ -364,6 +369,29 @@
             }
         },
         watch: {
+       /* nowTime:{
+            handler(val,oldVal){
+                const afterTime = moment().add(1,"hour").format("YYYY-MM-DD HH");
+                const space = moment(afterTime).diff(moment(val));
+                if(this.analyticsTimeRange>7){
+                    const interval = this.analyticsTimeRange;
+                    setTimeout(function () {
+                        const nowDay = moment().format("YYYY-MM-DD")
+                        this.setAnalyticsEnd(nowDay);
+                        this.setAnalyticsStart(moment(nowDay).subtract(interval,"day").format("YYYY-MM-DD"));
+                        this.init();
+                        this.nowTime = afterTime;
+                    }.bind(this),space)
+                }else {
+                    setTimeout(function () {
+                        this.setAnalyticsEnd(moment(this.analyticsEnd).add(1,"hour").format("YYYY-MM-DD HH")),
+                                this.setAnalyticsStart(moment(this.analyticsStart).add(1,"hour").format("YYYY-MM-DD HH"));
+                        this.init();
+                        this.nowTime = afterTime;
+                    }.bind(this),space)
+                }
+            }
+        },*/
             //这里需要判断资源-------------------
             analyticsRefreshTopic:{
                 handler(val){
@@ -376,7 +404,7 @@
                 handler(val){
                     this.resultChartLoading = true;
                     this.resultPieChartLoading = true;
-                    this.init(val);
+                    this.init();
                 }
             },
             //这里需要判断资源-------------------
@@ -415,6 +443,7 @@
             }
         },
         ready(){
+            this.nowTime = moment();
             if(this.activeAnalyticsTopic && this.activeAnalyticsTopic.topic_id){
                 this.init();
             }

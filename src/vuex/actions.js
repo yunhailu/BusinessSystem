@@ -120,11 +120,20 @@ export const insertExportImages = (store, image) => {
 export const removeExportImages = (store) => {
 	store.dispatch(types.REMOVE_EXPORT_IMAGES);
 };
-
-//login
+/**
+ * @param store
+ * @param state
+ */
 export const setLoginState = (store,state) => {
 	store.dispatch(types.LOGIN_STATE,state);
 };
 export const setLoginTime = (store,time) => {
 	store.dispatch(types.LOGIN_TIME,time)
+};
+/**
+ * @param store
+ * @param level
+ */
+export const setUserLevel = (store,level) =>{
+	store.dispatch(types.USER_LEVEL,level);
 }

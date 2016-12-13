@@ -55,14 +55,14 @@
     import Main from './Main/Main.vue';
     import Local from "../../local/local";
     import FooterComponent from '../OrderFooter/OrderFooter.vue';
-    import {compareDataChange, compareType, compareTimeRange, compareSource, compareSubTopic, compareStart, compareEnd, compareTimeRangeString } from '../../vuex/getters';
-    import {setCompareDataChange, setCompareType, setCompareTimeRange, setCompareSource, setCompareSubTopic, setCompareStart, setCompareEnd , setCompareTimeRangeString } from "../../vuex/actions";
+    import {userLevel,compareDataChange, compareType, compareTimeRange, compareSource, compareSubTopic, compareStart, compareEnd, compareTimeRangeString } from '../../vuex/getters';
+    import {setUserLevel,setCompareDataChange, setCompareType, setCompareTimeRange, setCompareSource, setCompareSubTopic, setCompareStart, setCompareEnd , setCompareTimeRangeString } from "../../vuex/actions";
 
     export default{
         data(){
             const compare = Local().compare;
             return{
-                timePay:getCookie('timePay') || 0,
+                timePay:parseInt(getCookie('business_level')) || 0,
                 compare,
                 search: '',
                 dateVal: `${ moment().subtract(8, 'hour').format('YYYY-MM-DD HH')} ~ ${moment().format('YYYY-MM-DD HH')}`,
@@ -82,8 +82,8 @@
             }
         },
         vuex:{
-            getters:{compareDataChange, compareType, compareTimeRange, compareSource, compareSubTopic, compareStart, compareEnd , compareTimeRangeString},
-            actions:{setCompareDataChange, setCompareType, setCompareTimeRange, setCompareSource, setCompareSubTopic, setCompareStart, setCompareEnd , setCompareTimeRangeString }
+            getters:{userLevel,compareDataChange, compareType, compareTimeRange, compareSource, compareSubTopic, compareStart, compareEnd , compareTimeRangeString},
+            actions:{setUserLevel,setCompareDataChange, setCompareType, setCompareTimeRange, setCompareSource, setCompareSubTopic, setCompareStart, setCompareEnd , setCompareTimeRangeString }
         },
         components:{
             'header-component': HeaderComponent,
@@ -157,6 +157,8 @@
                 },500);
             },
             init(){
+                /*this.timePay = this.userLevel;
+                console.log('abc',this.timePay)*/
                 const start = moment(this.cal.begin, "YYYY-MM-DD");
                 const end = moment(this.cal.end, "YYYY-MM-DD");
                 const days = end.diff(start)/1000/3600/24;

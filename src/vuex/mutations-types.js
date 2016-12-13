@@ -68,3 +68,4 @@ export const REMOVE_EXPORT_IMAGES = 'REMOVE_EXPORT_IMAGES';
 //登陆页
 export const LOGIN_STATE = 'LOGIN_STATE';
 export const LOGIN_TIME='LOGIN_TIME';
+export const USER_LEVEL = 'USER_LEVEL';
