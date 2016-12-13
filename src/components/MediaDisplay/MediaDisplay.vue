@@ -2,6 +2,7 @@
     <div class="hot-panel">
         <div class="row">
 
+<img class="logo-icon pull-left"  src="../Media/images/gushi.png" />
             <label for="sourchWord" class="col-sm-2 control-label"></label>
             <div class="col-sm-4 " id="sourchWordbox">
                 <input type="text" v-model="sourchWord" class="form-control" id="sourchWord" :placeholder="words.topic">
@@ -19,12 +20,11 @@
                 <br>
                 <div class="col-md-12 hot-today">
                     <ul class="hot-today-list">
-                        <!--<li v-for="item in Titles"  class="hot-today-list-item" @click="showDetail(item.title,$index);">-->
                         <li v-for="item in Titles"  class="hot-today-list-item" @click="getRefreshData(item.title,$index);">
                             <span class="hot-today-list-item-index">{{ ($index + 1) }}</span>
                             <span class="hot-today-list-item-text">{{item.title}}</span>
                             <div class="progress">
-                                <div class="progress-bar" role="progressbar" aria-valuenow="60" v-bind:style="{width:item.value+'%'} " aria-valuemin="0"  aria-valuemax="100">
+                                <div class="progress-bar" role="progressbar" aria-valuenow="60" v-bind:style="{width:item.value/maxHot+'%'} " aria-valuemin="0"  aria-valuemax="100">
                                 </div>
                             </div>
                         </li>
@@ -95,22 +95,7 @@
             </card-panel>
         </div>
 
-        <div class="row">
-            <card-panel :title="'年龄比例:'+sonTitle">
-            <div class="col-md-6 hot-sentiment">
-
-                    <div v-echarts="ageOption" :loading="ageLoading" class="hot-sentiment-pie" theme=""></div><!--infographic,macarons-->
-
-
-            </div>
-            <div class="col-md-6 hot-sentiment">
-
-                    <div v-echarts="agePieOption" :loading="agePieLoading" class="hot-sentiment-pie" theme=""></div><!--infographic,macarons-->
-
-                </div>
-            </card-panel>
-
-        </div>
+    
 
         <div class="row">
             <card-panel :title="'性别关注:'+sonTitle">
@@ -122,7 +107,7 @@
             <ul class="hot-ranking-list">
             <li v-for="item in follow0"  class="hot-ranking-list-item" >
             <span class="hot-ranking-list-item-index">{{ ($index + 1) }}</span>
-            <span class="hot-ranking-list-item-text">{{item.title}}</span>
+            <span class="hot-ranking-list-item-text">{{item}}</span>
             </li>
             </ul>
 
@@ -134,7 +119,7 @@
                     <ul class="hot-ranking-list">
                         <li v-for="item in follow1"  class="hot-ranking-list-item" >
                             <span class="hot-ranking-list-item-index">{{ ($index + 1) }}</span>
-                            <span class="hot-ranking-list-item-text">{{item.title}}</span>
+                            <span class="hot-ranking-list-item-text">{{item}}</span>
                         </li>
                     </ul>
 
@@ -168,11 +153,11 @@
                 words,
                 common,
                 Titles:[
-                    {title:'#金马奖# 金马53荣耀时刻最佳女主角访谈影音曝光',value:42},
-                    {title:'@范冰冰 表示如果没有电影的故事和画面',value:53},
-                    {title:'可能构不成一个很完整的她',value:23},
-                    {title:'周冬雨 透露和@马思纯 有不一样的沟通方式',value:33},
-                    {title:'生活，吴可熙称喜爱的所有元素都在电影里',value:43}
+                    {title:'MORE Health携手美国最新儿童白血病临床试验',value:142},
+                    {title:'全国微信1000强月度报告（2016.11）丨清博指数独家',value:93},
+                    {title:'乐视否认员工排队离职，传高层四处筹钱找合作',value:83},
+                    {title:'复盘”罗尔事件：短短几天 慈善捐款事件大翻转',value:53},
+                    {title:'罗尔事件：每个重大事件发生其实都是社会一次进化',value:33}
 
                 ],
                 displayTitle:'财经热点排行榜',
@@ -186,31 +171,63 @@
 
                 sontitle:'子话题的表现',
                 img: "",
+                maxHot:123,
 
 
                 follow0:[
-                    {title:'#金马奖# 金马53荣耀时刻最佳女主角访谈影音曝光'},
-                    {title:'@范冰冰 表示如果没有电影的故事和画面'},
-                    {title:'可能构不成一个很完整的她'},
-                    {title:'周冬雨 透露和@马思纯 有不一样的沟通方式'},
-                    {title:'生活，吴可熙称喜爱的所有元素都在电影里'}
+                    '#金马奖# 金马53荣耀时刻最佳女主角访谈影音曝光',
+                    '@范冰冰 表示如果没有电影的故事和画面',
+                    '可能构不成一个很完整的她',
+                    '周冬雨 透露和@马思纯 有不一样的沟通方式',
+                    '生活，吴可熙称喜爱的所有元素都在电影里'
 
                 ],
 
                 follow1:[
-                    {title:'#金马奖# 金马53荣耀时刻最佳女主角访谈影音曝光'},
-                    {title:' @范冰冰 表示如果没有电影的故事和画面'},
-                    {title:'可能构不成一个很完整的她'},
-                    {title:'周冬雨 透露和@马思纯 有不一样的沟通方式'},
-                    {title:'生活，吴可熙称喜爱的所有元素都在电影里'}
+                    '#金马奖# 金马53荣耀时刻最佳女主角访谈影音曝光',
+                    ' @范冰冰 表示如果没有电影的故事和画面',
+                    '可能构不成一个很完整的她',
+                    '周冬雨 透露和@马思纯 有不一样的沟通方式',
+                    '生活，吴可熙称喜爱的所有元素都在电影里'
 
                 ],
-
-
+            lineseries:[
+                        {
+                            name:'满意',
+                            type:'line',
+                            stack: '总量',
+                            data:[120, 12, 11, 134, 90, 230, 210]
+                        },
+                        {
+                            name:'愤怒',
+                            type:'line',
+                            stack: '总量',
+                            data:[220, 182, 11, 234, 290, 330, 310]
+                        },
+                        {
+                            name:'失望',
+                            type:'line',
+                            stack: '总量',
+                            data:[150, 232, 201, 14, 190, 330, 410]
+                        },
+                        {
+                            name:'反感',
+                            type:'line',
+                            stack: '总量',
+                            data:[320, 332, 301, 334, 390, 330, 320]
+                        },
+                        {
+                            name:'害怕',
+                            type:'line',
+                            stack: '总量',
+                            data:[20, 32, 1, 94, 190, 330, 130]
+                        }
+                    ],
 
                 allData: {
                     '女孩儿瞧下代理们的报喜速度1': {
                         hotValue: 78,
+                        date:['2016/10/11','2016/10/12','2016/10/13','2016/10/14','2016/10/15','2016/10/16','2016/10/17'],
                         sentiment: [
                             {name: '满意', data: [120, 12, 11, 134, 90, 230, 210]},
                             {name: '愤怒', data: [120, 12, 11, 134, 90, 230, 210]},
@@ -257,6 +274,7 @@
                     },
                     '女孩儿瞧下代理们的报喜速度2': {
                         hotValue: 99,
+                        date:['2016/10/11','2016/10/12','2016/10/13','2016/10/14','2016/10/15','2016/10/16','2016/10/17'],
                         sentiment: [
                             {name: '满意', data: [120, 1232, 151, 134, 70, 30, 210]},
                             {name: '愤怒', data: [120, 12, 11, 134, 90, 20, 210]},
@@ -302,6 +320,7 @@
                     },
                     '女孩儿瞧下代理们的报喜速度3': {
                         hotValue: 313,
+                        date:['2016/10/11','2016/10/12','2016/10/13','2016/10/14','2016/10/15','2016/10/16','2016/10/17'],
                         sentiment: [
                             {name: '满意', data: [120, 2, 151, 134, 70, 0, 210]},
                             {name: '愤怒', data: [120, 12, 11, 134, 90, 20, 210]},
@@ -347,6 +366,7 @@
                     },
                     '女孩儿瞧下代理们的报喜速度4': {
                         hotValue: 223,
+                        date:['2016/10/11','2016/10/12','2016/10/13','2016/10/14','2016/10/15','2016/10/16','2016/10/17'],
                         sentiment: [
                             {name: '满意', data: [20, 1232, 151, 134, 70, 30, 210]},
                             {name: '愤怒', data: [620, 12, 11, 134, 90, 20, 210]},
@@ -392,6 +412,7 @@
                     },
                     '女孩儿瞧下代理们的报喜速度5': {
                         hotValue: 193,
+                        date:['2016/10/11','2016/10/12','2016/10/13','2016/10/14','2016/10/15','2016/10/16','2016/10/17'],
                         sentiment: [
                             {name: '满意', data: [190, 1232, 151, 134, 70, 30, 210]},
                             {name: '愤怒', data: [820, 12, 11, 14, 90, 20, 210]},
@@ -472,6 +493,7 @@
                     yAxis: {
                         type: 'value'
                     },
+                    graphic:Chart.graphic,
                     series:[
                         {
                             name:'满意',
@@ -528,6 +550,7 @@
                         left: 'left',
                         data: ["满意","愤怒","失望","反感","害怕"]
                     },
+                    graphic:Chart.graphic,
                     series : [
                         {
                             label: {
@@ -577,6 +600,7 @@
                         data: ['男','女']
                     },
                     yAxis: {},
+                    graphic:Chart.graphic,
                     series: [{
                         barGap:'40%',
                         barWidth:25,
@@ -602,6 +626,7 @@
                 tooltip : {
 
                 },
+                graphic:Chart.graphic,
 
                 series : [
                     {
@@ -717,6 +742,7 @@
                 hotWordsLoading: false,
                 hotWordsOption: {
                     tooltip: {},
+                    graphic:Chart.graphic,
                     series: {
                         //grid: {x:0, x2:0},
                         type: 'wordCloud',
@@ -783,8 +809,195 @@
 
 
             },
+            getRefreshData(title){
+            this.sonTitle=title;
+            const maxHot =this.maxHot;
+            const myss=this.lineseries;
 
-            getRefreshData(title,idx){
+
+            
+            const start='2016-12-05';
+            const end='2016-12-11';
+            const topic='罗一笑';
+            const subtopic='罗尔';
+
+
+            
+
+            Api.getMediaHotspot({topic, subtopic, start, end}).then(resp => {
+                    if(resp.data.code ==0){
+                        //const HotspotData = resp.data.data;
+
+                       
+
+                        this.Titles= _.sortBy(resp.data.data, function(item){
+                                return -item.value;
+                            });
+
+                         
+
+                         const swer=_.values(_.pick(_.first(this.Titles),'value'));
+                         this.maxHot=_.flatten(swer,true)[0]/109;
+                    
+
+ 
+                    }
+                });
+
+
+
+            Api.getMediaWordcloud({topic, subtopic, start, end}).then(resp => {
+                    if(resp.data.code ==0){
+                        const mediaData = resp.data.data;
+                        this.subtopics=mediaData.subtopics;
+                        this.hotWordsOption.series.data=mediaData.wordcloud;
+
+
+ 
+                    }
+                });
+
+            Api.getMediaGender({topic, subtopic, start, end}).then(resp => {
+                if(resp.data.code ==0){
+                    const mediaData0 = resp.data.data;
+                    const conte0=mediaData0.focus;
+                
+                this.sexOption.series[0].data=_.values(mediaData0.gender);
+                this.sexPieOption.series[0].data=_.map(mediaData0.gender,(value,key)=>{
+                    if (key=='m'){key="男"};
+                    if (key=='f'){key="女"};
+                    return {"name":key,"value":value}
+                });
+                this.follow0=mediaData0.focus.m;
+                this.follow1=mediaData0.focus.f;
+
+                    } });
+
+                Api.getMediaMood({topic, subtopic, start, end}).then(resp => {
+                if(resp.data.code ==0){
+                    const mediaMood = resp.data.data;
+                
+                  const sdf=_.map(mediaMood,(item)=>{
+                    item=_.values(_.pick(item,'date'));
+                    return item;
+                });
+
+                this.sentimentLineOption.xAxis.data=_.flatten(sdf,true);
+
+                 const sdf1=_.map(mediaMood,(item)=>{
+                    item=_.values(_.pick(item,'mood'));
+                    return item;
+                });
+
+
+
+                const sdf2=_.flatten(sdf1,true);
+
+                const happy0=_.map(sdf2,(item)=>{
+                    item=_.values(_.pick(item,'happy'));
+                    return item;
+                });
+                const happy=_.flatten(happy0,true);
+
+
+
+
+                 const anger0=_.map(sdf2,(item)=>{
+                    item=_.values(_.pick(item,'anger'));
+                    return item;
+                });
+                const anger=_.flatten(anger0,true);
+
+
+                 const sorrow0=_.map(sdf2,(item)=>{
+                    item=_.values(_.pick(item,'sorrow'));
+                    return item;
+                });
+                const sorrow=_.flatten(sorrow0,true);
+
+
+                const disgust0=_.map(sdf2,(item)=>{
+                    item=_.values(_.pick(item,'disgust'));
+                    return item;
+                });
+                const disgust=_.flatten(disgust0,true);
+
+                const fear0=_.map(sdf2,(item)=>{
+                    item=_.values(_.pick(item,'fear'));
+                    return item;
+                });
+                const fear=_.flatten(fear0,true);
+
+
+                const lineserie=_.map(myss,(item)=>{
+                    if(item.name=='满意'){item.data=happy;};
+                    if(item.name=='愤怒'){item.data=anger;};
+                    if(item.name=='失望'){item.data=disgust;};
+                    if(item.name=='害怕'){item.data=fear;};
+                    if(item.name=='反感'){item.data=sorrow;};
+                    item.value=_.reduce(item.data, function(memo, num){ return memo + num; }, 0);
+                    return item;
+                });
+
+                this.sentimentLineOption.series=lineserie;
+                this.sentimentPieOption.series[0].data=_.map(lineserie,(item)=>{
+                    item=_.pick(item,'name','value');
+                    return item;
+                });
+
+            
+
+
+
+
+
+
+
+               
+
+                
+                
+
+
+                
+
+
+
+
+            
+                    
+
+
+
+
+                }
+            });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            },
+
+
+            getRefreshData1(title,idx){
                 //接受参数title数值
                 this.sonTitle=title;
                 //const bidx=idx;
@@ -793,7 +1006,20 @@
              const newData=this.allData;
              console.log('yyy',title);
              console.log('yyy',newData);
+
+             const titleKeys=_.keys(this.allData);
              const contents1= _.values(this.allData);
+             const contents2=_.map(contents1, (item)=> {
+                    item=_.pick(item,'hotValue');
+                    return item;
+                });
+                console.log('yyy',titleKeys);
+                console.log('y21121yy',contents2);
+
+
+
+
+
              console.log('contents1',contents1[idx].sentiment);
              const newDateLa = _.map(contents1[idx].sentiment, (item)=> {
                     item.type='line';
@@ -801,6 +1027,8 @@
                     item.value=_.reduce(item.data, function(memo, num){ return memo + num; }, 0);
                     return item;
                 });
+
+                this.sentimentLineOption.xAxis.data=contents1[idx].date;
                 this.sentimentLineOption.series=newDateLa; // chartlines
                 this.sentimentPieOption.series[0].data=_.map(newDateLa, (item)=> {
                     item=_.pick(item,'name','value');
@@ -830,29 +1058,30 @@
                 this.agePieOption.series[0].data=contents1[idx].age;
                 this.follow0=_.values(contents1[idx].follow)[0];
                 this.follow1=_.values(contents1[idx].follow)[1];
+//---------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
             },
 
-            chartData(){
-
-                const newsData=this.allData;
-                const titles= _.keys(newsData);
-                const contents= _.values(newsData);
-                console.log('titles:',titles);
-                console.log('contents:',contents);
-                const hotvalues=_.pluck(contents,'hotValue');
-                console.log('hotvalues:',hotvalues);
-                const maxHot=_.max(hotvalues);
-                console.log('maxHot:',maxHot);
-                const percentage=_.map(hotvalues,function(num){ return num*99/_.max(hotvalues);});
-                console.log('percentage:',percentage);
-                const titleObj=_.object(titles,percentage);
-                console.log('titleObj:',titleObj);
-
-
-            },
+           
 
 
 
@@ -872,7 +1101,7 @@
             }
         },
         created(){
-            this.chartData();
+            this.getRefreshData('MORE Health携手美国最新儿童白血病临床试验');
 
         },
         components:{ CardPanel }

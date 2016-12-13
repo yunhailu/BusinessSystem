@@ -2,47 +2,10 @@
 	<header-component active="home"></header-component>
 	<div class="home-panel">
 		<div class="home-panel-wrap">
-
-				<!--<ul class="home-panel-wrap-list row">-->
-					<!--<li class="home-panel-wrap-list-item col-md-3"  v-for="item in items">-->
-						<!--<div class="home-panel-wrap-list-item-container">-->
-							<!--<a v-link="item.link" class="home-panel-wrap-list-item-container-link">-->
-								<!--<i class="fa fa-2x icon" :class="item.icon"></i>-->
-								<!--<span class="title">{{item.name}}</span>-->
-								<!--<div class="dec">{{item.dec}}</div>-->
-							<!--</a>-->
-						<!--</div>-->
-					<!--</li>-->
-				<!--</ul>-->
-
-				<!--<div class="home-panel-wrap-dashboard row">-->
-					<!--<div class="home-panel-wrap-dashboard-container">-->
-						<!--<i class="fa fa-2x icon" :class="dashboard.icon"></i>-->
-						<!--<span class="title">{{dashboard.name}}</span>-->
-						<!--<div class="dec">{{dashboard.dec}}</div>-->
-						<!--<ul class="row dashboard-items">-->
-							<!--<li class="col-md-3 item" v-for="item in dashboardList">-->
-								<!--<div class="item-con" >-->
-									<!--<a v-link="item.link" class="item-con-link">-->
-										<!--<i class="fa fa-2x" :class="dashboard.icon"></i>-->
-										<!--<span>{{item.name}}</span>-->
-									<!--</a>-->
-								<!--</div>-->
-							<!--</li>-->
-						<!--</ul>-->
-					<!--</div>-->
-				<!--</div>-->
 				<hot-event></hot-event>
-
-
-
 			<order-footer-component></order-footer-component>
 		</div>
-
 	</div>
-
-
-
 </template>
 <style lang="less">
 	@import "Home.less";
@@ -97,7 +60,6 @@
 		methods: {
 			getDashboardList(){
 				Api.getDashboardList({}).then(resp => {
-					console.log('getDashboardList', resp.data);
 					if(resp.data.code == 0){
 						const list = resp.data.data;
 						this.dashboardList = _.map(list, item => {

@@ -74,7 +74,7 @@
                     ],
                     progressive: 4,
                     textStyle: {
-                        fontFamily: 'pingfang'
+                       // fontFamily: 'pingfang'
                     },
                     series : [
                         {

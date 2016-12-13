@@ -3,13 +3,13 @@
 @h: 42px;
 @item-title-h: 30px;
 
-.home-panel{
+.home-panel{.h(100%);
   //.pa();
   .top(@h);  .bottom(0);  .left(0);  .right(0);
-  .bgc(@bg-color);  overflow: auto; //.pd(25px 0 0);
+  .bgc(@bg-color);  //overflow: auto; //.pd(25px 0 0);
 
   &-wrap{
-    .pa();  .w(100%);  .h(auto); .pd(10px);
+    .pa();  .w(100%);   .pd(10px);.h(100%);overflow: auto;.pd-bottom(30px);
 
     &-list{
       &-item{

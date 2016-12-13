@@ -2,7 +2,7 @@
 
 .wid{ .w(1200px;)}
 .reports{
-  min-height: 100%;background-color: #f9f9f9;
+  height: 100%;background-color: #f9f9f9;overflow-y: auto;
   &-wrap{
     .bgc(@bg-color);  .pd(0);
     &-title{
@@ -13,7 +13,7 @@
       .w(100%);  .pd(10px);
       table{ .bgc(white); .b(1px solid white); }
       table>thead{
-        .bgc(@body-theme);  .c(white);  .ff("pingfang-bold");
+        .bgc(@body-theme);  .c(white); // .ff("pingfang-bold");
       }
       table tr>td{ .b0();  .tc();  .pr();}
       .actionBtn{ .pd(0 5px);  .pointer(); }

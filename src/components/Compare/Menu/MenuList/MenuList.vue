@@ -60,15 +60,12 @@ console.log('aaa');
                 const groups = _.map(this.groups, item => {
                     if(group.group_id != item.group_id){
                         item.isActive = false;
-                        //this.setActiveCompareTopic(null);
-                        //this.initActiveTopic(group);
                     } else {
                         item.isActive = !item.isActive;
                     }
                     return item;
                 });
                 //获取当前list对象
-                console.log('当前group',group);
                 this.setTopicList(groups);
                 this.setTopicGroupActiveId(group.group_id)
             },
@@ -80,33 +77,19 @@ console.log('aaa');
                 const active = topic;
                 if(src.length != 0 && _.find(groupActive.list,item =>item.topic_id ==_.first(src).topic_id) != undefined){
                     if(src.findIndex(value => value==topic)!=-1){
-                        console.log('del');
                             src.splice(src.indexOf(topic),1);
-                        console.log('删除后的',src);
                             this.setActiveCompareTopic(src);
                             return ;
                     } else {
-                         console.log('add');
                               src.push(active);
-                        console.log('添加后的',src);
                             this.setActiveCompareTopic(src);
                     }
                 } else {
                     src = [];
                     src.push(topic);
-                    console.log(src);
                     this.setActiveCompareTopic(src);
                 }
             },
-            /*initActiveTopic(group){
-            this.group = group;
-                let active =_.map(this.activeCompareTopic,item=>item);
-                if(active.length =='0'){
-                    console.log('group',group);
-                    active.push(_.first(group.list));
-                    this.setActiveCompareTopic(active);
-                }
-            },*/
             addTopicAction(){
                 this.$router.go({name: "settingAdd"});
             }

@@ -15,7 +15,6 @@
                     <li v-for="topic in group.list" :id="topic.topic_id" @click="selectTopic(topic);" :class="topic | isActive" >
                         <a href="javascript:void(0);">
                             <i class="fa fa-angle-double-right"></i> {{topic.topic_name}}
-                            <!--<i class="fa fa-remove delete" @click.stop.prevent="deleteTopicAction(topic,group.group_id);"></i>-->
                         </a>
                     </li>
                 </ul>
@@ -31,8 +30,8 @@
     import Local from "../../../../local/local";
     import Tips from "../../../Common/Tips/Tips.vue"
     import * as Api from "../../../../widgets/Api";
-    import { topicList, activeAnalyticsTopic, analyticsRefreshTopic, analyticsResetSearch } from '../../../../vuex/getters';
-    import { setTopicList, setActiveAnalyticsTopic, setAnalyticsRefreshTopic, setAnalyticsResetSearch } from "../../../../vuex/actions";
+    import {analyticsTimePopUp, topicList, activeAnalyticsTopic, analyticsRefreshTopic, analyticsResetSearch } from '../../../../vuex/getters';
+    import {setAnalyticsTimePopUp, setTopicList, setActiveAnalyticsTopic, setAnalyticsRefreshTopic, setAnalyticsResetSearch } from "../../../../vuex/actions";
 
     export default{
         props: ['title', 'menus', 'groups', 'action'],
@@ -44,8 +43,8 @@
         },
         components:{ Tips },
         vuex: {
-            actions: { setTopicList, setActiveAnalyticsTopic, setAnalyticsRefreshTopic, setAnalyticsResetSearch },
-            getters: { topicList, activeAnalyticsTopic, analyticsRefreshTopic, analyticsResetSearch }
+            actions: {setAnalyticsTimePopUp, setTopicList, setActiveAnalyticsTopic, setAnalyticsRefreshTopic, setAnalyticsResetSearch },
+            getters: {analyticsTimePopUp, topicList, activeAnalyticsTopic, analyticsRefreshTopic, analyticsResetSearch }
         },
         methods: {
             toggle(group){
@@ -68,6 +67,7 @@
                     this.setAnalyticsRefreshTopic(this.analyticsRefreshTopic+1)
                     console.log('相同',this.analyticsRefreshTopic);
                 }else{
+                    //this.setAnalyticsTimePopUp(0.33);
                     if(this.analyticsResetSearch == false);{
                         console.log('判断不为空');
                         console.log('修改时间',(new Date()).getTime())

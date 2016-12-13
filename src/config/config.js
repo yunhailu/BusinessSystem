@@ -7,56 +7,18 @@ import Local from "../local/local";
  * link: 本网站的路由地址, name: 路由渲染组件名, domain: 第三方网站
  * */
 export const WhiteList = [{
-    id: '',
-    name: 'demo03',
-    title: "中国消费者情绪指数CCSI",
-    local: 'zh_CN_CCSI',
-    link: 'ccsi',
-    domain: 'http://vipccsi.ccn.com.cn'
-}, {
-    id: '',
-    name: 'demo11',
     title: "中国消费者情绪指数CCSI",
     local: 'zh_CN_CCSI',
     link: 'ccsi',
     domain: 'http://vipccsi.ccn.com.cn'
 },{
-    id: '',
-    name: 'demo12',
-    title: "中国消费者情绪指数CCSI",
-    local: 'zh_CN_CCSI',
-    link: 'ccsi',
-    domain: 'http://vipccsi.ccn.com.cn'
-},{
-    id: '',
-    name: 'demo03',
-    title: "中国消费者情绪指数CCSI",
-    local: 'zh_CN_CCSI',
-    link: 'ccsi',
-    domain: 'http://vipccsi.ccn.com.cn'
-},{
-    id: '',
-    name: 'demo14',
-    title: "中国消费者情绪指数CCSI",
-    local: 'zh_CN_CCSI',
-    link: 'ccsi',
-    domain: 'http://vipccsi.ccn.com.cn'
-},{
-    id: '',
-    name: 'demo15',
-    title: "中国消费者情绪指数CCSI",
-    local: 'zh_CN_CCSI',
-    link: 'ccsi',
-    domain: 'http://vipccsi.ccn.com.cn'
-},{
-    id: '',
-    name: 'demo06',
     title: "沃德社会气象台",
     local: 'zh_CN_society',
-    link: 'login',
+    link: 'society',
     domain: 'http://v2.wordemotion.com'
 }];
-
+//人名白名单
+export const WhiteNameList = ["习近平","马凯","王岐山","王沪宁","刘云山","刘延东","刘奇葆","许其亮","孙春兰","孙政才","李克强","李建国","李源潮","汪洋","张春贤","张高丽","张德江","范长龙","孟建柱","赵乐际","胡春华","俞正声","栗战书","郭金龙","韩正","王刚","王乐泉","王兆国","回良玉","刘淇","李长春","吴邦国","汪洋","张高丽","周永康","胡锦涛","贺国强","贾庆林","徐才厚","温家宝","薄熙来","郭伯雄","李长春","吴仪","吴官正","张立昌","张德江","陈良宇","罗干","贺国强","贾庆林","黄菊","曹刚川","曾庆红","曾培炎"];
 
 // 统计图表基础配置(饼图、环形图)
 export const Pie = {

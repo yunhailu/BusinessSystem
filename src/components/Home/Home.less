@@ -3,13 +3,15 @@
 @h: 42px;
 @item-title-h: 30px;
 
-.home-panel{
+.home-panel{height: 100%;
   //.pa();
   .top(@h);  .bottom(0);  .left(0);  .right(0);
   .bgc(@bg-color);  overflow: auto; //.pd(25px 0 0);
 
   &-wrap{
-    .pa();  .w(100%);  .h(auto); .pd(10px);
+    height:100%;
+    overflow: auto;
+    .pa();  .w(100%); /* .h(auto);*/ .pd(10px);.pd-bottom(50px);
 
     &-list{
       &-item{
@@ -32,7 +34,6 @@
       &-container{
         .con();
         .dashboard-items{
-          //.mg(15px 0 0);
           .item{
             .pd(10px 10px 0);
             &-con{

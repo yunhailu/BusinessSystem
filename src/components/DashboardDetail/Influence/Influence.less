@@ -12,9 +12,10 @@
   &-list{
     .pd(10px);
     &-item{
-      .w(23%);  .disIB();  .pd(10px); .mg(0 1%);  .br(2px);  .pointer();  .bgc(white);  //.c(#888);
+      .w(23%);  .disIB();  .pd(10px); .mg(0 1%);  .br(2px);  .pointer();  .bgc(white);
       .fa{ .f(15px); }
-      &-title{ .vm();  .f(15px);  .ff("pingfang-bold"); }
+      &-title{ .vm();  .f(15px); // .ff("pingfang-bold");
+      }
       &-con{
         .vm(); .f(12px);
         &-link{ .text-hidden(); }
@@ -30,13 +31,13 @@
   .pd(0.1rem);  .mg(1rem 2rem);
   table{ .bgc(white); .b(0.1rem solid white); }
   table>thead{
-    .bgc(@body-theme);  .c(white);  .ff("pingfang-bold");
+    .bgc(@body-theme);  .c(white); // .ff("pingfang-bold");
   }
   table tr>td{ .b0();  .tc();  .pr();}
   .barTd{
     .w(30%);
     .sentimentBar{
-      .w(100%);  .h(1.6rem);  //.pa();  .top(0); .bottom(0);  .left(0);  .right(0);
+      .w(100%);  .h(1.6rem);
     }
   }
   .rate{

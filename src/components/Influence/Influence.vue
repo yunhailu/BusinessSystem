@@ -1,24 +1,25 @@
 ﻿<template>
     <tabs :datas="influancerNums"></tabs>
     <!--<span>Influence</span>-->
-    <div class="popular">
-        <ul class="popular-list">
-            <li class="popular-list-item"  v-show="coltrol" v-for="item in popularList" @click="showNewList(item)">
-                <i class="fa" :class="[item.icon ? 'fa-'+item.icon : 'fa-cog']"></i>
-                <span class="popular-list-item-title">{{item.title}}</span>
-                <div class="popular-list-item-con">
-                    <div class="popular-list-item-con-source">{{item.source}} - {{item.value}}</div>
-                    <div class="popular-list-item-con-link">
-                        <a :href="item.link"  target="_blank">{{item.link}}</a>
+    <div class="influence-overflow">
+        <div class="popular">
+            <ul class="popular-list">
+                <li class="popular-list-item"  v-show="coltrol" v-for="item in popularList" @click="showNewList(item)">
+                    <i class="fa" :class="[item.icon ? 'fa-'+item.icon : 'fa-cog']"></i>
+                    <span class="popular-list-item-title">{{item.title}}</span>
+                    <div class="popular-list-item-con">
+                        <div class="popular-list-item-con-source">{{item.source}} - {{item.value}}</div>
+                        <div class="popular-list-item-con-link">
+                            <a :href="item.link"  target="_blank">{{item.link}}</a>
+                        </div>
+                        <div>{{item.post | addLabel "Post"}}</div>
                     </div>
-                    <div>{{item.post | addLabel "Post"}}</div>
-                </div>
-            </li>
-        </ul>
-    </div>
-    <div class="influenceTable">
-        <table class="table table-hover  table-striped">
-            <thead>
+                </li>
+            </ul>
+        </div>
+        <div class="influenceTable">
+            <table class="table table-hover  table-striped">
+                <thead>
                 <tr>
                     <td><i class="fa fa-user"></i> <span>{{words.influencer}}</span></td>
                     <td><i class="fa fa-comments"></i> <span>{{words.numberOfPosts}}</span></td>
@@ -28,8 +29,8 @@
                     <td><i class="fa fa-comment"></i> {{words.comments}}</td>
                     <td><i class="fa fa-share"></i> {{words.rate}}</td>
                 </tr>
-            </thead>
-            <tbody v-if="influancerTable.length">
+                </thead>
+                <tbody v-if="influancerTable.length">
                 <tr id="item.id" v-for="(index, item) in influancerTable" :class="[index % 2 == 0 ? '' : '']" @click="showPopList(item)" >
                     <td>{{item.influencer}}</td>
                     <td>{{item.post}}</td>
@@ -39,16 +40,13 @@
                     <td>{{item.comments}}</td>
                     <td class="rate"><i class="fa" :class="[item.rate.key == 'up' ? 'fa-arrow-up' : 'fa-arrow-down']"></i> {{item.rate | rateFormat}}</td>
                 </tr>
-            </tbody>
-        </table>
-        <!--<div v-if="influancerTable.length" class="paging">-->
-            <!--<page></page>-->
-        <!--</div>-->
-        <div v-if="!influancerTable.length" class="noTableTips">{{noTableTips}}</div>
+                </tbody>
+            </table>
+            <div v-if="!influancerTable.length" class="noTableTips">{{noTableTips}}</div>
+        </div>
+        <pop-list :item="selectItem" :pops="popList" :visiable.sync="popVisiable">
+        </pop-list>
     </div>
-    <pop-list :item="selectItem" :pops="popList" :visiable.sync="popVisiable">
-
-    </pop-list>
     <tips :visible.sync="loadingParams.visiable" :tipsparam.sync="loadingParams"></tips>
 </template>
 <style lang="less" scoped>
@@ -56,6 +54,7 @@
 </style>
 <script type="text/ecmascript-6">
     import _ from 'underscore';
+    import moment from 'moment';
     import {Chart, Pie} from '../../config/config';
     import Local from '../../local/local';
     import * as Api from '../../widgets/Api';
@@ -64,12 +63,14 @@
     import PopList from './PopList/PopList.vue';
     import Tips from '../Common/Tips/Tips.vue';
     import { analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic, analyticsDateChange, analyticsStart, analyticsEnd, activeAnalyticsTopic } from '../../vuex/getters';
+    import {setAnalyticsEnd,setAnalyticsStart} from '../../vuex/actions';
 
     export default{
         data(){
             const words = Local().influence;
             return{
                 words,
+                nowTime:null,
                 loadingParams: {
                     visiable: false,
                     type: 'loading',
@@ -87,13 +88,35 @@
             }
         },
         vuex: {
-            getters: {analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic, analyticsDateChange, analyticsStart, analyticsEnd, activeAnalyticsTopic}
+            getters: {analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic, analyticsDateChange, analyticsStart, analyticsEnd, activeAnalyticsTopic},
+            actions: {setAnalyticsEnd,setAnalyticsStart}
         },
         watch: {
+          /*  nowTime:{
+                handler(val,oldVal){
+                    const afterTime = moment().add(1,"hour").format("YYYY-MM-DD HH");
+                    const space = moment(afterTime).diff(moment(val));
+                    if(this.analyticsTimeRange>7){
+                        const interval = this.analyticsTimeRange;
+                        setTimeout(function () {
+                            const nowDay = moment().format("YYYY-MM-DD")
+                            this.setAnalyticsEnd(nowDay);
+                            this.setAnalyticsStart(moment(nowDay).subtract(interval,"day").format("YYYY-MM-DD"));
+                            this.init();
+                            this.nowTime = afterTime;
+                        }.bind(this),space)
+                    }else {
+                        setTimeout(function () {
+                            this.setAnalyticsEnd(moment(this.analyticsEnd).add(1,"hour").format("YYYY-MM-DD HH")),
+                                    this.setAnalyticsStart(moment(this.analyticsStart).add(1,"hour").format("YYYY-MM-DD HH"));
+                            this.init();
+                            this.nowTime = afterTime;
+                        }.bind(this),space)
+                    }
+                }
+            },*/
             activeAnalyticsTopic: {
                 handler(val){
-                    //this.commentBarLoading = true;
-                    //this.commentChartLoading = true;
                     this.init(val);
                 }
             },
@@ -111,13 +134,7 @@
             },
             analyticsSource: {
                 handler(val){
-                    console.log('analyticsSource', val);
                     this.init();
-
-//                    if(val == 'wechat' || val == 'weibo' ){
-//
-//                    }
-
                     if(val == 'all'){
                         this.influancerTable = _.filter(this.influancerList, (info, index) => {
                             return (index < 20);
@@ -132,32 +149,51 @@
             }
         },
         ready(){
+            this.nowTime = moment();
             if(this.activeAnalyticsTopic && this.activeAnalyticsTopic.topic_id){
                 this.init();
             }
         },
         methods: {
+            nowTime:{
+                handler(val,oldVal){
+                    const afterTime = moment().add(1,"hour").format("YYYY-MM-DD HH");
+                    const space = moment(afterTime).diff(moment(val));
+                    if(this.analyticsTimeRange>7){
+                        const interval = this.analyticsTimeRange;
+                        setTimeout(function () {
+                            const nowDay = moment().format("YYYY-MM-DD")
+                            this.setAnalyticsEnd(nowDay);
+                            this.setAnalyticsStart(moment(nowDay).subtract(interval,"day").format("YYYY-MM-DD"));
+                            this.init();
+                            this.nowTime = afterTime;
+                        }.bind(this),space)
+                    }else {
+                        setTimeout(function () {
+                            this.setAnalyticsEnd(moment(this.analyticsEnd).add(1,"hour").format("YYYY-MM-DD HH")),
+                                    this.setAnalyticsStart(moment(this.analyticsStart).add(1,"hour").format("YYYY-MM-DD HH"));
+                            this.init();
+                            this.nowTime = afterTime;
+                        }.bind(this),space)
+                    }
+                }
+            },
             showPopList(item){
                 this.popVisiable = true;
                 const topic_id = this.activeAnalyticsTopic.topic_id;
-                const author = item.influencer;
+                const author = item.author;
                 const size = this.$route.params.size;
-//                const start = this.analyticsStart;
-//                const end = this.analyticsEnd;
                 let end =this.analyticsEnd,
                         start = this.analyticsStart;
                 if(start.includes(' ') && end.includes(' ')){
                     start = start.split(' ')[0]+'T'+start.split(' ')[1];
                     end = end.split(' ')[0]+'T'+end.split(' ')[1];
-                    console.log('start',start,end);
                 }
                 this.getArticles({topic_id,author,size,start,end});
             },
             getArticles(params){
                 Api.getCommentList(params).then(resp => {
-                    console.log("getCommentList", resp.data);
                     if (resp.data.code ==0&&resp.data.data!=null) {
-                        console.log('wanglipeng:',resp.data.data);
                         const newDates = _.map(resp.data.data, (item)=> {
                             item.context = item.content;
                             item.date =item.pDate;
@@ -165,12 +201,10 @@
                             this.selectItem= item;
                         });
                         this.popList = newDates;
-
                     }
                     else {
                         this.popList =[{title:'暂无数据！',date:'无',from:'无',context:'无'}];
                     }
-
                 });
             },
             showNewList(item){
@@ -182,24 +216,16 @@
                         time_dimension = time_interval > 7 ? 1 : 0;
                         let end =this.analyticsEnd,
                         start = this.analyticsStart;
-                //console.log('001:',this.analyticsSource);
-
-
                 if(start.includes(' ') && end.includes(' ')){
                     start = start.split(' ')[0]+'T'+start.split(' ')[1];
                     end = end.split(' ')[0]+'T'+end.split(' ')[1];
-                    //console.log('start',start,end);
                 }
-//                        end = this.analyticsEnd,
-//                        start = this.analyticsStart;
 
                 if (item.icon=='edge' || item.icon=='chrome' ){ this.source='web'; this.controll=false; };
-//                console.log('wq1:',topic_id, topic, subtopic, source, start, end, time_dimension);
 
                 Api.getInfluenceList({topic_id, topic, subtopic, source, start, end, time_dimension}).then(resp => {
                     this.loadingParams.visiable = false;
                     if(resp.data.code ==0){
-                       console.log('12131----------------3',item.icon);
                         const influanceInfo = resp.data.data;
                         if(item.icon=='user'){
                             var influanceInfos =_.sortBy(influanceInfo, function(item){
@@ -207,33 +233,24 @@
                             });
                         }
                         else if (item.icon=='user-plus'){
-
                             var influanceInfos =_.sortBy(influanceInfo, function(item){
-
                                 return -item.rate.value.replace('%','');
                             });
                         }
                         else if (item.icon=='edge'){
                             var influanceInfos =_.sortBy(influanceInfo, function(item){
                                 return -(item.comments+item.shareCount+item.likeCount);
-
                             });
                         }
                         else if (item.icon=='chrome'){
                             var influanceInfos =_.sortBy(influanceInfo, function(item){
-
                                 return -(item.comments+item.post+item.shareCount+item.likeCount);
-
                             });
                         }
                         else{
                             var influanceInfos =_.sortBy(influanceInfo, function(item){
                             return -item.post;
                         });}
-
-                           //console.log('influanceInfos:',influanceInfos);
-
-
                         this.influancerList = _.map(influanceInfos, info => info);
                         this.influancerTable = _.filter(influanceInfos, (info, index) => {
                             return (index < 20);
@@ -256,7 +273,6 @@
                 if(start.includes(' ') && end.includes(' ')){
                     start = start.split(' ')[0]+'T'+start.split(' ')[1];
                     end = end.split(' ')[0]+'T'+end.split(' ')[1];
-                    console.log('start',start,end);
                 };
 
                 const icons = ['user','user-plus','edge','chrome'];
@@ -277,9 +293,6 @@
                             return -(item.comments+item.post+item.shareCount+item.likeCount);
                         }));
 
-
-//                        console.log('wlp2103:',sdasda2);
-//                        console.log('sdasda4:',resp.data.data);
                         var firstTitle=[];
                         firstTitle.push(sdasda1);
                         firstTitle.push(sdasda2);
@@ -299,67 +312,21 @@
                             itemd=_.pick(itemd,'icon','value','title','post','source');
                             return itemd;
                         });
-                        console.log('sdaaa2::',sdaaa2);
                         this.popularList=sdaaa2;
-
-                       // console.log('sdaaa2:wanglipeng:',sdaaa2);
-
                     }
 
                     else{
-
-
-//                        this.popularList=[
-//                            {icon:'user',post:'0',source:'',title:'最活跃的作者',value:'暂无数据'},
-//                            {icon:'user-plus',post:'0',source:'',title:'最具影响力的作者',value:'暂无数据'},
-//                            {icon:'edge',post:'0',source:'',title:'最活跃的站点',value:'暂无数据'},
-//                            {icon:'chrome',post:'0',source:'',title:'最具影响力的站点',value:'暂无数据'}];
-
                         this.coltrol=false;
                     }
-//                    else{
-//
-//
-////                        this.popularList=[
-////                            {icon:'user',post:'0',source:'',title:'最活跃的作者',value:'无'},
-////                            {icon:'user-plus',post:'0',source:'',title:'最具影响力的作者',value:'无'},
-////                            {icon:'edge',post:'0',source:'',title:'最活跃的站点',value:'无'},
-////                            {icon:'chrome',post:'0',source:'',title:'最具影响力的站点',value:'无'}];
-//
-//                    }
                 });
-
-                //this is my function api  --end
-
-
-//                Api.getPopularList({topic_id, topic, subtopic, source, start, end, time_dimension}).then(resp => {
-//                    this.loadingParams.visiable = false;
-//                    if(resp.data.code ==0){
-//                        const popularList = resp.data.data;
-//                        console.log('wq12122}}q:',resp.data.data);
-//                        this.popularList= _.map(popularList, (item, index) => {
-//                            item.icon = icons[index];
-//                            return item;
-//                        });
-//
-//                        console.log('wq23q:',this.popularList);
-//
-//                    }
-//                });
-
             },
-
-
-
             //order by function
-
             getOrderbyTitle(a,bi){
                 const orderResult =_.first(_.sortBy(a, function(item){
                     return -item+'.'+bi;
                 }));
                 return  orderResult;
             },
-
             getInfluenceList(){
                 const   topic_id = this.activeAnalyticsTopic.topic_id,
                         topic = this.activeAnalyticsTopic.topic_name,
@@ -372,22 +339,16 @@
                 if(start.includes(' ') && end.includes(' ')){
                     start = start.split(' ')[0]+'T'+start.split(' ')[1];
                     end = end.split(' ')[0]+'T'+end.split(' ')[1];
-                    console.log('start',start,end);
                 }
-//                        end = this.analyticsEnd,
-//                        start = this.analyticsStart;
                 Api.getInfluenceList({topic_id, topic, subtopic, source, start, end, time_dimension}).then(resp => {
                     this.loadingParams.visiable = false;
                     if(resp.data.code ==0&& resp.data.data!=null ){
                         const influanceInfos = resp.data.data;
-
-                        console.log(resp.data.data);
                         this.influancerList = _.map(influanceInfos, info => info);
                         this.influancerTable = _.filter(this.influancerList, (info, index) => {
                             return (index < 20);
                         });
                     }
-
                     else{
                         this.coltrol=false;
                     }
@@ -489,7 +450,6 @@
                         }
                     ]
                 };
-                //console.log(option);
                 return option;
             }
         },

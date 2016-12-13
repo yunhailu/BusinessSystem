@@ -1,25 +1,8 @@
 <template>
-    <!--<tabs ></tabs>-->
-    <!--<span>Influence</span>-->
     <div class="panel-title">
         <span class="panel-title-text">{{title}}</span>
         <div class="panel-title-delete" @click="deleteItem();"><i class="fa fa-minus"></i></div>
     </div>
-    <!--<div class="popular">-->
-        <!--<ul class="popular-list">-->
-            <!--<li class="popular-list-item" v-for="item in popularList">-->
-                <!--<i class="fa" :class="[item.icon ? 'fa-'+item.icon : 'fa-cog']"></i>-->
-                <!--<span class="popular-list-item-title">{{item.title}}</span>-->
-                <!--<div class="popular-list-item-con">-->
-                    <!--<div class="popular-list-item-con-source">{{item.source}} - {{item.value}}</div>-->
-                    <!--<div class="popular-list-item-con-link">-->
-                        <!--<a :href="item.link"  target="_blank">{{item.link}}</a>-->
-                    <!--</div>-->
-                    <!--<div>{{item.post | addLabel "Post"}}</div>-->
-                <!--</div>-->
-            <!--</li>-->
-        <!--</ul>-->
-    <!--</div>-->
     <div class="influenceTable">
         <table class="table table-hover  table-striped">
             <thead>
@@ -45,9 +28,6 @@
                 </tr>
             </tbody>
         </table>
-        <!--<div v-if="influancerTable.length" class="paging">-->
-            <!--<page></page>-->
-        <!--</div>-->
         <div v-if="!influancerTable.length" class="noTableTips">{{noTableTips}}</div>
     </div>
 
@@ -82,10 +62,7 @@
                         topic_id = this.data.topic_id,
                         source = this.data.source,
                         time_interval = this.data.time_interval,
-                        //time_dimension = this.data.time_dimension,
                         time_dimension = time_interval > 7 ? 1 : 0,
-//                        start = moment().subtract(time_interval, 'days').format('YYYY-MM-DD'),
-//                        end = moment().format('YYYY-MM-DD'),
                         topic = this.data.topic;
                 let start,end;
                 if(time_interval!=0){
@@ -99,7 +76,6 @@
                     console.log('start', start, end);
                 }
                 Api.getInfluenceList({ subtopic, topic_id, source, time_dimension, start, end, topic }).then(resp => {
-                    //const resp = {data: {code:0, data: [{id: "1234", influencer: "台湾", posts: 6, like: 123, resend: 32, sentiment: {happy: 5, anger: 15, sorrow: 10, disgust: 0, fear: 5}, rate: {key: "up", value: "24%"}},{"id": "1234", "influencer": "台湾1", "posts": 6, "like": 123, "resend": 32, "sentiment": {happy: 3, anger: 5, sorrow: 10, disgust: 3, fear: 5}, "rate": {"key": "up", "value": "24%"}}] }};
                     if(resp.data.code ==0){
                         const influanceInfos = resp.data.data;
                         this.influancerList = _.map(influanceInfos, info => {
@@ -108,7 +84,6 @@
                         this.influancerTable = _.filter(this.influancerList, (info, index) => {
                                     return (index < 20);
                         });
-//                      console.log('这是影响力',this.influancerTable)
                     }
                 });
             },
@@ -131,7 +106,6 @@
             barFormat(val){
                 const option = {
                     tooltip: _.extend({}, Chart.tooltip, {}),
-                    //grid: _.extend({}, Chart.grid),
                     progressive: 4,
                     textStyle: Chart.textStyle,
                     xAxis: _.extend({}, Chart.xAxis, {
@@ -207,7 +181,6 @@
                         }
                     ]
                 };
-                //console.log(option);
                 return option;
             }
         },

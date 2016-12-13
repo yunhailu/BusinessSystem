@@ -63,6 +63,43 @@ export const logout = params => {
 };
 
 /**
+ *  Encapsulate `register` interface
+ *
+ *  @params {String} username
+ *  @params {String} password
+ *  @params {String} phone
+ *  @params {String} key
+ *  @params {String} email
+ *
+ *  @return {Promise} With Register.
+ */
+export const register = params => {
+    return Api.request({
+        url: `${rootURI}/auth/register`,
+        params
+    });
+};
+
+/**
+ *  Encapsulate `nodify` interface
+ *
+ *  @params {String} username
+ *  @params {String} new_password
+ *  @params {String} current_password
+ *  @params {String} phone
+ *  @params {String} key
+ *  @params {String} email
+ *
+ *  @return {Promise} With Register.
+ */
+export const nodifyUser = params => {
+    return Api.request({
+        url: `${rootURI}/auth/settings`,
+        params
+    });
+};
+
+/**
  *  Encapsulate `get group list` interface
  *
  *  @return {Promise} With Group List.
@@ -166,6 +203,43 @@ export const getCommentDetail = params => {
         params
     });
 };
+
+
+/**
+ *  Encapsulate `get mediaData ` interface
+ *
+ *  @return {Promise} With Topic List.
+ */
+export const getMediaHotspot = params => {
+    return Api.request({
+        url: `${rootURI}/media/hotspot`,
+        params
+    });
+};
+
+export const getMediaGender = params => {
+    return Api.request({
+        url: `${rootURI}/media/gender`,
+        params
+    });
+};
+
+export const getMediaWordcloud = params => {
+    return Api.request({
+        url: `${rootURI}/media/wordcloud`,
+        params
+    });
+};
+
+
+export const getMediaMood = params => {
+    return Api.request({
+        url: `${rootURI}/media/mood`,
+        params
+    });
+};
+
+
 
 /**
  *  Encapsulate `get Influence Popular List` interface

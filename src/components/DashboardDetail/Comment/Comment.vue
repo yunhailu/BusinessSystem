@@ -1,27 +1,19 @@
 ﻿<template>
-    <!--<tabs :actions="actions" ></tabs>-->
-    <!--<div>Evaluation</div>-->
     <div class="panel-title">
         <span class="panel-title-text">{{title}}</span>
         <div class="panel-title-delete" @click="deleteItem();"><i class="fa fa-minus"></i></div>
     </div>
     <div class="charts">
-        <!--<div class="chart commentLeftBar" v-echarts="commentBarOption" :click="clickChartAction" :loading="commentBarLoading" theme="macarons"></div>&lt;!&ndash;theme="infographic"&ndash;&gt;-->
-        <!--<div class="chart commentRightBar" v-echarts="commentPieOption2" :loading="commentPieLoading2" v-show="isShow" theme="macarons"></div>-->
-        <!--<div class="chart commentRightBar" v-echarts="commentPieOption" :loading="commentChartLoading" v-show="!isShow" theme="macarons"></div>-->
-
         <div class="chart commentLeftBar" theme="macarons">
             <echarts :options="commentBarOption" initOptions="commentBarOption" :img.sync="master" theme="macarons"></echarts>
         </div>
         <div class="chart commentRightBar"  v-show="isShow">
-            <!--<echarts :options="commentChartOption" initOptions="commentChartOption" :img.sync="sub" theme="macarons"></echarts>-->
             <echarts :options="commentPieOption2" initOptions="commentPieOption2" :img.sync="sub" theme="macarons"></echarts>
         </div>
         <div class="chart commentRightBar" v-show="!isShow" >
             <echarts :options="commentPieOption" initOptions="commentPieOption"  theme="macarons"></echarts>
         </div>
     </div>
-    <!--<list-panel :list="list" :options="options" :select-title="selectTitle" :select-value.sync="sortVal"></list-panel>-->
 </template>
 <style lang="less" scoped>
     @import "Comment.less";
@@ -72,7 +64,6 @@
                 words,
                 common,
                 selectTitle: Local().common.sortBy,
-                //list: list.time,
                 options: [{key: 'time', value:common.timeRanking}, {key: 'browser', value:common.countRanking}, {key: 'star', value:common.greetRanking}],
                 sortVal: "",
                 x: [],
@@ -120,17 +111,14 @@
                     series : [
                         { name: words.positive,
                             type: 'line',
-                            //areaStyle: {normal: {}}, stack: 'Total',
                             data: []
                         },
                         { name: words.negative,
                             type:'line',
-                            //areaStyle: {normal: {}}, stack: 'Total',
                             data: []
                         },
                         { name: words.neutral,
                             type:'line',
-                            //areaStyle: {normal: {}}, stack: 'Total',
                             data: []
                         }
                     ]
@@ -167,29 +155,6 @@
                         }
                     ]
                 },
-                /* commentChartLoading: true,
-                 commentChartOption: {
-                 tooltip: _.extend({}, Chart.tooltip, {}),
-                 legend: { data: [words.positive, words.negative, words.neutral], bottom: 0 },
-                 grid: _.extend({}, Chart.grid, {bottom: '10%'}),
-                 toolbox: _.extend({}, Chart.toolbox, {
-                 feature: { saveAsImage: {} }
-                 }),
-                 progressive: 4,
-                 textStyle: Chart.textStyle,
-                 xAxis: _.extend({}, Chart.xAxis, { type: 'value' }),
-                 yAxis: _.extend({}, Chart.yAxis, {
-                 type: 'category',
-                 data: [common.wechat, common.weibo, common.web, common.client, common.overseas]
-                 }),
-                 color:['#2FCC71','#E64D3D', '#F1C40F', '#3598DC', '#737373'],
-                 series: [
-                 { name: words.positive, type: 'bar', stack: '总量', data: [] },
-                 { name: words.negative, type: 'bar', stack: '总量', data: [] },
-                 { name: words.neutral, type: 'bar', stack: '总量', data: [] }
-                 ]
-                 },*/
-
                 commentPieOption: {
                     isActive: true,
                     title: _.extend({}, Pie.title, { show: false }),
@@ -209,49 +174,6 @@
                         data:[]
                     })
                 },
-                /*commentChartLoading: true,
-                commentChartOption: {
-                    tooltip: _.extend({}, Chart.tooltip, {}),
-                    legend: { data: [words.positive, words.negative, words.neutral], bottom: 0 },
-                    grid: _.extend({}, Chart.grid, {bottom: '10%'}),
-                    toolbox: _.extend({}, Chart.toolbox, {
-                        feature: { saveAsImage: {} }
-                    }),
-                    animation:false,
-                    progressive: 4,
-                    textStyle: Chart.textStyle,
-                    xAxis: _.extend({}, Chart.xAxis, { type: 'value' }),
-                    yAxis: _.extend({}, Chart.yAxis, {
-                        type: 'category',
-                        data: [common.wechat, common.weibo, common.web, common.client, common.overseas]
-                    }),
-                    color: _.extend([], Chart.color),
-                    series: [
-                        { name: words.positive, type: 'bar', stack: '总量', data: [] },
-                        { name: words.negative, type: 'bar', stack: '总量', data: [] },
-                        { name: words.neutral, type: 'bar', stack: '总量', data: [] }
-                    ]
-                },*/
-
-//                commentChartOption1: {
-//                    tooltip: _.extend({}, Chart.tooltip, {}),
-//                    legend: {
-//                        data: ['Comment']
-//                    },
-//                    grid: _.extend({}, Chart.grid),
-//                    toolbox: _.extend({}, Chart.toolbox, {
-//                        feature: { saveAsImage: {} }
-//                    }),
-//                    progressive: 4,
-//                    textStyle: Chart.textStyle,
-//                    xAxis: _.extend({}, Chart.xAxis, { type: 'value' }),
-//                    yAxis: _.extend({}, Chart.yAxis, {
-//                        type: 'category',
-//                        data: [common.wechat, common.weibo, common.web, common.client, common.overseas]
-//                    }),
-//                    color: _.extend([], Chart.color),
-//                    series: []
-//                },
                 commentPieOption: {
                     isActive: true,
                     title: _.extend({}, Pie.title, { show: false }),
@@ -296,12 +218,10 @@
                 }
 
                 Api.getCommentDetail({ subtopic, topic_id, source, time_dimension, start, end, topic }).then(resp => {
-                    //console.log('getCommentDetail', resp);
                     if(resp.data.code == 0){
                         const details = resp.data.data;
                         this.x = _.map(details, detail => detail.date);
                         const _this = this;
-                        //console.log("xxxx", this.x);
                         let all = {positive: [], negative:[], neutral:[]};
                         _.each(details, (detail, index) => {
                             _.each(detail.values, (value, key) => {
@@ -309,9 +229,6 @@
                                 this.lineData[key].negative.push(detail.values[key].negative);
                                 this.lineData[key].neutral.push(detail.values[key].neutral);
                             });
-                           /* all.positive.push(this.lineData.wechat.positive[index] + this.lineData.weibo.positive[index] + this.lineData.client.positive[index] + this.lineData.web.positive[index] + this.lineData.overseas.positive[index]);
-                            all.negative.push(_this.lineData.wechat.negative[index] + _this.lineData.weibo.negative[index] + _this.lineData.client.negative[index] + _this.lineData.web.positive[index] + _this.lineData.overseas.positive[index]);
-                            all.neutral.push(_this.lineData.wechat.neutral[index] + _this.lineData.weibo.neutral[index] + _this.lineData.client.neutral[index] + _this.lineData.web.positive[index] + _this.lineData.overseas.positive[index]);*/
                         });
                         all.positive =_.map(_.zip(this.lineData.wechat.positive,this.lineData.weibo.positive,this.lineData.client.positive,this.lineData.web.positive,this.lineData.overseas.positive),item =>{
                                     return _.reduce(item, function(memo, num){ return memo + num; }, 0);
@@ -336,21 +253,6 @@
                             {value:_.reduce(this.lineData.all.positive,(mome, val) => mome + val, 0), name:this.words.positive},
                             {value:_.reduce(this.lineData.all.negative,(mome, val) => mome + val, 0), name:this.words.negative},
                             {value:_.reduce(this.lineData.all.neutral,(mome, val) => mome + val, 0), name:this.words.neutral},]
-                        /*
-                        this.commentChartLoading = false;
-                        const datas = _.chain(this.lineData)
-                                .filter((value, key) => (key != 'all'))
-                                .map(value => {
-                                    return _.map(value, val => {
-                                        return _.reduce(val, (memo, v) => memo + v, 0);
-                                    });
-                                }).value();
-                        this.commentChartOption.series = _.map(this.commentChartOption.series, (value, index) => {
-                            value.data = _.zip.apply(null,datas)[index];
-                            return value;
-                        });*/
-                        //console.log('datas', datas);
-                        //console.log('series', this.commentChartOption.series);
                         const allNums=_.reduce(this.lineData.all.negative,(mome, val) => mome + val, 0)+_.reduce(this.lineData.all.neutral,(mome, val) => mome + val, 0)
                         +_.reduce(this.lineData.all.positive,(mome, val) => mome + val, 0);
 
@@ -427,30 +329,6 @@
                         default:
                             break;
                         }
-               /* if(idx == 0){
-                    this.isShow = true;
-                    return;
-                }
-
-                this.isShow = false;*/
-//                this.commentChartOption1.series = [{  //右侧柱状图
-//                    type: 'bar',
-//                    name: 'Comment',
-//                    itemStyle: {
-//                        normal: {
-//                            color: function(params) {
-//                                // build a color map as your need.
-//                                var colorList = _.extend({}, Chart.color);
-//                                return colorList[params.dataIndex]
-//                            }
-//                        }
-//                    },
-//                    data: [712,621,810]
-//                }];
-                /*this.commentPieOption.series.data = _.map(this.lineData[map[idx]], (value, key) => {
-                    return ({ value: _.reduce(value, (memo, val) => memo + val, 0),name: this.words[key] });
-                });*/
-
             },
             initData(){
                 this.lineData = {

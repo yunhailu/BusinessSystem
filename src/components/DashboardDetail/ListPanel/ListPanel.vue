@@ -21,10 +21,6 @@
                     <a class="btn btn-default list-panel-tools-filter-item" href="javascript:void(0);" @click="setCount(100)" :class="[filterActive == 100 ? 'active' : '']">100</a>
                 </div>
             </div>
-            <!--<div class="col-md-4">-->
-            <!--<i class="fa fa-th-large"></i>-->
-            <!--<i class="fa fa-th-list"></i>-->
-            <!--</div>-->
         </div>
         <ul class="list-panel-list" v-if="tableList.length">
             <li class="list-panel-list-item row" v-for="item in tableList">
@@ -47,7 +43,6 @@
                         <div class="item-data">
                             <div class="row">
                                 <div class="title">{{common.match}}</div>
-                                <!--<div class="time">{{activeAnalyticsTopic.topic_name}}</div>-->
                                 <div class="time">{{topicName}}</div>
                             </div>
                             <div class="row">
@@ -67,10 +62,6 @@
                 </a>
             </li>
         </ul>
-        <!--<div v-if="!tableList.length" class="list-panel-tip">{{listTip}}</div>-->
-        <!--<div class="list-panel-pager">-->
-            <!--<page></page>-->
-        <!--</div>-->
     </div>
 </template>
 <style lang="less" scoped>
@@ -156,11 +147,6 @@
                 return f;
             }
         },
-//        computed: {
-//            list(){
-//                return this.list;
-//            }
-//        },
         watch: {
             list(val){
                 this.tableList = val;
@@ -171,8 +157,6 @@
             }
         },
         ready(){
-            console.log('props,options',this.options,this.data);
-            console.log('props,data',this.data);
             this.setCount(this.filterActive);
             this.setSentiment('all');
 

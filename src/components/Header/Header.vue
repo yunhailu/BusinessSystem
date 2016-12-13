@@ -1,13 +1,13 @@
 ﻿<template>
     <header class="header">
         <div class="logo">
-            <!--<img src="../../../images/logo.jpg" />-->
             <span>{{words.title}}</span>
+            <sup> &reg;</sup>
         </div>
         <ul class="navbar-center">
             <li class="tab-item" v-for="tab in tabs">
                 <a href="javascript:void(0);" v-link="{name: tab.link}" :class="active == tab.id ? 'active' : ''">
-                    <i class="fa" :class="[tab.icon]" aria-hidden="true"></i>
+                    <i class="fa fa-2x" :class="[tab.icon]" aria-hidden="true"></i>
                     <span class="header-font">{{tab.name}}</span>
                 </a>
             </li>
@@ -87,7 +87,8 @@
                 const business_name = getCookie('business_name');
                 Cookie.remove('business_uid');
                 Cookie.remove('bussiness_name');
-                const whiteName = _.filter(WhiteList, item => (item.name == business_name));
+                Cookie.remove('business_level');
+                const whiteName = _.filter(WhiteList, item => (item.domain == location.origin));
                 let name = 'login';
                 if(whiteName.length){
                     name = whiteName[0].link;

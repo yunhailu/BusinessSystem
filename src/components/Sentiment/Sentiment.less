@@ -9,13 +9,14 @@
 @flag-grey: @word;
 
 
+.sentiment-overflow{overflow:auto;  height:100%;.pd-bottom(150px);}
+
 .charts{
   .pd(0);  .mg(0);   .w(100%);   .pr();  .tc();.pd-top(10px);
   .chart.active{ .w(73%); }
   .chart{
     .w(100%);  .h(200px); .pd(0);
     .disIB();
-    //.pd(20px 0);
   }
   .percentBar{ .h(300px);  .w(34%);.disIB(); }
   .timeBar{ .h(300px);  .w(65%);  .disIB(); }
@@ -28,7 +29,7 @@
   .pie.active{ .w(23%); .disIB();  .opacity(100); }
   .pie{
     .w(23%);  .h(280px);  .opacity(0);  .pa();  .right(20px);
-    .disIB();  //.pd(10px);
+    .disIB();
   }
   .arrow{
     .w(20px);  .h(280px);  .c(@word);  .float-right();  .tc();
@@ -39,7 +40,6 @@
 
 .sentiment-panel{
   .pd(0);  .mg(20px 0);   .w(100%);   .pr();  .bgc(@list-bg);
-  //.b-top(1px solid #dedede);
 
   &-tools{
     .pd(6px 0);  .mg(0);  .b-top(1px solid #dedede);
@@ -54,8 +54,11 @@
         .fa{ .mg(10px 0);  .float-left();  .c(@word); }
         &-con{
           .mg(0 0 0 26px);
-          .title{ .c(@body-theme);  .h(24px);  .lh(24px);  .f(14px);  .ff("pingfang-bold");  .text-hidden();  }
-          .detail{ .text-num-hidden(2); .ff("pingfang-bold");   }
+          .title{ .c(@body-theme);  .h(24px);  .lh(24px);  .f(14px);
+            //.ff("pingfang-bold");
+             .text-hidden();  }
+          .detail{ .text-num-hidden(2);
+            //.ff("pingfang-bold");   }
           .time{ .pd(5px 0); }
         }
       }
@@ -74,7 +77,10 @@
           .pd(8px 0 );
           .row{
             .mg(7px 0 0);  .f(14px);
-            .title{ .ff(pingfang-bold);  .fw(600); }
+            .title{
+              //.ff(pingfang-bold);
+               .fw(600); }
+          }
           }
         }
 

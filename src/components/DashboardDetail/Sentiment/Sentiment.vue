@@ -1,21 +1,13 @@
 <template>
-    <!--<tabs :actions="actions" ></tabs>-->
-    <!--<span>Sentiment</span>-->
     <div class="panel-title">
         <span class="panel-title-text">{{title}}</span>
         <div class="panel-title-delete" @click="deleteItem();"><i class="fa fa-minus"></i></div>
     </div>
     <div class="charts">
-        <!--<div class="charts">-->
-            <!--<div class="chart timeBar" :click="clickChartAction" v-echarts="sentimentBarOption" :loading="sentimentBarLoading" ></div>-->
-            <!--<div class="chart percentBar" v-echarts="sentimentPieOption" :loading="sentimentPieLoading"></div>-->
-        <!--</div>-->
-
        <div class="chart timeBar" :loading="sentimentBarLoading" >
             <echarts :options="sentimentBarOption" :initOptions="sentimentBarOption" :img.sync="master"></echarts>
         </div>
         <div class="chart percentBar"   :loading="sentimentChartLoading" >
-            <!--<echarts :options="sentimentChartOption" :initOptions="sentimentChartOption" :img.sync="sub"></echarts>-->
             <echarts :options="sentimentPieOption" :initOptions="sentimentPieOption" :img.sync="sub"></echarts>
         </div>
     </div>
@@ -112,7 +104,6 @@
                         data:[common.happy,common.anger,common.sorrow,common.disgust,common.fear]
                     },
                     dataZoom: _.extend({}, Chart.dataZoom),
-                    //color:_.extend( Chart.color, {}),
                     grid: _.extend({}, Chart.grid, {
                         bottom: '40rem',
                     }),
@@ -133,32 +124,22 @@
                     series : [{
                         name:common.happy,
                         type:'line',
-                        //areaStyle: {normal: {}},
-                        //stack: 'Total',
                         data: []
                     }, {
                         name:common.anger,
                         type:'line',
-                        //areaStyle: {normal: {}},
-                        //stack: 'Total',
                         data: []
                     }, {
                         name:common.sorrow,
                         type:'line',
-                        //areaStyle: {normal: {}},
-                        //stack: 'Total',
                         data: []
                     }, {
                         name:common.disgust,
                         type:'line',
-                        //areaStyle: {normal: {}},
-                        //stack: 'Total',
                         data: []
                     }, {
                         name:common.fear,
                         type:'line',
-                        //areaStyle: {normal: {}},
-                        //stack: 'Total',
                         data: []
                     }]
                 },
@@ -170,11 +151,6 @@
                         trigger: 'item',
                         formatter:"{b}:({d}%)"
                     },
-                    /*legend: {
-                     orient: 'vertical',
-                     bottom:0,
-                     data:[common.happy,common.anger,common.sorrow,common.disgust,common.fear]
-                     },*/
                     legend: _.extend({}, Pie.legend, {
                         bottom: 0,
                         data: [common.happy,common.anger,common.sorrow,common.disgust,common.fear]
@@ -199,105 +175,7 @@
                             data:[]
                         }
                     ]
-                    /*isActive: true,
-                     title: _.extend({}, Pie.title, { show: false}),
-                     tooltip : {
-                     trigger: 'item',
-                     formatter: "{a} <br/>{b} : {c} ({d}%)"
-                     },
-                     legend: _.extend({}, Pie.legend, {
-                     //orient: 'vertical',
-                     //x: 'bottom',
-                     bottom: 0,
-                     data: ["满意", "愤怒", "失望", "反感", "害怕"]
-                     }),
-                     textStyle: Pie.textStyle,
-                     toolbox: Pie.toolbox,
-                     series: [
-                     {
-                     name:'',
-                     type:'pie',
-                     radius: ['30%', '70%'],
-                     avoidLabelOverlap: false,
-                     label: {
-                     normal: {
-                     show: false,
-                     position: 'center'
-                     },
-                     emphasis: {
-                     show: true,
-                     textStyle: {
-                     fontSize: '30',
-                     fontWeight: 'bold'
-                     }
-                     }
-                     },
-                     labelLine: {
-                     normal: {
-                     show: false
-                     }
-                     },
-                     data:[]
-                     }
-                     ]*/
                 },
-
-                /*sentimentChartLoading: true,
-                sentimentChartOption: {
-                    tooltip: _.extend({}, Chart.tooltip, {}),
-                    legend: {
-                        data: [common.happy, common.anger, common.sorrow, common.disgust, common.fear]
-                    },
-                    animation:false,
-                    grid: _.extend({}, Chart.grid),
-                    toolbox: _.extend({}, Chart.toolbox, {
-                        feature: {
-                            saveAsImage: {}
-                        }
-                    }),
-                    progressive: 4,
-                    textStyle: Chart.textStyle,
-                    xAxis: _.extend({}, Chart.xAxis, {
-                        type: 'value',
-//                        interval: 10,
-//                        axisLabel: {
-//                            formatter: '{value}%'
-//                        }
-                    }),
-                    yAxis: _.extend({}, Chart.yAxis, {
-                        type: 'category',
-                        data: ['微信', '微博', '网页', '客户端', '海外']
-                    }),
-                    color: _.extend([], Chart.color),
-                    series: [
-                        {
-                            name: common.happy,
-                            type: 'bar',
-                            stack: '总量',
-                            data: []
-                        }, {
-                            name: common.anger,
-                            type: 'bar',
-                            stack: '总量',
-                            data: []
-                        }, {
-                            name: common.sorrow,
-                            type: 'bar',
-                            stack: '总量',
-                            data: []
-                        }, {
-                            name: common.disgust,
-                            type: 'bar',
-                            stack: '总量',
-                            data: []
-                        }, {
-                            name: common.fear,
-                            type: 'bar',
-                            stack: '总量',
-                            data: []
-                        }
-                    ]
-                }*/
             }
         },
         methods: {
@@ -334,21 +212,14 @@
                 ];
                 _.each(this.lineData[source], (value, key) => {
                     this.sentimentBarOption.series[this.sentimentMap[key]].data = value;
-                    //console.log('chakanshuju',value)
                 });
-                /*_.each(this.lineData[source], (value, key) => {
-                    this.sentimentBarOption.series[this.sentimentMap[key]].data = value;
-                });*/
             },
             getSentimentDetail(){
                 const subtopic = this.data.subtopic,
                         topic_id = this.data.topic_id,
                         source = this.data.source,
                         time_interval = this.data.time_interval,
-                        //time_dimension = this.data.time_dimension,
                         time_dimension = time_interval > 7 ? 1 : 0,
-//                        start = moment().subtract(time_interval, 'days').format('YYYY-MM-DD'),
-//                        end = moment().format('YYYY-MM-DD'),
                         topic = this.data.topic;
                 let start,end;
                 if(time_interval!=0){
@@ -362,14 +233,10 @@
                     console.log('start', start, end);
                 }
                 Api.getSentimentDetail({ subtopic, topic_id, source, time_dimension, start, end, topic }).then(resp => {
-                    //console.log("getSentimentDetail", JSON.stringify(resp.data.data));
                     if(resp.data.code == 0){
-
                         const details = resp.data.data;
-                        console.log('查看是否进入报告内情绪数据请求',details);
                         this.x = _.map(details, detail => detail.date);
                         const _this = this;
-                        //console.log("xxxx", this.x);
                         let all = {happy: [], anger:[], sorrow:[], disgust:[], fear:[]};
                         _.each(details, (detail, index) => {
                             _.each(detail.values, (value, key) => {
@@ -386,26 +253,11 @@
                             all.fear.push(this.lineData.wechat.fear[index] + this.lineData.weibo.fear[index] + this.lineData.client.fear[index] + this.lineData.web.fear[index] + this.lineData.overseas.fear[index]);
                         });
                         this.lineData.all = all;
-                        //console.log(this.lineData);
-
-                        /*this.sentimentBarLoading = false;
-                        this.sentimentChartLoading = false;
-                        this.sentimentBarOption.xAxis.data = this.x;*/
                         this.sentimentBarLoading = false;
                         this.sentimentPieLoading = false;
                         this.sentimentBarOption.xAxis.data = this.x;
 
                         this.actions("", 0);
-
-                        /*_.each(this.sentimentChartOption.series, function(value, index){
-                            _.each(this.lineData, function(val, key){
-                                if(key == "all") return;
-                                const summary = _.reduce(this.lineData[key][this.sentimentArr[index]], (memo, val) => {
-                                    return memo + val;
-                                }, 0);
-                                this.sentimentChartOption.series[index].data.push(summary);
-                            }.bind(this));
-                        }.bind(this));*/
                         const allNums=_.reduce(this.lineData.all.happy,(mome, val) => mome + val, 0)+_.reduce(this.lineData.all.anger,(mome, val) => mome + val, 0)
                                 +_.reduce(this.lineData.all.sorrow,(mome, val) => mome + val, 0)+_.reduce(this.lineData.all.disgust,(mome, val) => mome + val, 0)
                                 +_.reduce(this.lineData.all.fear,(mome, val) => mome + val, 0);
@@ -464,34 +316,6 @@
                         happy: [], anger: [], sorrow: [], disgust: [], fear: []
                     }
                 };
-                /*this.sentimentChartOption.series = [
-                 {
-                 name: this.common.happy,
-                 type: 'bar',
-                 stack: '总量',
-                 data: []
-                 }, {
-                 name: this.common.anger,
-                 type: 'bar',
-                 stack: '总量',
-                 data: []
-                 }, {
-                 name: this.common.sorrow,
-                 type: 'bar',
-                 stack: '总量',
-                 data: []
-                 }, {
-                 name: this.common.disgust,
-                 type: 'bar',
-                 stack: '总量',
-                 data: []
-                 }, {
-                 name: this.common.fear,
-                 type: 'bar',
-                 stack: '总量',
-                 data: []
-                 }
-                 ];*/
             },
             init(){
                 this.initData();

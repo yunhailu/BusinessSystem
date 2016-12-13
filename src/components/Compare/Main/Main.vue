@@ -1,6 +1,5 @@
 ﻿<template>
     <tabs :datas="compareNums"></tabs>
-    <!--<span>Compare Panel</span>-->
 
     <div class="compare-charts">
         <div class="chart" v-echarts="compareChartOption" :loading="compareChartLoading" theme="macarons"></div>
@@ -59,7 +58,13 @@
 
                 compareChartLoading: false,
                 compareChartOption: {
-                    title: _.extend({}, Chart.title, { show: false}),
+                    title: _.extend({}, Chart.title, {
+                        text:'关注趋势图：',
+                        textStyle:{
+                            color:'#408CD7'
+                        },
+                        show: true
+                    }),
                     tooltip: Chart.tooltip,
                     legend: {
                         data:[]
@@ -84,7 +89,13 @@
 
                 comparePieLoading: false,
                 comparePieOption: {
-                    title: _.extend({}, Pie.title, { show: false}),
+                    title: _.extend({}, Pie.title, {
+                        text:'关注占比图：',
+                        textStyle:{
+                            color:'#408CD7'
+                        },
+                        show: true
+                    }),
                     tooltip: _.extend({}, Pie.tooltip),
                     legend: _.extend({}, Pie.legend, {
                         bottom: 0,
@@ -104,13 +115,19 @@
                 compareRadarLoading: false,
                 compareRadarOption: {
                     backgroundColor: '-webkit-radial-gradient(#e9e9e9 5%, #f9f9f9 60%);',
-                    title: {
-                    },
+                    title: _.extend({}, Pie.title, {
+                        text:'情绪趋势图：',
+                        textStyle:{
+                            color:'#408CD7'
+                        },
+                        show: true
+                    }),
                     legend: {
                         bottom: 1,
-                        data: [],
+                        data: []
                     },
-                    color: _.extend([], Chart.color),
+                    //color: _.extend([], Chart.color),
+                    color:["#1C7C76","#FA943E","#88051C","#2E44E1","#F58974","#F574EA","#81F574","#051527","#C9E120","#F4D171"],
                     radar: {
                         indicator: [
                             {name: common.happy, max: 100},
@@ -145,7 +162,21 @@
                         }
                     },
                     graphic:Chart.graphic,
-                    series: []
+                    series: [{
+                        type: 'radar',
+                        symbol: 'none',
+                        itemStyle: {
+                            normal: {
+                                lineStyle: {
+                                    width:1
+                                }
+                            },
+                            emphasis : {
+                                areaStyle: {color:'rgba(0,250,0,0.3)'}
+                            }
+                        },
+                        data:[]
+                    }]
                 },
                 compareNums:[]
             }
@@ -159,7 +190,7 @@
             },
             initRadar(){
                 this.compareRadarOption.legend.data=[];
-                this.compareRadarOption.series=[];
+                this.compareRadarOption.series[0].data=[];
             },
             initData(){
                 this.VariableChartData.all = {},
@@ -187,7 +218,6 @@
                                 name:key,
                                 type:'line',
                                 areaStyle: {normal: {}},
-                                //stack: 'Total',
                                 data: item
                             }
                     );
@@ -204,31 +234,15 @@
                 this.initRadar();
                 //渲染radar
                 _.each(radarData,(item,key) => {
+                    console.log(item,key);
                     this.compareRadarOption.legend.data.push(key);
-                    this.compareRadarOption.series.push(
-                        {
-                            name: key,
-                            type: 'radar',
-                            lineStyle: {
-                                normal: {
-                                    width: 1.5,
-                                    opacity: 0.5
-                                }
-                            },
-                            data: item,
-                            symbol: 'none',
-                            itemStyle: {
-                                normal: {
-                                    //color: '#F9713C'
-                                }
-                            },
-                            areaStyle: {
-                                normal: {
-                                    opacity: 0.1
-                                }
+                    this.compareRadarOption.series[0].data.push(
+                            {
+                                value:item[0],
+                                name:key
                             }
-                        }
                     )
+                console.log(this.compareRadarOption.series)
                 });
             },
             //chart数据处理
@@ -262,37 +276,23 @@
                 this.VariableChartData.web[newTopic[0].topic_name]=web;
                 this.VariableChartData.overseas[newTopic[0].topic_name]=overseas;
                 this.VariableChartData.sengine[newTopic[0].topic_name]=sengine;
-                console.log('VariableChartData',this.VariableChartData);
-                console.log('values',_.values(this.VariableChartData.all));
-
-                console.log(this.VariableChartData.all);
-                console.log('JSON',JSON.stringify(this.VariableChartData.all));
-                console.log(typeof this.VariableChartData.all);
-
-                console.log('查看watch是不是首席变化');
-                //tabs
                 this.getSourceCount();
-
-
             },
             //添加雷达数据处理
             dealRadarData(newTopic,details){
                 //Radar数据处理
                 let all = {happy: [], anger:[], sorrow:[], disgust:[], fear:[]};
-                //
                 const wechat=[];
                 const weibo =[];
                 const client =[];
                 const web =[];
                 const overseas =[];
-                //const sengine=[];
                 _.each(details,(detail,index) =>{
                     client.push(detail.values.client);
                     weibo.push(detail.values.weibo);
                     web.push(detail.values.web);
                     overseas.push(detail.values.overseas);
                     wechat.push(detail.values.wechat);
-                   // sengine.push(detail.values.sengine);
                 });
                 //wechat
                 const newWechatlist = _.unzip(_.map(_.map(wechat,item =>{return _.values(item)}),item =>item));
@@ -349,7 +349,6 @@
                         all.fear.push(details[index].values[key].fear);
                     })
                 })
-                console.log('all',this.VariableRadarData);
                 const radar = _.map(_.values(all),item => {
                             return _.reduce(item, function(memo, num){ return memo + num; }, 0);
                         }
@@ -365,11 +364,8 @@
             selectCalendar(){
                 //获取数据
                 const activeCompareTopics = this.activeCompareTopic;
-                console.log('修改时间',activeCompareTopics);
-
                 //初始化数据
                 this.initData();
-
                 _.map(activeCompareTopics,item =>{
                     let topicParams = {
                         topic_id:item.topic_id,
@@ -383,34 +379,23 @@
                 if(topicParams.start.includes(' ') && topicParams.end.includes(' ')){
                     topicParams.start = topicParams.start.split(' ')[0]+'T'+topicParams.start.split(' ')[1];
                     topicParams.end = topicParams.end.split(' ')[0]+'T'+topicParams.end.split(' ')[1];
-                    console.log('start',topicParams.start,topicParams.end);
                 }
-
                     this.dealAddSummaryData([item],topicParams);
                     this.dealAddSentimentData([item],topicParams);
-
                     //push
-
                 })
             },
             //处理Summary数据相同group添加
             dealAddSummaryData(newTopic, topicParams){
                 Api.getSummaryDetail(topicParams).then(resp =>{
                     if(resp.data.code ==0){
-                        //this.compareChartLoading = false;
-                        //this.comparePieLoading = false;
                         const newTopicData =resp.data.data;
                         const intervalDate = _.pluck(newTopicData,'date');
                         this.intervalTime =intervalDate;
                         this.dealChartData(newTopic,newTopicData);
-//处理data问题
-                        console.log('change前',this.data);
+                        //处理data问题
                         this.changeSource();
-                        console.log('change后',this.data);
                         this.mapData(this.data,intervalDate);
-                        console.log('时间修改bug查看1',newTopic);
-                        console.log(this.VariableChartData);
-                        console.log(this.data);
                     }
                 });
             },
@@ -421,7 +406,6 @@
                     this.loadingParams.visiable = false;
                 }.bind(this),8000)
                 Api.getSentimentDetail(topicParams).then(resp =>{
-                    //this.compareRadarLoading = false;
                     if(resp.data.code == 0){
                         this.loadingParams.visiable = false;
                         clearTimeout(this.timeout);
@@ -437,39 +421,31 @@
             },
             //加上后有一个数据sum
             dealAddOnlyOneSummaryData(newTopic,topicParams){
-                //this.compareChartLoading = true;
-                //this.comparePieLoading = true;
                 Api.getSummaryDetail(topicParams).then(resp =>{
                     if(resp.data.code ==0){
-                        //this.compareChartLoading = false;
-                        //this.comparePieLoading = false;
                         const newTopicData =resp.data.data;
                         const intervalDate = _.pluck(newTopicData,'date');
                         this.intervalTime =intervalDate;
                         this.dealChartData(newTopic,newTopicData);
                         this.changeSource();
-//处理data问题
+                        //处理data问题
                         this.mapData(this.data,intervalDate);
                     }
                 });
             },
             //加上后only一个数据sen
             dealAddOnlyOneSentimentData(newTopic,topicParams){
-                //this.compareRadarLoading = true;
                 this.loadingParams.visiable = true;
                 setTimeout(function () {
                     this.loadingParams.visiable = false;
                 }.bind(this),8000)
                 Api.getSentimentDetail(topicParams).then(resp =>{
-                    //this.compareRadarLoading = false;
                     if(resp.data.code == 0){
                         this.loadingParams.visiable = false;
                         clearTimeout(this.timeout);
                         const details = resp.data.data;
-                        console.log('details',details)
                         const intervalDate = _.pluck(details,'date');
                         this.intervalTime =intervalDate;
-                        //this.radarData = this.VariableRadarData.all;
                         this.changeSource();
                         this.dealRadarData(newTopic,details);
                         this.mapRadarData(this.radarData,intervalDate);
@@ -500,7 +476,6 @@
                 const midSengineCount = _.map(_.values(this.VariableChartData.sengine),item=>{
                     return _.reduce(item, function(memo, num){ return memo + num; }, 0);
                 });
-                console.log('midCount',midAllCount)
                 let compareSourceCount = this.compareSourceCount;
                 compareSourceCount.all = _.reduce(midAllCount, function(memo, num){ return memo + num; }, 0);
                 compareSourceCount.wechat = _.reduce(midWechatCount, function(memo, num){ return memo + num; }, 0);
@@ -510,20 +485,13 @@
                 compareSourceCount.overseas = _.reduce(midOverseasCount, function(memo, num){ return memo + num; }, 0);
                 compareSourceCount.sengine = _.reduce(midSengineCount, function(memo, num){ return memo + num; }, 0);
 
-                console.log('___',compareSourceCount);
                 this.compareNums=[
                     compareSourceCount.all,compareSourceCount.wechat,compareSourceCount.weibo,compareSourceCount.client+compareSourceCount.web,compareSourceCount.sengine,compareSourceCount.overseas
                 ];
-//                this.compareNums = _.values(compareSourceCount);
-//                this.setCompareSourceCount(_.values(compareSourceCount));
-                //console.log('....',this.compareSourceCount.all);
-                console.log('查看修改',this.compareNums);
             },
             //切换赋值
             changeSource(){
                 const newSource = this.compareSource;
-                console.log('newSource',newSource);
-                console.log('-----------',this.VariableChartData);
                 switch(newSource){
                     case 'all':
                         this.data =this.VariableChartData.all;
@@ -552,7 +520,6 @@
                     default:
                         break;
                 }
-                console.log('------------',this.data);
             }
 
         },
@@ -574,7 +541,7 @@
                         this.comparePieOption.legend.data=[];
                         this.comparePieOption.series.data=[];
                         this.compareRadarOption.legend.data=[];
-                        this.compareRadarOption.series=[];
+                        this.compareRadarOption.series[0].data=[];
                         this.initData();
                         this.compareNums = [0,0,0,0,0,0];
                         return ;
@@ -602,12 +569,8 @@
                         //都不为空,判断是否是同一个group--yes
                         if(_.find(currentGroup.list,function(item){return item.topic_name == oldVal[0].topic_name;}) !=undefined){
                             if(val.length > oldVal.length){
-                                //this.compareChartLoading = true;
-                                //this.comparePieLoading = true;
-                                //this.compareRadarLoading = true;
                                 this.compareNums=[];
                                 const newTopic = _.difference(val, oldVal);
-                                console.log(newTopic);
                                 let topicParams = {
                                     topic_id:_.isEmpty(newTopic) ? '' : newTopic[0].topic_id,
                                     topic:_.isEmpty(newTopic) ? '' : newTopic[0].topic_name,
@@ -627,8 +590,6 @@
                             } else {
                                 this.compareNums=[];
                                 var oldTopic = _.difference(oldVal, val);
-                                console.log(oldTopic);
-                                console.log('pre',this.VariableRadarData)
                                 this.VariableChartData.all=_.omit(this.VariableChartData.all,oldTopic[0].topic_name);
                                 this.VariableChartData.wechat=_.omit(this.VariableChartData.wechat,oldTopic[0].topic_name);
                                 this.VariableChartData.weibo=_.omit(this.VariableChartData.weibo,oldTopic[0].topic_name);
@@ -643,22 +604,14 @@
                                 this.VariableRadarData.web=_.omit(this.VariableRadarData.web,oldTopic[0].topic_name);
                                 this.VariableRadarData.overseas=_.omit(this.VariableRadarData.overseas,oldTopic[0].topic_name);
                                 const intervalDate =this.intervalTime;
-                                console.log('after',this.VariableRadarData);
-                                /*this.data =this.VariableChartData.all;
-                                this.radarData = this.VariableRadarData.all;*/
                                 this.mapData(this.data,intervalDate);
                                 this.mapRadarData(this.radarData,intervalDate);
-                                console.log(this.VariableChartData.all);
-                                console.log('JSON',JSON.stringify(this.VariableChartData.all));
-                                console.log(typeof this.VariableChartData.all);
-
-                                console.log('查看watch是不是首席变化');
                                 //tabs
                                 this.getSourceCount();
 
                             };
                         }else {
-                            console.log('这里对空数据做出判断');
+                            //这里对空数据做出判断
                             this.compareNums=[];
                             const newTopic = val;
                             let topicParams = {
@@ -673,15 +626,12 @@
                             if(topicParams.start.includes(' ') && topicParams.end.includes(' ')){
                                 topicParams.start = topicParams.start.split(' ')[0]+'T'+topicParams.start.split(' ')[1];
                                 topicParams.end = topicParams.end.split(' ')[0]+'T'+topicParams.end.split(' ')[1];
-                                console.log('start',topicParams.start,topicParams.end);
                             }
                             this.initData();
                             this.dealAddOnlyOneSummaryData(newTopic,topicParams);
                             this.dealAddOnlyOneSentimentData(newTopic,topicParams);
                         }
-
                     }
-
                 }
             },
             compareSource:{
@@ -690,7 +640,6 @@
                     //判断修改后的源
                     this.changeSource();
                     //展示修改后的源,刷新
-console.log(this.data);
                 }
             },
             compareSubTopic: {
@@ -703,16 +652,12 @@ console.log(this.data);
                 handler(){
                     const intervalDate = this.intervalTime;
                     this.mapData(this.data,intervalDate);
-                    console.log('查看data是不是首席变化');
                 }
             },
-            //深度监听varableradardata就好了，他变对应数据就变，判断是哪端
-            //当我们在微信页面时，点击一个list
             VariableChartData:{
                 deep:true,
                 handler(){
                     const source = this.compareSource;
-                    console.log('source',source);
                     this.data = this.VariableChartData[source];
                     this.radarData = this.VariableRadarData[source];
                 }
@@ -721,39 +666,13 @@ console.log(this.data);
                 handler(){
                     const intervalDate = this.intervalTime;
                     this.mapRadarData(this.radarData,intervalDate);
-                    console.log('查看radar是不是首席变化');
                 }
             },
             compareDataChange:{
                 handler(){
-                    console.log('查看时间',this.compareTimeRangeString);
                     this.selectCalendar();
                 }
             }
-            /*compareTimeRangeString:{
-                handler(){
-                    console.log('查看时间',this.compareTimeRangeString);
-                    this.selectCalendar();
-                }
-            }*/
-            /*compareStart: {
-                handler(){
-                    if(_.isEmpty(this.activeCompareTopic)){
-                        return ;
-                    }else {
-                        this.selectCalendar();
-                    }
-                }
-            },
-            compareEnd:{
-                handler(){
-                    if(_.isEmpty(this.activeCompareTopic)){
-                        return ;
-                    }else {
-                        this.selectCalendar();
-                    }
-                }
-            }*/
         },
         components:{
             Tabs,Tips

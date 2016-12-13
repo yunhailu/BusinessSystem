@@ -34,6 +34,8 @@ export const UPDATE_REFRESH_TOPIC = 'UPDATE_REFRESH_TOPIC';
 export const UPDATE_RESET_SEARCH = 'UPDATE_RESET_SEARCH';
 
 export const UPDATE_SUBTOPIC_ID = 'UPDATE_SUBTOPIC_ID';
+
+export const UPDATE_TIME_POP_UP = 'UPDATE_TIME_POP_UP';
 /**
  * Compare
  **/
@@ -55,6 +57,7 @@ export const UPDATE_COMPARE_SOURCE_COUNT = 'UPDATE_COMPARE_SOURCE_COUNT';
 
 export const UPDATE_COMPARE_DATA_CHANGE = 'UPDATE_COMPARE_DATA_CHANGE';
 
+
 /**
  * Export Images
  * */
@@ -65,3 +68,4 @@ export const REMOVE_EXPORT_IMAGES = 'REMOVE_EXPORT_IMAGES';
 //登陆页
 export const LOGIN_STATE = 'LOGIN_STATE';
 export const LOGIN_TIME='LOGIN_TIME';
+export const USER_LEVEL = 'USER_LEVEL';

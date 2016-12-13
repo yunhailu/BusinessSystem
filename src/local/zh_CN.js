@@ -36,9 +36,9 @@ export const zh_CN = {
         hotEvent:"热点事件"
     },
     footer:{
-        coppy:"京ICP备14046778号-5 联系电话：010-88315479 版权所有:沃民高新科技（北京）股份有限公司 ",
+        coppy:"京ICP备14046778号-5 联系电话：010-61934324 版权所有:沃民高新科技（北京）股份有限公司 ",
         phone:"联系电话：010-88315479 ",
-        cooperation:"沃民高新科技（北京）股份有限公司、工信部电子科技情报所网络舆情研究中心"
+        cooperation:"沃民高新科技（北京）股份有限公司、工信部电子科技情报所网络舆情研究中心联合开发"
     },
     header: {
         title: "沃德品牌气象站",
@@ -63,18 +63,27 @@ export const zh_CN = {
         settingDec: "设置您所需要的监测信息"
     },
     hotEvent: {
-        hotsRiver: "品牌热点事件散点图",
+        hotsRiver: " 实时热点态势",
         sentiment: "情绪比例",
         hotsRanking: "实时热点排行",
         todayHotsRanking: "今日热点排行",
         wordsRanking: "热词排行",
-        allNetHotsRiver:"全网热点事件散点图"
+        allNetHotsRiver:"实时热点态势"
     },
     analytics: {
         tabs: ["关注分析", "情绪分析", "评价分析", "影响力分析", "印象分析"],
         filters: ["全部", "情绪指数", "地域分布", "性别分布", "语言分布"],
         source: ["全部", "微信", "微博", "客户端", "网页", "海外"],
-        addDashboard: "添加快捷报告"
+        addDashboard: "添加快捷报告",
+        monitor:"监测词",
+        tips:"如需开通，请联系客服：010-61934324"
+    },
+    sentiment:{
+        happy: "满意",
+        anger: "愤怒",
+        sorrow: "失望",
+        disgust: "反感",
+        fear: "害怕",
     },
     comment: {
         comment: "评价指数",
@@ -84,19 +93,19 @@ export const zh_CN = {
         all: "全部"
     },
     influence: {
-        noTableTips: "暂时没有数据",
+        noTableTips: "数据处理中",
         influencer: "影响者",
         numberOfPosts: "发布量",
         sentiment: "情绪指数",
         like: "点赞数",
         resend: "转发数",
         comments: "评论数",
-        rate: "浮动比率",
+        rate: "影响力指数",
         close: "关闭"
     },
     theme: {
         topics: "话题排行",
-        ranking:"排名变化"
+        ranking:"排名变化(8小时环比)"
     },
     detail: {
         article: "层级转发关系",
@@ -112,7 +121,8 @@ export const zh_CN = {
     compare: {
         tabs: ["品牌关注", "品牌情绪","品牌评价", "品牌影响力", "品牌印象"],
         filters: ["全部", "情绪指数", "地域分布", "性别分布", "语言分布"],
-        source: ["全部", "微信", "微博", "客户端", "网页", "海外"]
+        source: ["全部", "微信", "微博", "客户端", "网页", "海外"],
+        tips:"如需开通，请联系客服：010-61934324"
     },
     addDashboard:{
         addTitle: "添加新的报表",
@@ -148,7 +158,8 @@ export const zh_CN = {
         required: "必填",
         optional: "选填",
         groupTitle: "话题分组",
-        topic: "新主题",
+        topic: "主题词",
+        topicInfo: "多主题词请用逗号或空格分隔",
         topicArr: "主题词组",
         topicArrTip: "主题词组用空格隔开，是或的关系",
         related: "关联词",
@@ -179,10 +190,17 @@ export const zh_CN = {
         tel: "手机号码",
         email: "电子邮箱",
         password: "密码",
+        oldPassword: "旧密码",
         rePassword: "确认密码",
         createBtn: "提交创建",
         modifyBtn: "提交修改",
-        resetBtn: "重置"
+        resetBtn: "重置",
+        passDiff: "两次密码不一致",
+        addSuccess: "添加成功",
+        nodifySuccess: "修改成功",
+        passwordCondition: "密码需要大于6位，且需要包含数字和字母",
+        phoneCondition: "手机号码不正确",
+        emailCondition: "邮箱不正确"
     },
     common: {
         weeks: ['日', '一', '二', '三', '四', '五', '六'],

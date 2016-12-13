@@ -12,7 +12,7 @@ const state ={
     compare_subtopic: '',
     compare_time_Range_String:'',
     compare_source_Count:{},
-    compare_data_change:0
+    compare_data_change:0,
 }
 
 const mutations = {
@@ -42,7 +42,7 @@ const mutations = {
     },
     [UPDATE_COMPARE_DATA_CHANGE](state, datachange){
         state.compare_data_change = datachange;
-    }
+    },
 }
 
 export default {

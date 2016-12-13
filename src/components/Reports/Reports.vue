@@ -70,11 +70,9 @@
         },
         methods: {
             viewAction(report){
-                console.log('view', report);
                 this.$router.go({ name: 'dashboardDetail', params: { id: report.id } });
             },
             emailAction(report){
-                console.log('email', report);
                 location.href = `mailto:${getCookie('business_email')}?CC=${getCookie('business_email')}&BCC=${getCookie('business_email')}&Subject=发送报告-${report.name}&Body=你好`;
             },
             getDashboardList(){
@@ -83,7 +81,6 @@
                     if(resp.data.code == 0){
                         //this.reports = resp.data.data;
                         this.reports=resp.data.data;
-                        console.log('12',this.reports);
 
                         //console.log('newDateS',newDateS);  _.chain(resp.data.data).
                         //const mystr= _.flatten(resp.data.data,)
