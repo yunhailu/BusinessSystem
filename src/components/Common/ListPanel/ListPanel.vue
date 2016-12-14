@@ -1,26 +1,35 @@
 <template>
     <div class="list-panel">
         <div class="row list-panel-tools" v-if="isShowTools">
-            <div class="row-left">
+            <!--<div class="row-left">
                 <select-el :options="options" :title="selectTitle" :value.sync="selectValue"></select-el>
-            </div>
-            <div class="row-middle list-panel-tools-flag">
-                <!--<div class="list-panel-tools-flag-title">情绪筛选</div>-->
-                <div class="btn-group list-panel-tools-flag">
-                    <a class="btn btn-default list-panel-tools-flag-item" href="javascript:void(0);" @click="setSentiment('all');" :class="[sentimentActive == 'all' ? 'active' : '']">{{words.all}}</a>
-                    <a class="btn btn-default list-panel-tools-flag-item" href="javascript:void(0);" @click="setSentiment('positive')" :class="[sentimentActive == 'positive' ? 'active' : '']">{{words.positive}}</a>
-                    <a class="btn btn-default list-panel-tools-flag-item" href="javascript:void(0);" @click="setSentiment('negative')" :class="[sentimentActive == 'negative' ? 'active' : '']">{{words.negative}}</a>
-                    <a class="btn btn-default list-panel-tools-flag-item" href="javascript:void(0);" @click="setSentiment('neutral')" :class="[sentimentActive == 'neutral' ? 'active' : '']">{{words.neutral}}</a>
+            </div>-->
+                <div class="row-left">
+                    <div class="btn-group list-panel-tools-order">
+                        <a class="btn btn-default list-panel-tools-order-item" href="javascript:void(0);" @click="setOrder('time');" :class="[orderActive == 'time' ? 'active' : '']">{{common.timeRanking}}</a>
+                        <a class="btn btn-default list-panel-tools-order-item" href="javascript:void(0);" @click="setOrder('browser')" :class="[orderActive == 'browser' ? 'active' : '']">{{common.countRanking}}</a>
+                        <a class="btn btn-default list-panel-tools-order-item" href="javascript:void(0);" @click="setOrder('star')" :class="[orderActive == 'star' ? 'active' : '']">{{common.greetRanking}}</a>
+                        <a class="btn btn-default list-panel-tools-order-item" href="javascript:void(0);" @click="setOrder('share')" :class="[orderActive == 'share' ? 'active' : '']">{{common.shareRanking}}</a>
+                    </div>
                 </div>
-            </div>
-            <div class="row-right">
-                <div class="btn-group list-panel-tools-filter">
-                    <a class="btn btn-default list-panel-tools-filter-item" href="javascript:void(0);" @click="setCount(5);" :class="[filterActive == 5 ? 'active' : '']"> 5</a>
-                    <a class="btn btn-default list-panel-tools-filter-item" href="javascript:void(0);" @click="setCount(20)" :class="[filterActive == 20 ? 'active' : '']">20</a>
-                    <a class="btn btn-default list-panel-tools-filter-item" href="javascript:void(0);" @click="setCount(50)" :class="[filterActive == 50 ? 'active' : '']">50</a>
-                    <a class="btn btn-default list-panel-tools-filter-item" href="javascript:void(0);" @click="setCount(100)" :class="[filterActive == 100 ? 'active' : '']">100</a>
+                <div class="row-middle list-panel-tools-flag">
+                    <!--<div class="list-panel-tools-flag-title">情绪筛选</div>-->
+                    <div class="btn-group list-panel-tools-flag">
+                        <a class="btn btn-default list-panel-tools-flag-item" href="javascript:void(0);" @click="setSentiment('all');" :class="[sentimentActive == 'all' ? 'active' : '']">{{words.all}}</a>
+                        <a class="btn btn-default list-panel-tools-flag-item" href="javascript:void(0);" @click="setSentiment('positive')" :class="[sentimentActive == 'positive' ? 'active' : '']">{{words.positive}}</a>
+                        <a class="btn btn-default list-panel-tools-flag-item" href="javascript:void(0);" @click="setSentiment('negative')" :class="[sentimentActive == 'negative' ? 'active' : '']">{{words.negative}}</a>
+                        <a class="btn btn-default list-panel-tools-flag-item" href="javascript:void(0);" @click="setSentiment('neutral')" :class="[sentimentActive == 'neutral' ? 'active' : '']">{{words.neutral}}</a>
+                    </div>
                 </div>
-            </div>
+                <div class="row-right">
+                    <div class="btn-group list-panel-tools-filter">
+                        <a class="btn btn-default list-panel-tools-filter-item" href="javascript:void(0);" @click="setCount(5);" :class="[filterActive == 5 ? 'active' : '']"> 5</a>
+                        <a class="btn btn-default list-panel-tools-filter-item" href="javascript:void(0);" @click="setCount(20)" :class="[filterActive == 20 ? 'active' : '']">20</a>
+                        <a class="btn btn-default list-panel-tools-filter-item" href="javascript:void(0);" @click="setCount(50)" :class="[filterActive == 50 ? 'active' : '']">50</a>
+                        <a class="btn btn-default list-panel-tools-filter-item" href="javascript:void(0);" @click="setCount(100)" :class="[filterActive == 100 ? 'active' : '']">100</a>
+                    </div>
+                </div>
+
             <!--<div class="col-md-4">-->
             <!--<i class="fa fa-th-large"></i>-->
             <!--<i class="fa fa-th-list"></i>-->
@@ -118,7 +127,8 @@
                 listTip: common.nullTip,
                 tableList: [],
                 filterActive: 20,
-                sentimentActive: 'all'
+                sentimentActive: 'all',
+                orderActive:'time'
             }
         },
         computed: {
@@ -131,6 +141,11 @@
             getters: { activeAnalyticsTopic }
         },
         methods: {
+            setOrder(type){
+                this.orderActive = type;
+                this.selectValue = type;
+                console.log('selectvalue',this.selectValue);
+            },
             setCount(count){
                 this.filterActive = count;
                 this.filterItem(count, this.sentimentActive);
