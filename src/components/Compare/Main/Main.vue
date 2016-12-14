@@ -1,11 +1,13 @@
 ﻿<template>
     <tabs :datas="compareNums"></tabs>
-
+<div class="chartBox">
     <div class="compare-charts">
         <div class="chart" v-echarts="compareChartOption" :loading="compareChartLoading" theme="macarons"></div>
         <div class="chart radar" v-echarts="compareRadarOption" :loading="compareRadarLoading" theme="macarons"></div>
         <div class="chart pie" v-echarts="comparePieOption" :loading="comparePieLoading" theme="macarons"></div>
     </div>
+</div>
+
     <tips :visible.sync="loadingParams.visiable" :tipsparam.sync="loadingParams"></tips>
 </template>
 <style lang="less" scoped>

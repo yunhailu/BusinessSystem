@@ -232,7 +232,7 @@ export const zh_CN = {
         publish:"发布于",
         sourceFrom:"来源",
         dataFrom:"数据分析平台",
-        match:"匹配",
+        match:"监测词",
         target:"指标",
         sub_source:"来自"
     },
