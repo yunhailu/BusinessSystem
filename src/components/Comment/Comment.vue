@@ -442,7 +442,7 @@
             },
             sortVal: {
                 handler(val, oldVal){
-                    if(val != oldVal){
+                    if(val != oldVal && oldVal !=''){
                         this.getCommentList(val.key);
                     }
                 }

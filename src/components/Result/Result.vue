@@ -138,24 +138,33 @@
                             }),
                             series: [ {
                                 name:common.wechat,
-
+                                areaStyle: {normal: {}},
+                                stack: 'Total',
                                 type:'line',
                                 data:data[0]
                             }, {
                                 name:common.weibo,
+                                areaStyle: {normal: {}},
+                                stack: 'Total',
                                 type:'line',
                                 data: data[1]
                             }, {
                                 name:common.client,
                                 type:'line',
+                                areaStyle: {normal: {}},
+                                stack: 'Total',
                                 data:data[2]
                             }, {
                                 name:common.web,
                                 type:'line',
+                                areaStyle: {normal: {}},
+                                stack: 'Total',
                                 data: data[3]
                             }, {
                                 name:common.overseas,
                                 type:'line',
+                                areaStyle: {normal: {}},
+                                stack: 'Total',
                                 data: data[4]
                             }]
                         });

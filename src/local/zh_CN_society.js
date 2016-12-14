@@ -162,7 +162,7 @@ export const zh_CN_society = _.extend({}, zh_CN, {
         optional: "选填",
         groupTitle: "话题分组",
         topic: "主题词",
-        topicInfo: "多主题词请用逗号或空格分隔",
+        topicInfo: "多主题词请用逗号分隔",
         topicArr: "主题词组",
         topicArrTip: "主题词组用空格隔开，是或的关系",
         related: "关联词",
