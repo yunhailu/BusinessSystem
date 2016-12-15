@@ -37,16 +37,16 @@
       .b-bottom(1px solid #dedede);
       .mg(0);
       .c(@word);
-      .h(110px);
+      .h(100px);
       .pr();
       & > a {
         .w(100%);
-        .h(110px);
+        .h(100px);
         .disB();
         .list-left {
           .w(100%);
           box-sizing: border-box;
-          .h(110px);
+          .h(100px);
           .float-left();
           .pd(10px 20px 10px);
           .fa-left {
@@ -86,11 +86,14 @@
           }
           .left-con {
             .mg(0 0 0 26px);
+            .keyWord{.f(14px);}
             .title {
               .c(@body-theme);
               .h(24px);
               .lh(24px);
               .f(14px); // .ff("pingfang-bold");.text-hidden();
+              .disIB();
+              .pd-left(10px);
             }
             .detail {
               .text-hidden();
@@ -120,16 +123,19 @@
             .title-bottom {
               .fw(500);
               .mg-top(5px);
+              .disIB();
             }
             .title-bottom .time-bottom {
-              .f(12px);
-              .mg-left(10px);
+              //.f(12px);
+              //.mg-left(10px);
               .disIB();
               color:#767676;
               .item {
+                .f(12px);
                 .disIB();
                 .lh(20px);
                 .mg-left(10px);
+                vertical-align: -4px;
               }
             }
           }

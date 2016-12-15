@@ -7,7 +7,7 @@ const state ={
     compare_type: 'summary',
     compare_start: '',
     compare_end: '',
-    compare_time_Range: '7',
+    compare_time_Range: '0.33',
     compare_source: 'all',
     compare_subtopic: '',
     compare_time_Range_String:'',

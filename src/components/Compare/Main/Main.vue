@@ -376,7 +376,7 @@
                         source:this.compareSource,
                         start:this.compareStart,
                         end:this.compareEnd,
-                        time_dimension:this.compareTimeRange<=10 ? 0 :1
+                        time_dimension:this.compareTimeRange<=7 ? 0 :1
                     };
                 if(topicParams.start.includes(' ') && topicParams.end.includes(' ')){
                     topicParams.start = topicParams.start.split(' ')[0]+'T'+topicParams.start.split(' ')[1];
@@ -558,7 +558,7 @@
                             source:this.compareSource,
                             start:this.compareStart,
                             end:this.compareEnd,
-                            time_dimension:this.compareTimeRange<=10 ? 0 :1
+                            time_dimension:this.compareTimeRange<=7 ? 0 :1
                         };
                         if(topicParams.start.includes(' ') && topicParams.end.includes(' ')){
                             topicParams.start = topicParams.start.split(' ')[0]+'T'+topicParams.start.split(' ')[1];
@@ -580,7 +580,7 @@
                                     source:this.compareSource,
                                     start:this.compareStart,
                                     end:this.compareEnd,
-                                    time_dimension:this.compareTimeRange<=10 ? 0 :1
+                                    time_dimension:this.compareTimeRange<=7 ? 0 :1
                                 };
                                 if(topicParams.start.includes(' ') && topicParams.end.includes(' ')){
                                     topicParams.start = topicParams.start.split(' ')[0]+'T'+topicParams.start.split(' ')[1];
@@ -623,7 +623,7 @@
                                 source:this.compareSource,
                                 start:this.compareStart,
                                 end:this.compareEnd,
-                                time_dimension:this.compareTimeRange<=10 ? 0 :1
+                                time_dimension:this.compareTimeRange<=7 ? 0 :1
                             };
                             if(topicParams.start.includes(' ') && topicParams.end.includes(' ')){
                                 topicParams.start = topicParams.start.split(' ')[0]+'T'+topicParams.start.split(' ')[1];
