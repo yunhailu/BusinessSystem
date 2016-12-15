@@ -26,8 +26,9 @@ const Api = {
         return this.request(opts);
     },
     post(opts){
-        opts.method = "post";
-        return this.request(opts);
+        return Vue.http.post(opts.url, opts.params);
+        // opts.method = "post";
+        // return this.request(opts);
     },
     jsonp(opts){
         opts.method = "jsonp";
@@ -48,6 +49,7 @@ export const login = params => {
         url: `${rootURI}/auth/login`,
         params
     });
+    //return Vue.http.post(`${rootURI}/auth/login`, params);
 };
 
 /**
