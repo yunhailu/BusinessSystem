@@ -110,13 +110,14 @@
                             subtopic = this.analyticsSubTopic,
                             source = this.analyticsSource,
                             time_interval = this.analyticsTimeRange,
-                            time_dimension = 1;
+                            time_dimension = 1,
+                            type='browser';
                 console.log(this.analyticsType, this.analyticsTimeRange, this.analyticsSource, this.analyticsSubTopic);
                 if(!name){
                     this.addTip = this.words.addTips;
                     return;
                 }
-                let params = {name, topic, topic_id, subtopic, source, time_interval, time_dimension};
+                let params = {type, name, topic, topic_id, subtopic, source, time_interval, time_dimension};
                 params[this.analyticsType] = 1;
 
                 Api.addDashboard(params).then(resp => {

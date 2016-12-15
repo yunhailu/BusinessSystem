@@ -444,8 +444,8 @@
             },
             sortVal: {
                 handler(val, oldVal){
-//                    if(val != oldVal && oldVal !=""){
-                    if(val != oldVal){
+                    if(val != oldVal && val !=""){
+//                    if(val != oldVal){
                         // 展示不同的列表信息
 //                        this.getCommentList(val.key);
                         this.getCommentList(val);

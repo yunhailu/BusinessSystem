@@ -218,6 +218,12 @@
 //            }
 //        },
         watch: {
+            activeAnalyticsTopic:{
+                handler(val){
+                    this.orderActive = 'time';
+                    this.selectValue = "";
+                }
+            },
             list(val){
                 this.tableList = val;
                 this.setCount(20);
