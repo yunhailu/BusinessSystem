@@ -103,12 +103,10 @@
             chart.setOption(this.options)
             this.$watch('options', options => {
                 chart.setOption(options, true);
-
                 setTimeout(() => {
                     this.img = this.getDataURL({
                         pixelRatio: 1
                     });
-                    //console.log(this.img);
                 }, 4000);
             }, { deep: true });
             chart.group = this.group
@@ -118,6 +116,7 @@
             // expose ECharts events as custom events
             ACTION_EVENTS.forEach(event => {
                 chart.on(event, params => {
+                    //dispatch:调度
                     this.$dispatch(event, params)
                  })
             })

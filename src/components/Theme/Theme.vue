@@ -1,63 +1,66 @@
 <template>
     <tabs :datas="themeNums"></tabs>
     <!--<span>Theme</span>-->
-    <div class="theme-word">
-        <div class="theme-word-chart" v-echarts="themeWordOption" :loading="themeWordLoading"  theme="infographic"></div><!-- :click="clickAction"-->
-        <div class="theme-word-ranking">
-            <dl class="list up-list">
-                <dt class="list-title">{{words.ranking}}</dt>
-                <dd v-for="item in trendList" class="list-item up-list-item">
-                    <div :id="item.id">
-                        <i class="fa fa-level-up" v-if="item.trend == 'up'"></i>
-                        <i class="fa fa-level-down" v-if="item.trend == 'down'"></i>
-                        <span class="list-item-con">{{item.name}} - {{item.rate}}</span>
-                    </div>
-                </dd>
-            </dl>
-            <!--<dl class="list up-list">-->
+    <div class="theme-overflow">
+        <div class="theme-word">
+            <div class="theme-word-chart" v-echarts="themeWordOption" :loading="themeWordLoading"  theme="infographic"></div><!-- :click="clickAction"-->
+            <div class="theme-word-ranking">
+                <dl class="list up-list">
+                    <dt class="list-title">{{words.ranking}}</dt>
+                    <dd v-for="item in trendList" class="list-item up-list-item">
+                        <div :id="item.id">
+                            <i class="fa fa-level-up" v-if="item.trend == 'up'"></i>
+                            <i class="fa fa-level-down" v-if="item.trend == 'down'"></i>
+                            <span class="list-item-con">{{item.name}} - {{item.rate}}</span>
+                        </div>
+                    </dd>
+                </dl>
+                <!--<dl class="list up-list">-->
                 <!--<dt class="list-title">UP</dt>-->
                 <!--<dd v-for="item in upList" class="list-item up-list-item">-->
-                    <!--<div :id="item.id">-->
-                        <!--<i class="fa fa-level-up"></i>-->
-                        <!--<span class="list-item-con">{{item.rate}} - {{item.name}}</span>-->
-                    <!--</div>-->
+                <!--<div :id="item.id">-->
+                <!--<i class="fa fa-level-up"></i>-->
+                <!--<span class="list-item-con">{{item.rate}} - {{item.name}}</span>-->
+                <!--</div>-->
                 <!--</dd>-->
-            <!--</dl>-->
-            <!--<dl class="list down-list">-->
+                <!--</dl>-->
+                <!--<dl class="list down-list">-->
                 <!--<dt class="list-title">DOWN</dt>-->
                 <!--<dd v-for="item in downList" class="list-item down-list-item">-->
-                    <!--<div :id="item.id">-->
-                        <!--<i class="fa fa-level-down"></i>-->
-                        <!--<span class="list-item-con">{{item.rate}} - {{item.name}}</span>-->
-                    <!--</div>-->
+                <!--<div :id="item.id">-->
+                <!--<i class="fa fa-level-down"></i>-->
+                <!--<span class="list-item-con">{{item.rate}} - {{item.name}}</span>-->
+                <!--</div>-->
                 <!--</dd>-->
-            <!--</dl>-->
+                <!--</dl>-->
+            </div>
         </div>
-    </div>
-    <div class="theme-chart">
-        <div class="chart"  v-echarts="themeScatterOption" :loading="themeScatterLoading"  theme="macarons"></div>
-        <div class="chart"  v-echarts="themeLineOption" :loading="themeLineLoading"  theme="macarons"></div>
-        <div class="chart best"  v-echarts="themeBestOption" :loading="themeBestLoading"  theme="macarons"></div>
-    </div>
+        <div class="theme-chart">
+            <div class="chart"  v-echarts="themeScatterOption" :loading="themeScatterLoading"  theme="macarons"></div>
+            <div class="chart"  v-echarts="themeLineOption" :loading="themeLineLoading"  theme="macarons"></div>
+            <div class="chart best"  v-echarts="themeBestOption" :loading="themeBestLoading"  theme="macarons"></div>
+        </div>
 
-    <div class="theme-map">
-        <div class="theme-map-chart" v-echarts="themeMapOption" :loading="themeWordLoading"  theme="macarons" ></div>
-        <div class="theme-map-ranking">
-            <div class="theme-map-chart" v-echarts="themePieOption" :loading="themePieLoading"  theme="macarons" :click="clickAction"></div>
-            <!--<dl class="list up-list">-->
+        <div class="theme-map">
+            <div class="theme-map-chart" v-echarts="themeMapOption" :loading="themeWordLoading"  theme="macarons" ></div>
+            <div class="theme-map-ranking">
+                <div class="theme-map-chart" v-echarts="themePieOption" :loading="themePieLoading"  theme="macarons" :click="clickAction"></div>
+                <!--<dl class="list up-list">-->
                 <!--<dt class="list-title">排名变化</dt>-->
                 <!--<dd v-for="item in trendList" class="list-item up-list-item">-->
-                    <!--<div :id="item.id">-->
-                        <!--<i class="fa fa-level-up" v-if="item.trend == 'up'"></i>-->
-                        <!--<i class="fa fa-level-down" v-if="item.trend == 'down'"></i>-->
-                        <!--<span class="list-item-con">{{item.name}} - {{item.rate}}</span>-->
-                    <!--</div>-->
+                <!--<div :id="item.id">-->
+                <!--<i class="fa fa-level-up" v-if="item.trend == 'up'"></i>-->
+                <!--<i class="fa fa-level-down" v-if="item.trend == 'down'"></i>-->
+                <!--<span class="list-item-con">{{item.name}} - {{item.rate}}</span>-->
+                <!--</div>-->
                 <!--</dd>-->
-            <!--</dl>-->
+                <!--</dl>-->
 
 
+            </div>
         </div>
     </div>
+
 
 
     <tips :visible.sync="loadingParams.visiable" :tipsparam.sync="loadingParams"></tips>
@@ -67,6 +70,7 @@
 </style>
 <script type="text/ecmascript-6">
     import _ from 'underscore';
+    import moment from 'moment';
     import Tabs from '../Common/Tabs/Tabs.vue';
     import Tips from '../Common/Tips/Tips.vue';
     import Local from "../../local/local";
@@ -75,6 +79,7 @@
     import China from 'echarts/map/js/china';
     import * as Api from '../../widgets/Api';
     import { analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic, analyticsDateChange, analyticsStart, analyticsEnd, activeAnalyticsTopic } from '../../vuex/getters';
+    import {setAnalyticsEnd,setAnalyticsStart} from '../../vuex/actions';
 
     export default{
         data(){
@@ -82,6 +87,7 @@
             const common = Local().common;
             return{
                 words,
+                nowTime:null,
                 loadingParams: {
                     visiable: false,
                     type: 'loading',
@@ -552,9 +558,33 @@
             }
         },
         vuex: {
-            getters: {analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic, analyticsDateChange, analyticsStart, analyticsEnd, activeAnalyticsTopic}
+            getters: {analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic, analyticsDateChange, analyticsStart, analyticsEnd, activeAnalyticsTopic},
+            actions: {setAnalyticsEnd,setAnalyticsStart}
         },
         watch: {
+           /* nowTime:{
+                handler(val,oldVal){
+                    const afterTime = moment().add(1,"hour").format("YYYY-MM-DD HH");
+                    const space = moment(afterTime).diff(moment(val));
+                    if(this.analyticsTimeRange>7){
+                        const interval = this.analyticsTimeRange;
+                        setTimeout(function () {
+                            const nowDay = moment().format("YYYY-MM-DD")
+                            this.setAnalyticsEnd(nowDay);
+                            this.setAnalyticsStart(moment(nowDay).subtract(interval,"day").format("YYYY-MM-DD"));
+                            this.init();
+                            this.nowTime = afterTime;
+                        }.bind(this),space)
+                    }else {
+                        setTimeout(function () {
+                            this.setAnalyticsEnd(moment(this.analyticsEnd).add(1,"hour").format("YYYY-MM-DD HH")),
+                                    this.setAnalyticsStart(moment(this.analyticsStart).add(1,"hour").format("YYYY-MM-DD HH"));
+                            this.init();
+                            this.nowTime = afterTime;
+                        }.bind(this),space)
+                    }
+                }
+            },*/
             activeAnalyticsTopic: {
                 handler(val){
                     this.themeBestLoading = true;
@@ -577,6 +607,7 @@
             }
         },
         ready(){
+            this.nowTime = moment();
             if(this.activeAnalyticsTopic && this.activeAnalyticsTopic.topic_id){
                 this.init();
             }

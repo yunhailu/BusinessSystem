@@ -13,11 +13,18 @@
                     </div>
                     <div class="row-right">
                         <ul class="days-btn">
+                            <li>监测区间: </li>
                             <li @click="selectTime(0.33);" :class="[selectTimeTag == 0.33 ? 'active' : '']" class="active">8H</li>
                             <li @click="selectTime(1);" :class="[selectTimeTag == 1 ? 'active' : '']">1D</li>
                             <li @click="selectTime(7);" :class="[selectTimeTag == 7 ? 'active' : '']">7D</li>
-                            <li @click="selectTime(30);" :class="[selectTimeTag == 30 ? 'active' : '']">30D</li>
-                            <li @click="selectTime(0);" :class="[selectTimeTag == 0 ? 'active' : '']">自定义</li>
+                            <li @click="selectTime(30);" v-if="timePay ===0"  :class="[selectTimeTag == 30 ? 'active' : '']">30D
+                                <smalltip :title = 'compare.tips' class="smalltip"></smalltip>
+                            </li>
+                            <li @click="selectTime(30);" v-if="timePay !== 0"  :class="[selectTimeTag == 30 ? 'active' : '']"> 30D</li>
+                            <li @click="selectTime(0);"  v-if="timePay !== 2"   :class="[selectTimeTag == 0 ? 'active' : '']">自定义
+                                <smalltip :title = 'compare.tips' class="smalltip"></smalltip>
+                            </li>
+                            <li @click="selectTime(0);"  v-if="timePay ===2"  :class="[selectTimeTag == 0 ? 'active' : '']">自定义</li>
                         </ul>
                         <div class="diyDate" v-show="isTimeDiy">
                             <span class="date" @click="showCalendar"><i class="fa fa-calendar icon"></i> {{dateVal}}</span>
@@ -26,9 +33,6 @@
 
                     </div>
                 </div>
-                <!--<tabs ></tabs>-->
-
-                <!--<router-view></router-view>-->
                 <main></main>
             </div>
         </div>
@@ -41,19 +45,25 @@
 </style>
 <script  type="text/ecmascript-6">
     import moment from 'moment';
+    import Cookie from "js-cookie";
+    import { getCookie } from '../../widgets/Cookie';
     import HeaderComponent from '../Header/Header.vue';
     import MenuComponent from './Menu/Menu.vue';
     import Calendar from '../Common/Calendar/Calendar.vue';
     import Tabs from './Tabs/Tabs.vue';
+    import SmallTip from '../Common/SmallTip/SmallTip.vue';
     import Main from './Main/Main.vue';
     import Local from "../../local/local";
     import FooterComponent from '../OrderFooter/OrderFooter.vue';
-    import {compareDataChange, compareType, compareTimeRange, compareSource, compareSubTopic, compareStart, compareEnd, compareTimeRangeString } from '../../vuex/getters';
-    import {setCompareDataChange, setCompareType, setCompareTimeRange, setCompareSource, setCompareSubTopic, setCompareStart, setCompareEnd , setCompareTimeRangeString } from "../../vuex/actions";
+    import {userLevel,compareDataChange, compareType, compareTimeRange, compareSource, compareSubTopic, compareStart, compareEnd, compareTimeRangeString } from '../../vuex/getters';
+    import {setUserLevel,setCompareDataChange, setCompareType, setCompareTimeRange, setCompareSource, setCompareSubTopic, setCompareStart, setCompareEnd , setCompareTimeRangeString } from "../../vuex/actions";
 
     export default{
         data(){
+            const compare = Local().compare;
             return{
+                timePay:parseInt(getCookie('business_level')) || 0,
+                compare,
                 search: '',
                 dateVal: `${ moment().subtract(8, 'hour').format('YYYY-MM-DD HH')} ~ ${moment().format('YYYY-MM-DD HH')}`,
                 cal: {
@@ -72,33 +82,33 @@
             }
         },
         vuex:{
-            getters:{compareDataChange, compareType, compareTimeRange, compareSource, compareSubTopic, compareStart, compareEnd , compareTimeRangeString},
-            actions:{setCompareDataChange, setCompareType, setCompareTimeRange, setCompareSource, setCompareSubTopic, setCompareStart, setCompareEnd , setCompareTimeRangeString }
+            getters:{userLevel,compareDataChange, compareType, compareTimeRange, compareSource, compareSubTopic, compareStart, compareEnd , compareTimeRangeString},
+            actions:{setUserLevel,setCompareDataChange, setCompareType, setCompareTimeRange, setCompareSource, setCompareSubTopic, setCompareStart, setCompareEnd , setCompareTimeRangeString }
         },
         components:{
             'header-component': HeaderComponent,
             'menu-component': MenuComponent,
             'calendar': Calendar,
             'footer-component': FooterComponent,
-            //'tabs': Tabs,
-            'main': Main
+            'main': Main,
+            'smalltip':SmallTip
         },
         methods: {
             searchAction(){
-                console.log(this.search);
                 this.setCompareSubTopic(this.search);
             },
             selectTime(num){
-                this.selectTimeTag = num;
+                //this.selectTimeTag = num;
                 if(num == 0){
-                   /* alert('更多信息，请联系客服');
-                    return ;
-                    //禁掉*/
-                    this.isTimeDiy = true;
-                    this.dateVal = this.compareStart + ' ~ ' + this.compareEnd;
-                    this.setCompareDataChange(this.compareDataChange + 1);
+                    if(this.timePay !==2){
+                        return ;
+                    }else {
+                        this.isTimeDiy = true;
+                        this.dateVal = this.compareStart + ' ~ ' + this.compareEnd;
+                        this.setCompareDataChange(this.compareDataChange + 1);
+                    }
                 } else if(num == 0.33){
-                    //this.selectTimeTag = num;
+                    this.selectTimeTag = num;
                     this.isTimeDiy = false;
                     this.setCompareTimeRange(0.33);
                     let start = moment().subtract(8,"hour").format("YYYY-MM-DD HH");
@@ -107,33 +117,29 @@
                     end = end.split(" ")[0] + "T" + end.split(" ")[1];
                     this.setCompareStart(start);
                     this.setCompareEnd(end);
-                    console.log(this.compareStart,this.compareEnd);
-                    //可以精确到小时
-                    //console.log('8H',moment().subtract(8,"hour").format("YYYY-MM-DD HH"),moment().format("YYYY-MM-DD HH"));
                     this.dateVal = `${ start} ~ ${end}`;
-                    //this.setCompareTimeRangeString(this.dateVal);
                     this.setCompareDataChange(this.compareDataChange + 1);
-                }else{
-                    //只显示1天和7天
-                   /* if(num == 30){
-                        alert('更多信息，请联系客服')
+                }else if(num == 30){
+                    if(this.timePay === 0){
                         return ;
-                    }*/
-                    //
-                    //this.selectTimeTag = num;
+                    }else {
+                        this.selectTimeTag = num;
+                        this.isTimeDiy = false;
+                        this.setCompareTimeRange(num);
+                        this.setCompareStart(moment().subtract(num, 'days').format('YYYY-MM-DD'));
+                        this.setCompareEnd(moment().format('YYYY-MM-DD'));
+                        this.dateVal = `${ moment().subtract(num, 'days').format('YYYY-MM-DD')} ~ ${moment().format('YYYY-MM-DD')}`;
+                        this.setCompareDataChange(this.compareDataChange + 1);
+                    }
+                }else{
+                    this.selectTimeTag = num;
                     this.isTimeDiy = false;
                     this.setCompareTimeRange(num);
                     this.setCompareStart(moment().subtract(num, 'days').format('YYYY-MM-DD'));
                     this.setCompareEnd(moment().format('YYYY-MM-DD'));
                     this.dateVal = `${ moment().subtract(num, 'days').format('YYYY-MM-DD')} ~ ${moment().format('YYYY-MM-DD')}`;
-                    //this.setCompareTimeRangeString(this.dateVal);
                     this.setCompareDataChange(this.compareDataChange + 1);
-                    //console.log('这是想要的数据0',this.compareTimeRangeString);
                 }
-
-
-                console.log('在这里测试时间切换',num);
-                console.log('this.dateVal',this.dateVal);
             },
             showCalendar:function(e){
                 e.stopPropagation();
@@ -151,6 +157,8 @@
                 },500);
             },
             init(){
+                /*this.timePay = this.userLevel;
+                console.log('abc',this.timePay)*/
                 const start = moment(this.cal.begin, "YYYY-MM-DD");
                 const end = moment(this.cal.end, "YYYY-MM-DD");
                 const days = end.diff(start)/1000/3600/24;
@@ -171,28 +179,20 @@
             },
             dateVal: {
                 handler(val){
-                    //console.log('date',val);
                     let start = moment(val.split(' ~ ')[0], "YYYY-MM-DD");
                     let end = moment(val.split(' ~ ')[1], "YYYY-MM-DD");
-                    //
                     const currentData = moment().format('YYYY-MM-DD');
-                    console.log(currentData,this.compareEnd);
                     if(moment(end)>moment(currentData)){
                         alert('请求区间错误,返回最近7天对比数据');
                         this.dateVal =  `${ moment().subtract(7, 'days').format('YYYY-MM-DD')} ~ ${moment().format('YYYY-MM-DD')}`;
                         this.selectTime(7);
                         return ;
                     }
-                    //
                     const days = end.diff(start)/1000/3600/24;
                     this.setCompareStart(val.split(' ~ ')[0]);
                     this.setCompareEnd(val.split(' ~ ')[1]);
                     this.setCompareTimeRange(days);
-                    console.log(this.compareStart,this.compareEnd,this.compareTimeRange);
-                    console.log(val.split(' ~ ')[0], val.split(' ~ ')[1], days);
-                    //this.setCompareTimeRangeString(this.dateVal);
                     this.setCompareDataChange(this.compareDataChange + 1);
-                    //console.log('这是日历改变后的数据',this.compareTimeRangeString);
                 }
             },
             compareSubTopic:{

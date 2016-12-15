@@ -1,5 +1,6 @@
 <template>
     <header-component  v-show="showRow" active="analytics"></header-component>
+    <div class="box">
         <div v-show="showRow"  class="container animated bouncelnDown">
             <br>
             <div class="row">
@@ -26,7 +27,7 @@
                     </card-panel>
                 </div>
             </div>
-<br>
+            <br>
             <div  class="row">
                 <div  class="col-md-12 detail-chart">
                     <card-panel :title="words.shareChart" >
@@ -37,11 +38,6 @@
                 </div>
                 <div  class="col-md-6 detail-article">
                     <card-panel :title="words.article" >
-                        <!--<ul class="detail-article-list">-->
-                            <!--<li class="detail-article-list-item" v-for="acticle in acticles">-->
-                                <!--<a :href="acticle.link" target="_blank"><i class="fa fa-bookmark"></i> {{acticle.title}}</a>-->
-                            <!--</li>-->
-                        <!--</ul>-->
                         <div class="detail-timeline-chart" v-echarts="timeclevelOption" :loading="timelineLoading" theme="macarons"></div>
 
 
@@ -57,20 +53,22 @@
         </div>
 
 
-    <!--//全屏的-->
+        <!--//全屏的-->
 
-    <div v-show="!showRow" class="row animated bounceInLeft bg">
-        <div  class="col-md-12 detail-chart">
-            <card-panel :title="words.shareChart" >
-                <a class="fullpage pull-right" href='Javascript: void(0)' v-on:click="getFull(true)"><i class="fa fa-compress"></i>返回</a>
-                <a class="showinfo pull-right" href='Javascript: void(0)' v-on:click="showinfonode()">{{dispalayinfo}}</a>
-                <div   class="chart" v-echarts="graphChartOption" :click="graphChartAction"  :loading="graphChartLoading" theme="infographic"></div>
-            </card-panel>
+        <div v-show="!showRow" class="row animated bounceInLeft bg">
+            <div  class="col-md-12 detail-chart">
+                <card-panel :title="words.shareChart" >
+                    <a class="fullpage pull-right" href='Javascript: void(0)' v-on:click="getFull(true)"><i class="fa fa-compress"></i>返回</a>
+                    <a class="showinfo pull-right" href='Javascript: void(0)' v-on:click="showinfonode()">{{dispalayinfo}}</a>
+                    <div   class="chart" v-echarts="graphChartOption" :click="graphChartAction"  :loading="graphChartLoading" theme="infographic"></div>
+                </card-panel>
+            </div>
+
+
+
         </div>
-
-
-
     </div>
+
 </template>
 <style lang="less" scoped>
     @import "Detail.less";
@@ -242,8 +240,6 @@
                         barWidth:25,
                         name: "数量",
                         type: 'bar',
-                        //areaStyle: {normal: {}},
-                        //stack: 'Total',
                         data: []
                     }]
                 }
@@ -287,9 +283,7 @@
             getPageDetail(){
                 const id = this.$route.params.id;
                 Api.getPageDetail({id}).then(resp => {
-                    console.log("getPageDetail", resp.data);
                     if (resp.data.code == 0) {
-                        console.log('有数据返回',resp.data.data);
                         if(resp.data.data.length == 0){
                            this.isLive = false;
                             return ;
@@ -309,10 +303,7 @@
             getArticleForward(){
                 const id = this.$route.params.id;
                 Api.getArticleForward({id}).then(resp => {
-                    console.log("getArticleForward", resp.data);
                     if (resp.data.code == 0) {
-
-
                         const firstdata = resp.data.data.datas, firstlink = resp.data.data.links;
                         const nodestyle0={normal:{show:this.control}}, nodestyle1={modularity_class:0};
                         const newDateS = _.map(firstdata, (item)=> {
@@ -322,24 +313,16 @@
                             item.itemStyle = "null";
                             item.attributes = nodestyle1;
                             item.label = nodestyle0;
-                            //item.x = Math.random() * (-1) * Math.random() * 1000;
-                            //item.y = Math.random() * Math.random() * 1000;
                             return item;
                         });
-
-
-
                         const newDateScout=_.size(newDateS)==0?0:(_.size(newDateS)-1);
-
                         const  linstyle0={normal:{color:'#000',width:1,type:'solid'}},
-//                                lablestyle0={normal:{show:false}},
                                 newDateL = _.map(firstlink, (item)=> {
                             item.name="";
                             item.source = ''+item.src+'';
                             item.target = ''+item.dst+'';
                             item.lineStyle=linstyle0;
                             // item.value =40;
-
                             return item;
                         });
 
@@ -352,33 +335,20 @@
                         filterCountx[4]=_.size(_.filter(newDateS, function(item){ return item.level==5; }));
                         filterCountx[5]=_.size(_.filter(newDateS, function(item){ return item.level==6; }));
                         //层级的统计！---end----
-
-                        // console.log(filterCountx);
-                        // console.log(newDateS);
-                        // console.log(newDateL);
-
-
                         this.graphChartOption.series[0].data = newDateS;
                         this.graphChartOption.series[0].links = newDateL;
                         this.graphChartOption.title.text="转发次数："+newDateScout+"次";
-
                         //转发的line 的数据请求的
                         const newDate1 = _.map(resp.data.data.forward, (item)=> {
                             return item.date;
-
                         });
                         const newDate2 = _.map(resp.data.data.forward, (item)=> {
                             return item.value;
-
                         });
-
                         this.timelineOption.series[0].data = newDate2;
                         this.timeclevelOption.series[0].data = filterCountx;
                         this.timelineOption.xAxis.data = newDate1;
-
                         //this.acticles = resp.data.data;
-
-
                     }
                 });
             },
@@ -386,9 +356,7 @@
                 console.log(this.$route.params);
                 this.getPageDetail();
                 this.getArticleForward();
-
                 // this.DEEE();
-
             }
         },
         components: {

@@ -10,20 +10,9 @@
                 </div>
                 <div class="pull-left info">
                     <p>{{common.hi}}, {{nickName}}</p>
-
                     <!--<a href="javascript:void(0);"><i class="fa fa-circle text-success"></i> 在线</a>-->
                 </div>
             </div>
-
-            <!--<form action="#" method="get" class="sidebar-form">-->
-                <!--<div class="input-group">-->
-                    <!--<input type="text" name="q" class="form-control" placeholder="Search..."/>-->
-                        <!--<span class="input-group-btn">-->
-                            <!--<button type='submit' name='seach' id='search-btn' class="btn btn-flat"><i class="fa fa-search"></i></button>-->
-                        <!--</span>-->
-                <!--</div>-->
-            <!--</form>-->
-
             <menu-list title="主题" :groups.sync="list" :action="topicAction()"></menu-list>
         </section>
     </aside>
@@ -71,20 +60,17 @@
             }
         },
         methods: {
-//            getTopicList(){
-//                return Api.getTopicList();
-//            },
             getTopics(){
-                console.log('vuex getTopicList:',this.getTopicList);
                 if(this.topicList.length){
-                    //this.topicList = this.getTopicList;
                     this.initActiveTopic();
                     return;
                 }
                 Api.getTopicList({}).then(resp => {
-                    console.log('getTopicList', resp);
-                    console.log('getTopicList', resp.data);
                     if(resp.data.code == 0){
+                        if(!resp.data.data.length){
+                            this.$router.go({ name: 'settingAdd' });
+                            return ;
+                        }
                         let topicList = _.map(resp.data.data, topic => {
                             topic.isActive = false;
                             return topic;
@@ -92,14 +78,7 @@
                         _.first(topicList).isActive = true;
                         this.setTopicList(topicList);
                         this.initActiveTopic();
-
-                        if(!resp.data.data.length){
-                            this.$router.go({ name: 'settingAdd' });
-                        }
                     }
-                    /*if(resp.data.code==8){
-                        this.$router.go({ name: 'settingAdd' });
-                    }*/
                 });
             },
             initActiveTopic(){
@@ -111,7 +90,6 @@
                 }
             },
             toggle(menu){
-                console.log(menu, this.MainMenu);
                 _.each(this.MainMenu, menuItem => {
                     if(menuItem.router != menu.router){
                         menuItem.isActive = false;
@@ -119,7 +97,6 @@
                         menuItem.isActive = !menuItem.isActive;
                     }
                 });
-                //menu.isActive = !menu.isActive;
             },
             topicAction(){
                 return (item, group_id) => {

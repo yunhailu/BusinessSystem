@@ -4,7 +4,7 @@
   .title{
 
     .pd(0 14px);  .bgc(@body-theme);  .c(white);  //.fw(300);
-    .lh(30px);  .b-top(2px solid @body-title);  font-family: "pingfang-bold";
+    .lh(30px);  .b-top(2px solid @body-title); // font-family: "pingfang-bold";
     span{
       .f(14px);  .pd(0 5px);
     }
@@ -12,7 +12,7 @@
       .pr();.disIB();
       .fa-question-circle-o{.c(#fff);.pointer();.pd(10px 0);}
       .tips{
-        .pa();.bgc(#3c8dbc);.h(30px);.w(80px);.left(18px);.top(0);.disN();.pd-left(5px);
+        .pa();.bgc(@body-theme);.h(30px);.w(80px);.left(18px);.top(0);.disN();.pd-left(5px);
         .fa-times{.float-right();.c(#000);font-weight: 600;}
         p{.c(#fff)}
       }
@@ -39,7 +39,7 @@
       >li{
         .mg(0);
         >a{
-          .pd(5px 5px 5px 30px);  .disB();  .f(12px);  .mg(0);  .c(#777);   font-family: "pingfang-bold";
+          .pd(5px 5px 5px 30px);  .disB();  .f(12px);  .mg(0);  .c(#777); //  font-family: "pingfang-bold";
           .fa{ .w(14px); }
           .delete{ .float-right();  .pd(3px 0); }
         }
@@ -57,7 +57,8 @@
   .expand-transition {
     transition: all .6s ease;
     //display: block;
-    .h(auto); .opacity(100);
+    /*.h(auto);*/ .opacity(100);
+    max-height:200px;overflow:auto;
   }
 
   /* .expand-enter 定义进入的开始状态 */

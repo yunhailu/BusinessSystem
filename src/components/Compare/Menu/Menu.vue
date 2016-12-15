@@ -1,11 +1,8 @@
 <template>
     <aside class="left-side sidebar-offcanvas">
-        <!-- sidebar: style can be found in sidebar.less -->
         <section class="sidebar">
-            <!-- Sidebar user panel -->
             <div class="user-panel">
                 <div class="pull-left image">
-                    <!-- class="img-circle"-->
                     <img src="images/avatar.png" alt="User Image" />
                 </div>
                 <div class="pull-left info">
@@ -14,17 +11,6 @@
                     <!--<a href="javascript:void(0);"><i class="fa fa-circle text-success"></i> 在线</a>-->
                 </div>
             </div>
-
-            <!--<form action="#" method="get" class="sidebar-form">-->
-                <!--<div class="input-group">-->
-                    <!--<input type="text" name="q" class="form-control" placeholder="Search..."/>-->
-                        <!--<span class="input-group-btn">-->
-                            <!--<button type='submit' name='seach' id='search-btn' class="btn btn-flat"><i class="fa fa-search"></i></button>-->
-                        <!--</span>-->
-                <!--</div>-->
-            <!--</form>-->
-
-            <!-- <menu-list title="主题" :menus="CompareMenu"></menu-list> -->
             <menu-list title="主题" :groups.sync="list" :action = "topicAction()"></menu-list>
         </section>
     </aside>

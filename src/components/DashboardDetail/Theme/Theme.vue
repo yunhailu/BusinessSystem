@@ -1,17 +1,12 @@
 <template>
-    <!--<tabs></tabs>-->
-    <!--<span>Theme</span>-->
     <div class="panel-title">
         <span class="panel-title-text">{{title}}</span>
         <div class="panel-title-delete" @click="deleteItem();"><i class="fa fa-minus"></i></div>
     </div>
     <div class="theme-word">
-        <!--<div class="theme-word-chart" v-echarts="themeWordOption" :loading="themeWordLoading"  theme="infographic" :click="clickAction"></div>-->
         <div class="theme-word-chart">
             <echarts :options="themeWordOption" initOptions="themeWordOption" :img.sync="wordcloud" theme="infographic"></echarts>
         </div>
-        <!--修改1行-->
-        <!--<div class="theme-word-chart" v-echarts="themeWordOption" :loading="themeWordLoading"  theme="infographic">-->
         <div class="theme-word-ranking">
             <dl class="list up-list">
                 <dt class="list-title">排名变化</dt>
@@ -26,11 +21,6 @@
         </div>
     </div>
     <div class="theme-chart">
-        <!--<div class="chart"  v-echarts="themeScatterOption" :loading="themeScatterLoading"  theme="macarons"></div>-->
-
-        <!--<div class="chart"  v-echarts="themeLineOption" :loading="themeLineLoading"  theme="macarons"></div>-->
-        <!--<div class="chart best"  v-echarts="themeBestOption" :loading="themeBestLoading"  theme="macarons"></div>-->
-
         <div class="chart">
             <echarts :options="themeScatterOption" initOptions="themeScatterOption" :img.sync="scatter" theme="macarons"></echarts>
         </div>
@@ -115,7 +105,6 @@
                     tooltip: {},
                     graphic:Pie.graphic,
                     series: {
-                        //grid: {x:0, x2:0},
                         type: 'wordCloud',
                         animation:false,
                         gridSize: 14,
@@ -149,12 +138,7 @@
                 themeScatterOption: {
                     legend: _.extend({}, Chart.legend, {
                         y: 'top',
-//                        data: ['南海问题', '每日关注', '货币战争', '网易新闻', '阿里影业'],
                         data:[],
-                        textStyle: {
-                            //color: '#fff',
-//                            fontSize: 16
-                        }
                     }),
                     animation:false,
                     tooltip: _.extend({}, Chart.tooltip, {
@@ -186,9 +170,6 @@
                             precision: 0.1,
                             text: ['圆形大小：文章转发数'],
                             textGap: 30,
-//                            textStyle: {
-//                                color: '#fff'
-//                            },
                             inRange: {
                                 symbolSize: [10, 70]
                             },
@@ -210,9 +191,7 @@
                         right: '10%'
                     }),
                     xAxis:  _.extend({}, Chart.xAxis, {
-                        type : 'category',  //category
-//                        data : ["2016-08-21:12","2016-08-21:14","2016-08-21:15","2016-08-21:16","2016-08-21:17","2016-08-21:18","2016-08-21:20","2016-08-21:22","2016-08-22:00","2016-08-22:03","2016-08-22:05","2016-08-22:06","2016-08-22:08","2016-08-22:09","2016-08-22:10","2016-08-22:11","2016-08-22:12","2016-08-22:13","2016-08-22:14","2016-08-22:15","2016-08-22:16","2016-08-22:17","2016-08-22:18","2016-08-22:19","2016-08-22:20","2016-08-22:21","2016-08-22:22","2016-08-23:00","2016-08-23:03","2016-08-23:06","2016-08-23:08","2016-08-23:09","2016-08-23:10","2016-08-23:11","2016-08-23:12","2016-08-23:13","2016-08-23:14","2016-08-23:15","2016-08-23:16","2016-08-23:17","2016-08-23:18","2016-08-23:19","2016-08-23:20","2016-08-23:22","2016-08-23:23","2016-08-24:00","2016-08-24:01","2016-08-24:06","2016-08-24:07","2016-08-24:08","2016-08-24:09","2016-08-24:10","2016-08-24:11","2016-08-24:12","2016-08-24:14","2016-08-24:15","2016-08-24:16","2016-08-24:17","2016-08-24:18","2016-08-24:20","2016-08-24:21","2016-08-24:22","2016-08-25:00","2016-08-25:02","2016-08-25:03","2016-08-25:05","2016-08-25:06","2016-08-25:07","2016-08-25:08","2016-08-25:09","2016-08-25:10","2016-08-25:11","2016-08-25:12","2016-08-25:14","2016-08-25:15","2016-08-25:16","2016-08-25:17","2016-08-25:18","2016-08-25:19","2016-08-25:20","2016-08-25:21","2016-08-25:22","2016-08-25:23","2016-08-26:00","2016-08-26:01","2016-08-26:06","2016-08-26:07","2016-08-26:08","2016-08-26:09","2016-08-26:10","2016-08-26:11","2016-08-26:12","2016-08-26:13","2016-08-26:14","2016-08-26:15","2016-08-26:16","2016-08-26:17","2016-08-26:18","2016-08-26:22","2016-08-26:23","2016-08-27:00","2016-08-27:01","2016-08-27:02","2016-08-27:06","2016-08-27:08","2016-08-27:09","2016-08-27:10","2016-08-27:11","2016-08-27:12","2016-08-27:13","2016-08-27:14","2016-08-27:15","2016-08-27:16","2016-08-27:17","2016-08-27:18","2016-08-27:19","2016-08-27:20","2016-08-28:00","2016-08-28:01","2016-08-28:06","2016-08-28:08"],
-                        //type: 'value',
+                        type : 'category',
                         data:[],
                         name: '日期',
                         nameGap: 16,
@@ -223,11 +202,6 @@
                         splitLine: {
                             show: false
                         },
-//                        axisLine: {
-//                            lineStyle: {
-//                                color: '#eee'
-//                            }
-//                        }
                     }),
                     yAxis: _.extend({}, Chart.yAxis, {
                         type: 'value',
@@ -253,7 +227,6 @@
                                 }
                             },
                             data:[]
-//                            data: themeScatterData.dataBJ
                         }, {
                             name: '',
                             type: 'scatter',
@@ -267,7 +240,6 @@
                                 }
                             },
                             data:[]
-//                            data: themeScatterData.dataSH
                         }, {
                             name: '',
                             type: 'scatter',
@@ -281,7 +253,6 @@
                                 }
                             },
                             data:[]
-//                            data: themeScatterData.dataGZ
                         },{
                             name: '',
                             type: 'scatter',
@@ -295,7 +266,6 @@
                                 }
                             },
                             data:[]
-//                            data: themeScatterData.dataWeb
                         }, {
                             name: '',
                             type: 'scatter',
@@ -309,7 +279,6 @@
                                 }
                             },
                             data:[]
-//                            data: themeScatterData.dataClient
                         }
                     ]
                 },
@@ -318,9 +287,6 @@
                 themeBestOption: {
                     title: _.extend({}, Chart.title, {text: words.topics, left: 10, top: 20}),
                     tooltip: _.extend({}, Chart.tooltip),
-//                    legend: {
-//                        data: ['话题排行']
-//                    },
                     animation:false,
                     grid: _.extend({}, Chart.grid),
                     textStyle: _.extend({}, Chart.textStyle),
@@ -367,8 +333,6 @@
                             type : 'line'
                         }
                     }),
-                    //color: _.extend([], Chart.color),
-                    //backgroundColor: '#f9f9f9',
                     legend: {
                         data:[]
                     },
@@ -382,7 +346,7 @@
                         }
                     }),
                     xAxis: _.extend({}, Chart.xAxis, {
-                        type : 'category',  //category
+                        type : 'category',
                         data : ["2016-08-21:12","2016-08-21:14","2016-08-21:15","2016-08-21:16","2016-08-21:17","2016-08-21:18","2016-08-21:20","2016-08-21:21","2016-08-22:00","2016-08-22:03","2016-08-22:05","2016-08-22:06","2016-08-22:08","2016-08-22:09","2016-08-22:10","2016-08-22:11","2016-08-22:12","2016-08-22:13","2016-08-22:14","2016-08-22:15","2016-08-22:16","2016-08-22:17","2016-08-22:18","2016-08-22:19","2016-08-22:20","2016-08-22:21","2016-08-22:22","2016-08-23:00","2016-08-23:03","2016-08-23:06","2016-08-23:08","2016-08-23:09","2016-08-23:10","2016-08-23:11","2016-08-23:12","2016-08-23:13","2016-08-23:14","2016-08-23:15","2016-08-23:16","2016-08-23:17","2016-08-23:18","2016-08-23:19","2016-08-23:20","2016-08-23:22","2016-08-23:23","2016-08-24:00","2016-08-24:01","2016-08-24:06","2016-08-24:07","2016-08-24:08","2016-08-24:09","2016-08-24:10","2016-08-24:11","2016-08-24:12","2016-08-24:14","2016-08-24:15","2016-08-24:16","2016-08-24:17","2016-08-24:18","2016-08-24:20","2016-08-24:21","2016-08-24:22","2016-08-25:00","2016-08-25:02","2016-08-25:03","2016-08-25:05","2016-08-25:06","2016-08-25:07","2016-08-25:08","2016-08-25:09","2016-08-25:10","2016-08-25:11","2016-08-25:12","2016-08-25:14","2016-08-25:15","2016-08-25:16","2016-08-25:17","2016-08-25:18","2016-08-25:19","2016-08-25:20","2016-08-25:21","2016-08-25:22","2016-08-25:23","2016-08-26:00","2016-08-26:01","2016-08-26:06","2016-08-26:07","2016-08-26:08","2016-08-26:09","2016-08-26:10","2016-08-26:11","2016-08-26:12","2016-08-26:13","2016-08-26:14","2016-08-26:15","2016-08-26:16","2016-08-26:17","2016-08-26:18","2016-08-26:22","2016-08-26:23","2016-08-27:00","2016-08-27:01","2016-08-27:02","2016-08-27:06","2016-08-27:08","2016-08-27:09","2016-08-27:10","2016-08-27:11","2016-08-27:12","2016-08-27:13","2016-08-27:14","2016-08-27:15","2016-08-27:16","2016-08-27:17","2016-08-27:18","2016-08-27:19","2016-08-27:20","2016-08-28:00","2016-08-28:01","2016-08-28:06","2016-08-28:08"],
                         boundaryGap : false
                     }),
@@ -402,19 +366,12 @@
             //动态气泡图--->
             getBubblChart(){
                 const topic_id = this.data.topic_id,
-                        //end='2016-11-15',
-                        //start='2016-11-11';
                         time_interval = this.data.time_interval;
-                        //time_dimension = this.data.time_dimension,
-//                        start = moment().subtract(time_interval, 'days').format('YYYY-MM-DD'),
-//                        end = moment().format('YYYY-MM-DD');
                 let start,end;
                 if(time_interval!=0){
-                    console.log('这不是8h')
                      start = moment().subtract(time_interval, 'days').format('YYYY-MM-DD'),
                             end = moment().format('YYYY-MM-DD');
                 }else {
-                    console.log('这是8h')
                      start = moment().subtract(8, 'hour').format('YYYY-MM-DD HH'),
                             end = moment().format('YYYY-MM-DD HH');
                     start = start.split(' ')[0] + 'T' + start.split(' ')[1];
@@ -422,13 +379,9 @@
                     console.log('start', start, end);
                 }
                 Api.getBubblChart({topic_id,start,end}).then(resp => {
-                    console.log('13',resp.data);
                     if(resp.data.code == 0){
-                        console.log('12',resp.data.data[0]);
                         const yuy =_.keys(resp.data.data);
                         this.themeScatterOption.legend.data=yuy;
-                         console.log('话题',yuy);
-                        console.log('话题',yuy[0]);
                         this.themeScatterOption.series[0].name=yuy[0];
                         this.themeScatterOption.series[1].name=yuy[1];
                         this.themeScatterOption.series[2].name=yuy[2];
@@ -450,7 +403,6 @@
                         sizedate.push(_.size(datearr5));
 
                         const uye=_.max(sizedate);
-                        //console.log('sizedate',sizedate);
 
 
                         if(_.size(datearr1)==uye){
@@ -471,13 +423,11 @@
                             this.themeScatterOption.xAxis.data=datearr5;
 
                         }
-                        console.log('数据',yuy0); //数据组的所有数据
                         const dataOne=yuy0[0];
                         const dataTwue=yuy0[1];
                         const dataThree=yuy0[2];
                         const dataFour=yuy0[3];
                         const dataFire=yuy0[4];
-                        console.log('dataOne:',dataOne);
                         const result0 = [];
                         for(var i=0; i < dataOne.length; i++) {
                             dataOne[i]=_.omit(dataOne[i],'date');
@@ -513,24 +463,17 @@
                             dataFire[i][0]=i+1
                             result4.push(_.values(dataFire[i]));
                         };
-                        //   console.log('result1',result1);
-                        //  console.log('result2',result2);
-                        //console.log('result3',result3);
-                        //console.log('result4',result4);
                         this.themeScatterOption.series[0].data=result0;
                         this.themeScatterOption.series[1].data=result1;
                         this.themeScatterOption.series[2].data=result2;
                         this.themeScatterOption.series[3].data=result3;
                         this.themeScatterOption.series[4].data=result4;
                         const uiy=_.omit(yuy0[0],'date');
-                        // const gu=_.each(yuy0[0],value,list);
-                        // console.log('gu',gu);
                     }
                 });
             },
             //<----
             clickAction(e){
-                console.log(e);
                 alert(e.name + ": " + e.value);
             },
             getTrendList(){
@@ -538,10 +481,7 @@
                     topic_id = this.data.topic_id,
                     source = this.data.source,
                     time_interval = this.data.time_interval,
-                    //time_dimension = this.data.time_dimension,
                     time_dimension = time_interval > 7 ? 1 : 0,
-//                    start = moment().subtract(time_interval, 'days').format('YYYY-MM-DD'),
-//                    end = moment().format('YYYY-MM-DD'),
                     topic = this.data.topic;
                 let start,end;
                 if(time_interval!=0){
@@ -568,10 +508,7 @@
                         topic_id = this.data.topic_id,
                         source = this.data.source,
                         time_interval = this.data.time_interval,
-                        //time_dimension = this.data.time_dimension,
                         time_dimension = time_interval > 7 ? 1 : 0,
-//                        start = moment().subtract(time_interval, 'days').format('YYYY-MM-DD'),
-//                        end = moment().format('YYYY-MM-DD'),
                         topic = this.data.topic;
                 let start,end;
                 if(time_interval!=0){
@@ -587,7 +524,6 @@
                     console.log('start', start, end);
                 }
                 return Api.getWordCloud({ topic_id, topic, subtopic, source, start, end, time_dimension }).then(resp => {
-                    //console.log('getWordCloud',resp);
                     if(resp.data.code == 0){
                         this.themeWordLoading = false;
                         this.themeWordOption.series.data = resp.data.data;
@@ -601,28 +537,12 @@
                     }
                 });
             },
-//            getThemeBest(){
-//                return Api.getThemeBest({}).then(resp => {
-//                    //console.log('getThemeBest',resp);
-//                    if(resp.data.code == 0){
-//                        const bestList = _.sortBy(resp.data.data, 'value');
-//                        const yAxis = _.map(bestList, value => value.name);
-//                        const data = _.map(bestList, value => value.value);
-//                        this.themeBestLoading = false;
-//                        this.themeBestOption.yAxis.data = yAxis;
-//                        this.themeBestOption.series[0].data = data;
-//                    }
-//                });
-//            },
             getThemeDetail(){
                 const subtopic = this.data.subtopic,
                     topic_id = this.data.topic_id,
                     source = this.data.source,
                     time_interval = this.data.time_interval,
-                    //time_dimension = this.data.time_dimension,
                     time_dimension = time_interval > 7 ? 1 : 0,
-//                    start = moment().subtract(time_interval, 'days').format('YYYY-MM-DD'),
-//                    end = moment().format('YYYY-MM-DD'),
                     topic = this.data.topic;
                 let start,end;
                 if(time_interval!=0){
@@ -638,13 +558,11 @@
                     console.log('start', start, end);
                 }
                 Api.getThemeDetail({ topic_id, topic, subtopic, source, start, end, time_dimension }).then(resp => {
-                    //console.log('getThemeDetail', resp.data);
                     if(resp.data.code == 0){
                         const details = resp.data.data;
                         this.themeLineLoading = false;
                         this.themeLineOption.xAxis.data = _.map(details, detail => detail.date);
-                    //console.log('details',details);
-                        this.themeLineOption.legend.data = _.map(details[0].values, item => item.name);
+                        this.themeLineOption.legend.data = _.map(details[0].values, item => item.name+'');
                         this.themeLineOption.series = _.map(this.themeLineOption.legend.data, legend => {
                             const data = _.chain(details)
                                     .map(detail => (_.filter(detail.values, value => (value.name == legend))[0]))
@@ -666,7 +584,6 @@
                 this.getBubblChart();
                 this.getTrendList();
                 this.getWordCloud();
-                //this.getThemeBest();
                 this.getThemeDetail();
             }
         },

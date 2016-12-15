@@ -1,7 +1,7 @@
 /**
  * Created by yunhailu on 2016/10/23.
  */
-import { UPDATE_TYPE, UPDATE_TIME_RANGE, UPDATE_SOURCE, UPDATE_SUBTOPIC, UPDATE_DATE_CHANGE, UPDATE_START, UPDATE_END,UPDATE_REFRESH_TOPIC, UPDATE_RESET_SEARCH ,UPDATE_SUBTOPIC_ID} from '../mutations-types'
+import { UPDATE_TYPE, UPDATE_TIME_RANGE, UPDATE_SOURCE, UPDATE_SUBTOPIC, UPDATE_DATE_CHANGE, UPDATE_START, UPDATE_END,UPDATE_REFRESH_TOPIC, UPDATE_RESET_SEARCH ,UPDATE_SUBTOPIC_ID,UPDATE_TIME_POP_UP} from '../mutations-types'
 
 const state = {
     type: 'summary',
@@ -13,7 +13,8 @@ const state = {
     subtopic: '',
     refreshTopic:0,
     resetSearch:false,
-    subtopicId:0
+    subtopicId:0,
+    timePopUp:0.33
 }
 
 const mutations = {
@@ -46,6 +47,9 @@ const mutations = {
     },
     [UPDATE_SUBTOPIC_ID](state,subtopicId){
         state.subtopicId = subtopicId;
+    },
+    [UPDATE_TIME_POP_UP](state,time){
+        state.timePopUp = time;
     }
 }
 

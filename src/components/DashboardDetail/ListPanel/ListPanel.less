@@ -32,7 +32,111 @@
 
   &-list{
     .b-top(1px solid #dedede);
-    &-item{
+    &-item {
+      .b-top(1px solid #fff);
+      .b-bottom(1px solid #dedede);
+      .mg(0);
+      .c(@word);
+      .h(110px);
+      .pr();
+      & > a {
+        .w(100%);
+        .h(110px);
+        .disB();
+        .list-left {
+          .w(100%);
+          box-sizing: border-box;
+          .h(110px);
+          .float-left();
+          .pd(10px 20px 10px);
+          .fa-left {
+            .mg(10px 0);
+            .float-left();
+            .c(@word);
+          }
+          .icon {
+            .w(20px);
+            .h(20px);
+            .b(1px solid #dedede);
+            .tc();
+            .lh(20px);
+            .tc();
+            .pa();
+            .top(-10px);
+            .bgc(@list-bg);
+            .right(20px);
+          }
+          .icon.flag-blue {
+            .c(@flag-blue);
+          }
+          .icon.flag-yellow {
+            .c(@flag-yellow);
+          }
+          .icon.flag-light-blue {
+            .c(@flag-light-blue);
+          }
+          .icon.flag-green {
+            .c(@flag-green);
+          }
+          .icon.flag-grey {
+            .c(@flag-grey);
+          }
+          .icon.flag-red {
+            .c(@flag-red);
+          }
+          .left-con {
+            .mg(0 0 0 26px);
+            .title {
+              .c(@body-theme);
+              .h(24px);
+              .lh(24px);
+              .f(14px); // .ff("pingfang-bold");.text-hidden();
+            }
+            .detail {
+              .text-hidden();
+            }
+            .time {
+              .pd(5px 0 0);
+              .disIB();
+              .vm();
+            }
+            .source {
+              .pd(5px 5px 0);
+              .disIB();
+              .vm();
+            }
+            .sub-source {
+              .pd(5px 5px 0);
+              .disIB();
+              .vm();
+            }
+            .waterPage {
+              .c(#888);
+              .f(12px);
+              .disIB();
+              .pd-left(20px);
+              vertical-align: -4px;
+            }
+            .title-bottom {
+              .fw(500);
+              .mg-top(5px);
+            }
+            .title-bottom .time-bottom {
+              .f(12px);
+              .mg-left(10px);
+              .disIB();
+              color:#767676;
+              .item {
+                .disIB();
+                .lh(20px);
+                .mg-left(10px);
+              }
+            }
+          }
+        }
+      }
+    }
+    /*&-item{
       .b-top(1px solid #fff);  .b-bottom(1px solid #dedede);  .mg(0);  .c(@word); .h(100px);
       &>a{
         .w(100%);.h(100px);.disB();
@@ -44,8 +148,10 @@
         .fa{ .mg(10px 0);  .float-left();  .c(@word); };
         &-con{
           .mg(0 0 0 26px);
-          .title{ .c(@body-theme);  .h(24px);  .lh(24px);  .f(14px);  .ff("pingfang-bold");  .text-hidden();  }
-          .detail{ /*.text-num-hidden(2);*/ .ff("pingfang-bold"); .text-hidden();   }
+          .title{ .c(@body-theme);  .h(24px);  .lh(24px);  .f(14px); // .ff("pingfang-bold");
+            .text-hidden();  }
+          .detail{ !*.text-num-hidden(2);*!// .ff("pingfang-bold");
+            .text-hidden();   }
           //.data{
           //  .disIB();  .vm();  .pd(0 0 0 20px);
           //  .item{
@@ -56,7 +162,7 @@
           .time{ .pd(5px 0 0); .disIB(); .vm(); }
           .source{ .pd(5px 5px 0); .disIB(); .vm(); }
           .sub-source{ .pd(5px 5px 0); .disIB(); .vm();}
-          .waterPage{.c(#ddd);.f(12px);}
+          .waterPage{.c(#888);.f(12px);.disIB();.pd-left(20px);vertical-align: -4px;}
         }
       }
       &-right{
@@ -81,7 +187,8 @@
           }
           .row{
             .mg(5px 0 0);  .f(14px);.disT();.w(100%);
-            .title{ .ff(pingfang-bold);  .fw(600);.disTC();.w(25%); }
+            .title{// .ff(pingfang-bold);
+              .fw(600);.disTC();.w(25%); }
             .time{
               .f(12px);.disTC();.w(75%);
               .item{ .disIB();  .w(30%); .lh(20px); }
@@ -93,7 +200,7 @@
         }
 
       }
-    }
+    }*/
     &-item:hover{
       .bgc(white);
       .icon{ .bgc(white); }

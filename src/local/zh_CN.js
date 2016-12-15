@@ -36,9 +36,9 @@ export const zh_CN = {
         hotEvent:"热点事件"
     },
     footer:{
-        coppy:"京ICP备14046778号-5 联系电话：010-88315479 版权所有:沃民高新科技（北京）股份有限公司 ",
+        coppy:"京ICP备14046778号-5 联系电话：010-61934324 版权所有:沃民高新科技（北京）股份有限公司 ",
         phone:"联系电话：010-88315479 ",
-        cooperation:"沃民高新科技（北京）股份有限公司、工信部电子科技情报所网络舆情研究中心"
+        cooperation:"沃民高新科技（北京）股份有限公司、工信部电子科技情报所网络舆情研究中心联合开发"
     },
     header: {
         title: "沃德品牌气象站",
@@ -74,7 +74,16 @@ export const zh_CN = {
         tabs: ["关注分析", "情绪分析", "评价分析", "影响力分析", "印象分析"],
         filters: ["全部", "情绪指数", "地域分布", "性别分布", "语言分布"],
         source: ["全部", "微信", "微博", "客户端", "网页", "海外"],
-        addDashboard: "添加快捷报告"
+        addDashboard: "添加快捷报告",
+        monitor:"监测词",
+        tips:"如需开通，请联系客服：010-61934324"
+    },
+    sentiment:{
+        happy: "满意",
+        anger: "愤怒",
+        sorrow: "失望",
+        disgust: "反感",
+        fear: "害怕",
     },
     comment: {
         comment: "评价指数",
@@ -91,12 +100,12 @@ export const zh_CN = {
         like: "点赞数",
         resend: "转发数",
         comments: "评论数",
-        rate: "浮动比率",
+        rate: "影响力指数",
         close: "关闭"
     },
     theme: {
         topics: "话题排行",
-        ranking:"排名变化"
+        ranking:"排名变化(8小时环比)"
     },
     detail: {
         article: "层级转发关系",
@@ -112,7 +121,8 @@ export const zh_CN = {
     compare: {
         tabs: ["品牌关注", "品牌情绪","品牌评价", "品牌影响力", "品牌印象"],
         filters: ["全部", "情绪指数", "地域分布", "性别分布", "语言分布"],
-        source: ["全部", "微信", "微博", "客户端", "网页", "海外"]
+        source: ["全部", "微信", "微博", "客户端", "网页", "海外"],
+        tips:"如需开通，请联系客服：010-61934324"
     },
     addDashboard:{
         addTitle: "添加新的报表",
@@ -148,7 +158,8 @@ export const zh_CN = {
         required: "必填",
         optional: "选填",
         groupTitle: "话题分组",
-        topic: "新主题",
+        topic: "主题词",
+        topicInfo: "多主题词请用逗号分隔",
         topicArr: "主题词组",
         topicArrTip: "主题词组用空格隔开，是或的关系",
         related: "关联词",
@@ -214,14 +225,14 @@ export const zh_CN = {
         loadingTip: "等待加载...",
         waitWords:"请稍侯......",
         hi:"您好",
-        timeRanking:"按时间排序",
-        countRanking:"按浏览数排序",
-        greetRanking:"按点赞数排序",
-        shareRanking:"按转发数排序",
+        timeRanking:"时间",
+        countRanking:"浏览数",
+        greetRanking:"点赞数",
+        shareRanking:"转发数",
         publish:"发布于",
         sourceFrom:"来源",
         dataFrom:"数据分析平台",
-        match:"匹配",
+        match:"监测词",
         target:"指标",
         sub_source:"来自"
     },

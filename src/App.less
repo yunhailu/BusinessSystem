@@ -40,14 +40,14 @@ a,a:hover,a:active,a:visited,a:link{
   text-decoration: none; .c(inherit);
 }
 
-html,body{ font-family: "pingfang", "microsoft yahei","Helvetica Neue","Helvetica","Arial","sans-serif"; }
-
+html,body{ font-family:"microsoft yahei","Helvetica Neue","Helvetica","Arial","sans-serif"; }
+// "pingfang",
 html,body,*{
   //letter-spacing: 0.1rem;
   .pd(0);  .mg(0);  .b0();
   -webkit-font-smoothing: antialiased;
 }
-body{.bgc(@body-bg);.h(100%);min-height: 100%;}
+body{.bgc(#EDF2F6);.h(100%);/*min-height: 100%;*/overflow-y: hidden;}
 //div,span,ul,li,a,dl,dt,dd,i,table,tbody,thead,tr,td,form,input,button{ .f(1.2rem); }
 
 html,body {
@@ -112,12 +112,14 @@ html,body {
   }
 }
 @font-face {
-    font-family: pingfang;
-    src: url('./fonts/pingfang/PingFang-Regular.ttf');
+  font-family:'microsoft yahei' ;
+    //font-family: pingfang;
+    //src: url('./fonts/pingfang/PingFang-Regular.ttf');
 }
 @font-face {
-  font-family: pingfang-bold;
-  src: url('./fonts/pingfang/PingFang-Bold.ttf');
+  font-family: 'microsoft yahei';
+  //font-family: pingfang-bold;
+  //src: url('./fonts/pingfang/PingFang-Bold.ttf');
 }
 
 

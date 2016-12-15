@@ -21,16 +21,37 @@
                     <a class="btn btn-default list-panel-tools-filter-item" href="javascript:void(0);" @click="setCount(100)" :class="[filterActive == 100 ? 'active' : '']">100</a>
                 </div>
             </div>
-            <!--<div class="col-md-4">-->
-            <!--<i class="fa fa-th-large"></i>-->
-            <!--<i class="fa fa-th-list"></i>-->
-            <!--</div>-->
         </div>
         <ul class="list-panel-list" v-if="tableList.length">
             <li class="list-panel-list-item row" v-for="item in tableList">
                 <!--<a :href="item.url" target="_blank">-->
                 <a  @click="showDetail(item);" href="javascript:void(0);" target="_blank">
                     <div class="list-panel-list-item-left list-left">
+                        <i class="fa fa-flag icon" :class="item.sentiment | sentiment"></i>
+                        <i class="fa fa-paperclip fa-2x fa-left"></i>
+                        <div class="list-panel-list-item-left-con left-con">
+                            <div class="title">{{{item.title| title}}}</div>
+                            <div class="detail">{{{item.content}}}</div>
+                            <div class="time">{{common.publish}} {{item.pDate}}</div>
+                            <div class="source">{{common.sourceFrom}} {{item.from}} </div>
+                            <div class="sub-source">{{common.sub_source}} {{item.sub_source}}</div>
+                            <div class="waterPage">{{common.dataFrom}}：{{common.source}}</div>
+                            <div class="title-bottom">
+                                <span>{{common.match}}: </span> <span class="time-bottom">{{topicName}}</span>
+                                <div class="time-bottom">
+                                    <div class="item" v-if="item.likeCount" ><i class="fa fa-thumbs-up"></i> <span>{{item.likeCount}}</span></div>
+                                    <div class="item" v-if="item.fansCount"><i class="fa fa-user"></i> <span>{{item.fansCount}}</span></div>
+                                    <div class="item" v-if="item.viewCount"><i class="fa fa-eye"></i> <span>{{item.viewCount}}</span></div>
+                                    <div class="item" v-if="item.shareCount"><i class="fa fa-share"></i> <span>{{item.shareCount}}</span></div>
+                                    <div class="item" v-if="item.commentsCount"><i class="fa fa-commenting"></i> <span>{{item.commentsCount}}</span></div>
+                                    <div class="item" v-if="item.followCount"><i class="fa fa-plus"></i> <span>{{item.followCount}}</span></div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                   <!-- <div class="list-panel-list-item-left list-left">
                         <i class="fa fa-paperclip fa-2
                         x"></i>
                         <div class="list-panel-list-item-left-con">
@@ -47,7 +68,6 @@
                         <div class="item-data">
                             <div class="row">
                                 <div class="title">{{common.match}}</div>
-                                <!--<div class="time">{{activeAnalyticsTopic.topic_name}}</div>-->
                                 <div class="time">{{topicName}}</div>
                             </div>
                             <div class="row">
@@ -63,14 +83,10 @@
                                 <div class="col-md-offset-3 col-md-9 time"></div>
                             </div>
                         </div>
-                    </div>
+                    </div>-->
                 </a>
             </li>
         </ul>
-        <!--<div v-if="!tableList.length" class="list-panel-tip">{{listTip}}</div>-->
-        <!--<div class="list-panel-pager">-->
-            <!--<page></page>-->
-        <!--</div>-->
     </div>
 </template>
 <style lang="less" scoped>
@@ -156,11 +172,6 @@
                 return f;
             }
         },
-//        computed: {
-//            list(){
-//                return this.list;
-//            }
-//        },
         watch: {
             list(val){
                 this.tableList = val;
@@ -171,8 +182,6 @@
             }
         },
         ready(){
-            console.log('props,options',this.options,this.data);
-            console.log('props,data',this.data);
             this.setCount(this.filterActive);
             this.setSentiment('all');
 

@@ -3,16 +3,16 @@
 @left-w: 180px;
 
 .header{
-  .pr();  .z(1030);.h(@h);.mw(1150px);
+  .pr();  .z(1030);.h(@h);.mw(1250px);
   .top(0);  .left(0);  .right(0); .bgc(@body-theme);
 
   .logo{
-    .float-left();  .f(20px);  .lh(@h);  .tc();  .bgc(@body-title);  .c(#f9f9f9);
+    .float-left();  .f(20px);  .lh(@h);  .tc();  .bgc(@body-theme);  .c(#fff);
     //.pd(5px 10px);
     .fw(500);  .disB();  .w(@left-w);  .h(50px);.w(180px);.pa();.left(0); .z(60);
     span{
-      .text-shadow(1px 1px 5px #333);
-      font-family: 'pingfang-bold', 'pingfang', 'microsoft yahei';
+      //.text-shadow(1px 1px 5px #333);
+     // font-family: 'pingfang-bold', 'pingfang', 'microsoft yahei';//(old)
     }
   }
 
@@ -24,9 +24,9 @@
         .tab-item{
           .float-left();
           .h(@h);
-          a>span{ .pd-left(3px); .f(14px); .h(@h); .ff('Microsoft Yahei');.fw(500);}
+          a>span{ .pd-left(3px); .f(18px); .h(@h); .ff('Microsoft Yahei');.fw(500);}
           a{
-            .fw(bold);  color: rgba(255, 255, 255, 0.8);.disB();.h(50px);
+            .fw(bold);  color: rgba(255, 255, 255,1);.disB();.h(50px);
             .pd-left(20px);  .pd-right(20px);
             .glyphicon{.mg-right(5px)}
           }
@@ -34,17 +34,17 @@
             .fw(bold);   .c(#f6f6f6);  background: rgba(0, 0, 0, 0.1);
           }
           &:focus{
-            .fw(bold);   .c(@body-theme);  background: rgba(255, 255, 255, 0.9);
+            .fw(bold);   .c(@body-theme);  background: rgba(255, 255, 255, 1);
             //padding-left: 30px;  padding-right: 30px;
             //span{ .f(14px); }
           }
           &:focus a{.c(@body-theme);}
           &:active{
-            .fw(bold);   .c(@body-theme);  background: rgba(255, 255, 255, 0.9);
+            .fw(bold);   .c(@body-theme);  background: rgba(255, 255, 255, 1);
           }
           &:active a{.c(@body-theme);}
           a.active{
-            .fw(bold);   .c(@body-theme);  background: rgba(255, 255, 255, 0.9);
+            .fw(bold);   .c(@body-theme);  background: rgba(255, 255, 255, 1);
           }
         }
     }

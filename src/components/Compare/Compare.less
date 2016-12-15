@@ -2,34 +2,35 @@
 
 .divBox{
   .mw(1250px);
-  overflow: hidden;
-  background-color: #f9f9f9;
-  min-height: 100%;
+  //overflow: hidden;
+  background-color: #fff;
+  height: 100%;
 }
 .compare-panel{
-  .bgc(@bg-color);   .mg-left(180px);min-height: 100%;
-  &-wrap{
+  .bgc(#fff);   .mg-left(180px);height: 100%;
+  &-wrap{.h(100%);
     .tools{
-      .h(50px);  .pd(14px 0);  .mg(0);
-      //display: flex;
+      .h(50px);  .pd(14px 0);  .mg(0);.bgc(#EDF2F6);
       .disT();.w(100%);
       .row-left{
-        //flex:6;
         .disTC();.w(45%);
         .search{
           .w(100%);  .h(24px);.mg-left(20px);
-          .bgc(#e6e6e6);  .br(2px);
+          .bgc(#fff);  .br(2px);
           &-input{  .w(80%);  .input-transparent();  .h(12px);  .c(#666);  .disIB();  .mg(5px 10px); }
           &-btn{ .float-right();  .disIB();  .pointer(); .pd(3px 10px); }
         }
       }
       .row-right{
-        //flex:4;
         .disTC();.w(55%);vertical-align: middle;
         .days-btn{
-          .h(24px);  overflow: hidden;  .float-left();  .w(200px);.mg-left(30px);
+          .h(24px); .float-left();  .w(250px);.mg-left(30px);
           li{
-            .disIB();  .lh(24px);  .pd(0 3px);  .pointer();  .br(4px);  .c(@word);
+            .disIB();  .lh(24px);  .pd(0 3px);  .pointer();  .br(4px);  .c(@word);.pr();
+            .smalltip{.pa();display: none; .top(30px);}
+          }
+          li:hover .smalltip{
+            display: block;
           }
           li.active{ .bgc(@body-theme);  .c(white);  }
         }

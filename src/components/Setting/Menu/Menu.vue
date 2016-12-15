@@ -14,16 +14,6 @@
                     <!--<a href="javascript:void(0);"><i class="fa fa-circle text-success"></i> 在线</a>-->
                 </div>
             </div>
-
-            <!--<form action="#" method="get" class="sidebar-form">-->
-                <!--<div class="input-group">-->
-                    <!--<input type="text" name="q" class="form-control" placeholder="Search..."/>-->
-                        <!--<span class="input-group-btn">-->
-                            <!--<button type='submit' name='seach' id='search-btn' class="btn btn-flat"><i class="fa fa-search"></i></button>-->
-                        <!--</span>-->
-                <!--</div>-->
-            <!--</form>-->
-
             <menu-list title="主题" :groups.sync="list" :action="topicAction()"></menu-list>
         </section>
     </aside>
@@ -73,11 +63,9 @@
             getTopics(){
                 console.log('vuex getTopicList:',this.getTopicList);
                 if(this.topicList.length){
-                    //this.topicList = this.getTopicList;
                     return;
                 }
                 Api.getTopicList({}).then(resp => {
-                    //console.log('getTopicList', resp);
                     if(resp.data.code == 0){
                         let topicList = _.map(resp.data.data, topic => {
                             topic.isActive = false;
@@ -97,7 +85,6 @@
                         menuItem.isActive = !menuItem.isActive;
                     }
                 });
-                //menu.isActive = !menu.isActive;
             },
             topicAction(){
                 return (item, group_id) => {

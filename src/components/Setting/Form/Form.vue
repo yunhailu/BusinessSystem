@@ -32,7 +32,7 @@
                         <div class="form-group" v-show="!isAdvanced">
                             <label for="topicText" class="col-sm-2 control-label">{{words.topic}}</label>
                             <div class="col-sm-4">
-                                <input type="text" v-model="topicText" class="form-control" id="topicText" :placeholder="words.topic">
+                                <input type="text" v-model="topicText" class="form-control" id="topicText" :placeholder="words.topicInfo">
                             </div>
                             <div class="col-sm-4 tip">{{words.required}}</div>
                         </div>

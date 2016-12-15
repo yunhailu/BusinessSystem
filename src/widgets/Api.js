@@ -206,6 +206,43 @@ export const getCommentDetail = params => {
     });
 };
 
+
+/**
+ *  Encapsulate `get mediaData ` interface
+ *
+ *  @return {Promise} With Topic List.
+ */
+export const getMediaHotspot = params => {
+    return Api.request({
+        url: `${rootURI}/media/hotspot`,
+        params
+    });
+};
+
+export const getMediaGender = params => {
+    return Api.request({
+        url: `${rootURI}/media/gender`,
+        params
+    });
+};
+
+export const getMediaWordcloud = params => {
+    return Api.request({
+        url: `${rootURI}/media/wordcloud`,
+        params
+    });
+};
+
+
+export const getMediaMood = params => {
+    return Api.request({
+        url: `${rootURI}/media/mood`,
+        params
+    });
+};
+
+
+
 /**
  *  Encapsulate `get Influence Popular List` interface
  *

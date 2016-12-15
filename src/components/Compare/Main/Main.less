@@ -1,7 +1,10 @@
 @import "../../common.less";
 
+.chartBox{
+  .h(100%);overflow-y: auto;
+}
 .compare-charts{
-  .w(100%);  .pd(10px);
+  .w(100%);  .pd(10px);min-height: 800px;
 
   .chart{
     .w(100%);  .h(320px);
@@ -11,6 +14,5 @@
   }
   .radar{
     .w(50%);  .h(300px);  .disIB();
-    //.bgc('-webkit-radial-gradient(circle, #a9a9a9, #f9f9f9);');
   }
 }

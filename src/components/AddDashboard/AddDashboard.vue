@@ -6,7 +6,7 @@
                 <li :class="[isNew ? '' : 'active']" @click="setNewPanel(0);"><a href="javascript:void(0);">{{words.importTitle}}</a></li>
             </ul>
             <div class="add-panel-new" v-if="isNew">
-                <form class="form-horizontal" role="form">
+                <form class="form-horizontal" role="form" v-on:submit.prevent>
                     <div class="form-group">
                         <label for="dashName" class="col-sm-3 control-label">{{words.addLabel}}</label>
                         <div class="col-sm-8">
@@ -18,14 +18,14 @@
                     </div>
                     <div class="form-group">
                         <div class="col-sm-offset-3 col-sm-8">
-                            <button type="submit" class="btn btn-primary" @click="addDashboard">{{words.addBtn}}</button>
-                            <button type="submit" class="btn btn-default" @click="close">{{words.cancel}}</button>
+                            <button type="button" class="btn btn-primary" @click="addDashboard" >{{words.addBtn}}</button>
+                            <button type="button" class="btn btn-default" @click="close" >{{words.cancel}}</button>
                         </div>
                     </div>
                 </form>
             </div>
             <div class="add-panel-import" v-if="!isNew">
-                <form class="form-horizontal" role="form">
+                <form class="form-horizontal" role="form" v-on:submit.prevent>
                     <div class="form-group">
                         <label for="selectName" class="col-sm-3 control-label">{{words.importLabel}}</label>
                         <div class="col-sm-8 selectEl">
@@ -37,8 +37,8 @@
                     </div>
                     <div class="form-group">
                         <div class="col-sm-offset-3 col-sm-8">
-                            <button type="submit" class="btn btn-primary" @click="importDashborad">{{words.importBtn}}</button>
-                            <button type="submit" class="btn btn-default" @click="close">{{words.cancel}}</button>
+                            <button type="button" class="btn btn-primary" @click="importDashborad">{{words.importBtn}}</button>
+                            <button type="button" class="btn btn-default" @click="close">{{words.cancel}}</button>
                         </div>
                     </div>
                 </form>
@@ -110,13 +110,14 @@
                             subtopic = this.analyticsSubTopic,
                             source = this.analyticsSource,
                             time_interval = this.analyticsTimeRange,
-                            time_dimension = 1;
+                            time_dimension = 1,
+                            type='browser';
                 console.log(this.analyticsType, this.analyticsTimeRange, this.analyticsSource, this.analyticsSubTopic);
                 if(!name){
                     this.addTip = this.words.addTips;
                     return;
                 }
-                let params = {name, topic, topic_id, subtopic, source, time_interval, time_dimension};
+                let params = {type, name, topic, topic_id, subtopic, source, time_interval, time_dimension};
                 params[this.analyticsType] = 1;
 
                 Api.addDashboard(params).then(resp => {

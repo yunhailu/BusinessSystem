@@ -1,72 +1,72 @@
 <template>
+    <div class="netBox">
+        <div v-show="showRow" class="container">
+            <div class="hot-panel">
+                <!--热点事件散点图-->
+                <div class="row row-hot-river">
+                    <div class="col-md-12 hot-river">
+                        <card-panel :title="words.allNetHotsRiver" >
+                            <a class="fullpage0 pull-right" href='Javascript: void(0)' v-on:click="getFull(false)"><i class="fa fa-expand"></i> 全屏</a>
+                            <div v-echarts="graphChartOption" :loading="graphChartLoading" class="hot-river-scatter" theme="" :img.sync="img"></div>
+                        </card-panel>
+                    </div>
+                </div>
 
-    <div v-show="showRow" class="container">
-    <div class="hot-panel">
-        <!--热点事件散点图-->
-        <div class="row row-hot-river">
-            <div class="col-md-12 hot-river">
-                <card-panel :title="words.allNetHotsRiver" >
-                    <a class="fullpage0 pull-right" href='Javascript: void(0)' v-on:click="getFull(false)"><i class="fa fa-expand"></i> 全屏</a>
-                    <div v-echarts="graphChartOption" :loading="graphChartLoading" class="hot-river-scatter" theme="" :img.sync="img"></div>
-                </card-panel>
+                <!--热点事件排行，实时热点排行-->
+                <div class="row">
+                    <div class="col-md-6 hot-today">
+                        <card-panel :title="words.todayHotsRanking">
+                            <ul class="hot-today-list">
+                                <li v-for="item in hotsTodayRankings"  class="hot-today-list-item" @click="showDetail(item,0);">
+                                    <span class="hot-today-list-item-index">{{ ($index + 1) }}</span>
+                                    <span class="hot-today-list-item-text">{{item.title}}</span>
+                                </li>
+                            </ul>
+                        </card-panel>
+                    </div>
+                    <div class="col-md-6 hot-ranking">
+                        <card-panel :title="words.hotsRanking">
+                            <ul class="hot-ranking-list">
+                                <li v-for="item in hotsRankings"  class="hot-ranking-list-item" @click="showDetail(item,1);">
+                                    <span class="hot-ranking-list-item-index">{{ ($index + 1) }}</span>
+                                    <span class="hot-ranking-list-item-text">{{item.title}}</span>
+                                </li>
+                            </ul>
+                        </card-panel>
+                    </div>
+                </div>
+                <!--情绪比例，热词排行-->
+                <div class="row">
+                    <div class="col-md-6 hot-sentiment">
+                        <card-panel :title="words.sentiment | title">
+                            <div v-echarts="sentimentOption" :loading="sentimentLoading" class="hot-sentiment-pie" theme=""></div><!--infographic,macarons-->
+                        </card-panel>
+                    </div>
+                    <div class="col-md-6 hot-words">
+                        <card-panel :title="words.wordsRanking | title">
+                            <div v-echarts="hotWordsOption" :loading="hotWordsLoading" class="hot-words-cloud" ></div>
+                        </card-panel>
+                    </div>
+
+                </div>
+                <!--热点事件,散点图-->
+                <!--<div class="row">
+                    <div class="col-md-12 hot-river">
+                        <card-panel :title="words.hotsRiver">
+                            <div v-echarts="scatterOption" :loading="scatterLoading" class="hot-river-scatter" theme="" :img.sync="img"></div>
+                        </card-panel>
+                    </div>
+                </div>-->
             </div>
         </div>
 
-        <!--热点事件排行，实时热点排行-->
-        <div class="row">
-            <div class="col-md-6 hot-today">
-                <card-panel :title="words.todayHotsRanking">
-                    <ul class="hot-today-list">
-                        <li v-for="item in hotsTodayRankings"  class="hot-today-list-item" @click="showDetail(item,0);">
-                            <span class="hot-today-list-item-index">{{ ($index + 1) }}</span>
-                            <span class="hot-today-list-item-text">{{item.title}}</span>
-                        </li>
-                    </ul>
-                </card-panel>
-            </div>
-            <div class="col-md-6 hot-ranking">
-                <card-panel :title="words.hotsRanking">
-                    <ul class="hot-ranking-list">
-                        <li v-for="item in hotsRankings"  class="hot-ranking-list-item" @click="showDetail(item,1);">
-                            <span class="hot-ranking-list-item-index">{{ ($index + 1) }}</span>
-                            <span class="hot-ranking-list-item-text">{{item.title}}</span>
-                        </li>
-                    </ul>
-                </card-panel>
-            </div>
-        </div>
-        <!--情绪比例，热词排行-->
-        <div class="row">
-            <div class="col-md-6 hot-sentiment">
-                <card-panel :title="words.sentiment | title">
-                    <div v-echarts="sentimentOption" :loading="sentimentLoading" class="hot-sentiment-pie" theme=""></div><!--infographic,macarons-->
-                </card-panel>
-            </div>
-            <div class="col-md-6 hot-words">
-                <card-panel :title="words.wordsRanking | title">
-                    <div v-echarts="hotWordsOption" :loading="hotWordsLoading" class="hot-words-cloud" ></div>
-                </card-panel>
-            </div>
-
-        </div>
-        <!--热点事件,散点图-->
-        <!--<div class="row">
-            <div class="col-md-12 hot-river">
-                <card-panel :title="words.hotsRiver">
-                    <div v-echarts="scatterOption" :loading="scatterLoading" class="hot-river-scatter" theme="" :img.sync="img"></div>
-                </card-panel>
-            </div>
-        </div>-->
-    </div>
-    </div>
-
-    <div v-show="!showRow" v-bind:style="{height:sheight +'px'}" class="bg1">
+        <div v-show="!showRow" v-bind:style="{height:sheight +'px'}" class="bg1">
 
             <a class="fullpage1 pull-right" href='Javascript: void(0)' v-on:click="getFull(true)"><i class="fa fa-compress"></i>返回</a>
             <div  v-bind:style="{height:sheightin +'px'}" v-echarts="graphChartOption" :loading="graphChartLoading" class="hot-river-scatter" theme="" :img.sync="img"></div>
 
+        </div>
     </div>
-
 
 </template>
 <style lang="less" scoped>
@@ -203,21 +203,6 @@
 
                 graphChartLoading: true,
                 graphChartOption: {
-                    /*title: {
-
-                        text: '媒体展示',
-                        textStyle: {
-                            color:'#3C3F41',
-                            fontStyle: 'normal',
-                            fontWeight: 'border',
-                            fontSize: 16,
-                        },
-                        top:0,
-                        left: 'right',
-                        link:'/media',
-                        target:'blank'
-
-                    },*/
                     tooltip: {
 
                         formatter: '{b}'
