@@ -1,5 +1,8 @@
 <template>
+
     <div class="hot-panel">
+
+
         <div class="row">
 
 <img class="logo-icon pull-left"  src="../Media/images/gushi.png" />
@@ -108,11 +111,11 @@
                 <span class="sexmen1">男性关注</span>
                 <br>
             <ul class="hot-ranking-list">
-            <li v-for="item in follow0"  class="hot-ranking-list-item" >
-                <!--<a :href="item.link" target="_blank" >-->
+            <li v-for="item in follow0"  class="hot-ranking-list-item"  @click="showDetail(item.mid)" >
+
             <span class="hot-ranking-list-item-index">{{ ($index + 1) }}</span>
             <span class="hot-ranking-list-item-text">{{item.title}}</span>
-                <!--</a>-->
+
             </li>
             </ul>
 
@@ -123,7 +126,7 @@
                 <br>
                     <ul class="hot-ranking-list">
 
-                        <li v-for="item in follow1"  class="hot-ranking-list-item" >
+                        <li v-for="item in follow1"  class="hot-ranking-list-item" @click="showDetail(item.mid)" >
                             <!--<a :href="item.link" target="_blank" >-->
                             <span class="hot-ranking-list-item-index">{{ ($index + 1) }}</span>
                             <span class="hot-ranking-list-item-text">{{item.title}}</span>
@@ -158,16 +161,15 @@
             const words = Local().hotEvent;
             const common = Local().common;
             return{
-
                 words,
                 common,
+
                 Titles:[
                     {title:'MORE Health携手美国最新儿童白血病临床试验',value:142},
                     {title:'全国微信1000强月度报告（2016.11）丨清博指数独家',value:93},
                     {title:'乐视否认员工排队离职，传高层四处筹钱找合作',value:83},
                     {title:'复盘”罗尔事件：短短几天 慈善捐款事件大翻转',value:53},
                     {title:'罗尔事件：每个重大事件发生其实都是社会一次进化',value:33}
-
                 ],
                 displayTitle:'财经热点排行榜',
                 sonTitle:'(#金马奖# 金马53荣耀时刻最佳女主角)',
@@ -176,10 +178,9 @@
                     {title:'可能构不成一个很完整的她',value:23},
                     {title:'周冬雨 透露和@马思纯 有不一样的沟通方式',value:33},
                     {title:'生活，吴可熙称喜爱的所有元素都在电影里',value:43}],
-
-
                 sontitle:'子话题的表现',
                 img: "",
+                mywort:false,
                 maxHot:123,
 
 
@@ -448,7 +449,6 @@
             },
                 sexPieLoading:false,
 
-
                 ageOption:{
                     // title: {
                     //     text:'性别分布'
@@ -602,39 +602,54 @@
                 return Y+M+D;
             },
 
+            showDetail(xids){
+                if(xids!=null){ window.open(window.location.origin+"/"+this.$route.name+"/detail/"+xids);}
+            },
+
+
             getSourchData(a){
                 //sourch-function
-                console.log(a);
-
-                const iu=_.now();
-                this.start=this.getdateymd(iu-(60*60*24*1000)*7).toString();
-                this.end=this.getdateymd(iu).toString();
-
-                console.log('start:',this.start,'end:',this.end);
+                console.log('aaa:',a);
 
 
-                const start=this.start;
-                const end=this.end;
-                this.topic=a;
-                const topic=a;
-                Api.getMediaHotspot({topic, start, end}).then(resp => {
-                    if(resp.data.code ==0){
-                        //const HotspotData = resp.data.data;
-                        console.log('12313131333',resp.data.data);
+                if(_.isEmpty(a)){
+                    alert('关键词不为空！请重新输入！！！');
 
-                        this.Titles= _.sortBy(resp.data.data, function(item){
-                            return -item.value;
-                        });
+            }
+            else{
 
-                        const swer=_.values(_.pick(_.first(this.Titles),'value'));
-                        this.maxHot=_.flatten(swer,true)[0]/109;
-                        this.sonTitle=this.Titles[0].title;
+                    console.log(a);
 
-                        this.getRefreshData(this.Titles[0].title,this.Titles[0].subtopic);
+                    const iu = _.now();
+                    this.start = this.getdateymd(iu - (60 * 60 * 24 * 1000) * 7).toString();
+                    this.end = this.getdateymd(iu).toString();
 
 
-                    }
-                });
+
+                    const start = this.start;
+                    const end = this.end;
+                    this.topic = a;
+                    const topic = a;
+                    Api.getMediaHotspot({topic, start, end}).then(resp => {
+                        if (resp.data.code == 0) {
+                            //const HotspotData = resp.data.data;
+
+                            this.Titles = _.sortBy(resp.data.data, function (item) {
+                                return -item.value;
+                            });
+
+                            const swer = _.values(_.pick(_.first(this.Titles), 'value'));
+                            this.maxHot = _.flatten(swer, true)[0] / 109;
+                            this.sonTitle = this.Titles[0].title;
+
+                            this.getRefreshData(this.Titles[0].title, this.Titles[0].subtopic);
+
+
+                        }
+                    });
+
+
+                }
 
 
 
@@ -643,7 +658,7 @@
 
             getRefreshData(title,subtopics){
             this.sonTitle=title;
-            console.log('subtopic',subtopics);
+            //console.log('subtopic',subtopics);
             //const maxHot =this.maxHot;
             const myss=this.lineseries;
 
