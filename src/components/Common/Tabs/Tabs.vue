@@ -21,7 +21,10 @@
             <span class="con">{{item.name | showNum datas[index] datas}}<i class="fa fa-spinner fa-spin" v-show="!datas.length"></i></span>
         </li>
     </ul>
-    <add-dashboard :visiable.sync="showDashboard"></add-dashboard>
+    <div v-if="showDashboard">
+        <add-dashboard :visiable.sync="showDashboard"></add-dashboard>
+    </div>
+
 </template>
 <style lang="less" scoped>
     @import "Tabs.less";

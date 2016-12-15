@@ -38,6 +38,9 @@
                 <router-view></router-view>
             </div>
         </div>
+       <!-- <div class="qq">
+            <a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=3342973679&site=qq&menu=yes"><img border="0" src="http://wpa.qq.com/pa?p=2:3342973679:3" alt="点这里给我发消息" /></a>
+        </div>-->
     </div>
     <order-footer></order-footer>
 </template>
