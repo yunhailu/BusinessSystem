@@ -9,7 +9,7 @@
             <label for="sourchWord" class="col-sm-2 control-label"></label>
             <button type="submit" id="sourchWordSumit"  value="sou" class="btn btn-primary" v-on:click="getSourchData(sourchWord)" >搜索</button>
             <div class="col-sm-4 " id="sourchWordbox">
-                <input type="text" v-model="sourchWord" class="form-control" id="sourchWord" :placeholder="words.topic">
+                <input type="text" v-model="sourchWord" class="form-control" id="sourchWord" :placeholder="words.topic"  @keyup.enter="getSourchData(sourchWord)">
             </div>
 
 
@@ -606,13 +606,15 @@
                 if(xids!=null){ window.open(window.location.origin+"/"+this.$route.name+"/detail/"+xids);}
             },
 
-
+            trim(str){
+                return str.replace(/(^\s*)|(\s*$)/g,'');
+            },
             getSourchData(a){
                 //sourch-function
                 console.log('aaa:',a);
 
 
-                if(_.isEmpty(a)){
+                if(_.isEmpty(this.trim(a))){
                     alert('关键词不为空！请重新输入！！！');
 
             }
