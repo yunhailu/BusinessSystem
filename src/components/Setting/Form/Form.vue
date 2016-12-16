@@ -164,6 +164,9 @@
             trim(str){
                 return str.replace(/(^\s*)|(\s*$)/g,'');
             },
+            dealSymbol(str){
+                return str.replace(/，/ig,',');
+            },
             getCategroy(){
                 Api.getCategroy().then(resp => {
                     //console.log(resp.data);
@@ -299,7 +302,7 @@
             topicAdd(){
                 return Api.topicAdd({
                     group_id: this.radioVal,
-                    name: this.trim(this.topicText),
+                    name: this.dealSymbol(this.trim(this.topicText)),
                     monitor:this.monitor,
                     threshold:this.threshold
                 });
@@ -308,7 +311,7 @@
                 return Api.topicUp({
                     id:this.$route.params.topic_id,
                     group_id:this.radioVal,
-                    name: this.trim(this.topicText),
+                    name: this.dealSymbol(this.trim(this.topicText)),
                     monitor:this.monitor,
                     threshold:this.threshold
                 });
