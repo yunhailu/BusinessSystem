@@ -148,7 +148,8 @@ export const zh_CN_society = _.extend({}, zh_CN, {
         comment: "评价分析",
         influence: "影响力分析",
         theme: "子话题分析",
-        save: "打印或保存"
+        save: "打印或保存",
+        compare:'数据对比'
     },
     setting: {
         title: "设置你的项目",

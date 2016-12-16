@@ -5,13 +5,13 @@
     </div>
     <div class="compare-charts">
         <div class="chart" :loading="compareChartLoading">
-            <echarts :options="compareChartOption" :initOptions="compareChartOption" img.sync="master"></echarts>
+            <echarts :options="compareChartOption" :initOptions="compareChartOption" :img.sync="master"></echarts>
         </div>
         <div class="chart radar" :loading="compareRadarLoading">
-            <echarts :options="compareRadarOption" :initOptions="compareRadarOption" img.sync="sub"></echarts>
+            <echarts :options="compareRadarOption" :initOptions="compareRadarOption" :img.sync="sub"></echarts>
         </div>
         <div class="chart pie" :loading="comparePieLoading">
-            <echarts :options="comparePieOption" :initOptions="comparePieOption" img.sync="secsub"></echarts>
+            <echarts :options="comparePieOption" :initOptions="comparePieOption" :img.sync="trend"></echarts>
         </div>
     </div>
 </template>
@@ -30,12 +30,42 @@
     import {insertExportImages, removeExportImages } from "../../../vuex/actions";
 
     export default{
-        props: ['title', 'data', 'remove', 'master', 'sub','secsub'],
+        props: ['title', 'comdata', 'remove', 'master', 'sub','trend'],
+        watch:{
+            master:{
+                handler(value){
+                    this.insertExportImages({
+                        topic: this.$route.params.id,
+                        key: "compare_master",
+                        value
+                    });
+                }
+            },
+            sub:{
+                handler(value){
+                    this.insertExportImages({
+                        topic: this.$route.params.id,
+                        key: "compare_sub",
+                        value
+                    });
+                }
+            },
+            trend:{
+                handler(value){
+                    this.insertExportImages({
+                        topic: this.$route.params.id,
+                        key: "compare_trend",
+                        value
+                    });
+                }
+            }
+        },
         data(){
             const common = Local().common;
             return{
                 common,
                 timeout:null,
+                topicDetail:[],
                 loadingParams:{
                     visiable:false,
                     type:'loading',
@@ -189,6 +219,9 @@
             }
         },
         methods:{
+            deleteItem(){
+                this.remove()
+            },
             initChart(){
                 this.compareChartOption.legend.data=[];
                 this.compareChartOption.series=[];
@@ -276,14 +309,14 @@
                     sengine.push(item.values.sengine);
                 });
                 console.log(newTopic);
-                this.VariableChartData.all[newTopic[0].topic_name]=newChart;
-                this.VariableChartData.wechat[newTopic[0].topic_name]=wechat;
-                this.VariableChartData.weibo[newTopic[0].topic_name]=weibo;
-                this.VariableChartData.client[newTopic[0].topic_name]=client;
-                this.VariableChartData.web[newTopic[0].topic_name]=web;
-                this.VariableChartData.overseas[newTopic[0].topic_name]=overseas;
-                this.VariableChartData.sengine[newTopic[0].topic_name]=sengine;
-                this.getSourceCount();
+                this.VariableChartData.all[newTopic[0].topic]=newChart;
+                this.VariableChartData.wechat[newTopic[0].topic]=wechat;
+                this.VariableChartData.weibo[newTopic[0].topic]=weibo;
+                this.VariableChartData.client[newTopic[0].topic]=client;
+                this.VariableChartData.web[newTopic[0].topic]=web;
+                this.VariableChartData.overseas[newTopic[0].topic]=overseas;
+                this.VariableChartData.sengine[newTopic[0].topic]=sengine;
+                console.log('VariableChartData',this.VariableChartData);
             },
             //添加雷达数据处理
             dealRadarData(newTopic,details){
@@ -331,19 +364,19 @@
                     return _.reduce(item,function(memo, num){ return memo + num; }, 0);;
                 })
                 console.log(newWeb);
-                this.VariableRadarData.wechat[newTopic[0].topic_name] = [_.map(newWechat,item =>{
+                this.VariableRadarData.wechat[newTopic[0].topic] = [_.map(newWechat,item =>{
                     return (item/(_.reduce(newWechat, function(memo, num){ return memo + num; }, 0)))*100;
                 })];
-                this.VariableRadarData.weibo[newTopic[0].topic_name] = [_.map(newWeibo,item =>{
+                this.VariableRadarData.weibo[newTopic[0].topic] = [_.map(newWeibo,item =>{
                     return (item/(_.reduce(newWeibo, function(memo, num){ return memo + num; }, 0)))*100;
                 })];
-                this.VariableRadarData.client[newTopic[0].topic_name] = [_.map(newClient,item =>{
+                this.VariableRadarData.client[newTopic[0].topic] = [_.map(newClient,item =>{
                     return (item/(_.reduce(newClient, function(memo, num){ return memo + num; }, 0)))*100;
                 })];
-                this.VariableRadarData.overseas[newTopic[0].topic_name] = [_.map(newOverseas,item =>{
+                this.VariableRadarData.overseas[newTopic[0].topic] = [_.map(newOverseas,item =>{
                     return (item/(_.reduce(newOverseas, function(memo, num){ return memo + num; }, 0)))*100;
                 })];
-                this.VariableRadarData.web[newTopic[0].topic_name] = [_.map(newWeb,item =>{
+                this.VariableRadarData.web[newTopic[0].topic] = [_.map(newWeb,item =>{
                     return (item/(_.reduce(newWeb, function(memo, num){ return memo + num; }, 0)))*100;
                 })];
 
@@ -364,7 +397,8 @@
                 const newRadar =[_.map(radar,item =>{
                     return (item/allNumber)*100;
                 })];
-                this.VariableRadarData.all[newTopic[0].topic_name] =newRadar;
+                this.VariableRadarData.all[newTopic[0].topic] =newRadar;
+                console.log('VariableRadarData',this.VariableRadarData);
             },
             //初始化表格数据并将表设为loading
             //修改时间动态获取
@@ -400,6 +434,7 @@
                         const intervalDate = _.pluck(newTopicData,'date');
                         this.intervalTime =intervalDate;
                         this.dealChartData(newTopic,newTopicData);
+                        console.log('respsum',resp.data.data);
                         //处理data问题
                         this.changeSource();
                         this.mapData(this.data,intervalDate);
@@ -420,9 +455,9 @@
                         const intervalDate = _.pluck(details,'date');
                         this.intervalTime =intervalDate;
                         this.dealRadarData(newTopic,details);
+                        console.log('respsum',resp.data.data);
                         this.changeSource();
                         this.mapRadarData(this.radarData,intervalDate);
-
                     }
                 })
             },
@@ -459,46 +494,9 @@
                     }
                 })
             },
-//
-            getSourceCount(){
-                console.log(_.values(this.VariableChartData.all));
-                const midAllCount = _.map(_.values(this.VariableChartData.all),item=>{
-                    return _.reduce(item, function(memo, num){ return memo + num; }, 0);
-                });
-                const midWechatCount = _.map(_.values(this.VariableChartData.wechat),item=>{
-                    return _.reduce(item, function(memo, num){ return memo + num; }, 0);
-                });
-                const midWeiboCount = _.map(_.values(this.VariableChartData.weibo),item=>{
-                    return _.reduce(item, function(memo, num){ return memo + num; }, 0);
-                });
-                const midClientCount = _.map(_.values(this.VariableChartData.client),item=>{
-                    return _.reduce(item, function(memo, num){ return memo + num; }, 0);
-                });
-                const midWebCount = _.map(_.values(this.VariableChartData.web),item=>{
-                    return _.reduce(item, function(memo, num){ return memo + num; }, 0);
-                });
-                const midOverseasCount = _.map(_.values(this.VariableChartData.overseas),item=>{
-                    return _.reduce(item, function(memo, num){ return memo + num; }, 0);
-                });
-                const midSengineCount = _.map(_.values(this.VariableChartData.sengine),item=>{
-                    return _.reduce(item, function(memo, num){ return memo + num; }, 0);
-                });
-                let compareSourceCount = this.compareSourceCount;
-                compareSourceCount.all = _.reduce(midAllCount, function(memo, num){ return memo + num; }, 0);
-                compareSourceCount.wechat = _.reduce(midWechatCount, function(memo, num){ return memo + num; }, 0);
-                compareSourceCount.weibo = _.reduce(midWeiboCount, function(memo, num){ return memo + num; }, 0);
-                compareSourceCount.client = _.reduce(midClientCount, function(memo, num){ return memo + num; }, 0);
-                compareSourceCount.web = _.reduce(midWebCount, function(memo, num){ return memo + num; }, 0);
-                compareSourceCount.overseas = _.reduce(midOverseasCount, function(memo, num){ return memo + num; }, 0);
-                compareSourceCount.sengine = _.reduce(midSengineCount, function(memo, num){ return memo + num; }, 0);
-
-                this.compareNums=[
-                    compareSourceCount.all,compareSourceCount.wechat,compareSourceCount.weibo,compareSourceCount.client+compareSourceCount.web,compareSourceCount.sengine,compareSourceCount.overseas
-                ];
-            },
             //切换赋值
             changeSource(){
-                const newSource = this.compareSource;
+                const newSource = this.comdata[0].source;
                 switch(newSource){
                     case 'all':
                         this.data =this.VariableChartData.all;
@@ -527,6 +525,36 @@
                     default:
                         break;
                 }
+            },
+            getCompareDetail(){
+                const details = this.comdata;
+                _.map(details,value=>{
+                    //this.topicDetail.push(value);
+                    const source = value.source,
+                        topic_id = value.topic_id,
+                        subtopic = '',
+                        time_interval = value.time_interval,
+                        time_dimension = time_interval > 7 ? 1 : 0;
+                    let start,end;
+                    if(time_interval!=0){
+                        start = moment().subtract(time_interval, 'days').format('YYYY-MM-DD'),
+                                end = moment().format('YYYY-MM-DD');
+                    }else {
+                        start = moment().subtract(8, 'hour').format('YYYY-MM-DD HH'),
+                                end = moment().format('YYYY-MM-DD HH');
+                        start = start.split(' ')[0] + 'T' + start.split(' ')[1];
+                        end = end.split(' ')[0] + 'T' + end.split(' ')[1];
+                        console.log('start', start, end);
+                    }
+                    this.dealAddSummaryData([value],{topic_id,source,subtopic,time_dimension,start,end});
+                    this.dealAddSentimentData([value],{topic_id,source,subtopic,time_dimension,start,end});
+                })
+            },
+            init(){
+                this.initChart();
+                this.initRadar();
+                this.initData();
+                this.getCompareDetail();
             }
 
         },
@@ -534,22 +562,9 @@
             actions:{insertExportImages, removeExportImages},
             getters:{exportImages  }
         },
-       /* watch:{
-           master:{
-               handler(val){
-                   this.insertExportImages({
-                       topic:this.data.topic_ids,
-
-                   })
-               }
-           },
-            sub:{
-
-            },
-            secsub:{
-
-            }
-        },*/
+        created(){
+            this.init();
+        },
         components:{
             Tips,Echarts
         }

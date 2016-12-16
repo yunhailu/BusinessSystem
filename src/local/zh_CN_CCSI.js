@@ -148,7 +148,8 @@ export const zh_CN_CCSI = _.extend({}, zh_CN,{
         comment: "品牌评价",
         influence: "品牌影响力",
         theme: "品牌印象",
-        save: "打印或保存"
+        save: "打印或保存",
+        compare:'数据对比'
     },
     setting: {
         title: "设置你的项目",

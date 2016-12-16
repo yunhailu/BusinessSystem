@@ -11,7 +11,7 @@
                         <li><a href="javascript:void(0);" @click="toPromotion">{{loginStr.forFirstPage}}</a></li>
                         <li><a href="javascript:void(0);" @click="showLogin">{{loginStr.forLogin}}</a></li>
                         <li><a href="javascript:void(0);" @click="toHotEvent">{{loginStr.hotEvent}}</a></li>
-                        <!--<li><a href="javascript:void(0);" @click="toIntruction">{{loginStr.instructionForUse}}</a></li>-->
+                        <li><a href="javascript:void(0);" @click="toIntruction">{{loginStr.instructionForUse}}</a></li>
 
                         <!--<li><a href="javascript:void(0);" @click="showApply">账号注册</a></li>-->
 

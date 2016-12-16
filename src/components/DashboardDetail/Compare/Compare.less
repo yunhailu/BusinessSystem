@@ -1,5 +1,11 @@
 @import "../../common.less";
 
+.panel-title{
+  .mg(5px 10px);  .pd(5px 10px);  .disB();  .tc();  .bgc(#eee);
+  &-text{}
+  &-delete{ .float-right();  .c(#999);  .pointer(); }
+  &-delete:hover{ .c(#666); }
+}
 .chartBox{
   .h(100%);overflow-y: auto;
 }

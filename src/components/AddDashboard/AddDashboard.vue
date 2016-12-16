@@ -161,6 +161,7 @@
             },
             importCompareDashborad(){
                 const name = this.newName,
+                        id = this.selectValue.key,
                         topic_ids=(_.map(this.activeCompareTopic,item=>{
                             return item.topic_id
                         })).join(','),
@@ -168,11 +169,7 @@
                         source = this.compareSource,
                         time_interval = this.compareTimeRange,
                         time_dimension = time_interval > 7 ? 1 : 0;
-                if(!name){
-                    this.addTip = this.words.addTips;
-                    return;
-                }
-                let params={name, topic_ids, subtopic, source, time_interval, time_dimension};
+                let params={id,name, topic_ids, subtopic, source, time_interval, time_dimension};
                 console.log('compareparams',params);
                 Api.updateDashboard(params).then(resp => {
                     console.log(resp.data);

@@ -1,10 +1,10 @@
 <template>
-    <!--<div class="add-dashboard">
+    <div class="add-dashboard">
         <div class="add-dashboard-btn" @click="showAdd();">
             <i class="fa fa-plus"></i>
             <span>{{words.addDashboard}}</span>
         </div>
-    </div>-->
+    </div>
     <!--<ul class="row items source">
         <li v-for="item in source" class="item" :class="[sourceActive == $index ? 'active' : '']" @click="sourceAction(item, $index)">
             <span class="con">{{item}}</span>

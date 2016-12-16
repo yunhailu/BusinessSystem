@@ -2,10 +2,10 @@
     <header-component active="dashboard"></header-component>
     <div class="dashboard-detail">
         <div class="container">
+            <div class="saveBtn" @click="saveAction();"><i class="fa fa-save"></i> <span>{{words.save}}</span></div>
             <div class="dashboard-detail-wrap" v-for="detail in details">
                 <div class="dashboard-detail-wrap-box" v-if="detail.summary || detail.sentiment || detail.comment || detail.influence || detail.theme">
                     <div class="dashboard-detail-wrap-box-title">
-                        <div class="saveBtn" @click="saveAction();"><i class="fa fa-save"></i> <span>{{words.save}}</span></div>
                         <div class="title"><i class="fa fa-thumb-tack"></i> <span>{{name}}</span></div>
                     </div>
                     <div class="relatedTopic">关键词:{{detail.topic}}</div>
@@ -24,10 +24,10 @@
                     <div class="dashboard-detail-wrap-box-module" v-if="detail.theme">
                         <theme-component :title="words.theme" :data="detail" :remove="removeItem" :wordcloud.sync="detail.themewordcloud" :scatter.sync="detail.themescatter" :bar.sync="detail.themebar" :top.sync="detail.themetop"></theme-component>
                     </div>
-                    <div class="dashboard-detail-wrap-box-module" v-if="false">
-                        <compare-component :title="words.compare" :data="compare" :remove="removeItem" :master.sync="detail.comparemaster" :sub.sync="detail.comparesub" :secsub.sync="detail.comparesecsub"></compare-component>
-                    </div>
                 </div>
+            </div>
+            <div class="dashboard-compare-box-module" v-if="compare.length">
+                <compare-component :title="words.compare" :comdata.sync="compare" :remove="removeCompare"  :master.sync="compare[0].comparemaster" :sub.sync="compare[0].comparesub" :trend.sync="compare[0].comparetrend"></compare-component>
             </div>
         </div>
     </div>
@@ -95,7 +95,7 @@
             getters: { exportImages }
         },
         methods: {
-            formatImgs(details){
+            formatImgs(details,compare){
                 let imgs = _.chain(details)
                         .map(value => {
                             const imgs = [];
@@ -120,6 +120,13 @@
                             return imgs;
                         })
                         .flatten().value();
+                console.log('IMGS',imgs);
+                        if(compare.length){
+                            imgs.push({topic:this.$route.params.id,key:"compare_master",value:compare[0].comparemaster})
+                            imgs.push({topic:this.$route.params.id,key:"compare_sub",value:compare[0].comparesub})
+                            imgs.push({topic:this.$route.params.id,key:"compare_trend",value:compare[0].comparetrend})
+                        }
+                console.log('IMGS2',imgs);
                 return imgs;
             },
             getDashboardDetail(){
@@ -129,8 +136,9 @@
                         const detail = resp.data.data;
                         this.name = detail.name;
                         this.details = detail.data;
-                        const compare = detail.compare;
+                        this.compare = detail.compare;
                         console.log('details',this.details);
+                        console.log('compare',this.compare);
                         this.details = _.map(this.details, value => {
                             value.summarymaster = "";
                             value.summarysub = "";
@@ -143,9 +151,21 @@
                             value.themetop = "";
                             return value;
                         });
-                        console.log('this.details',this.details);
+                        this.compare=_.map(this.compare,value=>{
+                            value.comparemaster="";
+                            value.comparesub="";
+                            value.comparetrend="";
+                            return value;
+                        })
+                        console.log('this.details',this.details,this.compare);
                     }
                 });
+            },
+            removeCompare(){
+                const params={compare:1};
+                Api.removeDashboardItem(params).then(resp =>{
+                    console.log(resp.data);
+                })
             },
             removeItem(detail, category, callback){
                 const params = {
@@ -167,10 +187,10 @@
             exportReport(){
                 this.loadingParams.visiable = true;
                 //imgs存放关键字信息
-                this.imgs = this.formatImgs(this.details);
+                this.imgs = this.formatImgs(this.details,this.compare);
                 const id = this.$route.params.id;
                 const imgs = JSON.stringify(this.exportImages);
-                //console.log(imgs);
+                console.log(imgs);
                 //window.open(`http://118.244.212.122:8008/export/report?id=${id}&imgs=${imgs}`);
                 Api.exportReport({ id, imgs }).then(resp => {
                     console.log(resp);
@@ -201,7 +221,8 @@
         route: {
             data(){
                 this.init();
-            }
+                console.log('this.compare',this.details,this.compare);
+            },
         }
     }
 </script>
