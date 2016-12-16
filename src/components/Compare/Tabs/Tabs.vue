@@ -1,4 +1,10 @@
 <template>
+    <!--<div class="add-dashboard">
+        <div class="add-dashboard-btn" @click="showAdd();">
+            <i class="fa fa-plus"></i>
+            <span>{{words.addDashboard}}</span>
+        </div>
+    </div>-->
     <!--<ul class="row items source">
         <li v-for="item in source" class="item" :class="[sourceActive == $index ? 'active' : '']" @click="sourceAction(item, $index)">
             <span class="con">{{item}}</span>
@@ -10,6 +16,9 @@
             <span class="con">{{item.name | showNum datas[index] datas}}<i class="fa fa-spinner fa-spin" v-show="!datas.length"></i></span>
         </li>
     </ul>
+    <div v-if="showDashboard">
+        <add-dashboard :visiable.sync="showDashboard" :iscompare.sync="isCompare"></add-dashboard>
+    </div>
 </template>
 <style lang="less" scoped>
     @import "Tabs.less";
@@ -17,6 +26,7 @@
 <script type="text/ecmascript-6">
     import _ from 'underscore';
     import Local from '../../../local/local';
+    import AddDashboard from '../../AddDashboard/AddDashboard.vue'
     import {compareActiveTopic, compareSource, compareSourceCount, compareType } from '../../../vuex/getters';
     import {setCompareActiveTopic, setCompareSource, setCompareSourceCount, setCompareType } from "../../../vuex/actions";
 
@@ -29,6 +39,9 @@
         data(){
             const words = Local().compare;
             return{
+                words,
+                showDashboard:false,
+                isCompare:false,
                 tabs: [{
                     name: words.tabs[0],
                     link: ''
@@ -60,6 +73,10 @@
                 this.sourceActive = idx;
                 const source = ["all", "wechat", "weibo", "client", "web", "overseas"];
                 this.setCompareSource(source[idx]);
+            },
+            showAdd(){
+                this.showDashboard = true;
+                this.isCompare = true;
             }
         },
         filters:{
@@ -97,7 +114,7 @@
             }
         },*/
         components:{
-
+            AddDashboard
         }
     }
 </script>

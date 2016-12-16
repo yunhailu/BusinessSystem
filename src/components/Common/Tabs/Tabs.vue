@@ -22,7 +22,7 @@
         </li>
     </ul>
     <div v-if="showDashboard">
-        <add-dashboard :visiable.sync="showDashboard"></add-dashboard>
+        <add-dashboard :visiable.sync="showDashboard" :isanalytics.sync="isAnalytics"></add-dashboard>
     </div>
 
 </template>
@@ -48,6 +48,7 @@
             return{
                 words,
                 showDashboard: false,
+                isAnalytics:false,
                 tabs: [{
                     name: words.tabs[0],
                     link: 'summary'
@@ -139,6 +140,7 @@
             },
             showAdd(){
                 this.showDashboard = true;
+                this.isAnalytics=true;
             }
         },
         ready(){

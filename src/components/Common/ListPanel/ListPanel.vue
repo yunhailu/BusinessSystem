@@ -43,14 +43,20 @@
                         <i class="fa fa-flag icon" :class="item.sentiment | sentiment"></i>
                         <i class="fa fa-paperclip fa-2x fa-left"></i>
                         <div class="list-panel-list-item-left-con left-con">
-                            <div class="title">{{{item.title| title}}}</div>
+                            <div class="keyWord">
+                                <div class="title-bottom">
+                                    <span>{{common.match}}:</span> <span class="time-bottom">{{activeAnalyticsTopic.topic_name}}</span>
+                                </div>
+                                <div class="title">{{{item.title| title}}}</div>
+                            </div>
+                            <!--<div class="title">{{{item.title| title}}}</div>-->
                             <div class="detail">{{{item.content}}}</div>
                             <div class="time">{{common.publish}} {{item.pDate}}</div>
                             <div class="source">{{common.sourceFrom}} {{item.from}} </div>
                             <div class="sub-source">{{common.sub_source}} {{item.sub_source}}</div>
-                            <div class="waterPage">{{common.dataFrom}}：{{common.source}}</div>
+
                             <div class="title-bottom">
-                                <span>{{common.match}}: </span> <span class="time-bottom">{{activeAnalyticsTopic.topic_name}}</span>
+                                <!--<span>{{common.match}}: </span> <span class="time-bottom">{{activeAnalyticsTopic.topic_name}}</span>-->
                                 <div class="time-bottom">
                                     <div class="item" v-if="item.likeCount" ><i class="fa fa-thumbs-up"></i> <span>{{item.likeCount}}</span></div>
                                     <div class="item" v-if="item.fansCount"><i class="fa fa-user"></i> <span>{{item.fansCount}}</span></div>
@@ -60,7 +66,7 @@
                                     <div class="item" v-if="item.followCount"><i class="fa fa-plus"></i> <span>{{item.followCount}}</span></div>
                                 </div>
                             </div>
-
+                            <div class="waterPage">{{common.dataFrom}}：{{common.source}}</div>
 
                         </div>
                     </div>
@@ -209,7 +215,6 @@
                     title = title.substring(0,40)+'...';
                 };
                 return title;
-
             }
         },
 //        computed: {
