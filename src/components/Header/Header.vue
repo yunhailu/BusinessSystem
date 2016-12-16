@@ -25,7 +25,9 @@
             </li>
         </ul>
     </header>
+    <qservice></qservice>
 </template>
+
 <style lang="less">
     @import "Header.less";
 </style>
@@ -37,6 +39,7 @@
     import { getCookie } from '../../widgets/Cookie';
     import {loginTime} from '../../vuex/getters';
     import {setLoginTime} from '../../vuex/actions';
+    import qservice from '../QQservice/QQservice.vue';
 
     export default{
         props: ["active"],
@@ -82,6 +85,7 @@
             getters:{loginTime},
             actions:{setLoginTime}
         },
+        components:{ qservice},
         methods: {
             quit(){
                 const business_name = getCookie('business_name');

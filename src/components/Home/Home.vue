@@ -6,6 +6,7 @@
 			<order-footer-component></order-footer-component>
 		</div>
 	</div>
+
 </template>
 <style lang="less">
 	@import "Home.less";
@@ -18,6 +19,7 @@
 	import OrderFooterComponent from '../OrderFooter/OrderFooter.vue';
 	import Local from "../../local/local";
 	import * as Api from "../../widgets/Api";
+
 
 	export default{
 		data(){

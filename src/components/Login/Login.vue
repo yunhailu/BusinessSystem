@@ -169,6 +169,7 @@
 
     <instruction v-if="isInstruction"></instruction>
     <hot-event class="hotevent" v-if="isHotEvent"></hot-event>
+    <qservice></qservice>
 </template>
 <style lang="less">
     @import "Login.less";
@@ -184,6 +185,7 @@
     import Promotion from "./Promotion/Promotion.vue"
     import Instruction from "./InstructionsForUse/InstructionsForUse.vue"
     import HotEvent from "../AllNetHotEvent/AllNetHotEvent.vue"
+    import qservice from '../QQservice/QQservice.vue';
     import {loginState ,loginTime,userLevel } from '../../vuex/getters';
     import {setLoginState, setLoginTime,setUserLevel} from "../../vuex/actions";
 
@@ -210,7 +212,7 @@
             };
         },
         components:{
-            FooterComponent,Promotion,Instruction,HotEvent
+            FooterComponent,Promotion,Instruction,HotEvent,qservice
         },
         vuex:{
             getters:{loginState, loginTime,userLevel},
