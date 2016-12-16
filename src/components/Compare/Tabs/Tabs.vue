@@ -1,5 +1,5 @@
 <template>
-   <!-- <div class="add-dashboard">
+    <!--<div class="add-dashboard">
         <div class="add-dashboard-btn" @click="showAdd();">
             <i class="fa fa-plus"></i>
             <span>{{words.addDashboard}}</span>
