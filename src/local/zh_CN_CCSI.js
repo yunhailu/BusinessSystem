@@ -125,7 +125,8 @@ export const zh_CN_CCSI = _.extend({}, zh_CN,{
         tabs: ["品牌关注", "品牌情绪","品牌评价", "品牌影响力", "品牌印象"],
         filters: ["全部", "情绪指数", "地域分布", "性别分布", "语言分布"],
         source: ["全部", "微信", "微博", "客户端", "网页", "海外"],
-        tips:"如需开通，请联系客服：010-88315484 "
+        tips:"如需开通，请联系客服：010-88315484 ",
+        addDashboard: "添加快捷报告"
     },
     addDashboard:{
         addTitle: "添加新的报表",
@@ -162,7 +163,7 @@ export const zh_CN_CCSI = _.extend({}, zh_CN,{
         optional: "选填",
         groupTitle: "话题分组",
         topic: "主题词",
-        topicInfo: "多主题词请用逗号或空格分隔",
+        topicInfo: "多主题词请用逗号分隔",
         topicArr: "主题词组",
         topicArrTip: "主题词组用空格隔开，是或的关系",
         related: "关联词",
@@ -228,14 +229,14 @@ export const zh_CN_CCSI = _.extend({}, zh_CN,{
         loadingTip: "等待加载...",
         waitWords:"请稍侯......",
         hi:"您好",
-        timeRanking:"按时间排序",
-        countRanking:"按浏览数排序",
-        greetRanking:"按点赞数排序",
-        shareRanking:"按转发数排序",
+        timeRanking:"时间",
+        countRanking:"浏览数",
+        greetRanking:"点赞数",
+        shareRanking:"转发数",
         publish:"发布于",
         sourceFrom:"来源",
         dataFrom:"数据分析平台",
-        match:"匹配",
+        match:"监测词",
         target:"指标",
         sub_source:"来自"
     },

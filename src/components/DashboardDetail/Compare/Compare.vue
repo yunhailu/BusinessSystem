@@ -1,31 +1,36 @@
-﻿<template>
-    <tabs :datas="compareNums"></tabs>
-<div class="chartBox">
-    <div class="compare-charts">
-        <div class="chart" v-echarts="compareChartOption" :loading="compareChartLoading" theme="macarons"></div>
-        <div class="chart radar" v-echarts="compareRadarOption" :loading="compareRadarLoading" theme="macarons"></div>
-        <div class="chart pie" v-echarts="comparePieOption" :loading="comparePieLoading" theme="macarons"></div>
+<template>
+    <div class="panel-title">
+        <span class="panel-title-text">{{title}}</span>
+        <div class="panel-title-delete" @click="deleteItem();"><i class="fa fa-minus"></i></div>
     </div>
-</div>
-
-    <tips :visible.sync="loadingParams.visiable" :tipsparam.sync="loadingParams"></tips>
+    <div class="compare-charts">
+        <div class="chart" :loading="compareChartLoading">
+            <echarts :options="compareChartOption" :initOptions="compareChartOption" img.sync="master"></echarts>
+        </div>
+        <div class="chart radar" :loading="compareRadarLoading">
+            <echarts :options="compareRadarOption" :initOptions="compareRadarOption" img.sync="sub"></echarts>
+        </div>
+        <div class="chart pie" :loading="comparePieLoading">
+            <echarts :options="comparePieOption" :initOptions="comparePieOption" img.sync="secsub"></echarts>
+        </div>
+    </div>
 </template>
 <style lang="less" scoped>
-    @import "Main.less";
+    @import "Compare.less";
 </style>
 <script type="text/ecmascript-6">
     import _ from 'underscore';
     import moment from 'moment';
+    import Echarts from '../../Common/Echarts/Echarts.vue';
     import Local from "../../../local/local";
-    import  Tabs from '../Tabs/Tabs.vue';
     import  Tips from '../../Common/Tips/Tips.vue';
     import {Chart, Pie} from '../../../config/config';
     import * as Api from "../../../widgets/Api";
-    import {compareDataChange, topicList, activeCompareTopic, topicGroupActiveId, compareSource, compareSubTopic, compareStart, compareEnd, compareTimeRange, compareTimeRangeString, compareSourceCount } from '../../../vuex/getters';
-    import {setCompareDataChange, setTopicList, setActiveCompareTopic, setTopicGroupActiveId, setCompareSource, setCompareSubTopic, setCompareStart, setCompareEnd, setCompareTimeRange, setCompareTimeRangeString, setCompareSourceCount  } from "../../../vuex/actions";
+    import {exportImages} from '../../../vuex/getters';
+    import {insertExportImages, removeExportImages } from "../../../vuex/actions";
 
     export default{
-        props: [],
+        props: ['title', 'data', 'remove', 'master', 'sub','secsub'],
         data(){
             const common = Local().common;
             return{
@@ -196,19 +201,19 @@
             },
             initData(){
                 this.VariableChartData.all = {},
-                this.VariableChartData.wechat = {},
-                this.VariableChartData.weibo = {},
-                this.VariableChartData.client = {},
-                this.VariableChartData.web = {},
-                this.VariableChartData.overseas = {},
-                this.VariableChartData.sengine={},
-                this.VariableRadarData.all = {},
-                this.VariableRadarData.wechat = {},
-                this.VariableRadarData.weibo = {},
-                this.VariableRadarData.client = {},
-                this.VariableRadarData.web = {},
-                this.VariableRadarData.overseas = {},
-                this.VariableRadarData.sengine = {}
+                        this.VariableChartData.wechat = {},
+                        this.VariableChartData.weibo = {},
+                        this.VariableChartData.client = {},
+                        this.VariableChartData.web = {},
+                        this.VariableChartData.overseas = {},
+                        this.VariableChartData.sengine={},
+                        this.VariableRadarData.all = {},
+                        this.VariableRadarData.wechat = {},
+                        this.VariableRadarData.weibo = {},
+                        this.VariableRadarData.client = {},
+                        this.VariableRadarData.web = {},
+                        this.VariableRadarData.overseas = {},
+                        this.VariableRadarData.sengine = {}
             },
             mapData(data,intervalDate){
                 this.initChart();
@@ -244,7 +249,7 @@
                                 name:key
                             }
                     )
-                console.log(this.compareRadarOption.series)
+                    console.log(this.compareRadarOption.series)
                 });
             },
             //chart数据处理
@@ -378,10 +383,10 @@
                         end:this.compareEnd,
                         time_dimension:this.compareTimeRange<=7 ? 0 :1
                     };
-                if(topicParams.start.includes(' ') && topicParams.end.includes(' ')){
-                    topicParams.start = topicParams.start.split(' ')[0]+'T'+topicParams.start.split(' ')[1];
-                    topicParams.end = topicParams.end.split(' ')[0]+'T'+topicParams.end.split(' ')[1];
-                }
+                    if(topicParams.start.includes(' ') && topicParams.end.includes(' ')){
+                        topicParams.start = topicParams.start.split(' ')[0]+'T'+topicParams.start.split(' ')[1];
+                        topicParams.end = topicParams.end.split(' ')[0]+'T'+topicParams.end.split(' ')[1];
+                    }
                     this.dealAddSummaryData([item],topicParams);
                     this.dealAddSentimentData([item],topicParams);
                     //push
@@ -526,158 +531,27 @@
 
         },
         vuex:{
-            actions:{setCompareDataChange,setTopicList ,setActiveCompareTopic ,setTopicGroupActiveId, setCompareSource, setCompareSubTopic, setCompareStart, setCompareEnd, setCompareTimeRange, setCompareTimeRangeString, setCompareSourceCount},
-            getters:{compareDataChange,topicList ,activeCompareTopic , topicGroupActiveId, compareSource, compareSubTopic, compareStart, compareEnd, compareTimeRange, compareTimeRangeString, compareSourceCount  }
+            actions:{insertExportImages, removeExportImages},
+            getters:{exportImages  }
         },
-        watch:{
-            activeCompareTopic: {
-                handler(val, oldVal){
-                    //如果新值为空
-                    const currentList = this.topicList;
-                    const currentGroupId = this.topicGroupActiveId;
-                    const activeCompareTopic = this.activeCompareTopic;
-                    const currentGroup = _.find(currentList,function(item){return item.group_id ==currentGroupId;});
-                    if(val.length == 0){
-                        this.compareChartOption.legend.data=[];
-                        this.compareChartOption.series=[];
-                        this.comparePieOption.legend.data=[];
-                        this.comparePieOption.series.data=[];
-                        this.compareRadarOption.legend.data=[];
-                        this.compareRadarOption.series[0].data=[];
-                        this.initData();
-                        this.compareNums = [0,0,0,0,0,0];
-                        return ;
-                    }else if(oldVal.length == 0){
-                        //新值不为空---如果老值为空
-                        this.compareNums=[];
-                        const newTopic = val;
-                        let topicParams = {
-                            topic_id:_.isEmpty(newTopic) ? '' : newTopic[0].topic_id,
-                            topic:_.isEmpty(newTopic) ? '' : newTopic[0].topic_name,
-                            subtopic:this.compareSubTopic,
-                            source:this.compareSource,
-                            start:this.compareStart,
-                            end:this.compareEnd,
-                            time_dimension:this.compareTimeRange<=7 ? 0 :1
-                        };
-                        if(topicParams.start.includes(' ') && topicParams.end.includes(' ')){
-                            topicParams.start = topicParams.start.split(' ')[0]+'T'+topicParams.start.split(' ')[1];
-                            topicParams.end = topicParams.end.split(' ')[0]+'T'+topicParams.end.split(' ')[1];
-                            console.log('start',topicParams.start,topicParams.end);
-                        }
-                        this.dealAddOnlyOneSummaryData(newTopic,topicParams);
-                        this.dealAddOnlyOneSentimentData(newTopic,topicParams);
-                    }else{
-                        //都不为空,判断是否是同一个group--yes
-                        if(_.find(currentGroup.list,function(item){return item.topic_name == oldVal[0].topic_name;}) !=undefined){
-                            if(val.length > oldVal.length){
-                                this.compareNums=[];
-                                const newTopic = _.difference(val, oldVal);
-                                let topicParams = {
-                                    topic_id:_.isEmpty(newTopic) ? '' : newTopic[0].topic_id,
-                                    topic:_.isEmpty(newTopic) ? '' : newTopic[0].topic_name,
-                                    subtopic:this.compareSubTopic,
-                                    source:this.compareSource,
-                                    start:this.compareStart,
-                                    end:this.compareEnd,
-                                    time_dimension:this.compareTimeRange<=7 ? 0 :1
-                                };
-                                if(topicParams.start.includes(' ') && topicParams.end.includes(' ')){
-                                    topicParams.start = topicParams.start.split(' ')[0]+'T'+topicParams.start.split(' ')[1];
-                                    topicParams.end = topicParams.end.split(' ')[0]+'T'+topicParams.end.split(' ')[1];
-                                    console.log('start',topicParams.start,topicParams.end);
-                                }
-                                this.dealAddSummaryData(newTopic,topicParams);
-                                this.dealAddSentimentData(newTopic,topicParams);
-                            } else {
-                                this.compareNums=[];
-                                var oldTopic = _.difference(oldVal, val);
-                                this.VariableChartData.all=_.omit(this.VariableChartData.all,oldTopic[0].topic_name);
-                                this.VariableChartData.wechat=_.omit(this.VariableChartData.wechat,oldTopic[0].topic_name);
-                                this.VariableChartData.weibo=_.omit(this.VariableChartData.weibo,oldTopic[0].topic_name);
-                                this.VariableChartData.client=_.omit(this.VariableChartData.client,oldTopic[0].topic_name);
-                                this.VariableChartData.web=_.omit(this.VariableChartData.web,oldTopic[0].topic_name);
-                                this.VariableChartData.overseas=_.omit(this.VariableChartData.overseas,oldTopic[0].topic_name);
+       /* watch:{
+           master:{
+               handler(val){
+                   this.insertExportImages({
+                       topic:this.data.topic_ids,
 
-                                this.VariableRadarData.all=_.omit(this.VariableRadarData.all,oldTopic[0].topic_name);
-                                this.VariableRadarData.wechat=_.omit(this.VariableRadarData.wechat,oldTopic[0].topic_name);
-                                this.VariableRadarData.weibo=_.omit(this.VariableRadarData.weibo,oldTopic[0].topic_name);
-                                this.VariableRadarData.client=_.omit(this.VariableRadarData.client,oldTopic[0].topic_name);
-                                this.VariableRadarData.web=_.omit(this.VariableRadarData.web,oldTopic[0].topic_name);
-                                this.VariableRadarData.overseas=_.omit(this.VariableRadarData.overseas,oldTopic[0].topic_name);
-                                const intervalDate =this.intervalTime;
-                                this.mapData(this.data,intervalDate);
-                                this.mapRadarData(this.radarData,intervalDate);
-                                //tabs
-                                this.getSourceCount();
+                   })
+               }
+           },
+            sub:{
 
-                            };
-                        }else {
-                            //这里对空数据做出判断
-                            this.compareNums=[];
-                            const newTopic = val;
-                            let topicParams = {
-                                topic_id:_.isEmpty(newTopic) ? '' : newTopic[0].topic_id,
-                                topic:_.isEmpty(newTopic) ? '' : newTopic[0].topic_name,
-                                subtopic:this.compareSubTopic,
-                                source:this.compareSource,
-                                start:this.compareStart,
-                                end:this.compareEnd,
-                                time_dimension:this.compareTimeRange<=7 ? 0 :1
-                            };
-                            if(topicParams.start.includes(' ') && topicParams.end.includes(' ')){
-                                topicParams.start = topicParams.start.split(' ')[0]+'T'+topicParams.start.split(' ')[1];
-                                topicParams.end = topicParams.end.split(' ')[0]+'T'+topicParams.end.split(' ')[1];
-                            }
-                            this.initData();
-                            this.dealAddOnlyOneSummaryData(newTopic,topicParams);
-                            this.dealAddOnlyOneSentimentData(newTopic,topicParams);
-                        }
-                    }
-                }
             },
-            compareSource:{
-                handler(){
-                    console.log(this.compareSource);
-                    //判断修改后的源
-                    this.changeSource();
-                    //展示修改后的源,刷新
-                }
-            },
-            compareSubTopic: {
-                handler(val,oldVal){
-                    //只在新值不为空时监控
-                    this.selectCalendar();
-                    }
-            },
-            data:{
-                handler(){
-                    const intervalDate = this.intervalTime;
-                    this.mapData(this.data,intervalDate);
-                }
-            },
-            VariableChartData:{
-                deep:true,
-                handler(){
-                    const source = this.compareSource;
-                    this.data = this.VariableChartData[source];
-                    this.radarData = this.VariableRadarData[source];
-                }
-            },
-            radarData:{
-                handler(){
-                    const intervalDate = this.intervalTime;
-                    this.mapRadarData(this.radarData,intervalDate);
-                }
-            },
-            compareDataChange:{
-                handler(){
-                    this.selectCalendar();
-                }
+            secsub:{
+
             }
-        },
+        },*/
         components:{
-            Tabs,Tips
+            Tips,Echarts
         }
     }
 </script>

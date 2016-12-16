@@ -24,6 +24,9 @@
                     <div class="dashboard-detail-wrap-box-module" v-if="detail.theme">
                         <theme-component :title="words.theme" :data="detail" :remove="removeItem" :wordcloud.sync="detail.themewordcloud" :scatter.sync="detail.themescatter" :bar.sync="detail.themebar" :top.sync="detail.themetop"></theme-component>
                     </div>
+                    <div class="dashboard-detail-wrap-box-module" v-if="false">
+                        <compare-component :title="words.compare" :data="compare" :remove="removeItem" :master.sync="detail.comparemaster" :sub.sync="detail.comparesub" :secsub.sync="detail.comparesecsub"></compare-component>
+                    </div>
                 </div>
             </div>
         </div>
@@ -63,6 +66,7 @@
     import SentimentComponent from './Sentiment/Sentiment.vue';
     import ThemeComponent from './Theme/Theme.vue';
     import Tips from '../Common/Tips/Tips.vue';
+    import CompareComponent from './Compare/Compare.vue';
 
 
     import Local from "../../local/local";
@@ -77,6 +81,7 @@
                 words,
                 name: "",
                 details: [],
+                compare:[],
                 imgs: [],
                 loadingParams: {
                     visiable: false,
@@ -124,6 +129,7 @@
                         const detail = resp.data.data;
                         this.name = detail.name;
                         this.details = detail.data;
+                        const compare = detail.compare;
                         console.log('details',this.details);
                         this.details = _.map(this.details, value => {
                             value.summarymaster = "";
@@ -189,7 +195,8 @@
             CommentComponent,
             SentimentComponent,
             ThemeComponent,
-            Tips
+            Tips,
+            CompareComponent
         },
         route: {
             data(){

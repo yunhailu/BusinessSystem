@@ -18,7 +18,8 @@
                     </div>
                     <div class="form-group">
                         <div class="col-sm-offset-3 col-sm-8">
-                            <button type="button" class="btn btn-primary" @click="addDashboard" >{{words.addBtn}}</button>
+                            <button type="button" class="btn btn-primary" @click="addDashboard" v-if="isanalytics">{{words.addBtn}}</button>
+                            <button type="button" class="btn btn-primary" @click="addCompareDashboard" v-if="iscompare">{{words.addBtn}}</button>
                             <button type="button" class="btn btn-default" @click="close" >{{words.cancel}}</button>
                         </div>
                     </div>
@@ -37,7 +38,8 @@
                     </div>
                     <div class="form-group">
                         <div class="col-sm-offset-3 col-sm-8">
-                            <button type="button" class="btn btn-primary" @click="importDashborad">{{words.importBtn}}</button>
+                            <button type="button" class="btn btn-primary" @click="importDashborad" v-if="isanalytics">{{words.importBtn}}</button>
+                            <button type="button" class="btn btn-primary" @click="importCompareDashborad" v-if="iscompare">{{words.importBtn}}</button>
                             <button type="button" class="btn btn-default" @click="close">{{words.cancel}}</button>
                         </div>
                     </div>
@@ -55,12 +57,12 @@
     import SelectEl from '../Common/Select/Select.vue';
     import Local from '../../local/local';
     import * as Api from '../../widgets/Api';
-    import { activeAnalyticsTopic, analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic } from '../../vuex/getters';
+    import {compareTimeRange, compareSource, compareSubTopic, activeCompareTopic, activeAnalyticsTopic, analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic } from '../../vuex/getters';
     import { setAnalyticsType, setAnalyticsTimeRange, setAnalyticsSource, setAnalyticsSubTopic } from "../../vuex/actions";
 
 
     export default{
-        props: ['visiable'],
+        props: ['visiable','isanalytics','iscompare'],
         data(){
             const words = Local().addDashboard;
             return{
@@ -78,13 +80,19 @@
                     callback: () => {
                         console.log(this.deleteTopic);
                         this.visiable = false;
+                        this.isanalytics = false;
+                        this.iscompare = false;
                     },
-                    failback: () => { this.visiable = false; }
+                    failback: () => {
+                        this.visiable = false;
+                        this.isanalytics = false;
+                        this.iscompare = false;
+                    }
                 }
             }
         },vuex: {
             actions: { setAnalyticsType, setAnalyticsTimeRange, setAnalyticsSource, setAnalyticsSubTopic },
-            getters: { activeAnalyticsTopic, analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic }
+            getters: {compareTimeRange, compareSource, compareSubTopic, activeCompareTopic, activeAnalyticsTopic, analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic }
         },
         methods: {
             setNewPanel(flag){
@@ -93,6 +101,8 @@
             },
             close(){
                 this.visiable = false;
+                this.isanalytics = false;
+                this.iscompare = false;
             },
             getDashboardList(){
                 Api.getDashboardList({}).then(resp => {
@@ -103,6 +113,28 @@
                     }
                 });
             },
+            addCompareDashboard(){
+                const name = this.newName,
+                        topic_ids=(_.map(this.activeCompareTopic,item=>{
+                            return item.topic_id
+                        })).join(','),
+                        subtopic = this.compareSubTopic,
+                        source = this.compareSource,
+                        time_interval = this.compareTimeRange,
+                        time_dimension = time_interval > 7 ? 1 : 0;
+                if(!name){
+                    this.addTip = this.words.addTips;
+                    return;
+                }
+                let params={name, topic_ids, subtopic, source, time_interval, time_dimension};
+                console.log('compareparams',params);
+                Api.addDashboard(params).then(resp => {
+                    console.log('add', resp.data);
+                    this.close();
+                    this.newName = "";
+                    this.addTip = "";
+                });
+            },
             addDashboard(){
                 const name = this.newName,
                             topic = this.activeAnalyticsTopic.topic_name,
@@ -110,13 +142,14 @@
                             subtopic = this.analyticsSubTopic,
                             source = this.analyticsSource,
                             time_interval = this.analyticsTimeRange,
-                            time_dimension = 1;
+                            time_dimension = time_interval > 7 ? 1 : 0,
+                            type='browser';
                 console.log(this.analyticsType, this.analyticsTimeRange, this.analyticsSource, this.analyticsSubTopic);
                 if(!name){
                     this.addTip = this.words.addTips;
                     return;
                 }
-                let params = {name, topic, topic_id, subtopic, source, time_interval, time_dimension};
+                let params = {type, name, topic, topic_id, subtopic, source, time_interval, time_dimension};
                 params[this.analyticsType] = 1;
 
                 Api.addDashboard(params).then(resp => {
@@ -124,6 +157,30 @@
                     this.close();
                     this.newName = "";
                     this.addTip = "";
+                });
+            },
+            importCompareDashborad(){
+                const name = this.newName,
+                        topic_ids=(_.map(this.activeCompareTopic,item=>{
+                            return item.topic_id
+                        })).join(','),
+                        subtopic = this.compareSubTopic,
+                        source = this.compareSource,
+                        time_interval = this.compareTimeRange,
+                        time_dimension = time_interval > 7 ? 1 : 0;
+                if(!name){
+                    this.addTip = this.words.addTips;
+                    return;
+                }
+                let params={name, topic_ids, subtopic, source, time_interval, time_dimension};
+                console.log('compareparams',params);
+                Api.updateDashboard(params).then(resp => {
+                    console.log(resp.data);
+                    if(resp.data.code == 0 && resp.data.data.data == 1){
+                        this.close();
+                    } else {
+                        this.importTip = this.words.importTip;
+                    }
                 });
             },
             importDashborad(){
@@ -134,8 +191,9 @@
                             subtopic = this.analyticsSubTopic,
                             source = this.analyticsSource,
                             time_interval = this.analyticsTimeRange,
-                            time_dimension = 1;
-                let params = {id, topic, topic_id, subtopic, source, time_interval, time_dimension};
+                        time_dimension = time_interval > 7 ? 1 : 0,
+                        type='browser';
+                let params = {type,id, topic, topic_id, subtopic, source, time_interval, time_dimension};
                 params[this.analyticsType] = 1;
                 Api.updateDashboard(params).then(resp => {
                     console.log(resp.data);

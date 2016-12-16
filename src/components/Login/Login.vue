@@ -9,8 +9,10 @@
                 <div class="col-md-6 col-lg-6 pull-right">
                     <ul  class=" navbar-nav pull-right ">
                         <li><a href="javascript:void(0);" @click="toPromotion">{{loginStr.forFirstPage}}</a></li>
-                        <li><a href="javascript:void(0);" @click="toHotEvent">{{loginStr.hotEvent}}</a></li>
                         <li><a href="javascript:void(0);" @click="showLogin">{{loginStr.forLogin}}</a></li>
+                        <li><a href="javascript:void(0);" @click="toHotEvent">{{loginStr.hotEvent}}</a></li>
+                        <!--<li><a href="javascript:void(0);" @click="toIntruction">{{loginStr.instructionForUse}}</a></li>-->
+
                         <!--<li><a href="javascript:void(0);" @click="showApply">账号注册</a></li>-->
 
                     </ul>
@@ -221,11 +223,11 @@
                 this.isHotEvent = true;
                 this.isPromotion=false;
             },
-           /* 注册
+            //注册
            toIntruction(){
                 this.isInstruction=true;
                 this.isPromotion=false;
-            },*/
+            },
             toPromotion(){
                 this.isPromotion=true;
                 this.isInstruction=false;

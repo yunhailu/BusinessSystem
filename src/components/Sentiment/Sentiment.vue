@@ -209,7 +209,7 @@
                 _.each(this.lineData[source], (value, key) => {
                     this.sentimentBarOption.series[this.sentimentMap[key]].data = value;
                 });
-                this.getCommentList();
+                //this.getCommentList();
 
             },
             clickChartAction(opts){
@@ -503,8 +503,11 @@
             },
             sortVal: {
                 handler(val, oldVal){
-                    if(val != oldVal){
-                        this.getCommentList(val.key);
+                    if(val != oldVal && val !=""){
+//                    if(val != oldVal){
+//                        this.getCommentList(val.key);
+                        this.getCommentList(val);
+                        console.log('val',val);
                     }
                 }
             },

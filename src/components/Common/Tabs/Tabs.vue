@@ -21,7 +21,10 @@
             <span class="con">{{item.name | showNum datas[index] datas}}<i class="fa fa-spinner fa-spin" v-show="!datas.length"></i></span>
         </li>
     </ul>
-    <add-dashboard :visiable.sync="showDashboard"></add-dashboard>
+    <div v-if="showDashboard">
+        <add-dashboard :visiable.sync="showDashboard" :isanalytics.sync="isAnalytics"></add-dashboard>
+    </div>
+
 </template>
 <style lang="less" scoped>
     @import "Tabs.less";
@@ -45,6 +48,7 @@
             return{
                 words,
                 showDashboard: false,
+                isAnalytics:false,
                 tabs: [{
                     name: words.tabs[0],
                     link: 'summary'
@@ -136,6 +140,7 @@
             },
             showAdd(){
                 this.showDashboard = true;
+                this.isAnalytics=true;
             }
         },
         ready(){
