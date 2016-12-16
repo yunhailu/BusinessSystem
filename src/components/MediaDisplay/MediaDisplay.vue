@@ -617,12 +617,7 @@
                 //sourch-function
                 console.log('aaa:',a);
 
-<<<<<<< HEAD
-                if(_.isEmpty(a)){
-=======
-
                 if(_.isEmpty(this.trim(a))){
->>>>>>> 83dedc58dd18b53cb438bfc4f3bbd1414c1c9138
                     alert('关键词不为空！请重新输入！！！');
 
             }
