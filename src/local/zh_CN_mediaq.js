@@ -42,10 +42,10 @@ export const zh_CN_mediaq = _.extend({}, zh_CN, {
     footer:{
         coppy:"京ICP备14046778号-5 联系电话：010-61934324 版权所有:沃民高新科技（北京）股份有限公司 ",
         phone:"联系电话：010-88315479 ",
-        cooperation:"沃民高新科技（北京）股份有限公司、工信部电子科技情报所网络舆情研究中心联合开发"
+        cooperation:"沃民高新科技（北京）股份有限公司、工信部电子科技情报所网络舆情研究中心，媒商实验室联合开发"
     },
     header: {
-        title: "沃德社会气象台",
+        title: "沃德媒商气象站",
         home: "热点事件",
         analytics: "数据分析",
         dashboard: "报告生成",
@@ -220,7 +220,7 @@ export const zh_CN_mediaq = _.extend({}, zh_CN, {
         client: "客户端",
         web: "网页",
         overseas: "海外",
-        source:"沃德社会气象台",
+        source:"沃德媒商气象站",
         happy: "满意",
         anger: "愤怒",
         sorrow: "失望",
