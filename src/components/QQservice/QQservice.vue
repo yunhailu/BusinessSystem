@@ -13,7 +13,7 @@
         <!--<a href="javascript:;" class="toolbar-item toolbar-item-weixin"><span class="toolbar-layer"></span></a>-->
         <a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=2994454967&site=qq&menu=yes" class="toolbar-item toolbar-item-feedback"></a>
         <a href="javascript:;" class="toolbar-item toolbar-item-app"><span class="toolbar-layer"></span></a>
-        <a href="#dfs1" id="top"  class="toolbar-item toolbar-item-top"></a>
+        <!--<a href="#dfs1" id="top"  class="toolbar-item toolbar-item-top"></a>-->
     </div>
 
 

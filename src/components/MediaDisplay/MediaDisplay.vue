@@ -615,7 +615,7 @@
             },
             getSourchData(a){
                 //sourch-function
-                console.log('aaa:',a);
+                //console.log('aaa:',a);
 
                 if(_.isEmpty(this.trim(a))){
                     alert('关键词不为空！请重新输入！！！');
@@ -688,17 +688,18 @@
                 if(resp.data.code ==0){
                     const mediaData0 = resp.data.data;
                     const conte0=mediaData0.focus;
-                    const adada=_.omit(mediaData0.gender,'n');
-                this.sexOption.series[0].data=_.values(adada);
-                const degs= _.map(adada,(value,key)=>{
+                    console.log('mediaData0.gender:',mediaData0.gender);
+//                    const adada=_.omit(mediaData0.gender,'n');
+                this.sexOption.series[0].data=_.values(mediaData0.gender);
+                const degs= _.map(mediaData0.gender,(value,key)=>{
                     if (key=='m'){key="男"};
                     if (key=='f'){key="女"};
                     return {"name":key,"value":value}
                 });
 
                 this.sexPieOption.series[0].data=degs;
-                console.log('wanglipeng:',this.sexPieOption.series[0].data);
-                console.log('wanglipeng2:',mediaData0.focus);
+                //console.log('wanglipeng:',this.sexPieOption.series[0].data);
+               //console.log('wanglipeng2:',mediaData0.focus);
 
 
                 this.follow0=mediaData0.focus.m;
