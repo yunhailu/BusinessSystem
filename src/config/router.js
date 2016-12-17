@@ -163,6 +163,12 @@ module.exports = {
             require(['../components/SocietyLogin/SocietyLogin.vue'], resolve);
         }
     },
+    '/mediaq': {
+        name: 'mediaq',
+        component (resolve) {
+            require(['../components/MediaQLogin/MediaQLogin.vue'], resolve);
+        }
+    },
 
 
     

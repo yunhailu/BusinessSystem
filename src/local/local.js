@@ -7,9 +7,10 @@ import { zh_CN_society } from './zh_CN_society';
 import { en } from './en';
 import { zh_CN_CCSI } from './zh_CN_CCSI';
 import { WhiteList } from '../config/config';
+import {zh_CN_mediaq } from './zh_CN_mediaq';
 
 export default function(){
-    const Local = { zh_CN, zh_CN_society, en, zh_CN_CCSI };
+    const Local = { zh_CN, zh_CN_society, en, zh_CN_CCSI ,zh_CN_mediaq};
     let lang;
 
     switch (window.navigator.language){
