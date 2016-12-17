@@ -11,6 +11,7 @@
                         <li><a href="javascript:void(0);" @click="toPromotion">{{loginStr.forFirstPage}}</a></li>
                         <li><a href="javascript:void(0);" @click="showLogin">{{loginStr.forLogin}}</a></li>
                         <li><a href="javascript:void(0);" @click="toHotEvent">{{loginStr.hotEvent}}</a></li>
+                        <li><a href="javascript:void(0);" @click="toIntruction">{{loginStr.instructionForUse}}</a></li>
                     </ul>
                 </div>
 
@@ -211,12 +212,14 @@
             toHotEvent(){
                 this.isHotEvent = true;
                 this.isPromotion=false;
+                this.isInstruction=false;
             },
-           /* 注册
+           // 注册
            toIntruction(){
                 this.isInstruction=true;
                 this.isPromotion=false;
-            },*/
+               this.isHotEvent = false;
+            },
             toPromotion(){
                 this.isPromotion=true;
                 this.isInstruction=false;
@@ -227,8 +230,8 @@
                 this.isLogin=false;
                 this.isApply=true;
             },*/
-            /*去申请登陆
-            toLogin(){
+            //去申请登陆
+            /*toLogin(){
                 this.isApply=false;
                 this.isLogin=true;
             },*/

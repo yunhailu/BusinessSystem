@@ -1,6 +1,7 @@
 <template>
     <div class="instruction-wrap">
-        <div class="about-title">
+        <img @click.prevent  class="image" src="../../../../images/userInstruction.png">
+      <!--  <div class="about-title">
             <h2>使用说明</h2>
             <p class="blue">
                 <span class="indx-gb">INSTRUCTIONS</span>
@@ -79,7 +80,7 @@
                 <p>报告打印以及保存各种格式</p>
                 <div><img src="../../../../images/intro-9.png"></div>
             </dd>
-        </dl>
+        </dl>-->
     </div>
 </template>
 
@@ -88,5 +89,9 @@
 </style>
 
 <script type="text/ecmascript-6">
+    export default {
+        data(){
 
+        }
+    }
 </script>
