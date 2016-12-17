@@ -44,8 +44,10 @@
             </table>
             <div v-if="!influancerTable.length" class="noTableTips">{{noTableTips}}</div>
         </div>
+
         <pop-list :item="selectItem" :pops="popList" :visiable.sync="popVisiable">
         </pop-list>
+
     </div>
     <tips :visible.sync="loadingParams.visiable" :tipsparam.sync="loadingParams"></tips>
 </template>

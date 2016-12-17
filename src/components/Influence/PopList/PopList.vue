@@ -1,6 +1,10 @@
 <template>
-    <tips :visible.sync="visiable" :tipsparam.sync="popListParams">
-        <div class="pop-list">
+
+    <tips :visible.sync="visiable" :tipsparam.sync="popListParams" >
+
+        <div class="pull-right" @click="closeTip();"><i class="fa fa-close fa-lg"></i></div>
+        <br><br>
+        <div class="pop-list" @mouseover="myover();" >
             <div class="pop-list-wrap">
                 <div class="pop-list-wrap-items">
                     <div class="pop-list-wrap-items-item" v-for="pop in pops" @click="showDetail(pop);">
@@ -15,8 +19,10 @@
                 </div>
             </div>
         </div>
-        <div class="btn btn-default closeBtn" @click="closeTip();">{{words.close}}</div>
+
     </tips>
+
+
 </template>
 <style lang="less" scoped>
     @import "PopList.less";
@@ -25,6 +31,7 @@
     import _ from "underscore";
     import Tips from "../../Common/Tips/Tips.vue";
     import Local from "../../../local/local";
+    import ScrollHandler from "../../../widgets/scrollHandler";
 
     export default{
         props: ['item', 'pops', 'visiable'],
@@ -51,7 +58,12 @@
             closeTip(){
                 this.visiable = false;
                 this.pops = [];
+            },
+            myover(){
+
+                ScrollHandler.enableScroll();
             }
+
         },
         components:{ Tips }
     }

@@ -1,7 +1,7 @@
 <template>
-  <div class="zz-tips-bg" v-if="visible && slide!='down' && tipsparam.cover!=false" @click="cancel" ></div>
+  <div class="zz-tips-bg" v-if="visible && slide!='down' && tipsparam.cover!=false" @click="cancel"  ></div>
 
-  <div class="zz-tips" v-if="visible && tipsparam.type != 'slide'"  >
+  <div class="zz-tips" v-if="visible && tipsparam.type != 'slide'" @click="closePage" >
 
     <div class="zz-tips-confirm" v-if="tipsparam.type=='confirm'">
         <h3><i class="fa fa-warning"></i> {{tipsparam.title |  defaultValue '提示'}}</h3>

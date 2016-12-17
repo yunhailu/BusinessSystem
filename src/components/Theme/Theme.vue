@@ -145,7 +145,7 @@
                     },
                     dataRange: {
                         min: 0,
-                        max: 2500,
+                        max: 2000,
                         x: 'left',
                         y: 'bottom',
                         text:['高','低'],           // 文本，默认为数值文本
@@ -193,55 +193,7 @@
                                 {name: '安徽',value: Math.round(Math.random()*1000)},
                                 {name: '山东',value: Math.round(Math.random()*1000)},
                                 {name: '新疆',value: Math.round(Math.random()*1000)},
-                                {name: '江苏',value: Math.round(Math.random()*1000)},
-                                {name: '浙江',value: Math.round(Math.random()*1000)},
-                                {name: '江西',value: Math.round(Math.random()*1000)},
-                                {name: '湖北',value: Math.round(Math.random()*1000)},
-                                {name: '广西',value: Math.round(Math.random()*1000)},
-                                {name: '甘肃',value: Math.round(Math.random()*1000)},
-                                {name: '山西',value: Math.round(Math.random()*1000)},
-                                {name: '内蒙古',value: Math.round(Math.random()*1000)},
-                                {name: '陕西',value: Math.round(Math.random()*1000)},
-                                {name: '吉林',value: Math.round(Math.random()*1000)},
-                                {name: '福建',value: Math.round(Math.random()*1000)},
-                                {name: '贵州',value: Math.round(Math.random()*1000)},
-                                {name: '广东',value: Math.round(Math.random()*1000)},
-                                {name: '青海',value: Math.round(Math.random()*1000)},
-                                {name: '西藏',value: Math.round(Math.random()*1000)},
-                                {name: '四川',value: Math.round(Math.random()*1000)},
-                                {name: '宁夏',value: Math.round(Math.random()*1000)},
-                                {name: '海南',value: Math.round(Math.random()*1000)},
-                                {name: '台湾',value: Math.round(Math.random()*1000)},
-                                {name: '香港',value: Math.round(Math.random()*1000)},
-                                {name: '澳门',value: Math.round(Math.random()*1000)}
-                            ]
-                        },
-                        {
-                            name: '热门微博',
-                            type: 'map',
-                            mapType: 'china',
-                            roam: false,
-                            itemStyle:{
-                                normal:{label:{show:true}},
-                                emphasis:{label:{show:true}}
-                            },
-                            data:[
-                                {name: '天津',value: Math.round(Math.random()*1000)},
-                                {name: '重庆',value: Math.round(Math.random()*1000)},
-                                {name: '河北',value: Math.round(Math.random()*1000)},
-                                {name: '云南',value: Math.round(Math.random()*1000)},
-                                {name: '辽宁',value: Math.round(Math.random()*1000)},
-                                {name: '湖南',value: Math.round(Math.random()*1000)},
-                                {name: '安徽',value: Math.round(Math.random()*1000)},
-                                {name: '新疆',value: Math.round(Math.random()*1000)},
-                                {name: '浙江',value: Math.round(Math.random()*1000)},
-                                {name: '湖北',value: Math.round(Math.random()*1000)},
-                                {name: '山西',value: Math.round(Math.random()*1000)},
-                                {name: '内蒙古',value: Math.round(Math.random()*1000)},
-                                {name: '吉林',value: Math.round(Math.random()*1000)},
-                                {name: '广东',value: Math.round(Math.random()*1000)},
-                                {name: '台湾',value: Math.round(Math.random()*1000)},
-                                {name: '澳门',value: Math.round(Math.random()*1000)}
+                                {name: '江苏',value: Math.round(Math.random()*1000)}
                             ]
                         }
                     ]
@@ -613,6 +565,27 @@
             }
         },
         methods: {
+            getppdata(){
+
+                const topic_id = this.activeAnalyticsTopic.topic_id;
+                let end =this.analyticsEnd,
+                    start = this.analyticsStart;
+                if(start.includes(' ') && end.includes(' ')){
+                    start = start.split(' ')[0]+'T'+start.split(' ')[1];
+                    end = end.split(' ')[0]+'T'+end.split(' ')[1];
+                    console.log('start',start,end);
+                }
+                Api.getBubblChart({topic_id,start,end}).then(resp => {
+                    if(resp.data.code == 0){
+                        
+
+                    }
+                });
+
+
+
+
+            },
             getBubblChart(){
                 this.themeScatterLoading=true;
                 const topic_id = this.activeAnalyticsTopic.topic_id;
@@ -677,15 +650,14 @@
                         	this.themeScatterOption.xAxis.data=datearr5;
                         	
                         }
-                        console.log('数据',yuy0); //数据组的所有数据
+
                         
                         const dataOne=yuy0[0];
                         const dataTwue=yuy0[1];
                         const dataThree=yuy0[2];
                         const dataFour=yuy0[3];
                         const dataFire=yuy0[4];
-                        
-                        console.log('dataOne:',dataOne);
+
 
 							const result0 = [];
 							for(var i=0; i < dataOne.length; i++) {
@@ -728,53 +700,20 @@
 							      dataFire[i][0]=i+1
 							     result4.push(_.values(dataFire[i]));  
 							};
-					
-                      
-                        //   console.log('result1',result1);
-                          //  console.log('result2',result2);
-                            //console.log('result3',result3);
-                            //console.log('result4',result4);
-                        
-                        
-                      
-                        
-                        
-                        
-                        
+
                         this.themeScatterOption.series[0].data=result0;
                         this.themeScatterOption.series[1].data=result1;
                         this.themeScatterOption.series[2].data=result2;
                         this.themeScatterOption.series[3].data=result3;
                         this.themeScatterOption.series[4].data=result4;
 
-
-
-
-
-
-
                         const uiy=_.omit(yuy0[0],'date');
-                        console.log('数组0',uiy);
-                        console.log('数组1',yuy0[0]);
-                        console.log('数组2',yuy0[1]);
-                        console.log('数组3',yuy0[2]);
-                        console.log('数组4',yuy0[3]);
-                        console.log('数组5',yuy0[4]);
-
-                        // const gu=_.each(yuy0[0],value,list);
-                        // console.log('gu',gu);
-
-
-
-
-
-
 
 
                     }
                 });
             },
-         convertData (data) {
+            convertData (data) {
              this.themeMapOption.series[0].data=[
                  {name: '海门', value: 9},
                  {name: '鄂尔多斯', value: 12},
@@ -1031,27 +970,6 @@
                     }
                 });
             },
-//            getThemeBest(){
-//                const topic_id = this.activeAnalyticsTopic.topic_id,
-//                        topic = this.activeAnalyticsTopic.topic_name,
-//                        subtopic = this.analyticsSubTopic,
-//                        source = this.analyticsSource,
-//                        time_interval = this.analyticsTimeRange,
-//                        time_dimension = time_interval > 7 ? 1 : 0,
-//                        end = this.analyticsEnd,
-//                        start = this.analyticsStart;
-//                return Api.getThemeBest({topic_id, topic, subtopic, source, start, end, time_dimension}).then(resp => {
-//                    //console.log('getThemeBest',resp);
-//                    if(resp.data.code == 0){
-//                        const bestList = _.sortBy(resp.data.data, 'value');
-//                        const yAxis = _.map(bestList, value => value.name);
-//                        const data = _.map(bestList, value => value.value);
-//                        this.themeBestLoading = false;
-//                        this.themeBestOption.yAxis.data = yAxis;
-//                        this.themeBestOption.series[0].data = data;
-//                    }
-//                });
-//            },
             getThemeDetail(){
                 const topic_id = this.activeAnalyticsTopic.topic_id,
                         topic = this.activeAnalyticsTopic.topic_name,
@@ -1091,13 +1009,55 @@
                     }
                 });
             },
+            getMapData(){
+                const topic_id = this.activeAnalyticsTopic.topic_id,
+//                    topic = this.activeAnalyticsTopic.topic_name,
+//                    subtopic = this.analyticsSubTopic,
+//                    source = this.analyticsSource,
+                    time_interval = this.analyticsTimeRange,
+                    time_dimension = time_interval > 7 ? 1 : 0;
+                let end =this.analyticsEnd,
+                    start = this.analyticsStart;
+                if(start.includes(' ') && end.includes(' ')){
+                    start = start.split(' ')[0]+'T'+start.split(' ')[1];
+                    end = end.split(' ')[0]+'T'+end.split(' ')[1];
+                    console.log('start',start,end);
+                }
+
+                Api.getMapData({topic_id, start, end}).then(resp => {
+
+                    if(resp.data.code == 0){
+                        console.log('wanglipengjia', resp.data.data);
+
+                        const mapgender= _.map(resp.data.data.gender,(value,key)=>{
+                            if (key=='m'){key="男"};
+                            if (key=='f'){key="女"};
+                            return {"name":key,"value":value}
+                        });
+                        console.log('mapgender:', mapgender);
+
+                        const mapdatas= _.map(resp.data.data.province,(value,key)=>{
+                            return {"name":key,"value":value}
+                        });
+
+                        console.log('mapdatas:', mapdatas);
+                        this.themePieOption.series[0].data=mapgender;
+                        this.themeMapOption.series[0].data=mapdatas;
+
+
+
+                    }
+                });
+            },
+
             init(){
                 this.getBubblChart();
                 this.getTrendList();
                 this.getWordCloud();
-                //this.getThemeBest();
+                this.getMapData();
                 this.getThemeDetail();
-                // this.convertData();
+                //mytest
+                this.getppdata();
             }
         },
         created(){
