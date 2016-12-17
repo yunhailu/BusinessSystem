@@ -174,7 +174,7 @@
     import * as Api from "../../widgets/Api";
     import FooterComponent from "../Footer/Footer.vue"
     import Promotion from "./SocietyPromotion/SocietyPromotion.vue"
-    import Instruction from "./InstructionsForUse/InstructionsForUse.vue"
+    import Instruction from "../Common/InstructionsForUse/InstructionsForUse.vue"
     import HotEvent from "../AllNetHotEvent/AllNetHotEvent.vue"
     import {loginState ,loginTime } from '../../vuex/getters';
     import {setLoginState, setLoginTime} from "../../vuex/actions";

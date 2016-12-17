@@ -1,7 +1,7 @@
 <template>
     <div class="instruction-wrap">
-        <img @click.prevent  class="image" src="../../../../images/userInstruction.png">
-      <!--  <div class="about-title">
+        <img class="image" src="../../../../images/userInstruction.png">
+        <!--<div class="about-title">
             <h2>使用说明</h2>
             <p class="blue">
                 <span class="indx-gb">INSTRUCTIONS</span>
@@ -16,7 +16,7 @@
             <dd>
                 <h4>
                     <span>a)</span>登录
-                </h4>i
+                </h4>
                 <div><img src="../../../../images/intro-1.png"></div>
                 <p>用户根据申请的账号登录</p>
             </dd>
@@ -89,9 +89,8 @@
 </style>
 
 <script type="text/ecmascript-6">
-    export default {
-        data(){
-
-        }
+    function stop(){
+        return false;
     }
+    window.document.oncontextmenu=stop;
 </script>

@@ -88,6 +88,7 @@
             </div>
         </div>
     </div>
+    <!--<instruction v-if="isInstruction"></instruction>-->
     <ccsi-promotion v-if="isPromotion"></ccsi-promotion>
     <!--<instruction v-if="isInstruction"></instruction>-->
 </template>
@@ -100,6 +101,7 @@
     import Cookie from "js-cookie";
     import { getCookie } from '../../widgets/Cookie';
     import {redirect} from "../../widgets/Auth";
+//    import Instruction from "./../Common/InstructionsForUse/InstructionsForUse.vue"
     import * as Api from "../../widgets/Api";
     import FooterComponent from "../Footer/Footer.vue"
     import CcsiPromotion from "./CcsiPromotion/CcsiPromotion.vue"

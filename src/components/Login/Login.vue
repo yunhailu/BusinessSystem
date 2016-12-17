@@ -185,7 +185,7 @@
     import * as Api from "../../widgets/Api";
     import FooterComponent from "../Footer/Footer.vue"
     import Promotion from "./Promotion/Promotion.vue"
-    import Instruction from "./InstructionsForUse/InstructionsForUse.vue"
+    import Instruction from "./../Common/InstructionsForUse/InstructionsForUse.vue"
     import HotEvent from "../AllNetHotEvent/AllNetHotEvent.vue"
     import qservice from '../QQservice/QQservice.vue';
     import {loginState ,loginTime,userLevel } from '../../vuex/getters';
