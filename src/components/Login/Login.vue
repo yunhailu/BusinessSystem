@@ -171,6 +171,7 @@
 
     <instruction v-if="isInstruction"></instruction>
     <hot-event class="hotevent" v-if="isHotEvent"></hot-event>
+    <qservice></qservice>
 </template>
 <style lang="less">
     @import "Login.less";
@@ -184,8 +185,9 @@
     import * as Api from "../../widgets/Api";
     import FooterComponent from "../Footer/Footer.vue"
     import Promotion from "./Promotion/Promotion.vue"
-    import Instruction from "./InstructionsForUse/InstructionsForUse.vue"
+    import Instruction from "./../Common/InstructionsForUse/InstructionsForUse.vue"
     import HotEvent from "../AllNetHotEvent/AllNetHotEvent.vue"
+    import qservice from '../QQservice/QQservice.vue';
     import {loginState ,loginTime,userLevel } from '../../vuex/getters';
     import {setLoginState, setLoginTime,setUserLevel} from "../../vuex/actions";
 
@@ -212,7 +214,7 @@
             };
         },
         components:{
-            FooterComponent,Promotion,Instruction,HotEvent
+            FooterComponent,Promotion,Instruction,HotEvent,qservice
         },
         vuex:{
             getters:{loginState, loginTime,userLevel},
@@ -222,11 +224,13 @@
             toHotEvent(){
                 this.isHotEvent = true;
                 this.isPromotion=false;
+                this.isInstruction=false;
             },
             //注册
            toIntruction(){
                 this.isInstruction=true;
                 this.isPromotion=false;
+                this.isHotEvent = false;
             },
             toPromotion(){
                 this.isPromotion=true;
@@ -239,10 +243,10 @@
                 this.isApply=true;
             },*/
 //            /*去申请登陆
-            toLogin(){
+           /* toLogin(){
                 this.isApply=false;
                 this.isLogin=true;
-            },
+            },*/
             isShowError(){
                 if(this.errorShow == true){
                     this.errorShow = this.userName || this.password;

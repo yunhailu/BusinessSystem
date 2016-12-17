@@ -1,6 +1,7 @@
 <template>
     <div class="instruction-wrap">
-        <div class="about-title">
+        <img class="image" src="../../../../images/userInstruction.png">
+        <!--<div class="about-title">
             <h2>使用说明</h2>
             <p class="blue">
                 <span class="indx-gb">INSTRUCTIONS</span>
@@ -15,7 +16,7 @@
             <dd>
                 <h4>
                     <span>a)</span>登录
-                </h4>i
+                </h4>
                 <div><img src="../../../../images/intro-1.png"></div>
                 <p>用户根据申请的账号登录</p>
             </dd>
@@ -79,7 +80,7 @@
                 <p>报告打印以及保存各种格式</p>
                 <div><img src="../../../../images/intro-9.png"></div>
             </dd>
-        </dl>
+        </dl>-->
     </div>
 </template>
 
@@ -88,5 +89,8 @@
 </style>
 
 <script type="text/ecmascript-6">
-
+    function stop(){
+        return false;
+    }
+    window.document.oncontextmenu=stop;
 </script>

@@ -1,9 +1,9 @@
 <template>
 
-    <div class="hot-panel">
+    <div class="hot-panel"  >
 
 
-        <div class="row">
+        <div class="row" name="dfs1">
 
 <img class="logo-icon pull-left"  src="../Media/images/gushi.png" />
             <label for="sourchWord" class="col-sm-2 control-label"></label>
@@ -141,7 +141,10 @@
 
         <!--sourch-for-->
 
+
     </div>
+
+<qservice> </qservice>
 
 
 </template>
@@ -154,6 +157,7 @@
     import { Chart, Pie } from '../../config/config';
     import * as Api from '../../widgets/Api';
     import CardPanel from '../Common/CardPanel/CardPanel.vue';
+    import qservice from '../QQservice/QQservice.vue';
 
     export default{
         props: ['sourchWord'],
@@ -613,7 +617,6 @@
                 //sourch-function
                 console.log('aaa:',a);
 
-
                 if(_.isEmpty(this.trim(a))){
                     alert('关键词不为空！请重新输入！！！');
 
@@ -877,6 +880,7 @@
            //this.getSourchData('罗一笑');
 
         },
-        components:{ CardPanel }
+        components:{ CardPanel,qservice}
+
     }
 </script>
