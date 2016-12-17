@@ -577,7 +577,7 @@
                 }
                 Api.getBubblChart({topic_id,start,end}).then(resp => {
                     if(resp.data.code == 0){
-                        
+
 
                     }
                 });
