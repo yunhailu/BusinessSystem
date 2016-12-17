@@ -122,9 +122,9 @@
                         .flatten().value();
                 console.log('IMGS',imgs);
                         if(compare.length){
-                            imgs.push({topic:this.$route.params.id,key:"compare_master",value:compare[0].comparemaster})
-                            imgs.push({topic:this.$route.params.id,key:"compare_sub",value:compare[0].comparesub})
-                            imgs.push({topic:this.$route.params.id,key:"compare_trend",value:compare[0].comparetrend})
+                            imgs.push({key:"compare_master",value:compare[0].comparemaster})
+                            imgs.push({key:"compare_sub",value:compare[0].comparesub})
+                            imgs.push({key:"compare_trend",value:compare[0].comparetrend})
                         }
                 console.log('IMGS2',imgs);
                 return imgs;
@@ -162,9 +162,10 @@
                 });
             },
             removeCompare(){
-                const params={compare:1};
+                const params={compare:1,id:this.$route.params.id};
                 Api.removeDashboardItem(params).then(resp =>{
                     console.log(resp.data);
+                this.compare=[];
                 })
             },
             removeItem(detail, category, callback){

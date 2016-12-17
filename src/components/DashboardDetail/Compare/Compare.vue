@@ -32,10 +32,15 @@
     export default{
         props: ['title', 'comdata', 'remove', 'master', 'sub','trend'],
         watch:{
+            comdata:{
+               handler(val){
+                   console.log('comdata',val);
+                   this.init();
+               }
+            },
             master:{
                 handler(value){
                     this.insertExportImages({
-                        topic: this.$route.params.id,
                         key: "compare_master",
                         value
                     });
@@ -44,7 +49,6 @@
             sub:{
                 handler(value){
                     this.insertExportImages({
-                        topic: this.$route.params.id,
                         key: "compare_sub",
                         value
                     });
@@ -53,7 +57,6 @@
             trend:{
                 handler(value){
                     this.insertExportImages({
-                        topic: this.$route.params.id,
                         key: "compare_trend",
                         value
                     });
@@ -562,7 +565,7 @@
             actions:{insertExportImages, removeExportImages},
             getters:{exportImages  }
         },
-        created(){
+        ready(){
             this.init();
         },
         components:{
