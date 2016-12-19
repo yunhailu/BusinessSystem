@@ -44,8 +44,10 @@
             </table>
             <div v-if="!influancerTable.length" class="noTableTips">{{noTableTips}}</div>
         </div>
+
         <pop-list :item="selectItem" :pops="popList" :visiable.sync="popVisiable">
         </pop-list>
+
     </div>
     <tips :visible.sync="loadingParams.visiable" :tipsparam.sync="loadingParams"></tips>
 </template>
@@ -385,8 +387,21 @@
 
                         show: false
                     }),
-                    color: _.extend([], Chart.color),
-                    graphic:Chart.graphic,
+                    color:['#2FCC71','#E64D3D', '#F1C40F', '#3598DC', '#737373'],
+                    graphic:[
+                        {
+                            type: 'text',
+                            z: -10,
+                            left: 'center', // 相对父元素居中
+                            top: 'middle',  // 相对父元素居中
+                            //rotation: Math.PI / 4,
+                            style: {
+                                fill: '#eee',
+                                text:Local().common.source,
+                                font: 'bold 12px Microsoft YaHei'
+                            }
+                        }
+                    ],
                     series: [
                         {
                             name: '满意',

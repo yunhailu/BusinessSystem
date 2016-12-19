@@ -280,6 +280,19 @@ export const getWordCloud = params => {
 };
 
 /**
+ *  Encapsulate `get theme china-map data` interface
+ *
+ *  @return {Promise} With Theme Word Cloud.
+ */
+export const getMapData = params => {
+    return Api.request({
+        url: `${rootURI}/theme/region`,
+        params
+    });
+};
+
+
+/**
  *  Encapsulate `get theme Trend List` interface
  *
  *  @return {Promise} With Theme Trend List.

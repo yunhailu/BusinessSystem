@@ -154,7 +154,6 @@
 
                 compareRadarLoading: false,
                 compareRadarOption: {
-                    //backgroundColor: '-webkit-radial-gradient(#e9e9e9 5%, #f9f9f9 60%);',
                     title: _.extend({}, Pie.title, {
                         text:'情绪趋势图：',
                         textStyle:{
