@@ -408,14 +408,11 @@
                         this.hotsRankings =_.each(_.toArray( _.object(_.pairs(resp.data.data))),(value,key)=>{
                             return value.title = (this.hotsRanking)[key];
                         });
-						
+
 //						this.hotsRankings=_.filter(hgffd1, (info, index) => {
 //                        return (index < 5);
 //                    });
-						
-						
-						
-						
+
                         console.log('this.hotsRankings',this.hotsRankings);
                         console.log('this.hotsRanking',this.hotsRanking);
                         this.graphchart();
