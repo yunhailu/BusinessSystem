@@ -42,7 +42,8 @@ export const Pie = {
         showTitle: true,
         feature: {
             saveAsImage: {}
-        }
+        },
+        right:20
     },
     tooltip: {
         trigger: 'item',
@@ -202,7 +203,8 @@ export const Chart = {
                 type: ['line', 'bar']
             },
             saveAsImage: {}
-        }
+        },
+        right:20
     }
 };
 

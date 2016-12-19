@@ -151,6 +151,7 @@
                 hotWordsOption: {
                     tooltip: {},
                     graphic:Chart.graphic,
+                    toolbox: Pie.toolbox,
                     series: {
                         //grid: {x:0, x2:0},
                         type: 'wordCloud',

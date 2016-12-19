@@ -98,7 +98,12 @@
                         },
                         show: true
                     }),
-                    tooltip: _.extend({}, Pie.tooltip),
+//                    tooltip: _.extend({}, Pie.tooltip),
+                    tooltip: {
+                        show:true,
+                        trigger: 'item',
+                        formatter:"{b}:({d}%)"
+                    },
                     legend: _.extend({}, Pie.legend, {
                         bottom: 0,
                         data:[]
@@ -108,6 +113,14 @@
                     color: _.extend([], Chart.color),
                     graphic:Pie.graphic,
                     series: _.extend({}, Pie.series, {
+                        label:{
+                            normal:{
+                                show:true,
+                                formatter:"{d}%"
+                            }
+                        },
+                        labelLine:{normal:{show:true}},
+                        type:'pie',
                         name: 'Compare',
                         radius: ['25%', '60%'],
                         data:[]
@@ -128,6 +141,7 @@
                         bottom: 1,
                         data: []
                     },
+                    toolbox: Pie.toolbox,
                     //color: _.extend([], Chart.color),
                     color:["#1C7C76","#FA943E","#88051C","#2E44E1","#F58974","#F574EA","#81F574","#051527","#C9E120","#F4D171"],
                     radar: {

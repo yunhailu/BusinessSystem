@@ -280,6 +280,9 @@
                         Cookie.set('business_name', data.data.user_name);
                         Cookie.set('business_admin', data.data.isAdmin);
                         Cookie.set('business_email', data.data.email);
+                        Cookie.set('business_level', data.data.level);
+                        this.setUserLevel(data.data.level);
+                        console.log(this.userLevel);
                         this.setLoginTime(this.loginTime + 1);
                         this.userName = '';
                         this.password = '';
