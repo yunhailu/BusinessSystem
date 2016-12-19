@@ -10,7 +10,7 @@
                 <!--<h2>情绪数据,为您导航</h2>-->
                 <h2>{{login.forWode}}</h2>
             </div>
-            <div class="login-btn" v-show="false">
+           <!-- <div class="login-btn" v-show="false">
                 <a href="javascript:void(0);" @click="login">
                     <img src="../../../../images/login-1.png">
                 </a>
@@ -19,7 +19,7 @@
                 <div class="conBox">
                     <p>{{login.forParams1}}</p>
                 </div>
-            </div>
+            </div>-->
         </swiper-slide>
         <swiper-slide class="swiper-item item-2">
             <img class="sliderimg" src="../../../../images/login-banner-2.jpg">
