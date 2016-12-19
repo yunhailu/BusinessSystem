@@ -4,7 +4,7 @@
             <div class="row">
                 <div class="col-md-6 col-lg-6  pull-left">
                 <img src="images/logo.png">
-                <span>{{loginStr.forWodeTitle}}</span>
+                <span>{{loginStr.forMediaQTitle}}</span>
                 </div>
                 <div class="col-md-6 col-lg-6 pull-right">
                     <ul  class=" navbar-nav pull-right ">
@@ -163,7 +163,7 @@
     <hot-event class="hotevent" v-if="isHotEvent"></hot-event>
 </template>
 <style lang="less">
-    @import "SocietyLogin.less";
+    @import "NewsLogin.less";
 </style>
 <script type="text/ecmascript-6">
 
@@ -173,7 +173,7 @@
     import {redirect} from "../../widgets/Auth";
     import * as Api from "../../widgets/Api";
     import FooterComponent from "../Footer/Footer.vue"
-    import Promotion from "./SocietyPromotion/SocietyPromotion.vue"
+    import Promotion from "./NewsLogin/NewsLogin.vue"
     import Instruction from "../Common/InstructionsForUse/InstructionsForUse.vue"
     import HotEvent from "../AllNetHotEvent/AllNetHotEvent.vue"
     import {loginState ,loginTime } from '../../vuex/getters';

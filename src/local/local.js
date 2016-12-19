@@ -8,9 +8,10 @@ import { en } from './en';
 import { zh_CN_CCSI } from './zh_CN_CCSI';
 import { WhiteList } from '../config/config';
 import {zh_CN_mediaq } from './zh_CN_mediaq';
+import {zh_CN_news} from './zh_CN_news';
 
 export default function(){
-    const Local = { zh_CN, zh_CN_society, en, zh_CN_CCSI ,zh_CN_mediaq};
+    const Local = { zh_CN, zh_CN_society, en, zh_CN_CCSI ,zh_CN_mediaq,zh_CN_news};
     let lang;
 
     switch (window.navigator.language){

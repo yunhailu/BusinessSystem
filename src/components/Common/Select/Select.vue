@@ -38,7 +38,9 @@
         created(){
             this.value = this.options[0];
             //--->
-            this.showStr = this.value.value;
+            if(this.value){
+                this.showStr = this.value.value;
+            }
         },
         watch:{
             showStr:{

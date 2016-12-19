@@ -107,7 +107,13 @@
                     grid: _.extend({}, Chart.grid, {
                         bottom: '40rem',
                     }),
-                    toolbox: _.extend({}, Chart.toolbox),
+                    toolbox:_.extend({},Chart.toolbox,{
+                        iconStyle:{
+                            normal:{
+                                borderColor:'#3bcacc'
+                            }
+                        }
+                    }),
                     xAxis: _.extend({}, Chart.xAxis, {
                         type : 'category',  //category
                         data: [],
@@ -158,7 +164,17 @@
 
                     color:['#2FCC71','#E64D3D', '#F1C40F', '#3598DC', '#737373'],
                     textStyle: Pie.textStyle,
-                    toolbox: Pie.toolbox,
+                    toolbox:_.extend({},Pie.toolbox,{
+                        feature:{
+                            saveAsImage:{
+                                iconStyle:{
+                                    normal:{
+                                        borderColor:'#3bcacc'
+                                    }
+                                }
+                            }
+                        }
+                    }),
                     graphic:Pie.graphic,
                     series: [
                         {

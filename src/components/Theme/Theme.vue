@@ -209,8 +209,6 @@
                         }
                     ]
                 },
-
-
                 //pie option
                 themePieLoading: false,
                 themePieOption: {

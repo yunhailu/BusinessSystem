@@ -76,14 +76,23 @@
                 Api.getTopicList({}).then(resp => {
                     console.log('getTopicList', resp);
                     if(resp.data.code == 0){
+                        /*if(!resp.data.data.length){
+                         this.$router.go({ name: 'settingAdd' });
+                         return ;
+                         }*/
                         let topicList = _.map(resp.data.data, topic => {
                             topic.isActive = false;
                             return topic;
                         });
-                        _.first(topicList).isActive = true;
-                        this.setTopicList(topicList);
-                        console.log('第一次查看',this.topicList);
-                        this.initActiveTopic();
+                        if(topicList.length){
+                            _.first(topicList).isActive = true;
+                            this.setTopicList(topicList);
+                            console.log('第一次查看',this.topicList);
+                            this.initActiveTopic();
+                        }else{
+                            this.$router.go({ name: 'settingAdd' });
+                            return ;
+                        }
                     }
                 });
             },

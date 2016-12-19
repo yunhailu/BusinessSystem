@@ -93,9 +93,7 @@
                     dataZoom: _.extend({}, Chart.dataZoom),
                     color:_.extend( Chart.color, {}),
                     grid: _.extend({}, Chart.grid, { bottom: '40rem' }),
-                    toolbox: _.extend({}, Chart.toolbox, {
-                        feature: { saveAsImage: {} }
-                    }),
+                    toolbox:Chart.toolbox,
                     xAxis: _.extend({}, Chart.xAxis, {
                         type : 'category',
                         data: [],

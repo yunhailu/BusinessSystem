@@ -207,8 +207,6 @@ console.log(this.userName,this.password);
                         Cookie.set('business_admin', data.data.isAdmin);
                         Cookie.set('business_email', data.data.email);
                         Cookie.set('business_level', data.data.level);
-                        this.setUserLevel(data.data.level);
-                        console.log(this.userLevel);
                         this.userName = '';
                         this.password = '';
                         this.$router.go({name: 'home'});

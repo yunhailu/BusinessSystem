@@ -169,6 +169,12 @@ module.exports = {
             require(['../components/MediaQLogin/MediaQLogin.vue'], resolve);
         }
     },
+    '/news': {
+        name: 'news',
+        component (resolve) {
+            require(['../components/NewsLogin/NewsLogin.vue'], resolve);
+        }
+    },
 
 
     

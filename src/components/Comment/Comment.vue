@@ -67,9 +67,10 @@
                     dataZoom: _.extend({}, Chart.dataZoom),
                     color:['#2FCC71','#E64D3D', '#F1C40F', '#3598DC', '#737373'],
                     grid: _.extend({}, Chart.grid, { bottom: '40rem' }),
-                    toolbox: _.extend({}, Chart.toolbox, {
+                    /*toolbox: _.extend({}, Chart.toolbox, {
                         feature: { saveAsImage: {} }
-                    }),
+                    }),*/
+                    toolbox:Chart.toolbox,
                     xAxis: _.extend({}, Chart.xAxis, {
                         type : 'category',
                         data: [],

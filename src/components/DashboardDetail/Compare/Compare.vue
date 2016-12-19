@@ -146,6 +146,14 @@
                     color: _.extend([], Chart.color),
                     graphic:Pie.graphic,
                     series: _.extend({}, Pie.series, {
+                        label:{
+                            normal:{
+                                show:true,
+                                formatter:"{d}%"
+                            }
+                        },
+                        labelLine:{normal:{show:true}},
+                        type:'pie',
                         name: 'Compare',
                         radius: ['25%', '60%'],
                         data:[]
@@ -201,6 +209,7 @@
                         }
                     },
                     graphic:Chart.graphic,
+                    toolbox:Pie.toolbox,
                     series: [{
                         type: 'radar',
                         symbol: 'none',

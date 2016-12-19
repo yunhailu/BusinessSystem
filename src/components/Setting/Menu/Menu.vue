@@ -71,8 +71,10 @@
                             topic.isActive = false;
                             return topic;
                         });
-                        _.first(topicList).isActive = true;
-                        this.setTopicList(topicList);
+                        if(topicList.length){
+                            _.first(topicList).isActive = true;
+                            this.setTopicList(topicList);
+                        }
                     }
                 });
             },

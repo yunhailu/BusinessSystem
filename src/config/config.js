@@ -26,6 +26,11 @@ export const WhiteList = [{
     local: 'zh_CN_mediaq',
     link: 'mediaq',
     domain: 'http://wodemediaq.com'
+},{
+    title: "沃德新闻气象站",
+    local: 'zh_CN_news',
+    link: 'news',
+    domain: 'http://news.wordemotion.com'
 }];
 //人名白名单
 export const WhiteNameList = ["习近平","马凯","王岐山","王沪宁","刘云山","刘延东","刘奇葆","许其亮","孙春兰","孙政才","李克强","李建国","李源潮","汪洋","张春贤","张高丽","张德江","范长龙","孟建柱","赵乐际","胡春华","俞正声","栗战书","郭金龙","韩正","王刚","王乐泉","王兆国","回良玉","刘淇","李长春","吴邦国","汪洋","张高丽","周永康","胡锦涛","贺国强","贾庆林","徐才厚","温家宝","薄熙来","郭伯雄","李长春","吴仪","吴官正","张立昌","张德江","陈良宇","罗干","贺国强","贾庆林","黄菊","曹刚川","曾庆红","曾培炎"];
@@ -41,7 +46,13 @@ export const Pie = {
         show: true,
         showTitle: true,
         feature: {
-            saveAsImage: {}
+            saveAsImage: {
+                iconStyle:{
+                    normal:{
+                        borderColor:'#3bcacc'
+                    }
+                }
+            }
         },
         right:20
     },
@@ -196,6 +207,11 @@ export const Chart = {
         '#59678c','#c9ab00','#7eb00a','#6f5553','#c14089'
     ],
     toolbox: {
+        iconStyle:{
+            normal:{
+                borderColor:'#3bcacc'
+            }
+        },
         show: true,
         showTitle: true,
         feature: {
