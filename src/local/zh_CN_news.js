@@ -51,6 +51,7 @@ export const zh_CN_news =_.extend({},zh_CN,{
         compare: "数据对比",
         reports: "预警监测",
         setting: "监测设置",
+        forUse:"使用说明",
         quit: "退出"
     },
     home: {
@@ -206,6 +207,9 @@ export const zh_CN_news =_.extend({},zh_CN,{
         passwordCondition: "密码需要大于6位，且需要包含数字和字母",
         phoneCondition: "手机号码不正确",
         emailCondition: "邮箱不正确"
+    },
+    instruction:{
+        forUse:'../../../../images/userInstruction.png',
     },
     common: {
         weeks: ['日', '一', '二', '三', '四', '五', '六'],

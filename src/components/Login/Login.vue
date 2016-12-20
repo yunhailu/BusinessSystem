@@ -11,7 +11,7 @@
                         <li><a href="javascript:void(0);" @click="toPromotion">{{loginStr.forFirstPage}}</a></li>
                         <li><a href="javascript:void(0);" @click="showLogin">{{loginStr.forLogin}}</a></li>
                         <li><a href="javascript:void(0);" @click="toHotEvent">{{loginStr.hotEvent}}</a></li>
-                        <li><a href="javascript:void(0);" @click="toIntruction">{{loginStr.instructionForUse}}</a></li>
+                        <!--<li><a href="javascript:void(0);" @click="toIntruction">{{loginStr.instructionForUse}}</a></li>-->
 
                         <!--<li><a href="javascript:void(0);" @click="showApply">账号注册</a></li>-->
 
@@ -169,7 +169,7 @@
 
     </div>
 
-    <instruction v-if="isInstruction"></instruction>
+    <!--<instruction v-if="isInstruction"></instruction>-->
     <hot-event class="hotevent" v-if="isHotEvent"></hot-event>
     <qservice></qservice>
 </template>
@@ -209,12 +209,13 @@
                 isLogin:false,
                 errorShow:false,
                 isPromotion:true,
-                isInstruction:false,
+//                isInstruction:false,
                 isHotEvent:false,
             };
         },
         components:{
-            FooterComponent,Promotion,Instruction,HotEvent,qservice
+            FooterComponent,Promotion,HotEvent,qservice
+//            ,Instruction
         },
         vuex:{
             getters:{loginState, loginTime,userLevel},
@@ -224,17 +225,17 @@
             toHotEvent(){
                 this.isHotEvent = true;
                 this.isPromotion=false;
-                this.isInstruction=false;
+//                this.isInstruction=false;
             },
             //注册
-           toIntruction(){
+          /* toIntruction(){
                 this.isInstruction=true;
                 this.isPromotion=false;
                 this.isHotEvent = false;
-            },
+            },*/
             toPromotion(){
                 this.isPromotion=true;
-                this.isInstruction=false;
+//                this.isInstruction=false;
                 this.isHotEvent = false;
             },
             /*去申请登使用

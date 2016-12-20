@@ -139,6 +139,12 @@ module.exports = {
             }
         }
     },
+    'instruction':{
+        name:'instruction',
+        component(resolve){
+            require(['../components/Common/InstructionsForUse/InstructionsForUse.vue'],resolve);
+        }
+    },
     '/profile': {
         name: 'profile',
         component (resolve) {

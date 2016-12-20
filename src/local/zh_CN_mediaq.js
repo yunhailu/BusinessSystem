@@ -52,6 +52,7 @@ export const zh_CN_mediaq = _.extend({}, zh_CN, {
         compare: "数据对比",
         reports: "预警监测",
         setting: "监测设置",
+        forUse:"使用说明",
         quit: "退出"
     },
     home: {
@@ -83,11 +84,11 @@ export const zh_CN_mediaq = _.extend({}, zh_CN, {
         tips:"如需开通，请联系客服：010-61934324"
     },
     sentiment:{
-        happy: "高兴",
+        happy: "满意",
         anger: "愤怒",
-        sorrow: "悲伤",
-        disgust: "厌恶",
-        fear: "恐惧",
+        sorrow: "失望",
+        disgust: "反感",
+        fear: "害怕"
     },
     comment: {
         comment: "评价指数",
@@ -206,6 +207,9 @@ export const zh_CN_mediaq = _.extend({}, zh_CN, {
         passwordCondition: "密码需要大于6位，且需要包含数字和字母",
         phoneCondition: "手机号码不正确",
         emailCondition: "邮箱不正确"
+    },
+    instruction:{
+        forUse:'../../../../images/mediaqInstruction.jpg',
     },
     common: {
         weeks: ['日', '一', '二', '三', '四', '五', '六'],

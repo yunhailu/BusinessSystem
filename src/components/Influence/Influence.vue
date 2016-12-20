@@ -70,8 +70,10 @@
     export default{
         data(){
             const words = Local().influence;
+            const common=Local().common;
             return{
                 words,
+                common,
                 nowTime:null,
                 loadingParams: {
                     visiable: false,
@@ -383,7 +385,7 @@
                     }),
                     yAxis: _.extend({}, Chart.yAxis, {
                         type: 'category',
-                        data: ['sentiment'],
+                        data: ['情绪分析'],
 
                         show: false
                     }),
@@ -404,9 +406,9 @@
                     ],
                     series: [
                         {
-                            name: '满意',
+                            name: this.common.happy,
                             type: 'bar',
-                            stack: 'sentiment',
+                            stack: '情绪分析',
                             label: {
                                 normal: {
                                     show: false,
@@ -416,9 +418,9 @@
                             data: [val.happy]
                         },
                         {
-                            name: '愤怒',
+                            name: this.common.anger,
                             type: 'bar',
-                            stack: 'sentiment',
+                            stack: '情绪分析',
                             label: {
                                 normal: {
                                     show: false,
@@ -428,9 +430,9 @@
                             data: [val.anger]
                         },
                         {
-                            name: '失望',
+                            name: this.common.sorrow,
                             type: 'bar',
-                            stack: 'sentiment',
+                            stack: '情绪分析',
                             label: {
                                 normal: {
                                     show: false,
@@ -440,9 +442,9 @@
                             data: [val.sorrow]
                         },
                         {
-                            name: '反感',
+                            name: this.common.disgust,
                             type: 'bar',
-                            stack: 'sentiment',
+                            stack: '情绪分析',
                             label: {
                                 normal: {
                                     show: false,
@@ -452,9 +454,9 @@
                             data: [val.disgust]
                         },
                         {
-                            name: '害怕',
+                            name: this.common.fear,
                             type: 'bar',
-                            stack: 'sentiment',
+                            stack: '情绪分析',
                             label: {
                                 normal: {
                                     show: false,

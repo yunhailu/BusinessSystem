@@ -25,7 +25,7 @@ export const WhiteList = [{
     title: "沃德媒商气象站",
     local: 'zh_CN_mediaq',
     link: 'mediaq',
-    domain: 'http://wodemediaq.com'
+    domain: 'http://www.wodemediaq.com'
 },{
     title: "沃德新闻气象站",
     local: 'zh_CN_news',

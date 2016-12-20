@@ -51,6 +51,7 @@ export const zh_CN_society = _.extend({}, zh_CN, {
         compare: "数据对比",
         reports: "预警监测",
         setting: "监测设置",
+        forUse:"使用说明",
         quit: "退出"
     },
     home: {
@@ -172,9 +173,9 @@ export const zh_CN_society = _.extend({}, zh_CN, {
         advancedBtn: "高级模式",
         exclude: "排除词",
         warningSet:"预警设置",
-        moodGroups:["满意","愤怒", "失望", "反感","害怕"],
+        moodGroups:["高兴","愤怒", "悲伤", "厌恶","恐惧"],
         groups: ["人物", "机构", "产品", "项目", "事件", "其他"],
-        create: "提交",
+        create: "提交"
     },
     reportsWarning: {
         reportTitle: "预警标题",
@@ -207,6 +208,9 @@ export const zh_CN_society = _.extend({}, zh_CN, {
         phoneCondition: "手机号码不正确",
         emailCondition: "邮箱不正确"
     },
+    instruction:{
+        forUse:'../../../../images/userInstruction.png',
+    },
     common: {
         weeks: ['日', '一', '二', '三', '四', '五', '六'],
         buttons:['确定', '取消'],
@@ -221,11 +225,11 @@ export const zh_CN_society = _.extend({}, zh_CN, {
         web: "网页",
         overseas: "海外",
         source:"沃德社会气象台",
-        happy: "满意",
+        happy: "高兴",
         anger: "愤怒",
-        sorrow: "失望",
-        disgust: "反感",
-        fear: "害怕",
+        sorrow: "悲伤",
+        disgust: "厌恶",
+        fear: "恐惧",
         nullTip: "数据为空",
         loadingTip: "等待加载...",
         waitWords:"请稍侯......",

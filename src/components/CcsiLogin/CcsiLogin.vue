@@ -6,7 +6,6 @@
                    <span class="en">{{loginStr.forCcsiTitleE}}</span>
             </div>
             <ul>
-                <li v-if="false"><a href="javascript:void(0);" @click="toIntruction">{{loginStr.instructionForUse}}</a></li>
                 <li v-if="false"><a href="javascript:void(0);">{{loginStr.showBrand}}</a></li>
                 <li><a href="javascript:void(0);" @click="showLogin">{{loginStr.forLogin}}</a></li>
                 <li  v-show="false"><a href="javascript:void(0);" @click="showApply">{{loginStr.applyForUse}}</a></li>
@@ -88,9 +87,9 @@
             </div>
         </div>
     </div>
-    <!--<instruction v-if="isInstruction"></instruction>-->
+
     <ccsi-promotion v-if="isPromotion"></ccsi-promotion>
-    <!--<instruction v-if="isInstruction"></instruction>-->
+
 </template>
 <style lang="less">
     @import "CcsiLogin.less";
@@ -126,13 +125,11 @@
                 isLogin:false,
                 errorShow:false,
                 isPromotion:true,
-                isInstruction:false,
                 showList:false
             };
         },
         components:{
             FooterComponent,CcsiPromotion
-            //,Instruction
         },
         vuex:{
             getters:{loginState},
@@ -142,13 +139,8 @@
             toggle(){
                 this.showList = !this.showList;
             },
-            toIntruction(){
-                this.isInstruction=true;
-                this.isPromotion=false;
-            },
             toPromotion(){
                 this.isPromotion=true;
-                this.isInstruction=false;
                 this.showList = !this.showList;
             },
             submit(){
