@@ -66,6 +66,7 @@
                     tooltip: Chart.tooltip,
                     grid: Chart.grid,
                     toolbox: Chart.toolbox,
+                    color:['#111844','#2FCC71', '#F1C40F', '#d78b40', '#3598DC','#E64D3D'],
                     xAxis: _.extend({}, Chart.xAxis, {
                         type : 'category',  //category
                         data: [],
@@ -92,6 +93,7 @@
                     textStyle: Pie.textStyle,
                     toolbox: Pie.toolbox,
                     graphic:Pie.graphic,
+                    color:['#2FCC71', '#F1C40F', '#d78b40', '#3598DC','#E64D3D'],
                     series:[]
                 },
                 actions: function(val, idx){
@@ -134,37 +136,42 @@
                             }),
                             legend: _.extend({}, Pie.legend, {
                                 top: 0,
-                                data: [common.wechat, common.weibo, common.client, common.web, common.overseas]
+                                data: [common.all,common.wechat, common.weibo, common.client, common.web, common.overseas]
                             }),
-                            series: [ {
+                            series: [{
+                                name:common.all,
+                                type:'line',
+//                                areaStyle: {normal: {}},
+                                data: data[5]
+                            },{
                                 name:common.wechat,
-                                areaStyle: {normal: {}},
-                                stack: 'Total',
+//                                areaStyle: {normal: {}},
+//                                stack: 'Total',
                                 type:'line',
                                 data:data[0]
                             }, {
                                 name:common.weibo,
-                                areaStyle: {normal: {}},
-                                stack: 'Total',
+//                                areaStyle: {normal: {}},
+//                                stack: 'Total',
                                 type:'line',
                                 data: data[1]
                             }, {
                                 name:common.client,
                                 type:'line',
-                                areaStyle: {normal: {}},
-                                stack: 'Total',
+//                                areaStyle: {normal: {}},
+//                                stack: 'Total',
                                 data:data[2]
                             }, {
                                 name:common.web,
                                 type:'line',
-                                areaStyle: {normal: {}},
-                                stack: 'Total',
+//                                areaStyle: {normal: {}},
+//                                stack: 'Total',
                                 data: data[3]
                             }, {
                                 name:common.overseas,
                                 type:'line',
-                                areaStyle: {normal: {}},
-                                stack: 'Total',
+//                                areaStyle: {normal: {}},
+//                                stack: 'Total',
                                 data: data[4]
                             }]
                         });
@@ -289,7 +296,11 @@
                         });
                         this.lineData.web = this.lineData.sengine;
                         console.log('client+web',this.lineData.client);
-                        this.lineData.all = [this.lineData.wechat,this.lineData.weibo,this.lineData.client,this.lineData.web,this.lineData.overseas];
+                        const plus=_.map(_.zip(this.lineData.wechat,this.lineData.weibo,this.lineData.client,this.lineData.web,this.lineData.overseas),item=>{
+                                    return _.reduce(item, function(memo, num){ return memo + num; }, 0)
+                                });
+                    console.log('plus',plus);
+                        this.lineData.all = [this.lineData.wechat,this.lineData.weibo,this.lineData.client,this.lineData.web,this.lineData.overseas,plus];
                         this.actions("全部", 0);
                         const wechatNums =  _.reduce(this.lineData.wechat, (memo, value) => (memo + value), 0);
                         const weiboNums =  _.reduce(this.lineData.weibo, (memo, value) => (memo + value), 0);

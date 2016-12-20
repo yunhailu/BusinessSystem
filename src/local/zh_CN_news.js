@@ -219,6 +219,7 @@ export const zh_CN_news =_.extend({},zh_CN,{
         prevPage: "上一页",
         nextPage: "下一页",
         deleteTip: "确定要删除么？",
+        all:"所有",
         wechat: "微信",
         weibo: "微博",
         client: "客户端",
