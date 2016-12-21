@@ -202,8 +202,7 @@
                         topic_id = this.data.topic_id,
                         source = this.data.source,
                         time_interval = this.data.time_interval,
-                        time_dimension = time_interval > 7 ? 1 : 0,
-                        topic = this.data.topic;
+                        time_dimension = time_interval > 7 ? 1 : 0;
                 let start,end;
                 if(time_interval!=0){
                     start = moment().subtract(time_interval, 'days').format('YYYY-MM-DD'),
@@ -215,7 +214,7 @@
                     end = end.split(' ')[0] + 'T' + end.split(' ')[1];
                     console.log('start', start, end);
                 }
-                Api.getSummaryDetail({ subtopic, topic_id, source, time_dimension, start, end, topic }).then(resp => {
+                Api.getSummaryDetail({ subtopic, topic_id, source, time_dimension, start, end}).then(resp => {
                     if(resp.data.code == 0){
                         const details = resp.data.data;
                         this.x = _.map(details, detail => detail.date);

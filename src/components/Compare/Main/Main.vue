@@ -385,7 +385,6 @@
                 _.map(activeCompareTopics,item =>{
                     let topicParams = {
                         topic_id:item.topic_id,
-                        topic:item.topic_name,
                         subtopic:this.compareSubTopic,
                         source:this.compareSource,
                         start:this.compareStart,
@@ -567,7 +566,6 @@
                         const newTopic = val;
                         let topicParams = {
                             topic_id:_.isEmpty(newTopic) ? '' : newTopic[0].topic_id,
-                            topic:_.isEmpty(newTopic) ? '' : newTopic[0].topic_name,
                             subtopic:this.compareSubTopic,
                             source:this.compareSource,
                             start:this.compareStart,
@@ -589,7 +587,6 @@
                                 const newTopic = _.difference(val, oldVal);
                                 let topicParams = {
                                     topic_id:_.isEmpty(newTopic) ? '' : newTopic[0].topic_id,
-                                    topic:_.isEmpty(newTopic) ? '' : newTopic[0].topic_name,
                                     subtopic:this.compareSubTopic,
                                     source:this.compareSource,
                                     start:this.compareStart,
@@ -632,7 +629,6 @@
                             const newTopic = val;
                             let topicParams = {
                                 topic_id:_.isEmpty(newTopic) ? '' : newTopic[0].topic_id,
-                                topic:_.isEmpty(newTopic) ? '' : newTopic[0].topic_name,
                                 subtopic:this.compareSubTopic,
                                 source:this.compareSource,
                                 start:this.compareStart,

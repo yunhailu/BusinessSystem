@@ -197,7 +197,6 @@
             const applyStr = Local().apply;
             const loginStr =Local().login;
             return{
-
                 applyStr,
                 loginStr,
                 errorTip: '',
@@ -285,7 +284,7 @@
                     username: this.userName,
                     password: this.password
                 }).then(resp => {
-                    //console.log('Login', resp);
+                    console.log('Login', resp);
                     const data = resp.data;
                     if(data.code == 0){
                         this.errorShow = false;
@@ -294,6 +293,8 @@
                         Cookie.set('business_admin', data.data.isAdmin);
                         Cookie.set('business_email', data.data.email);
                         Cookie.set('business_level', data.data.level);
+                        Cookie.set('access_token',data.data.access_token);
+//                        document.cookie ="access_token="+data.data.access_token + "; expires=" + (new Date()).setTime((new Date()).getTime()+60*60*24).toGMTString();
                         this.setUserLevel(data.data.level);
                         console.log(this.userLevel);
                         this.setLoginTime(this.loginTime + 1);

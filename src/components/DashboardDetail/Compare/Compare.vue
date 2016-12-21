@@ -421,7 +421,6 @@
                 _.map(activeCompareTopics,item =>{
                     let topicParams = {
                         topic_id:item.topic_id,
-                        topic:item.topic_name,
                         subtopic:this.compareSubTopic,
                         source:this.compareSource,
                         start:this.compareStart,

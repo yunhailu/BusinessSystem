@@ -65,7 +65,7 @@
                     this.initActiveTopic();
                     return;
                 }
-                Api.getTopicList({}).then(resp => {
+                Api.getTopicList({access_token:getCookie("access_token")}).then(resp => {
                     if(resp.data.code == 0){
                         /*if(!resp.data.data.length){
                          this.$router.go({ name: 'settingAdd' });

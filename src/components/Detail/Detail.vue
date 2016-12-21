@@ -1,6 +1,6 @@
 <template>
     <header-component  v-show="showRow" active="analytics"></header-component>
-    <div class="box">
+
         <div v-show="showRow"  class="container animated bouncelnDown">
             <br>
             <div class="row">
@@ -67,7 +67,6 @@
 
 
         </div>
-    </div>
 
 </template>
 <style lang="less" scoped>

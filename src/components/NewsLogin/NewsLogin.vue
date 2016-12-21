@@ -282,6 +282,7 @@
                         Cookie.set('business_admin', data.data.isAdmin);
                         Cookie.set('business_email', data.data.email);
                         Cookie.set('business_level', data.data.level);
+                        Cookie.set('access_token',data.data.access_token);
                         this.userName = '';
                         this.password = '';
                         /*if(this.$els.remember.checked==true){

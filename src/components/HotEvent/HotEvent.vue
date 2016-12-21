@@ -74,6 +74,7 @@
 </style>
 <script type="text/ecmascript-6">
     import _ from 'underscore';
+    import Cookie from 'js-cookie';
     import Local from '../../local/local';
     import { Chart, Pie } from '../../config/config';
     import * as Api from '../../widgets/Api';

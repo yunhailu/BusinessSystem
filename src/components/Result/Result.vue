@@ -238,7 +238,6 @@
             clickChartAction(opts){
                 this.loadingParams.visiable = true;
                 const topic_id = this.activeAnalyticsTopic.topic_id,
-                        topic = this.activeAnalyticsTopic.topic_name,
                         subtopic = this.analyticsSubTopic,
                         source = this.analyticsSource,
                         time_dimension = 0,
@@ -251,7 +250,7 @@
                     start = moment(opts.name.split(":")[0],"YYYY-MM-DD HH").subtract(8, 'hour').format("YYYY-MM-DD HH")
                     start=start.split(" ")[0]+'T'+start.split(" ")[1];
                 }
-                Api.getCommentList({type, topic_id, topic, subtopic, source, start, end, time_dimension}).then(resp => {
+                Api.getCommentList({type, topic_id, subtopic, source, start, end, time_dimension}).then(resp => {
                     //console.log(resp.data);
                     this.loadingParams.visiable = false;
                     if(resp.data.code == 0){
@@ -261,7 +260,6 @@
             },
             getSummaryDetail(){
                 const topic_id = this.activeAnalyticsTopic.topic_id,
-                        topic = this.activeAnalyticsTopic.topic_name,
                         subtopic = this.analyticsSubTopic,
                         source = this.analyticsSource,
                         time_interval = this.analyticsTimeRange,
@@ -273,7 +271,7 @@
                     end = end.split(' ')[0]+'T'+end.split(' ')[1];
                     console.log('start',start,end);
                 }
-                Api.getSummaryDetail({topic_id, topic, subtopic, source, start, end, time_dimension}).then(resp => {
+                Api.getSummaryDetail({topic_id, subtopic, source, start, end, time_dimension}).then(resp => {
                     if(resp.data.code == 0){
                         this.resultChartLoading = false;
                         this.resultPieChartLoading = false;
@@ -350,7 +348,6 @@
                     this.loadingParams.visiable = false;
                 }.bind(this),9000)
                 const topic_id = this.activeAnalyticsTopic.topic_id,
-                        topic = this.activeAnalyticsTopic.topic_name,
                         subtopic = this.analyticsSubTopic,
                         source = this.analyticsSource,
                         time_interval = this.analyticsTimeRange,
@@ -362,7 +359,7 @@
                     end = end.split(' ')[0]+'T'+end.split(' ')[1];
                     console.log('start',start,end);
                 }
-                Api.getCommentList({type, topic_id, topic, subtopic, source, start, end, time_dimension}).then(resp => {
+                Api.getCommentList({type, topic_id, subtopic, source, start, end, time_dimension}).then(resp => {
                     if(resp.data.code == 0){
                         this.loadingParams.visiable = false;
                         this.list = resp.data.data;

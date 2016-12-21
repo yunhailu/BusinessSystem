@@ -3,7 +3,9 @@
  */
 
 import Vue from 'vue';
+import _ from 'underscore';
 import VueResource from 'vue-resource';
+import {getCookie} from './Cookie'
 
 Vue.http.options.emulateJSON = true;
 Vue.http.options.emulateHTTP = true;
@@ -18,7 +20,10 @@ const plainURI = "http://192.168.1.76";
 const Api = {
     request({url="", params= {}, method= "jsonp"}={}){
         return Vue.http[method](url, {
-            params
+            params:_.extend({},params,{
+            access_token:getCookie("access_token") ?getCookie("access_token") : ''
+        })
+            //params
         });
     },
     get(opts){
