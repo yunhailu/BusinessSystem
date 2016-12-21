@@ -50,8 +50,8 @@ export const zh_CN_CCSI = _.extend({}, zh_CN,{
         dashboard: "报告生成",
         compare: "比较分析",
         reports: "预警监测",
-        setting: "监测设置",
-        forUse:"使用说明",
+        setting: "搜索设置",
+        forUse:"使用指南",
         quit: "退出"
     },
     home: {
