@@ -64,11 +64,11 @@
                 }, {
                     name: words.tabs[3],
                     //link: 'influence'
-                    link: 'sentiment'
+                    link: 'comment'
                 },{
                     name: words.tabs[4],
                     //link: 'theme'
-                    link: 'comment'
+                    link: 'sentiment'
                 }],
 //                filters: words.filters,
 //                filterActive: 0,
