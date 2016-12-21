@@ -4,7 +4,7 @@
     <div class="influence-overflow">
         <div class="popular">
             <ul class="popular-list">
-                <li class="popular-list-item"  v-show="coltrol" v-for="item in popularList" @click="showNewList(item)">
+                <li class="popular-list-item"  v-show="coltrol" v-for="(idx,item) in popularList" @click="showNewList(item,idx)" :class="[influColor==idx ? 'influenceActive' : '']">
                     <i class="fa" :class="[item.icon ? 'fa-'+item.icon : 'fa-cog']"></i>
                     <span class="popular-list-item-title">{{item.title}}</span>
                     <div class="popular-list-item-con">
@@ -75,6 +75,7 @@
                 words,
                 common,
                 nowTime:null,
+                influColor:0,
                 loadingParams: {
                     visiable: false,
                     type: 'loading',
@@ -211,7 +212,8 @@
                     }
                 });
             },
-            showNewList(item){
+            showNewList(item,idx){
+                this.influColor = idx;
                 const  topic_id = this.activeAnalyticsTopic.topic_id,
                         topic = this.activeAnalyticsTopic.topic_name,
                         subtopic = this.analyticsSubTopic,
