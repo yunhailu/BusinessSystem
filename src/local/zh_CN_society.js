@@ -48,7 +48,7 @@ export const zh_CN_society = _.extend({}, zh_CN, {
         home: "热点事件",
         analytics: "数据分析",
         dashboard: "报告生成",
-        compare: "数据对比",
+        compare: "比较分析",
         reports: "预警监测",
         setting: "监测设置",
         forUse:"使用说明",
@@ -75,7 +75,8 @@ export const zh_CN_society = _.extend({}, zh_CN, {
         allNetHotsRiver:"实时热点态势"
     },
     analytics: {
-        tabs: ["关注分析", "情绪分析", "评价分析", "影响力分析", "印象分析"],
+        // tabs: ["关注分析", "情绪分析", "评价分析", "影响力分析", "印象分析"],
+        tabs: ["关注分析", "意见领袖", "印象分析", "情绪分析", "评价分析"],
         filters: ["全部", "情绪指数", "地域分布", "性别分布", "语言分布"],
         source: ["全部", "微信", "微博", "客户端", "网页", "海外"],
         addDashboard: "添加快捷报告",
@@ -127,7 +128,8 @@ export const zh_CN_society = _.extend({}, zh_CN, {
         filters: ["全部", "情绪指数", "地域分布", "性别分布", "语言分布"],
         source: ["全部", "微信", "微博", "客户端", "网页", "海外"],
         tips:"如需开通，请联系客服：010-61934324",
-        addDashboard: "添加快捷报告"
+        addDashboard: "添加快捷报告",
+        noMsgTips:"暂无数据"
     },
     addDashboard:{
         addTitle: "添加新的报表",
@@ -244,7 +246,8 @@ export const zh_CN_society = _.extend({}, zh_CN, {
         dataFrom:"数据分析平台",
         match:"监测词",
         target:"指标",
-        sub_source:"来自"
+        sub_source:"来自",
+        phone:"010-61934324"
     },
     upload: {
         upload: "上传",

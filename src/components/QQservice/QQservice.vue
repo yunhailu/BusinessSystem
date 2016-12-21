@@ -12,7 +12,10 @@
     <div class="toolbar ">
         <!--<a href="javascript:;" class="toolbar-item toolbar-item-weixin"><span class="toolbar-layer"></span></a>-->
         <a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=2994454967&site=qq&menu=yes" class="toolbar-item toolbar-item-feedback"></a>
-        <a href="javascript:;" class="toolbar-item toolbar-item-app"><span class="toolbar-layer"></span></a>
+        <a href="javascript:void(0);" class="toolbar-item toolbar-item-app"><div class="toolbar-layer">
+            <h3>客服热线电话</h3>
+            <span>{{common.phone}}</span>
+        </div></a>
         <!--<a href="#dfs1" id="top"  class="toolbar-item toolbar-item-top"></a>-->
     </div>
 

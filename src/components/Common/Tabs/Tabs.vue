@@ -54,16 +54,20 @@
                     link: 'summary'
                 }, {
                     name: words.tabs[1],
-                    link: 'sentiment'
+                    //link: 'sentiment'
+                    link:'influence'
                 }, {
                     name: words.tabs[2],
-                    link: 'comment'
+                    //link: 'comment'
+                    link:'theme'
                 },{
                     name: words.tabs[4],
-                    link: 'theme'
+                    //link: 'theme'
+                    link: 'sentiment'
                 }, {
                     name: words.tabs[3],
-                    link: 'influence'
+                    //link: 'influence'
+                    link: 'comment'
                 }],
 //                filters: words.filters,
 //                filterActive: 0,

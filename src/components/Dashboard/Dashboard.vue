@@ -29,7 +29,7 @@
         </div>
     </div>
 
-    <footer-component class="footer"></footer-component>
+    <footer-component></footer-component>
 
 </template>
 <style lang="less" scoped>

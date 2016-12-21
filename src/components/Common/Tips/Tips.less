@@ -161,7 +161,32 @@
      -webkit-transform: rotate(-90deg);
    }
  }
- 
+ &-noMsgTips{
+   width: 20%;
+   background-color: #fff;
+   margin: 0 auto;
+   border-radius: 10 * @px;
+   padding: 0 4%;
+   color: #292d33;
+   position: fixed;
+   left:40%;
+   top:30%;
+   z-index: 1000;
+   h3{
+     padding-top: 42 * @px;
+     padding-bottom: 24 * @px;
+     font-size: 38 * @px;
+     font-weight: 700;
+     text-align: center;
+   }
+   .tips-content{
+     line-height: 40 * @px;
+     font-size: 30 * @px;
+     color: #292d33;
+     text-align: center;
+     .pd-bottom(50px);
+   }
+ }
  &-dialog{
    width: 70%;
    background-color: #fff;

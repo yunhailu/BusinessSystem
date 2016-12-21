@@ -9,6 +9,7 @@
 </div>
 
     <tips :visible.sync="loadingParams.visiable" :tipsparam.sync="loadingParams"></tips>
+    <tips :visible.sync="noMsgConfirm.visiable" :tipsparam.sync="noMsgConfirm"></tips>
 </template>
 <style lang="less" scoped>
     @import "Main.less";
@@ -28,6 +29,7 @@
         props: [],
         data(){
             const common = Local().common;
+            const compare = Local().compare;
             return{
                 common,
                 timeout:null,
@@ -35,6 +37,11 @@
                     visiable:false,
                     type:'loading',
                     content:common.waitWords
+                },
+                noMsgConfirm:{
+                    visiable:false,
+                    type:'noMsgTips',
+                    content:compare.noMsgTips
                 },
                 data:[],
                 VariableChartData:{
@@ -411,6 +418,15 @@
                         //处理data问题
                         this.changeSource();
                         this.mapData(this.data,intervalDate);
+                    } else if(resp.data.code !==0){
+                        this.noMsgConfirm.visiable = true;
+                        let arr = this.activeCompareTopic;
+                        const newArr  = _.without(arr,_.find(arr,item=>{return item.topic_id==topicParams.topic_id}));
+                        this.setActiveCompareTopic(newArr);
+                        setTimeout(function () {
+                            this.noMsgConfirm.visiable = false;
+                        }.bind(this),1000);
+                        return ;
                     }
                 });
             },
@@ -431,6 +447,9 @@
                         this.changeSource();
                         this.mapRadarData(this.radarData,intervalDate);
 
+                    }else if(resp.data.code !=0){
+                        this.loadingParams.visiable = false;
+                        clearTimeout(this.timeout);
                     }
                 })
             },
@@ -445,6 +464,15 @@
                         this.changeSource();
                         //处理data问题
                         this.mapData(this.data,intervalDate);
+                    } else if(resp.data.code !=0){
+                        this.noMsgConfirm.visiable = true;
+                        let arr = this.activeCompareTopic;
+                        const newArr  = _.without(arr,_.find(arr,item=>{return item.topic_id==topicParams.topic_id}));
+                        this.setActiveCompareTopic(newArr);
+                        setTimeout(function () {
+                            this.noMsgConfirm.visiable = false;
+                        }.bind(this),1000);
+                        return ;
                     }
                 });
             },
@@ -464,6 +492,9 @@
                         this.changeSource();
                         this.dealRadarData(newTopic,details);
                         this.mapRadarData(this.radarData,intervalDate);
+                    }else if(resp.data.code !=0){
+                        this.loadingParams.visiable = false;
+                        clearTimeout(this.timeout);
                     }
                 })
             },
