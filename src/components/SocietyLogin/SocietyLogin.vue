@@ -3,92 +3,37 @@
         <div class="login-header container ">
             <div class="row">
                 <div class="col-md-6 col-lg-6  pull-left">
-                <img src="images/logo.png">
-                <span>{{loginStr.forWodeTitle}}</span>
+                    <img src="images/logo.png">
+                    <span>{{loginStr.forWodeTitle}}</span>
                 </div>
                 <div class="col-md-6 col-lg-6 pull-right">
                     <ul  class=" navbar-nav pull-right ">
                         <li><a href="javascript:void(0);" @click="toPromotion">{{loginStr.forFirstPage}}</a></li>
                         <li><a href="javascript:void(0);" @click="showLogin">{{loginStr.forLogin}}</a></li>
                         <li><a href="javascript:void(0);" @click="toHotEvent">{{loginStr.hotEvent}}</a></li>
-                        <!--<li><a href="javascript:void(0);" @click="toIntruction">{{loginStr.instructionForUse}}</a></li>-->
+                        <li><a href="javascript:void(0);" @click="toApply">{{loginStr.applyForUse}}</a></li>
+
+                        <!--<li><a href="javascript:void(0);" @click="showApply">账号注册</a></li>-->
                     </ul>
                 </div>
-
             </div>
 
-
-
-            <!-- -&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;-->
-
-
-            <!--<div>-->
-                <!--<img src="images/logo.png">-->
-                <!--<span>{{loginStr.forWodeTitle}}</span>-->
-            <!--</div>-->
-            <!--<ul>-->
-                <!--<li class="col-sm-4"><a href="javascript:void(0);" @click="toHotEvent">{{loginStr.hotEvent}}</a></li>-->
-                <!--<li class="col-sm-4"><a href="javascript:void(0);" @click="showLogin">{{loginStr.forLogin}}</a></li>-->
-                <!--<li class="col-sm-4"><a href="javascript:void(0);" @click="toPromotion">{{loginStr.forFirstPage}}</a></li>-->
-            <!--</ul>-->
 
             <!--v-bind:style="{height:sliderH + 'px' ,width: sliderW + 'px' }"-->
         </div>
-        <!--<div class="container">
-
-            <div class="login-page">
-                <form class="form-horizontal" v-on:submit.prevent>
-                    <fieldset>
-                        <legend>
-                            <img class="logo-icon" src="images/logo.jpg" />
-                            <span>沃德品牌气象站</span>
-                        </legend>
-                        <div class="form-group">
-                            <label for="inputEmail3" class="col-sm-2 control-label login-font">用户名</label>
-                            <div class="col-sm-4">
-                                <input type="text" v-model="userName" class="form-control" id="inputEmail3" placeholder="UserName">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="inputPassword3" class="col-sm-2 control-label login-font">密码</label>
-                            <div class="col-sm-4">
-                                <input type="password" v-model="password" class="form-control" id="inputPassword3" placeholder="Password">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-sm-offset-2 col-sm-10 login-font">
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox"> 记住密码
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group" v-show="errorTip">
-                            <div class="col-sm-offset-2 col-sm-10 errorTip">
-                                <label>{{errorTip}}</label>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-sm-offset-2 col-sm-10">
-                                <button type="submit" class="btn btn-primary" @click="login">登录系统</button>
-                            </div>
-                        </div>
-                    </fieldset>
-                </form>
-            </div>
-        </div>-->
         <footer-component></footer-component>
-        <!--<div class="apply-bg" v-show="isApply" @click="cancelApply">
+
+        <!--账号申请注册------start -->
+        <div class="apply-bg" v-show="isApply" @click="cancelApply">
             <div class="apply-bg-content" @click.stop>
                 <div class="apply-bg-content-model" @keyup.enter="submit" >
                     <h3>
-                        <span>申请试用</span>
+                        <span>账号申请</span>
                         <a href="javascript:void(0);" @click="toLogin">已有账号，请点此登陆</a>
                     </h3>
                     <div class="applyCon">
                         <div class="form-group">
-                            <input type="text" placeholder="姓名"  v-model="applyUserName"  />
+                            <input type="text" placeholder="用户名"  v-model="applyUserName"  />
                             <em class="red">*</em>
                         </div>
                         <div class="form-group">
@@ -99,27 +44,35 @@
                             <em class="red">*</em>
                         </div>
                         <div class="form-group">
+                            <input type="text" placeholder="可用邮箱"  v-model="email"  />
+                            <em class="red">*</em>
+                        </div>
+                        <!--<div class="form-group">
                             <input type="text" placeholder="验证码"  v-model="applySms"  />
                             <span class="getSms">获取验证码</span>
                             <em class="red">*</em>
-                        </div>
-                        <div class="form-group">
-                            <textarea class="require" placeholder="需求描述"></textarea>
-                        </div>
+                        </div>-->
+                        <!-- <div class="form-group">
+                             <textarea class="require" placeholder="需求描述" v-model="demand"></textarea>
+                         </div>-->
                         <div class="form-group">
                             <a class="apply-btn" href="javascript:void(0);"  @click="submit">提 交</a>
-                            <p>客服 : ***-********</p>
+                            <p>客服 : {{common.phone}}</p>
                         </div>
+                    </div>
+                    <div class="smallTips" v-if="showSmallTips" @click="tipsHide">
+                        <p>{{errorTips}}</p>
                     </div>
                 </div>
             </div>
-        </div>-->
+        </div>
+        <!--账号申请注册-------end -->
         <div class="login-bg" v-show="isLogin" @click="cancelLogin">
             <div class="login-bg-content" @click.stop>
                 <div class="login-bg-content-model" @keyup.enter="login"  @keyup.8="isShowError">
                     <h3>
                         <span>{{loginStr.login}}</span>
-                        <!--<a href="javascript:void(0);" @click="toApply" v-show="false">{{loginStr.toApply}}</a>-->
+                        <a href="javascript:void(0);" @click="toApply">{{loginStr.toApply}}</a>
                     </h3>
                     <div class="loginCon">
                         <div class="form-group">
@@ -152,15 +105,13 @@
                 </div>
             </div>
         </div>
-
     </div>
     <div v-if="isPromotion"  class="loginSlider">
         <promotion ></promotion>
-
     </div>
-
     <!--<instruction v-if="isInstruction"></instruction>-->
     <hot-event class="hotevent" v-if="isHotEvent"></hot-event>
+    <qservice></qservice>
 </template>
 <style lang="less">
     @import "SocietyLogin.less";
@@ -174,78 +125,136 @@
     import * as Api from "../../widgets/Api";
     import FooterComponent from "../Footer/Footer.vue"
     import Promotion from "./SocietyPromotion/SocietyPromotion.vue"
-    import Instruction from "../Common/InstructionsForUse/InstructionsForUse.vue"
+    import Instruction from "./../Common/InstructionsForUse/InstructionsForUse.vue"
     import HotEvent from "../AllNetHotEvent/AllNetHotEvent.vue"
-    import {loginState ,loginTime } from '../../vuex/getters';
-    import {setLoginState, setLoginTime} from "../../vuex/actions";
+    import qservice from '../QQservice/QQservice.vue';
+    import {loginState ,loginTime,userLevel } from '../../vuex/getters';
+    import {setLoginState, setLoginTime,setUserLevel} from "../../vuex/actions";
 
     export default {
         name: 'login',
         data(){
             const applyStr = Local().apply;
             const loginStr =Local().login;
+            const common = Local().common;
             return{
-
                 applyStr,
                 loginStr,
+                common,
                 errorTip: '',
                 userName: '',
                 password: '',
+                applyUserName:'',
+                applyFactory:'',
+                applyTelephone:'',
+                email:'',
+//                demand:'',
+                errorTips:'',
+                timeout:null,
 //                userName:getCookie('login_userName'),
 //                password:getCookie('login_password'),
                 isApply:false,
                 isLogin:false,
                 errorShow:false,
                 isPromotion:true,
-//                isInstruction:false,
                 isHotEvent:false,
+                showSmallTips:false
             };
         },
         components:{
-            FooterComponent,Promotion,HotEvent
-//            ,Instruction
+            FooterComponent,Promotion,HotEvent,qservice
         },
         vuex:{
-            getters:{loginState, loginTime},
-            actions:{setLoginState, setLoginTime}
+            getters:{loginState, loginTime,userLevel},
+            actions:{setLoginState, setLoginTime,setUserLevel}
         },
         methods: {
+            tipsHide(){
+                clearTimeout(this.timeout);
+                this.showSmallTips = false;
+            },
+            tipsShow(){
+                clearTimeout(this.timeout);
+                this.timeout = setTimeout(function () {
+                    this.showSmallTips = false;
+                }.bind(this),1000);
+            },
+            submit(){
+                this.errorTips = '';
+
+                //姓名必填2-10位
+                if((this.applyUserName).length>10 ||(this.applyUserName).length<2){
+                    this.errorTips="姓名需输入2-10位字符";
+                    this.showSmallTips = true;
+                    this.tipsShow();
+                    return ;
+                }
+                //校验正确的手机号
+                var phoneReg = /^((1[3-8]{1}[0-9]{1})+\d{8})$/;
+                if(!phoneReg.test(this.applyTelephone)){
+                    this.errorTips="请输入正确手机号";
+                    this.showSmallTips = true;
+                    this.tipsShow();
+                    return ;
+                }
+                //可用邮箱注册校验
+                var emailReg = /^(\w)+(\.\w+)*@(\w)+((\.\w{2,3}){1,3})$/;
+                if(!emailReg.test(this.email)){
+                    this.errorTips="请输入正确的邮箱格式";
+                    this.showSmallTips = true;
+                    this.tipsShow();
+                    return ;
+                }
+                //提交申请
+                const params = {
+                    username:this.applyUserName,
+                    company:this.applyFactory,
+                    phone:this.applyTelephone,
+                    email:this.email,
+
+                }
+                Api.register(params).then(resp =>{
+                    if(resp.data.code==0){
+                    console.log('申请成功');
+                } else if(resp.data.code==100){
+                    this.errorTips="用户名已被注册";
+                    this.showSmallTips = true;
+                    setTimeout(function () {
+                        this.showSmallTips = false;
+                    },1000);
+                    return ;
+                }
+            })
+            },
             toHotEvent(){
                 this.isHotEvent = true;
                 this.isPromotion=false;
-//                this.isInstruction=false;
             },
-           // 注册
-          /* toIntruction(){
-                this.isInstruction=true;
-                this.isPromotion=false;
-               this.isHotEvent = false;
-            },*/
+            //注册
             toPromotion(){
                 this.isPromotion=true;
-//                this.isInstruction=false;
                 this.isHotEvent = false;
             },
-            /*去申请登使用
+            //去申请登使用
             toApply(){
                 this.isLogin=false;
                 this.isApply=true;
-            },*/
-            //去申请登陆
-            /*toLogin(){
+            },
+//            /*去申请登陆
+            toLogin(){
                 this.isApply=false;
                 this.isLogin=true;
-            },*/
+            },
             isShowError(){
                 if(this.errorShow == true){
                     this.errorShow = this.userName || this.password;
                 }
             },
-            /*点击遮罩取消
+//            /*点击遮罩取消
             cancelApply(){
                 this.isApply=false;
                 this.errorShow = false;
-            },*/
+            },
             cancelLogin(){
                 this.isLogin=false;
                 this.errorShow = false;
@@ -273,46 +282,50 @@
                     username: this.userName,
                     password: this.password
                 }).then(resp => {
-                    //console.log('Login', resp);
-                    const data = resp.data;
-                    if(data.code == 0){
-                        this.errorShow = false;
-                        Cookie.set('business_uid', data.data.user_id);
-                        Cookie.set('business_name', data.data.user_name);
-                        Cookie.set('business_admin', data.data.isAdmin);
-                        Cookie.set('business_email', data.data.email);
-                        Cookie.set('business_level', data.data.level);
-                        Cookie.set('access_token',data.data.access_token);
-                        this.userName = '';
-                        this.password = '';
-                        /*if(this.$els.remember.checked==true){
-                            console.log(this.$els.remember.checked)
-                            Cookie.set('login_userName',this.userName);
-                            Cookie.set('login_password',this.password);
-                            Cookie.set('login_remember',true);
-                        }else{
-                            this.userName = '';
-                            this.password = '';
-                        }*/
-                        //location.hash = '#!/home';
-                        this.$router.go({name: 'home'});
-                    } else {
-                        this.errorShow = true;
-                        this.errorTip = data.message;
-                    }
-                });
+                    console.log('Login', resp);
+                const data = resp.data;
+                if(data.code == 0){
+                    this.errorShow = false;
+                    Cookie.set('business_uid', data.data.user_id);
+                    Cookie.set('business_name', data.data.user_name);
+                    Cookie.set('business_admin', data.data.isAdmin);
+                    Cookie.set('business_email', data.data.email);
+                    Cookie.set('business_level', data.data.level);
+                    Cookie.set('access_token',data.data.access_token);
+//                        document.cookie ="access_token="+data.data.access_token + "; expires=" + (new Date()).setTime((new Date()).getTime()+60*60*24).toGMTString();
+                    this.setUserLevel(data.data.level);
+                    console.log(this.userLevel);
+                    this.setLoginTime(this.loginTime + 1);
+                    this.userName = '';
+                    this.password = '';
+                    /*if(this.$els.remember.checked==true){
+                     console.log(this.$els.remember.checked)
+                     Cookie.set('login_userName',this.userName);
+                     Cookie.set('login_password',this.password);
+                     Cookie.set('login_remember',true);
+                     }else{
+                     this.userName = '';
+                     this.password = '';
+                     }*/
+                    //location.hash = '#!/home';
+                    this.$router.go({name: 'home'});
+                } else {
+                    this.errorShow = true;
+                    this.errorTip = data.message;
+                }
+            });
             }
         },
-       /* created(){
-            console.log('bbb',this.userName,this.password);
-            this.userName = getCookie('login_userName');
-            this.password = getCookie('login_password');
-        },*/
+        /* created(){
+         console.log('bbb',this.userName,this.password);
+         this.userName = getCookie('login_userName');
+         this.password = getCookie('login_password');
+         },*/
         ready(){
 
             console.log('aaa',this.userName,this.password);
-                this.userName = getCookie('login_userName');
-                this.password = getCookie('login_password');
+            this.userName = getCookie('login_userName');
+            this.password = getCookie('login_password');
 
             //console.log('this',this.$el.querySelector('.remember').checked);
             //this.$els.remember.checked = getCookie('login_remember');
@@ -329,11 +342,11 @@
             }
         }
         /*route:{
-            activate(transition){
-                redirect();
-                transition.next();
-            }
-        }*/
+         activate(transition){
+         redirect();
+         transition.next();
+         }
+         }*/
     };
 
 </script>

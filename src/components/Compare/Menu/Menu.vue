@@ -34,8 +34,7 @@
             return{
                 common,
                 CompareMenu,
-//                nickName: getCookie('business_name')
-                nickName: "欢迎！"
+                nickName: getCookie('business_name')
             }
         },
         components:{

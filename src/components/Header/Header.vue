@@ -40,6 +40,7 @@
     import {loginTime} from '../../vuex/getters';
     import {setLoginTime} from '../../vuex/actions';
     import qservice from '../QQservice/QQservice.vue';
+    import * as Api from "../../widgets/Api";
 
     export default{
         props: ["active"],
@@ -97,13 +98,20 @@
                 Cookie.remove('business_uid');
                 Cookie.remove('bussiness_name');
                 Cookie.remove('business_level');
-                const whiteName = _.filter(WhiteList, item => (item.domain == location.origin));
-                let name = 'login';
-                if(whiteName.length){
-                    name = whiteName[0].link;
-                }
-                this.$router.go({ name });
-                location.reload();
+                Cookie.remove('access_token');
+
+                Api.logout({}).then(resp=>{
+                    console.log(resp);
+                    const whiteName = _.filter(WhiteList, item => (item.domain == location.origin));
+                    let name = 'login';
+                    if(whiteName.length){
+                        name = whiteName[0].link;
+                    }
+                    this.$router.go({ name });
+                    location.reload();
+                });
+
+
             },
             initData(){
                 this.nickName = getCookie('business_name');

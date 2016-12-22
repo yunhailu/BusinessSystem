@@ -117,11 +117,11 @@
             }
         },
         methods:{
-            login(){
-
-                this.setLoginState(true);
-
-            }
+//            login(){
+//
+//                this.setLoginState(true);
+//
+//            }
         },
 
         mounted() {
