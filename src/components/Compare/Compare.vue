@@ -20,7 +20,7 @@
                             <li @click="selectTime(30);" v-if="timePay ===0"  :class="[selectTimeTag == 30 ? 'active' : '']">30天
                                 <smalltip :title = 'compare.tips' class="smalltip"></smalltip>
                             </li>
-                            <li @click="selectTime(30);" v-if="timePay !== 0"  :class="[selectTimeTag == 30 ? 'active' : '']"> 30D</li>
+                            <li @click="selectTime(30);" v-if="timePay !== 0"  :class="[selectTimeTag == 30 ? 'active' : '']"> 30天</li>
                             <li @click="selectTime(0);"  v-if="timePay !== 2"   :class="[selectTimeTag == 0 ? 'active' : '']">自定义
                                 <smalltip :title = 'compare.tips' class="smalltip"></smalltip>
                             </li>

@@ -51,19 +51,24 @@
                 isAnalytics:false,
                 tabs: [{
                     name: words.tabs[0],
-                    link: 'summary'
+                    //link: 'summary'
+                    link:'theme'
                 }, {
                     name: words.tabs[1],
-                    link: 'sentiment'
+                    //link: 'sentiment'
+                    link:'influence'
                 }, {
                     name: words.tabs[2],
+                    //link: 'comment'
+                    link: 'summary'
+                }, {
+                    name: words.tabs[3],
+                    //link: 'influence'
                     link: 'comment'
                 },{
                     name: words.tabs[4],
-                    link: 'theme'
-                }, {
-                    name: words.tabs[3],
-                    link: 'influence'
+                    //link: 'theme'
+                    link: 'sentiment'
                 }],
 //                filters: words.filters,
 //                filterActive: 0,

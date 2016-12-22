@@ -11,7 +11,7 @@
                         <li><a href="javascript:void(0);" @click="toPromotion">{{loginStr.forFirstPage}}</a></li>
                         <li><a href="javascript:void(0);" @click="showLogin">{{loginStr.forLogin}}</a></li>
                         <li><a href="javascript:void(0);" @click="toHotEvent">{{loginStr.hotEvent}}</a></li>
-                        <li><a href="javascript:void(0);" @click="toIntruction">{{loginStr.instructionForUse}}</a></li>
+                        <!--<li><a href="javascript:void(0);" @click="toIntruction">{{loginStr.instructionForUse}}</a></li>-->
 
                         <!--<li><a href="javascript:void(0);" @click="showApply">账号注册</a></li>-->
 
@@ -169,7 +169,7 @@
 
     </div>
 
-    <instruction v-if="isInstruction"></instruction>
+    <!--<instruction v-if="isInstruction"></instruction>-->
     <hot-event class="hotevent" v-if="isHotEvent"></hot-event>
     <qservice></qservice>
 </template>
@@ -197,7 +197,6 @@
             const applyStr = Local().apply;
             const loginStr =Local().login;
             return{
-
                 applyStr,
                 loginStr,
                 errorTip: '',
@@ -209,12 +208,13 @@
                 isLogin:false,
                 errorShow:false,
                 isPromotion:true,
-                isInstruction:false,
+//                isInstruction:false,
                 isHotEvent:false,
             };
         },
         components:{
-            FooterComponent,Promotion,Instruction,HotEvent,qservice
+            FooterComponent,Promotion,HotEvent,qservice
+//            ,Instruction
         },
         vuex:{
             getters:{loginState, loginTime,userLevel},
@@ -224,17 +224,17 @@
             toHotEvent(){
                 this.isHotEvent = true;
                 this.isPromotion=false;
-                this.isInstruction=false;
+//                this.isInstruction=false;
             },
             //注册
-           toIntruction(){
+          /* toIntruction(){
                 this.isInstruction=true;
                 this.isPromotion=false;
                 this.isHotEvent = false;
-            },
+            },*/
             toPromotion(){
                 this.isPromotion=true;
-                this.isInstruction=false;
+//                this.isInstruction=false;
                 this.isHotEvent = false;
             },
             /*去申请登使用
@@ -284,7 +284,7 @@
                     username: this.userName,
                     password: this.password
                 }).then(resp => {
-                    //console.log('Login', resp);
+                    console.log('Login', resp);
                     const data = resp.data;
                     if(data.code == 0){
                         this.errorShow = false;
@@ -293,6 +293,8 @@
                         Cookie.set('business_admin', data.data.isAdmin);
                         Cookie.set('business_email', data.data.email);
                         Cookie.set('business_level', data.data.level);
+                        Cookie.set('access_token',data.data.access_token);
+//                        document.cookie ="access_token="+data.data.access_token + "; expires=" + (new Date()).setTime((new Date()).getTime()+60*60*24).toGMTString();
                         this.setUserLevel(data.data.level);
                         console.log(this.userLevel);
                         this.setLoginTime(this.loginTime + 1);

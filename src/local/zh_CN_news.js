@@ -1,7 +1,10 @@
 /**
  * Created by yunhailu on 2016/8/20.
  */
-export const zh_CN = {
+import _ from 'underscore';
+import { zh_CN } from './zh_CN';
+
+export const zh_CN_news =_.extend({},zh_CN,{
     apply:{
         apply:"申请试用",
         toLogin:"已有账号，请点此登陆",
@@ -41,7 +44,7 @@ export const zh_CN = {
         cooperation:"沃民高新科技（北京）股份有限公司、工信部电子科技情报所网络舆情研究中心联合开发"
     },
     header: {
-        title: "沃德品牌气象站",
+        title: "沃德新闻气象站",
         home: "热点事件",
         analytics: "数据分析",
         dashboard: "报告生成",
@@ -84,7 +87,7 @@ export const zh_CN = {
         anger: "愤怒",
         sorrow: "失望",
         disgust: "反感",
-        fear: "害怕"
+        fear: "害怕",
     },
     comment: {
         comment: "评价指数",
@@ -224,7 +227,7 @@ export const zh_CN = {
         web: "网页",
         overseas: "海外",
         happy: "满意",
-        source:"沃德品牌气象站",
+        source:"沃德新闻气象站",
         anger: "愤怒",
         sorrow: "失望",
         disgust: "反感",
@@ -252,4 +255,4 @@ export const zh_CN = {
         onlyOne: "请只选择一张图片",
         noPic: "您选择的不是图片"
     }
-};
+});

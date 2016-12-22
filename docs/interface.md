@@ -420,7 +420,7 @@
 ### 三、数据对比
 -  compare/sentiment(是3)
 
-### 四、监测设置
+### 四、监测/预警设置
 ##### 1.获取话题列表
 - topic/list
 ```
@@ -439,7 +439,7 @@
 
 ##### 2.添加话题
 - topic/add
-- 入参：name, group_id,monitor=(angry),threshold=100
+- 入参：name, group_id
 ```
 {
 	code: 0,
@@ -449,7 +449,6 @@
 	message: "success"
 }
 ```
-
 
 ##### 3.删除话题
 - topic/delete
@@ -463,9 +462,10 @@
 	message: "success"
 }
 ```
+
 ##### 4.更新话题
 - topic/update
-- 入参：id,name,group_id,monitor=(angry),threshold=100
+- 入参：id,name,group_id
 ```
 {
 	code: 0,
@@ -473,6 +473,53 @@
 		success:1
 	},
 	message: "success"
+}
+```
+
+##### 5.添加预警
+- monitor/add
+- 入参：topic_id,monitor=(angry),predicate=(>=),threshold=100
+```
+{
+	code: 0,
+	data: {
+		monitor_id:1
+	},
+	message: "success"
+}
+```
+
+##### 6.更新预警
+- monitor/update
+- 入参：id,predicate=(>=),threshold=100
+```
+{
+	code: 0,
+	data: {
+		data:1
+	},
+	message: "success"
+}
+```
+
+##### 7.预警列表
+- monitor/list
+- 入参：无
+```
+{
+    "code": 0, 
+    "message": "success", 
+    "data": [
+        {
+            "id": "1", 
+            "topic_id": 95, 
+            "topic_name": "奥迪", 
+            "monitor": "anger", 
+            "predicate": ">", 
+            "threshold": "80", 
+            "date": "2016-12-21 17:36:08"
+        }
+    ]
 }
 ```
 
@@ -611,7 +658,8 @@
 ### 五、帐号/鉴权
 ##### 1.注册用户
 - auth/register
-- 必传入参: username,password,email,avatar,phone
+- 必传入参: username,email,phone
+- 选传入参: company
 - 说明：username、email、phone有唯一性校验
 ```
 - 失败：

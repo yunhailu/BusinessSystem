@@ -67,9 +67,10 @@
                     dataZoom: _.extend({}, Chart.dataZoom),
                     color:['#2FCC71','#E64D3D', '#F1C40F', '#3598DC', '#737373'],
                     grid: _.extend({}, Chart.grid, { bottom: '40rem' }),
-                    toolbox: _.extend({}, Chart.toolbox, {
+                    /*toolbox: _.extend({}, Chart.toolbox, {
                         feature: { saveAsImage: {} }
-                    }),
+                    }),*/
+                    toolbox:Chart.toolbox,
                     xAxis: _.extend({}, Chart.xAxis, {
                         type : 'category',
                         data: [],
@@ -131,7 +132,6 @@
             clickChartAction(opts){
                 this.loadingParams.visiable = true;
                 const topic_id = this.activeAnalyticsTopic.topic_id,
-                        topic = this.activeAnalyticsTopic.topic_name,
                         subtopic = this.analyticsSubTopic,
                         source = this.analyticsSource,
                         time_dimension = 0,
@@ -145,7 +145,7 @@
                     start=start.split(" ")[0]+'T'+start.split(" ")[1];
                     console.log('start',start,end);
                 }
-                Api.getCommentList({type, topic_id, topic, subtopic, source, start, end, time_dimension}).then(resp => {
+                Api.getCommentList({type, topic_id, subtopic, source, start, end, time_dimension}).then(resp => {
                     if(resp.data.code == 0){
                     this.loadingParams.visiable = false;
                         this.list = resp.data.data;
@@ -159,7 +159,6 @@
                     this.loadingParams.visiable = false;
                 }.bind(this),9000)
                 const topic_id = this.activeAnalyticsTopic.topic_id,
-                        topic = this.activeAnalyticsTopic.topic_name,
                         subtopic = this.analyticsSubTopic,
                         source = this.analyticsSource,
                         time_interval = this.analyticsTimeRange,
@@ -170,7 +169,7 @@
                     start = start.split(' ')[0] + 'T' + start.split(' ')[1];
                     end = end.split(' ')[0] + 'T' + end.split(' ')[1];
                 }
-                Api.getCommentList({type, topic_id, topic, subtopic, source, start, end, time_dimension}).then(resp => {
+                Api.getCommentList({type, topic_id, subtopic, source, start, end, time_dimension}).then(resp => {
                     if(resp.data.code == 0){
                         this.list = resp.data.data;
                         this.loadingParams.visiable = false;
@@ -179,7 +178,6 @@
             },
             getCommentDetail(){
                 const topic_id = this.activeAnalyticsTopic.topic_id,
-                    topic = this.activeAnalyticsTopic.topic_name,
                     subtopic = this.analyticsSubTopic,
                     source = this.analyticsSource,
                     time_interval = this.analyticsTimeRange,
@@ -191,7 +189,7 @@
                     end = end.split(' ')[0]+'T'+end.split(' ')[1];
                     console.log('start',start,end);
                 }
-                Api.getCommentDetail({ topic_id, topic, subtopic, source, start, end, time_dimension }).then(resp => {
+                Api.getCommentDetail({ topic_id, subtopic, source, start, end, time_dimension }).then(resp => {
                     if(resp.data.code == 0){
                         this.commentBarLoading = false;
                         this.commentPieLoading2= false;

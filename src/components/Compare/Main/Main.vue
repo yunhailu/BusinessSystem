@@ -9,6 +9,7 @@
 </div>
 
     <tips :visible.sync="loadingParams.visiable" :tipsparam.sync="loadingParams"></tips>
+    <tips :visible.sync="noMsgConfirm.visiable" :tipsparam.sync="noMsgConfirm"></tips>
 </template>
 <style lang="less" scoped>
     @import "Main.less";
@@ -28,6 +29,7 @@
         props: [],
         data(){
             const common = Local().common;
+            const compare = Local().compare;
             return{
                 common,
                 timeout:null,
@@ -35,6 +37,11 @@
                     visiable:false,
                     type:'loading',
                     content:common.waitWords
+                },
+                noMsgConfirm:{
+                    visiable:false,
+                    type:'noMsgTips',
+                    content:compare.noMsgTips
                 },
                 data:[],
                 VariableChartData:{
@@ -98,7 +105,12 @@
                         },
                         show: true
                     }),
-                    tooltip: _.extend({}, Pie.tooltip),
+//                    tooltip: _.extend({}, Pie.tooltip),
+                    tooltip: {
+                        show:true,
+                        trigger: 'item',
+                        formatter:"{b}:({d}%)"
+                    },
                     legend: _.extend({}, Pie.legend, {
                         bottom: 0,
                         data:[]
@@ -108,6 +120,14 @@
                     color: _.extend([], Chart.color),
                     graphic:Pie.graphic,
                     series: _.extend({}, Pie.series, {
+                        label:{
+                            normal:{
+                                show:true,
+                                formatter:"{d}%"
+                            }
+                        },
+                        labelLine:{normal:{show:true}},
+                        type:'pie',
                         name: 'Compare',
                         radius: ['25%', '60%'],
                         data:[]
@@ -116,7 +136,7 @@
 
                 compareRadarLoading: false,
                 compareRadarOption: {
-                    backgroundColor: '-webkit-radial-gradient(#e9e9e9 5%, #f9f9f9 60%);',
+                   // backgroundColor: '-webkit-radial-gradient(#e9e9e9 5%, #f9f9f9 60%);',
                     title: _.extend({}, Pie.title, {
                         text:'情绪趋势图：',
                         textStyle:{
@@ -128,6 +148,7 @@
                         bottom: 1,
                         data: []
                     },
+                    toolbox: Pie.toolbox,
                     //color: _.extend([], Chart.color),
                     color:["#1C7C76","#FA943E","#88051C","#2E44E1","#F58974","#F574EA","#81F574","#051527","#C9E120","#F4D171"],
                     radar: {
@@ -371,7 +392,6 @@
                 _.map(activeCompareTopics,item =>{
                     let topicParams = {
                         topic_id:item.topic_id,
-                        topic:item.topic_name,
                         subtopic:this.compareSubTopic,
                         source:this.compareSource,
                         start:this.compareStart,
@@ -398,6 +418,15 @@
                         //处理data问题
                         this.changeSource();
                         this.mapData(this.data,intervalDate);
+                    } else if(resp.data.code !==0){
+                        this.noMsgConfirm.visiable = true;
+                        let arr = this.activeCompareTopic;
+                        const newArr  = _.without(arr,_.find(arr,item=>{return item.topic_id==topicParams.topic_id}));
+                        this.setActiveCompareTopic(newArr);
+                        setTimeout(function () {
+                            this.noMsgConfirm.visiable = false;
+                        }.bind(this),1000);
+                        return ;
                     }
                 });
             },
@@ -418,6 +447,9 @@
                         this.changeSource();
                         this.mapRadarData(this.radarData,intervalDate);
 
+                    }else if(resp.data.code !=0){
+                        this.loadingParams.visiable = false;
+                        clearTimeout(this.timeout);
                     }
                 })
             },
@@ -432,6 +464,15 @@
                         this.changeSource();
                         //处理data问题
                         this.mapData(this.data,intervalDate);
+                    } else if(resp.data.code !=0){
+                        this.noMsgConfirm.visiable = true;
+                        let arr = this.activeCompareTopic;
+                        const newArr  = _.without(arr,_.find(arr,item=>{return item.topic_id==topicParams.topic_id}));
+                        this.setActiveCompareTopic(newArr);
+                        setTimeout(function () {
+                            this.noMsgConfirm.visiable = false;
+                        }.bind(this),1000);
+                        return ;
                     }
                 });
             },
@@ -451,6 +492,9 @@
                         this.changeSource();
                         this.dealRadarData(newTopic,details);
                         this.mapRadarData(this.radarData,intervalDate);
+                    }else if(resp.data.code !=0){
+                        this.loadingParams.visiable = false;
+                        clearTimeout(this.timeout);
                     }
                 })
             },
@@ -553,7 +597,6 @@
                         const newTopic = val;
                         let topicParams = {
                             topic_id:_.isEmpty(newTopic) ? '' : newTopic[0].topic_id,
-                            topic:_.isEmpty(newTopic) ? '' : newTopic[0].topic_name,
                             subtopic:this.compareSubTopic,
                             source:this.compareSource,
                             start:this.compareStart,
@@ -575,7 +618,6 @@
                                 const newTopic = _.difference(val, oldVal);
                                 let topicParams = {
                                     topic_id:_.isEmpty(newTopic) ? '' : newTopic[0].topic_id,
-                                    topic:_.isEmpty(newTopic) ? '' : newTopic[0].topic_name,
                                     subtopic:this.compareSubTopic,
                                     source:this.compareSource,
                                     start:this.compareStart,
@@ -618,7 +660,6 @@
                             const newTopic = val;
                             let topicParams = {
                                 topic_id:_.isEmpty(newTopic) ? '' : newTopic[0].topic_id,
-                                topic:_.isEmpty(newTopic) ? '' : newTopic[0].topic_name,
                                 subtopic:this.compareSubTopic,
                                 source:this.compareSource,
                                 start:this.compareStart,

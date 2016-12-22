@@ -16,7 +16,10 @@
         </div>
         <i class="tips-close" v-if="tipsparam.showX" @click="closePage"></i>
     </div>
-
+      <div class="zz-tips-noMsgTips" v-if="tipsparam.type=='noMsgTips'">
+          <h3><i class="fa fa-warning"></i> {{tipsparam.title |  defaultValue '提示'}}</h3>
+          <div class="tips-content">{{tipsparam.content}}</div>
+      </div>
     <div class="zz-tips-toast" v-if="tipsparam.type == 'toast'">
         <p class="failImg" v-show="tipsparam.toastType == 'fail'"></p>
         <p class="successImg" v-show="tipsparam.toastType == 'success'"></p>

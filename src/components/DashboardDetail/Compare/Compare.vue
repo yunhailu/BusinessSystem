@@ -8,10 +8,10 @@
             <echarts :options="compareChartOption" :initOptions="compareChartOption" :img.sync="master"></echarts>
         </div>
         <div class="chart radar" :loading="compareRadarLoading">
-            <echarts :options="compareRadarOption" :initOptions="compareRadarOption" :img.sync="sub"></echarts>
+            <echarts :options="compareRadarOption" :initOptions="compareRadarOption" :img.sync="trend"></echarts>
         </div>
         <div class="chart pie" :loading="comparePieLoading">
-            <echarts :options="comparePieOption" :initOptions="comparePieOption" :img.sync="trend"></echarts>
+            <echarts :options="comparePieOption" :initOptions="comparePieOption" :img.sync="sub"></echarts>
         </div>
     </div>
 </template>
@@ -146,6 +146,14 @@
                     color: _.extend([], Chart.color),
                     graphic:Pie.graphic,
                     series: _.extend({}, Pie.series, {
+                        label:{
+                            normal:{
+                                show:true,
+                                formatter:"{d}%"
+                            }
+                        },
+                        labelLine:{normal:{show:true}},
+                        type:'pie',
                         name: 'Compare',
                         radius: ['25%', '60%'],
                         data:[]
@@ -154,7 +162,6 @@
 
                 compareRadarLoading: false,
                 compareRadarOption: {
-                    backgroundColor: '-webkit-radial-gradient(#e9e9e9 5%, #f9f9f9 60%);',
                     title: _.extend({}, Pie.title, {
                         text:'情绪趋势图：',
                         textStyle:{
@@ -202,6 +209,7 @@
                         }
                     },
                     graphic:Chart.graphic,
+                    toolbox:Pie.toolbox,
                     series: [{
                         type: 'radar',
                         symbol: 'none',
@@ -413,7 +421,6 @@
                 _.map(activeCompareTopics,item =>{
                     let topicParams = {
                         topic_id:item.topic_id,
-                        topic:item.topic_name,
                         subtopic:this.compareSubTopic,
                         source:this.compareSource,
                         start:this.compareStart,

@@ -48,9 +48,10 @@ export const zh_CN_CCSI = _.extend({}, zh_CN,{
         home: "热点事件",
         analytics: "数据分析",
         dashboard: "报告生成",
-        compare: "数据对比",
+        compare: "比较分析",
         reports: "预警监测",
-        setting: "监测设置",
+        setting: "搜索设置",
+        forUse:"使用指南",
         quit: "退出"
     },
     home: {
@@ -74,7 +75,7 @@ export const zh_CN_CCSI = _.extend({}, zh_CN,{
         allNetHotsRiver:"实时热点态势"
     },
     analytics: {
-        tabs: ["关注分析", "情绪分析", "评价分析", "影响力分析", "印象分析"],
+        tabs: [ "印象分析", "意见领袖","关注分析", "评价分析", "情绪分析"],
         filters: ["全部", "情绪指数", "地域分布", "性别分布", "语言分布"],
         source: ["全部", "微信", "微博", "客户端", "网页", "海外"],
         addDashboard: "添加快捷报告",
@@ -126,7 +127,8 @@ export const zh_CN_CCSI = _.extend({}, zh_CN,{
         filters: ["全部", "情绪指数", "地域分布", "性别分布", "语言分布"],
         source: ["全部", "微信", "微博", "客户端", "网页", "海外"],
         tips:"如需开通，请联系客服：010-88315484 ",
-        addDashboard: "添加快捷报告"
+        addDashboard: "添加快捷报告",
+        noMsgTips:"暂无数据"
     },
     addDashboard:{
         addTitle: "添加新的报表",
@@ -207,6 +209,9 @@ export const zh_CN_CCSI = _.extend({}, zh_CN,{
         phoneCondition: "手机号码不正确",
         emailCondition: "邮箱不正确"
     },
+    instruction:{
+        forUse:'../../../../images/ccsiInstruction.jpg',
+    },
     common: {
         weeks: ['日', '一', '二', '三', '四', '五', '六'],
         buttons:['确定', '取消'],
@@ -215,6 +220,7 @@ export const zh_CN_CCSI = _.extend({}, zh_CN,{
         prevPage: "上一页",
         nextPage: "下一页",
         deleteTip: "确定要删除么？",
+        all:"所有",
         wechat: "微信",
         weibo: "微博",
         client: "客户端",
@@ -239,7 +245,8 @@ export const zh_CN_CCSI = _.extend({}, zh_CN,{
         dataFrom:"数据分析平台",
         match:"监测词",
         target:"指标",
-        sub_source:"来自"
+        sub_source:"来自",
+        phone:"010-88315484"
     },
     upload: {
         upload: "上传",
