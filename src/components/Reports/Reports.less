@@ -1,12 +1,20 @@
 @import "../common.less";
 
-.wid{ .w(1200px;)}
+.wid{.w(100%;)}
+.wornin {.c(#f00);}
+.form-group {
+  h5{.mg-bottom(0px); .mg-top(10px);}
+  .w(100%); .mg-bottom(10px);.h(40px);}
+.modifyReports{ .br(4px); .pa(); .pd-top(1%); .bgc(rgba(255,255,255,0.9));
+  min-width:390px; .top(20%); .left(36%); .w(28%); .h(300px); .z(1999); box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.75); }
+.modifyReportsbg { .bgc(rgba(0,0,0,0.6)); .pf(); .top(0); .left(0); .w(100%); .h(100%); .z(999);}
+.cclose {.mg-right(6px);.mg-top(-6px);}
 .reports{
   height: 100%;background-color: #f9f9f9;overflow-y: auto;
   &-wrap{
     .bgc(@bg-color);  .pd(0);
     &-title{
-      .w(100%);  .pd(5px 1px);  .b-bottom(1px solid #e9e9e9);
+      .w(100%);  .pd(12px 1px);  .b-bottom(1px solid #e9e9e9);
       .title{ .f(20px);  .c(#999);  .ff("Microsoft Yahei"); }
     }
     &-table{

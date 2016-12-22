@@ -104,7 +104,35 @@ module.exports = {
         auth: true,
         component (resolve) {
             require(['../components/Reports/Reports.vue'], resolve);
+        },
+        subRoutes:{
+            // '/': {
+            //     name: 'settingDefault',
+            //     component (resolve) {
+            //         require(['../components/Setting/Default/Default.vue'], resolve);
+            //     }
+            // },
+            '/': {
+                name: 'reportsAdd',
+                component (resolve) {
+                    require(['../components/Reports/Reports.vue'], resolve);
+                }
+            },
+            '/add': {
+                name: 'reportsAdd',
+                component (resolve) {
+                    require(['../components/Reports/Reports.vue'], resolve);
+                }
+            },
+            '/:group_id/:topic_id': {
+                name: 'reportsEdit',
+                component (resolve) {
+                    require(['../components/Reports/Reports.vue'], resolve);
+                }
+            }
         }
+
+
     },
     'setting': {
         name: 'setting',

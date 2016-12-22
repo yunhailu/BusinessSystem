@@ -50,13 +50,7 @@
                             </div>
                             <div class="col-sm-4 tip">{{words.optional}}</div>
                         </div>
-
-                        <!-- ---------------moodselect--------------------------------------------->
-                       
-                        <!-- ------------------------------------------------------------>
                         <div class="form-group">
-
-
 
                             <label for="excludeText" class="col-sm-2 control-label">{{words.exclude}}</label>
                             <div class="col-sm-4">
@@ -64,8 +58,7 @@
                             </div>
                             <div class="col-sm-4 tip">{{words.optional}}</div>
                         </div>
-                        
-                         <div class="form-group">
+                        <div class="form-group" v-show="false">
                             <label for="monitor" class="col-sm-2 control-label">{{words.warningSet}}</label>
                             <div class="col-sm-4">
                             <select v-model="monitor" @click="geteachmood(monitor);"  name="moodSelect" class="form-control moodwSet0" id="monitor" >
@@ -79,9 +72,7 @@
                             </div>
                             <div class="col-sm-4 tip">{{words.optional}}</div>
                         </div>
-                        
-                        
-                        
+
                         <div class="form-group" v-show="errorTip">
                             <div class="col-sm-offset-3 col-sm-10">
                                 <div class="error">* {{errorTip}}</div>
@@ -217,7 +208,6 @@
                     default:
                         break;
                 }
-
             },
             updateSubmit(){
 
@@ -329,49 +319,19 @@
                 const topic = _.chain(group.list)
                         .filter(topic => (topic.topic_id == topic_id))
                         .first().value();
+                console.log('group.list:',group.list);
                 this.topicText = topic.topic_name;
-                Api.getMonitorList().then(resp => {
-                    //console.log(resp.data);
-                    if(resp.data.code == 0){
-                        //this.reports = resp.data.data;
-                        const hj=_.chain(resp.data.data)
-                                .filter(hj => (hj.topic_id == topic_id))
-                                .first().value();
-                         if(_.size(hj.data)>0){
-                        this.monitor=hj.data[0].key;                  
-                        this.threshold=hj.data[0].value;
-
-                         	const sortbydatas=_.sortBy(hj.data, 'key');
-                         	const sdf=_.pluck(sortbydatas,'key');
-                         	const wed=_.difference(['happy','anger','disgust','sorrow','fear'],sdf);
-                         	for(var i=0; i<wed.length;i++){
-                         		var cdssa={'key':wed[i],'value':0};
-                         		sortbydatas.push(cdssa);
-                         	};
-
-                         	this.moodVaule=sortbydatas;   
-
-                         }
-                         
-
-
-                    }
-                });
 
                  this.radioVal = group_id;
 
             },
 
 
-
-
             init(){
-            	
-            
+
                 //拉取情绪的列表。。
                 this.getCategroy();
-                
-                
+
                 // 拉取 group 列表
                 this.getGroupList().then(resp => {
                     //console.log("group list", resp);

@@ -13,6 +13,7 @@ Vue.use(VueResource);
 
 const myURI = "http://127.0.0.1:3000";
 const rootURI = "http://118.244.212.122:8008";
+// const rootURI = "http://123.196.116.135:8008";
 const plainURI = "http://192.168.1.76";
 
 const Api = {
@@ -343,20 +344,6 @@ export const getThemeDetail = params => {
 //     });
 // };
 
-/**
- *  Encapsulate `实时热点事件（前5名）` interface
- *
- *  @param {String}
- *
- *  @return {Promise} With Get Hot Realtime.
- */
-export const getHotRealtime = params => {
-    return Api.request({
-        //url: `${myURI}/hot/realtime`,
-        url: `${rootURI}/hotspot/reallist`,
-        params
-    });
-};
 
 /**
  *  Encapsulate `今日热点排行` interface
@@ -586,6 +573,45 @@ export const getMonitorList = params => {
         params
     });
 };
+
+/**预警监测的更新
+ *  Encapsulate `getMonitorList` interface
+ *
+
+ */
+export const getMonitorUp = params => {
+    return Api.request({
+        url: `${rootURI}/monitor/update`,
+        params
+    });
+};
+/**预警监测的删除
+ *  Encapsulate `getMonitorList` interface
+ *
+
+ */
+export const getMonitorDel = params => {
+    return Api.request({
+        url: `${rootURI}/monitor/remove`,
+        params
+    });
+};
+
+
+/**预警监测的添加
+ *  Encapsulate `getMonitorList` interface
+ *
+
+ */
+export const getMonitorAdd = params => {
+    return Api.request({
+        url: `${rootURI}/monitor/add`,
+        params
+    });
+};
+
+
+
 
 /**品牌印象的气泡接口
  *  Encapsulate `getMonitorList` interface
