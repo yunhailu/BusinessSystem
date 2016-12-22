@@ -25,9 +25,9 @@ module.exports = {
         },
         subRoutes: {
             '/': {
-                name: 'summary',
+                name: 'theme',
                 component (resolve) {
-                    require(['../components/Result/Result.vue'], resolve);
+                    require(['../components/Theme/Theme.vue'], resolve);
                 }
             },
             '/summary': {

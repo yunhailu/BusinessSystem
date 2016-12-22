@@ -4,7 +4,7 @@
 import { UPDATE_TYPE, UPDATE_TIME_RANGE, UPDATE_SOURCE, UPDATE_SUBTOPIC, UPDATE_DATE_CHANGE, UPDATE_START, UPDATE_END,UPDATE_REFRESH_TOPIC, UPDATE_RESET_SEARCH ,UPDATE_SUBTOPIC_ID,UPDATE_TIME_POP_UP} from '../mutations-types'
 
 const state = {
-    type: 'summary',
+    type: 'theme',
     start:'',
     end:'',
     dateChange: 0,

@@ -31,7 +31,7 @@
                 </tr>
                 </thead>
                 <tbody v-if="influancerTable.length">
-                <tr id="item.id" v-for="(index, item) in influancerTable" :class="[index % 2 == 0 ? '' : '']" @click="showPopList(item)" >
+                <tr class="tableList" id="item.id" v-for="(index, item) in influancerTable" :class="[index % 2 == 0 ? '' : '']" @click="showPopList(item)" >
                     <td>{{item.influencer}}</td>
                     <td>{{item.post}}</td>
                     <td class="barTd"><div class="sentimentBar" v-echarts="item.sentiment | barFormat"></div></td>

@@ -209,9 +209,6 @@ export const zh_CN_mediaq = _.extend({}, zh_CN, {
         phoneCondition: "手机号码不正确",
         emailCondition: "邮箱不正确"
     },
-    instruction:{
-        forUse:'../../../../images/mediaqInstruction.jpg',
-    },
     common: {
         weeks: ['日', '一', '二', '三', '四', '五', '六'],
         buttons:['确定', '取消'],
