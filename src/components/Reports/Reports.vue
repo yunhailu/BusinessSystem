@@ -1,15 +1,11 @@
 <template>
     <header-component active="reports"></header-component>
-    <menu-component></menu-component>
-    <div class="reports">
 
-
+    <div class="reports  ">
 
     <div class="reports-wrap">
-
-        <div class="container">
-
-
+        <menu-component></menu-component>
+        <div class="container wid ">
             <div class="reports-wrap-title">
                 <div class="title"><i class="fa fa-lightbulb-o"></i> <span>{{name}}</span></div>
                 <br> <span class="wornin"> *点击左边 关键词列表 即可添加相应 关键词 的情绪监测 *</span>
@@ -61,7 +57,7 @@
                     </div>
 
             </div>
-            <div class="modifyReportsbg " v-show="displayModify" @click="bgclose();" > </div>
+            <div class="modifyReportsbg" v-show="displayModify" @click="bgclose();" > </div>
 
 
             <div class="reports-wrap-table">

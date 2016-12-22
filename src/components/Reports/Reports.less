@@ -1,6 +1,6 @@
 @import "../common.less";
 
-.wid{.w(100%;)}
+.wid{ max-width:880px;  .pr(); .top(0%); .left(0%);}
 .wornin {.c(#f00);}
 .form-group {
   h5{.mg-bottom(0px); .mg-top(10px);}
@@ -10,7 +10,8 @@
 .modifyReportsbg { .bgc(rgba(0,0,0,0.6)); .pf(); .top(0); .left(0); .w(100%); .h(100%); .z(999);}
 .cclose {.mg-right(6px);.mg-top(-6px);}
 .reports{
-  height: 100%;background-color: #f9f9f9;/*overflow-y: auto;*/
+  height: 100%; width:100%;background-color: #f9f9f9;/*overflow-y: auto;*/ .pr(); .top(0%); .left(0%);
+;
   &-wrap{
     .bgc(@bg-color);  .pd(0);
     &-title{
