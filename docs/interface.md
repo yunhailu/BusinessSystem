@@ -658,7 +658,8 @@
 ### 五、帐号/鉴权
 ##### 1.注册用户
 - auth/register
-- 必传入参: username,password,email,avatar,phone
+- 必传入参: username,email,phone
+- 选传入参: company
 - 说明：username、email、phone有唯一性校验
 ```
 - 失败：

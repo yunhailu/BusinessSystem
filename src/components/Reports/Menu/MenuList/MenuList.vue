@@ -15,7 +15,7 @@
                     <li v-for="topic in group.list" :id="topic.topic_id" @click="editTopicAction(topic,group.group_id);" :class="topic | isActive" >
                         <a href="javascript:void(0);">
                             <i class="fa fa-angle-double-right"></i> {{topic.topic_name}}
-                            <i class="fa fa-remove delete" @click.stop.prevent="comfirmDeleteTopic(topic,group.group_id);"></i>
+
                         </a>
                     </li>
                 </ul>
@@ -60,7 +60,7 @@
         },
         methods: {
             toggle(group){
-
+                console.log(group);
                 const groups = _.map(this.groups, item => {
                     if(group.group_id != item.group_id){
                         item.isActive = false;
@@ -75,47 +75,22 @@
                 //menu.isActive = !menu.isActive;
             },
             addTopicAction(){
+
                 this.$router.go({name: "settingAdd"});
             },
             editTopicAction(item,group_id){
 
-
+                console.log('editstr', item, group_id);
                 this.action(item, group_id);
-               // console.log(action(item, group_id));
+                this.selectTopic(item);//激活的
 
-                this.selectTopic(item);
-                //console.log(selectTopic(item));
             },
-
 
             selectTopic(topic){
                 this.setActiveSettingTopic(topic)
             },
-            comfirmDeleteTopic(item, group_id){
-                console.log('group_id', group_id);
-                this.deleteTopic = item;
-                this.deleteTopic.group_id = group_id;
-                this.showDeleteComfirm = true;
-            },
-            successDelete(){
-                //console.log(this.deleteTopic);
-                const _this = this;
-                Api.topicDelete({id: _this.deleteTopic.topic_id}).then(resp => {
-                    //console.log('topicDelete', resp.data);
-                    // resp.data.data.success  1: 成功, 0: 失败
-                    if(resp.data.code == 0 && resp.data.data.success){
-                        const list = _.map(_this.topicList, item => {
-                            const group = _.extend({}, item);
-                            if(group.group_id == _this.deleteTopic.group_id){
-                                console.log('group',group);
-                                group.list = _.filter(group.list, topic => (topic.topic_id != _this.deleteTopic.topic_id));
-                            }
-                            return group;
-                        });
-                        _this.setTopicList(list);
-                    }
-                });
-            }
+
+
         },
         filters: {
             isActive(topic){

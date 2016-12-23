@@ -281,63 +281,13 @@
                 this.showRow=boot;
                 this.getRealList();
                 this.getTodayList();
-                this.getHotRealtime();
+                //this.getHotRealtime();
                 //this.graphchart();
                 console.log('fullpages');
 
 
             },
-            getHotRealtime(){
-                return Api.getHotRealtime({}).then(resp => {
-                    console.log('getHotRealtime', resp.data);
-                    if(resp.data.code == 0){
-                        this.scatterLoading = false;
-                        const scatters = resp.data.data;
-                        this.scatterOption.title = _.map(scatters, (scatter, index) => {
-                            return ({
-                                textBaseline: 'middle',
-                                textStyle: {fontSize: 16},
-                                top: `${index * 20 + 10}%`,
-                                text: scatter.name
-                            });
-                        });
-                        this.scatterOption.singleAxis = _.map(scatters, (scatter, index) => {
-                            return ({
-                                left: 180,
-                                type: 'category',
-                                boundaryGap: false,
-                                data: _.map(scatter.data, item => item.date),
-                                top: `${4 + index * 20}%`,
-                                height: '10%',
-                                axisLine: {
-                                    lineStyle: {color: '#aaa'}
-                                },
-                                splitLine: {
-                                    lineStyle: {type: 'dashed'}
-                                },
-                                axisLabel: {
-                                    interval: 2
-                                }
-                            });
-                        });
-                        this.scatterOption.series = _.map(scatters, (scatter, index) => {
-                            const max = _.chain(scatter.data)
-                                        .map(value => value.value)
-                                        .max(value => value).value(),
-                                    step = Math.ceil(max / 50);
-                            return ({
-                                singleAxisIndex: index,
-                                coordinateSystem: 'singleAxis',
-                                type: 'scatter',
-                                data: _.map(scatter.data, (item, index) => [index, item.value]),
-                                symbolSize(dataItem) {
-                                    return dataItem[1] / step;
-                                }
-                            });
-                        });
-                    }
-                });
-            },
+
             showDetail(item,idx){
                 if(idx ==0){
                     this.source = '今日';
@@ -434,9 +384,7 @@
 //						this.hotsTodayRankings=_.filter(gy1, (info, index) => {
 //                        return (index < 5);
 //                    });
-						
-						
-						
+
                         if (this.activeHot.name == '') {
                             this.activeHot = {name: (this.hotsTodayRanking)[0], value: (this.hotsTodayRankings)[0]};
 
@@ -462,7 +410,7 @@
         created(){
             this.getRealList();
             this.getTodayList();
-            this.getHotRealtime();
+            //this.getHotRealtime();
             //this.graphchart();
 
         },
