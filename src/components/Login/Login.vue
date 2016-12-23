@@ -226,14 +226,35 @@
                 }
                 Api.register(params).then(resp =>{
                     if(resp.data.code==0){
+                        this.errorTips="正在审核，请等待邮件回复";
+                        this.showSmallTips = true;
+                        this.tipsShow();
+                        setTimeout(function () {
+                            this.isApply=false;
+                        }.bind(this),1000);
                         console.log('申请成功');
                     } else if(resp.data.code==100){
-                        this.errorTips="用户名已被注册";
-                        this.showSmallTips = true;
-                        setTimeout(function () {
-                            this.showSmallTips = false;
-                        },1000);
-                        return ;
+                        if(resp.data.message[0].includes('username')){
+                            this.errorTips="用户名已被注册";
+                            this.showSmallTips = true;
+                            this.tipsShow();
+                            return ;
+                        }else if (resp.data.message[0].includes('email')){
+                            this.errorTips="邮箱已被注册";
+                            this.showSmallTips = true;
+                            this.tipsShow();
+                            return ;
+                        }else if(resp.data.message[0].includes('phone')){
+                            this.errorTips="手机号已被注册";
+                            this.showSmallTips = true;
+                            this.tipsShow();
+                            return ;
+                        }else {
+                            this.errorTips="申请出错";
+                            this.showSmallTips = true;
+                            this.tipsShow();
+                            return ;
+                        }
                     }
                 })
             },

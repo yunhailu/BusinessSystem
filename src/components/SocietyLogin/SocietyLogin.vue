@@ -226,16 +226,37 @@
                 }
                 Api.register(params).then(resp =>{
                     if(resp.data.code==0){
-                    console.log('申请成功');
-                } else if(resp.data.code==100){
-                    this.errorTips="用户名已被注册";
-                    this.showSmallTips = true;
-                    setTimeout(function () {
-                        this.showSmallTips = false;
-                    },1000);
-                    return ;
-                }
-            })
+                        this.errorTips="成功申请，请耐心等待审核";
+                        this.showSmallTips = true;
+                        this.tipsShow();
+                        setTimeout(function () {
+                            this.isApply=false;
+                        }.bind(this),1000);
+                        console.log('申请成功');
+                    } else if(resp.data.code==100){
+                        if(resp.data.message[0].includes('username')){
+                            this.errorTips="用户名已被注册";
+                            this.showSmallTips = true;
+                            this.tipsShow();
+                            return ;
+                        }else if (resp.data.message[0].includes('email')){
+                            this.errorTips="邮箱已被注册";
+                            this.showSmallTips = true;
+                            this.tipsShow();
+                            return ;
+                        }else if(resp.data.message[0].includes('phone')){
+                            this.errorTips="手机号已被注册";
+                            this.showSmallTips = true;
+                            this.tipsShow();
+                            return ;
+                        }else {
+                            this.errorTips="申请出错";
+                            this.showSmallTips = true;
+                            this.tipsShow();
+                            return ;
+                        }
+                    }
+                })
             },
             toHotEvent(){
                 this.isHotEvent = true;

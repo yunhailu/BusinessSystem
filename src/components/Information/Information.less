@@ -1,0 +1,98 @@
+@import "../common.less";
+
+@list-bg: @bg-color;
+@flag-blue: #337ab7;
+@flag-yellow: #f0ad4e;
+@flag-light-blue: #46b8da;
+@flag-green: #5cb85c;
+@flag-red: #f2dede;
+@flag-grey: @word;
+
+
+.sentiment-overflow{/*overflow:auto;*/ /* height:100%;*//*.pd-bottom(150px);*/}
+
+.charts{
+  .pd(0);  .mg(0);   .w(100%);   .pr();  .tc();.pd-top(10px);
+  .chart.active{ .w(73%); }
+  .chart{
+    .w(100%);  .h(200px); .pd(0);
+    .disIB();
+  }
+  .percentBar{ .h(300px);  .w(34%);.disIB(); }
+  .timeBar{ .h(300px);  .w(65%);  .disIB(); }
+
+
+  .line{
+    .w(96%);  .h(1px); .pd(0);  .mg(20px auto);
+    .disIB();  .bgc(@word);
+  }
+  .pie.active{ .w(23%); .disIB();  .opacity(100); }
+  .pie{
+    .w(23%);  .h(280px);  .opacity(0);  .pa();  .right(20px);
+    .disIB();
+  }
+  .arrow{
+    .w(20px);  .h(280px);  .c(@word);  .float-right();  .tc();
+    i{ .mgc();  .top(130px); .pr();   }
+  }
+  .arrow:hover{ .bgc(#eee);  .pointer(); }
+}
+
+.sentiment-panel{
+  .pd(0);  .mg(20px 0);   .w(100%);   .pr();  .bgc(@list-bg);
+
+  &-tools{
+    .pd(6px 0);  .mg(0);  .b-top(1px solid #dedede);
+  }
+
+  &-list{
+    .b-top(1px solid #dedede);
+    &-item{
+      .b-top(1px solid #fff);  .b-bottom(1px solid #dedede);  .mg(0);  .c(@word);
+      &-left{
+        .pd(10px 20px 10px);  .b-right(1px solid #dedede);
+        .fa{ .mg(10px 0);  .float-left();  .c(@word); }
+        &-con{
+          .mg(0 0 0 26px);
+          .title{ .c(@body-theme);  .h(24px);  .lh(24px);  .f(14px);
+            //.ff("pingfang-bold");
+             .text-hidden();  }
+          .detail{ .text-num-hidden(2);
+            //.ff("pingfang-bold");   }
+          .time{ .pd(5px 0); }
+        }
+      }
+      &-right{
+        .pd(20px 20px 30px);
+        .icon{
+          .w(20px);  .h(20px);  .b(1px solid #dedede);  .tc();
+          .lh(20px);  .tc();  .pa();  .top(-10px);  .bgc(@list-bg);
+        }
+        .icon.flag-blue{ .c(@flag-blue); }
+        .icon.flag-yellow{ .c(@flag-yellow); }
+        .icon.flag-light-blue{ .c(@flag-light-blue); }
+        .icon.flag-green{ .c(@flag-green); }
+        .icon.flag-grey{ .c(@flag-grey); }
+        .item-data{
+          .pd(8px 0 );
+          .row{
+            .mg(7px 0 0);  .f(14px);
+            .title{
+              //.ff(pingfang-bold);
+               .fw(600); }
+          }
+          }
+        }
+
+      }
+    }
+    &-item:hover{
+      .bgc(white);
+      .icon{ .bgc(white); }
+    }
+  }
+
+  &-pager{
+    .w(100%);  .tc();
+  }
+}

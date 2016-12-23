@@ -25,9 +25,15 @@ module.exports = {
         },
         subRoutes: {
             '/': {
-                name: 'theme',
+                name: 'summary',
                 component (resolve) {
-                    require(['../components/Theme/Theme.vue'], resolve);
+                    require(['../components/Result/Result.vue'], resolve);
+                }
+            },
+            '/information': {
+                name: 'information',
+                component (resolve) {
+                    require(['../components/Information/Information.vue'], resolve);
                 }
             },
             '/summary': {

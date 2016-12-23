@@ -89,6 +89,9 @@
                         <div class="col-sm-offset-3 col-sm-8" v-if="addTip">
                             <label class="tips">{{mine.tip}}</label>
                         </div>
+                        <div class="col-sm-offset-3 col-sm-8" v-if="addSuccessTip">
+                            <label class="successTips">{{mine.successTip}}</label>
+                        </div>
                         <div class="form-group">
                             <div class="col-sm-offset-3 col-sm-8">
                                 <button type="submit" class="btn btn-primary">{{words.modifyBtn}}</button>
@@ -145,6 +148,9 @@
                         </div>
                         <div class="col-sm-offset-3 col-sm-8" v-if="addTip">
                             <label class="tips">{{mine.tip}}</label>
+                        </div>
+                        <div class="col-sm-offset-3 col-sm-8" v-if="addSuccessTip">
+                            <label class="successTips">{{mine.successTip}}</label>
                         </div>
                         <div class="form-group">
                             <div class="col-sm-offset-3 col-sm-8">
@@ -262,9 +268,11 @@
                     email: "",
                     key: "",
                     avatar: "",
-                    tip: ""
+                    tip: "",
+                    successTip:""
                 },
-                addTip:false
+                addTip:false,
+                addSuccessTip:false
             }
         },
         computed: {
@@ -277,6 +285,7 @@
                 this.profile = str;
                 this.resetMine();
                 this.addTip = false;
+                this.addSuccessTip = false;
             },
             /*setMine(flag){
                 this.isMine = flag;
@@ -290,6 +299,7 @@
             },
             modifyPsdSubmit(){
                 this.addTip = false;
+                this.addSuccessTip = false;
                 if(this.mine.password != this.mine.rePassword){
                     this.mine.tip = this.words.passDiff;
                     this.addTip = true;
@@ -310,7 +320,11 @@
                 }
                 Api.nodifyUser( params ).then(resp => {
                     if(resp.data.code == 0 && resp.data.data.success == 1){
-                        alert(this.words.nodifySuccess);
+                       this.mine.successTip = '密码修改成功';
+                        this.addSuccessTip = true;
+                        setTimeout(function () {
+                            this.addSuccessTip = false;
+                        }.bind(this),1000)
                         this.getUserInfo();
                     }
                     if(resp.data.code == 101){
@@ -321,26 +335,27 @@
             },
             modifySubmit(){
                 this.addTip = false;
+                this.addSuccessTip = false;
                 console.log('modifySubmit', this.mine);
                /* if(this.mine.password != this.mine.rePassword){
                     this.mine.tip = this.words.passDiff;
                     this.addTip = true;
                     return ;
                 }*/
+                if((this.mine.username).length>10 ||(this.mine.username).length<2){
+                    this.mine.tip="用户名需输入2-10位字符";
+                    this.addTip = true;
+                    return ;
+                }
                 var nameReg = /^[a-zA-Z0-9_]$/;
                 var chineseReg = new RegExp("[\u4e00-\u9fa5]");
                 for(var i=0;i<(this.mine.username).length;i++){
                     const c = (this.mine.username).charAt(i);
                     if(!(chineseReg.test(c) || nameReg.test(c))){
-                        this.mine.tip = '用户名格式错误';
+                        this.mine.tip = '用户名只能包含中文，字母，数字，下划线';
                         this.addTip = true;
                         return ;
                     }
-                }
-                if(! /^[0-9A-Za-z]{6,}$/.test(this.mine.password)){
-                    this.mine.tip = this.words.passwordCondition;
-                    this.addTip = true;
-                    return ;
                 }
                 if(! /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1}))+\d{8})$/.test(this.mine.phone)){
                     this.mine.tip = this.words.phoneCondition;
@@ -360,15 +375,40 @@
                     phone:this.mine.phone,
                     avatar:""
                 }
+                if(! /^[0-9A-Za-z]{6,}$/.test(this.mine.password)){
+                    this.mine.tip = this.words.passwordCondition;
+                    this.addTip = true;
+                    return ;
+                }
                /* const params = _.pick(this.mine, 'username', 'password', 'phone', 'key', 'email');
                 console.log('params' , params);*/
                 Api.nodifyUser( params ).then(resp => {
                     if(resp.data.code == 0 && resp.data.data.success == 1){
-                        alert(this.words.nodifySuccess);
+                        this.mine.successTip = '用户信息修改成功';
+                        this.addSuccessTip = true;
+                        setTimeout(function () {
+                            this.addSuccessTip = false;
+                        }.bind(this),1000)
                         this.getUserInfo();
                     }
-                    if(resp.data.code == 101){
-                        this.mine.tip = resp.data.data.message;
+                    if(resp.data.code == 100){
+                        if(resp.data.message[0].includes('Username')){
+                            this.mine.tip="用户名已存在";
+                            this.addTip = true;
+                            return ;
+                        }else if (resp.data.message[0].includes('Email')){
+                            this.mine.tip="邮箱已存在";
+                            this.addTip = true;
+                            return ;
+                        }else if(resp.data.message[0].includes('Phone')){
+                            this.mine.tip="手机号已存在";
+                            this.addTip = true;
+                            return ;
+                        }else {
+                            this.mine.tip="修改出错";
+                            this.addTip = true;
+                            return ;
+                        }
                     }
                     this.resetMine();
                 });

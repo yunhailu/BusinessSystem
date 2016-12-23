@@ -14,8 +14,8 @@ Vue.http.options.xhr = { withCredentials: true };//跨域问题
 Vue.use(VueResource);
 
 const myURI = "http://127.0.0.1:3000";
-//const rootURI = "http://118.244.212.122:8008";
-const rootURI = "http://123.196.116.135:8008";
+const rootURI = "http://118.244.212.122:8008";
+//const rootURI = "http://123.196.116.135:8008";
 const plainURI = "http://192.168.1.76";
 //扩展api添加access_token字段
 const Api = {
@@ -106,7 +106,11 @@ export const nodifyUser = params => {
         params
     });
 };
-
+/**
+ *
+ * @param params
+ * @returns {*}
+ */
 export const getUserInfo =params=>{
     return Api.request({
         url:`${rootURI}/auth/userinfo`,

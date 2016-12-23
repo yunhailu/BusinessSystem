@@ -49,18 +49,24 @@
                 words,
                 showDashboard: false,
                 isAnalytics:false,
-                tabs: [{
+                tabs: [
+                  /*      {
                     name: words.tabs[0],
+                    //link: 'comment'
+                    link: 'information'
+                },*/
+                    {
+                    name: words.tabs[0],
+                    //link: 'comment'
+                    link: 'summary'
+                },{
+                    name: words.tabs[1],
                     //link: 'summary'
                     link:'theme'
                 }, {
-                    name: words.tabs[1],
+                    name: words.tabs[2],
                     //link: 'sentiment'
                     link:'influence'
-                }, {
-                    name: words.tabs[2],
-                    //link: 'comment'
-                    link: 'summary'
                 }, {
                     name: words.tabs[3],
                     //link: 'influence'
