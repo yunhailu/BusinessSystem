@@ -9,11 +9,11 @@
             </ul>
             <div class="profile-add" v-if="isMine == 'isMain'">
                 <ul class="mineMsgNodify">
-                        <li @click = "showMain('showMsg')" :class="[profile =='showMsg' ? 'active': '']"><a
+                        <li @click = "showMine('showMsg')" :class="[profile =='showMsg' ? 'active': '']"><a
                                 href="#">个人信息</a></li>
-                        <li @click = "showMain('notifyPsd')" :class="[profile =='notifyPsd' ? 'active': '']"><a
+                        <li @click = "showMine('notifyPsd')" :class="[profile =='notifyPsd' ? 'active': '']"><a
                                 href="#">修改密码</a></li>
-                        <li @click = "showMain('notifyOth')" :class="[profile =='notifyOth' ? 'active': '']"><a
+                        <li @click = "showMine('notifyOth')" :class="[profile =='notifyOth' ? 'active': '']"><a
                                 href="#">修改其他信息</a></li>
                     </ul>
                 <div class="containerBox">
@@ -87,10 +87,10 @@
                             </div>
                         </div>
                         <div class="col-sm-offset-3 col-sm-8" v-if="addTip">
-                            <label class="tips">{{mine.tip}}</label>
+                            <label class="tips">{{tip}}</label>
                         </div>
                         <div class="col-sm-offset-3 col-sm-8" v-if="addSuccessTip">
-                            <label class="successTips">{{mine.successTip}}</label>
+                            <label class="successTips">{{successTip}}</label>
                         </div>
                         <div class="form-group">
                             <div class="col-sm-offset-3 col-sm-8">
@@ -103,7 +103,7 @@
                         <div class="form-group">
                             <label for="newUserName" class="col-sm-3 control-label">{{words.userName}}</label>
                             <div class="col-sm-5">
-                                <input type="text" v-model="mine.username" class="form-control" id="newUserName" :placeholder="words.userName">
+                                <input type="text" :value="userInfo.username" v-model="mine.username" class="form-control" id="newUserName" :placeholder="words.userName">
                             </div>
                         </div>
                         <!--<div class="form-group">-->
@@ -131,26 +131,26 @@
                         <div class="form-group">
                             <label for="addTel" class="col-sm-3 control-label">{{words.tel}}</label>
                             <div class="col-sm-5">
-                                <input type="text" v-model="mine.phone" class="form-control" id="addTel" :placeholder="words.tel">
+                                <input type="text" :value="userInfo.phone" v-model="mine.phone" class="form-control" id="addTel" :placeholder="words.tel">
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="addEmail" class="col-sm-3 control-label">{{words.email}}</label>
                             <div class="col-sm-5">
-                                <input type="text" v-model="mine.email" class="form-control" id="addEmail" :placeholder="words.email">
+                                <input type="text" :value="userInfo.email" v-model="mine.email" class="form-control" id="addEmail" :placeholder="words.email">
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="addPassword" class="col-sm-3 control-label">{{words.password}}</label>
                             <div class="col-sm-5">
-                                <input type="password"   v-model="mine.password" class="form-control" id="addPassword" :placeholder="words.password">
+                                <input type="password" :value="userInfo.password"   v-model="mine.password" class="form-control" id="addPassword" :placeholder="words.password">
                             </div>
                         </div>
                         <div class="col-sm-offset-3 col-sm-8" v-if="addTip">
-                            <label class="tips">{{mine.tip}}</label>
+                            <label class="tips">{{tip}}</label>
                         </div>
                         <div class="col-sm-offset-3 col-sm-8" v-if="addSuccessTip">
-                            <label class="successTips">{{mine.successTip}}</label>
+                            <label class="successTips">{{successTip}}</label>
                         </div>
                         <div class="form-group">
                             <div class="col-sm-offset-3 col-sm-8">
@@ -267,10 +267,11 @@
                     phone: "",
                     email: "",
                     key: "",
-                    avatar: "",
-                    tip: "",
-                    successTip:""
+                    avatar: ""
+
                 },
+                tip: "",
+                successTip:"abc",
                 addTip:false,
                 addSuccessTip:false
             }
@@ -281,9 +282,11 @@
             }
         },
         methods: {
-            showMain(str){
+            showMine(str){
                 this.profile = str;
                 this.resetMine();
+                this.tip='';
+                this.successTip='';
                 this.addTip = false;
                 this.addSuccessTip = false;
             },
@@ -298,15 +301,17 @@
                 this.isMine = str;
             },
             modifyPsdSubmit(){
+                this.tip='';
+                this.successTip='';
                 this.addTip = false;
                 this.addSuccessTip = false;
                 if(this.mine.password != this.mine.rePassword){
-                    this.mine.tip = this.words.passDiff;
+                    this.tip = this.words.passDiff;
                     this.addTip = true;
                     return ;
                 }
                 if(! /^[0-9A-Za-z]{6,}$/.test(this.mine.password)){
-                    this.mine.tip = this.words.passwordCondition;
+                    this.tip = this.words.passwordCondition;
                     this.addTip = true;
                     return ;
                 }
@@ -320,20 +325,24 @@
                 }
                 Api.nodifyUser( params ).then(resp => {
                     if(resp.data.code == 0 && resp.data.data.success == 1){
-                       this.mine.successTip = '密码修改成功';
+                       this.successTip = '密码修改成功';
+                        console.log(this.mine);
                         this.addSuccessTip = true;
                         setTimeout(function () {
+                            this.successTip='';
                             this.addSuccessTip = false;
-                        }.bind(this),1000)
+                        }.bind(this),1000);
                         this.getUserInfo();
                     }
                     if(resp.data.code == 101){
-                        this.mine.tip = resp.data.data.message;
+                        this.tip = resp.data.data.message;
                     }
                     this.resetMine();
                 });
             },
             modifySubmit(){
+                this.tip='';
+                this.successTip='';
                 this.addTip = false;
                 this.addSuccessTip = false;
                 console.log('modifySubmit', this.mine);
@@ -343,7 +352,7 @@
                     return ;
                 }*/
                 if((this.mine.username).length>10 ||(this.mine.username).length<2){
-                    this.mine.tip="用户名需输入2-10位字符";
+                    this.tip="用户名需输入2-10位字符";
                     this.addTip = true;
                     return ;
                 }
@@ -352,18 +361,18 @@
                 for(var i=0;i<(this.mine.username).length;i++){
                     const c = (this.mine.username).charAt(i);
                     if(!(chineseReg.test(c) || nameReg.test(c))){
-                        this.mine.tip = '用户名只能包含中文，字母，数字，下划线';
+                        this.tip = '用户名只能包含中文，字母，数字，下划线';
                         this.addTip = true;
                         return ;
                     }
                 }
                 if(! /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1}))+\d{8})$/.test(this.mine.phone)){
-                    this.mine.tip = this.words.phoneCondition;
+                    this.tip = this.words.phoneCondition;
                     this.addTip = true;
                     return ;
                 }
                 if(! /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/.test(this.mine.email)){
-                    this.mine.tip = this.words.emailCondition;
+                    this.tip = this.words.emailCondition;
                     this.addTip = true;
                     return ;
                 }
@@ -376,7 +385,7 @@
                     avatar:""
                 }
                 if(! /^[0-9A-Za-z]{6,}$/.test(this.mine.password)){
-                    this.mine.tip = this.words.passwordCondition;
+                    this.tip = this.words.passwordCondition;
                     this.addTip = true;
                     return ;
                 }
@@ -384,28 +393,30 @@
                 console.log('params' , params);*/
                 Api.nodifyUser( params ).then(resp => {
                     if(resp.data.code == 0 && resp.data.data.success == 1){
-                        this.mine.successTip = '用户信息修改成功';
+                        this.successTip = '用户信息修改成功';
                         this.addSuccessTip = true;
                         setTimeout(function () {
+                            this.successTip='';
                             this.addSuccessTip = false;
+                            this.showMine('showMsg');
                         }.bind(this),1000)
                         this.getUserInfo();
                     }
                     if(resp.data.code == 100){
                         if(resp.data.message[0].includes('Username')){
-                            this.mine.tip="用户名已存在";
+                            this.tip="用户名已存在";
                             this.addTip = true;
                             return ;
                         }else if (resp.data.message[0].includes('Email')){
-                            this.mine.tip="邮箱已存在";
+                            this.tip="邮箱已存在";
                             this.addTip = true;
                             return ;
                         }else if(resp.data.message[0].includes('Phone')){
-                            this.mine.tip="手机号已存在";
+                            this.tip="手机号已存在";
                             this.addTip = true;
                             return ;
                         }else {
-                            this.mine.tip="修改出错";
+                            this.tip="修改出错";
                             this.addTip = true;
                             return ;
                         }
@@ -422,7 +433,6 @@
                     current_password:"",
                     phone: "",
                     email: "",
-                    tip: ""
                 };
             },
             getUserInfo(){

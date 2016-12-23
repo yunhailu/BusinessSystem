@@ -213,6 +213,7 @@
                 });
             },
             showNewList(item,idx){
+                this.loadingParams.visiable = true;
                 this.influColor = idx;
                 const  topic_id = this.activeAnalyticsTopic.topic_id,
                         topic = this.activeAnalyticsTopic.topic_name,
@@ -230,8 +231,8 @@
                 if (item.icon=='edge' || item.icon=='chrome' ){ this.source='web'; this.controll=false; };
 
                 Api.getInfluenceList({topic_id, topic, subtopic, source, start, end, time_dimension}).then(resp => {
-                    this.loadingParams.visiable = false;
                     if(resp.data.code ==0){
+                        this.loadingParams.visiable = false;
                         const influanceInfo = resp.data.data;
                         if(item.icon=='user'){
                             var influanceInfos =_.sortBy(influanceInfo, function(item){
@@ -284,8 +285,7 @@
                 const icons = ['user','user-plus','edge','chrome'];
                 const iconsName = ["最活跃的作者", "最具影响力的作者","最活跃的站点", "最具影响力的站点"];
                 Api.getInfluenceList({topic_id, topic, subtopic, source, start, end, time_dimension}).then(resp => {
-                    this.loadingParams.visiable = false;
-                    if(resp.data.code ==0&& resp.data.data.length>0){   //success--load-data
+                    if(resp.data.code ==0 && resp.data.data.length>0){   //success--load-data
                         this.coltrol=true;
 
                         const sdasda1=this.getOrderbyTitle(resp.data.data ,'post');
@@ -334,6 +334,7 @@
                 return  orderResult;
             },
             getInfluenceList(){
+                this.loadingParams.visiable = true;
                 const   topic_id = this.activeAnalyticsTopic.topic_id,
                         topic = this.activeAnalyticsTopic.topic_name,
                         subtopic = this.analyticsSubTopic,
@@ -347,8 +348,8 @@
                     end = end.split(' ')[0]+'T'+end.split(' ')[1];
                 }
                 Api.getInfluenceList({topic_id, topic, subtopic, source, start, end, time_dimension}).then(resp => {
-                    this.loadingParams.visiable = false;
-                    if(resp.data.code ==0&& resp.data.data!=null ){
+                    if(resp.data.code ==0 && resp.data.data!=null ){
+                        this.loadingParams.visiable = false;
                         const influanceInfos = resp.data.data;
                         this.influancerList = _.map(influanceInfos, info => info);
                         this.influancerTable = _.filter(this.influancerList, (info, index) => {
