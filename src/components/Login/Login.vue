@@ -183,11 +183,22 @@
                 this.errorTips = '';
 
                 //姓名必填2-10位
+                var nameReg = /^[a-zA-Z0-9_]$/;
+                var chineseReg = new RegExp("[\u4e00-\u9fa5]");
                 if((this.applyUserName).length>10 ||(this.applyUserName).length<2){
-                    this.errorTips="姓名需输入2-10位字符";
+                    this.errorTips="用户名需输入2-10位字符";
                     this.showSmallTips = true;
                     this.tipsShow();
                     return ;
+                }
+                for(var i=0;i<(this.applyUserName).length;i++){
+                    const c = (this.applyUserName).charAt(i);
+                    if(!(chineseReg.test(c) || nameReg.test(c))){
+                        this.errorTips="用户名格式错误";
+                        this.showSmallTips = true;
+                        this.tipsShow();
+                        return ;
+                    }
                 }
                 //校验正确的手机号
                 var phoneReg = /^((1[3-8]{1}[0-9]{1})+\d{8})$/;

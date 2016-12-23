@@ -1,5 +1,8 @@
 @import "../common.less";
 
+@media screen and (max-width:850px ){
+  .mineMsgNodify li{.float-left();}
+}
 
 .profile{
   .w(100%);  .pd(20px 0);
@@ -9,10 +12,19 @@
   &-add{
     .pr();  .pd(20px 10px);
     .selectEl{ .h(28px); }
+    .mineMsgNodify{
+      .w(100px);.mg-top(20px);.float-left();.h(150px);border-radius: 5px;
+      li{.h(50px);.lh(50px);.tc();cursor: pointer;.c(#000);.f(12px);}
+      li:hover{.c(@body-theme);}
+      li.active{.c(@body-theme);.f(14px);border-bottom: 1px solid @body-theme;}
+    }
+    .containerBox{.mw(1000px);.pd-top(50px);.float-left();
+      .mineMsg label{padding-top: 0 !important;}
+    }
     &-avatar{
       .pa();  .right(0);
       .float-right();
-      .w(30%);  .h(auto);
+      .w(30%);  .h(auto);.top(50px);
       &-wrap{
         border: 1px solid #dedede;
         .w(120px);  .h(120px);
@@ -22,6 +34,7 @@
           .b(1px solid #dedede);
         }
       }
+      &-wrap.noBorder{border:none;}
       &-btn{
         .pd(10px 0);
         #uploadBtn{ .mg(0 10px);  .w(100px); }
@@ -36,6 +49,11 @@
           .lh(24px);
         }
       }
+    }
+    table{
+      td{vertical-align: middle;}
+      .cgreen{.c(#008000)}
+      .cred{.c(#000)}
     }
   }
   .tips{

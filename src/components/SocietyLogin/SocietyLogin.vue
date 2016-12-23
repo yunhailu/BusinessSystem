@@ -189,6 +189,17 @@
                     this.tipsShow();
                     return ;
                 }
+                var nameReg = /^[a-zA-Z0-9_]$/;
+                var chineseReg = new RegExp("[\u4e00-\u9fa5]");
+                for(var i=0;i<(this.applyUserName).length;i++){
+                    const c = (this.applyUserName).charAt(i);
+                    if(!(chineseReg.test(c) || nameReg.test(c))){
+                        this.errorTips="用户名格式错误";
+                        this.showSmallTips = true;
+                        this.tipsShow();
+                        return ;
+                    }
+                }
                 //校验正确的手机号
                 var phoneReg = /^((1[3-8]{1}[0-9]{1})+\d{8})$/;
                 if(!phoneReg.test(this.applyTelephone)){

@@ -107,6 +107,12 @@ export const nodifyUser = params => {
     });
 };
 
+export const getUserInfo =params=>{
+    return Api.request({
+        url:`${rootURI}/auth/userinfo`,
+        params
+    })
+}
 /**
  *  Encapsulate `get group list` interface
  *
