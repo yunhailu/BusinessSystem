@@ -286,7 +286,8 @@
                                     + '</div>'
                                     + '转发数：' + value[2] + '<br>'
                                     + '点赞数：' + value[3] + '<br>'
-                                    + '评论数：' + value[4] + '<br>';
+                                    + '评论数：' + value[4] + '<br>'
+                                    + '文章数：' + value[1] + '<br>';
                         }
                     }),
                     textStyle: _.extend({}, Chart.textStyle),
@@ -633,18 +634,22 @@
                         const datearr3 = _.pluck(yuy0[2],'date');
                         const datearr4 = _.pluck(yuy0[3],'date');
                         const datearr5 = _.pluck(yuy0[4],'date');
-                        
+
+                    console.log('sizedate王立鹏',yuy0);
+
+
                         const sizedate=[];
                          sizedate.push(_.size(datearr1));
                          sizedate.push(_.size(datearr2));
                          sizedate.push(_.size(datearr3));
                          sizedate.push(_.size(datearr4));
                          sizedate.push(_.size(datearr5));
-                        
-                         const uye=_.max(sizedate);
-                         console.log('sizedate',sizedate);
-                         
-                        
+                    console.log('sizedate王立鹏sizedate',sizedate);
+
+                    const uye=_.max(sizedate);
+
+                    //console.log('sizedate王立鹏sizedate',uye);
+
                         if(_.size(datearr1)==uye){
                         	this.themeScatterOption.xAxis.data=datearr1;
                         	
