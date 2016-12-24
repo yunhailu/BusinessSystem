@@ -189,7 +189,7 @@ export const zh_CN_mediaq = _.extend({}, zh_CN, {
     profile: {
         mineTitle: "我的信息",
         userMsg: "用户信息",
-        agreeApply:"申请信息",
+        agreeApply:"申请审核",
         userName: "用户名",
         newUserName: "新用户名",
         gender: "性别",
