@@ -8,7 +8,7 @@
             </div>
             <div class="navigation">
                 <!--<h2>情绪数据,为您导航</h2>-->
-                <h2>{{login.forWode}}</h2>
+                <h2>{{login.forSociety}}</h2>
             </div>
             <div class="login-btn" v-show="false">
                 <a href="javascript:void(0);" @click="login">

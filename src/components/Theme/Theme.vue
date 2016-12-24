@@ -39,6 +39,7 @@
             <div class="chart"  v-echarts="themeScatterOption" :loading="themeScatterLoading"  theme="macarons"></div>
             <div class="chart"  v-echarts="themeLineOption" :loading="themeLineLoading"  theme="macarons"></div>
             <div class="chart best"  v-echarts="themeBestOption" :loading="themeBestLoading"  theme="macarons"></div>
+            <div class="chart article" v-echarts="themeArticleOption" :loading="themeBestLoading"  theme="macarons"></div>
         </div>
 
         <div class="theme-map">
@@ -482,6 +483,67 @@
                 },
                 themeBestLoading: true,
 
+                themeArticleOption:{
+                    title: _.extend({}, Pie.title, { text:'文章分类图：', left: 10, top: 20}),
+                    tooltip: {
+                        trigger: 'item'
+                    },
+                    legend: {
+                        bottom: 1,
+                        data: []
+                    },
+                    toolbox: Pie.toolbox,
+                    //color: _.extend([], Chart.color),
+                    //color:["#1C7C76","#FA943E","#88051C","#2E44E1","#F58974","#F574EA","#81F574","#051527","#C9E120","#F4D171"],
+                    radar: {
+                        indicator: [
+                            {text:'',max:100}
+                        ],
+                        //shape: 'circle',
+                        //splitNumber: 5,
+                        name: {
+                            textStyle: {
+                                color: 'rgb(39, 114, 123)'
+                            }
+                        },
+                        /*splitLine: {
+                            lineStyle: {
+                                color: [
+                                    'rgba(238, 197, 102, 0.1)', 'rgba(238, 197, 102, 0.2)',
+                                    'rgba(238, 197, 102, 0.4)', 'rgba(238, 197, 102, 0.6)',
+                                    'rgba(238, 197, 102, 0.8)', 'rgba(238, 197, 102, 1)'
+                                ].reverse()
+                            }
+                        },*/
+                        splitArea: {
+                            show: false
+                        },
+                        axisLine: {
+                            lineStyle: {
+                                color: 'rgba(238, 197, 102, 0.5)'
+                            }
+                        }
+                    },
+                    graphic:Chart.graphic,
+                    series: [{
+                        type: 'radar',
+                        //symbol: 'none',消除节点的圆点
+                        itemStyle: {
+                            normal: {
+                                lineStyle: {
+                                    width:1
+                                }
+                            },
+                            emphasis : {
+                                areaStyle: {color:'rgba(0,250,0,0.3)'}
+                            }
+                        },
+                        data:[{
+                            value:[],
+                            name:''
+                        }]
+                    }]
+                },
                 themeLineOption: {
                     title: _.extend({}, Chart.title, { show: false}),
                     tooltip: _.extend({}, Chart.tooltip, {
@@ -988,6 +1050,37 @@
                     }
                 });
             },
+            getCategory(){
+                const topic_id = this.activeAnalyticsTopic.topic_id,
+                        topic = this.activeAnalyticsTopic.topic_name,
+                        subtopic = this.analyticsSubTopic,
+                        source = this.analyticsSource,
+                        time_interval = this.analyticsTimeRange,
+                        time_dimension = time_interval > 7 ? 1 : 0;
+                let end =this.analyticsEnd,
+                        start = this.analyticsStart;
+                if(start.includes(' ') && end.includes(' ')){
+                    start = start.split(' ')[0]+'T'+start.split(' ')[1];
+                    end = end.split(' ')[0]+'T'+end.split(' ')[1];
+                    console.log('start',start,end);
+                }
+                Api.getThemeCategory({topic_id, topic, subtopic, source, start, end, time_dimension}).then(resp=>{
+                    if(resp.data.code==0){
+                        const details = resp.data.data;
+                        let categoryArr=[];
+                        let valueArr = [];
+                        _.each(details,item=>{
+                            categoryArr.push({text:item.category,max:100});
+                            valueArr.push(item.value);
+                        })
+                        const maxNum = _.max(valueArr,item=>item);
+                        _.map(categoryArr,item=>{return item.max=maxNum;});
+                        this.themeArticleOption.series[0].data[0].name=this.activeAnalyticsTopic.topic_name;
+                        this.themeArticleOption.series[0].data[0].value=valueArr;
+                        this.themeArticleOption.radar.indicator=categoryArr;
+                    }
+                })
+            },
             getThemeDetail(){
                 const topic_id = this.activeAnalyticsTopic.topic_id,
                         topic = this.activeAnalyticsTopic.topic_name,
@@ -1074,6 +1167,7 @@
                 this.getWordCloud();
                 this.getMapData();
                 this.getThemeDetail();
+                this.getCategory();
                 //mytest
                 this.getppdata();
             }

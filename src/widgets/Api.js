@@ -706,6 +706,13 @@ export const uploadToken = params => {
     });
 };
 
+export const getThemeCategory = params =>{
+    return Api.request({
+        url:`${rootURI}/theme/category`,
+        params
+    })
+}
+
 
 
 
