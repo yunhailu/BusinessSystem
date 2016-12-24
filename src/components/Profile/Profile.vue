@@ -2,6 +2,7 @@
     <header-component></header-component>
     <div class="container">
         <div class="profile">
+            <div class="refresh" v-if="isMine == 'isAgreeMsg'"><i @click="getCheckList" class="fa fa-refresh fa-2x" aria-hidden="true"></i></div>
             <ul id="myTab" class="nav nav-tabs">
                 <li :class="[isMine == 'isMain' ? 'active' : '']" @click="setMine('isMain');"><a href="javascript:void(0);" >{{words.mineTitle}}</a></li>
                 <li v-if="isAdmin" :class="[isMine == 'isUserMsg' ? 'active' : '']" @click="setMine('isUserMsg');"><a href="javascript:void(0);">{{words.userMsg}}</a></li>
@@ -199,19 +200,31 @@
                         <td><span>公司名称</span></td>
                         <td><span>邮箱地址</span></td>
                         <td><span>电话号码</span></td>
-                        <td><span>开通状态</span></td>
+                        <td><span>申请时间</span></td>
+                        <td><span>审核</span></td>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr class="tableList"  >
-                        <td>admin</td>
-                        <td>wordemotion</td>
-                        <td>123@qq.com</td>
-                        <td>12345667544</td>
-                        <td>未开通</td>
+                    <tr class="tableList" v-for="item in checkList" >
+                        <td>{{item.username}}</td>
+                        <td>{{item.company}}</td>
+                        <td>{{item.email}}</td>
+                        <td>{{item.phone}}</td>
+                        <td>{{item.regtime}}</td>
+                        <td><i @click="addNewUser(item.id,item.username)" class="fa fa-square-o fa-2x cred" aria-hidden="true"></i></td>
                     </tr>
                     </tbody>
                 </table>
+            </div>
+        </div>
+    </div>
+    <div class="tipBg" v-if="showSmallTips">
+        <div class="smallTips">
+            <h3><i class="fa fa-warning"></i> 提示</h3>
+            <div class="tips-content">确定通过{{current_name}}审核?</div>
+            <div class="tips-btns">
+                <p class="tips-leftBtn" @click="confirm(id)">确认</p>
+                <p class="tips-rightBtn" @click="cancel">取消</p>
             </div>
         </div>
     </div>
@@ -238,7 +251,10 @@
                 //isAdmin: 0,
                 isGetToken: false,
                 profile:"showMsg",
+                current_id:'',
+                current_name:'',
                 user_avatar: 'http://of4d1rz63.bkt.clouddn.com/logo.png',
+                checkList:[],
                 userInfo:{
                     username:'',
                     company:'',
@@ -273,7 +289,8 @@
                 tip: "",
                 successTip:"abc",
                 addTip:false,
-                addSuccessTip:false
+                addSuccessTip:false,
+                showSmallTips:false
             }
         },
         computed: {
@@ -335,7 +352,7 @@
                         this.getUserInfo();
                     }
                     if(resp.data.code == 101){
-                        this.tip = resp.data.data.message;
+                        this.tip = resp.data.message[0];
                     }
                     this.resetMine();
                 });
@@ -403,23 +420,9 @@
                         this.getUserInfo();
                     }
                     if(resp.data.code == 100){
-                        if(resp.data.message[0].includes('Username')){
-                            this.tip="用户名已存在";
+                            this.tip=resp.data.message[0];
                             this.addTip = true;
                             return ;
-                        }else if (resp.data.message[0].includes('Email')){
-                            this.tip="邮箱已存在";
-                            this.addTip = true;
-                            return ;
-                        }else if(resp.data.message[0].includes('Phone')){
-                            this.tip="手机号已存在";
-                            this.addTip = true;
-                            return ;
-                        }else {
-                            this.tip="修改出错";
-                            this.addTip = true;
-                            return ;
-                        }
                     }
                     this.resetMine();
                 });
@@ -447,6 +450,35 @@
                         console.log(this.userInfo);
                     }
                 })
+            },
+            getCheckList(){
+                Api.checkApplyList({}).then(resp=>{
+                    if(resp.data.code==0){
+                        this.checkList = resp.data.data.data;
+                        console.log('checklist',this.checkList);
+                    }
+                })
+            },
+            addNewUser(id,name){
+                this.showSmallTips = true;
+                this.current_name=name;
+                this.current_id=id;
+            },
+            confirm(){
+                this.showSmallTips = false;
+                const id=this.current_id
+                Api.checkApplyId({id}).then(resp=>{
+                    if(resp.data.code ==0){
+                        this.checkList.splice(_.find(this.checkList,item=>{item.id = id}),1);
+                        this.current_id='';
+                        this.current_name='';
+                    }
+                })
+            },
+            cancel(){
+                this.showSmallTips = false;
+                this.current_id='';
+                this.current_name='';
             },
             upload(){
                 Api.uploadToken({}).then(resp => {
@@ -503,12 +535,13 @@
         },
         ready(){
             this.getUserInfo();
+            this.getCheckList();
         },
         filters: { formatSize },
         created(){
             //this.init();
         },
-        components:{ HeaderComponent },
+        components:{ HeaderComponent},
         route: {
             data(){
                 //this.init();

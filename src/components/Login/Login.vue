@@ -44,7 +44,7 @@
                             <em class="red">*</em>
                         </div>
                         <div class="form-group">
-                            <input type="text" placeholder="可用邮箱"  v-model="email"  />
+                            <input type="text" placeholder="常用邮箱"  v-model="email"  />
                             <em class="red">*</em>
                         </div>
                         <!--<div class="form-group">
@@ -234,27 +234,11 @@
                         }.bind(this),1000);
                         console.log('申请成功');
                     } else if(resp.data.code==100){
-                        if(resp.data.message[0].includes('username')){
-                            this.errorTips="用户名已被注册";
+                            this.errorTips=resp.data.message[0];
                             this.showSmallTips = true;
                             this.tipsShow();
                             return ;
-                        }else if (resp.data.message[0].includes('email')){
-                            this.errorTips="邮箱已被注册";
-                            this.showSmallTips = true;
-                            this.tipsShow();
-                            return ;
-                        }else if(resp.data.message[0].includes('phone')){
-                            this.errorTips="手机号已被注册";
-                            this.showSmallTips = true;
-                            this.tipsShow();
-                            return ;
-                        }else {
-                            this.errorTips="申请出错";
-                            this.showSmallTips = true;
-                            this.tipsShow();
-                            return ;
-                        }
+
                     }
                 })
             },

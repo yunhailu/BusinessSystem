@@ -111,6 +111,15 @@
             <!--<page></page>-->
         <!--</div>-->
     </div>
+    <div class="tipBg" v-if="showSmallTips">
+        <div class="smallTips">
+            <h3><i class="fa fa-warning"></i> 提示</h3>
+            <div class="tips-content">由于法律监管原因，无法访问外网数据，如果需要查阅，请联系客服</div>
+            <div class="tips-btns">
+                <p class="tips-leftBtn" @click="confirm()">确认</p>
+            </div>
+        </div>
+    </div>
 </template>
 <style lang="less" scoped>
     @import "ListPanel.less";
@@ -120,6 +129,7 @@
     import Local from '../../../local/local';
     import SelectEl from '../Select/Select.vue';
     import Page from '../Page/Page.vue';
+    import { WhiteWebSites } from '../../../config/config';
     import { activeAnalyticsTopic } from '../../../vuex/getters';
 
     export default{
@@ -130,6 +140,7 @@
             return{
                 words,
                 common,
+                showSmallTips:false,
                 listTip: common.nullTip,
                 tableList: [],
                 filterActive: 20,
@@ -147,6 +158,9 @@
             getters: { activeAnalyticsTopic }
         },
         methods: {
+            confirm(){
+                this.showSmallTips=false;
+            },
             setOrder(type){
                 this.orderActive = type;
                 this.selectValue = type;
@@ -171,6 +185,11 @@
                 console.log('showDetail', item);
                 console.log('route', this.$route);
                 const type = this.$route.name, id = item.id;
+                if(_.indexOf(WhiteWebSites,item.sub_source)!=-1){
+                    //海外网站，做处理逻辑
+                    this.showSmallTips = true;
+                    return ;
+                }
                 if(id){
                     console.log(window.location);
                     console.log(window.location.href);

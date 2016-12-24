@@ -118,6 +118,28 @@ export const getUserInfo =params=>{
     })
 }
 /**
+ *
+ * @param params
+ * @returns {*}
+ */
+export const checkApplyList = params =>{
+    return Api.request({
+        url:`${rootURI}/admin/checklist`,
+        params
+    })
+};
+/**
+ *
+ * @param params
+ * @returns {*}
+ */
+export const checkApplyId = params =>{
+    return Api.request({
+        url:`${rootURI}/admin/check`,
+        params
+    })
+};
+/**
  *  Encapsulate `get group list` interface
  *
  *  @return {Promise} With Group List.
