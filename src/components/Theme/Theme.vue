@@ -1064,6 +1064,7 @@
                     end = end.split(' ')[0]+'T'+end.split(' ')[1];
                     console.log('start',start,end);
                 }
+                this.themeArticleOption.legend.data=[];
                 Api.getThemeCategory({topic_id, topic, subtopic, source, start, end, time_dimension}).then(resp=>{
                     if(resp.data.code==0){
                         const details = resp.data.data;
@@ -1078,6 +1079,7 @@
                         this.themeArticleOption.series[0].data[0].name=this.activeAnalyticsTopic.topic_name;
                         this.themeArticleOption.series[0].data[0].value=valueArr;
                         this.themeArticleOption.radar.indicator=categoryArr;
+                        this.themeArticleOption.legend.data.push(this.activeAnalyticsTopic.topic_name);
                     }
                 })
             },
