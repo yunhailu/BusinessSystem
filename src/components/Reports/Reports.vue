@@ -44,12 +44,22 @@
                             <input type="text" v-model="thresholdValue" class="form-control" id="thresholdValue" placeholder="请输入一个小于100的整数阈值">
                         </div>
                     </div>
+<div v-show="worning">
+
+    <span class="wornin" > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; * 您输入的阈值有误，请重新输入！！！ <br><br></span>
+
+</div>
+
+
+
 
                     <div class="form-group" v-show="butUp">
                         <div class="col-sm-12 col-md-12 col-lg-12 ">
                             <button  class="btn btn-primary col-sm-11 col-md-11 col-lg-11" @click="addMonitor(moodName,logicName,thresholdValue)" >{{commitText}}</button>
                         </div>
                     </div>
+
+
                     <div class="form-group" v-show="!butUp">
                         <div class="col-sm-12 col-md-12 col-lg-12 ">
                             <button  class="btn btn-primary col-sm-11 col-md-11 col-lg-11" @click="modifyMonitor(logicName,thresholdValue)" >{{commitText}}</button>
@@ -118,6 +128,7 @@
             const words = Local().reportsWarning;
             return{
                 words,
+                worning:false,
                 butUp:'true',
                 isAdvanced:'false',
                 displayModify:false,
@@ -173,6 +184,7 @@
                 });},
 
             bgclose(){
+                this.worning=false;
                 this.displayModify=false;
                 this.$router.go({name: 'reports'});
             },
@@ -215,6 +227,7 @@
                 console.log(b,c);
 
                 if((c%1==0)&&(c<100&&c!=0)){
+                    this.worning=false;
                     Api.getMonitorUp({
                         id:this.mid,
                         predicate:b,
@@ -227,7 +240,7 @@
 
                 }else {
 
-                    alert('您输入的阈值有误，请重新输入！！！(注*阈值必须是一个不为0且小于100的整数值*)');
+                    this.worning=true;
 
                 }
 
@@ -238,6 +251,7 @@
             addMonitor(b,c,d,){
                 const a = this.$route.params.topic_id;
                 if((d%1==0)&&(d<100&&d!=0)){
+                    this.worning=false;
                     Api.getMonitorAdd({
                         topic_id: a,
                         monitor: b,
@@ -251,7 +265,7 @@
 
                 }
 
-                else {alert('您输入的阈值有误，请重新输入！！！(注*阈值必须是一个不为0且小于100的整数值*)');}
+                else { this.worning=true;}
 
             }
             ,
@@ -292,6 +306,7 @@
             },
 
             modifyInit(){
+                this.worning=false;
                 this.butUp=true;
                 if (this.$route.params.group_id!=null && this.$route.params.topic_id!=null){
 
