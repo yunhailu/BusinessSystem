@@ -278,6 +278,7 @@
                         const details = resp.data.data;
                         this.x =[];
                         this.initData();
+                        this.summaryNums=[];
                         this.x = _.map(details, detail => detail.date);
                         _.each(details, detail => {
                             this.lineData.wechat.push(detail.values.wechat);

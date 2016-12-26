@@ -17,6 +17,12 @@ module.exports = {
             require(['../components/Home/Home.vue'], resolve);
         }
     },
+    '/summarylist':{
+        name: 'summarylist',
+        component (resolve) {
+            require(['../components/Summary/Summary.vue'], resolve);
+        }
+    },
     '/analytics': {
         name: 'analytics',
         auth: true,
@@ -64,6 +70,12 @@ module.exports = {
                 name: 'theme',
                 component (resolve) {
                     require(['../components/Theme/Theme.vue'], resolve);
+                }
+            },
+            '/comparision':{
+                name:'comparision',
+                component(resolve){
+                    require(['../components/Comparision/Comparision.vue'],resolve)
                 }
             }
         }

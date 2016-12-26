@@ -1,0 +1,29 @@
+@import "../../common.less";
+
+@filter-border: #9e9e9e;
+
+.add-dashboard{
+  .float-right();  .mg(0 20px);  .c(@word);  .f(12px);  .fw(bold);  .pointer();.h(30px);.lh(30px);
+;
+  &-btn{ }
+}
+.tabs{
+  .h(32px);  .pd(6px 10px);  .mg(0);   .lh(20px);  .f(16px);
+
+  .tab{
+    .disIB();  .pd(0 10px);   .c(@word);  .fw(500);
+  }
+  .tab.active{ .c(@body-theme);  .text-shadow();  .fw(900); }
+}
+.items{
+  .h(30px);  .pd(5px 10px);  .mg(0);   .lh(20px);  .bgc(#fff);  font-family: "microsoft yahei";
+  //.b-top(1px solid @filter-border);  .b-bottom(1px solid @filter-border);
+
+  .item{
+    .disIB();  .pd(0 0 0 10px);   .c(@word);    .pointer();
+    .con{ .pd(3px 8px); }
+  }
+  .item.active .con{ .c(white);  .bgc(@body-theme);  .br(2px);  .pd(3px 8px); .fw(300); }
+}
+//.filters{ }
+//.source{ .pd(0px 10px  5px 10px); .h(25px); }

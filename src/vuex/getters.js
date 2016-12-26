@@ -13,6 +13,10 @@ export const activeAnalyticsTopic = state => {
 	return state.topic.active_analytics_topic;
 };
 
+export const activeSummaryTopic = state => {
+	return state.topic.active_summary_topic;
+};
+
 export const activeCompareTopic = state => {
 	return state.topic.active_compare_topic;
 };
@@ -27,6 +31,54 @@ export const loginState = state => {
 export const loginTime = state => {
 	return state.topic.login_time;
 }
+
+
+/**
+ * Sumamry
+ * */
+export const summaryType = state => {
+	return state.summary.sum_type;
+};
+
+export const summaryTimeRange = state => {
+	return state.summary.sum_timeRange;
+};
+
+export const summaryDateChange = state => {
+	return state.summary.sum_dateChange;
+};
+
+export const summarySource = state => {
+	return state.summary.sum_source;
+};
+
+export const summarySubTopic = state => {
+	return state.summary.sum_subtopic;
+};
+
+export const summaryStart = state => {
+	return state.summary.sum_start;
+};
+
+export const summaryEnd = state => {
+	return state.summary.sum_end;
+};
+
+export const summaryRefreshTopic = state => {
+	return state.summary.sum_refreshTopic;
+};
+
+export const summaryResetSearch = state => {
+	return state.summary.sum_resetSearch;
+};
+
+export const summarySubTopicId = state => {
+	return state.summary.sum_subtopicId;
+};
+
+export const summaryTimePopUp = state => {
+	return state.summary.sum_timePopUp;
+};
 
 /**
  * Analytics

@@ -352,7 +352,7 @@
                         this.getUserInfo();
                     }
                     if(resp.data.code == 101){
-                        this.tip = resp.data.message[0];
+                        this.tip = resp.data.message;
                     }
                     this.resetMine();
                 });
@@ -420,7 +420,7 @@
                         this.getUserInfo();
                     }
                     if(resp.data.code == 100){
-                            this.tip=resp.data.message[0];
+                            this.tip=resp.data.message;
                             this.addTip = true;
                             return ;
                     }

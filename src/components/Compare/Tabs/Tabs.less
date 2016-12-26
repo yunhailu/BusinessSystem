@@ -2,6 +2,37 @@
 
 @filter-border: #9e9e9e;
 
+.tabs{
+  .h(32px);  .pd(6px 10px);  .mg(0);   .lh(20px);  .f(16px);
+
+  .tab{
+    .disIB();  .pd(0 10px);   .c(@word);  .fw(500);
+    a{.f(20px);}
+  }
+  .tab.active{ .c(@body-theme);  .text-shadow();  .fw(900); }
+}
+
+.add-dashboard{
+  .float-right();  .mg(10px 20px);  .c(@word);  .f(12px);  .fw(bold);  .pointer();
+  &-btn{ }
+}
+
+.items{
+  .h(30px);  .pd(5px 10px);  .mg(0);.lh(20px);  .bgc(rgba(200,200,200, 0.2));  font-family: "microsoft yahei";
+
+  .item{
+    .disIB();  .pd(0 0 0 10px);   .c(@word);    .pointer();
+    .con{ .pd(3px 8px); }
+  }
+  .item.active .con{ .c(white);  .bgc(@body-theme);  .br(2px);  .pd(3px 8px); .fw(300); }
+}
+//.filters{ }
+//.source{ .pd(0 10px  5px 10px); .h(25px); }
+/*
+@import "../../common.less";
+
+@filter-border: #9e9e9e;
+
 .add-dashboard{
   .float-right();  .mg(0 20px);  .c(@word);  .f(12px);  .fw(bold);  .pointer();.h(30px);.lh(30px);
 ;
@@ -26,4 +57,4 @@
   .item.active .con{ .c(white);  .bgc(@body-theme);  .br(2px);  .pd(3px 8px); .fw(300); }
 }
 //.filters{ }
-//.source{ .pd(0px 10px  5px 10px); .h(25px); }
+//.source{ .pd(0px 10px  5px 10px); .h(25px); }*/

@@ -1,12 +1,13 @@
 /**
  * Created by yunhailu on 2016/10/19.
  */
-import { UPDATE_TOPIC_LIST, UPDATE_TOPIC_ACTIVE_GROUP_ID, UPDATE_ACTIVE_ANALYTICS_TOPIC, UPDATE_ACTIVE_COMPARE_TOPIC, UPDATE_ACTIVE_SETTING_TOPIC,LOGIN_STATE,LOGIN_TIME } from '../mutations-types'
+import { UPDATE_ACTIVE_SUMMARY_TOPIC,UPDATE_TOPIC_LIST, UPDATE_TOPIC_ACTIVE_GROUP_ID, UPDATE_ACTIVE_ANALYTICS_TOPIC, UPDATE_ACTIVE_COMPARE_TOPIC, UPDATE_ACTIVE_SETTING_TOPIC,LOGIN_STATE,LOGIN_TIME } from '../mutations-types'
 
 const state = {
     list: [],
     active_group_id: "",
     active_analytics_topic: {},
+    active_summary_topic: {},
     active_compare_topic: [],    //数组支持多选，单选数组只有一项
     active_setting_topic: {},
     login_state:false,
@@ -22,6 +23,9 @@ const mutations = {
     },
     [UPDATE_ACTIVE_ANALYTICS_TOPIC](state, topic){
         state.active_analytics_topic = topic;
+    },
+    [UPDATE_ACTIVE_SUMMARY_TOPIC](state, topic){
+        state.active_summary_topic = topic;
     },
     [UPDATE_ACTIVE_COMPARE_TOPIC](state, topic){
         state.active_compare_topic = topic;

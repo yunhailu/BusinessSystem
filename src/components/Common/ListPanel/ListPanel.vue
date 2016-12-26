@@ -45,7 +45,7 @@
                         <div class="list-panel-list-item-left-con left-con">
                             <div class="keyWord">
                                 <div class="title-bottom">
-                                    <span>{{common.match}}:</span> <span class="time-bottom">{{activeAnalyticsTopic.topic_name}}</span>
+                                    <span>{{common.match}}:</span> <span class="time-bottom">{{'' | topicName}}</span>
                                 </div>
                                 <div class="title">{{{item.title| title}}}</div>
                             </div>
@@ -130,7 +130,7 @@
     import SelectEl from '../Select/Select.vue';
     import Page from '../Page/Page.vue';
     import { WhiteWebSites } from '../../../config/config';
-    import { activeAnalyticsTopic } from '../../../vuex/getters';
+    import { activeAnalyticsTopic,activeSummaryTopic } from '../../../vuex/getters';
 
     export default{
         props: ["list", "options", "selectTitle", "selectValue", "tools"],
@@ -155,7 +155,7 @@
             }
         },
         vuex: {
-            getters: { activeAnalyticsTopic }
+            getters: { activeAnalyticsTopic,activeSummaryTopic }
         },
         methods: {
             confirm(){
@@ -210,6 +210,16 @@
             }
         },
         filters: {
+            topicName(value){
+                let val;
+                console.log(value,this.$route.name)
+                if(this.$route.name=='summarylist'){
+                    val=this.activeSummaryTopic.topic_name;
+                }else{
+                    val=this.activeAnalyticsTopic.topic_name;
+                }
+                return val;
+            },
             sentiment(flag){
                 let f;
                 switch(flag){

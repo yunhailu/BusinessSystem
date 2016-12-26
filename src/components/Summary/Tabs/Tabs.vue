@@ -1,30 +1,10 @@
 <template>
-    <div class="add-dashboard">
-        <div class="add-dashboard-btn" @click="showAdd();">
-            <i class="fa fa-plus"></i>
-            <span>{{words.addDashboard}}</span>
-        </div>
-    </div>
-    <ul class="row tabs">
-        <li v-for="tab in tabs" class="tab" :class="[tab.link == $route.name ? 'active' : '']" >
-            <a  v-link="{name: tab.link}" @click="changeTab(tab);">{{tab.name}}</a>
-        </li>
-    </ul>
-    <!--<ul class="row items filters">-->
-        <!--<li v-for="filter in filters" class="item" :class="[filterActive == $index ? 'active' : '']" @click="filterAction(filter, $index)">-->
-            <!--<span class="con">{{filter}}</span>-->
-        <!--</li>-->
-    <!--</ul>-->
     <ul class="row items source">
         <li v-for="(index, item) in source" class="item" :class="[sourceActive == $index ? 'active' : '']" @click="sourceAction(item, $index)">
             <!--<span class="con">{{item.name}} {{datas[index] | showNum datas}}<i class="fa fa-spinner fa-spin" v-show="!datas.length"></i></span>-->
             <span class="con">{{item.name | showNum datas[index] datas}}<i class="fa fa-spinner fa-spin" v-show="!datas.length"></i></span>
         </li>
     </ul>
-    <div v-if="showDashboard">
-        <add-dashboard :visiable.sync="showDashboard" :isanalytics.sync="isAnalytics"></add-dashboard>
-    </div>
-
 </template>
 <style lang="less" scoped>
     @import "Tabs.less";
@@ -33,14 +13,14 @@
     import _ from 'underscore';
     import Local from '../../../local/local';
     import AddDashboard from '../../AddDashboard/AddDashboard.vue'
-    import {activeAnalyticsTopic,analyticsResetSearch,analyticsSubTopicId,analyticsRefreshTopic,analyticsDateChange, analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic } from '../../../vuex/getters';
-    import { setAnalyticsType, setAnalyticsTimeRange, setAnalyticsSource, setAnalyticsSubTopic } from "../../../vuex/actions";
+    import {activeSummaryTopic,summaryResetSearch,summarySubTopicId,summaryRefreshTopic,summaryDateChange, summaryType, summaryTimeRange, summarySource, summarySubTopic } from '../../../vuex/getters';
+    import { setSummaryType, setSummaryTimeRange, setSummarySource, setSummarySubTopic } from "../../../vuex/actions";
 
     export default{
         props: ['active', 'actions', 'sourceactive', 'datas'],
         vuex: {
-            actions: { setAnalyticsType, setAnalyticsTimeRange, setAnalyticsSource, setAnalyticsSubTopic },
-            getters: {activeAnalyticsTopic,analyticsSubTopicId,analyticsResetSearch,analyticsRefreshTopic,analyticsDateChange, analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic }
+            actions: { setSummaryType, setSummaryTimeRange, setSummarySource, setSummarySubTopic },
+            getters: {activeSummaryTopic,summarySubTopicId,summaryResetSearch,summaryRefreshTopic,summaryDateChange, summaryType, summaryTimeRange, summarySource, summarySubTopic }
         },
 
         data(){
@@ -48,41 +28,7 @@
             return{
                 words,
                 showDashboard: false,
-                isAnalytics:false,
-                tabs: [
-                  /*      {
-                    name: words.tabs[0],
-                    //link: 'comment'
-                    link: 'information'
-                },*/
-                    {
-                    name: words.tabs[0],
-                    //link: 'comment'
-                    link: 'summary'
-                },{
-                    name: words.tabs[1],
-                    //link: 'summary'
-                    link:'theme'
-                }, {
-                    name: words.tabs[2],
-                    //link: 'sentiment'
-                    link:'influence'
-                }, {
-                    name: words.tabs[3],
-                    //link: 'influence'
-                    link: 'comment'
-                },{
-                    name: words.tabs[4],
-                    //link: 'theme'
-                    link: 'sentiment'
-                },{
-                    name: words.tabs[5],
-                    //link: 'theme'
-                    link: 'comparision'
-                    }],
-//                filters: words.filters,
-//                filterActive: 0,
-                //source: words.source,
+                isSummary:false,
                 source: [
                     { name: words.source[0] },
                     { name: words.source[1] },
@@ -99,38 +45,38 @@
             }
         },
         watch:{
-            activeAnalyticsTopic:{
+            activeSummaryTopic:{
                 handler(val){
                     this.sourceActive=0;
-                    this.setAnalyticsSource('all');
+                    this.setSummarySource('all');
                 }
             },
-            analyticsSubTopicId:{
+            summarySubTopicId:{
                 handler(val){
                     if(val!=0){
                         this.sourceActive=0;
-                        this.setAnalyticsSource('all');
+                        this.setSummarySource('all');
                     }
                 }
             },
-            analyticsSubTopic:{
+            summarySubTopic:{
                 handler(val){
                     this.sourceActive=0;
-                    this.setAnalyticsSource('all');
+                    this.setSummarySource('all');
                 }
             },
-            analyticsRefreshTopic:{
+            summaryRefreshTopic:{
                 handler(val){
                     if(val!=0){
                         this.sourceActive=0;
-                        this.setAnalyticsSource('all');
+                        this.setSummarySource('all');
                     }
                 }
             },
-            analyticsDateChange:{
+            summaryDateChange:{
                 handler(val){
                     this.sourceActive=0;
-                    this.setAnalyticsSource('all');
+                    this.setSummarySource('all');
                 }
             },
 
@@ -145,27 +91,24 @@
                 this.sourceActive = idx;
                 this.actions && this.actions(val, idx);
                 const source = ["all", "wechat", "weibo", "client", "web", "overseas","sengine"];
-                if(this.$route.path.indexOf('analytics') > -1){
-                    this.setAnalyticsSource(source[idx]);
+                if(this.$route.path.indexOf('summary') > -1){
+                    this.setSummarySource(source[idx]);
                 }
             },
             changeTab(tab){
                 console.log(tab);
-                this.setAnalyticsType(this.$route.name);
-                if(tab.link=='comparision'){
-                   // this.$router.go({name:tab.link});
-                }
+                this.setSummaryType(this.$route.name);
             },
             showAdd(){
                 this.showDashboard = true;
-                this.isAnalytics=true;
+                this.isSummary=true;
             }
         },
         ready(){
-            if(this.$route.path.indexOf('analytics') > -1){
-                this.setAnalyticsType(this.$route.name);
+            if(this.$route.path.indexOf('summary') > -1){
+                this.setSummaryType(this.$route.name);
                 const source = ["all", "wechat", "weibo", "client", "web", "oversea","sengine"];
-                this.setAnalyticsSource(source[0]);
+                this.setSummarySource(source[0]);
                 console.log('datas', this.datas);
             }
         },

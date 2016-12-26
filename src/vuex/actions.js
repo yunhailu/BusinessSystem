@@ -16,12 +16,63 @@ export const setActiveAnalyticsTopic = (store, topic) => {
 	store.dispatch(types.UPDATE_ACTIVE_ANALYTICS_TOPIC, topic);
 };
 
+export const setActiveSummaryTopic = (store, topic) => {
+	store.dispatch(types.UPDATE_ACTIVE_SUMMARY_TOPIC, topic);
+};
+
 export const setActiveCompareTopic = (store, topic) => {
 	store.dispatch(types.UPDATE_ACTIVE_COMPARE_TOPIC, topic);
 };
 
 export const setActiveSettingTopic = (store, topic) => {
 	store.dispatch(types.UPDATE_ACTIVE_SETTING_TOPIC, topic);
+};
+
+/**
+ * Summary
+ * */
+export const setSummaryType = (store, type) => {
+	store.dispatch(types.UPDATE_SUM_TYPE, type);
+};
+
+export const setSummaryTimeRange = (store, timeRange) => {
+	store.dispatch(types.UPDATE_SUM_TIME_RANGE, timeRange);
+};
+
+export const setSummaryDateChange = (store, value) => {
+	store.dispatch(types.UPDATE_SUM_DATE_CHANGE, value);
+};
+
+export const setSummarySource = (store, source) => {
+	store.dispatch(types.UPDATE_SUM_SOURCE, source);
+};
+
+export const setSummarySubTopic = (store, subtopic) => {
+	store.dispatch(types.UPDATE_SUM_SUBTOPIC, subtopic);
+};
+
+export const setSummaryStart = (store, start) => {
+	store.dispatch(types.UPDATE_SUM_START, start);
+};
+
+export const setSummaryEnd = (store, end) => {
+	store.dispatch(types.UPDATE_SUM_END, end);
+};
+
+export const setSummaryRefreshTopic = (store, refreshTopic) => {
+	store.dispatch(types.UPDATE_SUM_REFRESH_TOPIC, refreshTopic);
+};
+
+export const setSummaryResetSearch = (store, resetSearch) => {
+	store.dispatch(types.UPDATE_SUM_RESET_SEARCH, resetSearch);
+};
+
+export const setSummarySubTopicId = (store, subtopicId) => {
+	store.dispatch(types.UPDATE_SUM_SUBTOPIC_ID, subtopicId);
+};
+
+export const setSummaryTimePopUp = (store, newtime) => {
+	store.dispatch(types.UPDATE_SUM_TIME_POP_UP, newtime);
 };
 
 

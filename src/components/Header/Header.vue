@@ -55,16 +55,23 @@
                     icon: "fa-home",
                     link: "home"
                 },{
+                    id: "summary",
+                    name: words.summary,
+                    icon: "fa-list-ul",
+                    link: "summarylist"
+                },{
                     id: "analytics",
                     name: words.analytics,
                     icon: "fa-line-chart",
                     link: "analytics"
-                },{
+                },
+                   /* {
                     id: "compare",
                     name: words.compare,
                     icon: "fa-paper-plane",
                     link: "compare"
-                },{
+                },*/
+                {
                     id: "dashboard",
                     name: words.dashboard,
                     icon: "fa-adjust",

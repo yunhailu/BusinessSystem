@@ -234,7 +234,7 @@
                         }.bind(this),1000);
                         console.log('申请成功');
                     } else if(resp.data.code==100) {
-                        this.errorTips = resp.data.message[0];
+                        this.errorTips = resp.data.message;
                         this.showSmallTips = true;
                         this.tipsShow();
                         return;

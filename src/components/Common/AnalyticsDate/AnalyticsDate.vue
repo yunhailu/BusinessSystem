@@ -1,70 +1,49 @@
 <template>
-    <header-component active="analytics"></header-component>
-    <div class="divAnaBox">
-        <menu-component v-if="$route.name !='comparision'"></menu-component>
-        <com-menu v-if="$route.name=='comparision'"></com-menu>
-        <div class="analytics-panel">
-            <div class="analytics-panel-wrap">
-               <!-- <div class="row tools">
-                    <div class="row-left" v-if="trim(search) == ''">{{analytics.monitor}}: {{showName}}</div>
-                    <div class="row-left" v-if="trim(search) !=''">{{analytics.monitor}}: {{showName}}+{{search}}</div>
-                    <div class="row-middle">
-                        <div class="search">
-                            <input class="search-input" placeholder="子话题搜索" v-model="search" @keyup.enter="searchAction" />
-                            <span class="search-btn" @click="searchAction"><i class="fa fa-search"></i></span>
-                        </div>
-                    </div>
-                    <div class="row-right">
-                        <ul class="days-btn">
-                            <li>监测区间: </li>
-                            <li @click="selectTime(0.33);" :class="[selectTimeTag == 0.33 ? 'active' : '']" class="active">8小时</li>
-                            <li @click="selectTime(1);" :class="[selectTimeTag == 1 ? 'active' : '']">1天</li>
-                            <li @click="selectTime(7);" :class="[selectTimeTag == 7 ? 'active' : '']">7天</li>
-                            <li @click="selectTime(30);" v-if="timePay ===0" :class="[selectTimeTag == 30 ? 'active' : '']"> 30天
-                                <smalltip :title = 'analytics.tips' class="smalltip"></smalltip>
-                            </li>
-                            <li @click="selectTime(30);" v-if="timePay !== 0"  :class="[selectTimeTag == 30 ? 'active' : '']"> 30天</li>
-                            <li @click="selectTime(0);"  v-if="timePay !== 2"  :class="[selectTimeTag == 0 ? 'active' : '']">自定义
-                                <smalltip :title = 'analytics.tips' class="smalltip"></smalltip>
-                            </li>
-                            <li @click="selectTime(0);"  v-if="timePay ===2"  :class="[selectTimeTag == 0 ? 'active' : '']">自定义</li>
-                        </ul>
-                        <div class="diyDate" v-show="isTimeDiy">
-                            <span class="date" @click="showCalendar"><i class="fa fa-calendar  icon"></i> {{dateVal}}</span>
-                            <calendar :show.sync="cal.show" :value.sync="dateVal" :x="cal.x" :y="cal.y" :begin.sync="cal.begin" :end.sync="cal.end" :type="cal.type" :range="cal.range"></calendar>
-                        </div>
-                        <div class="row-null"></div>
-                    </div>
-                </div>-->
-                <analytics-date v-if="$route.name !='comparision'"></analytics-date>
-                <compare-date v-if="$route.name=='comparision'"></compare-date>
-                <router-view></router-view>
+    <div class="row tools">
+        <div class="row-left" v-if="trim(search) == ''">{{analytics.monitor}}: {{showName}}</div>
+        <div class="row-left" v-if="trim(search) !=''">{{analytics.monitor}}: {{showName}}+{{search}}</div>
+        <div class="row-middle">
+            <div class="search">
+                <input class="search-input" placeholder="子话题搜索" v-model="search" @keyup.enter="searchAction" />
+                <span class="search-btn" @click="searchAction"><i class="fa fa-search"></i></span>
             </div>
         </div>
-       <!-- <div class="qq">
-            <a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=3342973679&site=qq&menu=yes"><img border="0" src="http://wpa.qq.com/pa?p=2:3342973679:3" alt="点这里给我发消息" /></a>
-        </div>-->
+        <div class="row-right">
+            <ul class="days-btn">
+                <li>监测区间: </li>
+                <li @click="selectTime(0.33);" :class="[selectTimeTag == 0.33 ? 'active' : '']" class="active">8小时</li>
+                <li @click="selectTime(1);" :class="[selectTimeTag == 1 ? 'active' : '']">1天</li>
+                <li @click="selectTime(7);" :class="[selectTimeTag == 7 ? 'active' : '']">7天</li>
+                <li @click="selectTime(30);" v-if="timePay ===0" :class="[selectTimeTag == 30 ? 'active' : '']"> 30天
+                    <smalltip :title = 'analytics.tips' class="smalltip"></smalltip>
+                </li>
+                <li @click="selectTime(30);" v-if="timePay !== 0"  :class="[selectTimeTag == 30 ? 'active' : '']"> 30天</li>
+                <li @click="selectTime(0);"  v-if="timePay !== 2"  :class="[selectTimeTag == 0 ? 'active' : '']">自定义
+                    <smalltip :title = 'analytics.tips' class="smalltip"></smalltip>
+                </li>
+                <li @click="selectTime(0);"  v-if="timePay ===2"  :class="[selectTimeTag == 0 ? 'active' : '']">自定义</li>
+            </ul>
+            <div class="diyDate" v-show="isTimeDiy">
+                <span class="date" @click="showCalendar"><i class="fa fa-calendar  icon"></i> {{dateVal}}</span>
+                <calendar :show.sync="cal.show" :value.sync="dateVal" :x="cal.x" :y="cal.y" :begin.sync="cal.begin" :end.sync="cal.end" :type="cal.type" :range="cal.range"></calendar>
+            </div>
+            <div class="row-null"></div>
+        </div>
     </div>
-    <order-footer></order-footer>
 </template>
 <style lang="less">
-    @import "Analytics.less";
+    @import "AnalyticsDate.less";
 </style>
 <script  type="text/ecmascript-6">
     import moment from 'moment';
     import Cookie from "js-cookie";
-    import { getCookie } from '../../widgets/Cookie';
-    import SmallTip from '../Common/SmallTip/SmallTip.vue';
-    import HeaderComponent from '../Header/Header.vue';
-    import MenuComponent from './Menu/Menu.vue';
-    import ComMenuComonent from '../Compare/Menu/Menu.vue';
-    import Calendar from '../Common/Calendar/Calendar.vue';
-    import OrderFooterComponent from '../OrderFooter/OrderFooter.vue';
-    import Local from "../../local/local";
-    import CompareDate from "../Common/CompareDate/CompareDate.vue";
-    import AnalyticsDate from "../Common/AnalyticsDate/AnalyticsDate.vue";
-    import {analyticsTimePopUp,analyticsSubTopicId, activeAnalyticsTopic,analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic, analyticsDateChange, analyticsStart, analyticsEnd, analyticsResetSearch } from '../../vuex/getters';
-    import {setAnalyticsTimePopUp,setAnalyticsSubTopicId,setActiveAnalyticsTopic,setAnalyticsType, setAnalyticsTimeRange, setAnalyticsSource, setAnalyticsSubTopic, setAnalyticsDateChange, setAnalyticsStart, setAnalyticsEnd, setAnalyticsResetSearch  } from "../../vuex/actions";
+    import { getCookie } from '../../../widgets/Cookie';
+    import SmallTip from '../../Common/SmallTip/SmallTip.vue';
+    import HeaderComponent from '../../Header/Header.vue';
+    import Calendar from '../../Common/Calendar/Calendar.vue';
+    import Local from "../../../local/local";
+    import {analyticsTimePopUp,analyticsSubTopicId, activeAnalyticsTopic,analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic, analyticsDateChange, analyticsStart, analyticsEnd, analyticsResetSearch } from '../../../vuex/getters';
+    import {setAnalyticsTimePopUp,setAnalyticsSubTopicId,setActiveAnalyticsTopic,setAnalyticsType, setAnalyticsTimeRange, setAnalyticsSource, setAnalyticsSubTopic, setAnalyticsDateChange, setAnalyticsStart, setAnalyticsEnd, setAnalyticsResetSearch  } from "../../../vuex/actions";
 
     export default{
         data(){
@@ -120,13 +99,8 @@
         },
         components:{
             'header-component': HeaderComponent,
-            'menu-component': MenuComponent,
             'calendar': Calendar,
-            'order-footer':OrderFooterComponent,
-            'smalltip':SmallTip,
-            'com-menu':ComMenuComonent,
-            'analytics-date':AnalyticsDate,
-            'compare-date':CompareDate
+            'smalltip':SmallTip
         },
         methods: {
             searchAction(){
@@ -263,6 +237,7 @@
             }
         },
         ready(){
+            this.showName=this.activeAnalyticsTopic.topic_name;
             this.init();
         },
         route: {

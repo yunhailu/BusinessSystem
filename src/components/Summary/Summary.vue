@@ -1,11 +1,10 @@
 <template>
-    <header-component active="analytics"></header-component>
+    <header-component active="summary"></header-component>
     <div class="divAnaBox">
-        <menu-component v-if="$route.name !='comparision'"></menu-component>
-        <com-menu v-if="$route.name=='comparision'"></com-menu>
+        <menu-component></menu-component>
         <div class="analytics-panel">
             <div class="analytics-panel-wrap">
-               <!-- <div class="row tools">
+                <div class="row tools">
                     <div class="row-left" v-if="trim(search) == ''">{{analytics.monitor}}: {{showName}}</div>
                     <div class="row-left" v-if="trim(search) !=''">{{analytics.monitor}}: {{showName}}+{{search}}</div>
                     <div class="row-middle">
@@ -35,10 +34,8 @@
                         </div>
                         <div class="row-null"></div>
                     </div>
-                </div>-->
-                <analytics-date v-if="$route.name !='comparision'"></analytics-date>
-                <compare-date v-if="$route.name=='comparision'"></compare-date>
-                <router-view></router-view>
+                </div>
+                <v-information></v-information>
             </div>
         </div>
        <!-- <div class="qq">
@@ -48,7 +45,7 @@
     <order-footer></order-footer>
 </template>
 <style lang="less">
-    @import "Analytics.less";
+    @import "Summary.less";
 </style>
 <script  type="text/ecmascript-6">
     import moment from 'moment';
@@ -56,15 +53,13 @@
     import { getCookie } from '../../widgets/Cookie';
     import SmallTip from '../Common/SmallTip/SmallTip.vue';
     import HeaderComponent from '../Header/Header.vue';
+    import Information from '../Information/Information.vue'
     import MenuComponent from './Menu/Menu.vue';
-    import ComMenuComonent from '../Compare/Menu/Menu.vue';
     import Calendar from '../Common/Calendar/Calendar.vue';
     import OrderFooterComponent from '../OrderFooter/OrderFooter.vue';
     import Local from "../../local/local";
-    import CompareDate from "../Common/CompareDate/CompareDate.vue";
-    import AnalyticsDate from "../Common/AnalyticsDate/AnalyticsDate.vue";
-    import {analyticsTimePopUp,analyticsSubTopicId, activeAnalyticsTopic,analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic, analyticsDateChange, analyticsStart, analyticsEnd, analyticsResetSearch } from '../../vuex/getters';
-    import {setAnalyticsTimePopUp,setAnalyticsSubTopicId,setActiveAnalyticsTopic,setAnalyticsType, setAnalyticsTimeRange, setAnalyticsSource, setAnalyticsSubTopic, setAnalyticsDateChange, setAnalyticsStart, setAnalyticsEnd, setAnalyticsResetSearch  } from "../../vuex/actions";
+    import {summaryTimePopUp,summarySubTopicId, activeSummaryTopic,summaryType, summaryTimeRange, summarySource, summarySubTopic, summaryDateChange, summaryStart, summaryEnd, summaryResetSearch } from '../../vuex/getters';
+    import {setSummaryTimePopUp,setSummarySubTopicId,setActiveSummaryTopic,setSummaryType, setSummaryTimeRange, setSummarySource, setSummarySubTopic, setSummaryDateChange, setSummaryStart, setSummaryEnd, setSummaryResetSearch  } from "../../vuex/actions";
 
     export default{
         data(){
@@ -86,36 +81,35 @@
                 selectTimeTag: 0.33,
                 isTimeDiy: false,
                 tabActive: 'result',
-                showName:'',
-                isCompare:false
+                showName:''
             }
         },
         vuex: {
             actions: {
-                setAnalyticsSubTopicId,
-                setActiveAnalyticsTopic,
-                setAnalyticsType,
-                setAnalyticsTimeRange,
-                setAnalyticsSource,
-                setAnalyticsSubTopic,
-                setAnalyticsDateChange,
-                setAnalyticsStart,
-                setAnalyticsEnd,
-                setAnalyticsResetSearch,
-                setAnalyticsTimePopUp
+                setSummarySubTopicId,
+                setActiveSummaryTopic,
+                setSummaryType,
+                setSummaryTimeRange,
+                setSummarySource,
+                setSummarySubTopic,
+                setSummaryDateChange,
+                setSummaryStart,
+                setSummaryEnd,
+                setSummaryResetSearch,
+                setSummaryTimePopUp
             },
             getters: {
-                analyticsSubTopicId,
-                activeAnalyticsTopic,
-                analyticsType,
-                analyticsTimeRange,
-                analyticsSource,
-                analyticsSubTopic,
-                analyticsDateChange,
-                analyticsStart,
-                analyticsEnd,
-                analyticsResetSearch,
-                analyticsTimePopUp
+                summarySubTopicId,
+                activeSummaryTopic,
+                summaryType,
+                summaryTimeRange,
+                summarySource,
+                summarySubTopic,
+                summaryDateChange,
+                summaryStart,
+                summaryEnd,
+                summaryResetSearch,
+                summaryTimePopUp
             }
         },
         components:{
@@ -124,19 +118,17 @@
             'calendar': Calendar,
             'order-footer':OrderFooterComponent,
             'smalltip':SmallTip,
-            'com-menu':ComMenuComonent,
-            'analytics-date':AnalyticsDate,
-            'compare-date':CompareDate
+            "v-information":Information
         },
         methods: {
             searchAction(){
-                if(this.analyticsSubTopic == this.search){
-                    this.setAnalyticsSubTopicId(this.analyticsSubTopicId + 1);
-                    console.log(this.analyticsSubTopicId);
+                if(this.summarySubTopic == this.search){
+                    this.setSummarySubTopicId(this.summarySubTopicId + 1);
+                    console.log(this.summarySubTopicId);
                 }else{
                     console.log(this.search);
-                    this.setAnalyticsSubTopic(this.search);
-                    this.setAnalyticsSubTopicId(0);
+                    this.setSummarySubTopic(this.search);
+                    this.setSummarySubTopicId(0);
                 }
             },
             selectTime(num){
@@ -146,44 +138,44 @@
                         return ;
                     }else {
                         this.isTimeDiy = true;
-                        this.dateVal = this.analyticsStart + ' ~ ' + this.analyticsEnd;
+                        this.dateVal = this.summaryStart + ' ~ ' + this.summaryEnd;
                     }
                     //this.selectTimeTag = num;
 
                 } else if(num ==0.33){
                     this.selectTimeTag = num;
                     this.isTimeDiy = false;
-                    this.setAnalyticsTimeRange(0.33);
-                    this.setAnalyticsTimePopUp(0.33);
+                    this.setSummaryTimeRange(0.33);
+                    this.setSummaryTimePopUp(0.33);
                     let start = moment().subtract(8,"hour").format("YYYY-MM-DD HH");
                     let end = moment().format("YYYY-MM-DD HH");
                     start = start.split(" ")[0] + "T" + start.split(" ")[1];
                     end = end.split(" ")[0] + "T" + end.split(" ")[1];
-                    this.setAnalyticsStart(start);
-                    this.setAnalyticsEnd(end);
+                    this.setSummaryStart(start);
+                    this.setSummaryEnd(end);
                     //可以精确到小时
-                    this.setAnalyticsDateChange(this.analyticsDateChange + 1);
+                    this.setSummaryDateChange(this.summaryDateChange + 1);
                 }else if(num == 30){
                     if(this.timePay === 0){
                         return ;
                     }else {
                         this.selectTimeTag = num;
                         this.isTimeDiy = false;
-                        this.setAnalyticsTimeRange(num);
-                        this.setAnalyticsTimePopUp(num);
-                        this.setAnalyticsStart(moment().subtract(num, 'days').format('YYYY-MM-DD'));
-                        this.setAnalyticsEnd(moment().format('YYYY-MM-DD'));
-                        this.setAnalyticsDateChange(this.analyticsDateChange + 1);
+                        this.setSummaryTimeRange(num);
+                        this.setSummaryTimePopUp(num);
+                        this.setSummaryStart(moment().subtract(num, 'days').format('YYYY-MM-DD'));
+                        this.setSummaryEnd(moment().format('YYYY-MM-DD'));
+                        this.setSummaryDateChange(this.summaryDateChange + 1);
                     }
 
                 }else{
                     this.selectTimeTag = num;
                     this.isTimeDiy = false;
-                    this.setAnalyticsTimeRange(num);
-                    this.setAnalyticsTimePopUp(num);
-                    this.setAnalyticsStart(moment().subtract(num, 'days').format('YYYY-MM-DD'));
-                    this.setAnalyticsEnd(moment().format('YYYY-MM-DD'));
-                    this.setAnalyticsDateChange(this.analyticsDateChange + 1);
+                    this.setSummaryTimeRange(num);
+                    this.setSummaryTimePopUp(num);
+                    this.setSummaryStart(moment().subtract(num, 'days').format('YYYY-MM-DD'));
+                    this.setSummaryEnd(moment().format('YYYY-MM-DD'));
+                    this.setSummaryDateChange(this.summaryDateChange + 1);
 
 
                 }
@@ -207,40 +199,40 @@
                 const start = moment(this.cal.begin, "YYYY-MM-DD");
                 const end = moment(this.cal.end, "YYYY-MM-DD");
                 const days = end.diff(start)/1000/3600/24;
-                this.setAnalyticsStart(this.cal.begin);
-                this.setAnalyticsEnd(this.cal.end);
-                this.setAnalyticsTimeRange(days);
+                this.setSummaryStart(this.cal.begin);
+                this.setSummaryEnd(this.cal.end);
+                this.setSummaryTimeRange(days);
             },
             trim(str){
                 return str.replace(/(^\s*)|(\s*$)/g,'');
             }
         },
         watch: {
-            analyticsTimePopUp:{
+            summaryTimePopUp:{
                 handler(val){
                     this.selectTime(val);
                 }
             },
-            analyticsResetSearch:{
+            summaryResetSearch:{
                 handler(val){
                     if(val == true){
                         this.search = '';
-                        this.setAnalyticsResetSearch(false);
-                        this.setAnalyticsSubTopic(this.search);
+                        this.setSummaryResetSearch(false);
+                        this.setSummarySubTopic(this.search);
                     }
                 }
             },
-            activeAnalyticsTopic:{
+            activeSummaryTopic:{
                 handler(val){
-                    this.showName = (this.activeAnalyticsTopic).topic_name;
+                    this.showName = (this.activeSummaryTopic).topic_name;
                     this.selectTimeTag = 0.33;
                     let start = moment().subtract(8,"hour").format("YYYY-MM-DD HH");
                     let end = moment().format("YYYY-MM-DD HH");
                     start = start.split(" ")[0] + "T" + start.split(" ")[1];
                     end = end.split(" ")[0] + "T" + end.split(" ")[1];
-                    this.setAnalyticsStart(start);
-                    this.setAnalyticsEnd(end);
-                    this.setAnalyticsTimePopUp(0.33);
+                    this.setSummaryStart(start);
+                    this.setSummaryEnd(end);
+                    this.setSummaryTimePopUp(0.33);
                 }
             },
             dateVal: {
@@ -255,21 +247,20 @@
                         return ;
                     }
                     const days = end.diff(start)/1000/3600/24;
-                    this.setAnalyticsStart(val.split(' ~ ')[0]);
-                    this.setAnalyticsEnd(val.split(' ~ ')[1]);
-                    this.setAnalyticsTimeRange(days);
-                    this.setAnalyticsDateChange(this.analyticsDateChange + 1);
+                    this.setSummaryStart(val.split(' ~ ')[0]);
+                    this.setSummaryEnd(val.split(' ~ ')[1]);
+                    this.setSummaryTimeRange(days);
+                    this.setSummaryDateChange(this.summaryDateChange + 1);
                 }
             }
         },
         ready(){
             this.init();
         },
-        route: {
+       /* route: {
             data(){
                 this.tabActive = this.$route.name;
-                console.log(this.tabActive);
             }
-        }
+        }*/
     }
 </script>

@@ -137,7 +137,7 @@
                         data: []
                     }]
                 },
-               sentimentPieLoading:false,
+               sentimentPieLoading:true,
                 sentimentPieOption:{
                     tooltip: {
                         show:true,
@@ -302,6 +302,7 @@
                         this.x = _.map(details, detail => detail.date);
                         const _this = this;
                         this.initData();
+                        this.sentimentNums=[];
                         let all = {happy: [], anger:[], sorrow:[], disgust:[], fear:[]};
                         _.each(details, (detail, index) => {
                             _.each(detail.values, (value, key) => {
@@ -375,6 +376,33 @@
                         ];
                         console.log(this.sentimentNums)*/
                     }else if(resp.data.code == 1004){
+                       /* if(time_interval==0){
+                            this.commentBarLoading = false;
+                            this.commentPieLoading2= false;
+                            this.loadingParams.visiable = false;
+                            this.setAnalyticsTimePopUp(1);
+                            return ;
+                        }else if(time_interval==1){
+                            this.commentBarLoading = false;
+                            this.commentPieLoading2= false;
+                            this.loadingParams.visiable = false;
+                            this.setAnalyticsTimePopUp(7);
+                            return ;
+                        }else{
+                            this.commentBarOption.series = [
+                                { name: this.words.positive, type: 'line',
+                                    data: [] },
+                                { name: this.words.negative, type:'line',
+                                    data: [] },
+                                { name: this.words.neutral, type:'line',
+                                    data: [] }
+                            ];
+                            this.commentPieOption2.series.data=[];
+                            this.commentBarLoading = false;
+                            this.commentPieLoading2= false;
+                            this.loadingParams.visiable = false;
+                            return ;
+                        }*/
                         const selTime = this.analyticsTimePopUp;
                         switch (selTime){
                             case 0.33:
