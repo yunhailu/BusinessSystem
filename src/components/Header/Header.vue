@@ -37,8 +37,6 @@
     import Local from "../../local/local";
     import { WhiteList } from "../../config/config";
     import { getCookie } from '../../widgets/Cookie';
-    import {loginTime} from '../../vuex/getters';
-    import {setLoginTime} from '../../vuex/actions';
     import qservice from '../QQservice/QQservice.vue';
     import * as Api from "../../widgets/Api";
 
@@ -87,10 +85,6 @@
                 }]
             }
         },
-        vuex:{
-            getters:{loginTime},
-            actions:{setLoginTime}
-        },
         components:{ qservice},
         methods: {
             quit(){
@@ -118,15 +112,6 @@
             },
             init(){
                 this.initData();
-            }
-        },
-        watch:{
-            loginTime:{
-                handler(val){
-                    if(val !=0){
-                        this.initData();
-                    }
-                }
             }
         }
     }

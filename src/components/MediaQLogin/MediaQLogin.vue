@@ -16,68 +16,7 @@
                 </div>
 
             </div>
-
-
-
-            <!-- -&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;-->
-
-
-            <!--<div>-->
-                <!--<img src="images/logo.png">-->
-                <!--<span>{{loginStr.forWodeTitle}}</span>-->
-            <!--</div>-->
-            <!--<ul>-->
-                <!--<li class="col-sm-4"><a href="javascript:void(0);" @click="toHotEvent">{{loginStr.hotEvent}}</a></li>-->
-                <!--<li class="col-sm-4"><a href="javascript:void(0);" @click="showLogin">{{loginStr.forLogin}}</a></li>-->
-                <!--<li class="col-sm-4"><a href="javascript:void(0);" @click="toPromotion">{{loginStr.forFirstPage}}</a></li>-->
-            <!--</ul>-->
-
-            <!--v-bind:style="{height:sliderH + 'px' ,width: sliderW + 'px' }"-->
         </div>
-        <!--<div class="container">
-
-            <div class="login-page">
-                <form class="form-horizontal" v-on:submit.prevent>
-                    <fieldset>
-                        <legend>
-                            <img class="logo-icon" src="images/logo.jpg" />
-                            <span>沃德品牌气象站</span>
-                        </legend>
-                        <div class="form-group">
-                            <label for="inputEmail3" class="col-sm-2 control-label login-font">用户名</label>
-                            <div class="col-sm-4">
-                                <input type="text" v-model="userName" class="form-control" id="inputEmail3" placeholder="UserName">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="inputPassword3" class="col-sm-2 control-label login-font">密码</label>
-                            <div class="col-sm-4">
-                                <input type="password" v-model="password" class="form-control" id="inputPassword3" placeholder="Password">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-sm-offset-2 col-sm-10 login-font">
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox"> 记住密码
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group" v-show="errorTip">
-                            <div class="col-sm-offset-2 col-sm-10 errorTip">
-                                <label>{{errorTip}}</label>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-sm-offset-2 col-sm-10">
-                                <button type="submit" class="btn btn-primary" @click="login">登录系统</button>
-                            </div>
-                        </div>
-                    </fieldset>
-                </form>
-            </div>
-        </div>-->
         <footer-component></footer-component>
         <!--<div class="apply-bg" v-show="isApply" @click="cancelApply">
             <div class="apply-bg-content" @click.stop>
@@ -176,8 +115,8 @@
     import Promotion from "./MediaQPromotion/MediaQPromotion.vue"
     //import Instruction from "../Common/InstructionsForUse/InstructionsForUse.vue"
     import HotEvent from "../AllNetHotEvent/AllNetHotEvent.vue"
-    import {loginState ,loginTime } from '../../vuex/getters';
-    import {setLoginState, setLoginTime} from "../../vuex/actions";
+    import {loginState} from '../../vuex/getters';
+    import {setLoginState} from "../../vuex/actions";
 
     export default {
         name: 'login',
@@ -206,8 +145,8 @@
 //            ,Instruction
         },
         vuex:{
-            getters:{loginState, loginTime},
-            actions:{setLoginState, setLoginTime}
+            getters:{loginState},
+            actions:{setLoginState}
         },
         methods: {
             toHotEvent(){
@@ -283,18 +222,14 @@
                         Cookie.set('business_email', data.data.email);
                         Cookie.set('business_level', data.data.level);
                         Cookie.set('access_token',data.data.access_token);
-                        this.userName = '';
-                        this.password = '';
-                        /*if(this.$els.remember.checked==true){
-                            console.log(this.$els.remember.checked)
+                        if(this.remember){
                             Cookie.set('login_userName',this.userName);
                             Cookie.set('login_password',this.password);
-                            Cookie.set('login_remember',true);
+                            Cookie.set('login_remember',this.remember);
                         }else{
                             this.userName = '';
                             this.password = '';
-                        }*/
-                        //location.hash = '#!/home';
+                        }
                         this.$router.go({name: 'home'});
                     } else {
                         this.errorShow = true;
@@ -303,19 +238,10 @@
                 });
             }
         },
-       /* created(){
-            console.log('bbb',this.userName,this.password);
+        ready(){
             this.userName = getCookie('login_userName');
             this.password = getCookie('login_password');
-        },*/
-        ready(){
-
-            console.log('aaa',this.userName,this.password);
-                this.userName = getCookie('login_userName');
-                this.password = getCookie('login_password');
-
-            //console.log('this',this.$el.querySelector('.remember').checked);
-            //this.$els.remember.checked = getCookie('login_remember');
+            this.remember=getCookie('login_remember');
 
         },
         watch:{
@@ -328,12 +254,6 @@
                 }
             }
         }
-        /*route:{
-            activate(transition){
-                redirect();
-                transition.next();
-            }
-        }*/
     };
 
 </script>

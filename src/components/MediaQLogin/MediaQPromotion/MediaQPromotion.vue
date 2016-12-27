@@ -117,9 +117,7 @@
         },
         methods:{
             login(){
-
                 this.setLoginState(true);
-
             }
         },
 

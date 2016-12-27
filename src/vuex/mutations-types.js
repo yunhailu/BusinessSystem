@@ -36,6 +36,8 @@ export const UPDATE_RESET_SEARCH = 'UPDATE_RESET_SEARCH';
 export const UPDATE_SUBTOPIC_ID = 'UPDATE_SUBTOPIC_ID';
 
 export const UPDATE_TIME_POP_UP = 'UPDATE_TIME_POP_UP';
+
+export const UPDATE_ADD_TOPIC = 'UPDATE_ADD_TOPIC';
 /**
  * Compare
  **/
@@ -67,5 +69,3 @@ export const REMOVE_EXPORT_IMAGES = 'REMOVE_EXPORT_IMAGES';
 
 //登陆页
 export const LOGIN_STATE = 'LOGIN_STATE';
-export const LOGIN_TIME='LOGIN_TIME';
-export const USER_LEVEL = 'USER_LEVEL';

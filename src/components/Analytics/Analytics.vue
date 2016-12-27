@@ -230,6 +230,7 @@
                     end = end.split(" ")[0] + "T" + end.split(" ")[1];
                     this.setAnalyticsStart(start);
                     this.setAnalyticsEnd(end);
+                    this.setAnalyticsTimeRange(0.33);
                     this.setAnalyticsTimePopUp(0.33);
                 }
             },

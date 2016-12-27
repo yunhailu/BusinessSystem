@@ -72,6 +72,9 @@ export const setAnalyticsTimePopUp = (store, newtime) => {
 	store.dispatch(types.UPDATE_TIME_POP_UP, newtime);
 };
 
+export const setAnalyticsAddTopic = (store, topic) => {
+	store.dispatch(types.UPDATE_ADD_TOPIC, topic);
+};
 /**
  * Compare
  * */
@@ -127,13 +130,3 @@ export const removeExportImages = (store) => {
 export const setLoginState = (store,state) => {
 	store.dispatch(types.LOGIN_STATE,state);
 };
-export const setLoginTime = (store,time) => {
-	store.dispatch(types.LOGIN_TIME,time)
-};
-/**
- * @param store
- * @param level
- */
-export const setUserLevel = (store,level) =>{
-	store.dispatch(types.USER_LEVEL,level);
-}

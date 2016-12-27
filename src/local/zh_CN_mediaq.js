@@ -20,7 +20,7 @@ export const zh_CN_mediaq = _.extend({}, zh_CN, {
     login:{
         login:"登录",
         toApply:"没有账号?点我申请",
-        username:"用户名",
+        username:"用户名/邮箱",
         password:"请输入密码",
         remember:"记住密码",
         getBack:"找回密码",
@@ -189,7 +189,7 @@ export const zh_CN_mediaq = _.extend({}, zh_CN, {
     profile: {
         mineTitle: "我的信息",
         userMsg: "用户信息",
-        agreeApply:"申请信息",
+        agreeApply:"审核申请",
         userName: "用户名",
         newUserName: "新用户名",
         gender: "性别",

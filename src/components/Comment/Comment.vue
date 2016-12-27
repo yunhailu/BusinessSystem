@@ -177,6 +177,7 @@
                 });
             },
             getCommentDetail(){
+                this.commentNums=[];
                 const topic_id = this.activeAnalyticsTopic.topic_id,
                     subtopic = this.analyticsSubTopic,
                     source = this.analyticsSource,
@@ -270,7 +271,31 @@
                             overseasNums
                         ];
                     }else if(resp.data.code == 1004){
-                        const selTime = this.analyticsTimePopUp;
+                        if(time_interval==0.33){
+                            this.commentBarLoading = false;
+                            this.commentPieLoading2= false;
+                            this.loadingParams.visiable = false;
+                            this.setAnalyticsTimePopUp(1);
+                        }else if(time_interval==1){
+                            this.commentBarLoading = false;
+                            this.commentPieLoading2= false;
+                            this.loadingParams.visiable = false;
+                            this.setAnalyticsTimePopUp(7);
+                        }else {
+                            this.commentBarOption.series = [
+                                { name: this.words.positive, type: 'line',
+                                    data: [] },
+                                { name: this.words.negative, type:'line',
+                                    data: [] },
+                                { name: this.words.neutral, type:'line',
+                                    data: [] }
+                            ];
+                            this.commentPieOption2.series.data=[];
+                            this.commentBarLoading = false;
+                            this.commentPieLoading2= false;
+                            this.loadingParams.visiable = false;
+                        }
+                       /* const selTime = this.analyticsTimePopUp;
                         switch (selTime){
                             case 0.33:
                                 this.commentBarLoading = false;
@@ -299,7 +324,7 @@
                                 this.loadingParams.visiable = false;
                                 break;
 
-                        }
+                        }*/
                     }
                 });
             },

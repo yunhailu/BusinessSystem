@@ -284,6 +284,7 @@
                 });
             },
             getSentimentDetail(){
+                this.sentimentNums=[];
                 const topic_id = this.activeAnalyticsTopic.topic_id,
                         subtopic = this.analyticsSubTopic,
                         source = this.analyticsSource,
@@ -375,7 +376,44 @@
                         ];
                         console.log(this.sentimentNums)*/
                     }else if(resp.data.code == 1004){
-                        const selTime = this.analyticsTimePopUp;
+                        if(time_interval==0.33){
+                            this.sentimentBarLoading = false;
+                            this.sentimentPieLoading = false;
+                            this.loadingParams.visiable = false;
+                            this.setAnalyticsTimePopUp(1);
+                        }else if(time_interval==1){
+                            this.sentimentBarLoading = false;
+                            this.sentimentPieLoading = false;
+                            this.loadingParams.visiable = false;
+                            this.setAnalyticsTimePopUp(7);
+                        }else{
+                            this.sentimentBarOption.series=[{
+                                name:this.sentiment.happy,
+                                type:'line',
+                                data: []
+                            }, {
+                                name:this.sentiment.anger,
+                                type:'line',
+                                data: []
+                            }, {
+                                name:this.sentiment.sorrow,
+                                type:'line',
+                                data: []
+                            }, {
+                                name:this.sentiment.disgust,
+                                type:'line',
+                                data: []
+                            }, {
+                                name:this.sentiment.fear,
+                                type:'line',
+                                data: []
+                            }]
+                            this.sentimentPieOption.series.data=[];
+                            this.sentimentBarLoading = false;
+                            this.sentimentPieLoading = false;
+                            this.loadingParams.visiable = false;
+                        }
+                       /* const selTime = this.analyticsTimePopUp;
                         switch (selTime){
                             case 0.33:
                                 this.sentimentBarLoading = false;
@@ -417,7 +455,7 @@
                                 this.loadingParams.visiable = false;
                                 break;
 
-                        }
+                        }*/
                     }
                 });
             },

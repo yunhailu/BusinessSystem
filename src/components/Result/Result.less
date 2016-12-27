@@ -13,16 +13,21 @@
 
 .charts{
   .pd(0);  .mg(0);  .h(300px);  .w(100%);   .pr();.pd-top(10px);
-  .chart.active{ .w(65%); }
+  //.chart.active{ .w(65%); }
+  .chart.active{ .w(96%); }
   .chart{
     .w(96%);  .h(280px); .pd(0 10px);
     .disIB();
   }
-  .pie.active{ .w(35%); .disIB();  .opacity(100); }
+  //.pie.active{ .w(35%); .disIB();  .opacity(100); }
+  .pie.active{ .w(48%);  .h(300px); .disIB();  .opacity(100); }
   .pie{
-    .w(23%);  .h(300px);  .opacity(0);  .pa();  .right(20px);
+    .w(48%);  .opacity(0);
     .disIB();
   }
+  .article.active{.w(48%); .h(300px); .disIB();  .opacity(100);}
+  .article{.w(48%);  .opacity(0);
+    .disIB();}
   .arrow{
     .w(20px);  .h(280px);  .c(@word);  .float-right();  .tc();
     i{ .mgc();  .top(130px); .pr();   }

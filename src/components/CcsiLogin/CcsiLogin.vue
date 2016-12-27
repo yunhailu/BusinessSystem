@@ -175,16 +175,6 @@
                 this.showList = !this.showList;
             },
             login(){
-//                if(!this.userName && !this.password){
-//                    alert('用户名密码不能为空！');
-//                    return ;
-//                }
-//                if(this.userName != 'admin' || this.password != 'admin'){
-//                    alert('用户名密码不正确！');
-//                    return ;
-//                }
-//                Cookie.set('business_uid', 'admin');
-//                location.hash = '#!/home';
 console.log(this.userName,this.password);
 //登陆页面逻辑
                 Api.login({
@@ -200,8 +190,14 @@ console.log(this.userName,this.password);
                         Cookie.set('business_email', data.data.email);
                         Cookie.set('business_level', data.data.level);
                         Cookie.set('access_token',data.data.access_token);
-                        this.userName = '';
-                        this.password = '';
+                        if(this.remember){
+                            Cookie.set('login_userName',this.userName);
+                            Cookie.set('login_password',this.password);
+                            Cookie.set('login_remember',this.remember);
+                        }else{
+                            this.userName = '';
+                            this.password = '';
+                        }
                         this.$router.go({name: 'home'});
                     } else {
                         this.errorShow = true;
@@ -211,9 +207,9 @@ console.log(this.userName,this.password);
             }
         },
         ready(){
-            console.log('aaa',this.userName,this.password);
-                this.userName = getCookie('login_userName');
-                this.password = getCookie('login_password');
+            this.userName = getCookie('login_userName');
+            this.password = getCookie('login_password');
+            this.remember=getCookie('login_remember');
 
         },
         watch:{
@@ -226,12 +222,6 @@ console.log(this.userName,this.password);
                 }
             }
         }
-        /*route:{
-            activate(transition){
-                redirect();
-                transition.next();
-            }
-        }*/
     };
 
 </script>

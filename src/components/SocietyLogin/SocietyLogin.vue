@@ -12,14 +12,9 @@
                         <li><a href="javascript:void(0);" @click="showLogin">{{loginStr.forLogin}}</a></li>
                         <li><a href="javascript:void(0);" @click="toHotEvent">{{loginStr.hotEvent}}</a></li>
                         <li><a href="javascript:void(0);" @click="toApply">{{loginStr.applyForUse}}</a></li>
-
-                        <!--<li><a href="javascript:void(0);" @click="showApply">账号注册</a></li>-->
                     </ul>
                 </div>
             </div>
-
-
-            <!--v-bind:style="{height:sliderH + 'px' ,width: sliderW + 'px' }"-->
         </div>
         <footer-component></footer-component>
 
@@ -55,14 +50,16 @@
                         <!-- <div class="form-group">
                              <textarea class="require" placeholder="需求描述" v-model="demand"></textarea>
                          </div>-->
-                        <div class="form-group">
+                        <span class="tips errortips" v-if="showSmallTips">{{errorTips}}</span>
+                        <span class="tips succsstips" v-if="showSuccessTips">{{successips}}</span>
+                        <div class="form-group form-apply-btn">
                             <a class="apply-btn" href="javascript:void(0);"  @click="submit">提 交</a>
                             <p>客服 : {{common.phone}}</p>
                         </div>
                     </div>
-                    <div class="smallTips" v-if="showSmallTips" @click="tipsHide">
-                        <p>{{errorTips}}</p>
-                    </div>
+                    <!-- <div class="smallTips" v-if="showSmallTips" @click="tipsHide">
+                         <p>{{errorTips}}</p>
+                     </div>-->
                 </div>
             </div>
         </div>
@@ -87,7 +84,7 @@
                             <p style="font-size: 13px"></p>
                         </div>
                         <div class="form-group">
-                            <input class="remember" v-el="remember" type="checkbox" id="remember">
+                            <input class="remember" v-model="remember" type="checkbox" id="remember">
                             <label for="remember">{{loginStr.remember}}</label>
                             <div class="pull-right">
                                 <a href="javascript:void(0);" v-show="false">{{loginStr.getBack}}</a>
@@ -109,7 +106,6 @@
     <div v-if="isPromotion"  class="loginSlider">
         <promotion ></promotion>
     </div>
-    <!--<instruction v-if="isInstruction"></instruction>-->
     <hot-event class="hotevent" v-if="isHotEvent"></hot-event>
     <qservice></qservice>
 </template>
@@ -128,8 +124,8 @@
     import Instruction from "./../Common/InstructionsForUse/InstructionsForUse.vue"
     import HotEvent from "../AllNetHotEvent/AllNetHotEvent.vue"
     import qservice from '../QQservice/QQservice.vue';
-    import {loginState ,loginTime,userLevel } from '../../vuex/getters';
-    import {setLoginState, setLoginTime,setUserLevel} from "../../vuex/actions";
+    import {loginState} from '../../vuex/getters';
+    import {setLoginState} from "../../vuex/actions";
 
     export default {
         name: 'login',
@@ -148,55 +144,59 @@
                 applyFactory:'',
                 applyTelephone:'',
                 email:'',
-//                demand:'',
                 errorTips:'',
+                successips:'',
+                remember:false,
                 timeout:null,
-//                userName:getCookie('login_userName'),
-//                password:getCookie('login_password'),
                 isApply:false,
                 isLogin:false,
                 errorShow:false,
                 isPromotion:true,
                 isHotEvent:false,
-                showSmallTips:false
+                showSmallTips:false,
+                showSuccessTips:false
             };
         },
         components:{
             FooterComponent,Promotion,HotEvent,qservice
         },
         vuex:{
-            getters:{loginState, loginTime,userLevel},
-            actions:{setLoginState, setLoginTime,setUserLevel}
+            getters:{loginState},
+            actions:{setLoginState}
         },
         methods: {
-            tipsHide(){
-                clearTimeout(this.timeout);
-                this.showSmallTips = false;
+            resetLogin(){
+                this.errorTip='';
+                this.errorShow=false;
+                this.userName= '';
+                this.password='';
             },
-            tipsShow(){
-                clearTimeout(this.timeout);
-                this.timeout = setTimeout(function () {
-                    this.showSmallTips = false;
-                }.bind(this),1000);
+            resetApply(){
+                this.applyUserName='';
+                this.applyFactory='';
+                this.applyTelephone='';
+                this.email='';
+                this.showSuccessTips=false;
+                this.showSmallTips=false;
+                this.errorTips='';
+                this.successips='';
             },
             submit(){
                 this.errorTips = '';
-
+                this.successips='';
                 //姓名必填2-10位
-                if((this.applyUserName).length>10 ||(this.applyUserName).length<2){
-                    this.errorTips="姓名需输入2-10位字符";
-                    this.showSmallTips = true;
-                    this.tipsShow();
-                    return ;
-                }
                 var nameReg = /^[a-zA-Z0-9_]$/;
                 var chineseReg = new RegExp("[\u4e00-\u9fa5]");
+                if((this.applyUserName).length>10 ||(this.applyUserName).length<2){
+                    this.errorTips="用户名需输入2-10位字符";
+                    this.showSmallTips = true;
+                    return ;
+                }
                 for(var i=0;i<(this.applyUserName).length;i++){
                     const c = (this.applyUserName).charAt(i);
                     if(!(chineseReg.test(c) || nameReg.test(c))){
                         this.errorTips="用户名格式错误";
                         this.showSmallTips = true;
-                        this.tipsShow();
                         return ;
                     }
                 }
@@ -205,7 +205,6 @@
                 if(!phoneReg.test(this.applyTelephone)){
                     this.errorTips="请输入正确手机号";
                     this.showSmallTips = true;
-                    this.tipsShow();
                     return ;
                 }
                 //可用邮箱注册校验
@@ -213,7 +212,6 @@
                 if(!emailReg.test(this.email)){
                     this.errorTips="请输入正确的邮箱格式";
                     this.showSmallTips = true;
-                    this.tipsShow();
                     return ;
                 }
                 //提交申请
@@ -222,24 +220,19 @@
                     company:this.applyFactory,
                     phone:this.applyTelephone,
                     email:this.email,
-
                 }
                 Api.register(params).then(resp =>{
                     if(resp.data.code==0){
-                        this.errorTips="成功申请，请耐心等待审核";
-                        this.showSmallTips = true;
-                        this.tipsShow();
-                        setTimeout(function () {
-                            this.isApply=false;
-                        }.bind(this),1000);
-                        console.log('申请成功');
-                    } else if(resp.data.code==100) {
-                        this.errorTips = resp.data.message[0];
-                        this.showSmallTips = true;
-                        this.tipsShow();
-                        return;
-                    }
-                })
+                    this.showSmallTips = false;
+                    this.successips="正在审核，请等待邮件回复";
+                    this.showSuccessTips = true;
+                } else if(resp.data.code==100){
+                    this.errorTips=resp.data.message;
+                    this.showSmallTips = true;
+                    return ;
+
+                }
+            })
             },
             toHotEvent(){
                 this.isHotEvent = true;
@@ -254,11 +247,13 @@
             toApply(){
                 this.isLogin=false;
                 this.isApply=true;
+                this.resetLogin();
             },
 //            /*去申请登陆
             toLogin(){
                 this.isApply=false;
                 this.isLogin=true;
+                this.resetApply();
             },
             isShowError(){
                 if(this.errorShow == true){
@@ -269,10 +264,12 @@
             cancelApply(){
                 this.isApply=false;
                 this.errorShow = false;
+                this.resetApply();
             },
             cancelLogin(){
                 this.isLogin=false;
                 this.errorShow = false;
+                this.resetLogin();
             },
             showApply(){
                 this.isApply=true;
@@ -281,17 +278,6 @@
                 this.isLogin = true;
             },
             login(){
-//                if(!this.userName && !this.password){
-//                    alert('用户名密码不能为空！');
-//                    return ;
-//                }
-//                if(this.userName != 'admin' || this.password != 'admin'){
-//                    alert('用户名密码不正确！');
-//                    return ;
-//                }
-//                Cookie.set('business_uid', 'admin');
-//                location.hash = '#!/home';
-                console.log(this.userName,this.password);
 //登陆页面逻辑
                 Api.login({
                     username: this.userName,
@@ -307,22 +293,14 @@
                     Cookie.set('business_email', data.data.email);
                     Cookie.set('business_level', data.data.level);
                     Cookie.set('access_token',data.data.access_token);
-//                        document.cookie ="access_token="+data.data.access_token + "; expires=" + (new Date()).setTime((new Date()).getTime()+60*60*24).toGMTString();
-                    this.setUserLevel(data.data.level);
-                    console.log(this.userLevel);
-                    this.setLoginTime(this.loginTime + 1);
-                    this.userName = '';
-                    this.password = '';
-                    /*if(this.$els.remember.checked==true){
-                     console.log(this.$els.remember.checked)
-                     Cookie.set('login_userName',this.userName);
-                     Cookie.set('login_password',this.password);
-                     Cookie.set('login_remember',true);
-                     }else{
-                     this.userName = '';
-                     this.password = '';
-                     }*/
-                    //location.hash = '#!/home';
+                    if(this.remember){
+                        Cookie.set('login_userName',this.userName);
+                        Cookie.set('login_password',this.password);
+                        Cookie.set('login_remember',this.remember);
+                    }else{
+                        this.userName = '';
+                        this.password = '';
+                    }
                     this.$router.go({name: 'home'});
                 } else {
                     this.errorShow = true;
@@ -331,20 +309,10 @@
             });
             }
         },
-        /* created(){
-         console.log('bbb',this.userName,this.password);
-         this.userName = getCookie('login_userName');
-         this.password = getCookie('login_password');
-         },*/
         ready(){
-
-            console.log('aaa',this.userName,this.password);
             this.userName = getCookie('login_userName');
             this.password = getCookie('login_password');
-
-            //console.log('this',this.$el.querySelector('.remember').checked);
-            //this.$els.remember.checked = getCookie('login_remember');
-
+            this.remember=getCookie('login_remember');
         },
         watch:{
             loginState:{
@@ -356,12 +324,6 @@
                 }
             }
         }
-        /*route:{
-         activate(transition){
-         redirect();
-         transition.next();
-         }
-         }*/
     };
 
 </script>

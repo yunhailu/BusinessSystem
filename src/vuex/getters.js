@@ -24,9 +24,6 @@ export const activeSettingTopic = state => {
 export const loginState = state => {
 	return state.topic.login_state;
 };
-export const loginTime = state => {
-	return state.topic.login_time;
-}
 
 /**
  * Analytics
@@ -74,6 +71,10 @@ export const analyticsSubTopicId = state => {
 export const analyticsTimePopUp = state => {
 	return state.analytics.timePopUp;
 };
+
+export const analyticsAddTopic = state => {
+	return state.analytics.addTopic;
+};
 /**
  * Compare
  * */
@@ -119,9 +120,4 @@ export const compareDataChange = state => {
 export const exportImages = state => {
 	return state.exportImages.imgs;
 };
-/**
- * Exprot level
- */
-export const userLevel = state=>{
-	return state.loginMsg.userLevel;
-}
+
