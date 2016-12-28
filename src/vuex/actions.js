@@ -130,3 +130,7 @@ export const removeExportImages = (store) => {
 export const setLoginState = (store,state) => {
 	store.dispatch(types.LOGIN_STATE,state);
 };
+
+export const setHeaderName = (store,state) =>{
+	store.dispatch(types.HEADER_NAME,state);
+}

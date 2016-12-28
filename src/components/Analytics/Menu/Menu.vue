@@ -27,7 +27,7 @@
     import * as Api from "../../../widgets/Api";
     import Local from "../../../local/local";
     import { getCookie } from '../../../widgets/Cookie';
-    import { topicList, activeAnalyticsTopic,analyticsAddTopic } from '../../../vuex/getters';
+    import { topicList, activeAnalyticsTopic,analyticsAddTopic,headerName } from '../../../vuex/getters';
     import { setTopicList, setActiveAnalyticsTopic,setAnalyticsAddTopic } from "../../../vuex/actions";
 
     export default{
@@ -47,7 +47,7 @@
         },
         vuex: {
             actions: { setTopicList, setActiveAnalyticsTopic ,setAnalyticsAddTopic },
-            getters: { topicList, activeAnalyticsTopic, analyticsAddTopic }
+            getters: { topicList, activeAnalyticsTopic, analyticsAddTopic,headerName }
         },
         computed: {
             list(){
@@ -122,6 +122,11 @@
                     this.getTopics();
                     this.setActiveAnalyticsTopic(val);
                 }
+            }
+        },
+        headerName:{
+            handler(val){
+                this.nickName=val;
             }
         }
         /*route: {

@@ -28,7 +28,7 @@
     import MenuList from "./MenuList/MenuList.vue";
     import * as Api from "../../../widgets/Api";
     import { getCookie } from '../../../widgets/Cookie';
-    import { topicList, activeSettingTopic } from '../../../vuex/getters';
+    import { topicList, activeSettingTopic,headerName } from '../../../vuex/getters';
     import { setTopicList, setActiveSettingTopic } from "../../../vuex/actions";
 
     export default{
@@ -47,7 +47,7 @@
         },
         vuex: {
             actions: { setTopicList, setActiveSettingTopic },
-            getters: { topicList, activeSettingTopic }
+            getters: { topicList, activeSettingTopic,headerName }
         },
         computed: {
             list(){
@@ -95,6 +95,13 @@
             },
             init(){
                 this.getTopics();
+            }
+        },
+        watch:{
+            headerName:{
+                handler(val){
+                    this.nickName=val;
+                }
             }
         },
         ready(){

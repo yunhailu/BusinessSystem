@@ -39,6 +39,7 @@
     import { getCookie } from '../../widgets/Cookie';
     import qservice from '../QQservice/QQservice.vue';
     import * as Api from "../../widgets/Api";
+    import {headerName} from '../../vuex/getters';
 
     export default{
         props: ["active"],
@@ -86,6 +87,16 @@
             }
         },
         components:{ qservice},
+        vuex:{
+            getters:{headerName}
+        },
+        watch:{
+            headerName:{
+                handler(val){
+                    this.nickName=val;
+                }
+            }
+        },
         methods: {
             quit(){
                 const business_name = getCookie('business_name');
@@ -113,6 +124,9 @@
             init(){
                 this.initData();
             }
+        },
+        route:{
+
         }
     }
 </script>

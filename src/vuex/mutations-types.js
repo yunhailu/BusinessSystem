@@ -69,3 +69,6 @@ export const REMOVE_EXPORT_IMAGES = 'REMOVE_EXPORT_IMAGES';
 
 //登陆页
 export const LOGIN_STATE = 'LOGIN_STATE';
+
+//header
+export const HEADER_NAME='HEADER_NAME';

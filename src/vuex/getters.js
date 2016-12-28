@@ -121,3 +121,7 @@ export const exportImages = state => {
 	return state.exportImages.imgs;
 };
 
+export const headerName=state=>{
+	return state.topic.header_name;
+}
+
