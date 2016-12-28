@@ -28,6 +28,12 @@ export const setActiveSettingTopic = (store, topic) => {
 	store.dispatch(types.UPDATE_ACTIVE_SETTING_TOPIC, topic);
 };
 
+export const setMonitorWord = (store, word) => {
+	store.dispatch(types.UPDATE_ACTIVE_MONITOR_WORD, word);
+};
+export const setMonitorSumWord = (store, sumWord) => {
+	store.dispatch(types.UPDATE_ACTIVE_SUM_MONITOR_WORD, sumWord);
+};
 /**
  * Summary
  * */
@@ -123,6 +129,9 @@ export const setAnalyticsTimePopUp = (store, newtime) => {
 	store.dispatch(types.UPDATE_TIME_POP_UP, newtime);
 };
 
+export const setAnalyticsAddTopic = (store, topic) => {
+	store.dispatch(types.UPDATE_ADD_TOPIC, topic);
+};
 /**
  * Compare
  * */
@@ -178,13 +187,7 @@ export const removeExportImages = (store) => {
 export const setLoginState = (store,state) => {
 	store.dispatch(types.LOGIN_STATE,state);
 };
-export const setLoginTime = (store,time) => {
-	store.dispatch(types.LOGIN_TIME,time)
-};
-/**
- * @param store
- * @param level
- */
-export const setUserLevel = (store,level) =>{
-	store.dispatch(types.USER_LEVEL,level);
+
+export const setHeaderName = (store,state) =>{
+	store.dispatch(types.HEADER_NAME,state);
 }

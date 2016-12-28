@@ -21,7 +21,15 @@
         </div>
 
     </tips>
-
+    <div class="tipBg" v-if="showSmallTips">
+        <div class="smallTips">
+            <h3><i class="fa fa-warning"></i> 提示</h3>
+            <div class="tips-content">由于法律监管原因，无法访问外网数据，如果需要查阅，请联系客服</div>
+            <div class="tips-btns">
+                <p class="tips-leftBtn" @click="confirm()">确认</p>
+            </div>
+        </div>
+    </div>
 
 </template>
 <style lang="less" scoped>
@@ -39,6 +47,7 @@
             const words = Local().influence;
             return{
                 words,
+                showSmallTips:false,
                 popListParams: {
                     type: "dialog",
                     callback: () => {
@@ -49,7 +58,14 @@
             }
         },
         methods: {
+            confirm(){
+                this.showSmallTips=false;
+            },
             showDetail(pop){
+                if(pop.source=='overseas'){
+                    this.showSmallTips = true;
+                    return ;
+                }
                // this.$router.go({ name: 'detail', params: { type: 'influence', id: pop.id } });
                 if(pop.id!=null){ window.open(window.location.origin+"/"+this.$route.name+"/detail/"+pop.id);}
                 else{ window.open(pop.url); }

@@ -41,9 +41,6 @@
                 <router-view></router-view>
             </div>
         </div>
-       <!-- <div class="qq">
-            <a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=3342973679&site=qq&menu=yes"><img border="0" src="http://wpa.qq.com/pa?p=2:3342973679:3" alt="点这里给我发消息" /></a>
-        </div>-->
     </div>
     <order-footer></order-footer>
 </template>
@@ -51,26 +48,26 @@
     @import "Analytics.less";
 </style>
 <script  type="text/ecmascript-6">
-    import moment from 'moment';
-    import Cookie from "js-cookie";
-    import { getCookie } from '../../widgets/Cookie';
-    import SmallTip from '../Common/SmallTip/SmallTip.vue';
+    //import moment from 'moment';
+    //import Cookie from "js-cookie";
+    //import { getCookie } from '../../widgets/Cookie';
+    //import SmallTip from '../Common/SmallTip/SmallTip.vue';
     import HeaderComponent from '../Header/Header.vue';
     import MenuComponent from './Menu/Menu.vue';
     import ComMenuComonent from '../Compare/Menu/Menu.vue';
-    import Calendar from '../Common/Calendar/Calendar.vue';
+    //import Calendar from '../Common/Calendar/Calendar.vue';
     import OrderFooterComponent from '../OrderFooter/OrderFooter.vue';
-    import Local from "../../local/local";
+    //import Local from "../../local/local";
     import CompareDate from "../Common/CompareDate/CompareDate.vue";
     import AnalyticsDate from "../Common/AnalyticsDate/AnalyticsDate.vue";
-    import {analyticsTimePopUp,analyticsSubTopicId, activeAnalyticsTopic,analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic, analyticsDateChange, analyticsStart, analyticsEnd, analyticsResetSearch } from '../../vuex/getters';
-    import {setAnalyticsTimePopUp,setAnalyticsSubTopicId,setActiveAnalyticsTopic,setAnalyticsType, setAnalyticsTimeRange, setAnalyticsSource, setAnalyticsSubTopic, setAnalyticsDateChange, setAnalyticsStart, setAnalyticsEnd, setAnalyticsResetSearch  } from "../../vuex/actions";
+    //import {analyticsTimePopUp,analyticsSubTopicId, activeAnalyticsTopic,analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic, analyticsDateChange, analyticsStart, analyticsEnd, analyticsResetSearch } from '../../vuex/getters';
+    //import {setAnalyticsTimePopUp,setAnalyticsSubTopicId,setActiveAnalyticsTopic,setAnalyticsType, setAnalyticsTimeRange, setAnalyticsSource, setAnalyticsSubTopic, setAnalyticsDateChange, setAnalyticsStart, setAnalyticsEnd, setAnalyticsResetSearch  } from "../../vuex/actions";
 
     export default{
         data(){
-            const analytics = Local().analytics;
+            //const analytics = Local().analytics;
             return{
-                timePay:parseInt(getCookie('business_level')) || 0,
+                /*timePay:parseInt(getCookie('business_level')) || 0,
                 analytics,
                 search: '',
                 dateVal: `${ moment().subtract(8, 'hour').format('YYYY-MM-DD HH')} ~ ${moment().format('YYYY-MM-DD HH')}`,
@@ -87,10 +84,10 @@
                 isTimeDiy: false,
                 tabActive: 'result',
                 showName:'',
-                isCompare:false
+                isCompare:false*/
             }
         },
-        vuex: {
+       /* vuex: {
             actions: {
                 setAnalyticsSubTopicId,
                 setActiveAnalyticsTopic,
@@ -117,18 +114,18 @@
                 analyticsResetSearch,
                 analyticsTimePopUp
             }
-        },
+        },*/
         components:{
             'header-component': HeaderComponent,
             'menu-component': MenuComponent,
-            'calendar': Calendar,
+            //'calendar': Calendar,
             'order-footer':OrderFooterComponent,
-            'smalltip':SmallTip,
+            //'smalltip':SmallTip,
             'com-menu':ComMenuComonent,
             'analytics-date':AnalyticsDate,
             'compare-date':CompareDate
         },
-        methods: {
+       /* methods: {
             searchAction(){
                 if(this.analyticsSubTopic == this.search){
                     this.setAnalyticsSubTopicId(this.analyticsSubTopicId + 1);
@@ -240,6 +237,7 @@
                     end = end.split(" ")[0] + "T" + end.split(" ")[1];
                     this.setAnalyticsStart(start);
                     this.setAnalyticsEnd(end);
+                    this.setAnalyticsTimeRange(0.33);
                     this.setAnalyticsTimePopUp(0.33);
                 }
             },
@@ -270,6 +268,6 @@
                 this.tabActive = this.$route.name;
                 console.log(this.tabActive);
             }
-        }
+        }*/
     }
 </script>

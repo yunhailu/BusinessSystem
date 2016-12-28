@@ -177,6 +177,7 @@
                 });
             },
             getCommentDetail(){
+                this.commentNums=[];
                 const topic_id = this.activeAnalyticsTopic.topic_id,
                     subtopic = this.analyticsSubTopic,
                     source = this.analyticsSource,
@@ -272,19 +273,22 @@
                             overseasNums
                         ];
                     }else if(resp.data.code == 1004){
-                        /*if(time_interval==0){
+                        if(time_interval==0){
                             this.commentBarLoading = false;
                             this.commentPieLoading2= false;
                             this.loadingParams.visiable = false;
                             this.setAnalyticsTimePopUp(1);
-                            return ;
+                        }else if(time_interval==0.33){
+                            this.commentBarLoading = false;
+                            this.commentPieLoading2= false;
+                            this.loadingParams.visiable = false;
+                            this.setAnalyticsTimePopUp(1);
                         }else if(time_interval==1){
                             this.commentBarLoading = false;
                             this.commentPieLoading2= false;
                             this.loadingParams.visiable = false;
                             this.setAnalyticsTimePopUp(7);
-                            return ;
-                        }else{
+                        }else {
                             this.commentBarOption.series = [
                                 { name: this.words.positive, type: 'line',
                                     data: [] },
@@ -297,38 +301,6 @@
                             this.commentBarLoading = false;
                             this.commentPieLoading2= false;
                             this.loadingParams.visiable = false;
-                            return ;
-                        }*/
-
-                        const selTime = this.analyticsTimePopUp;
-                        switch (selTime){
-                            case 0.33:
-                                this.commentBarLoading = false;
-                                this.commentPieLoading2= false;
-                                this.loadingParams.visiable = false;
-                                this.setAnalyticsTimePopUp(1);
-                                break;
-                            case 1:
-                                this.commentBarLoading = false;
-                                this.commentPieLoading2= false;
-                                this.loadingParams.visiable = false;
-                                this.setAnalyticsTimePopUp(7);
-                                break;
-                            default:
-                                this.commentBarOption.series = [
-                                    { name: this.words.positive, type: 'line',
-                                        data: [] },
-                                    { name: this.words.negative, type:'line',
-                                        data: [] },
-                                    { name: this.words.neutral, type:'line',
-                                        data: [] }
-                                ];
-                                 this.commentPieOption2.series.data=[];
-                                this.commentBarLoading = false;
-                                this.commentPieLoading2= false;
-                                this.loadingParams.visiable = false;
-                                break;
-
                         }
                     }
                 });

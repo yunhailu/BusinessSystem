@@ -101,7 +101,7 @@
     import _ from "underscore";
     import Local from "../../../local/local";
     import * as Api from "../../../widgets/Api";
-    import { setTopicList } from "../../../vuex/actions";
+    import { setTopicList ,setAnalyticsAddTopic} from "../../../vuex/actions";
     import { topicList } from '../../../vuex/getters';
     import { WhiteNameList } from "../../../config/config";
     import Cookie from "js-cookie";
@@ -148,7 +148,7 @@
             }
         },
         vuex: {
-            actions: { setTopicList },
+            actions: { setTopicList,setAnalyticsAddTopic },
             getters: { topicList }
         },
         methods: {
@@ -257,6 +257,7 @@
                         console.log('没找到')
                     }
                 }
+                const newTopicName= this.dealSymbol(this.trim(this.topicText));
                 //console.log(this.threshold);
                 this.topicAdd().then( resp => {
                     if(resp.data.code == 0){
@@ -264,7 +265,9 @@
                         this.errorTip = "";
                         //this.radioVal = "";
                         this.topicText = "";
-                        return Api.getTopicList({});
+
+                    console.log(newTopicName);
+                        return Api.getTopicList({})
                     }
                 }).then(resp => {
                     console.log('topic list',resp);
@@ -274,11 +277,21 @@
                         _.each(topicList, group => {
                             if(group.group_id == this.radioVal){
                                 group.isActive = true;
-                            }
+                            };
                         });
+                        let newObj=null;
+                        _.each(topicList,group=>{
+                            if(_.find(group.list,list=>{return list.topic_name==newTopicName})){
+                                newObj = _.find(group.list,list=>{return list.topic_name==newTopicName})
+                                return;
+                            }
+                            })
                         this.setTopicList(topicList);
                         this.radioVal = "";
                         this.threshold="";
+                        this.setAnalyticsAddTopic(newObj);
+                        const name='summary';
+                        this.$router.go({name});
                     }
                 });
                 //history.go(-1);

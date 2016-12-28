@@ -59,7 +59,7 @@
     import OrderFooterComponent from '../OrderFooter/OrderFooter.vue';
     import Local from "../../local/local";
     import {summaryTimePopUp,summarySubTopicId, activeSummaryTopic,summaryType, summaryTimeRange, summarySource, summarySubTopic, summaryDateChange, summaryStart, summaryEnd, summaryResetSearch } from '../../vuex/getters';
-    import {setSummaryTimePopUp,setSummarySubTopicId,setActiveSummaryTopic,setSummaryType, setSummaryTimeRange, setSummarySource, setSummarySubTopic, setSummaryDateChange, setSummaryStart, setSummaryEnd, setSummaryResetSearch  } from "../../vuex/actions";
+    import {setMonitorSumWord,setSummaryTimePopUp,setSummarySubTopicId,setActiveSummaryTopic,setSummaryType, setSummaryTimeRange, setSummarySource, setSummarySubTopic, setSummaryDateChange, setSummaryStart, setSummaryEnd, setSummaryResetSearch  } from "../../vuex/actions";
 
     export default{
         data(){
@@ -96,7 +96,8 @@
                 setSummaryStart,
                 setSummaryEnd,
                 setSummaryResetSearch,
-                setSummaryTimePopUp
+                setSummaryTimePopUp,
+                setMonitorSumWord
             },
             getters: {
                 summarySubTopicId,
@@ -208,6 +209,21 @@
             }
         },
         watch: {
+            activeSummaryTopic:{
+                handler(val){
+                    this.setMonitorSumWord(this.activeSummaryTopic.topic_name);
+                }
+            },
+            search:{
+                handler(val){
+                    if(val !=''){
+                        this.setMonitorSumWord(this.activeSummaryTopic.topic_name+'+'+val);
+                        console.log(this.activeSummaryTopic.topic_name+'+'+val);
+                    }else{
+                        this.setMonitorSumWord(this.activeSummaryTopic.topic_name);
+                    }
+                }
+            },
             summaryTimePopUp:{
                 handler(val){
                     this.selectTime(val);

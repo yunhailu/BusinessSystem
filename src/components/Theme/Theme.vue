@@ -39,7 +39,7 @@
             <div class="chart"  v-echarts="themeScatterOption" :loading="themeScatterLoading"  theme="macarons"></div>
             <div class="chart"  v-echarts="themeLineOption" :loading="themeLineLoading"  theme="macarons"></div>
             <div class="chart best"  v-echarts="themeBestOption" :loading="themeBestLoading"  theme="macarons"></div>
-            <div class="chart article" v-echarts="themeArticleOption" :loading="themeBestLoading"  theme="macarons"></div>
+           <!-- <div class="chart article" v-echarts="themeArticleOption" :loading="themeBestLoading"  theme="macarons"></div>-->
         </div>
 
         <div class="theme-map">

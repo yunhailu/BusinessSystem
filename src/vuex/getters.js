@@ -24,13 +24,16 @@ export const activeCompareTopic = state => {
 export const activeSettingTopic = state => {
 	return state.topic.active_setting_topic;
 };
+export const monitorWord = state => {
+	return state.topic.monitorWord;
+};
+export const monitorSumWord = state => {
+	return state.topic.monitorSumWord;
+};
 //登陆
 export const loginState = state => {
 	return state.topic.login_state;
 };
-export const loginTime = state => {
-	return state.topic.login_time;
-}
 
 
 /**
@@ -126,6 +129,10 @@ export const analyticsSubTopicId = state => {
 export const analyticsTimePopUp = state => {
 	return state.analytics.timePopUp;
 };
+
+export const analyticsAddTopic = state => {
+	return state.analytics.addTopic;
+};
 /**
  * Compare
  * */
@@ -171,9 +178,8 @@ export const compareDataChange = state => {
 export const exportImages = state => {
 	return state.exportImages.imgs;
 };
-/**
- * Exprot level
- */
-export const userLevel = state=>{
-	return state.loginMsg.userLevel;
+
+export const headerName=state=>{
+	return state.topic.header_name;
 }
+

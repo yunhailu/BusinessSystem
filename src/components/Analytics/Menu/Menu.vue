@@ -27,8 +27,8 @@
     import * as Api from "../../../widgets/Api";
     import Local from "../../../local/local";
     import { getCookie } from '../../../widgets/Cookie';
-    import { topicList, activeAnalyticsTopic } from '../../../vuex/getters';
-    import { setTopicList, setActiveAnalyticsTopic } from "../../../vuex/actions";
+    import { topicList, activeAnalyticsTopic,analyticsAddTopic,headerName } from '../../../vuex/getters';
+    import { setTopicList, setActiveAnalyticsTopic,setAnalyticsAddTopic } from "../../../vuex/actions";
 
     export default{
         props: [],
@@ -46,8 +46,8 @@
             'menu-list': MenuList
         },
         vuex: {
-            actions: { setTopicList, setActiveAnalyticsTopic },
-            getters: { topicList, activeAnalyticsTopic }
+            actions: { setTopicList, setActiveAnalyticsTopic ,setAnalyticsAddTopic },
+            getters: { topicList, activeAnalyticsTopic, analyticsAddTopic,headerName }
         },
         computed: {
             list(){
@@ -64,7 +64,7 @@
                     this.initActiveTopic();
                     return;
                 }
-                Api.getTopicList({access_token:getCookie("access_token")}).then(resp => {
+                Api.getTopicList({}).then(resp => {
                     if(resp.data.code == 0){
                         /*if(!resp.data.data.length){
                          this.$router.go({ name: 'settingAdd' });
@@ -116,6 +116,19 @@
         ready(){
             this.init();
         },
+        watch:{
+            analyticsAddTopic:{
+                handler(val){
+                    this.getTopics();
+                    this.setActiveAnalyticsTopic(val);
+                }
+            }
+        },
+        headerName:{
+            handler(val){
+                this.nickName=val;
+            }
+        }
         /*route: {
             data(){
                 this.init();

@@ -284,6 +284,7 @@
                 });
             },
             getSentimentDetail(){
+                this.sentimentNums=[];
                 const topic_id = this.activeAnalyticsTopic.topic_id,
                         subtopic = this.analyticsSubTopic,
                         source = this.analyticsSource,
@@ -376,75 +377,47 @@
                         ];
                         console.log(this.sentimentNums)*/
                     }else if(resp.data.code == 1004){
-                       /* if(time_interval==0){
-                            this.commentBarLoading = false;
-                            this.commentPieLoading2= false;
+                        if(time_interval==0){
+                            this.sentimentBarLoading = false;
+                            this.sentimentPieLoading = false;
                             this.loadingParams.visiable = false;
                             this.setAnalyticsTimePopUp(1);
-                            return ;
+                        }else if(time_interval==0.33){
+                            this.sentimentBarLoading = false;
+                            this.sentimentPieLoading = false;
+                            this.loadingParams.visiable = false;
+                            this.setAnalyticsTimePopUp(1);
                         }else if(time_interval==1){
-                            this.commentBarLoading = false;
-                            this.commentPieLoading2= false;
+                            this.sentimentBarLoading = false;
+                            this.sentimentPieLoading = false;
                             this.loadingParams.visiable = false;
                             this.setAnalyticsTimePopUp(7);
-                            return ;
                         }else{
-                            this.commentBarOption.series = [
-                                { name: this.words.positive, type: 'line',
-                                    data: [] },
-                                { name: this.words.negative, type:'line',
-                                    data: [] },
-                                { name: this.words.neutral, type:'line',
-                                    data: [] }
-                            ];
-                            this.commentPieOption2.series.data=[];
-                            this.commentBarLoading = false;
-                            this.commentPieLoading2= false;
+                            this.sentimentBarOption.series=[{
+                                name:this.sentiment.happy,
+                                type:'line',
+                                data: []
+                            }, {
+                                name:this.sentiment.anger,
+                                type:'line',
+                                data: []
+                            }, {
+                                name:this.sentiment.sorrow,
+                                type:'line',
+                                data: []
+                            }, {
+                                name:this.sentiment.disgust,
+                                type:'line',
+                                data: []
+                            }, {
+                                name:this.sentiment.fear,
+                                type:'line',
+                                data: []
+                            }]
+                            this.sentimentPieOption.series.data=[];
+                            this.sentimentBarLoading = false;
+                            this.sentimentPieLoading = false;
                             this.loadingParams.visiable = false;
-                            return ;
-                        }*/
-                        const selTime = this.analyticsTimePopUp;
-                        switch (selTime){
-                            case 0.33:
-                                this.sentimentBarLoading = false;
-                                this.sentimentPieLoading = false;
-                                this.loadingParams.visiable = false;
-                                this.setAnalyticsTimePopUp(1);
-                                break;
-                            case 1:
-                                this.sentimentBarLoading = false;
-                                this.sentimentPieLoading = false;
-                                this.loadingParams.visiable = false;
-                                this.setAnalyticsTimePopUp(7);
-                                break;
-                            default:
-                               this.sentimentBarOption.series=[{
-                                                                name:this.sentiment.happy,
-                                                                type:'line',
-                                                                data: []
-                                                            }, {
-                                                                name:this.sentiment.anger,
-                                                                type:'line',
-                                                                data: []
-                                                            }, {
-                                                                name:this.sentiment.sorrow,
-                                                                type:'line',
-                                                                data: []
-                                                            }, {
-                                                                name:this.sentiment.disgust,
-                                                                type:'line',
-                                                                data: []
-                                                            }, {
-                                                                name:this.sentiment.fear,
-                                                                type:'line',
-                                                                data: []
-                                                            }]
-                                this.sentimentPieOption.series.data=[];
-                                this.sentimentBarLoading = false;
-                                this.sentimentPieLoading = false;
-                                this.loadingParams.visiable = false;
-                                break;
-
                         }
                     }
                 });

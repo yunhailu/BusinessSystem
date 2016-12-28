@@ -1,7 +1,7 @@
 <template>
     <div class="row tools">
-        <div class="row-left" v-if="trim(search) == ''">{{analytics.monitor}}: {{showName}}</div>
-        <div class="row-left" v-if="trim(search) !=''">{{analytics.monitor}}: {{showName}}+{{search}}</div>
+        <div class="row-left" v-if="trim(search) == ''">{{analytics.monitor}}:{{showName}}</div>
+        <div class="row-left" v-if="trim(search) !=''">{{analytics.monitor}}:{{showName}}+{{search}}</div>
         <div class="row-middle">
             <div class="search">
                 <input class="search-input" placeholder="子话题搜索" v-model="search" @keyup.enter="searchAction" />
@@ -43,7 +43,7 @@
     import Calendar from '../../Common/Calendar/Calendar.vue';
     import Local from "../../../local/local";
     import {analyticsTimePopUp,analyticsSubTopicId, activeAnalyticsTopic,analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic, analyticsDateChange, analyticsStart, analyticsEnd, analyticsResetSearch } from '../../../vuex/getters';
-    import {setAnalyticsTimePopUp,setAnalyticsSubTopicId,setActiveAnalyticsTopic,setAnalyticsType, setAnalyticsTimeRange, setAnalyticsSource, setAnalyticsSubTopic, setAnalyticsDateChange, setAnalyticsStart, setAnalyticsEnd, setAnalyticsResetSearch  } from "../../../vuex/actions";
+    import {setMonitorWord,setAnalyticsTimePopUp,setAnalyticsSubTopicId,setActiveAnalyticsTopic,setAnalyticsType, setAnalyticsTimeRange, setAnalyticsSource, setAnalyticsSubTopic, setAnalyticsDateChange, setAnalyticsStart, setAnalyticsEnd, setAnalyticsResetSearch  } from "../../../vuex/actions";
 
     export default{
         data(){
@@ -81,7 +81,8 @@
                 setAnalyticsStart,
                 setAnalyticsEnd,
                 setAnalyticsResetSearch,
-                setAnalyticsTimePopUp
+                setAnalyticsTimePopUp,
+                setMonitorWord
             },
             getters: {
                 analyticsSubTopicId,
@@ -190,6 +191,20 @@
             }
         },
         watch: {
+            activeAnalyticsTopic:{
+                handler(val){
+                    this.setMonitorWord(this.activeAnalyticsTopic.topic_name);
+                }
+            },
+            search:{
+                handler(val){
+                    if(val !=''){
+                        this.setMonitorWord(this.activeAnalyticsTopic.topic_name+'+'+val);
+                    }else{
+                        this.setMonitorWord(this.activeAnalyticsTopic.topic_name);
+                    }
+                }
+            },
             analyticsTimePopUp:{
                 handler(val){
                     this.selectTime(val);

@@ -8,6 +8,7 @@
             <!--</div>-->
             <div class="chart" v-echarts="resultChartOption" :click="clickChartAction" :loading="resultChartLoading" :class="[resultChartOption.isToggle ? 'active' : '']" :resize="resultChartOption.isToggle" theme="macarons"></div>
             <div class="pie" v-echarts="resultPieChartOption" :loading="resultPieChartLoading" :class="[resultPieChartOption.isActive ? 'active' : '']" translate="show-pie"  theme="macarons"></div>
+            <div class="article" v-echarts="themeArticleOption" :loading="themeArticleLoading"  :class="[themeArticleOption.isActive ? 'active' : '']"  theme="macarons">
         </div>
         <list-panel :list="list" :options="options" :select-title="selectTitle" :select-value.sync="sortVal"></list-panel>
     </div>
@@ -95,6 +96,70 @@
                     graphic:Pie.graphic,
                     color:['#2FCC71', '#F1C40F', '#d78b40', '#3598DC','#E64D3D'],
                     series:[]
+                },
+                themeArticleLoading: true,
+                themeArticleOption:{
+                    isActive:true,
+                    title: _.extend({}, Pie.title, { text:'文章分类：', left: 10, top: 20}),
+                    tooltip: {
+                        trigger: 'item'
+                    },
+                    legend: {
+                        bottom: 1,
+                        data: []
+                    },
+                    toolbox: Pie.toolbox,
+                    //color: _.extend([], Chart.color),
+                    //color:["#1C7C76","#FA943E","#88051C","#2E44E1","#F58974","#F574EA","#81F574","#051527","#C9E120","#F4D171"],
+                    radar: {
+                        indicator: [
+                            {text:'',max:100}
+                        ],
+                        radius:70,
+                        //shape: 'circle',
+                        //splitNumber: 5,
+                        name: {
+                            textStyle: {
+                                color: 'rgb(39, 114, 123)'
+                            }
+                        },
+                        /*splitLine: {
+                         lineStyle: {
+                         color: [
+                         'rgba(238, 197, 102, 0.1)', 'rgba(238, 197, 102, 0.2)',
+                         'rgba(238, 197, 102, 0.4)', 'rgba(238, 197, 102, 0.6)',
+                         'rgba(238, 197, 102, 0.8)', 'rgba(238, 197, 102, 1)'
+                         ].reverse()
+                         }
+                         },*/
+                        splitArea: {
+                            show: false
+                        },
+                        axisLine: {
+                            lineStyle: {
+                                color: 'rgba(238, 197, 102, 0.5)'
+                            }
+                        }
+                    },
+                    graphic:Chart.graphic,
+                    series: [{
+                        type: 'radar',
+                        //symbol: 'none',消除节点的圆点
+                        itemStyle: {
+                            normal: {
+                                lineStyle: {
+                                    width:1
+                                }
+                            },
+                            emphasis : {
+                                areaStyle: {color:'rgba(0,250,0,0.3)'}
+                            }
+                        },
+                        data:[{
+                            value:[],
+                            name:''
+                        }]
+                    }]
                 },
                 actions: function(val, idx){
                     const lineData = this.lineData;
@@ -200,9 +265,11 @@
                         });
                         this.resultChartOption.isToggle = true;
                         this.resultPieChartOption.isActive = true;
+                        this.themeArticleOption.isActive=true;
                     } else {
                         this.resultChartOption.isToggle = false;
                         this.resultPieChartOption.isActive = false;
+                        this.themeArticleOption.isActive=false;
                         //非all
                         this.resultChartOption = _.extend({}, this.resultChartOption, {
                          xAxis: _.extend({}, this.resultChartOption.xAxis, {
@@ -234,6 +301,7 @@
             toggle(){
                 this.resultChartOption.isToggle = !this.resultChartOption.isToggle;
                 this.resultPieChartOption.isActive = !this.resultPieChartOption.isActive;
+                this.themeArticleOption.isActive = !this.themeArticleOption.isActive;
             },
             clickChartAction(opts){
                 this.loadingParams.visiable = true;
@@ -259,6 +327,7 @@
                 });
             },
             getSummaryDetail(){
+                this.summaryNums=[];
                 const topic_id = this.activeAnalyticsTopic.topic_id,
                         subtopic = this.analyticsSubTopic,
                         source = this.analyticsSource,
@@ -315,29 +384,27 @@
                             overseasNums
                         ];
                     } else if(resp.data.code == 1004){
-                        const selTime = this.analyticsTimePopUp;
-                        switch (selTime){
-                            case 0.33:
-                                this.resultChartLoading = false;
-                                this.resultPieChartLoading = false;
-                                this.loadingParams.visiable = false;
-                                this.setAnalyticsTimePopUp(1);
-                                break;
-                            case 1:
-                                this.resultChartLoading = false;
-                                this.resultPieChartLoading = false;
-                                this.loadingParams.visiable = false;
-                                this.setAnalyticsTimePopUp(7);
-                                break;
-                            default:
-                                this.resultChartOption.series=[];
-                                    this.resultPieChartOption.series=[];
-                                this.resultChartLoading = false;
-                                this.resultPieChartLoading = false;
-                                this.loadingParams.visiable = false;
-                                //alert('暂无数据');
-                                break;
-
+                        if(time_interval==0){
+                            this.resultChartLoading = false;
+                            this.resultPieChartLoading = false;
+                            this.loadingParams.visiable = false;
+                            this.setAnalyticsTimePopUp(1);
+                        }else if(time_interval==0.33){
+                            this.resultChartLoading = false;
+                            this.resultPieChartLoading = false;
+                            this.loadingParams.visiable = false;
+                            this.setAnalyticsTimePopUp(1);
+                        } else if(time_interval==1){
+                            this.resultChartLoading = false;
+                            this.resultPieChartLoading = false;
+                            this.loadingParams.visiable = false;
+                            this.setAnalyticsTimePopUp(7);
+                        }else {
+                            this.resultChartOption.series=[];
+                            this.resultPieChartOption.series=[];
+                            this.resultChartLoading = false;
+                            this.resultPieChartLoading = false;
+                            this.loadingParams.visiable = false;
                         }
                     }
                 });
@@ -368,6 +435,54 @@
 
                 });
             },
+            getCategory(){
+                const topic_id = this.activeAnalyticsTopic.topic_id,
+                        topic = this.activeAnalyticsTopic.topic_name,
+                        subtopic = this.analyticsSubTopic,
+                        source = this.analyticsSource,
+                        time_interval = this.analyticsTimeRange,
+                        time_dimension = time_interval > 7 ? 1 : 0;
+                let end =this.analyticsEnd,
+                        start = this.analyticsStart;
+                if(start.includes(' ') && end.includes(' ')){
+                    start = start.split(' ')[0]+'T'+start.split(' ')[1];
+                    end = end.split(' ')[0]+'T'+end.split(' ')[1];
+                    console.log('start',start,end);
+                }
+                this.themeArticleOption.legend.data=[];
+                Api.getThemeCategory({topic_id, topic, subtopic, source, start, end, time_dimension}).then(resp=>{
+                    if(resp.data.code==0){
+                    this.themeArticleLoading=false;
+                    if(resp.data.data.length!=0){
+                        let details = resp.data.data;
+                        details = _.sortBy(details,item=>{return -item.value;});
+                        console.log(details);
+                        let categoryArr=[];
+                        let valueArr = [];
+
+                        _.each(details,item=>{
+                            categoryArr.push({text:item.category,max:100});
+                        valueArr.push(item.value);
+                    })
+                        const maxNum = _.max(valueArr,item=>item);
+                        _.map(categoryArr,item=>{return item.max=maxNum;});
+                        this.themeArticleOption.series[0].data[0].name=topic;
+                        this.themeArticleOption.series[0].data[0].value=valueArr;
+                        this.themeArticleOption.radar.indicator=categoryArr;
+                        this.themeArticleOption.legend.data.push(topic);
+                    }else{
+                        this.themeArticleOption.legend.data=[];
+                        this.themeArticleOption.radar.indicator=[{text:'',max:100}];
+                        this.themeArticleOption.series[0].data=[{
+                            value:[],
+                            name:''
+                        }];
+                        return ;
+                    }
+
+                    }
+                })
+            },
             initData(){
                 this.lineData = {
                     all: [],
@@ -384,6 +499,7 @@
                 this.initData();
                 this.getSummaryDetail();
                 this.getCommentList();
+                this.getCategory();
             }
         },
         watch: {
@@ -422,6 +538,7 @@
                 handler(val){
                     this.resultChartLoading = true;
                     this.resultPieChartLoading = true;
+                    this.themeArticleLoading=true;
                     this.init();
                 }
             },

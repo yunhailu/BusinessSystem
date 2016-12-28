@@ -37,10 +37,9 @@
     import Local from "../../local/local";
     import { WhiteList } from "../../config/config";
     import { getCookie } from '../../widgets/Cookie';
-    import {loginTime} from '../../vuex/getters';
-    import {setLoginTime} from '../../vuex/actions';
     import qservice from '../QQservice/QQservice.vue';
     import * as Api from "../../widgets/Api";
+    import {headerName} from '../../vuex/getters';
 
     export default{
         props: ["active"],
@@ -94,11 +93,17 @@
                 }]
             }
         },
-        vuex:{
-            getters:{loginTime},
-            actions:{setLoginTime}
-        },
         components:{ qservice},
+        vuex:{
+            getters:{headerName}
+        },
+        watch:{
+            headerName:{
+                handler(val){
+                    this.nickName=val;
+                }
+            }
+        },
         methods: {
             quit(){
                 const business_name = getCookie('business_name');
@@ -127,14 +132,8 @@
                 this.initData();
             }
         },
-        watch:{
-            loginTime:{
-                handler(val){
-                    if(val !=0){
-                        this.initData();
-                    }
-                }
-            }
+        route:{
+
         }
     }
 </script>

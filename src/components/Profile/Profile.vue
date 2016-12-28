@@ -240,6 +240,7 @@
     import { formatSize } from '../../widgets/Util';
     import * as Api from '../../widgets/Api';
     import * as Upload from '../../widgets/Upload';
+    import {setHeaderName} from '../../vuex/actions';
 
     export default{
         data(){
@@ -292,6 +293,9 @@
                 addSuccessTip:false,
                 showSmallTips:false
             }
+        },
+        vuex:{
+            actions:{setHeaderName}
         },
         computed: {
             isAdmin(){
@@ -447,6 +451,7 @@
                         this.userInfo.avatar = detail.avatar;
                         this.userInfo.email = detail.email;
                         this.userInfo.phone = detail.phone;
+                        this.setHeaderName( this.userInfo.username);
                         console.log(this.userInfo);
                     }
                 })

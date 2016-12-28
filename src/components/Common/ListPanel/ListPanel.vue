@@ -45,7 +45,7 @@
                         <div class="list-panel-list-item-left-con left-con">
                             <div class="keyWord">
                                 <div class="title-bottom">
-                                    <span>{{common.match}}:</span> <span class="time-bottom">{{'' | topicName}}</span>
+                                    <span>{{common.match}}:</span> <span class="time-bottom">{{topicName}}</span>
                                 </div>
                                 <div class="title">{{{item.title| title}}}</div>
                             </div>
@@ -130,7 +130,7 @@
     import SelectEl from '../Select/Select.vue';
     import Page from '../Page/Page.vue';
     import { WhiteWebSites } from '../../../config/config';
-    import { activeAnalyticsTopic,activeSummaryTopic } from '../../../vuex/getters';
+    import {monitorSumWord,monitorWord, activeAnalyticsTopic,activeSummaryTopic } from '../../../vuex/getters';
 
     export default{
         props: ["list", "options", "selectTitle", "selectValue", "tools"],
@@ -145,7 +145,8 @@
                 tableList: [],
                 filterActive: 20,
                 sentimentActive: 'all',
-                orderActive:'time'
+                orderActive:'time',
+                topicName:''
             }
         },
         computed: {
@@ -155,7 +156,7 @@
             }
         },
         vuex: {
-            getters: { activeAnalyticsTopic,activeSummaryTopic }
+            getters: {monitorSumWord,monitorWord, activeAnalyticsTopic,activeSummaryTopic }
         },
         methods: {
             confirm(){
@@ -175,6 +176,12 @@
                 this.filterItem(this.filterActive, flag);
             },
             filterItem(count, flag){
+                if(this.$route.name=='summarylist'){
+                    console.log(this.monitorSumWord);
+                    this.topicName=this.monitorSumWord =='' ? this.activeSummaryTopic.topic_name : this.monitorSumWord;
+                }else{
+                    this.topicName=this.monitorWord =='' ? this.activeAnalyticsTopic.topic_name : this.monitorWord;
+                }
                 if(flag == 'all'){
                     this.tableList = _.filter(this.list, (item, index) => (index < count));
                     return ;
@@ -210,16 +217,16 @@
             }
         },
         filters: {
-            topicName(value){
+           /* topicName(value){
                 let val;
                 console.log(value,this.$route.name)
                 if(this.$route.name=='summarylist'){
                     val=this.activeSummaryTopic.topic_name;
                 }else{
-                    val=this.activeAnalyticsTopic.topic_name;
+                    val=this.monitorWord;
                 }
                 return val;
-            },
+            },*/
             sentiment(flag){
                 let f;
                 switch(flag){
