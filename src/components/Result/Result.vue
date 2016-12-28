@@ -115,7 +115,7 @@
                         indicator: [
                             {text:'',max:100}
                         ],
-                        radius:70,
+                        radius:80,
                         //shape: 'circle',
                         //splitNumber: 5,
                         name: {
@@ -449,7 +449,7 @@
                     end = end.split(' ')[0]+'T'+end.split(' ')[1];
                     console.log('start',start,end);
                 }
-                this.themeArticleOption.legend.data=[];
+                //this.themeArticleOption.legend.data=[];
                 Api.getThemeCategory({topic_id, topic, subtopic, source, start, end, time_dimension}).then(resp=>{
                     if(resp.data.code==0){
                     this.themeArticleLoading=false;
@@ -469,9 +469,9 @@
                         this.themeArticleOption.series[0].data[0].name=topic;
                         this.themeArticleOption.series[0].data[0].value=valueArr;
                         this.themeArticleOption.radar.indicator=categoryArr;
-                        this.themeArticleOption.legend.data.push(topic);
+                        //this.themeArticleOption.legend.data.push(topic);
                     }else{
-                        this.themeArticleOption.legend.data=[];
+                        //this.themeArticleOption.legend.data=[];
                         this.themeArticleOption.radar.indicator=[{text:'',max:100}];
                         this.themeArticleOption.series[0].data=[{
                             value:[],
