@@ -38,6 +38,7 @@
                 </div>-->
                 <analytics-date v-if="$route.name !='comparision'"></analytics-date>
                 <compare-date v-if="$route.name=='comparision'"></compare-date>
+                <analytics-route></analytics-route>
                 <router-view></router-view>
             </div>
         </div>
@@ -60,6 +61,7 @@
     //import Local from "../../local/local";
     import CompareDate from "../Common/CompareDate/CompareDate.vue";
     import AnalyticsDate from "../Common/AnalyticsDate/AnalyticsDate.vue";
+    import AnalyticsRoute from '../Common/AnalyticsRoute/AnalyticsRoute.vue';
     //import {analyticsTimePopUp,analyticsSubTopicId, activeAnalyticsTopic,analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic, analyticsDateChange, analyticsStart, analyticsEnd, analyticsResetSearch } from '../../vuex/getters';
     //import {setAnalyticsTimePopUp,setAnalyticsSubTopicId,setActiveAnalyticsTopic,setAnalyticsType, setAnalyticsTimeRange, setAnalyticsSource, setAnalyticsSubTopic, setAnalyticsDateChange, setAnalyticsStart, setAnalyticsEnd, setAnalyticsResetSearch  } from "../../vuex/actions";
 
@@ -123,7 +125,8 @@
             //'smalltip':SmallTip,
             'com-menu':ComMenuComonent,
             'analytics-date':AnalyticsDate,
-            'compare-date':CompareDate
+            'compare-date':CompareDate,
+            'analytics-route':AnalyticsRoute
         },
        /* methods: {
             searchAction(){

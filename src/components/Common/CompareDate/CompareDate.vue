@@ -6,7 +6,7 @@
                             <span class="search-btn" @click="searchAction"><i class="fa fa-search"></i></span>
                         </div>
                     </div>
-                    <div class="row-right">
+                   <!-- <div class="row-right">
                         <ul class="days-btn">
                             <li>监测区间: </li>
                             <li @click="selectTime(0.33);" :class="[selectTimeTag == 0.33 ? 'active' : '']" class="active">8小时</li>
@@ -26,7 +26,7 @@
                             <calendar :show.sync="cal.show" :value.sync="dateVal" :x="cal.x" :y="cal.y" :begin.sync="cal.begin" :end.sync="cal.end" :type="cal.type" :range="cal.range"></calendar>
                         </div>
 
-                    </div>
+                    </div>-->
                 </div>
 </template>
 <style lang="less">
@@ -48,10 +48,10 @@
         data(){
             const compare = Local().compare;
             return{
-                timePay:parseInt(getCookie('business_level')) || 0,
+                //timePay:parseInt(getCookie('business_level')) || 0,
                 compare,
                 search: '',
-                dateVal: `${ moment().subtract(8, 'hour').format('YYYY-MM-DD HH')} ~ ${moment().format('YYYY-MM-DD HH')}`,
+               /* dateVal: `${ moment().subtract(8, 'hour').format('YYYY-MM-DD HH')} ~ ${moment().format('YYYY-MM-DD HH')}`,
                 cal: {
                     show: false,
                     type: "date", //date datetime
@@ -62,8 +62,8 @@
                     y: 0,
                     range:true//是否多选
                 },
-                selectTimeTag: 0.33,
-                isTimeDiy: false,
+                selectTimeTag: 0.33,*/
+                //isTimeDiy: false,
                 tabActive: 'result'
             }
         },
@@ -72,15 +72,15 @@
             actions:{setUserLevel,setCompareDataChange, setCompareType, setCompareTimeRange, setCompareSource, setCompareSubTopic, setCompareStart, setCompareEnd , setCompareTimeRangeString }
         },
         components:{
-            'header-component': HeaderComponent,
+           /* 'header-component': HeaderComponent,
             'calendar': Calendar,
-            'smalltip':SmallTip
+            'smalltip':SmallTip*/
         },
         methods: {
             searchAction(){
                 this.setCompareSubTopic(this.search);
             },
-            selectTime(num){
+           /* selectTime(num){
                 //this.selectTimeTag = num;
                 if(num == 0){
                     if(this.timePay !==2){
@@ -140,8 +140,8 @@
                 },500);
             },
             init(){
-                /*this.timePay = this.userLevel;
-                 console.log('abc',this.timePay)*/
+                /!*this.timePay = this.userLevel;
+                 console.log('abc',this.timePay)*!/
                 const start = moment(this.cal.begin, "YYYY-MM-DD");
                 const end = moment(this.cal.end, "YYYY-MM-DD");
                 const days = end.diff(start)/1000/3600/24;
@@ -151,7 +151,7 @@
             },
             trim(str){
                 return str.replace(/(^\s*)|(\s*$)/g,'');
-            }
+            }*/
         },
         watch: {
             search:{
@@ -160,7 +160,7 @@
                         this.setCompareSubTopic(this.search);
                 }
             },
-            dateVal: {
+            /*dateVal: {
                 handler(val){
                     let start = moment(val.split(' ~ ')[0], "YYYY-MM-DD");
                     let end = moment(val.split(' ~ ')[1], "YYYY-MM-DD");
@@ -184,10 +184,10 @@
                         this.search = '';
                     }
                 }
-            }
+            }*/
         },
         ready(){
-            this.init();
+           /* this.init();*/
         },
         route: {
             data(){

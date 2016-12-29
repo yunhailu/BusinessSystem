@@ -1,23 +1,37 @@
 <template>
-    <ul class="row items source">
-        <li v-for="(index, item) in source" class="item" :class="[sourceActive == $index ? 'active' : '']" @click="sourceAction(item, $index)">
-            <!--<span class="con">{{item.name}} {{datas[index] | showNum datas}}<i class="fa fa-spinner fa-spin" v-show="!datas.length"></i></span>-->
-            <span class="con">{{item.name | showNum datas[index] datas}}<i class="fa fa-spinner fa-spin" v-show="!datas.length"></i></span>
+    <div class="add-dashboard">
+        <div class="add-dashboard-btn" @click="showAdd();">
+            <i class="fa fa-plus"></i>
+            <span>{{words.addDashboard}}</span>
+        </div>
+    </div>
+    <ul class="row tabs">
+        <li v-for="tab in tabs" class="tab" :class="[tab.link == $route.name ? 'active' : '']" >
+            <a  v-link="{name: tab.link}" @click="changeTab(tab);">{{tab.name}}</a>
         </li>
     </ul>
+    <analytics-datechange></analytics-datechange>
+    <div v-if="showDashboard && $route.name != 'comparision'">
+        <add-dashboard :visiable.sync="showDashboard" :isanalytics.sync="isAnalytics"></add-dashboard>
+    </div>
+    <div v-if="showDashboard && $route.name=='comparision'">
+        <add-dashboard :visiable.sync="showDashboard" :iscompare.sync="isCompare"></add-dashboard>
+    </div>
 </template>
+
 <style lang="less" scoped>
-    @import "Tabs.less";
+    @import "AnalyticsRoute.less";
 </style>
 <script type="text/ecmascript-6">
     import _ from 'underscore';
     import Local from '../../../local/local';
-    import AddDashboard from '../../AddDashboard/AddDashboard.vue'
+    import AddDashboard from '../../AddDashboard/AddDashboard.vue';
+    import AnalyticsDateChange from '../AnalyticsDateChange/AnalyticsDateChange.vue';
     import {activeAnalyticsTopic,analyticsResetSearch,analyticsSubTopicId,analyticsRefreshTopic,analyticsDateChange, analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic } from '../../../vuex/getters';
     import { setAnalyticsType, setAnalyticsTimeRange, setAnalyticsSource, setAnalyticsSubTopic } from "../../../vuex/actions";
 
     export default{
-        props: ['active', 'actions', 'sourceactive', 'datas'],
+        props: [],
         vuex: {
             actions: { setAnalyticsType, setAnalyticsTimeRange, setAnalyticsSource, setAnalyticsSubTopic },
             getters: {activeAnalyticsTopic,analyticsSubTopicId,analyticsResetSearch,analyticsRefreshTopic,analyticsDateChange, analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic }
@@ -28,37 +42,38 @@
             return{
                 words,
                 showDashboard: false,
-                isAnalytics:false,
+                isAnalytics:true,
+                isCompare:true,
                 tabs: [
-                  /*      {
-                    name: words.tabs[0],
-                    //link: 'comment'
-                    link: 'information'
-                },*/
+                    /*      {
+                     name: words.tabs[0],
+                     //link: 'comment'
+                     link: 'information'
+                     },*/
                     {
-                    name: words.tabs[0],
-                    //link: 'comment'
-                    link: 'summary'
-                },{
-                    name: words.tabs[1],
-                    //link: 'summary'
-                    link:'theme'
-                }, {
-                    name: words.tabs[2],
-                    //link: 'sentiment'
-                    link:'influence'
-                }, {
-                    name: words.tabs[3],
-                    //link: 'influence'
-                    link: 'comment'
-                },{
-                    name: words.tabs[4],
-                    //link: 'theme'
-                    link: 'sentiment'
-                },{
-                    name: words.tabs[5],
-                    //link: 'theme'
-                    link: 'comparision'
+                        name: words.tabs[0],
+                        //link: 'comment'
+                        link: 'summary'
+                    },{
+                        name: words.tabs[1],
+                        //link: 'summary'
+                        link:'theme'
+                    }, {
+                        name: words.tabs[2],
+                        //link: 'sentiment'
+                        link:'influence'
+                    }, {
+                        name: words.tabs[3],
+                        //link: 'influence'
+                        link: 'comment'
+                    },{
+                        name: words.tabs[4],
+                        //link: 'theme'
+                        link: 'sentiment'
+                    },{
+                        name: words.tabs[5],
+                        //link: 'theme'
+                        link: 'comparision'
                     }],
 //                filters: words.filters,
 //                filterActive: 0,
@@ -133,12 +148,12 @@
                 console.log(tab);
                 this.setAnalyticsType(this.$route.name);
                 if(tab.link=='comparision'){
-                   // this.$router.go({name:tab.link});
+                    // this.$router.go({name:tab.link});
                 }
             },
             showAdd(){
                 this.showDashboard = true;
-                this.isAnalytics=true;
+                //this.isAnalytics=true;
             }
         },
         ready(){
@@ -175,7 +190,8 @@
                 return value;
             }
         },
-        components:{ AddDashboard },
+        components:{ AddDashboard,
+        'analytics-datechange':AnalyticsDateChange},
 //        route: {
 //            data(){
 //

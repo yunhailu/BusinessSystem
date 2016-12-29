@@ -8,7 +8,7 @@
                 <span class="search-btn" @click="searchAction"><i class="fa fa-search"></i></span>
             </div>
         </div>
-        <div class="row-right">
+      <!--  <div class="row-right">
             <ul class="days-btn">
                 <li>监测区间: </li>
                 <li @click="selectTime(0.33);" :class="[selectTimeTag == 0.33 ? 'active' : '']" class="active">8小时</li>
@@ -28,7 +28,7 @@
                 <calendar :show.sync="cal.show" :value.sync="dateVal" :x="cal.x" :y="cal.y" :begin.sync="cal.begin" :end.sync="cal.end" :type="cal.type" :range="cal.range"></calendar>
             </div>
             <div class="row-null"></div>
-        </div>
+        </div>-->
     </div>
 </template>
 <style lang="less">
@@ -49,9 +49,10 @@
         data(){
             const analytics = Local().analytics;
             return{
-                timePay:parseInt(getCookie('business_level')) || 0,
                 analytics,
                 search: '',
+                showName:'',
+                timePay:parseInt(getCookie('business_level')) || 0,
                 dateVal: `${ moment().subtract(8, 'hour').format('YYYY-MM-DD HH')} ~ ${moment().format('YYYY-MM-DD HH')}`,
                 cal: {
                     show: false,
@@ -65,7 +66,6 @@
                 selectTimeTag: 0.33,
                 isTimeDiy: false,
                 tabActive: 'result',
-                showName:'',
                 isCompare:false
             }
         },
