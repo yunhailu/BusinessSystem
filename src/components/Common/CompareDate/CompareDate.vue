@@ -157,7 +157,7 @@
             search:{
                 handler(val){
                     if(this.trim(val) =='')
-                        this.setAnalyticsSubTopic(this.search);
+                        this.setCompareSubTopic(this.search);
                 }
             },
             dateVal: {
