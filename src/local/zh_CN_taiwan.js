@@ -26,7 +26,7 @@ export const zh_CN_taiwan = _.extend({}, zh_CN, {
         getBack:"找回密码",
         submit:"登 录",
         forConsume:"为了更好的消费",
-        forSociety:"",
+        forSociety:"这里有您看不到的...",
         forParams1:"沃德品牌气象站是公司利用情绪大数据模型开发的“品牌价值互联网监测评价系统”。企业品牌价值的核心在于用户满意度，公司通过对全互联网情绪数据的分析，精确和实时计算知名产品、知名品牌、知名企业的用户满意度和交易量，从而为企业决策提供最精准的参考意见。",
         forCcsiTitle:"中国消费者情绪指数",
         forCcsiTitleE:"CCSI    China Consumer Sentiment Index",
@@ -78,7 +78,7 @@ export const zh_CN_taiwan = _.extend({}, zh_CN, {
     },
     analytics: {
         // tabs: ["关注分析", "情绪分析", "评价分析", "影响力分析", "印象分析"],
-        tabs: ["关注分析","印象分析", "意见领袖", "评价分析", "情绪分析"],
+        tabs: ["关注分析","印象分析", "意见领袖", "评价分析", "情绪分析","比较分析"],
         filters: ["全部", "情绪指数", "地域分布", "性别分布", "语言分布"],
         source: ["全部", "微信", "微博", "客户端", "网页", "海外"],
         addDashboard: "添加快捷报告",
