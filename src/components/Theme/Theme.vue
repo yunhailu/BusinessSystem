@@ -56,14 +56,9 @@
                 <!--</div>-->
                 <!--</dd>-->
                 <!--</dl>-->
-
-
             </div>
         </div>
     </div>
-
-
-
     <tips :visible.sync="loadingParams.visiable" :tipsparam.sync="loadingParams"></tips>
 </template>
 <style lang="less" scoped>

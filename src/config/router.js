@@ -227,6 +227,12 @@ module.exports = {
             require(['../components/NewsLogin/NewsLogin.vue'], resolve);
         }
     },
+    '/taiwan': {
+        name: 'taiwan',
+        component (resolve) {
+            require(['../components/TaiwanLogin/TaiwanLogin.vue'], resolve);
+        }
+    },
 
 
     
