@@ -47,12 +47,14 @@ export const zh_CN_mediaq = _.extend({}, zh_CN, {
     header: {
         title: "沃德媒商气象站",
         home: "热点事件",
-        analytics: "数据分析",
+        analytics: "智能分析",
         dashboard: "报告生成",
         compare: "比较分析",
         reports: "预警监测",
         setting: "监测设置",
         forUse:"使用指南",
+        summary:"信息汇总",
+        intelligent:"智能分析",
         quit: "退出"
     },
     home: {
