@@ -613,6 +613,11 @@
                     }
                 }
             },*/
+            analyticsSource:{
+                handler(val){
+                    this.init();
+                }
+            },
             activeAnalyticsTopic: {
                 handler(val){
                     this.themeBestLoading = true;
@@ -657,10 +662,6 @@
 
                     }
                 });
-
-
-
-
             },
             getBubblChart(){
                 this.themeScatterLoading=true;

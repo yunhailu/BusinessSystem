@@ -160,7 +160,7 @@
             }
         },
         methods: {
-            nowTime:{
+            /*nowTime:{
                 handler(val,oldVal){
                     const afterTime = moment().add(1,"hour").format("YYYY-MM-DD HH");
                     const space = moment(afterTime).diff(moment(val));
@@ -182,7 +182,7 @@
                         }.bind(this),space)
                     }
                 }
-            },
+            },*/
             showPopList(item){
                 this.popVisiable = true;
                 const topic_id = this.activeAnalyticsTopic.topic_id;

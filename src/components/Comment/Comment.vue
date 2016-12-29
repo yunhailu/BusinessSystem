@@ -8,6 +8,15 @@
         <list-panel :list="list" :options="options" :select-title="selectTitle" :select-value.sync="sortVal"></list-panel>
     </div>
     <tips :visible.sync="loadingParams.visiable" :tipsparam.sync="loadingParams"></tips>
+    <div class="tipBg" v-if="showSmallTips">
+        <div class="smallTips">
+            <h3><i class="fa fa-warning"></i> 提示</h3>
+            <div class="tips-content">一小时后出最新统计结果,系统正在计算中，请稍候...</div>
+            <div class="tips-btns">
+                <p class="tips-leftBtn" @click="confirm()">确认</p>
+            </div>
+        </div>
+    </div>
 </template>
 <style lang="less" scoped>
     @import "Comment.less";
@@ -32,6 +41,7 @@
                 words,
                 common,
                 nowTime:null,
+                showSmallTips:false,
                 loadingParams: {
                     visiable: false,
                     type: 'loading',
@@ -129,6 +139,9 @@
             }
         },
         methods: {
+            confirm(){
+                this.showSmallTips=false;
+            },
             clickChartAction(opts){
                 this.loadingParams.visiable = true;
                 const topic_id = this.activeAnalyticsTopic.topic_id,
@@ -301,6 +314,7 @@
                             this.commentBarLoading = false;
                             this.commentPieLoading2= false;
                             this.loadingParams.visiable = false;
+                            this.showSmallTips=true;
                         }
                     }
                 });

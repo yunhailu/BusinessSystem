@@ -14,6 +14,15 @@
     </div>
 
     <tips :visible.sync="loadingParams.visiable" :tipsparam.sync="loadingParams"></tips>
+        <div class="tipBg" v-if="showSmallTips">
+            <div class="smallTips">
+                <h3><i class="fa fa-warning"></i> 提示</h3>
+                <div class="tips-content">一小时后出最新统计结果,系统正在计算中，请稍候...</div>
+                <div class="tips-btns">
+                    <p class="tips-leftBtn" @click="confirm()">确认</p>
+                </div>
+            </div>
+        </div>
 </template>
 <style lang="less" scoped>
     @import "Result.less";
@@ -37,6 +46,7 @@
             return{
                 common,
                 nowTime:null,
+                showSmallTips:false,
                 loadingParams: {
                     visiable: false,
                     type: 'loading',
@@ -298,6 +308,9 @@
             actions:{setAnalyticsTimePopUp,setAnalyticsEnd,setAnalyticsStart}
         },
         methods: {
+            confirm(){
+                this.showSmallTips=false;
+            },
             toggle(){
                 this.resultChartOption.isToggle = !this.resultChartOption.isToggle;
                 this.resultPieChartOption.isActive = !this.resultPieChartOption.isActive;
@@ -405,6 +418,7 @@
                             this.resultChartLoading = false;
                             this.resultPieChartLoading = false;
                             this.loadingParams.visiable = false;
+                            this.showSmallTips=true;
                         }
                     }
                 });

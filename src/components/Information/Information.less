@@ -96,3 +96,49 @@
     .w(100%);  .tc();
   }
 }
+
+.tipBg{
+  .pf();.z(2000);.w(100%);.h(100%);.top(0);.left(0);.bg(rgba(0,0,0,.5));
+  .smallTips{
+    width: 20%;
+    background-color: #fff;
+    margin: 0 auto;
+    border-radius: 10 * @px;
+    padding: 0 4%;
+    color: #292d33;
+    position: fixed;
+    left:40%;
+    top:30%;
+    z-index: 1000;
+    h3{
+      padding-top: 42 * @px;
+      padding-bottom: 24 * @px;
+      font-size: 38 * @px;
+      font-weight: 700;
+      text-align: center;
+    }
+    .tips-content{
+      line-height: 40 * @px;
+      font-size: 30 * @px;
+      color: #292d33;
+      text-align: center;
+    }
+    .tips-btns{
+      padding-top: 40 * @px;
+      padding-bottom: 30 * @px;
+      text-align: center;
+      overflow: hidden;
+    }
+    .tips-leftBtn {
+      height: 86 * @px;
+      width: 96%;
+      border-radius: 8 * @px;
+      background-color: @body-theme;
+      color: #fff;
+      line-height: 86 * @px;
+      margin-right: 3%;
+      float: left;
+      .pointer();
+    }
+  }
+}

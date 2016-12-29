@@ -6,6 +6,15 @@
     </div>
 
     <tips :visible.sync="loadingParams.visiable" :tipsparam.sync="loadingParams"></tips>
+    <div class="tipBg" v-if="showSmallTips">
+        <div class="smallTips">
+            <h3><i class="fa fa-warning"></i> 提示</h3>
+            <div class="tips-content">一小时后出最新统计结果,系统正在计算中，请稍候...</div>
+            <div class="tips-btns">
+                <p class="tips-leftBtn" @click="confirm()">确认</p>
+            </div>
+        </div>
+    </div>
 </template>
 <style lang="less" scoped>
     @import "Information.less";
@@ -29,6 +38,7 @@
             return{
                 common,
                 nowTime:null,
+                showSmallTips:false,
                 loadingParams: {
                     visiable: false,
                     type: 'loading',
@@ -224,6 +234,9 @@
             actions:{setSummaryTimePopUp,setSummaryEnd,setSummaryStart}
         },
         methods: {
+            confirm(){
+                this.showSmallTips=false;
+            },
             toggle(){
                 this.resultChartOption.isToggle = !this.resultChartOption.isToggle;
                 this.resultPieChartOption.isActive = !this.resultPieChartOption.isActive;
@@ -307,6 +320,30 @@
                             webNums,
                             overseasNums
                         ];
+                    }else if(resp.data.code ==1004){
+                        if(time_interval==0){
+                            this.resultChartLoading = false;
+                            this.resultPieChartLoading= false;
+                            this.loadingParams.visiable = false;
+                            this.setSummaryTimePopUp(1);
+                        }else if(time_interval==0.33){
+                            this.resultChartLoading = false;
+                            this.resultPieChartLoading= false;
+                            this.loadingParams.visiable = false;
+                            this.setSummaryTimePopUp(1);
+                        }else if(time_interval==1){
+                            this.resultChartLoading = false;
+                            this.resultPieChartLoading= false;
+                            this.loadingParams.visiable = false;
+                            this.setSummaryTimePopUp(7);
+                        }else {
+                            this.resultChartOption.series=[];
+                            this.resultPieChartOption.series=[];
+                            this.resultChartLoading = false;
+                            this.resultPieChartLoading = false;
+                            this.loadingParams.visiable = false;
+                            this.showSmallTips=true;
+                        }
                     }
                 });
             },
