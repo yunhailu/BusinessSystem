@@ -132,6 +132,9 @@ export const setAnalyticsTimePopUp = (store, newtime) => {
 export const setAnalyticsAddTopic = (store, topic) => {
 	store.dispatch(types.UPDATE_ADD_TOPIC, topic);
 };
+export const setAnalyticsSourceData = (store, data) => {
+	store.dispatch(types.UPDATE_CHANGE_SOURCE_DATA, data);
+};
 /**
  * Compare
  * */

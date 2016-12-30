@@ -1,5 +1,5 @@
 ﻿<template>
-    <tabs :actions="actions" :datas="commentNums"></tabs>
+    <!--<tabs :actions="actions" :datas="commentNums"></tabs>-->
     <div class="overflowAuto">
         <div class="charts">
             <div class="chart commentLeftBar"  v-echarts="commentBarOption" :click="clickChartAction" :loading="commentBarLoading" theme="macarons"></div><!--theme="infographic"-->
@@ -32,7 +32,7 @@
     import Tabs from '../Common/Tabs/Tabs.vue';
     import Tips from '../Common/Tips/Tips.vue';
     import {analyticsTimePopUp,analyticsSubTopicId, analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic, analyticsDateChange, analyticsStart, analyticsEnd, activeAnalyticsTopic, analyticsRefreshTopic } from '../../vuex/getters';
-    import {setAnalyticsTimePopUp,setAnalyticsEnd,setAnalyticsStart} from '../../vuex/actions';
+    import {setAnalyticsSourceData,setAnalyticsTimePopUp,setAnalyticsEnd,setAnalyticsStart} from '../../vuex/actions';
 
     export default{
         data(){
@@ -285,6 +285,8 @@
                             webNums,
                             overseasNums
                         ];
+                        this.setAnalyticsSourceData(this.commentNums);
+                        this.drawCharts();
                     }else if(resp.data.code == 1004){
                         if(time_interval==0){
                             this.commentBarLoading = false;
@@ -319,7 +321,54 @@
                     }
                 });
             },
-            actions(val, idx){
+            drawCharts(){
+                const source = this.analyticsSource;
+                _.each(this.lineData[source], (value, key) => {
+                    this.commentBarOption.series[this.commentMap[key]].data = value;
+                });
+
+                switch (source){
+                    case 'all':
+                        this.commentPieOption2.series[0].data =[
+                            {value:_.reduce(this.lineData.all.positive,(mome, val) => mome + val, 0), name:this.words.positive},
+                            {value:_.reduce(this.lineData.all.negative,(mome, val) => mome + val, 0), name:this.words.negative},
+                            {value:_.reduce(this.lineData.all.neutral,(mome, val) => mome + val, 0), name:this.words.neutral},]
+                        break;
+                    case 'wechat':
+                        this.commentPieOption2.series[0].data =[
+                            {value:_.reduce(this.lineData.wechat.positive,(mome, val) => mome + val, 0), name:this.words.positive},
+                            {value:_.reduce(this.lineData.wechat.negative,(mome, val) => mome + val, 0), name:this.words.negative},
+                            {value:_.reduce(this.lineData.wechat.neutral,(mome, val) => mome + val, 0), name:this.words.neutral},]
+                        break;
+                    case 'weibo':
+                        this.commentPieOption2.series[0].data =[
+                            {value:_.reduce(this.lineData.weibo.positive,(mome, val) => mome + val, 0), name:this.words.positive},
+                            {value:_.reduce(this.lineData.weibo.negative,(mome, val) => mome + val, 0), name:this.words.negative},
+                            {value:_.reduce(this.lineData.weibo.neutral,(mome, val) => mome + val, 0), name:this.words.neutral},]
+                        break;
+                    case 'client':
+                        this.commentPieOption2.series[0].data =[
+                            {value:_.reduce(this.lineData.client.positive,(mome, val) => mome + val, 0), name:this.words.positive},
+                            {value:_.reduce(this.lineData.client.negative,(mome, val) => mome + val, 0), name:this.words.negative},
+                            {value:_.reduce(this.lineData.client.neutral,(mome, val) => mome + val, 0), name:this.words.neutral},]
+                        break;
+                    case 'web':
+                        this.commentPieOption2.series[0].data =[
+                            {value:_.reduce(this.lineData.web.positive,(mome, val) => mome + val, 0), name:this.words.positive},
+                            {value:_.reduce(this.lineData.web.negative,(mome, val) => mome + val, 0), name:this.words.negative},
+                            {value:_.reduce(this.lineData.web.neutral,(mome, val) => mome + val, 0), name:this.words.neutral},]
+                        break;
+                    case 'overseas':
+                        this.commentPieOption2.series[0].data =[
+                            {value:_.reduce(this.lineData.overseas.positive,(mome, val) => mome + val, 0), name:this.words.positive},
+                            {value:_.reduce(this.lineData.overseas.negative,(mome, val) => mome + val, 0), name:this.words.negative},
+                            {value:_.reduce(this.lineData.overseas.neutral,(mome, val) => mome + val, 0), name:this.words.neutral},]
+                        break;
+                    default:
+                        break;
+                }
+            },
+          /*  actions(val, idx){
                 const map = ['all', 'wechat', 'weibo', 'client', 'web', 'overseas','sengine'];
 
                 _.each(this.lineData[map[idx]], (value, key) => {
@@ -366,7 +415,7 @@
                     default:
                         break;
                 }
-            },
+            },*/
             initData(){
                 this.lineData = {
                     wechat: {positive: [], negative: [], neutral: []},
@@ -386,7 +435,7 @@
         },
         vuex: {
             getters: {analyticsTimePopUp,analyticsSubTopicId,analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic, analyticsDateChange, analyticsStart, analyticsEnd, activeAnalyticsTopic, analyticsRefreshTopic},
-            actions:{setAnalyticsTimePopUp,setAnalyticsEnd,setAnalyticsStart}
+            actions:{setAnalyticsSourceData,setAnalyticsTimePopUp,setAnalyticsEnd,setAnalyticsStart}
         },
         ready(){
             this.nowTime = moment();
@@ -452,6 +501,7 @@
             analyticsSource: {
                 handler(val){
                     this.getCommentList();
+                    this.drawCharts();
                 }
             },
             sortVal: {

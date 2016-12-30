@@ -11,6 +11,7 @@
         </li>
     </ul>
     <analytics-datechange></analytics-datechange>
+    <tabs></tabs>
     <div v-if="showDashboard && $route.name != 'comparision'">
         <add-dashboard :visiable.sync="showDashboard" :isanalytics.sync="isAnalytics"></add-dashboard>
     </div>
@@ -27,6 +28,7 @@
     import Local from '../../../local/local';
     import AddDashboard from '../../AddDashboard/AddDashboard.vue';
     import AnalyticsDateChange from '../AnalyticsDateChange/AnalyticsDateChange.vue';
+    import Tabs from '../Tabs/Tabs.vue';
     import {activeAnalyticsTopic,analyticsResetSearch,analyticsSubTopicId,analyticsRefreshTopic,analyticsDateChange, analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic } from '../../../vuex/getters';
     import { setAnalyticsType, setAnalyticsTimeRange, setAnalyticsSource, setAnalyticsSubTopic } from "../../../vuex/actions";
 
@@ -190,7 +192,7 @@
                 return value;
             }
         },
-        components:{ AddDashboard,
+        components:{ AddDashboard,Tabs,
         'analytics-datechange':AnalyticsDateChange},
 //        route: {
 //            data(){

@@ -1,5 +1,5 @@
 <template>
-    <tabs :datas="themeNums"></tabs>
+    <!--<tabs :datas="themeNums"></tabs>-->
     <!--<span>Theme</span>-->
     <div class="theme-overflow">
         <div class="theme-word">
@@ -75,7 +75,7 @@
     import China from 'echarts/map/js/china';
     import * as Api from '../../widgets/Api';
     import { analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic, analyticsDateChange, analyticsStart, analyticsEnd, activeAnalyticsTopic } from '../../vuex/getters';
-    import {setAnalyticsEnd,setAnalyticsStart} from '../../vuex/actions';
+    import {setAnalyticsSourceData,setAnalyticsEnd,setAnalyticsStart} from '../../vuex/actions';
 
     export default{
         data(){
@@ -582,7 +582,7 @@
         },
         vuex: {
             getters: {analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic, analyticsDateChange, analyticsStart, analyticsEnd, activeAnalyticsTopic},
-            actions: {setAnalyticsEnd,setAnalyticsStart}
+            actions: {setAnalyticsSourceData,setAnalyticsEnd,setAnalyticsStart}
         },
         watch: {
            /* nowTime:{
@@ -1160,6 +1160,7 @@
             },
 
             init(){
+                this.setAnalyticsSourceData(this.themeNums);
                 this.getBubblChart();
                 this.getTrendList();
                 this.getWordCloud();

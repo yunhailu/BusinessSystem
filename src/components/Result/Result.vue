@@ -1,5 +1,5 @@
 <template>
-    <tabs :actions="actions" :datas="summaryNums"></tabs>
+    <!--<tabs :actions="actions" :datas="summaryNums"></tabs>-->
     <!--<span>Result</span>-->
     <div class="result-overflow">
         <div class="charts">
@@ -37,8 +37,8 @@
     import ListPanel from '../Common/ListPanel/ListPanel.vue';
     import Tabs from '../Common/Tabs/Tabs.vue';
     import Tips from '../Common/Tips/Tips.vue';
-    import {analyticsTimePopUp, analyticsSubTopicId, analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic, analyticsDateChange, analyticsStart, analyticsEnd, activeAnalyticsTopic, analyticsRefreshTopic } from '../../vuex/getters';
-    import {setAnalyticsTimePopUp,setAnalyticsEnd,setAnalyticsStart } from '../../vuex/actions';
+    import {analyticsSourceData,analyticsTimePopUp, analyticsSubTopicId, analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic, analyticsDateChange, analyticsStart, analyticsEnd, activeAnalyticsTopic, analyticsRefreshTopic } from '../../vuex/getters';
+    import {setAnalyticsSourceData,setAnalyticsTimePopUp,setAnalyticsEnd,setAnalyticsStart } from '../../vuex/actions';
 
     export default{
         data(){
@@ -172,7 +172,7 @@
                         }]
                     }]
                 },
-                actions: function(val, idx){
+                /*actions: function(val, idx){
                     const lineData = this.lineData;
                     const x = this.x;
                     console.log('x',x);
@@ -296,7 +296,7 @@
                          }]
                          });
                     }
-                }.bind(this),
+                }.bind(this),*/
 
                 isChartScale: true,
                 isActivePie: true,
@@ -305,8 +305,8 @@
             }
         },
         vuex: {
-            getters: {analyticsTimePopUp, analyticsSubTopicId,analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic, analyticsDateChange, analyticsStart, analyticsEnd, activeAnalyticsTopic, analyticsRefreshTopic},
-            actions:{setAnalyticsTimePopUp,setAnalyticsEnd,setAnalyticsStart}
+            getters: {analyticsSourceData,analyticsTimePopUp, analyticsSubTopicId,analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic, analyticsDateChange, analyticsStart, analyticsEnd, activeAnalyticsTopic, analyticsRefreshTopic},
+            actions:{setAnalyticsSourceData,setAnalyticsTimePopUp,setAnalyticsEnd,setAnalyticsStart}
         },
         methods: {
             confirm(){
@@ -341,7 +341,8 @@
                 });
             },
             getSummaryDetail(){
-                this.summaryNums=[];
+                    this.summaryNums=[];
+                    this.setAnalyticsSourceData(this.summaryNums);
                 const topic_id = this.activeAnalyticsTopic.topic_id,
                         subtopic = this.analyticsSubTopic,
                         source = this.analyticsSource,
@@ -362,6 +363,7 @@
                         this.x =[];
                         this.initData();
                         this.summaryNums=[];
+                        this.setAnalyticsSourceData(this.summaryNums);
                         this.x = _.map(details, detail => detail.date);
                         _.each(details, detail => {
                             this.lineData.wechat.push(detail.values.wechat);
@@ -383,7 +385,7 @@
                                 });
                     console.log('plus',plus);
                         this.lineData.all = [this.lineData.wechat,this.lineData.weibo,this.lineData.client,this.lineData.web,this.lineData.overseas,plus];
-                        this.actions("全部", 0);
+                        //this.actions("全部", 0);
                         const wechatNums =  _.reduce(this.lineData.wechat, (memo, value) => (memo + value), 0);
                         const weiboNums =  _.reduce(this.lineData.weibo, (memo, value) => (memo + value), 0);
                         const clientNums =  _.reduce(this.lineData.client, (memo, value) => (memo + value), 0);
@@ -397,6 +399,10 @@
                             webNums,
                             overseasNums
                         ];
+                        this.setAnalyticsSourceData(this.summaryNums);
+                        console.log(this.analyticsSourceData);
+                        console.log(this.lineData);
+                        this.drawCharts();
                     } else if(resp.data.code == 1004){
                         if(time_interval==0){
                             this.resultChartLoading = false;
@@ -509,7 +515,130 @@
                     sengine:[]
                 };
             },
-
+            drawCharts(){
+                    const x = this.x;
+                    console.log('x',x);
+                    let data;
+                const source = this.analyticsSource;
+                console.log(source);
+                    switch (source){
+                        case 'all':
+                            data = this.lineData.all;
+                            break;
+                        case "wechat":
+                            data = this.lineData.wechat;
+                            break;
+                        case "weibo":
+                            data = this.lineData.weibo;
+                            break;
+                        case "client":
+                            data = this.lineData.client;
+                            break;
+                        case "web":
+                            data = this.lineData.web;
+                            break;
+                        case "overseas":
+                            data = this.lineData.overseas;
+                            break;
+                        default:
+                            data = this.lineData.all;
+                            break;
+                    }
+                    console.log('data',data);
+                    if(source == 'all'){
+                        this.resultChartOption = _.extend({}, this.resultChartOption, {
+                            xAxis: _.extend({}, this.resultChartOption.xAxis, {
+                                type : 'category',  //category
+                                data: x,
+                                boundaryGap : false
+                            }),
+                            legend: _.extend({}, Pie.legend, {
+                                top: 0,
+                                data: [this.common.all,this.common.wechat, this.common.weibo, this.common.client, this.common.web, this.common.overseas]
+                            }),
+                            series: [{
+                                name:this.common.all,
+                                type:'line',
+//                                areaStyle: {normal: {}},
+                                data: data[5]
+                            },{
+                                name:this.common.wechat,
+//                                areaStyle: {normal: {}},
+//                                stack: 'Total',
+                                type:'line',
+                                data:data[0]
+                            }, {
+                                name:this.common.weibo,
+//                                areaStyle: {normal: {}},
+//                                stack: 'Total',
+                                type:'line',
+                                data: data[1]
+                            }, {
+                                name:this.common.client,
+                                type:'line',
+//                                areaStyle: {normal: {}},
+//                                stack: 'Total',
+                                data:data[2]
+                            }, {
+                                name:this.common.web,
+                                type:'line',
+//                                areaStyle: {normal: {}},
+//                                stack: 'Total',
+                                data: data[3]
+                            }, {
+                                name:this.common.overseas,
+                                type:'line',
+//                                areaStyle: {normal: {}},
+//                                stack: 'Total',
+                                data: data[4]
+                            }]
+                        });
+                        this.resultPieChartOption = _.extend({}, this.resultPieChartOption, {
+                            series:[
+                                {
+                                    label:{
+                                        normal:{
+                                            show:true,
+                                            formatter:"{d}%"
+                                        }
+                                    },
+                                    name:'',
+                                    type:'pie',
+                                    radius: '50%',
+                                    center: ['50%', '50%'],
+                                    data:[
+                                        {value: _.reduce(this.lineData.wechat, (mome, val) => mome + val, 0), name: "微信"},
+                                        {value: _.reduce(this.lineData.weibo, (mome, val) => mome + val, 0), name:"微博"},
+                                        {value: _.reduce(this.lineData.client, (mome, val) => mome + val, 0), name:"客户端"},
+                                        {value: _.reduce(this.lineData.web, (mome, val) => mome + val, 0), name:"网页"},
+                                        {value: _.reduce(this.lineData.overseas, (mome, val) => mome + val, 0), name:"海外"}
+                                    ]
+                                }
+                            ]
+                        });
+                        this.resultChartOption.isToggle = true;
+                        this.resultPieChartOption.isActive = true;
+                        this.themeArticleOption.isActive=true;
+                    } else {
+                        this.resultChartOption.isToggle = false;
+                        this.resultPieChartOption.isActive = false;
+                        this.themeArticleOption.isActive=false;
+                        //非all
+                        this.resultChartOption = _.extend({}, this.resultChartOption, {
+                            xAxis: _.extend({}, this.resultChartOption.xAxis, {
+                                type : 'category',  //category
+                                data: x,
+                                boundaryGap : false
+                            }),
+                            series: [{
+                                name:"总数",
+                                type:'line',
+                                areaStyle: {normal: {}},
+                                data: data
+                            }]
+                        });
+                    }
+            },
             init(topic){
                 this.initData();
                 this.getSummaryDetail();
@@ -572,7 +701,9 @@
             analyticsSource: {
                 handler(val){
                     //this.loadingParams.visiable = true;
+
                     this.getCommentList();
+                    this.drawCharts();
                 }
             },
             analyticsSubTopic: {

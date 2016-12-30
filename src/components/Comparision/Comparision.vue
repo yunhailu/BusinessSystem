@@ -1,5 +1,5 @@
 <template>
-    <tabs :datas="compareNums"></tabs>
+    <!--<tabs :datas="compareNums"></tabs>-->
     <div class="chartBox">
         <div class="compare-charts">
             <div class="chart" v-echarts="compareChartOption" :loading="compareChartLoading" theme="macarons"></div>
@@ -22,8 +22,8 @@
     import Tabs from '../Compare/Tabs/Tabs.vue';
     import {Chart, Pie} from '../../config/config';
     import * as Api from "../../widgets/Api";
-    import {compareDataChange, topicList, activeCompareTopic, topicGroupActiveId, compareSource, compareSubTopic, compareStart, compareEnd, compareTimeRange, compareTimeRangeString, compareSourceCount } from '../../vuex/getters';
-    import {setCompareDataChange, setTopicList, setActiveCompareTopic, setTopicGroupActiveId, setCompareSource, setCompareSubTopic, setCompareStart, setCompareEnd, setCompareTimeRange, setCompareTimeRangeString, setCompareSourceCount  } from "../../vuex/actions";
+    import {compareDataChange, topicList, activeCompareTopic, topicGroupActiveId, analyticsSource, compareSubTopic, compareStart, compareEnd, compareTimeRange, compareTimeRangeString } from '../../vuex/getters';
+    import {setAnalyticsSourceData,setCompareDataChange, setTopicList, setActiveCompareTopic, setTopicGroupActiveId, setAnalyticsSource, setCompareSubTopic, setCompareStart, setCompareEnd, setCompareTimeRange, setCompareTimeRangeString  } from "../../vuex/actions";
 
     export default{
         props: [],
@@ -394,7 +394,7 @@
                     let topicParams = {
                         topic_id:item.topic_id,
                         subtopic:this.compareSubTopic,
-                        source:this.compareSource,
+                        source:this.analyticsSource,
                         start:this.compareStart,
                         end:this.compareEnd,
                         time_dimension:this.compareTimeRange<=7 ? 0 :1
@@ -523,22 +523,23 @@
                 const midSengineCount = _.map(_.values(this.VariableChartData.sengine),item=>{
                     return _.reduce(item, function(memo, num){ return memo + num; }, 0);
                 });
-                let compareSourceCount = this.compareSourceCount;
-                compareSourceCount.all = _.reduce(midAllCount, function(memo, num){ return memo + num; }, 0);
-                compareSourceCount.wechat = _.reduce(midWechatCount, function(memo, num){ return memo + num; }, 0);
-                compareSourceCount.weibo = _.reduce(midWeiboCount, function(memo, num){ return memo + num; }, 0);
-                compareSourceCount.client = _.reduce(midClientCount, function(memo, num){ return memo + num; }, 0);
-                compareSourceCount.web = _.reduce(midWebCount, function(memo, num){ return memo + num; }, 0);
-                compareSourceCount.overseas = _.reduce(midOverseasCount, function(memo, num){ return memo + num; }, 0);
-                compareSourceCount.sengine = _.reduce(midSengineCount, function(memo, num){ return memo + num; }, 0);
+                let analyticsSourceCount = [];
+                analyticsSourceCount.all = _.reduce(midAllCount, function(memo, num){ return memo + num; }, 0);
+                analyticsSourceCount.wechat = _.reduce(midWechatCount, function(memo, num){ return memo + num; }, 0);
+                analyticsSourceCount.weibo = _.reduce(midWeiboCount, function(memo, num){ return memo + num; }, 0);
+                analyticsSourceCount.client = _.reduce(midClientCount, function(memo, num){ return memo + num; }, 0);
+                analyticsSourceCount.web = _.reduce(midWebCount, function(memo, num){ return memo + num; }, 0);
+                analyticsSourceCount.overseas = _.reduce(midOverseasCount, function(memo, num){ return memo + num; }, 0);
+                analyticsSourceCount.sengine = _.reduce(midSengineCount, function(memo, num){ return memo + num; }, 0);
 
                 this.compareNums=[
-                    compareSourceCount.all,compareSourceCount.wechat,compareSourceCount.weibo,compareSourceCount.client+compareSourceCount.web,compareSourceCount.sengine,compareSourceCount.overseas
+                    analyticsSourceCount.all,analyticsSourceCount.wechat,analyticsSourceCount.weibo,analyticsSourceCount.client+analyticsSourceCount.web,analyticsSourceCount.sengine,analyticsSourceCount.overseas
                 ];
+                this.setAnalyticsSourceData(this.compareNums);
             },
             //切换赋值
             changeSource(){
-                const newSource = this.compareSource;
+                const newSource = this.analyticsSource;
                 switch(newSource){
                     case 'all':
                         this.data =this.VariableChartData.all;
@@ -571,8 +572,8 @@
 
         },
         vuex:{
-            actions:{setCompareDataChange,setTopicList ,setActiveCompareTopic ,setTopicGroupActiveId, setCompareSource, setCompareSubTopic, setCompareStart, setCompareEnd, setCompareTimeRange, setCompareTimeRangeString, setCompareSourceCount},
-            getters:{compareDataChange,topicList ,activeCompareTopic , topicGroupActiveId, compareSource, compareSubTopic, compareStart, compareEnd, compareTimeRange, compareTimeRangeString, compareSourceCount  }
+            actions:{setAnalyticsSourceData,setCompareDataChange,setTopicList ,setActiveCompareTopic ,setTopicGroupActiveId, setAnalyticsSource, setCompareSubTopic, setCompareStart, setCompareEnd, setCompareTimeRange, setCompareTimeRangeString },
+            getters:{compareDataChange,topicList ,activeCompareTopic , topicGroupActiveId, analyticsSource, compareSubTopic, compareStart, compareEnd, compareTimeRange, compareTimeRangeString   }
         },
         watch:{
             activeCompareTopic: {
@@ -591,15 +592,17 @@
                         this.compareRadarOption.series[0].data=[];
                         this.initData();
                         this.compareNums = [0,0,0,0,0,0];
+                        this.setAnalyticsSourceData(this.compareNums);
                         return ;
                     }else if(oldVal.length == 0){
                         //新值不为空---如果老值为空
                         this.compareNums=[];
+                        this.setAnalyticsSourceData(this.compareNums)
                         const newTopic = val;
                         let topicParams = {
                             topic_id:_.isEmpty(newTopic) ? '' : newTopic[0].topic_id,
                             subtopic:this.compareSubTopic,
-                            source:this.compareSource,
+                            source:this.analyticsSource,
                             start:this.compareStart,
                             end:this.compareEnd,
                             time_dimension:this.compareTimeRange<=7 ? 0 :1
@@ -616,11 +619,12 @@
                         if(_.find(currentGroup.list,function(item){return item.topic_name == oldVal[0].topic_name;}) !=undefined){
                             if(val.length > oldVal.length){
                                 this.compareNums=[];
+                                this.setAnalyticsSourceData(this.compareNums)
                                 const newTopic = _.difference(val, oldVal);
                                 let topicParams = {
                                     topic_id:_.isEmpty(newTopic) ? '' : newTopic[0].topic_id,
                                     subtopic:this.compareSubTopic,
-                                    source:this.compareSource,
+                                    source:this.analyticsSource,
                                     start:this.compareStart,
                                     end:this.compareEnd,
                                     time_dimension:this.compareTimeRange<=7 ? 0 :1
@@ -634,6 +638,7 @@
                                 this.dealAddSentimentData(newTopic,topicParams);
                             } else {
                                 this.compareNums=[];
+                                this.setAnalyticsSourceData(this.compareNums)
                                 var oldTopic = _.difference(oldVal, val);
                                 this.VariableChartData.all=_.omit(this.VariableChartData.all,oldTopic[0].topic_name);
                                 this.VariableChartData.wechat=_.omit(this.VariableChartData.wechat,oldTopic[0].topic_name);
@@ -658,11 +663,12 @@
                         }else {
                             //这里对空数据做出判断
                             this.compareNums=[];
+                            this.setAnalyticsSourceData(this.compareNums)
                             const newTopic = val;
                             let topicParams = {
                                 topic_id:_.isEmpty(newTopic) ? '' : newTopic[0].topic_id,
                                 subtopic:this.compareSubTopic,
-                                source:this.compareSource,
+                                source:this.analyticsSource,
                                 start:this.compareStart,
                                 end:this.compareEnd,
                                 time_dimension:this.compareTimeRange<=7 ? 0 :1
@@ -678,9 +684,9 @@
                     }
                 }
             },
-            compareSource:{
+            analyticsSource:{
                 handler(){
-                    console.log(this.compareSource);
+                    console.log(this.analyticsSource);
                     //判断修改后的源
                     this.changeSource();
                     //展示修改后的源,刷新
@@ -701,7 +707,7 @@
             VariableChartData:{
                 deep:true,
                 handler(){
-                    const source = this.compareSource;
+                    const source = this.analyticsSource;
                     this.data = this.VariableChartData[source];
                     this.radarData = this.VariableRadarData[source];
                 }

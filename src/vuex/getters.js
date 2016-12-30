@@ -130,8 +130,8 @@ export const analyticsTimePopUp = state => {
 	return state.analytics.timePopUp;
 };
 
-export const analyticsAddTopic = state => {
-	return state.analytics.addTopic;
+export const analyticsSourceData = state => {
+	return state.analytics.changeSourceData;
 };
 /**
  * Compare

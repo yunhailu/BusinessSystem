@@ -1,5 +1,5 @@
 <template>
-    <tabs :actions="actions" :datas="sentimentNums"></tabs>
+    <!--<tabs :actions="actions" :datas="sentimentNums"></tabs>-->
     <!--<span>Sentiment</span>-->
     <div class="sentiment-overflow">
         <div class="charts">
@@ -38,8 +38,8 @@
     import Local from "../../local/local";
     import {Chart, Pie} from '../../config/config';
     import * as Api from '../../widgets/Api';
-    import {analyticsTimePopUp,analyticsSubTopicId, analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic, analyticsDateChange, analyticsStart, analyticsEnd, activeAnalyticsTopic, analyticsRefreshTopic } from '../../vuex/getters';
-    import {setAnalyticsTimePopUp,setAnalyticsEnd,setAnalyticsStart} from '../../vuex/actions';
+    import {analyticsSourceData,analyticsTimePopUp,analyticsSubTopicId, analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic, analyticsDateChange, analyticsStart, analyticsEnd, activeAnalyticsTopic, analyticsRefreshTopic } from '../../vuex/getters';
+    import {setAnalyticsSourceData,setAnalyticsTimePopUp,setAnalyticsEnd,setAnalyticsStart} from '../../vuex/actions';
 
 
     export default{
@@ -194,14 +194,27 @@
             }
         },
         vuex: {
-            getters: {analyticsTimePopUp,analyticsSubTopicId, analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic, analyticsDateChange, analyticsStart, analyticsEnd, activeAnalyticsTopic, analyticsRefreshTopic },
-            actions:{setAnalyticsTimePopUp,setAnalyticsEnd,setAnalyticsStart}
+            getters: {analyticsSourceData,analyticsTimePopUp,analyticsSubTopicId, analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic, analyticsDateChange, analyticsStart, analyticsEnd, activeAnalyticsTopic, analyticsRefreshTopic },
+            actions:{setAnalyticsSourceData,setAnalyticsTimePopUp,setAnalyticsEnd,setAnalyticsStart}
         },
         methods: {
             confirm(){
                 this.showSmallTips=false;
             },
-            actions(val, idx){
+            drawCharts(){
+                const source = this.analyticsSource;
+                this.sentimentPieOption.series[0].data =[
+                    {value:_.reduce(this.lineData[source].happy,(mome, val) => mome + val, 0), name:this.sentiment.happy},
+                    {value:_.reduce(this.lineData[source].anger,(mome, val) => mome + val, 0), name:this.sentiment.anger},
+                    {value:_.reduce(this.lineData[source].sorrow,(mome, val) => mome + val, 0), name:this.sentiment.sorrow},
+                    {value:_.reduce(this.lineData[source].disgust,(mome, val) => mome + val, 0), name:this.sentiment.disgust},
+                    {value:_.reduce(this.lineData[source].fear,(mome, val) => mome + val, 0), name:this.sentiment.fear}
+                ];
+                _.each(this.lineData[source], (value, key) => {
+                    this.sentimentBarOption.series[this.sentimentMap[key]].data = value;
+                });
+            },
+            /*actions(val, idx){
                 let source = "";
                 switch(idx){
                     case 0:
@@ -244,7 +257,7 @@
                 });
                 //this.getCommentList();
 
-            },
+            },*/
             clickChartAction(opts){
                 this.loadingParams.visiable = true;
                 const topic_id = this.activeAnalyticsTopic.topic_id,
@@ -298,6 +311,7 @@
             },
             getSentimentDetail(){
                 this.sentimentNums=[];
+                this.setAnalyticsSourceData(this.sentimentNums);
                 const topic_id = this.activeAnalyticsTopic.topic_id,
                         subtopic = this.analyticsSubTopic,
                         source = this.analyticsSource,
@@ -317,6 +331,7 @@
                         const _this = this;
                         this.initData();
                         this.sentimentNums=[];
+                        this.setAnalyticsSourceData(this.sentimentNums);
                         let all = {happy: [], anger:[], sorrow:[], disgust:[], fear:[]};
                         _.each(details, (detail, index) => {
                             _.each(detail.values, (value, key) => {
@@ -345,21 +360,7 @@
                         //this.sentimentChartLoading = false;
                         this.sentimentPieLoading = false;
                         this.sentimentBarOption.xAxis.data = this.x;
-                        this.actions("", 0);
-
-                        _.each(_.pairs(this.lineData),(value,index) =>{
-                            console.log(this.lineData[index]);
-                            console.log(_.pairs(value));
-                            this.sentimentNums[index]=_.reduce( _.reduce(_.map(_.pairs(value[1]),arr=>{
-                                        return arr[1]
-                                    }),function(a,b){return a.concat(b);},[])
-                                    ,function (memo,num) {
-                                return memo+num;
-                            },0)
-                        });
-                        this.sentimentNums.pop();
-                        console.log(this.sentimentNums)
-                       /* const allNums=_.reduce(this.lineData.all.happy,(mome, val) => mome + val, 0)+_.reduce(this.lineData.all.anger,(mome, val) => mome + val, 0)
+                       const allNums=_.reduce(this.lineData.all.happy,(mome, val) => mome + val, 0)+_.reduce(this.lineData.all.anger,(mome, val) => mome + val, 0)
                                 +_.reduce(this.lineData.all.sorrow,(mome, val) => mome + val, 0)+_.reduce(this.lineData.all.disgust,(mome, val) => mome + val, 0)
                                 +_.reduce(this.lineData.all.fear,(mome, val) => mome + val, 0);
                         const wechatNums=_.reduce(this.lineData.wechat.happy,(mome, val) => mome + val, 0)+_.reduce(this.lineData.wechat.anger,(mome, val) => mome + val, 0)
@@ -388,7 +389,11 @@
                             webNums,
                             overseasNums
                         ];
-                        console.log(this.sentimentNums)*/
+                        this.setAnalyticsSourceData(this.sentimentNums);
+                        console.log(this.analyticsSourceData);
+                        console.log(this.sentimentNums)
+                        /* console.log(this.sentimentNums)*/
+                        this.drawCharts();
                     }else if(resp.data.code == 1004){
                         if(time_interval==0){
                             this.sentimentBarLoading = false;
@@ -531,6 +536,7 @@
                 handler(val){
                     //this.loadingParams.visiable = true;
                     this.getCommentList();
+                    this.drawCharts();
                 }
             },
             sortVal: {

@@ -1,5 +1,5 @@
 ﻿<template>
-    <tabs :datas="influancerNums"></tabs>
+    <!--<tabs :datas="influancerNums"></tabs>-->
     <!--<span>Influence</span>-->
     <div class="influence-overflow">
         <div class="popular">
@@ -65,7 +65,7 @@
     import PopList from './PopList/PopList.vue';
     import Tips from '../Common/Tips/Tips.vue';
     import { analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic, analyticsDateChange, analyticsStart, analyticsEnd, activeAnalyticsTopic } from '../../vuex/getters';
-    import {setAnalyticsEnd,setAnalyticsStart} from '../../vuex/actions';
+    import {setAnalyticsSourceData,setAnalyticsEnd,setAnalyticsStart} from '../../vuex/actions';
 
     export default{
         data(){
@@ -94,7 +94,7 @@
         },
         vuex: {
             getters: {analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic, analyticsDateChange, analyticsStart, analyticsEnd, activeAnalyticsTopic},
-            actions: {setAnalyticsEnd,setAnalyticsStart}
+            actions: {setAnalyticsSourceData,setAnalyticsEnd,setAnalyticsStart}
         },
         watch: {
           /*  nowTime:{
@@ -362,6 +362,7 @@
                 });
             },
             init(){
+                this.setAnalyticsSourceData(this.influancerNums);
                 this.getPopularList();
                 this.getInfluenceList();
 

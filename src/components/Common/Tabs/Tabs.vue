@@ -13,14 +13,14 @@
     import _ from 'underscore';
     import Local from '../../../local/local';
     import AddDashboard from '../../AddDashboard/AddDashboard.vue'
-    import {activeAnalyticsTopic,analyticsResetSearch,analyticsSubTopicId,analyticsRefreshTopic,analyticsDateChange, analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic } from '../../../vuex/getters';
-    import { setAnalyticsType, setAnalyticsTimeRange, setAnalyticsSource, setAnalyticsSubTopic } from "../../../vuex/actions";
+    import {analyticsSourceData,activeAnalyticsTopic,analyticsResetSearch,analyticsSubTopicId,analyticsRefreshTopic,analyticsDateChange, analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic } from '../../../vuex/getters';
+    import {setAnalyticsSourceData, setAnalyticsType, setAnalyticsTimeRange, setAnalyticsSource, setAnalyticsSubTopic } from "../../../vuex/actions";
 
     export default{
-        props: ['active', 'actions', 'sourceactive', 'datas'],
+        props: ['active', 'actions', 'sourceactive'],
         vuex: {
-            actions: { setAnalyticsType, setAnalyticsTimeRange, setAnalyticsSource, setAnalyticsSubTopic },
-            getters: {activeAnalyticsTopic,analyticsSubTopicId,analyticsResetSearch,analyticsRefreshTopic,analyticsDateChange, analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic }
+            actions: {setAnalyticsSourceData,setAnalyticsType, setAnalyticsTimeRange, setAnalyticsSource, setAnalyticsSubTopic },
+            getters: {analyticsSourceData,activeAnalyticsTopic,analyticsSubTopicId,analyticsResetSearch,analyticsRefreshTopic,analyticsDateChange, analyticsType, analyticsTimeRange, analyticsSource, analyticsSubTopic }
         },
 
         data(){
@@ -71,7 +71,8 @@
                     { name: words.source[4] },
                     { name: words.source[5] }
                 ],
-                sourceActive: 0
+                sourceActive: 0,
+                datas:[]
 //                filters: [{
 //                    name: words.filters[0],
 //                    value: 1
@@ -79,6 +80,17 @@
             }
         },
         watch:{
+            analyticsSourceData:{
+               handler(val){
+                   this.datas = val;
+               }
+            },
+            analyticsType:{
+                handler(val){
+                    this.sourceActive=0;
+                    this.setAnalyticsSource('all');
+                }
+            },
             activeAnalyticsTopic:{
                 handler(val){
                     this.sourceActive=0;
@@ -123,7 +135,7 @@
             sourceAction(val, idx){
                 console.log(val, idx, this.$route);
                 this.sourceActive = idx;
-                this.actions && this.actions(val, idx);
+                //this.actions && this.actions(val, idx);
                 const source = ["all", "wechat", "weibo", "client", "web", "overseas","sengine"];
                 if(this.$route.path.indexOf('analytics') > -1){
                     this.setAnalyticsSource(source[idx]);
