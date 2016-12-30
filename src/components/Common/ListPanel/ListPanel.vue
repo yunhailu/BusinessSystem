@@ -21,7 +21,7 @@
                         <a class="btn btn-default list-panel-tools-flag-item" href="javascript:void(0);" @click="setSentiment('neutral')" :class="[sentimentActive == 'neutral' ? 'active' : '']">{{words.neutral}}</a>
                     </div>
                 </div>
-                <div class="row-right">
+                <div class="row-right-list">
                     <div class="btn-group list-panel-tools-filter">
                         <a class="btn btn-default list-panel-tools-filter-item" href="javascript:void(0);" @click="setCount(5);" :class="[filterActive == 5 ? 'active' : '']"> 前5篇</a>
                         <a class="btn btn-default list-panel-tools-filter-item" href="javascript:void(0);" @click="setCount(20)" :class="[filterActive == 20 ? 'active' : '']">前20篇</a>

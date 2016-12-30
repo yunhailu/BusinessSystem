@@ -236,6 +236,7 @@
     import _ from 'underscore';
     import HeaderComponent from '../Header/Header.vue';
     import Local from '../../local/local';
+    import Cookie from 'js-cookie';
     import { getCookie } from '../../widgets/Cookie';
     import { formatSize } from '../../widgets/Util';
     import * as Api from '../../widgets/Api';
@@ -414,14 +415,16 @@
                 console.log('params' , params);*/
                 Api.nodifyUser( params ).then(resp => {
                     if(resp.data.code == 0 && resp.data.data.success == 1){
+                        Cookie.set('business_name',params.username);
+                        Cookie.set('business_email',params.email);
                         this.successTip = '用户信息修改成功';
                         this.addSuccessTip = true;
                         setTimeout(function () {
                             this.successTip='';
                             this.addSuccessTip = false;
                             this.showMine('showMsg');
+                            window.location.reload();
                         }.bind(this),1000)
-                        this.getUserInfo();
                     }
                     if(resp.data.code == 100){
                             this.tip=resp.data.message;
@@ -451,7 +454,7 @@
                         this.userInfo.avatar = detail.avatar;
                         this.userInfo.email = detail.email;
                         this.userInfo.phone = detail.phone;
-                        this.setHeaderName( this.userInfo.username);
+                        //this.setHeaderName( this.userInfo.username);
                         console.log(this.userInfo);
                     }
                 })
