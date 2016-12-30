@@ -78,8 +78,9 @@
                     legend: {
                         data:[]
                     },
-                    grid: Chart.grid,
                     toolbox: Chart.toolbox,
+                    dataZoom: _.extend({}, Chart.dataZoom),
+                    grid: _.extend({}, Chart.grid, { bottom: '40rem' }),
                     color: _.extend([], Chart.color),
                     xAxis: _.extend({}, Chart.xAxis, {
                         type : 'category',
