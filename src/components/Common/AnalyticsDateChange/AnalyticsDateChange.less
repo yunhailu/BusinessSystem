@@ -1,11 +1,12 @@
 @import "../../common.less";
 
 .row-right{
-  .disTC();.w(600px);vertical-align: middle;
+  .disT();.w(100%);vertical-align: middle;.bgc(#fff);.h(24px);
   .days-btn{
-    .h(24px); .float-left();  .w(250px);.mg-left(30px);
+    .monitor-word{}
+    .h(24px); .float-left();  .w(100%);.mg-left(10px);
     li{
-      .disIB();  .lh(24px);  .pd(0 3px);  .pointer();  .br(4px);  .c(@word);.pr();
+      .disTC();  .lh(24px);  .pd(0 10px);  .pointer();  .br(4px);  .c(@word);.pr();
       .smalltip{.pa();display: none; .top(30px);}
     }
     li:hover .smalltip{

@@ -2,34 +2,11 @@
     <div class="row tools">
         <div class="row-left" v-if="trim(search) == ''">{{analytics.monitor}}:{{showName}}</div>
         <div class="row-left" v-if="trim(search) !=''">{{analytics.monitor}}:{{showName}}+{{search}}</div>
-        <div class="row-middle">
             <div class="search">
                 <input class="search-input" placeholder="子话题搜索" v-model="search" @keyup.enter="searchAction" />
                 <span class="search-btn" @click="searchAction"><i class="fa fa-search"></i></span>
             </div>
         </div>
-      <!--  <div class="row-right">
-            <ul class="days-btn">
-                <li>监测区间: </li>
-                <li @click="selectTime(0.33);" :class="[selectTimeTag == 0.33 ? 'active' : '']" class="active">8小时</li>
-                <li @click="selectTime(1);" :class="[selectTimeTag == 1 ? 'active' : '']">1天</li>
-                <li @click="selectTime(7);" :class="[selectTimeTag == 7 ? 'active' : '']">7天</li>
-                <li @click="selectTime(30);" v-if="timePay ===0" :class="[selectTimeTag == 30 ? 'active' : '']"> 30天
-                    <smalltip :title = 'analytics.tips' class="smalltip"></smalltip>
-                </li>
-                <li @click="selectTime(30);" v-if="timePay !== 0"  :class="[selectTimeTag == 30 ? 'active' : '']"> 30天</li>
-                <li @click="selectTime(0);"  v-if="timePay !== 2"  :class="[selectTimeTag == 0 ? 'active' : '']">自定义
-                    <smalltip :title = 'analytics.tips' class="smalltip"></smalltip>
-                </li>
-                <li @click="selectTime(0);"  v-if="timePay ===2"  :class="[selectTimeTag == 0 ? 'active' : '']">自定义</li>
-            </ul>
-            <div class="diyDate" v-show="isTimeDiy">
-                <span class="date" @click="showCalendar"><i class="fa fa-calendar  icon"></i> {{dateVal}}</span>
-                <calendar :show.sync="cal.show" :value.sync="dateVal" :x="cal.x" :y="cal.y" :begin.sync="cal.begin" :end.sync="cal.end" :type="cal.type" :range="cal.range"></calendar>
-            </div>
-            <div class="row-null"></div>
-        </div>-->
-    </div>
 </template>
 <style lang="less">
     @import "AnalyticsDate.less";

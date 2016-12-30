@@ -1,7 +1,7 @@
 <template>
     <div class="row-right">
         <ul class="days-btn">
-            <li>监测区间: </li>
+            <li class="monitor-word">监测区间: </li>
             <li @click="selectTime(0.33);" :class="[selectTimeTag == 0.33 ? 'active' : '']" class="active">8小时</li>
             <li @click="selectTime(1);" :class="[selectTimeTag == 1 ? 'active' : '']">1天</li>
             <li @click="selectTime(7);" :class="[selectTimeTag == 7 ? 'active' : '']">7天</li>
