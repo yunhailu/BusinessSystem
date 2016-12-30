@@ -124,11 +124,7 @@
                 }
             }
         },
-        headerName:{
-            handler(val){
-                this.nickName=val;
-            }
-        }
+
         /*route: {
             data(){
                 this.init();

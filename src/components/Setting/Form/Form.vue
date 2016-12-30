@@ -290,7 +290,7 @@
                         this.radioVal = "";
                         this.threshold="";
                         this.setAnalyticsAddTopic(newObj);
-                        const name='summary';
+                        const name='summarylist';
                         this.$router.go({name});
                     }
                 });

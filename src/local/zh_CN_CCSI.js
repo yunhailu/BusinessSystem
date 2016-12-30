@@ -52,7 +52,7 @@ export const zh_CN_CCSI = _.extend({}, zh_CN,{
         reports: "预警监测",
         setting: "监测设置",
         forUse:"使用指南",
-        summary:"信息汇总",
+        summary:"实时信息",
         intelligent:"智能分析",
         quit: "退出"
     },
@@ -77,7 +77,7 @@ export const zh_CN_CCSI = _.extend({}, zh_CN,{
         allNetHotsRiver:"实时热点态势"
     },
     analytics: {
-        tabs: ["关注分析","印象分析", "意见领袖", "评价分析", "情绪分析","比较分析"],
+        tabs: ["态势分析","印象分析", "意见领袖", "评价分析", "情绪分析","比较分析"],
         filters: ["全部", "情绪指数", "地域分布", "性别分布", "语言分布"],
         source: ["全部", "微信", "微博", "客户端", "网页", "海外"],
         addDashboard: "添加快捷报告",

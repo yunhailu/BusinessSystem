@@ -75,8 +75,9 @@
                     isToggle: true,
                     title: _.extend({}, Chart.title, { show: false}),
                     tooltip: Chart.tooltip,
-                    grid: Chart.grid,
                     toolbox: Chart.toolbox,
+                    dataZoom: _.extend({}, Chart.dataZoom),
+                    grid: _.extend({}, Chart.grid, { bottom: '40rem' }),
                     color:['#111844','#2FCC71', '#F1C40F', '#d78b40', '#3598DC','#E64D3D'],
                     xAxis: _.extend({}, Chart.xAxis, {
                         type : 'category',  //category

@@ -97,13 +97,6 @@
         vuex:{
             getters:{headerName}
         },
-        watch:{
-            headerName:{
-                handler(val){
-                    this.nickName=val;
-                }
-            }
-        },
         methods: {
             quit(){
                 const business_name = getCookie('business_name');
