@@ -52,7 +52,7 @@ export const zh_CN_society = _.extend({}, zh_CN, {
         reports: "预警监测",
         setting: "监测设置",
         forUse:"使用指南",
-        summary:"信息汇总",
+        summary:"实时信息",
         intelligent:"智能分析",
         quit: "退出"
     },

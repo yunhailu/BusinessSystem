@@ -27,7 +27,7 @@
     import * as Api from "../../../widgets/Api";
     import Local from "../../../local/local";
     import { getCookie } from '../../../widgets/Cookie';
-    import { topicList, activeSummaryTopic } from '../../../vuex/getters';
+    import { analyticsAddTopic,topicList, activeSummaryTopic } from '../../../vuex/getters';
     import { setTopicList, setActiveSummaryTopic } from "../../../vuex/actions";
 
     export default{
@@ -47,7 +47,7 @@
         },
         vuex: {
             actions: { setTopicList, setActiveSummaryTopic },
-            getters: { topicList, activeSummaryTopic }
+            getters: {analyticsAddTopic, topicList, activeSummaryTopic }
         },
         computed: {
             list(){
@@ -111,6 +111,14 @@
             },
             init(){
                 this.getTopics();
+            }
+        },
+        watch:{
+            analyticsAddTopic:{
+                handler(val){
+                    this.getTopics();
+                    this.setActiveSummaryTopic(val);
+                }
             }
         },
         ready(){
