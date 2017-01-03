@@ -8,7 +8,7 @@
             </div>
         </div>
 </template>
-<style lang="less">
+<style lang="less" scoped>
     @import "AnalyticsDate.less";
 </style>
 <script  type="text/ecmascript-6">
