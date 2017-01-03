@@ -22,6 +22,11 @@ export const WhiteList = [{
     link: 'society',
     domain: 'http://www.wordemotion.com'
 },{
+    title: "发改舆情大数据综合平台",
+    local: 'zh_CN_develop',
+    link: 'develop',
+    domain: 'http://develop.wordemotion.com'
+},{
     title: "沃德媒商气象站",
     local: 'zh_CN_mediaq',
     link: 'mediaq',
