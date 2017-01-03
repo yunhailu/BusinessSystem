@@ -215,6 +215,12 @@ module.exports = {
             require(['../components/SocietyLogin/SocietyLogin.vue'], resolve);
         }
     },
+    '/develop': {
+        name: 'develop',
+        component (resolve) {
+            require(['../components/DevelopLogin/DevelopLogin.vue'], resolve);
+        }
+    },
     '/mediaq': {
         name: 'mediaq',
         component (resolve) {
