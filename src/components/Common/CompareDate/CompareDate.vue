@@ -1,11 +1,10 @@
 <template>
     <div class="row comTools">
-
-                        <div class="search">
-                            <input class="search-input" placeholder="搜索" v-model="search" @keyup.enter="searchAction"/>
-                            <span class="search-btn" @click="searchAction"><i class="fa fa-search"></i></span>
-                        </div>
-                </div>
+            <div class="search">
+                <input class="search-input" placeholder="搜索" v-model="search" @keyup.enter="searchAction"/>
+                <span class="search-btn" @click="searchAction"><i class="fa fa-search"></i></span>
+            </div>
+    </div>
 </template>
 <style lang="less">
     @import "CompareDate.less";

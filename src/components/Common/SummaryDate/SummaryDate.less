@@ -1,0 +1,25 @@
+@import "../../common.less";
+
+.row-right{
+  .disT();.w(100%);vertical-align: middle;.bgc(#fff);.h(24px);.mg-top(10px);.pd-top(5px);.pd-bottom(5px);
+  .days-btn{
+    .h(24px); .float-left();  .w(250px);.mg-left(20px);
+    li{
+      .disIB();  .lh(24px);  .pd(0 3px);  .pointer();  .br(4px);  .c(@word);.pr();
+      .smalltip{.pa();display: none; .top(30px);}
+    }
+    li:hover .smalltip{
+      display: block;
+    }
+    li.active{ .bgc(@body-theme);  .c(white);  }
+  }
+  .diyDate{
+    .mg-left(125px);
+    .date{
+      .icon{
+        .float-left();  .lh(24px);  .pd(0 7px);
+      }
+      .w(100%);  .h(24px);  .lh(24px);  .c(@word);  .tc();  .disB();  .bgc(#f3f3f3);  .br(2px);
+    }
+  }
+}

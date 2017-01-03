@@ -1,5 +1,7 @@
 <template>
+    <summary-date></summary-date>
     <ul class="row items source">
+        <li class="item">数据来源:</li>
         <li v-for="(index, item) in source" class="item" :class="[sourceActive == $index ? 'active' : '']" @click="sourceAction(item, $index)">
             <!--<span class="con">{{item.name}} {{datas[index] | showNum datas}}<i class="fa fa-spinner fa-spin" v-show="!datas.length"></i></span>-->
             <span class="con">{{item.name | showNum datas[index] datas}}<i class="fa fa-spinner fa-spin" v-show="!datas.length"></i></span>
@@ -12,6 +14,7 @@
 <script type="text/ecmascript-6">
     import _ from 'underscore';
     import Local from '../../../local/local';
+    import SummaryDate from '../../Common/SummaryDate/SummaryDate.vue'
     import AddDashboard from '../../AddDashboard/AddDashboard.vue'
     import {activeSummaryTopic,summaryResetSearch,summarySubTopicId,summaryRefreshTopic,summaryDateChange, summaryType, summaryTimeRange, summarySource, summarySubTopic } from '../../../vuex/getters';
     import { setSummaryType, setSummaryTimeRange, setSummarySource, setSummarySubTopic } from "../../../vuex/actions";
@@ -138,7 +141,7 @@
                 return value;
             }
         },
-        components:{ AddDashboard },
+        components:{ AddDashboard ,SummaryDate},
 //        route: {
 //            data(){
 //

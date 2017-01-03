@@ -22,7 +22,7 @@
     </div>
 </template>
 
-<style lang="less">
+<style lang="less" scoped>
     @import "AnalyticsDateChange.less";
 </style>
 <script  type="text/ecmascript-6">
