@@ -1,7 +1,7 @@
 <template>
     <header-component active="reports"></header-component>
 
-    <div class="reports  ">
+    <div class="reports">
 
     <div class="reports-wrap">
         <menu-component></menu-component>

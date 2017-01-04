@@ -5,16 +5,19 @@
 
 .divDashBox{
   /*overflow: hidden;*/
+  .mw(1250px);
+  overflow: hidden;
+  background-color: #e9e9e9;
   min-height: 100%;
-  background-color: #f9f9f9;
+  //height:100%;
+  padding: 20px 100px 0;
 }
 
 .dashboard-panel{
-  .pa();  .top(@h);  .bottom(0);  .left(0);  .right(0);
-  .bgc(@bg-color);  overflow: auto;
+  .c(#fff);.w(100%);.h(100%);
 
   &-wrap {
-    .pa();  .w(100%);  .h(auto);  .pd(10px);
+    /*.pa();  .w(100%);  .h(auto); */ .pd(10px);
 
     &-dashboard{
       .pd(20px);
