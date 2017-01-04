@@ -29,21 +29,7 @@
                 analytics,
                 search: '',
                 showName:'',
-                timePay:parseInt(getCookie('business_level')) || 0,
-                dateVal: `${ moment().subtract(8, 'hour').format('YYYY-MM-DD HH')} ~ ${moment().format('YYYY-MM-DD HH')}`,
-                cal: {
-                    show: false,
-                    type: "date", //date datetime
-                    begin: moment().subtract(8, 'hour').format('YYYY-MM-DD HH'),
-                    end: moment().format('YYYY-MM-DD HH'),
-                    x: 0,
-                    y: 0,
-                    range:true//是否多选
-                },
-                selectTimeTag: 0.33,
-                isTimeDiy: false,
-                tabActive: 'result',
-                isCompare:false
+                tabActive: 'result'
             }
         },
         vuex: {
@@ -91,78 +77,6 @@
                     this.setAnalyticsSubTopicId(0);
                 }
             },
-            selectTime(num){
-                //this.selectTimeTag = num;
-                if(num == 0){
-                    if(this.timePay !==2){
-                        return ;
-                    }else {
-                        this.isTimeDiy = true;
-                        this.dateVal = this.analyticsStart + ' ~ ' + this.analyticsEnd;
-                    }
-                    //this.selectTimeTag = num;
-
-                } else if(num ==0.33){
-                    this.selectTimeTag = num;
-                    this.isTimeDiy = false;
-                    this.setAnalyticsTimeRange(0.33);
-                    this.setAnalyticsTimePopUp(0.33);
-                    let start = moment().subtract(8,"hour").format("YYYY-MM-DD HH");
-                    let end = moment().format("YYYY-MM-DD HH");
-                    start = start.split(" ")[0] + "T" + start.split(" ")[1];
-                    end = end.split(" ")[0] + "T" + end.split(" ")[1];
-                    this.setAnalyticsStart(start);
-                    this.setAnalyticsEnd(end);
-                    //可以精确到小时
-                    this.setAnalyticsDateChange(this.analyticsDateChange + 1);
-                }else if(num == 30){
-                    if(this.timePay === 0){
-                        return ;
-                    }else {
-                        this.selectTimeTag = num;
-                        this.isTimeDiy = false;
-                        this.setAnalyticsTimeRange(num);
-                        this.setAnalyticsTimePopUp(num);
-                        this.setAnalyticsStart(moment().subtract(num, 'days').format('YYYY-MM-DD'));
-                        this.setAnalyticsEnd(moment().format('YYYY-MM-DD'));
-                        this.setAnalyticsDateChange(this.analyticsDateChange + 1);
-                    }
-
-                }else{
-                    this.selectTimeTag = num;
-                    this.isTimeDiy = false;
-                    this.setAnalyticsTimeRange(num);
-                    this.setAnalyticsTimePopUp(num);
-                    this.setAnalyticsStart(moment().subtract(num, 'days').format('YYYY-MM-DD'));
-                    this.setAnalyticsEnd(moment().format('YYYY-MM-DD'));
-                    this.setAnalyticsDateChange(this.analyticsDateChange + 1);
-
-
-                }
-            },
-            showCalendar:function(e){
-                e.stopPropagation();
-                var that = this;
-                that.cal.show = true;
-                that.cal.x = e.target.offsetLeft - 100;
-                that.cal.y = e.target.offsetTop+e.target.offsetHeight+8;
-                var bindHide = function(e){
-                    e.stopPropagation();
-                    that.cal.show = false;
-                    document.removeEventListener('click',bindHide,false);
-                };
-                setTimeout(function(){
-                    document.addEventListener('click',bindHide,false);
-                },500);
-            },
-            init(){
-                const start = moment(this.cal.begin, "YYYY-MM-DD");
-                const end = moment(this.cal.end, "YYYY-MM-DD");
-                const days = end.diff(start)/1000/3600/24;
-                this.setAnalyticsStart(this.cal.begin);
-                this.setAnalyticsEnd(this.cal.end);
-                this.setAnalyticsTimeRange(days);
-            },
             trim(str){
                 return str.replace(/(^\s*)|(\s*$)/g,'');
             }
@@ -182,11 +96,6 @@
                     }
                 }
             },
-            analyticsTimePopUp:{
-                handler(val){
-                    this.selectTime(val);
-                }
-            },
             analyticsResetSearch:{
                 handler(val){
                     if(val == true){
@@ -195,42 +104,10 @@
                         this.setAnalyticsSubTopic(this.search);
                     }
                 }
-            },
-            activeAnalyticsTopic:{
-                handler(val){
-                    this.showName = (this.activeAnalyticsTopic).topic_name;
-                    this.selectTimeTag = 0.33;
-                    let start = moment().subtract(8,"hour").format("YYYY-MM-DD HH");
-                    let end = moment().format("YYYY-MM-DD HH");
-                    start = start.split(" ")[0] + "T" + start.split(" ")[1];
-                    end = end.split(" ")[0] + "T" + end.split(" ")[1];
-                    this.setAnalyticsStart(start);
-                    this.setAnalyticsEnd(end);
-                    this.setAnalyticsTimePopUp(0.33);
-                }
-            },
-            dateVal: {
-                handler(val){
-                    const start = moment(val.split(' ~ ')[0], "YYYY-MM-DD");
-                    const end = moment(val.split(' ~ ')[1], "YYYY-MM-DD");
-                    const currentData = moment().format('YYYY-MM-DD');
-                    if(moment(end)>moment(currentData)){
-                        alert('请求区间错误,返回最近7天对比数据');
-                        this.dateVal =  `${ moment().subtract(7, 'days').format('YYYY-MM-DD')} ~ ${moment().format('YYYY-MM-DD')}`;
-                        this.selectTime(7);
-                        return ;
-                    }
-                    const days = end.diff(start)/1000/3600/24;
-                    this.setAnalyticsStart(val.split(' ~ ')[0]);
-                    this.setAnalyticsEnd(val.split(' ~ ')[1]);
-                    this.setAnalyticsTimeRange(days);
-                    this.setAnalyticsDateChange(this.analyticsDateChange + 1);
-                }
             }
         },
         ready(){
             this.showName=this.activeAnalyticsTopic.topic_name;
-            this.init();
         },
         route: {
             data(){

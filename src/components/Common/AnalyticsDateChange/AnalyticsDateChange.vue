@@ -126,7 +126,6 @@
                     this.selectTimeTag = num;
                     this.isTimeDiy = false;
                     this.setAnalyticsTimeRange(0.33);
-                    this.setAnalyticsTimePopUp(0.33);
                     this.setCompareTimeRange(0.33);
                     let start = moment().subtract(8,"hour").format("YYYY-MM-DD HH");
                     let end = moment().format("YYYY-MM-DD HH");
@@ -147,7 +146,6 @@
                         this.selectTimeTag = num;
                         this.isTimeDiy = false;
                         this.setAnalyticsTimeRange(num);
-                        this.setAnalyticsTimePopUp(num);
                         this.setAnalyticsStart(moment().subtract(num, 'days').format('YYYY-MM-DD'));
                         this.setAnalyticsEnd(moment().format('YYYY-MM-DD'));
                         this.setAnalyticsDateChange(this.analyticsDateChange + 1);
@@ -162,7 +160,6 @@
                     this.selectTimeTag = num;
                     this.isTimeDiy = false;
                     this.setAnalyticsTimeRange(num);
-                    this.setAnalyticsTimePopUp(num);
                     this.setAnalyticsStart(moment().subtract(num, 'days').format('YYYY-MM-DD'));
                     this.setAnalyticsEnd(moment().format('YYYY-MM-DD'));
                     this.setAnalyticsDateChange(this.analyticsDateChange + 1);

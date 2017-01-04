@@ -4,7 +4,7 @@
 import _ from 'underscore';
 import { zh_CN } from './zh_CN';
 
-export const zh_CN_develop = _.extend({}, zh_CN, {
+export const zh_CN_star = _.extend({}, zh_CN, {
     apply:{
         apply:"申请试用",
         toLogin:"已有账号，请点此登陆",
@@ -26,11 +26,11 @@ export const zh_CN_develop = _.extend({}, zh_CN, {
         getBack:"找回密码",
         submit:"登 录",
         forConsume:"为了更好的消费",
-        forSociety:"这里有您看不到的...",
+        forStar:"这里有您看不到的...",
         forParams1:"沃德品牌气象站是公司利用情绪大数据模型开发的“品牌价值互联网监测评价系统”。企业品牌价值的核心在于用户满意度，公司通过对全互联网情绪数据的分析，精确和实时计算知名产品、知名品牌、知名企业的用户满意度和交易量，从而为企业决策提供最精准的参考意见。",
-        forCcsiTitle:"中国消费者情绪指数",
-        forCcsiTitleE:"CCSI    China Consumer Sentiment Index",
-        forWodeTitle:" 发改舆情大数据综合平台",
+        forStarTitle:"沃德精美明星气象站",
+        forStarTitleE:"CCSI    China Consumer Sentiment Index",
+        forWodeTitle:" 网络舆情实时监测与智能分析大数据平台",
         instructionForUse:"使用说明",
         forLogin:"登录",
         forFirstPage:"首页",
@@ -41,10 +41,10 @@ export const zh_CN_develop = _.extend({}, zh_CN, {
     footer:{
         coppy:"京ICP备14046778号-5 联系电话：010-61934324 版权所有:沃民高新科技（北京）股份有限公司 ",
         phone:"联系电话：010-88315479 ",
-        cooperation:"国家发改委中国发展网舆情中心，沃民高新科技(北京)股份有限公司联合开发。"
+        cooperation:"沃民高新科技（北京）股份有限公司、工信部电子科技情报所网络舆情研究中心联合开发"
     },
     header: {
-        title: "发改舆情数据平台",
+        title: "沃德精美明星气象站",
         home: "热点事件",
         analytics: "智能分析",
         dashboard: "报告生成",
@@ -226,7 +226,7 @@ export const zh_CN_develop = _.extend({}, zh_CN, {
         client: "客户端",
         web: "网页",
         overseas: "海外",
-        source:"发改舆情大数据综合平台",
+        source:"沃德精美明星气象站",
         happy: "高兴",
         anger: "愤怒",
         sorrow: "悲伤",

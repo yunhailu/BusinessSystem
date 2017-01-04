@@ -303,7 +303,7 @@
                             this.commentPieLoading2= false;
                             this.loadingParams.visiable = false;
                             this.setAnalyticsTimePopUp(7);
-                        }else {
+                        }else if(time_interval==7) {
                             this.commentBarOption.series = [
                                 { name: this.words.positive, type: 'line',
                                     data: [] },

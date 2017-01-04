@@ -1015,6 +1015,7 @@
                 });
             },
             getWordCloud(){
+                this.themeWordOption.series.data=[];
                 const topic_id = this.activeAnalyticsTopic.topic_id,
                         topic = this.activeAnalyticsTopic.topic_name,
                         subtopic = this.analyticsSubTopic,
@@ -1030,11 +1031,12 @@
                 }
 //                        end = this.analyticsEnd,
 //                        start = this.analyticsStart;
-                return Api.getWordCloud({topic_id, topic, subtopic, source, start, end, time_dimension}).then(resp => {
+                Api.getWordCloud({topic_id, topic, subtopic, source, start, end, time_dimension}).then(resp => {
                     //console.log('getWordCloud',resp);
                     this.loadingParams.visiable = false;
                     if(resp.data.code == 0){
                         this.themeWordLoading = false;
+                        this.themeWordOption.series.data=[];
                         this.themeWordOption.series.data = resp.data.data;
 
                         const bestList = _.chain(resp.data.data).filter((item, index) => (index <= 20)).sortBy('value').value();

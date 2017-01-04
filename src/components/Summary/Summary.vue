@@ -44,10 +44,10 @@
         data(){
             const analytics = Local().analytics;
             return{
-                timePay:parseInt(getCookie('business_level')) || 0,
+                //timePay:parseInt(getCookie('business_level')) || 0,
                 analytics,
                 search: '',
-                dateVal: `${ moment().subtract(8, 'hour').format('YYYY-MM-DD HH')} ~ ${moment().format('YYYY-MM-DD HH')}`,
+                /*dateVal: `${ moment().subtract(8, 'hour').format('YYYY-MM-DD HH')} ~ ${moment().format('YYYY-MM-DD HH')}`,
                 cal: {
                     show: false,
                     type: "date", //date datetime
@@ -58,7 +58,7 @@
                     range:true//是否多选
                 },
                 selectTimeTag: 0.33,
-                isTimeDiy: false,
+                isTimeDiy: false,*/
                 tabActive: 'result',
                 showName:''
             }
@@ -111,7 +111,7 @@
                     this.setSummarySubTopicId(0);
                 }
             },
-            selectTime(num){
+            /*selectTime(num){
                 //this.selectTimeTag = num;
                 if(num == 0){
                     if(this.timePay !==2){
@@ -182,7 +182,7 @@
                 this.setSummaryStart(this.cal.begin);
                 this.setSummaryEnd(this.cal.end);
                 this.setSummaryTimeRange(days);
-            },
+            },*/
             trim(str){
                 return str.replace(/(^\s*)|(\s*$)/g,'');
             }
@@ -203,11 +203,11 @@
                     }
                 }
             },
-            summaryTimePopUp:{
+            /*summaryTimePopUp:{
                 handler(val){
                     this.selectTime(val);
                 }
-            },
+            },*/
             summaryResetSearch:{
                 handler(val){
                     if(val == true){
@@ -217,7 +217,7 @@
                     }
                 }
             },
-            activeSummaryTopic:{
+           /* activeSummaryTopic:{
                 handler(val){
                     this.showName = (this.activeSummaryTopic).topic_name;
                     this.selectTimeTag = 0.33;
@@ -247,10 +247,10 @@
                     this.setSummaryTimeRange(days);
                     this.setSummaryDateChange(this.summaryDateChange + 1);
                 }
-            }
+            }*/
         },
         ready(){
-            this.init();
+           /* this.init();*/
         },
        /* route: {
             data(){

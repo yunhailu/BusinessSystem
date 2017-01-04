@@ -410,7 +410,7 @@
                             this.sentimentPieLoading = false;
                             this.loadingParams.visiable = false;
                             this.setAnalyticsTimePopUp(7);
-                        }else{
+                        }else if(time_interval==7){
                             this.sentimentBarOption.series=[{
                                 name:this.sentiment.happy,
                                 type:'line',
