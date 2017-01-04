@@ -1,7 +1,7 @@
 <template>
     <header-component active="summary"></header-component>
     <div class="divAnaBox">
-        <menu-component></menu-component>
+        <summenu-component></summenu-component>
         <div class="analytics-panel">
             <div class="analytics-panel-wrap">
                 <div class="row tools">
@@ -33,7 +33,7 @@
     import SmallTip from '../Common/SmallTip/SmallTip.vue';
     import HeaderComponent from '../Header/Header.vue';
     import Information from '../Information/Information.vue'
-    import MenuComponent from './Menu/Menu.vue';
+    import SummenuComponent from './Menu/Menu.vue';
     import Calendar from '../Common/Calendar/Calendar.vue';
     import OrderFooterComponent from '../OrderFooter/OrderFooter.vue';
     import Local from "../../local/local";
@@ -94,7 +94,7 @@
         },
         components:{
             'header-component': HeaderComponent,
-            'menu-component': MenuComponent,
+            'summenu-component': SummenuComponent,
             'calendar': Calendar,
             'order-footer':OrderFooterComponent,
             'smalltip':SmallTip,

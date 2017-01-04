@@ -85,11 +85,6 @@
                     name: words.setting,
                     icon: "fa-cog",
                     link: "setting"
-                },{
-                    id:"instruction",
-                    name:words.forUse,
-                    icon:"fa-hand-o-right",
-                    link:"instruction"
                 }]
             }
         },

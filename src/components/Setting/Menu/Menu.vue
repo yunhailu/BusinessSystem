@@ -18,7 +18,7 @@
         </section>
     </aside>
 </template>
-<style lang="less">
+<style lang="less" scoped>
     @import "Menu.less";
 </style>
 <script type="text/ecmascript-6">
@@ -71,6 +71,7 @@
                             return topic;
                         });
                         if(topicList.length){
+                            console.log('进入代码set');
                             _.first(topicList).isActive = true;
                             this.setTopicList(topicList);
                         }
@@ -90,7 +91,7 @@
             topicAction(){
                 return (item, group_id) => {
                     console.log(item, group_id);
-                    this.$router.go({name: 'settingEdit', params: {topic_id: item.topic_id, group_id}});
+                    this.$router.go({name: 'settingEdit', params: {topic_id: item.topic_id, group_id,except:item.except}});
                 };
             },
             init(){

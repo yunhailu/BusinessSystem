@@ -423,8 +423,11 @@
                             this.successTip='';
                             this.addSuccessTip = false;
                             this.showMine('showMsg');
+                            Cookie.set('business_name',params.username);
                             window.location.reload();
                         }.bind(this),1000)
+                        //this.getUserInfo();
+
                     }
                     if(resp.data.code == 100){
                             this.tip=resp.data.message;
@@ -454,7 +457,6 @@
                         this.userInfo.avatar = detail.avatar;
                         this.userInfo.email = detail.email;
                         this.userInfo.phone = detail.phone;
-                        //this.setHeaderName( this.userInfo.username);
                         console.log(this.userInfo);
                     }
                 })

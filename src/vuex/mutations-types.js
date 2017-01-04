@@ -40,6 +40,8 @@ export const UPDATE_SUM_SUBTOPIC_ID = 'UPDATE_SUM_SUBTOPIC_ID';
 
 export const UPDATE_SUM_TIME_POP_UP = 'UPDATE_SUM_TIME_POP_UP';
 
+export const UPDATE_SUM_ADD_TOPIC = 'UPDATE_SUM_ADD_TOPIC';
+
 /**
  * Analytics
  * */

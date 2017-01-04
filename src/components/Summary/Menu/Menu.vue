@@ -17,7 +17,7 @@
         </section>
     </aside>
 </template>
-<style lang="less">
+<style lang="less" scoped>
     @import "Menu.less";
 </style>
 <script type="text/ecmascript-6">
@@ -27,8 +27,8 @@
     import * as Api from "../../../widgets/Api";
     import Local from "../../../local/local";
     import { getCookie } from '../../../widgets/Cookie';
-    import { analyticsAddTopic,topicList, activeSummaryTopic } from '../../../vuex/getters';
-    import { setTopicList, setActiveSummaryTopic } from "../../../vuex/actions";
+    import { summaryAddTopic,topicList, activeSummaryTopic } from '../../../vuex/getters';
+    import { setTopicList, setActiveSummaryTopic,setSummaryAddTopic } from "../../../vuex/actions";
 
     export default{
         props: [],
@@ -46,8 +46,8 @@
             'menu-list': MenuList
         },
         vuex: {
-            actions: { setTopicList, setActiveSummaryTopic },
-            getters: {analyticsAddTopic, topicList, activeSummaryTopic }
+            actions: { setTopicList, setActiveSummaryTopic,setSummaryAddTopic },
+            getters: {summaryAddTopic, topicList, activeSummaryTopic }
         },
         computed: {
             list(){
@@ -66,15 +66,12 @@
                 }
                 Api.getTopicList({access_token:getCookie("access_token")}).then(resp => {
                     if(resp.data.code == 0){
-                        /*if(!resp.data.data.length){
-                         this.$router.go({ name: 'settingAdd' });
-                         return ;
-                        }*/
                         let topicList = _.map(resp.data.data, topic => {
                             topic.isActive = false;
                             return topic;
                         });
                         if(topicList.length){
+                            console.log('进入代码sum');
                             _.first(topicList).isActive = true;
                             this.setTopicList(topicList);
                             this.initActiveTopic();
@@ -87,12 +84,18 @@
                 });
             },
             initActiveTopic(){
-                let active = _.extend({}, this.activeSummaryTopic);
-                if(_.isEmpty(active)){
-                    const group = _.first(this.topicList);
-                    active = _.first(group.list);
-                    this.setActiveSummaryTopic(active);
+                if(_.isEmpty(this.summaryAddTopic)){
+                    let active = _.extend({}, this.activeSummaryTopic);
+                    if(_.isEmpty(active)){
+                        const group = _.first(this.topicList);
+                        active = _.first(group.list);
+                        this.setActiveSummaryTopic(active);
+                    }
+                }else{
+                    this.setActiveSummaryTopic(val);
+                    this.setSummaryAddTopic({});
                 }
+
             },
             toggle(menu){
                 _.each(this.MainMenu, menuItem => {
@@ -113,18 +116,10 @@
                 this.getTopics();
             }
         },
-        watch:{
-            analyticsAddTopic:{
-                handler(val){
-                    this.getTopics();
-                    this.setActiveSummaryTopic(val);
-                }
-            }
-        },
         ready(){
             this.init();
         },
-        /*route: {
+       /* route: {
             data(){
                 this.init();
             }

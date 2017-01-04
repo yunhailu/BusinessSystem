@@ -1,4 +1,4 @@
-import { UPDATE_SUM_TYPE, UPDATE_SUM_TIME_RANGE, UPDATE_SUM_SOURCE, UPDATE_SUM_SUBTOPIC, UPDATE_SUM_DATE_CHANGE, UPDATE_SUM_START, UPDATE_SUM_END,UPDATE_SUM_REFRESH_TOPIC, UPDATE_SUM_RESET_SEARCH ,UPDATE_SUM_SUBTOPIC_ID,UPDATE_SUM_TIME_POP_UP} from '../mutations-types'
+import {UPDATE_SUM_ADD_TOPIC, UPDATE_SUM_TYPE, UPDATE_SUM_TIME_RANGE, UPDATE_SUM_SOURCE, UPDATE_SUM_SUBTOPIC, UPDATE_SUM_DATE_CHANGE, UPDATE_SUM_START, UPDATE_SUM_END,UPDATE_SUM_REFRESH_TOPIC, UPDATE_SUM_RESET_SEARCH ,UPDATE_SUM_SUBTOPIC_ID,UPDATE_SUM_TIME_POP_UP} from '../mutations-types'
 
 const state = {
     sum_type: 'theme',
@@ -11,7 +11,8 @@ const state = {
     sum_refreshTopic:0,
     sum_resetSearch:false,
     sum_subtopicId:0,
-    sum_timePopUp:0.33
+    sum_timePopUp:0.33,
+    sum_addTopic:{}
 }
 
 const mutations = {
@@ -47,6 +48,9 @@ const mutations = {
     },
     [UPDATE_SUM_TIME_POP_UP](state,time){
         state.sum_timePopUp = time;
+    },
+    [UPDATE_SUM_ADD_TOPIC](state,topic){
+        state.sum_addTopic = topic;
     }
 }
 

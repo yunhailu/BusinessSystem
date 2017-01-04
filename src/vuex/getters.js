@@ -82,6 +82,9 @@ export const summarySubTopicId = state => {
 export const summaryTimePopUp = state => {
 	return state.summary.sum_timePopUp;
 };
+export const summaryAddTopic = state => {
+	return state.summary.sum_addTopic;
+};
 
 /**
  * Analytics

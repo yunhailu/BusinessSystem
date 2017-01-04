@@ -75,6 +75,7 @@
                             return topic;
                         });
                         if(topicList.length){
+                            console.log('进入代码ana');
                             _.first(topicList).isActive = true;
                             this.setTopicList(topicList);
                             this.initActiveTopic();

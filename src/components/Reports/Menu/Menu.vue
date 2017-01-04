@@ -65,6 +65,7 @@
                 }
                 Api.getTopicList({}).then(resp => {
                     if(resp.data.code == 0){
+                        console.log('进入代码rep');
                         let topicList = _.map(resp.data.data, topic => {
                             topic.isActive = false;
                             return topic;

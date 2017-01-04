@@ -34,7 +34,7 @@
                             <div class="col-sm-4">
                                 <input type="text" v-model="topicText" class="form-control" id="topicText" :placeholder="words.topicInfo">
                             </div>
-                            <div class="col-sm-4 tip">{{words.required}}</div>
+                            <div class="col-sm-4 tip color-red">{{words.required}}</div>
                         </div>
                         <div class="form-group" v-show="isAdvanced">
                             <label for="topicArr" class="col-sm-2 control-label">{{words.topicArr}}</label>
@@ -101,7 +101,7 @@
     import _ from "underscore";
     import Local from "../../../local/local";
     import * as Api from "../../../widgets/Api";
-    import { setTopicList ,setAnalyticsAddTopic} from "../../../vuex/actions";
+    import { setTopicList ,setSummaryAddTopic} from "../../../vuex/actions";
     import { topicList } from '../../../vuex/getters';
     import { WhiteNameList } from "../../../config/config";
     import Cookie from "js-cookie";
@@ -148,7 +148,7 @@
             }
         },
         vuex: {
-            actions: { setTopicList,setAnalyticsAddTopic },
+            actions: { setTopicList,setSummaryAddTopic },
             getters: { topicList }
         },
         methods: {
@@ -223,6 +223,7 @@
                         this.errorTip = "";
                         //this.radioVal = "";
                         this.topicText = "";
+                        this.excludeText="";
                         return Api.getTopicList({});
                     }
                 }).then(resp => {
@@ -265,6 +266,7 @@
                         this.errorTip = "";
                         //this.radioVal = "";
                         this.topicText = "";
+                        this.excludeText="";
 
                     console.log(newTopicName);
                         return Api.getTopicList({})
@@ -289,7 +291,7 @@
                         this.setTopicList(topicList);
                         this.radioVal = "";
                         this.threshold="";
-                        this.setAnalyticsAddTopic(newObj);
+                        this.setSummaryAddTopic(newObj);
                         const name='summarylist';
                         this.$router.go({name});
                     }
@@ -307,7 +309,8 @@
                     group_id: this.radioVal,
                     name: this.dealSymbol(this.trim(this.topicText)),
                     monitor:this.monitor,
-                    threshold:this.threshold
+                    threshold:this.threshold,
+                    except:this.excludeText
                 });
             },
             topicUp(){
@@ -316,7 +319,8 @@
                     group_id:this.radioVal,
                     name: this.dealSymbol(this.trim(this.topicText)),
                     monitor:this.monitor,
-                    threshold:this.threshold
+                    threshold:this.threshold,
+                    except:this.excludeText
                 });
             },
             updateInit(){
@@ -334,6 +338,7 @@
                         .first().value();
                 console.log('group.list:',group.list);
                 this.topicText = topic.topic_name;
+                this.excludeText=topic.except;
 
                  this.radioVal = group_id;
 
