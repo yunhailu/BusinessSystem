@@ -101,7 +101,7 @@
     import _ from "underscore";
     import Local from "../../../local/local";
     import * as Api from "../../../widgets/Api";
-    import { setTopicList ,setAnalyticsAddTopic} from "../../../vuex/actions";
+    import { setTopicList,setActiveSummaryTopic } from "../../../vuex/actions";
     import { topicList } from '../../../vuex/getters';
     import { WhiteNameList } from "../../../config/config";
     import Cookie from "js-cookie";
@@ -148,7 +148,7 @@
             }
         },
         vuex: {
-            actions: { setTopicList,setAnalyticsAddTopic },
+            actions: { setTopicList,setActiveSummaryTopic },
             getters: { topicList }
         },
         methods: {
@@ -291,7 +291,7 @@
                         this.setTopicList(topicList);
                         this.radioVal = "";
                         this.threshold="";
-                        this.setAnalyticsAddTopic(newObj);
+                        this.setActiveSummaryTopic(newObj);
                         const name='summarylist';
                         this.$router.go({name});
                     }

@@ -27,8 +27,8 @@
     import * as Api from "../../../widgets/Api";
     import Local from "../../../local/local";
     import { getCookie } from '../../../widgets/Cookie';
-    import { topicList, activeAnalyticsTopic,analyticsAddTopic,headerName } from '../../../vuex/getters';
-    import { setTopicList, setActiveAnalyticsTopic,setAnalyticsAddTopic } from "../../../vuex/actions";
+    import { topicList, activeAnalyticsTopic,headerName } from '../../../vuex/getters';
+    import { setTopicList, setActiveAnalyticsTopic } from "../../../vuex/actions";
 
     export default{
         props: [],
@@ -46,8 +46,8 @@
             'menu-list': MenuList
         },
         vuex: {
-            actions: { setTopicList, setActiveAnalyticsTopic ,setAnalyticsAddTopic },
-            getters: { topicList, activeAnalyticsTopic, analyticsAddTopic,headerName }
+            actions: { setTopicList, setActiveAnalyticsTopic},
+            getters: { topicList, activeAnalyticsTopic,headerName }
         },
         computed: {
             list(){
@@ -115,15 +115,7 @@
         },
         ready(){
             this.init();
-        },
-        watch:{
-            analyticsAddTopic:{
-                handler(val){
-                    this.getTopics();
-                    this.setActiveAnalyticsTopic(val);
-                }
-            }
-        },
+        }
 
         /*route: {
             data(){

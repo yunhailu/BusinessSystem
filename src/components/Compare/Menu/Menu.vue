@@ -25,7 +25,7 @@
     import { getCookie } from '../../../widgets/Cookie';
     import Local from "../../../local/local";
     import * as Api from "../../../widgets/Api";
-    import { topicList, activeCompareTopic, topicGroupActiveId,headerName,analyticsAddTopic} from '../../../vuex/getters';
+    import { topicList, activeCompareTopic, topicGroupActiveId,headerName} from '../../../vuex/getters';
     import { setTopicList, setActiveCompareTopic, setTopicGroupActiveId} from "../../../vuex/actions";
 
     export default{
@@ -42,7 +42,7 @@
         },
         vuex:{
            actions:{setTopicList ,setActiveCompareTopic ,setTopicGroupActiveId},
-           getters:{topicList ,activeCompareTopic , topicGroupActiveId,headerName,analyticsAddTopic}
+           getters:{topicList ,activeCompareTopic , topicGroupActiveId,headerName}
         },
         computed: {
                    list(){
@@ -113,14 +113,6 @@
             },
             init(){
                 this.getTopics();
-            }
-        },
-        watch:{
-            //添加新的关键字时刷新topics
-            analyticsAddTopic:{
-                handler(val){
-                    this.getTopics();
-                }
             }
         },
         ready(){
