@@ -236,6 +236,7 @@
     import _ from 'underscore';
     import HeaderComponent from '../Header/Header.vue';
     import Local from '../../local/local';
+    import Cookie from 'js-cookie';
     import { getCookie } from '../../widgets/Cookie';
     import { formatSize } from '../../widgets/Util';
     import * as Api from '../../widgets/Api';
@@ -420,8 +421,10 @@
                             this.successTip='';
                             this.addSuccessTip = false;
                             this.showMine('showMsg');
+                            Cookie.set('business_name',params.username);
+                            window.location.reload();
                         }.bind(this),1000)
-                        this.getUserInfo();
+                        //this.getUserInfo();
                     }
                     if(resp.data.code == 100){
                             this.tip=resp.data.message;
@@ -451,7 +454,7 @@
                         this.userInfo.avatar = detail.avatar;
                         this.userInfo.email = detail.email;
                         this.userInfo.phone = detail.phone;
-                        this.setHeaderName( this.userInfo.username);
+
                         console.log(this.userInfo);
                     }
                 })

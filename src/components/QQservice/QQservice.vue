@@ -16,7 +16,7 @@
             <h3>客服热线电话</h3>
             <span>{{common.phone}}</span>
         </div></a>
-        <!--<a href="#dfs1" id="top"  class="toolbar-item toolbar-item-top"></a>-->
+        <a href="javascript:void(0);" id="top"  class="toolbar-item toolbar-item-top" v-link="{name:routeName}"></a>
     </div>
 
 
@@ -39,6 +39,7 @@
             return{
                 words,
                 common,
+                routeName:'instruction',
                 start:'2016-12-05',
                 end:'2016-12-11',
                 topic:'罗一笑',
@@ -47,13 +48,12 @@
         },
         methods: {
             //my functions
-
+            toInstruction(){
+                this.$router.go('/toInstruction')
+            },
             showDetail(){
-
                 console.log('q2w');
-
                 document.body.scrollTop = 0;
-
             },
 
 
