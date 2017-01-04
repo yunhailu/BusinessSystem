@@ -320,7 +320,14 @@
                             webNums,
                             overseasNums
                         ];
-                    }else if(resp.data.code ==1004){
+                    } else if(resp.data.code ==1004){
+                        this.resultChartOption.series=[];
+                        this.resultPieChartOption.series=[];
+                        this.resultChartLoading = false;
+                        this.resultPieChartLoading= false;
+                        this.loadingParams.visiable = false;
+                    }
+                   /* else if(resp.data.code ==1004){
                         if(time_interval==0){
                             this.resultChartLoading = false;
                             this.resultPieChartLoading= false;
@@ -344,7 +351,7 @@
                             this.loadingParams.visiable = false;
                             this.showSmallTips=true;
                         }
-                    }
+                    }*/
                 });
             },
             getCommentList(type = 'time'){
@@ -369,6 +376,16 @@
                     if(resp.data.code == 0){
                         this.loadingParams.visiable = false;
                         this.list = resp.data.data;
+                    }else if(resp.data.code ==1004){
+                        if(time_interval==0){
+                            this.setSummaryTimePopUp(1);
+                        }else if(time_interval==0.33){
+                            this.setSummaryTimePopUp(1);
+                        }else if(time_interval==1){
+                            this.setSummaryTimePopUp(7);
+                        }else if(time_interval==7){
+                            this.showSmallTips=true;
+                        }
                     }
 
                 });

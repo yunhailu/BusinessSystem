@@ -239,6 +239,12 @@ module.exports = {
             require(['../components/TaiwanLogin/TaiwanLogin.vue'], resolve);
         }
     },
+    '/star': {
+        name: 'star',
+        component (resolve) {
+            require(['../components/StarLogin/StarLogin.vue'], resolve);
+        }
+    },
 
 
     
