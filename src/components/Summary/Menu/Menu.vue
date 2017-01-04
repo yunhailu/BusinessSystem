@@ -27,8 +27,8 @@
     import * as Api from "../../../widgets/Api";
     import Local from "../../../local/local";
     import { getCookie } from '../../../widgets/Cookie';
-    import { summaryAddTopic,topicList, activeSummaryTopic } from '../../../vuex/getters';
-    import { setTopicList, setActiveSummaryTopic,setSummaryAddTopic } from "../../../vuex/actions";
+    import { topicList, activeSummaryTopic } from '../../../vuex/getters';
+    import { setTopicList, setActiveSummaryTopic } from "../../../vuex/actions";
 
     export default{
         props: [],
@@ -46,8 +46,8 @@
             'menu-list': MenuList
         },
         vuex: {
-            actions: { setTopicList, setActiveSummaryTopic,setSummaryAddTopic },
-            getters: {summaryAddTopic, topicList, activeSummaryTopic }
+            actions: { setTopicList, setActiveSummaryTopic },
+            getters: { topicList, activeSummaryTopic }
         },
         computed: {
             list(){
@@ -71,7 +71,6 @@
                             return topic;
                         });
                         if(topicList.length){
-                            console.log('进入代码sum');
                             _.first(topicList).isActive = true;
                             this.setTopicList(topicList);
                             this.initActiveTopic();
@@ -84,18 +83,12 @@
                 });
             },
             initActiveTopic(){
-                if(_.isEmpty(this.summaryAddTopic)){
                     let active = _.extend({}, this.activeSummaryTopic);
                     if(_.isEmpty(active)){
                         const group = _.first(this.topicList);
                         active = _.first(group.list);
                         this.setActiveSummaryTopic(active);
                     }
-                }else{
-                    this.setActiveSummaryTopic(val);
-                    this.setSummaryAddTopic({});
-                }
-
             },
             toggle(menu){
                 _.each(this.MainMenu, menuItem => {

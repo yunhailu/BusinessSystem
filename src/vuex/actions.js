@@ -80,9 +80,6 @@ export const setSummarySubTopicId = (store, subtopicId) => {
 export const setSummaryTimePopUp = (store, newtime) => {
 	store.dispatch(types.UPDATE_SUM_TIME_POP_UP, newtime);
 };
-export const setSummaryAddTopic = (store, topic) => {
-	store.dispatch(types.UPDATE_SUM_TIME_POP_UP, topic);
-};
 
 
 /**

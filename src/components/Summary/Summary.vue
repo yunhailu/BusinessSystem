@@ -1,7 +1,7 @@
 <template>
     <header-component active="summary"></header-component>
     <div class="divAnaBox">
-        <summenu-component></summenu-component>
+        <menu-component></menu-component>
         <div class="analytics-panel">
             <div class="analytics-panel-wrap">
                 <div class="row tools">
@@ -33,7 +33,7 @@
     import SmallTip from '../Common/SmallTip/SmallTip.vue';
     import HeaderComponent from '../Header/Header.vue';
     import Information from '../Information/Information.vue'
-    import SummenuComponent from './Menu/Menu.vue';
+    import MenuComponent from './Menu/Menu.vue';
     import Calendar from '../Common/Calendar/Calendar.vue';
     import OrderFooterComponent from '../OrderFooter/OrderFooter.vue';
     import Local from "../../local/local";
@@ -94,7 +94,7 @@
         },
         components:{
             'header-component': HeaderComponent,
-            'summenu-component': SummenuComponent,
+            'menu-component': MenuComponent,
             'calendar': Calendar,
             'order-footer':OrderFooterComponent,
             'smalltip':SmallTip,
@@ -217,20 +217,20 @@
                     }
                 }
             },
-           /* activeSummaryTopic:{
+            activeSummaryTopic:{
                 handler(val){
                     this.showName = (this.activeSummaryTopic).topic_name;
-                    this.selectTimeTag = 0.33;
+                   /* this.selectTimeTag = 0.33;
                     let start = moment().subtract(8,"hour").format("YYYY-MM-DD HH");
                     let end = moment().format("YYYY-MM-DD HH");
                     start = start.split(" ")[0] + "T" + start.split(" ")[1];
                     end = end.split(" ")[0] + "T" + end.split(" ")[1];
                     this.setSummaryStart(start);
                     this.setSummaryEnd(end);
-                    this.setSummaryTimePopUp(0.33);
+                    this.setSummaryTimePopUp(0.33);*/
                 }
             },
-            dateVal: {
+        /*    dateVal: {
                 handler(val){
                     const start = moment(val.split(' ~ ')[0], "YYYY-MM-DD");
                     const end = moment(val.split(' ~ ')[1], "YYYY-MM-DD");

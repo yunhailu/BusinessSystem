@@ -40,7 +40,7 @@
         },
         components:{
             HeaderComponent,
-            MenuComponent,
+            'menu-component':MenuComponent,
             FooterComponent
         }
     }

@@ -65,7 +65,6 @@
                 }
                 Api.getTopicList({}).then(resp => {
                     if(resp.data.code == 0){
-                        console.log('进入代码rep');
                         let topicList = _.map(resp.data.data, topic => {
                             topic.isActive = false;
                             return topic;
@@ -87,8 +86,6 @@
             },
             topicAction(){
                 return (item, group_id) => {
-
-                    console.log('1111111111111111');
                     this.$router.go({name: 'reportsEdit', params: {topic_id: item.topic_id, group_id}});
 
                 };

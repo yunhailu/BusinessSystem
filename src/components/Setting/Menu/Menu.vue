@@ -28,7 +28,7 @@
     import MenuList from "./MenuList/MenuList.vue";
     import * as Api from "../../../widgets/Api";
     import { getCookie } from '../../../widgets/Cookie';
-    import { topicList, activeSettingTopic,headerName } from '../../../vuex/getters';
+    import { topicList, activeSettingTopic,headerName,summaryAddTopic } from '../../../vuex/getters';
     import { setTopicList, setActiveSettingTopic } from "../../../vuex/actions";
 
     export default{
@@ -47,10 +47,11 @@
         },
         vuex: {
             actions: { setTopicList, setActiveSettingTopic },
-            getters: { topicList, activeSettingTopic,headerName }
+            getters: { topicList, activeSettingTopic,headerName ,summaryAddTopic}
         },
         computed: {
             list(){
+                console.log(this.summaryAddTopic);
                 let list = [];
                 _.each(this.topicList, item => {
                     list.push(_.extend({}, item));
@@ -71,7 +72,6 @@
                             return topic;
                         });
                         if(topicList.length){
-                            console.log('进入代码set');
                             _.first(topicList).isActive = true;
                             this.setTopicList(topicList);
                         }
