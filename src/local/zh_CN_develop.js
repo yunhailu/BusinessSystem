@@ -44,7 +44,7 @@ export const zh_CN_develop = _.extend({}, zh_CN, {
         cooperation:"国家发改委中国发展网舆情中心，沃民高新科技(北京)股份有限公司联合开发。"
     },
     header: {
-        title: "发改舆情数据平台",
+        title: "发改舆情大数据综合平台",
         home: "热点事件",
         analytics: "智能分析",
         dashboard: "报告生成",

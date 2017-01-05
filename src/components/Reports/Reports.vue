@@ -1,8 +1,6 @@
 <template>
     <header-component active="reports"></header-component>
 
-    <div class="reports">
-
     <div class="reports-wrap">
         <menu-component></menu-component>
         <div class="container wid ">
@@ -104,7 +102,7 @@
             </div>
         </div>
     </div>
-    </div>
+
     <footer-component></footer-component>
 </template>
 <style lang="less" scoped>
