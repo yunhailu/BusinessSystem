@@ -10,9 +10,16 @@
             <div class="pie" v-echarts="resultPieChartOption" :loading="resultPieChartLoading" :class="[resultPieChartOption.isActive ? 'active' : '']" translate="show-pie"  theme="macarons"></div>
             <div class="article" v-echarts="themeArticleOption" :loading="themeArticleLoading"  :class="[themeArticleOption.isActive ? 'active' : '']"  theme="macarons">
         </div>
-        <list-panel :list="list" :options="options" :select-title="selectTitle" :select-value.sync="sortVal"></list-panel>
-    </div>
 
+    </div>
+        <div class="list" v-if="showList" @click="cancel" :style="{height:bgHeight+'px'}" >
+            <div class="panelList" @click.stop >
+                <i class="fa fa-close fa-2x" @click="cancel"></i>
+                <div class="listBox" >
+                    <list-panel  :list="list" :options="options" :select-title="selectTitle" :select-value.sync="sortVal"></list-panel>
+                </div>
+            </div>
+        </div>
     <tips :visible.sync="loadingParams.visiable" :tipsparam.sync="loadingParams"></tips>
         <div class="tipBg" v-if="showSmallTips">
             <div class="smallTips">
@@ -45,7 +52,9 @@
             const common = Local().common;
             return{
                 common,
+                bgHeight:0,
                 nowTime:null,
+                showList:false,
                 showSmallTips:false,
                 loadingParams: {
                     visiable: false,
@@ -312,13 +321,25 @@
             confirm(){
                 this.showSmallTips=false;
             },
+            cancel(){
+                this.showList = false;
+            },
             toggle(){
                 this.resultChartOption.isToggle = !this.resultChartOption.isToggle;
                 this.resultPieChartOption.isActive = !this.resultPieChartOption.isActive;
                 this.themeArticleOption.isActive = !this.themeArticleOption.isActive;
             },
+            getHeight(){
+                var scrollHeight=0;
+                if(document.documentElement&&document.documentElement.scrollHeight){
+                    scrollHeight=document.documentElement.scrollHeight;
+                }
+                this.bgHeight=scrollHeight;
+            },
             clickChartAction(opts){
+                this.getHeight();
                 this.loadingParams.visiable = true;
+                this.showList = true;
                 const topic_id = this.activeAnalyticsTopic.topic_id,
                         subtopic = this.analyticsSubTopic,
                         source = this.analyticsSource,
@@ -642,7 +663,7 @@
             init(topic){
                 this.initData();
                 this.getSummaryDetail();
-                this.getCommentList();
+                //this.getCommentList();
                 this.getCategory();
             }
         },
@@ -702,7 +723,7 @@
                 handler(val){
                     //this.loadingParams.visiable = true;
 
-                    this.getCommentList();
+                    //this.getCommentList();
                     this.drawCharts();
                 }
             },

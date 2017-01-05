@@ -8,7 +8,7 @@
 	</div>
 
 </template>
-<style lang="less">
+<style lang="less" scoped>
 	@import "Home.less";
 </style>
 <script type="text/ecmascript-6">

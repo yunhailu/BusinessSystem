@@ -5,7 +5,15 @@
             <div class="chart commentLeftBar"  v-echarts="commentBarOption" :click="clickChartAction" :loading="commentBarLoading" theme="macarons"></div><!--theme="infographic"-->
             <div class="chart commentRightBar" v-echarts="commentPieOption2" :loading="commentPieLoading2" v-show="isShow" theme="macarons"></div>
         </div>
-        <list-panel :list="list" :options="options" :select-title="selectTitle" :select-value.sync="sortVal"></list-panel>
+
+    </div>
+    <div class="list" v-if="showList" @click="cancel" :style="{height:bgHeight+'px'}">
+        <div class="panelList" @click.stop>
+            <i class="fa fa-close fa-2x" @click="cancel"></i>
+            <div class="listBox">
+                <list-panel :list="list" :options="options" :select-title="selectTitle" :select-value.sync="sortVal"></list-panel>
+            </div>
+        </div>
     </div>
     <tips :visible.sync="loadingParams.visiable" :tipsparam.sync="loadingParams"></tips>
     <div class="tipBg" v-if="showSmallTips">
@@ -41,6 +49,8 @@
                 words,
                 common,
                 nowTime:null,
+                showList:false,
+                bgHeight:0,
                 showSmallTips:false,
                 loadingParams: {
                     visiable: false,
@@ -142,8 +152,20 @@
             confirm(){
                 this.showSmallTips=false;
             },
+            cancel(){
+                this.showList = false;
+            },
+            getHeight(){
+                var scrollHeight=0;
+                if(document.documentElement&&document.documentElement.scrollHeight){
+                    scrollHeight=document.documentElement.scrollHeight;
+                }
+                this.bgHeight=scrollHeight;
+            },
             clickChartAction(opts){
+                this.getHeight();
                 this.loadingParams.visiable = true;
+                this.showList = true;
                 const topic_id = this.activeAnalyticsTopic.topic_id,
                         subtopic = this.analyticsSubTopic,
                         source = this.analyticsSource,
@@ -430,7 +452,7 @@
             init(){
                 this.initData();
                 this.getCommentDetail();
-                this.getCommentList();
+                //this.getCommentList();
             }
         },
         vuex: {
@@ -500,7 +522,7 @@
             },
             analyticsSource: {
                 handler(val){
-                    this.getCommentList();
+                    //this.getCommentList();
                     this.drawCharts();
                 }
             },

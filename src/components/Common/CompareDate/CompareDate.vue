@@ -6,7 +6,7 @@
             </div>
     </div>
 </template>
-<style lang="less">
+<style lang="less" scoped>
     @import "CompareDate.less";
 </style>
 <script  type="text/ecmascript-6">

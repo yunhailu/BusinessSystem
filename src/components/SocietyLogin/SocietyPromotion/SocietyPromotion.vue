@@ -59,7 +59,7 @@
     </swiper>
 </template>
 
-<style lang="less">
+<style lang="less" scoped>
     @import "SocietyPromotion.less";
 </style>
 <script type="text/ecmascript-6" >

@@ -99,7 +99,7 @@
     <!--<instruction v-if="isInstruction"></instruction>-->
     <hot-event class="hotevent" v-if="isHotEvent"></hot-event>
 </template>
-<style lang="less">
+<style lang="less" scoped>
     @import "NewsLogin.less";
 </style>
 <script type="text/ecmascript-6">

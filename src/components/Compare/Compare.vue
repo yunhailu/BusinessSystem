@@ -40,7 +40,7 @@
 
     <footer-component></footer-component>
 </template>
-<style lang="less">
+<style lang="less" scoped>
     @import "Compare.less";
 </style>
 <script  type="text/ecmascript-6">

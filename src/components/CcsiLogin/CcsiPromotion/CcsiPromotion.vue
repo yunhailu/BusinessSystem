@@ -58,7 +58,7 @@
     </swiper>
 </template>
 
-<style lang="less">
+<style lang="less" scoped>
     @import "CcsiPromotion.less";
 </style>
 <script type="text/ecmascript-6" >

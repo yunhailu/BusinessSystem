@@ -14,7 +14,7 @@
     </div>
     <order-footer></order-footer>
 </template>
-<style lang="less">
+<style lang="less" scoped>
     @import "Analytics.less";
 </style>
 <script  type="text/ecmascript-6">

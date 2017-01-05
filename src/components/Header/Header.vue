@@ -28,7 +28,7 @@
     <qservice></qservice>
 </template>
 
-<style lang="less">
+<style lang="less" scoped>
     @import "Header.less";
 </style>
 <script type="text/ecmascript-6">

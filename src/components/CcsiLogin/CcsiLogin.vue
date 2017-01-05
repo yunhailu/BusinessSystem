@@ -91,7 +91,7 @@
     <ccsi-promotion v-if="isPromotion"></ccsi-promotion>
 
 </template>
-<style lang="less">
+<style lang="less" scoped>
     @import "CcsiLogin.less";
 </style>
 <script type="text/ecmascript-6">

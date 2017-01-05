@@ -18,7 +18,7 @@
         </section>
     </aside>
 </template>
-<style lang="less">
+<style lang="less" scoped>
     @import "Menu.less";
 </style>
 <script type="text/ecmascript-6">

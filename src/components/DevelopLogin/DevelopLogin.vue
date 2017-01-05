@@ -109,7 +109,7 @@
     <hot-event class="hotevent" v-if="isHotEvent"></hot-event>
     <qservice></qservice>
 </template>
-<style lang="less">
+<style lang="less" scoped>
     @import "DevelopLogin.less";
 </style>
 <script type="text/ecmascript-6">

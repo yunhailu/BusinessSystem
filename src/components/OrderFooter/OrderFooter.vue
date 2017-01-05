@@ -4,7 +4,7 @@
         <p>{{footer.cooperation}}</p>
     </footer>
 </template>
-<style lang="less">
+<style lang="less" scoped>
     @import "OrderFooter.less";
 </style>
 <script type="text/ecmascript-6">
