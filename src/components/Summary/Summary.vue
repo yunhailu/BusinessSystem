@@ -14,7 +14,8 @@
                         </div>
 
                 </div>
-                <v-information></v-information>
+                <summary-select></summary-select>
+                <summary-list></summary-list>
             </div>
         </div>
        <!-- <div class="qq">
@@ -32,11 +33,12 @@
     import { getCookie } from '../../widgets/Cookie';
     import SmallTip from '../Common/SmallTip/SmallTip.vue';
     import HeaderComponent from '../Header/Header.vue';
-    import Information from '../Information/Information.vue'
     import MenuComponent from './Menu/Menu.vue';
     import Calendar from '../Common/Calendar/Calendar.vue';
     import OrderFooterComponent from '../OrderFooter/OrderFooter.vue';
     import Local from "../../local/local";
+    import SummarySelect from "../Common/SummarySelect/SummarySelect.vue";
+    import SummaryList from "../Common/SummaryList/SummaryList.vue";
     import {summaryTimePopUp,summarySubTopicId, activeSummaryTopic,summaryType, summaryTimeRange, summarySource, summarySubTopic, summaryDateChange, summaryStart, summaryEnd, summaryResetSearch } from '../../vuex/getters';
     import {setMonitorSumWord,setSummaryTimePopUp,setSummarySubTopicId,setActiveSummaryTopic,setSummaryType, setSummaryTimeRange, setSummarySource, setSummarySubTopic, setSummaryDateChange, setSummaryStart, setSummaryEnd, setSummaryResetSearch  } from "../../vuex/actions";
 
@@ -98,7 +100,8 @@
             'calendar': Calendar,
             'order-footer':OrderFooterComponent,
             'smalltip':SmallTip,
-            "v-information":Information
+            "summary-select":SummarySelect,
+            "summary-list":SummaryList
         },
         methods: {
             searchAction(){

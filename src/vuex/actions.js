@@ -81,6 +81,22 @@ export const setSummaryTimePopUp = (store, newtime) => {
 	store.dispatch(types.UPDATE_SUM_TIME_POP_UP, newtime);
 };
 
+export const setSummaryOrder = (store, order) => {
+	store.dispatch(types.UPDATE_SUM_ORDER, order);
+};
+
+export const setSummaryCount = (store, count) => {
+	store.dispatch(types.UPDATE_SUM_COUNT, count);
+};
+
+export const setSummarySentiment = (store, sentiment) => {
+	store.dispatch(types.UPDATE_SUM_SENTIMENT, sentiment);
+};
+
+export const setSummarySourceData = (store, data) => {
+	store.dispatch(types.UPDATE_SUM_SOURCEDATA, data);
+};
+
 
 /**
  * Analytics

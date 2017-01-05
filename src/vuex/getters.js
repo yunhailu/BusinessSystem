@@ -83,6 +83,22 @@ export const summaryTimePopUp = state => {
 	return state.summary.sum_timePopUp;
 };
 
+export const summaryOrder = state => {
+	return state.summary.sum_order;
+};
+
+export const summaryCount = state => {
+	return state.summary.sum_count;
+};
+
+export const summarySentiment = state => {
+	return state.summary.sum_sentiment;
+};
+
+export const summarySourceData = state => {
+	return state.summary.sum_SourceData;
+};
+
 /**
  * Analytics
  * */

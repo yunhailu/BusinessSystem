@@ -3,7 +3,6 @@
     <ul class="row items source">
         <li class="item">数据来源:</li>
         <li v-for="(index, item) in source" class="item" :class="[sourceActive == $index ? 'active' : '']" @click="sourceAction(item, $index)">
-            <!--<span class="con">{{item.name}} {{datas[index] | showNum datas}}<i class="fa fa-spinner fa-spin" v-show="!datas.length"></i></span>-->
             <span class="con">{{item.name | showNum datas[index] datas}}<i class="fa fa-spinner fa-spin" v-show="!datas.length"></i></span>
         </li>
     </ul>
@@ -16,14 +15,14 @@
     import Local from '../../../local/local';
     import SummaryDate from '../../Common/SummaryDate/SummaryDate.vue'
     import AddDashboard from '../../AddDashboard/AddDashboard.vue'
-    import {activeSummaryTopic,summaryResetSearch,summarySubTopicId,summaryRefreshTopic,summaryDateChange, summaryType, summaryTimeRange, summarySource, summarySubTopic } from '../../../vuex/getters';
+    import {summarySourceData,activeSummaryTopic,summaryResetSearch,summarySubTopicId,summaryRefreshTopic,summaryDateChange, summaryType, summaryTimeRange, summarySource, summarySubTopic } from '../../../vuex/getters';
     import { setSummaryType, setSummaryTimeRange, setSummarySource, setSummarySubTopic } from "../../../vuex/actions";
 
     export default{
-        props: ['active', 'actions', 'sourceactive', 'datas'],
+        props: [],
         vuex: {
             actions: { setSummaryType, setSummaryTimeRange, setSummarySource, setSummarySubTopic },
-            getters: {activeSummaryTopic,summarySubTopicId,summaryResetSearch,summaryRefreshTopic,summaryDateChange, summaryType, summaryTimeRange, summarySource, summarySubTopic }
+            getters: {summarySourceData,activeSummaryTopic,summarySubTopicId,summaryResetSearch,summaryRefreshTopic,summaryDateChange, summaryType, summaryTimeRange, summarySource, summarySubTopic }
         },
 
         data(){
@@ -32,6 +31,7 @@
                 words,
                 showDashboard: false,
                 isSummary:false,
+                datas:[],
                 source: [
                     { name: words.source[0] },
                     { name: words.source[1] },
@@ -48,6 +48,11 @@
             }
         },
         watch:{
+            summarySourceData:{
+                handler(val){
+                    this.datas=val;
+                }
+            },
             activeSummaryTopic:{
                 handler(val){
                     this.sourceActive=0;
@@ -92,19 +97,10 @@
             sourceAction(val, idx){
                 console.log(val, idx, this.$route);
                 this.sourceActive = idx;
-                this.actions && this.actions(val, idx);
                 const source = ["all", "wechat", "weibo", "client", "web", "overseas","sengine"];
                 if(this.$route.path.indexOf('summary') > -1){
                     this.setSummarySource(source[idx]);
                 }
-            },
-            changeTab(tab){
-                console.log(tab);
-                this.setSummaryType(this.$route.name);
-            },
-            showAdd(){
-                this.showDashboard = true;
-                this.isSummary=true;
             }
         },
         ready(){

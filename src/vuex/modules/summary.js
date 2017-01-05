@@ -1,4 +1,4 @@
-import {UPDATE_SUM_TYPE, UPDATE_SUM_TIME_RANGE, UPDATE_SUM_SOURCE, UPDATE_SUM_SUBTOPIC, UPDATE_SUM_DATE_CHANGE, UPDATE_SUM_START, UPDATE_SUM_END,UPDATE_SUM_REFRESH_TOPIC, UPDATE_SUM_RESET_SEARCH ,UPDATE_SUM_SUBTOPIC_ID,UPDATE_SUM_TIME_POP_UP} from '../mutations-types'
+import {UPDATE_SUM_SOURCEDATA,UPDATE_SUM_SENTIMENT,UPDATE_SUM_COUNT,UPDATE_SUM_ORDER,UPDATE_SUM_TYPE, UPDATE_SUM_TIME_RANGE, UPDATE_SUM_SOURCE, UPDATE_SUM_SUBTOPIC, UPDATE_SUM_DATE_CHANGE, UPDATE_SUM_START, UPDATE_SUM_END,UPDATE_SUM_REFRESH_TOPIC, UPDATE_SUM_RESET_SEARCH ,UPDATE_SUM_SUBTOPIC_ID,UPDATE_SUM_TIME_POP_UP} from '../mutations-types'
 
 const state = {
     sum_type: 'theme',
@@ -10,8 +10,12 @@ const state = {
     sum_subtopic: '',
     sum_refreshTopic:0,
     sum_resetSearch:false,
-    sum_subtopicId:0,
-    sum_timePopUp:0.33
+    sum_subtopicId:0,//次数
+    sum_timePopUp:0.33,
+    sum_order:"",
+    sum_count:20,
+    sum_sentiment:"all",
+    sum_SourceData:[],
 }
 
 const mutations = {
@@ -47,6 +51,18 @@ const mutations = {
     },
     [UPDATE_SUM_TIME_POP_UP](state,time){
         state.sum_timePopUp = time;
+    },
+    [UPDATE_SUM_ORDER](state,order){
+        state.sum_order = order;
+    },
+    [UPDATE_SUM_COUNT](state,count){
+        state.sum_count = count;
+    },
+    [UPDATE_SUM_SENTIMENT](state,sentiment){
+        state.sum_sentiment = sentiment;
+    },
+    [UPDATE_SUM_SOURCEDATA](state,data){
+        state.sum_SourceData = data;
     }
 }
 
