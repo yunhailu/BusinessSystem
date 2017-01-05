@@ -1,6 +1,6 @@
 <template>
     <header-component active="summary"></header-component>
-    <div class="divAnaBox">
+    <div class="divSumBox">
         <menu-component></menu-component>
         <div class="analytics-panel">
             <div class="analytics-panel-wrap">

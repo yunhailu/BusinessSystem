@@ -116,15 +116,7 @@
         },
         ready(){
             this.init();
-        },
-        watch:{
-            analyticsAddTopic:{
-                handler(val){
-                    this.getTopics();
-                    this.setActiveAnalyticsTopic(val);
-                }
-            }
-        },
+        }
 
         /*route: {
             data(){

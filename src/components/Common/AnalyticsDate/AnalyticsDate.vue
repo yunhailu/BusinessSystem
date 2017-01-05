@@ -84,6 +84,7 @@
         watch: {
             activeAnalyticsTopic:{
                 handler(val){
+                    this.showName=this.activeAnalyticsTopic.topic_name;
                     this.setMonitorWord(this.activeAnalyticsTopic.topic_name);
                 }
             },
