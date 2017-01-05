@@ -3,7 +3,7 @@
 
     <div class="reports-wrap">
         <menu-component></menu-component>
-        <div class="container wid ">
+        <div class="wid ">
             <div class="reports-wrap-title">
                 <div class="title"><i class="fa fa-lightbulb-o"></i> <span>{{name}}</span></div>
                 <br> <span class="wornin"> *点击左边 关键词列表 即可添加相应 关键词 的情绪监测 *</span>
